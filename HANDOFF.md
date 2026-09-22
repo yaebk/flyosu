@@ -156,6 +156,41 @@ untrained advantage is in something the play protocol exposes and the
 single-note wiring probe does not — probably response timing, or behaviour
 with several notes on screen.
 
+## Male CNS (second connectome) — state at the end of the session
+
+`docs/MALECNS.md` has all of it. Data downloaded (public GCS bucket, no
+token; 1.1 GB in `data/malecns/`), loader `flyosu/malecns.py` (streams the
+152 M-edge table, weight ≥ 2 → 15.3 M edges, 166,700 neurons, <1 GB, 17 s),
+retinotopy `flyosu/retina_hex.py` (L1+L2 on the annotated column lattice —
+the retina is outside the volume), readout `outputs.build_motor` (the real
+T1/T2 leg motor neurons by side, 87/87/86/88), `model.build(dataset="malecns")`,
+play floor 90 (`PLAY_FLOOR`; 30 is chaotic on this graph). 55 checks in
+`tests/test_malecns.py`.
+
+Results so far (n = 2 rewired):
+- **Spectral radius replicates:** real 2.05 vs rewired 0.72 / 0.64. Same
+  threefold gap as FlyWire, on an independent reconstruction of a different
+  animal and sex. This is now the project's most robust connectome-specific
+  fact.
+- **Lane identity reaches real leg motor neurons** at 0.98 population
+  decodability (rewired 1.00 — as on FlyWire, information preservation is not
+  the discriminator).
+- **The real leg pools respond as a common mode.** All four pools move
+  together to a note anywhere (between-pool difference ~0.1 z); the untrained
+  pooled readout presses nothing at any threshold, while rewired controls
+  play by chance. FlyWire's channels were input-distinct *by construction*
+  (k-means on input connectivity); real pools by neuromere × side are not.
+  The untrained-pooled-readout result therefore does not transfer as-is.
+
+Next on this dataset, in order: (1) label-free common-mode subtraction on
+the four pools (cheap, probably insufficient); (2) a label-free
+low-dimensional projection of the 348 motor neurons fitted on the calibration
+ensemble (PCA on the ensemble responses, then the same 20-parameter
+controller on the top components) — keeps the "small readout" discipline
+while seeing within-pool pattern; (3) the e2/e3 protocols with ≥ 4 rewired
+controls; (4) `Fly.stability()` for every control, since the play floor was
+set on the real network only.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on
@@ -221,6 +256,10 @@ with several notes on screen.
 ---
 
 ## What to do next, in order of value
+
+0. **Male CNS** — see the section above; it is now the main line of work, and
+   the FlyWire results are the first arm of a cross-dataset replication.
+
 
 1. **More rewired controls through e3.** `RESUME=1 N_LEARN=8 python -m
    experiments.e3_learning` continues the saved run; each control ≈ 22 min for

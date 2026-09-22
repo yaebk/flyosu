@@ -397,3 +397,58 @@ Two things this says, at n = 2:
 
 Not yet done on this dataset: continuous play, the curriculum, learning, or
 more than two controls.
+
+## Continuous play: the real leg pools respond as a common mode
+
+Untrained play (θ = 1.5, noise 0.03, stages 1–4, two 20-note charts each):
+
+| | s1 | s2 | s3 | s4 |
+|---|---|---|---|---|
+| real — lane-correct / hit | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 | 0.00 / 0.00 |
+| rewired #1 | 0.00 / 0.00 | 0.33 / 0.25 | 0.15 / 0.10 | 0.10 / 0.03 |
+| rewired #2 | 1.00 / 0.75 | 0.00 / 0.00 | 0.56 / 0.23 | 0.61 / 0.45 |
+
+The real network presses nothing, at any threshold from 0.25 to 1.5 (hits at
+θ = 0.5 are strays landing on notes). The trace says why. The falling-note
+lane × pool response matrix (z units, rows D F J K, columns T2L T1L T1R T2R):
+
+```
+ lane D   +0.30  +0.41  +0.40  +0.53
+ lane F   +0.37  +0.51  +0.46  +0.54
+ lane J   -2.60  -2.70  -2.74  -2.65
+ lane K   -0.95  -0.99  -0.98  -1.08
+```
+
+Every row is flat. A note in any lane moves all four leg pools **together**
+— mostly downward — and the between-pool differences are ~0.1 z. During play
+the z-scores range −3.9 to +1.3 with the same shape on every channel. Lane
+identity is present in the 348 motor neurons (population decoder 0.98) but
+**not in the four pool means**: it is a within-pool pattern, and the pooled
+readout throws it away.
+
+This is the real motor anatomy pushing back on the game's framing, and it is
+plausible biology: a fly's leg motor pools respond to a moving visual object
+in concert (stop, turn, take off), not one leg per position in the visual
+field. FlyWire's four channels were *defined* by clustering descending
+neurons on their input connectivity, so they were input-distinct by
+construction; real leg pools defined by neuromere and side are not.
+
+The rewired controls "play" because degree-preserving rewiring scrambles
+which inputs reach which pool, so their pools differ by chance — the
+control is doing what a control should, and here it out-performs the real
+network on the untrained pooled readout. On FlyWire the same pooled readout
+was where the real network *won* (experiments 2–4). The two datasets
+disagree at the four-channel level and agree at the population level.
+
+What this licenses, and does not:
+
+- The untrained-pooled-readout comparison does not transfer to real motor
+  pools as defined here. Any future claim on this dataset needs either a
+  label-free readout that can see within-pool pattern (a low-dimensional
+  projection fitted on the calibration ensemble, still label-free), or a
+  learned readout — and experiment 3 already says what a learned readout
+  does to the real-vs-rewired gap.
+- Common-mode subtraction (each pool minus the mean of the four) is the
+  obvious label-free first step and is worth trying; from the matrix above it
+  would leave ~0.1 z of lane signal, so it is unlikely to be enough alone.
+- The spectral-radius replication and the population-level result stand.
