@@ -1,7 +1,7 @@
 FLYWIRE := https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/main
 ANNOT   := https://raw.githubusercontent.com/flyconnectome/flywire_annotations/main/supplemental_files
 
-.PHONY: all data cache check check-play experiment experiment2 figures figures2 play clean-derived
+.PHONY: all data cache check check-play experiment experiment2 experiment3 figures figures2 figures3 play clean-derived
 
 all: cache
 
@@ -31,11 +31,19 @@ experiment: cache
 experiment2: cache
 	N_CTRL=3 N_LEARN=2 N_EPISODES=30 python3 -m experiments.e2_play
 
+# annealed readout learning, real vs rewired, three conditions; plus radius sweep
+experiment3: cache
+	N_LEARN=4 N_EPISODES=30 python3 -m experiments.e3_learning
+	N_SEEDS=6 python3 -m experiments.e3_stability
+
 figures:
 	python3 -m experiments.figures
 
 figures2:
 	python3 -m experiments.figures_e2
+
+figures3:
+	python3 -m experiments.figures_e3
 
 play: cache
 	python3 run_play.py --stage 2

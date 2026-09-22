@@ -1,0 +1,15 @@
+  rewired topology #4          radius 0.75  Re +0.73  fixed point True  leading mode in optic 0.64  (32s)
+  rewired topology #5          radius 0.64  Re +0.45  fixed point True  leading mode in optic 0.66  (37s)
+  rewired topology #6          radius 1.12  Re +0.00  fixed point True  leading mode in optic 0.63  (33s)
+  shuffled retinotopy #4       radius 3.07  Re +0.21  fixed point True  leading mode in optic 0.97  (33s)
+  shuffled retinotopy #5       radius 2.93  Re +0.21  fixed point True  leading mode in optic 0.96  (29s)
+  shuffled retinotopy #6       radius 3.06  Re +0.17  fixed point False  leading mode in optic 0.95  (29s)
+  shuffled channel labels #4   radius 2.28  Re +0.16  fixed point True  leading mode in optic 0.96  (28s)
+  shuffled channel labels #5   radius 2.28  Re +0.16  fixed point True  leading mode in optic 0.96  (28s)
+  shuffled channel labels #6   radius 2.28  Re +0.16  fixed point True  leading mode in optic 0.96  (28s)
+
+--- spectral radius by family ---
+  real                       2.28 +- 0.00  (n=1, min 2.28, max 2.28, fixed points 1/1)
+  rewired topology           0.78 +- 0.16  (n=6, min 0.64, max 1.12, fixed points 6/6)
+  shuffled retinotopy        3.00 +- 0.09  (n=6, min 2.83, max 3.08, fixed points 4/6)
+  shuffled channel labels    2.28 +- 0.00  (n=6, min 2.28, max 2.28, fixed points 6/6)

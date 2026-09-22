@@ -25,6 +25,10 @@ without the penalty the cheapest strategy is to mash every key.
 
 ``mask`` restricts learning to a subset of the 20 parameters ("thresholds
 only" isolates timing; "wiring only" isolates the lane mapping).
+
+``lr_decay`` anneals the learning rate geometrically per episode.  The first
+run of experiment 2 used none and the real network's blank-start curve rose to
+0.44 and fell back to 0.32; 0.97 per episode halves the rate over ~23 episodes.
 """
 
 from __future__ import annotations
@@ -73,6 +77,7 @@ class ReadoutLearner:
     player: Player
     sigma: float = 0.3
     lr: float = 1.0
+    lr_decay: float = 1.0
     n_pairs: int = 1
     mask: np.ndarray = field(default_factory=lambda: mask_for("all"))
     stage: int = 3
@@ -108,7 +113,7 @@ class ReadoutLearner:
                 strays.append(res.n_stray)
             rs += out
             grad += 0.5 * (out[0] - out[1]) * eps / self.sigma
-        ctrl.params = theta + self.lr * grad / self.n_pairs
+        ctrl.params = theta + self.lr * self.lr_decay ** k * grad / self.n_pairs
         ep = Episode(k, float(np.mean(rs)), float(np.mean(accs)), float(np.mean(hits)),
                      int(np.mean(strays)), ctrl.params.copy(), time.time() - t0)
         self.history.append(ep)

@@ -1,0 +1,536 @@
+{
+ "runs": [
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.28277586414776,
+   "max_real": 0.15665397899698558,
+   "max_gain": 3.4665110111236572,
+   "mass_by_superclass": {
+    "ascending": 0.0001448769440755372,
+    "central": 0.002239953459828167,
+    "descending": 0.026508877455439953,
+    "optic": 0.9606973283231375,
+    "sensory": 8.133948333276564e-07,
+    "sensory_ascending": 4.147912660121741e-05,
+    "visual_centrifugal": 0.0010425942489087946,
+    "visual_projection": 0.009324077047175475
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 34,
+    "L5": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006133601930666738,
+   "label": "real connectome",
+   "seconds": 3.9,
+   "family": "real"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7326270599211481,
+   "max_real": -0.6920594572827123,
+   "max_gain": 3.822291135787964,
+   "mass_by_superclass": {
+    "ascending": 0.01672958873721549,
+    "central": 0.11129081556657847,
+    "descending": 0.11304836310031029,
+    "optic": 0.6519362159843797,
+    "sensory": 0.0004890252216883258,
+    "sensory_ascending": 0.00023870954996983948,
+    "visual_centrifugal": 0.010242120876375162,
+    "visual_projection": 0.09602516096348276
+   },
+   "top_cell_types": {
+    "L1": 37,
+    "L3": 21,
+    "Mi1": 19,
+    "L2": 19,
+    "L5": 16
+   },
+   "participation": 0.23445405565315705,
+   "label": "rewired topology #1",
+   "seconds": 6.6,
+   "family": "rewired topology"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7110348689317528,
+   "max_real": 0.34044889974918174,
+   "max_gain": 3.7616891860961914,
+   "mass_by_superclass": {
+    "ascending": 0.018700092619331227,
+    "central": 0.11180670383481138,
+    "descending": 0.11139372478523667,
+    "optic": 0.6501085111185688,
+    "sensory": 0.00018171336705496705,
+    "sensory_ascending": 0.0006446871407736119,
+    "visual_centrifugal": 0.010891086255489483,
+    "visual_projection": 0.09627348087873382
+   },
+   "top_cell_types": {
+    "L1": 45,
+    "L5": 29,
+    "L2": 15,
+    "Mi1": 15,
+    "L3": 12
+   },
+   "participation": 0.2579992530776783,
+   "label": "rewired topology #2",
+   "seconds": 8.0,
+   "family": "rewired topology"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7237361424069061,
+   "max_real": 0.6210719747208198,
+   "max_gain": 3.8012564182281494,
+   "mass_by_superclass": {
+    "ascending": 0.018827205519610944,
+    "central": 0.11969516486480342,
+    "descending": 0.11647038399932581,
+    "optic": 0.6348753199340428,
+    "sensory": 0.00017300173919834042,
+    "sensory_ascending": 0.00038030495419698134,
+    "visual_centrifugal": 0.01280231692755178,
+    "visual_projection": 0.09677630206126983
+   },
+   "top_cell_types": {
+    "L1": 36,
+    "Mi1": 23,
+    "L2": 21,
+    "L5": 18,
+    "L3": 16
+   },
+   "participation": 0.20262577873442522,
+   "label": "rewired topology #3",
+   "seconds": 5.8,
+   "family": "rewired topology"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.827724568180897,
+   "max_real": 0.20665386760684834,
+   "max_gain": 4.674178600311279,
+   "mass_by_superclass": {
+    "ascending": 9.697226322538832e-05,
+    "central": 0.0020550104973635114,
+    "descending": 0.02299815971893681,
+    "optic": 0.9631436712742257,
+    "sensory": 1.395238722595304e-06,
+    "sensory_ascending": 5.2411774524165544e-05,
+    "visual_centrifugal": 0.0008672339006398547,
+    "visual_projection": 0.010785145332361771
+   },
+   "top_cell_types": {
+    "Mi1": 47,
+    "L1": 41,
+    "L2": 37,
+    "L5": 36,
+    "Dm13": 7
+   },
+   "participation": 0.0006734227676634242,
+   "label": "shuffled retinotopy #1",
+   "seconds": 5.0,
+   "family": "shuffled retinotopy"
+  },
+  {
+   "drift": 0.5882296562194824,
+   "fixed_point": false,
+   "spectral_radius": 3.075364755092475,
+   "max_real": 0.2016535602395214,
+   "max_gain": 4.635799407958984,
+   "mass_by_superclass": {
+    "ascending": 0.00012599747323293155,
+    "central": 0.0017727421737096438,
+    "descending": 0.019978295950144442,
+    "optic": 0.9670515826246564,
+    "sensory": 6.48280579212197e-07,
+    "sensory_ascending": 1.2298144552729317e-05,
+    "visual_centrifugal": 0.0009916369322744757,
+    "visual_projection": 0.010066798420850051
+   },
+   "top_cell_types": {
+    "Mi1": 54,
+    "L2": 39,
+    "L1": 32,
+    "L5": 31,
+    "Pm08": 10
+   },
+   "participation": 0.0007338314020709315,
+   "label": "shuffled retinotopy #2",
+   "seconds": 4.4,
+   "family": "shuffled retinotopy"
+  },
+  {
+   "drift": 2.384185791015625e-07,
+   "fixed_point": true,
+   "spectral_radius": 3.069211152567048,
+   "max_real": 0.22173273588772702,
+   "max_gain": 4.788148880004883,
+   "mass_by_superclass": {
+    "ascending": 0.0001254845483631762,
+    "central": 0.0022820682778349173,
+    "descending": 0.023642271265792013,
+    "optic": 0.9600891087142003,
+    "sensory": 6.978041676330925e-07,
+    "sensory_ascending": 1.4971687950261854e-05,
+    "visual_centrifugal": 0.0011658733941612267,
+    "visual_projection": 0.012679524307530391
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 38,
+    "L1": 33,
+    "L5": 31,
+    "Pm08": 8
+   },
+   "participation": 0.0008911594520431235,
+   "label": "shuffled retinotopy #3",
+   "seconds": 4.2,
+   "family": "shuffled retinotopy"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.28277586414776,
+   "max_real": 0.1566539789969859,
+   "max_gain": 3.4665110111236572,
+   "mass_by_superclass": {
+    "ascending": 0.00014487694407562041,
+    "central": 0.002239953459828206,
+    "descending": 0.026508877455440106,
+    "optic": 0.9606973283231374,
+    "sensory": 8.133948333231417e-07,
+    "sensory_ascending": 4.147912660121582e-05,
+    "visual_centrifugal": 0.0010425942489088037,
+    "visual_projection": 0.00932407704717526
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 34,
+    "L5": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006133601930666732,
+   "label": "shuffled channel labels #1",
+   "seconds": 4.0,
+   "family": "shuffled channel labels"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.2827758641477653,
+   "max_real": 0.1566539789969852,
+   "max_gain": 3.4665110111236572,
+   "mass_by_superclass": {
+    "ascending": 0.00014487694407558854,
+    "central": 0.0022399534598283198,
+    "descending": 0.026508877455440272,
+    "optic": 0.9606973283231371,
+    "sensory": 8.133948333267823e-07,
+    "sensory_ascending": 4.147912660121774e-05,
+    "visual_centrifugal": 0.0010425942489087898,
+    "visual_projection": 0.009324077047175396
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 34,
+    "L5": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006133601930666724,
+   "label": "shuffled channel labels #2",
+   "seconds": 4.1,
+   "family": "shuffled channel labels"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.282775864147763,
+   "max_real": 0.15665397899698402,
+   "max_gain": 3.4665110111236572,
+   "mass_by_superclass": {
+    "ascending": 0.0001448769440754805,
+    "central": 0.0022399534598282235,
+    "descending": 0.026508877455440224,
+    "optic": 0.9606973283231373,
+    "sensory": 8.133948333228728e-07,
+    "sensory_ascending": 4.147912660121717e-05,
+    "visual_centrifugal": 0.001042594248908784,
+    "visual_projection": 0.009324077047175498
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 34,
+    "L5": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006133601930666737,
+   "label": "shuffled channel labels #3",
+   "seconds": 4.0,
+   "family": "shuffled channel labels"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7474308711820496,
+   "max_real": 0.7295122386649217,
+   "max_gain": 3.9467599391937256,
+   "mass_by_superclass": {
+    "ascending": 0.017237855012444868,
+    "central": 0.11367721422545016,
+    "descending": 0.12091655873149729,
+    "optic": 0.6422165062863836,
+    "sensory": 0.00013235699436887858,
+    "sensory_ascending": 0.0009733784888403277,
+    "visual_centrifugal": 0.010683160088824379,
+    "visual_projection": 0.09416297017219064
+   },
+   "top_cell_types": {
+    "L1": 42,
+    "L2": 20,
+    "L5": 17,
+    "Mi1": 13,
+    "L3": 13
+   },
+   "participation": 0.23936110858414328,
+   "label": "rewired topology #4",
+   "seconds": 31.6,
+   "family": "rewired topology"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6409223909500463,
+   "max_real": 0.4468942812588106,
+   "max_gain": 3.2929365634918213,
+   "mass_by_superclass": {
+    "ascending": 0.01623341151943904,
+    "central": 0.1041084298155151,
+    "descending": 0.110373530101772,
+    "optic": 0.66049272778199,
+    "sensory": 0.0003248914298697472,
+    "sensory_ascending": 0.0011524535592167219,
+    "visual_centrifugal": 0.011970218445984318,
+    "visual_projection": 0.09534433734621317
+   },
+   "top_cell_types": {
+    "L1": 52,
+    "L5": 22,
+    "L2": 21,
+    "L3": 18,
+    "Mi1": 13
+   },
+   "participation": 0.2759243389484029,
+   "label": "rewired topology #5",
+   "seconds": 37.0,
+   "family": "rewired topology"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 1.1246074211158577,
+   "max_real": 0.00063957936909953,
+   "max_gain": 4.017507553100586,
+   "mass_by_superclass": {
+    "ascending": 0.028126014145036425,
+    "central": 0.11741970339366625,
+    "descending": 0.11215459860620622,
+    "optic": 0.6313205610993384,
+    "sensory": 1.0811099645136142e-05,
+    "sensory_ascending": 0.00015900184375646002,
+    "visual_centrifugal": 0.01371306787078925,
+    "visual_projection": 0.09709624194156175
+   },
+   "top_cell_types": {
+    "L1": 22,
+    "L2": 22,
+    "Mi1": 14,
+    "L5": 11,
+    "L3": 6
+   },
+   "participation": 0.024896414863881704,
+   "label": "rewired topology #6",
+   "seconds": 32.8,
+   "family": "rewired topology"
+  },
+  {
+   "drift": 4.4465065002441406e-05,
+   "fixed_point": true,
+   "spectral_radius": 3.0698300497613795,
+   "max_real": 0.21182760137474244,
+   "max_gain": 4.866766929626465,
+   "mass_by_superclass": {
+    "ascending": 0.0001081672800563471,
+    "central": 0.0020011228214834647,
+    "descending": 0.019722380316107936,
+    "optic": 0.9669983327684402,
+    "sensory": 7.211745071021048e-07,
+    "sensory_ascending": 1.700207655705685e-05,
+    "visual_centrifugal": 0.0008480692567181076,
+    "visual_projection": 0.01030420430612974
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 35,
+    "L5": 32,
+    "Dm13": 7
+   },
+   "participation": 0.0008693895547378195,
+   "label": "shuffled retinotopy #4",
+   "seconds": 33.1,
+   "family": "shuffled retinotopy"
+  },
+  {
+   "drift": 3.6954879760742188e-06,
+   "fixed_point": true,
+   "spectral_radius": 2.9298103014255505,
+   "max_real": 0.21411951572912918,
+   "max_gain": 4.731285095214844,
+   "mass_by_superclass": {
+    "ascending": 0.00011120797761659069,
+    "central": 0.0020582521048289225,
+    "descending": 0.020412719335100298,
+    "optic": 0.9646720827867916,
+    "sensory": 1.0497020394964483e-06,
+    "sensory_ascending": 3.370591978853377e-05,
+    "visual_centrifugal": 0.0008966928982496031,
+    "visual_projection": 0.011814289275585158
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L1": 40,
+    "L5": 35,
+    "L2": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006208104887435131,
+   "label": "shuffled retinotopy #5",
+   "seconds": 29.2,
+   "family": "shuffled retinotopy"
+  },
+  {
+   "drift": 0.568256139755249,
+   "fixed_point": false,
+   "spectral_radius": 3.0572170061932518,
+   "max_real": 0.17430102686901877,
+   "max_gain": 4.830249786376953,
+   "mass_by_superclass": {
+    "ascending": 0.0001137258056910793,
+    "central": 0.002731932318939545,
+    "descending": 0.027176517630555067,
+    "optic": 0.9539503769251231,
+    "sensory": 1.86628579470126e-07,
+    "sensory_ascending": 6.0906005321914045e-06,
+    "visual_centrifugal": 0.0012588643074533277,
+    "visual_projection": 0.014762305783126303
+   },
+   "top_cell_types": {
+    "Mi1": 57,
+    "L5": 33,
+    "L1": 33,
+    "L2": 32,
+    "Pm08": 10
+   },
+   "participation": 0.0006688455699733371,
+   "label": "shuffled retinotopy #6",
+   "seconds": 29.0,
+   "family": "shuffled retinotopy"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.2827758641477613,
+   "max_real": 0.15665397899698447,
+   "max_gain": 3.4665110111236572,
+   "mass_by_superclass": {
+    "ascending": 0.0001448769440755821,
+    "central": 0.0022399534598282938,
+    "descending": 0.026508877455439953,
+    "optic": 0.9606973283231375,
+    "sensory": 8.133948333137934e-07,
+    "sensory_ascending": 4.1479126601218916e-05,
+    "visual_centrifugal": 0.0010425942489087987,
+    "visual_projection": 0.009324077047175493
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 34,
+    "L5": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006133601930666773,
+   "label": "shuffled channel labels #4",
+   "seconds": 28.3,
+   "family": "shuffled channel labels"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.282775864147764,
+   "max_real": 0.1566539789969856,
+   "max_gain": 3.4665110111236572,
+   "mass_by_superclass": {
+    "ascending": 0.00014487694407552175,
+    "central": 0.00223995345982824,
+    "descending": 0.026508877455440165,
+    "optic": 0.960697328323137,
+    "sensory": 8.133948333281492e-07,
+    "sensory_ascending": 4.147912660122229e-05,
+    "visual_centrifugal": 0.0010425942489087994,
+    "visual_projection": 0.009324077047175626
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 34,
+    "L5": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006133601930666746,
+   "label": "shuffled channel labels #5",
+   "seconds": 28.0,
+   "family": "shuffled channel labels"
+  },
+  {
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.2827758641477596,
+   "max_real": 0.15665397899698513,
+   "max_gain": 3.4665110111236572,
+   "mass_by_superclass": {
+    "ascending": 0.0001448769440755343,
+    "central": 0.0022399534598282625,
+    "descending": 0.026508877455440026,
+    "optic": 0.9606973283231375,
+    "sensory": 8.133948333265489e-07,
+    "sensory_ascending": 4.147912660122335e-05,
+    "visual_centrifugal": 0.0010425942489087957,
+    "visual_projection": 0.00932407704717549
+   },
+   "top_cell_types": {
+    "Mi1": 49,
+    "L2": 40,
+    "L1": 34,
+    "L5": 33,
+    "Dm13": 7
+   },
+   "participation": 0.0006133601930666737,
+   "label": "shuffled channel labels #6",
+   "seconds": 28.1,
+   "family": "shuffled channel labels"
+  }
+ ]
+}

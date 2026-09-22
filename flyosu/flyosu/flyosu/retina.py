@@ -91,6 +91,7 @@ class Retina:
     elevation: np.ndarray  # (P,) float32 degrees, + = dorsal
     direction: np.ndarray  # (P,3) float32 unit optical axes (head frame)
     fit: dict = field(default_factory=dict)
+    _gain_cache: dict = field(default_factory=dict, repr=False, compare=False)
 
     def __len__(self) -> int:
         return len(self.idx)
@@ -111,8 +112,18 @@ class Retina:
         gain = {"R1-6": 1.0, "R7": 0.6, "R8": 0.6, "R?": 0.5}
         if type_gain:
             gain.update(type_gain)
-        g = np.array([gain.get(t, 1.0) for t in self.ptype], dtype=np.float32)
+        # the per-cell gain vector is the same on every call with the same
+        # type_gain; building it from a Python loop over 8,452 cells was 70%
+        # of the game's frame time before it was cached
+        key = tuple(sorted(gain.items()))
+        g = self._gain_cache.get(key)
+        if g is None:
+            g = np.array([gain.get(t, 1.0) for t in self.ptype], dtype=np.float32)
+            self._gain_cache[key] = g
 
+        # arithmetic kept exactly as originally written: rewriting it changed
+        # results at 1e-7 and the calibration amplified that to a 2% change in
+        # spectral radius, so cached and fresh models disagreed
         out = np.zeros(len(self), dtype=np.float32)
         s = np.deg2rad(sigma_deg)
         for az, el, amp in targets:
