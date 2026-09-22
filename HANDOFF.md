@@ -143,6 +143,19 @@ real 2.28, rewired 0.78 ± 0.16 (max 1.12), same-graph families at the real
 value (retinotopy family drifts to 3.0 and 2/6 are not fixed points at floor
 30 — check stability per network for that family).
 
+## What experiment 4 found (20 rewired graphs)
+
+`docs/RESULTS_E4.md`. Spectral radius does not predict untrained lane choice
+across random graphs (ρ = 0.20, p = 0.39), nor does the leading eigenvalue's
+real part or the wiring rule's margin. The real network is off both
+distributions independently. Untrained lane-correct: real 0.82 vs rewired
+0.29 ± 0.15, 0/20, **p = 0.048** — the project's first sub-0.05 control
+comparison. Lead worth following: the real network's wiring *margin* is
+unremarkable (0.34 vs 0.37 ± 0.24) yet its play is far better, so the
+untrained advantage is in something the play protocol exposes and the
+single-note wiring probe does not — probably response timing, or behaviour
+with several notes on screen.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on
@@ -216,9 +229,11 @@ value (retinotopy family drifts to 3.0 and 2/6 are not fixed points at floor
    graph and destroys only the output grouping's relation to the lanes, which
    is exactly what the thresholds-only result says matters. Add it to the plan
    list in `e3_learning.main()`.
-3. **Spectral radius as a covariate.** 20+ rewired networks, radius vs
-   untrained lane-correctness: does recurrent gain predict behaviour across
-   random graphs? `e3_stability.py` + `untrained_noisy()` are the pieces.
+3. **Where is the untrained advantage?** e4 says not in gain and not in the
+   single-note wiring margin. Measure the *timing* of each channel's response
+   to a falling note (peak latency relative to the judgment line) and
+   behaviour with two notes on screen, real vs rewired. If a quantity there
+   predicts play across rewired graphs, make it the wiring rule's criterion.
 4. **The J lane.** Untrained J is never pressed. Either accept it as the
    honest cost of e1's lane placement or run the declared "lanes in the frontal
    zone" experiment as a separate condition.

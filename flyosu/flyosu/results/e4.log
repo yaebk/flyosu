@@ -11,3 +11,21 @@
   rewired #10              radius 0.78  Re -0.11  fixed True  margin +0.38  lane-correct 0.25  acc 0.008  (87s)
   rewired #11              radius 0.73  Re +0.60  fixed True  margin +0.38  lane-correct 0.47  acc 0.110  (86s)
   rewired #12              radius 0.64  Re -0.35  fixed True  margin +0.19  lane-correct 0.08  acc 0.003  (89s)
+  rewired #13              radius 0.70  Re -0.66  fixed True  margin +0.61  lane-correct 0.18  acc 0.093  (95s)
+  rewired #14              radius 0.72  Re +0.14  fixed True  margin +0.50  lane-correct 0.26  acc 0.029  (97s)
+  rewired #15              radius 0.72  Re -0.43  fixed True  margin +0.38  lane-correct 0.54  acc 0.131  (88s)
+  rewired #16              radius 0.65  Re -0.17  fixed True  margin +0.22  lane-correct 0.43  acc 0.367  (96s)
+  rewired #17              radius 0.88  Re +0.44  fixed True  margin +0.14  lane-correct 0.14  acc 0.100  (93s)
+  rewired #18              radius 0.65  Re +0.37  fixed True  margin +0.20  lane-correct 0.24  acc 0.061  (94s)
+  rewired #19              radius 0.65  Re +0.17  fixed True  margin +0.84  lane-correct 0.26  acc 0.035  (91s)
+  rewired #20              radius 0.73  Re +0.73  fixed True  margin +0.50  lane-correct 0.10  acc 0.001  (96s)
+
+--- 20 rewired networks ---
+  radius        0.74 +- 0.11   [0.63, 1.12]
+  lane-correct  0.29 +- 0.15
+  wired margin  +0.37 +- 0.24
+  radius vs lane-correct   Spearman rho +0.20  p 0.391
+  radius vs accuracy       Spearman rho +0.10  p 0.679
+  margin vs lane-correct   Spearman rho -0.03  p 0.905
+  radius vs margin         Spearman rho -0.13  p 0.574
+  real: radius 2.28  margin +0.34  lane-correct 0.82  -- 0/20 rewired reach it
