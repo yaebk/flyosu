@@ -55,7 +55,7 @@ Real male CNS: PC1 0.627, top-4 0.979, PR 2.09.
 
 **The participation-ratio cross-check passes.** PR is scale- and
 gain-invariant, and it separates real from rewired exactly as hard as PC1 does
-— same 0/20 and 0/10. So this is not "one mode dominates because the gain is
+— same 0/40 and 0/10. So this is not "one mode dominates because the gain is
 large", which was the obvious artefact to worry about given that the same
 networks also have a high spectral radius.
 
@@ -112,7 +112,7 @@ Spearman across control networks, computed **within** family:
 
 | | radius ~ PC1 | radius ~ top-4 | radius ~ PR |
 |---|---|---|---|
-| FlyWire rewired (n=20) | +0.04, p 0.88 | −0.22, p 0.35 | +0.20, p 0.41 |
+| FlyWire rewired (**n=40**) | +0.08, p 0.62 | −0.13, p 0.44 | +0.07, p 0.68 |
 | FlyWire retino (n=20) | −0.14, p 0.55 | +0.11, p 0.64 | +0.04, p 0.87 |
 | male CNS rewired (n=10) | +0.20, p 0.58 | +0.32, p 0.37 | −0.19, p 0.60 |
 | male CNS retino (n=10) | +0.08, p 0.83 | +0.30, p 0.41 | −0.12, p 0.75 |
@@ -152,8 +152,8 @@ number.
   without telling anyone anything new.
 - **The male CNS family is still n = 10** (p = 0.091), so the replication is
   directionally clear but not independently significant.
-- **At n = 20 per family the confidence interval on a null correlation is about
-  ±0.45**, so section 4 establishes "no strong shared driver", not "exactly
+- **Even at n = 40 the confidence interval on a null correlation is about
+  ±0.31**, so section 4 establishes "no strong shared driver", not "exactly
   independent". Separating ρ = 0.3 from 0 would need ~80 seeds per family.
 - **The retinotopy radii are measured at a non-stationary state** for 14 of 20
   FlyWire networks. They are reported because the direction is unambiguous, not
