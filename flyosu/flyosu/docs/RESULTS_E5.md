@@ -97,6 +97,32 @@ that finding. But eight components of the same 348 neurons reach 0.86. The
 information is there; the anatomical pooling by (neuromere, side) is what
 throws it away.
 
+## The best fly this project has produced
+
+The `pca16` readout, fitted once on four stage-3 charts and then played across
+the whole curriculum without refitting (three 20-note charts per stage, θ = 1.5,
+photoreceptor noise 0.03):
+
+| stage | accuracy | hit rate | lane-correct | strays/note | timing error |
+|---|---|---|---|---|---|
+| 1 one lane | 0.589 | 1.00 | 1.00 | 0.00 | −66 ± 29 ms |
+| 2 sequence | 0.822 | 1.00 | 1.00 | 0.00 | −26 ± 36 ms |
+| 3 random | **0.917** | 0.97 | 1.00 | 0.00 | −15 ± 29 ms |
+| 4 chords | 0.506 | 0.65 | 0.95 | 0.05 | −4 ± 57 ms |
+| 5 varied tempo | 0.608 | 0.75 | 0.98 | 0.02 | +1 ± 56 ms |
+
+It presses the right key essentially always (lane-correct ≥ 0.95 everywhere)
+and almost never presses a lane with nothing in it. What limits it is timing:
+on stage 1 every note is hit but 66 ms early, which is a 100 rather than a 300,
+so the accuracy is 0.59 with a perfect hit rate. The fit was made on stage 3,
+whose lane sequence is random, and a single repeating lane drives the network
+into a different operating point — the one place where "fitted on stage 3"
+visibly costs something.
+
+Pushed harder — stage 4, 60 notes at 400 ms spacing (150 BPM, chords) — it
+scores 0.286 with 32 of 60 notes missed. Chord density, not lane identity, is
+the wall. `results/flyosu_e5_stage4.osu` is that chart in osu! format.
+
 ## Reading it
 
 **The method is much better at the task.** Real FlyWire network, held-out
