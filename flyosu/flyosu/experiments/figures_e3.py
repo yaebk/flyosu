@@ -50,7 +50,7 @@ def fig_learning(res, path):
                     markeredgewidth=1, solid_capstyle="round", zorder=4)
             ends.append((y[-1], "real connectome", SERIES[0]))
         ax.set_title(COND_TITLES.get(cond, cond)); ax.set_xlabel("training episodes")
-        ax.set_ylim(0, 1.0); _clean(ax)
+        ax.set_ylim(0, 0.5); _clean(ax)
         if ends:
             _edge_labels(ax, xmax, [e[0] for e in ends], [e[1] for e in ends], [e[2] for e in ends])
     np.atleast_1d(axes)[0].set_ylabel("held-out accuracy (stage 3, 3 charts)")
@@ -90,7 +90,7 @@ def fig_radius(st, path):
 def fig_noisy(res, e2, path):
     """Untrained lane-correctness, noise-free (e2) vs noise 0.03 (e3), real vs rewired."""
     stages = [1, 2, 3, 4, 5]
-    fig, ax = plt.subplots(figsize=(6.4, 3.6))
+    fig, ax = plt.subplots(figsize=(7.2, 3.9))
     real3 = next(r for r in res["runs"] if r["label"] == "real connectome")
     ctrl3 = [r for r in res["runs"] if r["label"] != "real connectome"]
     real2 = next(r for r in e2["runs"] if r["family"] == "real")
@@ -113,10 +113,13 @@ def fig_noisy(res, e2, path):
     ax.set_xticklabels(["1\none lane", "2\nsequence", "3\nrandom", "4\nchords", "5\nvaried"], fontsize=8)
     ax.set_ylim(0, 1.05); ax.set_xlim(-0.3, 4.7)
     ax.set_ylabel("fraction of presses in the right lane")
-    ax.set_title("Untrained lane-correctness with and without photoreceptor noise")
+    fig.suptitle("Untrained lane-correctness with and without photoreceptor noise",
+                 fontsize=10.5, fontweight="bold", x=0.02, ha="left")
+    fig.text(0.02, 0.9, "noise-free runs from experiment 2 (different charts); noise 0.03 per receptor per frame",
+             fontsize=8, color=INK2)
     _clean(ax)
     _edge_labels(ax, 4, [e[0] for e in ends], [e[1] for e in ends], [e[2] for e in ends], gap_frac=0.08)
-    fig.tight_layout(rect=(0, 0, 0.78, 1)); fig.savefig(path, dpi=160); plt.close(fig)
+    fig.tight_layout(rect=(0, 0, 0.78, 0.9)); fig.savefig(path, dpi=160); plt.close(fig)
 
 
 def main():

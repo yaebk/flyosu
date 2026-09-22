@@ -1,8 +1,9 @@
 # Handoff — Fruit Fly Connectome Plays osu!mania
 
-Written at the end of the session that built steps 5–12 and ran experiment 2
-once. Supersedes the previous handoff (which covered steps 1–4); everything from
-that document that is still true is repeated here so this file stands alone.
+Written at the end of the session that built steps 5–12 and ran experiments 2
+and 3. Supersedes the previous handoff (which covered steps 1–4); everything
+from that document that is still true is repeated here so this file stands
+alone.
 
 ---
 
@@ -24,12 +25,12 @@ The package root is `flyosu/flyosu/` (the zip was extracted into a subfolder;
 ```
 flyosu/flyosu/
   run_fly.py      static probes                 run_play.py   watch it play
-  play_osu.py     .osu -> simulate -> replay     Makefile      data/cache/check/check-play/experiment/experiment2
+  play_osu.py     .osu -> simulate -> replay     Makefile      data/cache/check/check-play/experiment{,2,3}/figures{,2,3}
   flyosu/         package (see README "Layout")
-  experiments/    e1_*.py, e2_play.py, figures.py, figures_e2.py
+  experiments/    e1_*.py, e2_play.py, e3_learning.py, e3_stability.py, figures{,_e2,_e3}.py
   tests/          test_pipeline.py (28), test_play.py (46)
-  docs/           CALIBRATION.md, RESULTS.md (e1), RESULTS_E2.md (e2)
-  results/        e1_*.json, e2_play.json, e2.log, fig1–9, stats.txt, flyosu_stage4.osu
+  docs/           CALIBRATION.md, RESULTS.md (e1), RESULTS_E2.md, RESULTS_E3.md
+  results/        e1_*.json, e2_play.json, e3_learning.json, e3_stability.json, logs, fig1–12
   data/           SOURCES.md; raw data + caches are gitignored (make data)
   .venv/          gitignored; numpy pandas pyarrow scipy scikit-learn matplotlib
   scratch/        gitignored; this session's probe scripts, kept for reference
@@ -51,7 +52,7 @@ calibration 45 s per network.
  7    controller             done   flyosu/controller.py  20 parameters
  8    scoring                done   in mania.py; osu!mania windows, OD-parameterised
  9    plasticity             done   flyosu/learn.py  reward-modulated perturbation
-10    training experiments   run once   experiments/e2_play.py, N_CTRL=3, N_LEARN=2, N_EPISODES=30
+10    training experiments   run twice  e2_play.py (N_CTRL=3, N_LEARN=2); e3_learning.py (N_LEARN=4, 3 conditions, annealed)
 11    beatmap parser         done   flyosu/beatmap.py, round-trip tested
 12    osu! integration       built, NOT verified against a live client   play_osu.py
 ```
@@ -122,6 +123,26 @@ every future control comparison.
 
 ---
 
+## What experiment 3 found (n = 4 rewired, annealed, three conditions)
+
+`docs/RESULTS_E3.md`. The learning gap orders by how constrained learning is:
+
+| condition | real | rewired ×4 | reach real |
+|---|---|---|---|
+| thresholds only | 0.21 | 0.09 ± 0.05 | 0/4 |
+| from anatomical wiring | 0.24 | 0.13 ± 0.10 | 1/4 |
+| from W = 0 | 0.27 | 0.24 ± 0.11 | 2/4 |
+
+Reading: the real connectome supplies a starting point (an anatomical
+lane→output mapping that is 0.65 lane-correct before any reward, and
+lane-specific timing) that a constrained readout exploits; it does not raise
+the ceiling of a readout learning from scratch. This is e1's prediction in a
+third protocol. Untrained lane-correctness survives photoreceptor noise
+(1.00/1.00/0.73/0.75/0.45 vs rewired 0.19–0.38). Spectral radius at n = 6:
+real 2.28, rewired 0.78 ± 0.16 (max 1.12), same-graph families at the real
+value (retinotopy family drifts to 3.0 and 2/6 are not fixed points at floor
+30 — check stability per network for that family).
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on
@@ -135,9 +156,10 @@ every future control comparison.
    which is dominated by transients. The `W = 0` learning condition exists to
    remove even those 4.6 bits.
 3. **Learning rule:** antithetic perturbation pairs on the same chart,
-   `θ += lr·½(R⁺−R⁻)·ε/σ`, σ = 0.2, lr = 1, no annealing. σ was lowered from
-   0.3 after one smoke test on the real network — a small tuning-on-real bias,
-   named in RESULTS_E2. Reward = accuracy − 0.05·strays/note.
+   `θ += lr·decay^k·½(R⁺−R⁻)·ε/σ`, σ = 0.2, lr = 1; e2 used no annealing, e3
+   uses decay 0.97 per episode. σ was lowered from 0.3 after one smoke test on
+   the real network — a small tuning-on-real bias, named in RESULTS_E2. Reward
+   = accuracy − 0.05·strays/note. Seeds are recorded from e3 onward.
 4. **Untrained play is deterministic and noise-free.** `Player(noise=0.03)`
    adds e1's photoreceptor noise; not run in e2 for time.
 5. **Step 12 is simulate-then-replay**, not screen capture: the sim runs at
@@ -152,11 +174,23 @@ every future control comparison.
 
 ## Known bugs and rough edges
 
+- **The model cache is keyed on parameters, not code.** Any change to code
+  that feeds the calibration (retina, encoder, sim) silently produces two
+  populations of models: cached ones from before and fresh ones after. And the
+  calibration amplifies float-level differences — a rewrite of the retina's
+  Gaussian that changed `drive()` by 10⁻⁷ moved the spectral radius by 2%. If
+  you touch that code path, either keep it bit-identical (verify against the
+  committed version) or bump `v=` in `model._key` and rebuild everything,
+  knowing that invalidates comparability with e1–e3.
 - **Learner seeds in `results/e2_play.json` are unrecorded** — the running
   script used `hash(label)` (salted per process). Fixed to `zlib.crc32` and the
-  seed is now saved; the existing file's learning streams are not bit-reproducible.
-- **No learning-rate annealing.** The real fly's blank-start 0.44 → 0.32 dip is
-  the visible cost. Fix before scaling the learning experiment.
+  seed is saved from e3 onward; e2's learning streams are not bit-reproducible.
+- **The real network's learning curves flatten by episode 10** in two of three
+  e3 conditions. Whether that is the 20-parameter readout's ceiling on four
+  pooled channels or the learner is open.
+- **Rewired #1 barely learns in any condition** and has the most negative
+  leading eigenvalue (Re −0.69). Learning failure vs spectral properties across
+  many controls is an open question.
 - **Retinotopy-shuffled #2 is marginal** (drift 2 × 10⁻⁴ at 3 s, radius 3.08).
   Floor 30 has less margin for that family; a stability check per network is
   already in the results.
@@ -164,9 +198,10 @@ every future control comparison.
   Windows (cp1252 default encoding + a `θ` in the source). Rewritten; the
   lesson is `PYTHONUTF8=1` or `encoding="utf-8"` for any script that rewrites
   files containing non-ASCII.
-- Runtime: 2 ms wall per 2 ms game frame (19k neurons, 730k edges, sparse
-  matvec). A 20-note chart ≈ 13 s; an untrained sweep (2 θ × 5 stages × 2
-  charts) ≈ 4 min; 30 learning episodes ≈ 7 min + evals. E2 as run: 108 min.
+- Runtime: 1.4 ms wall per 2 ms game frame after the retina fix (19k neurons,
+  730k edges, sparse matvec is now the main cost). A 20-note chart ≈ 9 s; 30
+  learning episodes + 4 evals ≈ 7 min per condition. E3 as run: ~110 min for
+  5 networks × 3 conditions + noisy sweeps.
 - `Player.untrained()` costs ~25 s (settle + 61-stimulus normaliser + 4 falling
   notes). Cache it if you build many.
 
@@ -174,22 +209,22 @@ every future control comparison.
 
 ## What to do next, in order of value
 
-1. **More controls for the learning experiment.** `RESUME=1 N_CTRL=3 N_LEARN=5
-   N_EPISODES=30 python -m experiments.e2_play` continues the saved run; each
-   trained control ≈ 25 min. Add annealing first (`lr *= 0.97` per episode is
-   enough) and a `mask_for("thresholds")` condition to separate learning the
-   timing from learning the mapping.
-2. **Noise.** Re-run untrained play with `noise=0.03` and see whether the
-   real-vs-control lane-correct gap survives sensory noise. It is one flag.
-3. **The J lane.** Untrained J is never pressed. Either accept it as the
+1. **More rewired controls through e3.** `RESUME=1 N_LEARN=8 python -m
+   experiments.e3_learning` continues the saved run; each control ≈ 22 min for
+   all three conditions. Eight would take the p floor to 0.11.
+2. **The channel-shuffle family through e3's three conditions.** It keeps the
+   graph and destroys only the output grouping's relation to the lanes, which
+   is exactly what the thresholds-only result says matters. Add it to the plan
+   list in `e3_learning.main()`.
+3. **Spectral radius as a covariate.** 20+ rewired networks, radius vs
+   untrained lane-correctness: does recurrent gain predict behaviour across
+   random graphs? `e3_stability.py` + `untrained_noisy()` are the pieces.
+4. **The J lane.** Untrained J is never pressed. Either accept it as the
    honest cost of e1's lane placement or run the declared "lanes in the frontal
    zone" experiment as a separate condition.
-4. **Encoder adaptation variant** (`Encoder(adapt=100, adapt_gain=1)`) — built,
+5. **Encoder adaptation variant** (`Encoder(adapt=100, adapt_gain=1)`) — built,
    showed no gain in the chaotic regime, never tested in the play regime where
    it might matter. Cheap to check.
-5. **Spectral radius as a metric.** Compute it for the shuffled-retinotopy and
-   channel families across many seeds and for the whole-brain build; it is the
-   cheapest connectome-specific number in the project.
 6. **Live osu! test** of `play_osu.py --sink keyboard` with a silent audio
    file and `results/flyosu_stage4.osu`. Expect to tune `--offset`.
 7. Longer term: the dopaminergic/MBON plasticity option from the previous

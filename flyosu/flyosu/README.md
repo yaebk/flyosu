@@ -123,6 +123,17 @@ is consistent, the size is large, and none of it is significant yet.
 **[`docs/RESULTS_E2.md`](docs/RESULTS_E2.md)** has the tables, figures and the
 caveats, including the ones about the learner.
 
+Experiment 3 re-ran the learning comparison with an annealed learner, four
+rewired controls and three conditions. The gap between real and rewired orders
+by how constrained the learning is: thresholds only, real 0.21 vs 0.09 ± 0.05
+(0/4 controls reach it); from the anatomical wiring, 0.24 vs 0.13 ± 0.10 (1/4);
+from a blank readout, 0.27 vs 0.24 ± 0.11 (2/4). The real wiring supplies a
+starting point a small readout can exploit, not a higher ceiling for one that
+learns from scratch — which is what experiment 1 predicted. The untrained
+lane result survives photoreceptor noise, and the spectral-radius gap holds at
+n = 6 per family (real 2.28, rewired 0.78 ± 0.16).
+**[`docs/RESULTS_E3.md`](docs/RESULTS_E3.md).**
+
 ## Quick start
 
 ```bash
@@ -140,6 +151,9 @@ python -m experiments.e1_sensorimotor  # experiment 1 (~1 h with all controls)
 python -m experiments.figures
 python -m experiments.e2_play          # experiment 2 (~2 h at N_CTRL=3)
 python -m experiments.figures_e2
+python -m experiments.e3_learning      # experiment 3 (~1.5 h at N_LEARN=4)
+python -m experiments.e3_stability
+python -m experiments.figures_e3
 ```
 
 Watch it play:
@@ -214,13 +228,16 @@ experiments/
   e1_sensorimotor.py  experiment 1: tuning, decoding, approach, chords
   e1b_variance.py     how much of the control spread is estimation noise
   e2_play.py          experiment 2: stability, static probe, untrained play, learning
-  figures.py / figures_e2.py
+  e3_learning.py      experiment 3: annealed learning in three conditions, noisy untrained
+  e3_stability.py     spectral radius across control seeds
+  figures.py / figures_e2.py / figures_e3.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
 tests/test_play.py      46 checks on the game side
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
 docs/RESULTS.md         experiment 1
 docs/RESULTS_E2.md      experiment 2
+docs/RESULTS_E3.md      experiment 3
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -247,7 +264,7 @@ python -m tests.test_play            # 46 checks
  7  fly controller               done   20-parameter threshold policy
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation, connectome frozen
-10  training experiments         run once  real vs 3 controls/family, 2 trained
+10  training experiments         run twice  e2: real vs 3/family, 2 trained; e3: 4 rewired x 3 conditions
 11  beatmap parser               done   .osu v14 mania, both directions
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
