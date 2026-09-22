@@ -26,6 +26,20 @@ topology), with:
 ``channels`` (same network, descending neurons assigned to the four channels
 at random; tests whether the anatomical output grouping is what the
 constrained readout exploits).
+
+``WIRING=band`` re-runs the whole thing with the corrected untrained wiring
+rule.  Experiments 6 and 7 found that two procedural choices made early --
+the fixed threshold and the *margin* wiring rule -- both happened to suit the
+network they were developed on, and that fixing either helps only the controls.
+The results on this page were measured with the margin rule, and two of the
+three conditions start from the anatomical wiring, so they are exposed to the
+same correction.  ``WIRING=band`` picks the permutation maximising the
+shared-threshold band (``probes.band_assignment``) instead, and writes to
+``results/e3_learning_band.json``.  The ``blank`` condition starts from
+``W = 0`` and is immune, so it is worth running only ``wired`` and
+``thresholds``:
+
+    WIRING=band CONDITIONS=thresholds,wired N_LEARN=8 python -m experiments.e3_learning
 """
 
 from __future__ import annotations
@@ -40,12 +54,14 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flyosu import learn as L, model as M, play as P  # noqa: E402
+from flyosu import learn as L, model as M, play as P, probes as PR  # noqa: E402
 
 RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
-PATH = os.path.join(RESULTS, "e3_learning.json")
+WIRING = os.environ.get("WIRING", "margin")
+PATH = os.path.join(RESULTS, "e3_learning" + ("" if WIRING == "margin" else f"_{WIRING}") + ".json")
 
-CONDITIONS = ("wired", "blank", "thresholds")
+CONDITIONS = tuple(c.strip() for c in
+                   os.environ.get("CONDITIONS", "wired,blank,thresholds").split(","))
 FAMILIES = {"rewired": ("rewired topology", "shuffle_seed"),
             "channels": ("shuffled channel labels", "channel_seed")}
 STAGES = (1, 2, 3, 4, 5)
@@ -95,8 +111,19 @@ def run_network(label, kw, n_episodes, family="real"):
     t0 = time.time()
     print(f"\n=== {label}", flush=True)
     fly = M.build(regime="play", **kw)
-    out = {"label": label, "family": family, "stability": fly.stability()}
+    out = {"label": label, "family": family, "stability": fly.stability(), "wiring_rule": WIRING}
     player = P.Player.untrained(fly, theta=2.0)
+    if WIRING == "band":
+        # the corrected rule: maximise the band of thresholds serving all four
+        # keys, rather than the summed mean response (experiments 6 and 7)
+        tr = PR.lane_traces(fly, player.norm, player.r0)
+        perm = PR.band_assignment(tr)
+        W = np.zeros((4, 4))
+        for lane, ch in enumerate(perm):
+            W[lane, ch] = 1.0
+        player.controller.W = W
+        out["band_wiring"] = list(perm)
+        out["shared_band"] = PR.shared_threshold(tr, perm)["shared_band"]
     out["wiring"] = player.controller.wiring(fly.readout.names)
     out["untrained_noisy"] = untrained_noisy(player)
     row = "  ".join(f"s{s}={out['untrained_noisy'][f'stage{s}']['lane_correct']:.2f}" for s in STAGES)
@@ -118,8 +145,8 @@ def main():
     n_learn = int(os.environ.get("N_LEARN", 4))
     n_ep = int(os.environ.get("N_EPISODES", 30))
     results = {"regime": "play", "dt_ms": M.DT_PLAY, "n_episodes": n_ep,
-               "conditions": CONDITIONS, "learner": LEARNER, "untrained_theta": THETA,
-               "runs": []}
+               "conditions": list(CONDITIONS), "learner": LEARNER, "untrained_theta": THETA,
+               "wiring_rule": WIRING, "runs": []}
     if os.environ.get("RESUME") and os.path.exists(PATH):
         with open(PATH) as fh:
             results = json.load(fh)

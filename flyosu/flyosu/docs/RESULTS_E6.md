@@ -9,14 +9,13 @@ threshold that fires each key on its own lane and not on the others (band
 leads for most of the hit window (0.79 against 0.48 ± 0.14, **0/20**). Neither
 quantity predicts play *among* the controls.
 
-> **Partly retracted by experiment 7.** The band was measured with every
-> network wired by the *margin* rule, which does not optimise it. Give each
-> network the wiring that does and 5 of 20 rewired graphs match or beat the
-> real network's band (−1.73 ± 0.85, p = 0.286). The real network has one of
-> the widest bands and is one of the few networks where the naive rule finds
-> it — it is not alone in having one. The selectivity result (0/20) is measured
-> under the same wiring and has not been re-tested. See
-> `docs/RESULTS_E7.md`.
+> **Partly retracted by experiment 7.** Both numbers were measured with every
+> network wired by the *margin* rule, which does not optimise either of them.
+> Re-measured with each network given its band-optimal wiring, they come apart:
+> the **band does not survive** — 5 of 20 rewired graphs match or beat the real
+> network (−1.73 ± 0.85, p = 0.286), so it is not alone in admitting a single
+> working threshold — while **selectivity mostly does**: real 0.79 against
+> 0.50 ± 0.17, 1/20, p = 0.095. See `docs/RESULTS_E7.md`.
 
 **(2)** What predicts play among the controls is something else entirely: how
 *spread out* the four channels' peak times are (ρ = +0.57, p = 0.009) and how

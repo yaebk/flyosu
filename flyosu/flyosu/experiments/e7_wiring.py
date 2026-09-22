@@ -30,7 +30,16 @@ Two questions, in that order:
 Experiment 6's phase-3 sweep already measured the margin rule this way, and is
 reused rather than repeated.
 
+``PHASE=selectivity`` settles the loose end this experiment's retraction
+created.  Experiment 6 reported two quantities on which the real network was
+0/20 -- the shared-threshold band and the channel *selectivity* (how much of
+the hit window the wired channel spends as the largest of the four).  The band
+turned out to be conditional on the wiring rule.  Selectivity was measured
+under the same wiring and is owed the same test: give every network its
+band-optimal wiring and ask again.  Probes only, no play, so it is cheap.
+
     N_SEEDS=20 python -m experiments.e7_wiring
+    PHASE=selectivity N_SEEDS=20 python -m experiments.e7_wiring
     python -m experiments.e7_wiring report
 """
 
@@ -100,6 +109,77 @@ def measure(label, kw):
     return out
 
 
+def selectivity_one(label, kw):
+    """Selectivity and the other probe quantities under BOTH wirings."""
+    t0 = time.time()
+    fly = M.build(regime="play", **kw)
+    player = P.Player.untrained(fly, theta=1.5)
+    tr = PR.lane_traces(fly, player.norm, player.r0)
+    pre = tr.window(-400.0, 0.0)
+    m = best_assignment(tr.z[:, pre].mean(axis=1))
+    b = PR.band_assignment(tr)
+    out = {"label": label, "margin_wiring": list(m), "band_wiring": list(b)}
+    for name, w in (("margin", m), ("band", b)):
+        out[name] = {"selectivity": PR.selectivity(tr, w)["argmax_mean"],
+                     "peak_margin": PR.selectivity(tr, w)["peak_margin_mean"],
+                     "band": PR.shared_threshold(tr, w)["shared_band"],
+                     "n_false_keys": PR.crossings(tr, w, theta=1.5)["n_false_keys"],
+                     "n_on_time": PR.crossings(tr, w, theta=1.5)["n_on_time"]}
+    out["seconds"] = round(time.time() - t0, 1)
+    print(f"  {label:<24s} selectivity {out['margin']['selectivity']:.2f} -> "
+          f"{out['band']['selectivity']:.2f}   band {out['margin']['band']:+.2f} -> "
+          f"{out['band']['band']:+.2f}   false keys {out['margin']['n_false_keys']} -> "
+          f"{out['band']['n_false_keys']}  ({out['seconds']:.0f}s)", flush=True)
+    return out
+
+
+def phase_selectivity():
+    results = {"runs": []}
+    if os.path.exists(PATH):
+        with open(PATH) as fh:
+            results = json.load(fh)
+    n = int(os.environ.get("N_SEEDS", 20))
+    runs = results.setdefault("selectivity", [])
+    done = {r["label"] for r in runs}
+    plan = [("real connectome", {})] + [(f"rewired #{s}", {"shuffle_seed": s}) for s in range(1, n + 1)]
+    for label, kw in plan:
+        if label in done:
+            continue
+        runs.append(selectivity_one(label, kw))
+        with open(PATH, "w") as fh:
+            json.dump(results, fh, indent=1)
+    report_selectivity(results)
+
+
+def report_selectivity(results):
+    runs = results.get("selectivity", [])
+    real = next((r for r in runs if r["label"] == "real connectome"), None)
+    ctrl = [r for r in runs if r["label"] != "real connectome"]
+    if real is None or len(ctrl) < 3:
+        print("not enough networks yet")
+        return
+    print(f"\n=== does the selectivity result survive the new wiring rule? ===")
+    summary = {}
+    for key, label, better_high in (("selectivity", "selectivity (argmax fraction)", True),
+                                    ("band", "shared-threshold band", True),
+                                    ("peak_margin", "peak margin", True),
+                                    ("n_false_keys", "keys falsely driven", False)):
+        print(f"\n  {label}")
+        summary[key] = {}
+        for rule in ("margin", "band"):
+            rv = real[rule][key]
+            x = np.array([r[rule][key] for r in ctrl], dtype=float)
+            n_ge = int((x >= rv).sum() if better_high else (x <= rv).sum())
+            p = (n_ge + 1) / (len(x) + 1)
+            print(f"    {rule + ' wiring':<14s} real {rv:+.2f}  rewired {x.mean():+.2f} +- {x.std():.2f}  "
+                  f"{n_ge}/{len(x)} reach real  p {p:.3f}")
+            summary[key][rule] = {"real": float(rv), "ctrl_mean": float(x.mean()),
+                                  "ctrl_sd": float(x.std()), "n_ge": n_ge, "n": len(x), "p": p}
+    results["selectivity_summary"] = summary
+    with open(PATH, "w") as fh:
+        json.dump(results, fh, indent=1)
+
+
 def main():
     n = int(os.environ.get("N_SEEDS", 20))
     results = {"sweep_stage": SWEEP_STAGE, "theta": list(THETA_SWEEP), "runs": []}
@@ -167,6 +247,11 @@ def report(results):
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "report":
         with open(PATH) as fh:
-            report(json.load(fh))
+            res = json.load(fh)
+        report(res)
+        if res.get("selectivity"):
+            report_selectivity(res)
+    elif os.environ.get("PHASE") == "selectivity":
+        phase_selectivity()
     else:
         main()

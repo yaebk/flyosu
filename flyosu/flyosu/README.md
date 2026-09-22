@@ -169,9 +169,11 @@ Untrained accuracy ends level (real 0.196 vs 0.186 ± 0.075, **8/20, p = 0.43**)
 and lane-correctness stays at 1/20, p = 0.095. It also retracts experiment 6's
 central claim: with each network wired by the rule that optimises the band,
 **5 of 20 controls match the real network's band**, so it is not the only
-network that admits a single working threshold. Three experiments in a row, a
-gap shrank as soon as the controls were given a fairer procedure — which is by
-now the most robust finding here.
+network that admits a single working threshold. Its companion claim, channel
+selectivity, was re-measured the same way and *does* survive — real 0.79 vs
+0.50 ± 0.17, **1/20, p = 0.095** — so the two came apart and selectivity is the
+durable one. Three experiments in a row, a gap shrank as soon as the controls
+were given a fairer procedure, which is by now the most robust finding here.
 **[`docs/RESULTS_E7.md`](docs/RESULTS_E7.md).**
 
 Experiment 5 changed the method. The fly is a frozen recurrent network with a
