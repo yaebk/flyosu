@@ -349,6 +349,22 @@ n = 8 the floor is p = 0.11 and the best is p = 0.22.
 This was the last pre-correction result awaiting re-measurement. Everything in
 the project has now been measured under the corrected protocol.
 
+## Start here
+
+`docs/CLAIMS.md` is the one page that states what this project currently
+supports, what it supports only in direction, what it does not support, and
+what has been retracted -- each with the control family it holds against. The
+per-experiment write-ups are in the order things happened and several were
+later corrected; CLAIMS.md supersedes them wherever they disagree.
+
+The one thing to carry into any new work here: **a choice that is matched as a
+procedure can still be unmatched in outcome**, because it was developed while
+looking at the real connectome. That happened twice (the fixed threshold, the
+margin wiring rule) and cost the project two claims. Design the next comparison
+to be adversarial to the real connectome from the start: every control gets its
+own best operating point on every free parameter, and the metric is fixed
+before looking.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on

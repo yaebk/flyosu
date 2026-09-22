@@ -38,6 +38,12 @@ of the session — see [What changed](#what-changed-when-the-fly-started-playing
                              D     F      J     K
 ```
 
+> **Reading this repository:** the sections below are written in the order the
+> experiments happened, and five of them were later weakened or corrected by a
+> better control. **[`docs/CLAIMS.md`](docs/CLAIMS.md) is the single current
+> statement of what is and is not supported**, and supersedes anything here
+> that disagrees with it.
+
 ## The result so far
 
 > **Does spatially different visual stimulation reliably cause different activity
@@ -348,6 +354,7 @@ tests/test_pipeline.py  28 checks on the network side
 tests/test_play.py      55 checks on the game side, incl. the probes
 tests/test_reservoir.py 17 checks on the closed-form readout
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
+docs/CLAIMS.md          what is and is not supported, current
 docs/RESULTS.md         experiment 1
 docs/RESULTS_E2.md      experiment 2
 docs/RESULTS_E3.md      experiment 3
