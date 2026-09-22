@@ -1,0 +1,61 @@
+{
+ "pool_per_lane": 200,
+ "draw_per_lane": 60,
+ "n_boot": 200,
+ "networks": {
+  "real connectome": {
+   "decode_mean": 0.6693541666666667,
+   "decode_sd": 0.030981898556971043,
+   "decode_ci": [
+    0.6082291666666667,
+    0.7208333333333334
+   ],
+   "argmax_mean": 0.5413125,
+   "argmax_sd": 0.02380395005444358,
+   "argmax_ci": [
+    0.49166666666666664,
+    0.5834375
+   ]
+  },
+  "rewired topology #1": {
+   "decode_mean": 0.5426666666666666,
+   "decode_sd": 0.027007072119066236,
+   "decode_ci": [
+    0.4915624999999999,
+    0.5958333333333334
+   ],
+   "argmax_mean": 0.4341041666666666,
+   "argmax_sd": 0.019623529226557482,
+   "argmax_ci": [
+    0.3958333333333333,
+    0.4709375
+   ]
+  },
+  "rewired topology #2": {
+   "decode_mean": 0.5292916666666667,
+   "decode_sd": 0.03090900062189725,
+   "decode_ci": [
+    0.47072916666666664,
+    0.5917708333333334
+   ],
+   "argmax_mean": 0.36102083333333335,
+   "argmax_sd": 0.020211114499343066,
+   "argmax_ci": [
+    0.325,
+    0.4001041666666667
+   ]
+  }
+ },
+ "decomposition": {
+  "4 pooled channels": {
+   "observed_control_sd": 0.08971577204196828,
+   "estimation_sd": 0.028958036370481742,
+   "network_sd": 0.08491379088612327
+  },
+  "argmax policy": {
+   "observed_control_sd": 0.06760692389927295,
+   "estimation_sd": 0.019917321862950275,
+   "network_sd": 0.06460647373854826
+  }
+ }
+}

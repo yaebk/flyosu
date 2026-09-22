@@ -1,0 +1,39 @@
+
+--- summary (mean +/- sd over seeds; chance = 0.250) ----------
+condition                    descending (population)         4 pooled channels             argmax policy    max channel modulation      note-approach signal           chord linearity
+real                                    0.992                      0.721                      0.567                      0.159                      0.949                      0.815        
+rewired topology                        0.996  +-0.005              0.622  +-0.092              0.437  +-0.067              0.089  +-0.019              0.489  +-0.227              0.738  +-0.039
+shuffled retinotopy                     0.979  +-0.028              0.624  +-0.098              0.473  +-0.063              0.116  +-0.039              0.566  +-0.160              0.709  +-0.082
+shuffled channel labels                 0.992  +-0.006              0.670  +-0.068              0.474  +-0.067              0.100  +-0.013              0.935  +-0.018              0.815  +-0.000
+
+--- permutation test (p floor is 1/(n+1)) ---------------------
+  descending (population)   real 0.992
+     vs rewired topology         0.996+-0.005 | 13/15 reach it | p=0.875 | -0.75 SD
+     vs shuffled retinotopy      0.979+-0.028 | 5/15 reach it | p=0.375 | +0.46 SD
+     vs shuffled channel labels  0.992+-0.006 | 11/15 reach it | p=0.750 | -0.05 SD
+     vs all pooled               0.989+-0.018 | 29/45 reach it | p=0.652 | +0.16 SD
+  4 pooled channels   real 0.721
+     vs rewired topology         0.622+-0.092 | 3/15 reach it | p=0.250 | +1.08 SD
+     vs shuffled retinotopy      0.624+-0.098 | 3/15 reach it | p=0.250 | +0.98 SD
+     vs shuffled channel labels  0.670+-0.068 | 3/15 reach it | p=0.250 | +0.75 SD
+     vs all pooled               0.639+-0.090 | 9/45 reach it | p=0.217 | +0.92 SD
+  argmax policy   real 0.567
+     vs rewired topology         0.437+-0.067 | 0/15 reach it | p=0.062 | +1.95 SD
+     vs shuffled retinotopy      0.473+-0.063 | 2/15 reach it | p=0.188 | +1.49 SD
+     vs shuffled channel labels  0.474+-0.067 | 1/15 reach it | p=0.125 | +1.39 SD
+     vs all pooled               0.461+-0.068 | 3/45 reach it | p=0.087 | +1.56 SD
+  max channel modulation   real 0.159
+     vs rewired topology         0.089+-0.019 | 0/15 reach it | p=0.062 | +3.74 SD
+     vs shuffled retinotopy      0.116+-0.039 | 3/15 reach it | p=0.250 | +1.09 SD
+     vs shuffled channel labels  0.100+-0.013 | 0/15 reach it | p=0.062 | +4.38 SD
+     vs all pooled               0.102+-0.028 | 3/45 reach it | p=0.087 | +2.00 SD
+  note-approach signal   real 0.949
+     vs rewired topology         0.489+-0.227 | 0/15 reach it | p=0.062 | +2.03 SD
+     vs shuffled retinotopy      0.566+-0.160 | 0/15 reach it | p=0.062 | +2.39 SD
+     vs shuffled channel labels  0.935+-0.018 | 4/15 reach it | p=0.312 | +0.81 SD
+     vs all pooled               0.664+-0.252 | 4/45 reach it | p=0.109 | +1.13 SD
+  chord linearity   real 0.815
+     vs rewired topology         0.738+-0.039 | 1/15 reach it | p=0.125 | +1.99 SD
+     vs shuffled retinotopy      0.709+-0.082 | 1/15 reach it | p=0.125 | +1.29 SD
+     vs shuffled channel labels  0.815+-0.000 | 15/15 reach it | p=1.000 | +0.00 SD
+     vs all pooled               0.754+-0.069 | 17/45 reach it | p=0.391 | +0.89 SD

@@ -1,0 +1,18 @@
+
+real connectome: simulating 800 trials ...
+   4-channel decoding 0.669 +/- 0.031  95% CI [0.608, 0.721]
+   argmax policy      0.541 +/- 0.024  95% CI [0.492, 0.583]
+
+rewired topology #1: simulating 800 trials ...
+   4-channel decoding 0.543 +/- 0.027  95% CI [0.492, 0.596]
+   argmax policy      0.434 +/- 0.020  95% CI [0.396, 0.471]
+
+rewired topology #2: simulating 800 trials ...
+   4-channel decoding 0.529 +/- 0.031  95% CI [0.471, 0.592]
+   argmax policy      0.361 +/- 0.020  95% CI [0.325, 0.400]
+
+4 pooled channels: control spread 0.090  =  estimation noise 0.029  +  wiring 0.085  (in quadrature)
+
+argmax policy: control spread 0.068  =  estimation noise 0.020  +  wiring 0.065  (in quadrature)
+
+wrote results/e1b_variance.json

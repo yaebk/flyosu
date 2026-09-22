@@ -1,0 +1,261 @@
+building real connectome model ...
+
+=== real connectome  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+5deg  T1L=-55deg  T1R=+10deg  T2R=-20deg
+     modulation depth: 0.159  0.040  0.101  0.044
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  1.000 +/- 0.000
+       central brain              dim= 1566  0.992 +/- 0.010
+       descending (population)    dim= 1303  0.992 +/- 0.010
+       4 pooled channels          dim=    4  0.721 +/- 0.031
+       untrained argmax policy      acc=0.567  lane->channel ['T2R', 'T1L', 'T1R', 'T2L']
+  C  note approach: max |corr(channel, elevation)| = 0.685
+  D  chords: mean linearity 0.815  mean gain 0.744
+network   19,367 neurons  729,558 edges
+retina    8,452 R1-6 photoreceptors
+channels  T2L=393  T1L=261  T1R=380  T2R=269
+composition:
+   sensory               8,454
+   optic                 6,443
+   central               1,566
+   descending            1,303
+   visual_projection     1,260
+   visual_centrifugal      182
+   ascending               154
+   sensory_ascending         5
+
+building rewired topology control (seed 1) ...
+
+=== rewired topology #1  (19,367 neurons, 720,010 edges)
+  A  preferred azimuth per channel: T2L=+30deg  T1L=-85deg  T1R=+25deg  T2R=+95deg
+     modulation depth: 0.068  0.076  0.050  0.081
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  0.996 +/- 0.008
+       visual projection          dim= 1260  0.996 +/- 0.008
+       central brain              dim= 1566  0.992 +/- 0.010
+       descending (population)    dim= 1303  0.996 +/- 0.008
+       4 pooled channels          dim=    4  0.583 +/- 0.088
+       untrained argmax policy      acc=0.458  lane->channel ['T2R', 'T1L', 'T1R', 'T2L']
+  C  note approach: max |corr(channel, elevation)| = 0.583
+  D  chords: mean linearity 0.714  mean gain 0.825
+
+building rewired topology control (seed 2) ...
+
+=== rewired topology #2  (19,367 neurons, 720,020 edges)
+  A  preferred azimuth per channel: T2L=+65deg  T1L=+0deg  T1R=+90deg  T2R=+50deg
+     modulation depth: 0.057  0.081  0.056  0.048
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  0.992 +/- 0.017
+       visual projection          dim= 1260  0.992 +/- 0.017
+       central brain              dim= 1566  0.996 +/- 0.008
+       descending (population)    dim= 1303  1.000 +/- 0.000
+       4 pooled channels          dim=    4  0.417 +/- 0.042
+       untrained argmax policy      acc=0.317  lane->channel ['T1R', 'T2R', 'T1L', 'T2L']
+  C  note approach: max |corr(channel, elevation)| = 0.284
+  D  chords: mean linearity 0.711  mean gain 0.773
+
+building rewired topology control (seed 3) ...
+
+=== rewired topology #3  (19,367 neurons, 720,084 edges)
+  A  preferred azimuth per channel: T2L=+60deg  T1L=-75deg  T1R=-50deg  T2R=+95deg
+     modulation depth: 0.042  0.103  0.068  0.129
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  1.000 +/- 0.000
+       central brain              dim= 1566  1.000 +/- 0.000
+       descending (population)    dim= 1303  1.000 +/- 0.000
+       4 pooled channels          dim=    4  0.587 +/- 0.050
+       untrained argmax policy      acc=0.433  lane->channel ['T2R', 'T1L', 'T2L', 'T1R']
+  C  note approach: max |corr(channel, elevation)| = 0.744
+  D  chords: mean linearity 0.740  mean gain 0.708
+
+building rewired topology control (seed 4) ...
+
+=== rewired topology #4  (19,367 neurons, 720,071 edges)
+  A  preferred azimuth per channel: T2L=+95deg  T1L=-10deg  T1R=-10deg  T2R=+100deg
+     modulation depth: 0.063  0.068  0.059  0.051
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  0.996 +/- 0.008
+       visual projection          dim= 1260  1.000 +/- 0.000
+       central brain              dim= 1566  1.000 +/- 0.000
+       descending (population)    dim= 1303  1.000 +/- 0.000
+       4 pooled channels          dim=    4  0.683 +/- 0.050
+       untrained argmax policy      acc=0.550  lane->channel ['T2R', 'T1L', 'T1R', 'T2L']
+  C  note approach: max |corr(channel, elevation)| = 0.426
+  D  chords: mean linearity 0.780  mean gain 0.755
+
+building rewired topology control (seed 5) ...
+
+=== rewired topology #5  (19,367 neurons, 719,997 edges)
+  A  preferred azimuth per channel: T2L=+70deg  T1L=+100deg  T1R=+45deg  T2R=+10deg
+     modulation depth: 0.033  0.068  0.073  0.094
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  0.996 +/- 0.008
+       visual projection          dim= 1260  0.996 +/- 0.008
+       central brain              dim= 1566  0.996 +/- 0.008
+       descending (population)    dim= 1303  0.996 +/- 0.008
+       4 pooled channels          dim=    4  0.646 +/- 0.048
+       untrained argmax policy      acc=0.508  lane->channel ['T1L', 'T2L', 'T2R', 'T1R']
+  C  note approach: max |corr(channel, elevation)| = 0.680
+  D  chords: mean linearity 0.752  mean gain 0.720
+
+building shuffled retinotopy control (seed 1) ...
+
+=== shuffled retinotopy #1  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+55deg  T1L=+0deg  T1R=-55deg  T2R=+50deg
+     modulation depth: 0.070  0.077  0.091  0.108
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  1.000 +/- 0.000
+       central brain              dim= 1566  0.988 +/- 0.017
+       descending (population)    dim= 1303  0.992 +/- 0.010
+       4 pooled channels          dim=    4  0.433 +/- 0.046
+       untrained argmax policy      acc=0.388  lane->channel ['T1R', 'T2L', 'T1L', 'T2R']
+  C  note approach: max |corr(channel, elevation)| = 0.439
+  D  chords: mean linearity 0.813  mean gain 0.681
+
+building shuffled retinotopy control (seed 2) ...
+
+=== shuffled retinotopy #2  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=-45deg  T1L=-80deg  T1R=+15deg  T2R=-20deg
+     modulation depth: 0.079  0.102  0.083  0.081
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  0.979 +/- 0.013
+       central brain              dim= 1566  0.967 +/- 0.017
+       descending (population)    dim= 1303  0.971 +/- 0.010
+       4 pooled channels          dim=    4  0.629 +/- 0.016
+       untrained argmax policy      acc=0.446  lane->channel ['T2L', 'T2R', 'T1L', 'T1R']
+  C  note approach: max |corr(channel, elevation)| = 0.838
+  D  chords: mean linearity 0.664  mean gain 0.721
+
+building shuffled retinotopy control (seed 3) ...
+
+=== shuffled retinotopy #3  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+65deg  T1L=-45deg  T1R=+65deg  T2R=+20deg
+     modulation depth: 0.067  0.162  0.061  0.144
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  0.996 +/- 0.008
+       central brain              dim= 1566  0.983 +/- 0.008
+       descending (population)    dim= 1303  0.979 +/- 0.013
+       4 pooled channels          dim=    4  0.608 +/- 0.057
+       untrained argmax policy      acc=0.567  lane->channel ['T1L', 'T1R', 'T2R', 'T2L']
+  C  note approach: max |corr(channel, elevation)| = 0.494
+  D  chords: mean linearity 0.734  mean gain 0.655
+
+building shuffled retinotopy control (seed 4) ...
+
+=== shuffled retinotopy #4  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+35deg  T1L=+100deg  T1R=-15deg  T2R=-85deg
+     modulation depth: 0.133  0.125  0.066  0.070
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  1.000 +/- 0.000
+       central brain              dim= 1566  0.988 +/- 0.017
+       descending (population)    dim= 1303  0.971 +/- 0.021
+       4 pooled channels          dim=    4  0.738 +/- 0.017
+       untrained argmax policy      acc=0.475  lane->channel ['T2L', 'T2R', 'T1R', 'T1L']
+  C  note approach: max |corr(channel, elevation)| = 0.729
+  D  chords: mean linearity 0.783  mean gain 0.612
+
+building shuffled retinotopy control (seed 5) ...
+
+=== shuffled retinotopy #5  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=-55deg  T1L=+85deg  T1R=-90deg  T2R=+90deg
+     modulation depth: 0.076  0.057  0.064  0.062
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  0.988 +/- 0.025
+       central brain              dim= 1566  0.996 +/- 0.008
+       descending (population)    dim= 1303  0.992 +/- 0.017
+       4 pooled channels          dim=    4  0.629 +/- 0.085
+       untrained argmax policy      acc=0.458  lane->channel ['T2L', 'T2R', 'T1L', 'T1R']
+  C  note approach: max |corr(channel, elevation)| = 0.924
+  D  chords: mean linearity 0.579  mean gain 0.846
+
+building shuffled channel labels control (seed 1) ...
+
+=== shuffled channel labels #1  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+10deg  T1L=+10deg  T1R=+20deg  T2R=+5deg
+     modulation depth: 0.082  0.087  0.068  0.077
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  0.992 +/- 0.010
+       central brain              dim= 1566  0.983 +/- 0.016
+       descending (population)    dim= 1303  0.992 +/- 0.010
+       4 pooled channels          dim=    4  0.483 +/- 0.073
+       untrained argmax policy      acc=0.371  lane->channel ['T1R', 'T1L', 'T2R', 'T2L']
+  C  note approach: max |corr(channel, elevation)| = 0.722
+  D  chords: mean linearity 0.815  mean gain 0.744
+
+building shuffled channel labels control (seed 2) ...
+
+=== shuffled channel labels #2  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+5deg  T1L=+10deg  T1R=+15deg  T2R=+20deg
+     modulation depth: 0.099  0.047  0.078  0.080
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  0.996 +/- 0.008
+       visual projection          dim= 1260  0.996 +/- 0.008
+       central brain              dim= 1566  0.996 +/- 0.008
+       descending (population)    dim= 1303  0.992 +/- 0.010
+       4 pooled channels          dim=    4  0.654 +/- 0.060
+       untrained argmax policy      acc=0.417  lane->channel ['T1R', 'T1L', 'T2L', 'T2R']
+  C  note approach: max |corr(channel, elevation)| = 0.720
+  D  chords: mean linearity 0.815  mean gain 0.744
+
+building shuffled channel labels control (seed 3) ...
+
+=== shuffled channel labels #3  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+10deg  T1L=+20deg  T1R=+5deg  T2R=+20deg
+     modulation depth: 0.100  0.070  0.063  0.062
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  0.996 +/- 0.008
+       visual projection          dim= 1260  0.996 +/- 0.008
+       central brain              dim= 1566  0.996 +/- 0.008
+       descending (population)    dim= 1303  0.996 +/- 0.008
+       4 pooled channels          dim=    4  0.692 +/- 0.066
+       untrained argmax policy      acc=0.408  lane->channel ['T2L', 'T1L', 'T1R', 'T2R']
+  C  note approach: max |corr(channel, elevation)| = 0.676
+  D  chords: mean linearity 0.815  mean gain 0.744
+
+building shuffled channel labels control (seed 4) ...
+
+=== shuffled channel labels #4  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+5deg  T1L=+20deg  T1R=+10deg  T2R=+5deg
+     modulation depth: 0.085  0.070  0.071  0.070
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  1.000 +/- 0.000
+       central brain              dim= 1566  0.996 +/- 0.008
+       descending (population)    dim= 1303  1.000 +/- 0.000
+       4 pooled channels          dim=    4  0.654 +/- 0.078
+       untrained argmax policy      acc=0.442  lane->channel ['T1L', 'T2R', 'T2L', 'T1R']
+  C  note approach: max |corr(channel, elevation)| = 0.722
+  D  chords: mean linearity 0.815  mean gain 0.744
+
+building shuffled channel labels control (seed 5) ...
+
+=== shuffled channel labels #5  (19,367 neurons, 729,558 edges)
+  A  preferred azimuth per channel: T2L=+5deg  T1L=+20deg  T1R=+5deg  T2R=+20deg
+     modulation depth: 0.098  0.051  0.097  0.054
+  B  lane decoding (chance 0.250):
+       optic lobe                 dim= 4000  1.000 +/- 0.000
+       visual projection          dim= 1260  1.000 +/- 0.000
+       central brain              dim= 1566  0.996 +/- 0.008
+       descending (population)    dim= 1303  0.992 +/- 0.010
+       4 pooled channels          dim=    4  0.746 +/- 0.042
+       untrained argmax policy      acc=0.471  lane->channel ['T1L', 'T1R', 'T2L', 'T2R']
+  C  note approach: max |corr(channel, elevation)| = 0.823
+  D  chords: mean linearity 0.815  mean gain 0.744
+
+--- summary (mean +/- sd over seeds; chance = 0.250) ----------
+condition                    descending (population)         4 pooled channels             argmax policy    max channel modulation
+real                                    0.992                      0.721                      0.567                      0.159        
+rewired topology                        0.998  +-0.002              0.583  +-0.091              0.453  +-0.079              0.091  +-0.021
+shuffled retinotopy                     0.981  +-0.009              0.607  +-0.098              0.467  +-0.058              0.116  +-0.029
+shuffled channel labels                 0.994  +-0.003              0.646  +-0.088              0.422  +-0.033              0.094  +-0.006
+  rewired topology        : 0/5 seeds reach the real network's 0.721
+  shuffled retinotopy     : 1/5 seeds reach the real network's 0.721
+  shuffled channel labels : 1/5 seeds reach the real network's 0.721
