@@ -56,6 +56,17 @@ playfield is in the features, so asking for the window at a different place
 along the descent gives a different linear map; that is what the lead search
 uses.  Lanes do not interact in the judge, so the four (lead, offset) pairs
 are chosen independently from the same replays.
+
+The selection criterion is per-lane accuracy minus ``stray_penalty`` per stray
+press per note in the lane, with the penalty deliberately *larger* than the
+0.05 the perturbation learner's reward uses.  osu!mania itself charges nothing
+for a press in an empty lane, so a readout that fires every lane at every note
+scores 1.0 accuracy; at 0.05 that costs 0.15 and the offset search happily
+picks it (the first run of experiment 5 did, at 1.5 stray presses per note on
+the male CNS).  At 0.4 a stray costs more than a third of a perfect note and
+mashing four lanes is a net loss.  Held-out evaluation still reports accuracy,
+hit rate, strays per note and lane-correctness separately; the penalty only
+decides which threshold the fit installs.
 """
 
 from __future__ import annotations
@@ -126,9 +137,11 @@ class PopulationProjection:
 
     @classmethod
     def fit(cls, fly: Fly, r0: np.ndarray, k: int = 8, idx: np.ndarray | None = None,
-            dt: float = DT_PLAY) -> "PopulationProjection":
+            dt: float = DT_PLAY, states: list[np.ndarray] | None = None) -> "PopulationProjection":
+        """``states`` lets a caller pass the calibration ensemble it already has."""
         idx = fly.readout.dn_local if idx is None else np.asarray(idx)
-        X = np.array([s[idx] for s in calibration_states(fly, r0, dt)], dtype=np.float64)
+        states = calibration_states(fly, r0, dt) if states is None else states
+        X = np.array([s[idx] for s in states], dtype=np.float64)
         mean = X.mean(0)
         U, S, Vt = np.linalg.svd(X - mean, full_matrices=False)
         k = min(k, len(S))
@@ -244,7 +257,10 @@ def replay(rec: Recording, presses: list[list[int]]) -> PlayResult:
     return env.result()
 
 
-def lane_rewards(res: PlayResult, stray_penalty: float = 0.05) -> np.ndarray:
+STRAY_PENALTY_FIT = 0.4
+
+
+def lane_rewards(res: PlayResult, stray_penalty: float = STRAY_PENALTY_FIT) -> np.ndarray:
     """Per-lane accuracy minus stray penalty; lanes are independent in the judge."""
     out = np.zeros(N_KEYS)
     for lane in range(N_KEYS):
@@ -271,6 +287,7 @@ class RidgeReadout:
     player: Player
     features: Features | None = None
     lam: float = 1e-2
+    stray_penalty: float = STRAY_PENALTY_FIT
     width_ms: float = 80.0
     leads: tuple = (40.0, 20.0, 0.0, -20.0, -40.0, -60.0)     # window start, ms before the hit
     stage: int = 3
@@ -314,7 +331,8 @@ class RidgeReadout:
             for j, d in enumerate(self.offsets):
                 for rec, z in zip(self.recordings, Zs):
                     u = z @ W.T + b + d
-                    table[i, j] += lane_rewards(replay(rec, replay_presses(u, rec.t, refr)))
+                    table[i, j] += lane_rewards(replay(rec, replay_presses(u, rec.t, refr)),
+                                                self.stray_penalty)
         table /= len(self.recordings)
         W = np.zeros((N_KEYS, k)); b = np.zeros(N_KEYS)
         chosen = []

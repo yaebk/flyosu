@@ -71,7 +71,14 @@ def test_offline_matches_online():
     check("same judgments", online.judgments == offline.judgments)
     check("some notes were hit", online.hit_rate > 0.5, online.summary())
     lr = R.lane_rewards(offline)
-    check("lane rewards average to the reward", abs(lr.mean() - (offline.accuracy - 0.05 * offline.n_stray / len(chart))) < 1e-9)
+    check("lane rewards average to the reward",
+          abs(R.lane_rewards(offline, 0.05).mean() - (offline.accuracy - 0.05 * offline.n_stray / len(chart))) < 1e-9)
+    # mashing every lane at every note must lose to playing one's own lane
+    mash = R.replay(rec, [[0, 1, 2, 3] if any(abs(n.hit_ms - ti) < rec.dt / 2 for n in chart.notes) else []
+                          for ti in rec.t])
+    check("stray penalty makes four-lane mashing a loss", R.lane_rewards(mash).mean() < 0,
+          f"acc {mash.accuracy:.2f}, strays/note {mash.n_stray / len(chart):.2f}, "
+          f"lane reward {R.lane_rewards(mash).mean():+.2f}")
 
 
 def test_fit():
