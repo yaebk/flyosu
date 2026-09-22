@@ -17,8 +17,15 @@ topology), with:
     (experiment 2's untrained numbers were noise-free and deterministic).
 
     N_LEARN=4 N_EPISODES=30 python -m experiments.e3_learning
-    RESUME=1 python -m experiments.e3_learning
+    RESUME=1 N_LEARN=8 python -m experiments.e3_learning            # more rewired seeds
+    RESUME=1 FAMILIES=rewired,channels N_LEARN=4 python -m experiments.e3_learning
     python -m experiments.e3_learning report
+
+``FAMILIES`` selects which control families go through the three conditions:
+``rewired`` (degree-preserving rewiring; the direct test of the topology) and
+``channels`` (same network, descending neurons assigned to the four channels
+at random; tests whether the anatomical output grouping is what the
+constrained readout exploits).
 """
 
 from __future__ import annotations
@@ -39,6 +46,8 @@ RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 PATH = os.path.join(RESULTS, "e3_learning.json")
 
 CONDITIONS = ("wired", "blank", "thresholds")
+FAMILIES = {"rewired": ("rewired topology", "shuffle_seed"),
+            "channels": ("shuffled channel labels", "channel_seed")}
 STAGES = (1, 2, 3, 4, 5)
 THETA = 1.5
 LEARNER = dict(sigma=0.2, lr=1.0, lr_decay=0.97, stage=3)
@@ -82,11 +91,11 @@ def untrained_noisy(player, noise=0.03, n_charts=2):
     return out
 
 
-def run_network(label, kw, n_episodes):
+def run_network(label, kw, n_episodes, family="real"):
     t0 = time.time()
     print(f"\n=== {label}", flush=True)
     fly = M.build(regime="play", **kw)
-    out = {"label": label, "stability": fly.stability()}
+    out = {"label": label, "family": family, "stability": fly.stability()}
     player = P.Player.untrained(fly, theta=2.0)
     out["wiring"] = player.controller.wiring(fly.readout.names)
     out["untrained_noisy"] = untrained_noisy(player)
@@ -115,23 +124,29 @@ def main():
         with open(PATH) as fh:
             results = json.load(fh)
         print(f"resuming: {len(results['runs'])} runs done")
+    for r in results["runs"]:                       # runs saved before families existed
+        r.setdefault("family", "real" if r["label"] == "real connectome" else "rewired topology")
     done = {r["label"] for r in results["runs"]}
-    plan = [("real connectome", {})] + [(f"rewired topology #{s}", {"shuffle_seed": s})
-                                        for s in range(1, n_learn + 1)]
-    for label, kw in plan:
+    plan = [("real connectome", "real", {})]
+    for key in os.environ.get("FAMILIES", "rewired").split(","):
+        fam, kwarg = FAMILIES[key.strip()]
+        plan += [(f"{fam} #{s}", fam, {kwarg: s}) for s in range(1, n_learn + 1)]
+    for label, fam, kw in plan:
         if label in done:
             continue
-        results["runs"].append(run_network(label, kw, n_ep))
+        results["runs"].append(run_network(label, kw, n_ep, family=fam))
         _save(results)
     report(results)
 
 
 def report(results):
     runs = results["runs"]
-    real = next((r for r in runs if r["label"] == "real connectome"), None)
-    ctrl = [r for r in runs if r["label"] != "real connectome"]
+    for r in runs:
+        r.setdefault("family", "real" if r["label"] == "real connectome" else "rewired topology")
+    real = next((r for r in runs if r["family"] == "real"), None)
     if not real:
         return
+    fams = [f for f in dict.fromkeys(r["family"] for r in runs) if f != "real"]
 
     def perm(rv, v):
         v = np.asarray(v, float)
@@ -139,15 +154,21 @@ def report(results):
         return {"real": float(rv), "control_mean": float(v.mean()), "control_sd": float(v.std()),
                 "n": int(len(v)), "n_ge": n_ge, "p": float((n_ge + 1) / (len(v) + 1))}
 
+    def line(q):
+        return (f"{q['control_mean']:.3f}+-{q['control_sd']:.3f} {q['n_ge']}/{q['n']} p={q['p']:.2f}"
+                if q else "-")
+
     summary = {}
     print("\n--- untrained with photoreceptor noise 0.03, lane-correct by stage ---")
     for s in STAGES:
         rv = real["untrained_noisy"][f"stage{s}"]["lane_correct"]
-        v = [r["untrained_noisy"][f"stage{s}"]["lane_correct"] for r in ctrl]
-        q = perm(rv, v) if v else None
-        summary[f"noisy lane-correct s{s}"] = q
-        print(f"  stage {s}: real {rv:.3f}" + (f" | rewired {q['control_mean']:.3f}+-{q['control_sd']:.3f} "
-                                              f"{q['n_ge']}/{q['n']} p={q['p']:.2f}" if q else ""))
+        row = f"  stage {s}: real {rv:.3f}"
+        for fam in fams:
+            v = [r["untrained_noisy"][f"stage{s}"]["lane_correct"] for r in runs if r["family"] == fam]
+            q = perm(rv, v) if v else None
+            summary[f"noisy lane-correct s{s} | {fam}"] = q
+            row += f" | {fam[:9]} {line(q)}"
+        print(row)
 
     print("\n--- learning: held-out accuracy (stage 3) by episode ------------------")
     for cond in results["conditions"]:
@@ -156,19 +177,21 @@ def report(results):
             if cond not in r:
                 continue
             ev = r[cond]["held_out"]
-            print(f"    {r['label']:<24s} " + "  ".join(f"ep{e['episode']}={e['accuracy']:.2f}" for e in ev)
+            err = ev[-1]["error_mean_ms"]
+            print(f"    {r['label']:<28s} " + "  ".join(f"ep{e['episode']}={e['accuracy']:.2f}" for e in ev)
                   + f"   lane-correct {ev[0]['lane_correct']:.2f}->{ev[-1]['lane_correct']:.2f}"
-                  + f"   err {ev[-1]['error_mean_ms'] if ev[-1]['error_mean_ms'] is not None else float('nan'):+.0f} ms")
+                  + (f"   err {err:+.0f} ms" if err is not None else ""))
         for name, fn in (("final", lambda ev: ev[-1]["accuracy"]),
                          ("best", lambda ev: max(e["accuracy"] for e in ev)),
                          ("area", lambda ev: float(np.mean([e["accuracy"] for e in ev[1:]])))):
             rv = fn(real[cond]["held_out"])
-            v = [fn(r[cond]["held_out"]) for r in ctrl if cond in r]
-            if v:
-                q = perm(rv, v)
-                summary[f"{cond} {name}"] = q
-                print(f"    {name:<6s} real {rv:.3f} | rewired {q['control_mean']:.3f}+-{q['control_sd']:.3f} "
-                      f"{q['n_ge']}/{q['n']} p={q['p']:.2f}")
+            row = f"    {name:<6s} real {rv:.3f}"
+            for fam in fams:
+                v = [fn(r[cond]["held_out"]) for r in runs if r["family"] == fam and cond in r]
+                q = perm(rv, v) if v else None
+                summary[f"{cond} {name} | {fam}"] = q
+                row += f" | {fam[:9]} {line(q)}"
+            print(row)
     results["summary"] = summary
     _save(results)
 
