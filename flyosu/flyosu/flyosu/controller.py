@@ -24,7 +24,9 @@ Two pieces:
         period
 
     ``W`` and ``b`` are the *only* learnable parameters in the whole system --
-    20 numbers.  The connectome stays frozen.
+    20 numbers.  The connectome stays frozen.  (``W`` may be 4 x k when the
+    controller reads k label-free population features instead of the four
+    channels -- see ``reservoir.py``; the rule above is unchanged.)
 
 ``Controller.anatomical`` builds the untrained policy: ``W`` is a permutation
 matrix that wires each key to the channel that responds most while a single
@@ -51,6 +53,24 @@ from .model import CAL_AZ, CAL_EL, DT_PLAY, Fly
 N_KEYS = 4
 
 
+def calibration_states(fly: Fly, r0: np.ndarray, dt: float = DT_PLAY,
+                       duration_ms: float = 300.0) -> list[np.ndarray]:
+    """Network state after settling on each of the 60 calibration stimuli from
+    ``r0``, plus ``r0`` itself.  Label-free: the ensemble tiles the visual
+    field and knows nothing about lanes.  Every label-free readout (the channel
+    normaliser here, the population projection in ``reservoir.py``) is fitted
+    on exactly this set."""
+    out = []
+    for az in CAL_AZ:
+        for el in CAL_EL:
+            r, _ = fly.net.run(fly.stimulus([(float(az), float(el), 1.0)],
+                                            sigma_deg=SIGMA_DEG),
+                               duration_ms=duration_ms, dt=dt, r0=r0)
+            out.append(r)
+    out.append(r0)
+    return out
+
+
 @dataclass
 class ChannelNormaliser:
     mu: np.ndarray
@@ -64,15 +84,8 @@ class ChannelNormaliser:
             duration_ms: float = 300.0) -> "ChannelNormaliser":
         """Channel mean and spread over the calibration ensemble, each stimulus
         settled from the blank state ``r0`` for ``duration_ms``."""
-        rows = []
-        for az in CAL_AZ:
-            for el in CAL_EL:
-                r, _ = fly.net.run(fly.stimulus([(float(az), float(el), 1.0)],
-                                                sigma_deg=SIGMA_DEG),
-                                   duration_ms=duration_ms, dt=dt, r0=r0)
-                rows.append(fly.channels(r))
-        rows.append(fly.channels(r0))
-        A = np.array(rows, dtype=np.float64)
+        A = np.array([fly.channels(r) for r in calibration_states(fly, r0, dt, duration_ms)],
+                     dtype=np.float64)
         sd = A.std(0)
         sd[sd <= 0] = 1.0
         return cls(mu=A.mean(0), sd=sd)
@@ -80,7 +93,7 @@ class ChannelNormaliser:
 
 @dataclass
 class Controller:
-    W: np.ndarray                      # (4, 4) key <- channel mixing
+    W: np.ndarray                      # (4, k) key <- feature mixing; k = 4 channels by default
     b: np.ndarray                      # (4,) thresholds (u = W z + b > 0 fires)
     refractory_ms: float = 150.0
     smooth_ms: float = 40.0            # leaky-integrator time constant; 0 = none
@@ -97,12 +110,17 @@ class Controller:
     @params.setter
     def params(self, p: np.ndarray) -> None:
         p = np.asarray(p, dtype=np.float64)
-        self.W = p[:N_KEYS * N_KEYS].reshape(N_KEYS, N_KEYS).copy()
-        self.b = p[N_KEYS * N_KEYS:].copy()
+        n_w = self.W.size
+        self.W = p[:n_w].reshape(self.W.shape).copy()
+        self.b = p[n_w:].copy()
+
+    @property
+    def n_features(self) -> int:
+        return self.W.shape[1]
 
     @property
     def n_params(self) -> int:
-        return N_KEYS * N_KEYS + N_KEYS
+        return self.W.size + N_KEYS
 
     def copy(self) -> "Controller":
         return Controller(self.W.copy(), self.b.copy(), self.refractory_ms,
@@ -111,7 +129,7 @@ class Controller:
     # -- dynamics ----------------------------------------------------------
 
     def reset(self) -> None:
-        self.z_s = np.zeros(N_KEYS)
+        self.z_s = np.zeros(self.n_features)
         self.u_prev = np.full(N_KEYS, -np.inf)
         self.last_press = np.full(N_KEYS, -np.inf)
 

@@ -12,6 +12,7 @@ Every frame (``dt`` ms, default 2 ms -- see ``model.DT_PLAY``):
     ext      = encoder(visible)  (+ noise)      light on 8,452 photoreceptors
     r        = net.step(r, ext)                 one step of the connectome
     z        = normaliser.z(channels(r))        four channels on a common scale
+                                                (or ``features(r)``, if set)
     keys     = controller.step(z, t)            threshold crossings
     env.press(k) for k in keys;  env.step()     judged, clock advances
 
@@ -24,6 +25,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
+from typing import Callable
 
 import numpy as np
 
@@ -52,6 +54,7 @@ class Player:
     dt: float = DT_PLAY
     noise: float = 0.0                  # photoreceptor noise sd per frame
     seed: int = 0
+    features: Callable[[np.ndarray], np.ndarray] | None = None   # replaces norm.z(channels(r))
     stats: dict = field(default_factory=dict)
 
     @classmethod
@@ -68,7 +71,10 @@ class Player:
 
     def play(self, chart: Chart, record: bool = False,
              controller: Controller | None = None,
-             seed: int | None = None) -> PlayResult:
+             seed: int | None = None,
+             tap: Callable[[np.ndarray, ManiaEnv], None] | None = None) -> PlayResult:
+        """Play one chart.  ``tap(r, env)`` is called every frame after the
+        network step, before the controller acts -- used to record activity."""
         fly, net = self.fly, self.fly.net
         ctrl = controller if controller is not None else self.controller
         env = ManiaEnv(chart, dt_ms=self.dt)
@@ -88,8 +94,10 @@ class Player:
                 s = np.clip(s + rng.normal(0.0, self.noise, len(s)), 0.0, 1.0)
             ext[ph] = s
             r = net.step(r, ext, env.dt)
+            if tap is not None:
+                tap(r, env)
             a = fly.channels(r)
-            z = self.norm.z(a)
+            z = self.norm.z(a) if self.features is None else self.features(r)
             keys = ctrl.step(z, env.t, env.dt)
             for k in keys:
                 env.press(k)
