@@ -124,6 +124,45 @@ def test_motor(cx):
           f"{out:,} edges out")
 
 
+def test_retinotopy(cx):
+    print("retinotopy (column lattice)")
+    from flyosu import retina_hex as RH
+    from flyosu import retina as R
+    ret = RH.build(cx)
+    check("input layer is L1 + L2, one each per column", set(ret.ptype.tolist()) == {"L1", "L2"}
+          and 3_400 < len(ret) < 3_600, f"{len(ret):,} cells")
+    check("both eyes present", set(ret.side.tolist()) == {"left", "right"})
+    # the bug that mirrored the eyes once: direction must be in the canonical
+    # head frame that drive() uses, not in this volume's voxel frame
+    v = R.unit_vector(ret.azimuth, ret.elevation)
+    check("optical axes match stored angles", float(np.abs(v - ret.direction).max()) < 1e-4)
+    left = ret.side == "left"
+    dl = ret.drive([(-70.0, -25.0, 1.0)], sigma_deg=10)
+    dr = ret.drive([(70.0, -25.0, 1.0)], sigma_deg=10)
+    check("left field drives the left eye", dl[left].sum() > 20 * dl[~left].sum())
+    check("right field drives the right eye", dr[~left].sum() > 20 * dr[left].sum())
+    counts = [int((ret.drive([(a, -25.0, 1.0)], sigma_deg=10) > 0.05).sum())
+              for a in range(-140, 141, 20)]
+    check("the lane elevation is covered at every azimuth", min(counts) > 30, f"min {min(counts)} cells")
+    for s in ("left", "right"):
+        f = ret.fit[s]
+        check(f"{s} shell fit is clean", f["residual_um"] < 20 and f["fit_residual_deg"] < 20,
+              f"resid {f['residual_um']:.1f} um, {f['fit_residual_deg']:.1f} deg")
+
+
+def test_motor_readout(cx):
+    print("motor readout")
+    from flyosu import outputs as O
+    node_ids = np.arange(cx.n_neurons, dtype=np.int32)
+    ro = O.build_motor(cx, node_ids)
+    check("four pools, in FlyWire's channel order", ro.names == ["T2L", "T1L", "T1R", "T2R"], str(ro.names))
+    check("pool sizes are the annotated T1/T2 leg motor neurons", ro.sizes() == [87, 87, 86, 88],
+          str(ro.sizes()))
+    sides = [set(cx.ann.iloc[node_ids[g]].side) for g in ro.groups]
+    check("pools are single-sided", sides == [{"left"}, {"left"}, {"right"}, {"right"}])
+    check("pools are disjoint", len(np.unique(ro.dn_local)) == sum(ro.sizes()))
+
+
 def main():
     if not os.path.exists(MC.cache_path(MC.DEFAULT_MIN_WEIGHT)):
         print("cache missing; building (needs data/malecns/*.feather)")
@@ -132,6 +171,8 @@ def main():
     test_annotations(cx)
     test_photoreceptors(cx)
     test_motor(cx)
+    test_retinotopy(cx)
+    test_motor_readout(cx)
     print()
     if FAILED:
         print(f"{len(FAILED)} check(s) failed: " + ", ".join(FAILED))

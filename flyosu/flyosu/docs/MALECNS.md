@@ -333,3 +333,67 @@ T1/T2 idx)` on the male CNS `Connectome`, read out the four leg pools by
 `Fly.stability()` reported, before touching the game. The result to look for
 first is the untrained lane-decoding accuracy at the *motor neurons*, real vs
 rewired — the measurement the project could not make on FlyWire.
+
+## First measurements (added after the loader)
+
+Built on top of the feasibility study above: `flyosu/retina_hex.py` (L1+L2
+input layer on the annotated column lattice), `outputs.build_motor` (the
+T1/T2 leg motor neurons by side), and `model.build(dataset="malecns")`.
+
+**Retinotopy.** 3,534 L1/L2 cells, both eyes spanning the published field
+after rescaling; hex-neighbour columns land 5.0–5.2° apart (p95 6.7°), which
+is the real interommatidial angle. Shell fit residual 12 µm; quadratic
+hex→angle residual 10–13°. The lane elevation (−25°) is covered at every
+azimuth by ≥ 141 cells. One bug caught by the same check that caught it on
+FlyWire: `direction` must be expressed in the canonical head frame that
+`Retina.drive()` uses, not this volume's voxel frame — right is −x here and
++x in FAFB, and mixing them mirrors the eyes.
+
+**Network.** With `n_keep = 20000` the pathway is 16,581 neurons and
+1,309,893 edges (FlyWire: 19,367 / 729,558 — this graph is denser at the
+same edge threshold): 6,714 optic, 3,952 central, 2,987 visual projection,
+1,142 VNC intrinsic, 828 descending, 348 leg motor neurons. Calibration ~30 s.
+
+**The play regime needs a different floor.** At `sigma_floor = 30` (FlyWire's
+value) the blank field is chaotic: drift 0.92, spectral radius 4.3, max gain
+9. The floor is a global gain cap so the radius scales as its inverse:
+
+| floor | fixed point | radius | max gain |
+|---|---|---|---|
+| 30 | no (drift 0.92) | 4.32 | 9.1 |
+| 60 | no (drift 0.14) | 3.61 | 6.5 |
+| **90** | **yes** | **2.05** | 3.6 |
+| 150 | yes | 1.34 | 2.5 |
+
+`model.PLAY_FLOOR["malecns"] = 90` — the same operating point as FlyWire at
+30 (radius 2.05 vs 2.28), reached on a different graph.
+
+**Static lane probe at the motor neurons** (experiment 1's probe B: 30
+trials per lane, jitter, photoreceptor noise 0.03, from the fixed point):
+
+| | real | rewired #1 | rewired #2 |
+|---|---|---|---|
+| fixed point / radius | yes / **2.05** | yes / 0.72 | yes / 0.64 |
+| untrained argmax over the 4 leg pools | 0.517 | 0.433 | 0.517 |
+| 4-pool decoder | 0.700 | 0.667 | 0.808 |
+| **348 leg motor neurons, population decoder** | **0.983** | 1.000 | 1.000 |
+| 828 descending neurons, population decoder | 0.992 | 1.000 | 1.000 |
+
+Two things this says, at n = 2:
+
+- **The recurrent-gain result replicates across connectomes.** Real 2.05 vs
+  rewired 0.64–0.72 here; real 2.28 vs 0.78 ± 0.16 on FlyWire. Different
+  animal, sex, lab and reconstruction pipeline; same threefold gap; same
+  degree-preserving rewiring destroying it. This is now the most robust
+  connectome-specific fact in the project.
+- **Lane identity reaches real leg motor neurons essentially intact** (0.98
+  from 348 cells), and — exactly as on FlyWire — so it does in rewired
+  networks. The untrained four-pool result is not separable from the controls
+  at n = 2 (0.52 vs 0.43 / 0.52), which is also where FlyWire's static probe
+  sat (0.567 vs 0.55 ± 0.12). On FlyWire the real-vs-rewired gap only opened
+  in *continuous play* (experiments 2–4). Whether it does here is the next
+  measurement, and the game runs on this dataset unchanged:
+  `play.Player.untrained(model.build(dataset="malecns", regime="play"))`.
+
+Not yet done on this dataset: continuous play, the curriculum, learning, or
+more than two controls.

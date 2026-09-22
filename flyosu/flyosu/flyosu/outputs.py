@@ -113,3 +113,42 @@ def describe(readout: MotorReadout, cx: Connectome,
         joined = ", ".join(f"{t}({c})" for t, c in types.items())
         lines.append(f"  {name}  n={len(g):<5d} {joined}")
     return "\n".join(lines)
+
+
+def build_motor(cx: Connectome, node_ids: np.ndarray, Wt: sp.csr_matrix | None = None,
+                neuromeres: tuple = ("T1", "T2")) -> MotorReadout:
+    """Four channels from *real* leg motor neurons (male CNS only).
+
+    The male CNS reconstruction continues into the ventral nerve cord, so the
+    four keys can be four actual motor pools: the leg motor neurons of the
+    first two thoracic neuromeres, split by side.  Nothing is clustered and
+    nothing is inferred -- ``super_class == "vnc_motor"``, ``neuromere`` and
+    ``side`` are annotations.  T1L / T2L / T1R / T2R are no longer nicknames.
+
+    Grouping is by the *motor neuron's* side, not by the side of the
+    descending neurons that drive it: only 42% of DN -> leg-MN synapses are
+    ipsilateral to the DN soma (docs/MALECNS.md), so grouping DNs by their own
+    side, as ``build`` does for FlyWire, would not lateralise the output.
+    ``Wt`` is accepted for signature compatibility and unused.
+    """
+    lut = np.full(cx.n_neurons, -1, dtype=np.int32)
+    lut[node_ids] = np.arange(len(node_ids), dtype=np.int32)
+    ann = cx.ann
+    names, groups = [], []
+    for s, tag in (("left", "L"), ("right", "R")):
+        for nm in neuromeres:
+            g = cx.where(super_class="vnc_motor", neuromere=nm, side=s)
+            g = lut[g]
+            groups.append(np.sort(g[g >= 0]).astype(np.int32))
+            names.append(f"{nm}{tag}")
+    # channel order matches ``build``: (left | right) x (pool 0 | pool 1)
+    order = [1, 0, 2, 3] if len(neuromeres) == 2 else list(range(len(groups)))
+    groups = [groups[i] for i in order]
+    names = [names[i] for i in order]
+    dn_local = np.concatenate(groups)
+    label = np.zeros(len(dn_local), np.int8)
+    pos = {v: i for i, v in enumerate(dn_local)}
+    for gi, g in enumerate(groups):
+        for v in g:
+            label[pos[v]] = gi
+    return MotorReadout(groups=groups, names=names, dn_local=dn_local, label_of=label)

@@ -25,6 +25,18 @@ from . import retina as R
 from . import sim as S
 from . import subgraph as SG
 
+# Two connectomes can be run through the same pipeline.
+#
+# "flywire"  FlyWire v783, female, brain + optic lobes.  Input = 8,452 R1-6
+#            photoreceptors with a fitted retinotopy; output = 1,303
+#            descending neurons split into four channels by hemisphere and
+#            input-connectivity clustering (T1L/T2L/T1R/T2R are nicknames).
+# "malecns"  Male CNS v1.0, brain + optic lobes + ventral nerve cord.  Input =
+#            3,534 L1/L2 lamina cells on the annotated column lattice
+#            (retina_hex.py); output = the real T1/T2 leg motor neurons by
+#            side (outputs.build_motor).  See docs/MALECNS.md.
+DATASETS = ("flywire", "malecns")
+
 MODEL_DIR = os.path.join(C.DATA_DIR, "models")
 
 # Two operating regimes, selected by ``build(regime=...)``.
@@ -42,6 +54,12 @@ MODEL_DIR = os.path.join(C.DATA_DIR, "models")
 #         real connectome, 0.7 for rewired controls, both with Re < 1).  This
 #         is what the game runs on.  docs/CALIBRATION.md, "Ongoing activity".
 REGIMES = {"e1": dict(sigma_floor=0.05), "play": dict(sigma_floor=30.0)}
+# The play-regime floor is a global gain cap, so it depends on the graph.  30
+# puts FlyWire at spectral radius 2.3 with a fixed point; the male CNS
+# pathway has a different in-degree distribution and at 30 it is still
+# chaotic (radius 4.3).  90 gives it a fixed point at radius 2.05 -- the same
+# operating point on a different graph.  Measured, see docs/MALECNS.md.
+PLAY_FLOOR = {"flywire": 30.0, "malecns": 90.0}
 DT_PLAY = 2.0     # ms; at dt = 5 ms the oscillatory modes are badly under-damped
 
 # the training ensemble the operating points are calibrated on: a coarse sweep
@@ -117,7 +135,8 @@ class Fly:
     def summary(self) -> str:
         sc = self.class_of("super_class")
         lines = [f"network   {self.net.n:,} neurons  {self.net.n_edges:,} edges",
-                 f"retina    {len(self.ret):,} R1-6 photoreceptors",
+                 f"input     {len(self.ret):,} cells ("
+                 + "/".join(sorted(set(self.ret.ptype.tolist()))) + ")",
                  f"channels  " + "  ".join(
                      f"{n}={len(g)}" for n, g in
                      zip(self.readout.names, self.readout.groups))]
@@ -136,7 +155,8 @@ def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
           tau: float = 20.0, sigma_deg: float = 10.0, rounds: int = 8,
           shuffle_seed: int | None = None, retino_seed: int | None = None,
           channel_seed: int | None = None, sigma_floor: float | None = None,
-          regime: str = "e1", cache: bool = True, verbose: bool = False) -> Fly:
+          regime: str = "e1", dataset: str = "flywire", cache: bool = True,
+          verbose: bool = False) -> Fly:
     """Build (and calibrate) a fly.
 
     Three independent controls, each isolating one thing the connectome
@@ -159,6 +179,7 @@ def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
                       anatomical *grouping of the output* matters.
 
     ``regime``        "e1" (default) or "play"; see ``REGIMES``.
+    ``dataset``       "flywire" (default) or "malecns"; see ``DATASETS``.
     ``sigma_floor``   lower bound on each neuron's calibrated input spread, as
                       a fraction of the median.  Caps per-neuron gain at
                       ``slope / (sigma_floor * median sigma)``.  Overrides the
@@ -166,17 +187,30 @@ def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
     """
     if regime not in REGIMES:
         raise ValueError(f"regime {regime!r}; known: {sorted(REGIMES)}")
+    if dataset not in DATASETS:
+        raise ValueError(f"dataset {dataset!r}; known: {DATASETS}")
     if sigma_floor is None:
-        sigma_floor = REGIMES[regime]["sigma_floor"]
-    cx = C.load()
-    ret = R.build(cx)
-    pw = SG.visual_to_descending(cx, ret.idx, n_keep=n_keep)
+        sigma_floor = (PLAY_FLOOR[dataset] if regime == "play"
+                       else REGIMES[regime]["sigma_floor"])
+    if dataset == "malecns":
+        from . import malecns as MC
+        from . import retina_hex as RH
+        cx = MC.load(verbose=verbose)
+        ret = RH.build(cx)
+        sink = cx.where(super_class="vnc_motor", neuromere=["T1", "T2"])
+        pw = SG.build(cx, ret.idx, sink, n_keep=n_keep)
+    else:
+        cx = C.load()
+        ret = R.build(cx)
+        pw = SG.visual_to_descending(cx, ret.idx, n_keep=n_keep)
 
     kw = dict(n_keep=n_keep, slope=slope, offset=offset, tau=tau,
               sigma=sigma_deg, rounds=rounds, shuffle=shuffle_seed,
               retino=retino_seed, channel=channel_seed, v=4)
     if sigma_floor != 0.05:              # keep experiment-1 caches valid
         kw["floor"] = sigma_floor
+    if dataset != "flywire":
+        kw["dataset"] = dataset
     tag = _key(**kw)
     path = os.path.join(MODEL_DIR, f"fly_{tag}.pkl")
     if cache and os.path.exists(path):
@@ -185,7 +219,7 @@ def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
     else:
         blob = _fit(cx, ret, pw, slope, offset, tau, sigma_deg, rounds,
                     shuffle_seed, retino_seed, channel_seed, verbose,
-                    sigma_floor=sigma_floor)
+                    sigma_floor=sigma_floor, dataset=dataset)
         if cache:
             os.makedirs(MODEL_DIR, exist_ok=True)
             with open(path, "wb") as fh:
@@ -204,7 +238,7 @@ def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
                      "sigma_deg": sigma_deg, "shuffle_seed": shuffle_seed,
                      "retino_seed": retino_seed, "channel_seed": channel_seed,
                      "sigma_floor": sigma_floor, "regime": regime,
-                     "cache": path})
+                     "dataset": dataset, "cache": path})
 
 
 def _shuffle_edges(pre, post, w, n, seed):
@@ -223,9 +257,9 @@ def _shuffle_edges(pre, post, w, n, seed):
 
 
 def _fit(cx, ret, pw, slope, offset, tau, sigma_deg, rounds, shuffle_seed,
-         retino_seed, channel_seed, verbose, sigma_floor=0.05):
+         retino_seed, channel_seed, verbose, sigma_floor=0.05, dataset="flywire"):
     pre, post, w, node_ids = S.extract(cx, pw.node_ids, 1.0)
-    label = "flywire783"
+    label = "flywire783" if dataset == "flywire" else "malecns-v1"
     if shuffle_seed is not None:
         pre, post, w = _shuffle_edges(pre, post, w, len(node_ids), shuffle_seed)
         label = f"shuffled-{shuffle_seed}"
@@ -252,7 +286,8 @@ def _fit(cx, ret, pw, slope, offset, tau, sigma_deg, rounds, shuffle_seed,
     ens.append(np.zeros(net.n, np.float32))          # blank field
     net.calibrate(ens, rounds=rounds, sigma_floor=sigma_floor, verbose=verbose)
 
-    readout = O.build(cx, node_ids, net.Wt)
+    readout = (O.build_motor(cx, node_ids) if dataset == "malecns"
+               else O.build(cx, node_ids, net.Wt))
     if channel_seed is not None:
         rng = np.random.default_rng(channel_seed)
         sizes = readout.sizes()
