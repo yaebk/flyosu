@@ -171,6 +171,11 @@ datasets. Whether it is *the same* property as the high spectral radius is
 untested; the retinotopy-shuffled family (same graph, radius 2.7–3.3, PC1
 0.23–0.58) suggests they are related but not identical.
 
+> **Followed up and largely overturned by experiment 10.** The explanation
+> offered below — the amplified common mode responding to both lanes at once —
+> is wrong: all networks are additive about chords to within 3–4%, and the real
+> one cross-talks *less*. See `docs/RESULTS_E10.md`.
+
 **Stage-4 transfer is where the real network looks worst.** Fitted on stage 3
 and asked to play chords without refitting, the real network scores below the
 rewired mean at three of four readout sizes. Chords put two notes on screen at

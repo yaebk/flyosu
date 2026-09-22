@@ -98,13 +98,22 @@ corrected wiring rule it survives on area under the learning curve
 (1/8 → 2/8 → 4/8) and breaks on final accuracy (1/8 → 3/8 → 2/8). Quote it with
 the metric attached, or not at all. `docs/RESULTS_E3.md`.
 
+**14. "The real network transfers to chords worse because its common mode
+responds to both lanes at once" (experiment 5).** Measured directly, all
+thirteen networks respond to a chord as the sum of the two single notes to
+within 3–4%, and the real one shows *less* cross-talk than the controls, not
+more. The `channels` deficit is a transfer failure that refitting on chords
+fixes; the `pca8` deficit persists identically on *single notes* under the same
+fit, so it is a fitting pathology rather than anything to do with chords.
+`docs/RESULTS_E10.md`.
+
 ## The methodological result
 
-**Five times, a gap shrank as soon as the controls were given a fairer
-procedure** — readout fitting (e5), the shared threshold (e6), the wiring rule
-(e7), the sensory front end (e8), the learning comparison's starting wiring
-(e3 re-run). Twice the thing that shrank was a claim this project had already
-written down.
+**Six times, a gap shrank or an explanation dissolved once the comparison was
+made more carefully** — readout fitting (e5), the shared threshold (e6), the
+wiring rule (e7), the sensory front end (e8), the learning comparison's
+starting wiring (e3 re-run), and the chord hypothesis (e10). Three times the
+thing that fell was a claim this project had already written down.
 
 The mechanism was the same each time and is worth naming: a choice that is
 *matched as a procedure* — the same rule applied to every network — can still

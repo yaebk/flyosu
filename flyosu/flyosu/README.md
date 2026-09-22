@@ -348,6 +348,7 @@ experiments/
   e6_timing.py        what predicts untrained play; the threshold sweep
   e7_wiring.py        a wiring rule chosen on the shared-threshold band
   e9_structure.py     spectral radius and dimensionality, both datasets
+  e10_chords.py       chords: fit on stage 4, and chord additivity
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
@@ -364,6 +365,7 @@ docs/RESULTS_E6.md      experiment 6
 docs/RESULTS_E7.md      experiment 7
 docs/RESULTS_E8.md      experiment 8
 docs/RESULTS_E9.md      experiment 9
+docs/RESULTS_E10.md     experiment 10
 data/SOURCES.md         where the data comes from, with citations
 ```
 

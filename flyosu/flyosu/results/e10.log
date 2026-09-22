@@ -1,0 +1,124 @@
+  rewired topology #1        alpha +0.976 (peak +0.442, win +0.994)  |A|/|S| 0.989  |A|/|M| 1.381  cm-gain 0.994
+  rewired topology #1        channels  20 params  train 0.16  fit4->4 acc 0.163 hit 0.38 lane 0.43  fit4->3 acc 0.119
+  rewired topology #1        pca4      20 params  train 0.22  fit4->4 acc 0.133 hit 0.17 lane 0.58  fit4->3 acc 0.189
+  rewired topology #1        pca8      36 params  train 0.48  fit4->4 acc 0.371 hit 0.48 lane 0.90  fit4->3 acc 0.392
+  rewired topology #1        pca16     68 params  train 0.83  fit4->4 acc 0.796 hit 0.88 lane 1.00  fit4->3 acc 0.636
+  rewired topology #1        radius 0.73  (252s)
+  rewired topology #2        alpha +0.991 (peak +0.581, win +1.015)  |A|/|S| 1.001  |A|/|M| 1.255  cm-gain 1.005
+  rewired topology #2        channels  20 params  train 0.23  fit4->4 acc 0.271 hit 0.45 lane 0.69  fit4->3 acc 0.214
+  rewired topology #2        pca4      20 params  train 0.35  fit4->4 acc 0.312 hit 0.50 lane 0.52  fit4->3 acc 0.283
+  rewired topology #2        pca8      36 params  train 0.59  fit4->4 acc 0.433 hit 0.57 lane 0.89  fit4->3 acc 0.467
+  rewired topology #2        pca16     68 params  train 0.71  fit4->4 acc 0.588 hit 0.72 lane 0.91  fit4->3 acc 0.506
+  rewired topology #2        radius 0.71  (249s)
+  rewired topology #3        alpha +0.989 (peak +0.051, win +0.998)  |A|/|S| 1.001  |A|/|M| 1.183  cm-gain 1.014
+  rewired topology #3        channels  20 params  train 0.44  fit4->4 acc 0.425 hit 0.53 lane 0.88  fit4->3 acc 0.292
+  rewired topology #3        pca4      20 params  train 0.40  fit4->4 acc 0.317 hit 0.40 lane 0.80  fit4->3 acc 0.361
+  rewired topology #3        pca8      36 params  train 0.55  fit4->4 acc 0.471 hit 0.72 lane 0.71  fit4->3 acc 0.483
+  rewired topology #3        pca16     68 params  train 0.77  fit4->4 acc 0.767 hit 0.82 lane 0.97  fit4->3 acc 0.567
+  rewired topology #3        radius 0.72  (252s)
+  rewired topology #4        alpha +1.008 (peak +0.320, win +1.016)  |A|/|S| 1.003  |A|/|M| 1.283  cm-gain 1.000
+  rewired topology #4        channels  20 params  train 0.19  fit4->4 acc 0.208 hit 0.35 lane 0.84  fit4->3 acc 0.133
+  rewired topology #4        pca4      20 params  train 0.32  fit4->4 acc 0.233 hit 0.43 lane 0.82  fit4->3 acc 0.242
+  rewired topology #4        pca8      36 params  train 0.56  fit4->4 acc 0.542 hit 0.68 lane 1.00  fit4->3 acc 0.478
+  rewired topology #4        pca16     68 params  train 0.94  fit4->4 acc 0.867 hit 0.90 lane 1.00  fit4->3 acc 0.667
+  rewired topology #4        radius 0.75  (281s)
+  rewired topology #5        alpha +1.000 (peak +0.247, win +0.993)  |A|/|S| 1.008  |A|/|M| 1.266  cm-gain 1.004
+  rewired topology #5        channels  20 params  train 0.37  fit4->4 acc 0.287 hit 0.50 lane 0.68  fit4->3 acc 0.397
+  rewired topology #5        pca4      20 params  train 0.46  fit4->4 acc 0.325 hit 0.40 lane 0.94  fit4->3 acc 0.456
+  rewired topology #5        pca8      36 params  train 0.52  fit4->4 acc 0.408 hit 0.42 lane 1.00  fit4->3 acc 0.450
+  rewired topology #5        pca16     68 params  train 0.80  fit4->4 acc 0.733 hit 0.75 lane 0.97  fit4->3 acc 0.561
+  rewired topology #5        radius 0.64  (233s)
+  rewired topology #6        alpha +0.993 (peak +0.355, win +0.990)  |A|/|S| 1.004  |A|/|M| 1.220  cm-gain 1.004
+  rewired topology #6        channels  20 params  train 0.15  fit4->4 acc 0.046 hit 0.10 lane 0.86  fit4->3 acc 0.206
+  rewired topology #6        pca4      20 params  train 0.06  fit4->4 acc 0.000 hit 0.00 lane 0.50  fit4->3 acc 0.003
+  rewired topology #6        pca8      36 params  train 0.29  fit4->4 acc 0.175 hit 0.25 lane 0.77  fit4->3 acc 0.256
+  rewired topology #6        pca16     68 params  train 0.76  fit4->4 acc 0.625 hit 0.77 lane 0.89  fit4->3 acc 0.683
+  rewired topology #6        radius 1.12  (236s)
+  rewired topology #7        alpha +0.992 (peak +0.074, win +0.995)  |A|/|S| 0.997  |A|/|M| 1.336  cm-gain 0.995
+  rewired topology #7        channels  20 params  train 0.29  fit4->4 acc 0.325 hit 0.50 lane 0.86  fit4->3 acc 0.297
+  rewired topology #7        pca4      20 params  train 0.13  fit4->4 acc 0.108 hit 0.17 lane 0.89  fit4->3 acc 0.150
+  rewired topology #7        pca8      36 params  train 0.29  fit4->4 acc 0.221 hit 0.40 lane 0.90  fit4->3 acc 0.161
+  rewired topology #7        pca16     68 params  train 0.80  fit4->4 acc 0.708 hit 0.82 lane 0.94  fit4->3 acc 0.525
+  rewired topology #7        radius 0.90  (235s)
+  rewired topology #8        alpha +0.994 (peak +0.493, win +0.997)  |A|/|S| 1.002  |A|/|M| 1.480  cm-gain 1.011
+  rewired topology #8        channels  20 params  train 0.24  fit4->4 acc 0.183 hit 0.30 lane 0.74  fit4->3 acc 0.289
+  rewired topology #8        pca4      20 params  train 0.34  fit4->4 acc 0.383 hit 0.50 lane 0.77  fit4->3 acc 0.356
+  rewired topology #8        pca8      36 params  train 0.43  fit4->4 acc 0.308 hit 0.35 lane 0.94  fit4->3 acc 0.319
+  rewired topology #8        pca16     68 params  train 0.72  fit4->4 acc 0.700 hit 0.75 lane 0.91  fit4->3 acc 0.556
+  rewired topology #8        radius 0.63  (210s)
+  rewired topology #9        alpha +0.998 (peak +0.421, win +1.008)  |A|/|S| 0.996  |A|/|M| 1.267  cm-gain 1.008
+  rewired topology #9        channels  20 params  train 0.33  fit4->4 acc 0.188 hit 0.32 lane 0.93  fit4->3 acc 0.133
+  rewired topology #9        pca4      20 params  train 0.30  fit4->4 acc 0.154 hit 0.23 lane 1.00  fit4->3 acc 0.239
+  rewired topology #9        pca8      36 params  train 0.47  fit4->4 acc 0.346 hit 0.50 lane 0.88  fit4->3 acc 0.450
+  rewired topology #9        pca16     68 params  train 0.85  fit4->4 acc 0.800 hit 0.88 lane 1.00  fit4->3 acc 0.794
+  rewired topology #9        radius 0.71  (196s)
+  rewired topology #10       alpha +0.970 (peak -0.030, win +0.991)  |A|/|S| 0.987  |A|/|M| 1.554  cm-gain 0.977
+  rewired topology #10       channels  20 params  train 0.29  fit4->4 acc 0.379 hit 0.57 lane 0.66  fit4->3 acc 0.236
+  rewired topology #10       pca4      20 params  train 0.27  fit4->4 acc 0.242 hit 0.28 lane 1.00  fit4->3 acc 0.231
+  rewired topology #10       pca8      36 params  train 0.55  fit4->4 acc 0.529 hit 0.68 lane 1.00  fit4->3 acc 0.450
+  rewired topology #10       pca16     68 params  train 0.80  fit4->4 acc 0.775 hit 0.78 lane 0.97  fit4->3 acc 0.567
+  rewired topology #10       radius 0.78  (198s)
+  rewired topology #11       alpha +0.988 (peak +0.494, win +0.989)  |A|/|S| 0.993  |A|/|M| 1.251  cm-gain 0.992
+  rewired topology #11       channels  20 params  train 0.22  fit4->4 acc 0.246 hit 0.38 lane 0.81  fit4->3 acc 0.194
+  rewired topology #11       pca4      20 params  train 0.01  fit4->4 acc 0.017 hit 0.05 lane 1.00  fit4->3 acc 0.000
+  rewired topology #11       pca8      36 params  train 0.32  fit4->4 acc 0.188 hit 0.30 lane 1.00  fit4->3 acc 0.239
+  rewired topology #11       pca16     68 params  train 0.60  fit4->4 acc 0.463 hit 0.62 lane 0.97  fit4->3 acc 0.628
+  rewired topology #11       radius 0.73  (191s)
+  rewired topology #12       alpha +0.983 (peak +0.406, win +0.986)  |A|/|S| 1.004  |A|/|M| 1.173  cm-gain 1.020
+  rewired topology #12       channels  20 params  train 0.20  fit4->4 acc 0.117 hit 0.23 lane 0.70  fit4->3 acc 0.178
+  rewired topology #12       pca4      20 params  train 0.09  fit4->4 acc 0.037 hit 0.08 lane 0.67  fit4->3 acc 0.064
+  rewired topology #12       pca8      36 params  train 0.40  fit4->4 acc 0.304 hit 0.35 lane 0.89  fit4->3 acc 0.328
+  rewired topology #12       pca16     68 params  train 0.65  fit4->4 acc 0.608 hit 0.65 lane 0.74  fit4->3 acc 0.492
+  rewired topology #12       radius 0.63  (198s)
+
+=== experiment 10, flywire: chords, fitted on chords ===
+control family: rewired topology (12 seeds).  one-sided permutation p = (n_ge + 1) / (n + 1).
+
+-- fit4 -> eval4: stage-4 accuracy, fitted on stage 4
+   readout      real   rewired mean     sd    n_ge       p
+   channels    0.263          0.236  0.104    5/12   0.462
+   pca4        0.058          0.189  0.126    9/12   0.769
+   pca8        0.050          0.358  0.119   12/12   1.000
+   pca16       0.667          0.702  0.108    8/12   0.692
+
+-- fit4 -> eval3: stage-3 accuracy, fitted on stage 4
+   readout      real   rewired mean     sd    n_ge       p
+   channels    0.233          0.224  0.079    5/12   0.462
+   pca4        0.178          0.214  0.137    8/12   0.692
+   pca8        0.150          0.373  0.105   12/12   1.000
+   pca16       0.750          0.598  0.083    1/12   0.154
+
+-- the transfer deficit: e5 fit3 -> eval4 against e10 fit4 -> eval4
+   readout    real f3  real f4  real d    ctl f3  ctl f4   ctl d    n_ge(d)      p
+   channels     0.162    0.263  +0.100     0.308   0.247  -0.060     0/10   0.091
+   pca4         0.071    0.058  -0.012     0.260   0.221  -0.040     2/10   0.273
+   pca8         0.158    0.050  -0.108     0.408   0.380  -0.027     8/10   0.818
+   pca16        0.583    0.667  +0.083     0.697   0.736  +0.039     2/10   0.273
+
+-- chord additivity (alpha: 1 = additive, 0 = max-like, <0 = suppressive)
+   network                      alpha  a_peak   a_win  |A|/|S|  |A|/|M|  cm gain  radius
+   real connectome             +0.985  +0.679  +0.988    0.985    1.376    0.954    2.28
+   rewired topology #1         +0.976  +0.442  +0.994    0.989    1.381    0.994    0.73
+   rewired topology #2         +0.991  +0.581  +1.015    1.001    1.255    1.005    0.71
+   rewired topology #3         +0.989  +0.051  +0.998    1.001    1.183    1.014    0.72
+   rewired topology #4         +1.008  +0.320  +1.016    1.003    1.283    1.000    0.75
+   rewired topology #5         +1.000  +0.247  +0.993    1.008    1.266    1.004    0.64
+   rewired topology #6         +0.993  +0.355  +0.990    1.004    1.220    1.004    1.12
+   rewired topology #7         +0.992  +0.074  +0.995    0.997    1.336    0.995    0.90
+   rewired topology #8         +0.994  +0.493  +0.997    1.002    1.480    1.011    0.63
+   rewired topology #9         +0.998  +0.421  +1.008    0.996    1.267    1.008    0.71
+   rewired topology #10        +0.970  -0.030  +0.991    0.987    1.554    0.977    0.78
+   rewired topology #11        +0.988  +0.494  +0.989    0.993    1.251    0.992    0.73
+   rewired topology #12        +0.983  +0.406  +0.986    1.004    1.173    1.020    0.63
+   real alpha +0.985 vs rewired +0.990 +- 0.010, 9/12 >= real, p = 0.769 (one-sided, real is highest if p is small)
+
+-- additivity against the chord-transfer deficit, across rewired controls
+   channels  alpha_full  n=10  rho -0.491 (pearson -0.687)  two-sided perm p 0.159
+   channels  alpha_peak  n=10  rho -0.552 (pearson -0.614)  two-sided perm p 0.103
+   pca4      alpha_full  n=10  rho +0.055 (pearson +0.067)  two-sided perm p 0.892
+   pca4      alpha_peak  n=10  rho -0.127 (pearson +0.005)  two-sided perm p 0.733
+   pca8      alpha_full  n=10  rho +0.515 (pearson +0.581)  two-sided perm p 0.132
+   pca8      alpha_peak  n=10  rho +0.297 (pearson +0.345)  two-sided perm p 0.401
+   pca16     alpha_full  n=10  rho +0.006 (pearson +0.303)  two-sided perm p 1.000
+   pca16     alpha_peak  n=10  rho -0.042 (pearson -0.113)  two-sided perm p 0.918
+   pooled    alpha_full  n=10  rho +0.248 (pearson +0.160)  two-sided perm p 0.492
