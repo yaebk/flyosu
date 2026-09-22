@@ -142,6 +142,34 @@ def test_controller_logic():
     m = L.mask_for("thresholds")
     check("threshold mask covers b only", m.sum() == 4 and m[16:].all())
 
+    # per-key delays (experiment 8's recommendation): a crossing schedules a
+    # press instead of making one.  Zero delay must be the old behaviour.
+    def run(ctrl, spikes, T=400, dt=2.0):
+        ctrl.reset(); out = []
+        for i in range(T):
+            t = i * dt
+            z = np.zeros(N_KEYS)
+            for (at, k) in spikes:
+                if abs(t - at) < dt / 2:
+                    z[k] = 2.0
+            for kk in ctrl.step(z, t, dt):
+                out.append((t, kk))
+        return out
+    base = Controller(W=np.eye(N_KEYS), b=np.full(N_KEYS, -1.0), refractory_ms=100.0, smooth_ms=0.0)
+    spikes = [(100.0, 0), (300.0, 2)]
+    a = run(base, spikes)
+    check("zero delay reproduces the undelayed controller",
+          run(base.with_delays(np.zeros(N_KEYS)), spikes) == a, str(a))
+    d = run(base.with_delays([60.0, 0.0, 20.0, 0.0]), spikes)
+    check("each key waits its own delay",
+          [(t, k) for t, k in d] == [(160.0, 0), (320.0, 2)], str(d))
+    check("delays cannot be negative",
+          np.array_equal(base.with_delays([-50.0, 10.0, 0.0, 30.0]).delay_ms,
+                         np.array([0.0, 10.0, 0.0, 30.0])))
+    check("a delayed controller copies its delays",
+          np.array_equal(base.with_delays([1., 2., 3., 4.]).copy().delay_ms,
+                         np.array([1., 2., 3., 4.])))
+
 
 def test_with_network():
     from flyosu import model as M, play as P

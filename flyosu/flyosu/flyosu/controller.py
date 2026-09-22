@@ -21,7 +21,7 @@ Two pieces:
         tau_s dz_s/dt = -z_s + z                 (smoothing, optional)
         u             = W z_s + b                (4 x 4 mixing + 4 thresholds)
         press key k when u_k crosses 0 upward, at most once per refractory
-        period
+        period, optionally ``delay_ms[k]`` after the crossing
 
     ``W`` and ``b`` are the *only* learnable parameters in the whole system --
     20 numbers.  The connectome stays frozen.  (``W`` may be 4 x k when the
@@ -97,9 +97,11 @@ class Controller:
     b: np.ndarray                      # (4,) thresholds (u = W z + b > 0 fires)
     refractory_ms: float = 150.0
     smooth_ms: float = 40.0            # leaky-integrator time constant; 0 = none
+    delay_ms: np.ndarray | None = None  # (4,) per-key wait between crossing and press
     z_s: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS))
     u_prev: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
     last_press: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
+    pending: list = field(default_factory=list)   # [(press time, key), ...]
 
     # -- parameters --------------------------------------------------------
 
@@ -124,7 +126,8 @@ class Controller:
 
     def copy(self) -> "Controller":
         return Controller(self.W.copy(), self.b.copy(), self.refractory_ms,
-                          self.smooth_ms)
+                          self.smooth_ms,
+                          None if self.delay_ms is None else self.delay_ms.copy())
 
     # -- dynamics ----------------------------------------------------------
 
@@ -132,6 +135,7 @@ class Controller:
         self.z_s = np.zeros(self.n_features)
         self.u_prev = np.full(N_KEYS, -np.inf)
         self.last_press = np.full(N_KEYS, -np.inf)
+        self.pending = []
 
     def step(self, z: np.ndarray, t_ms: float, dt_ms: float) -> list[int]:
         """Feed one frame of z-scored channel activity; return keys pressed."""
@@ -143,9 +147,20 @@ class Controller:
         fire = ((u > 0) & (self.u_prev <= 0)
                 & (t_ms - self.last_press >= self.refractory_ms))
         self.u_prev = u
-        keys = np.flatnonzero(fire).tolist()
-        for k in keys:
+        crossed = np.flatnonzero(fire).tolist()
+        for k in crossed:
             self.last_press[k] = t_ms
+        if self.delay_ms is None:
+            return crossed
+        # experiment 8: the channels peak hundreds of ms before the note
+        # arrives, and no sensory front end removes the spread between them,
+        # so the wait belongs here.  A crossing schedules a press; the press
+        # happens delay_ms[k] later.  With delay 0 this is the branch above.
+        for k in crossed:
+            self.pending.append((t_ms + float(self.delay_ms[k]), k))
+        keys = [k for (when, k) in self.pending if when <= t_ms]
+        if keys:
+            self.pending = [(w, k) for (w, k) in self.pending if w > t_ms]
         return keys
 
     def drive(self) -> np.ndarray:
@@ -164,6 +179,14 @@ class Controller:
         for lane, ch in enumerate(perm):
             W[lane, ch] = 1.0
         return cls(W=W, b=np.full(N_KEYS, -float(theta)), **kw)
+
+    def with_delays(self, delay_ms) -> "Controller":
+        """Copy of this controller that waits ``delay_ms[k]`` after each
+        crossing before pressing key k.  Negative waits are impossible -- the
+        policy cannot act before the evidence -- so they are clipped to 0."""
+        c = self.copy()
+        c.delay_ms = np.clip(np.asarray(delay_ms, dtype=np.float64), 0.0, None)
+        return c
 
     @classmethod
     def blank(cls, theta: float = 1.0, **kw) -> "Controller":
