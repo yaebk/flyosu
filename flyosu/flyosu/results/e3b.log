@@ -1,0 +1,14 @@
+resuming: 5 runs done
+
+=== rewired topology #5
+  untrained, noise 0.03, lane-correct: s1=1.00  s2=0.00  s3=0.24  s4=0.33  s5=0.13
+      wired      ep   0  held-out acc 0.000
+      wired      ep  10  held-out acc 0.019  hit 0.117  lane-correct 0.93  train reward (last 10) 0.019
+      wired      ep  20  held-out acc 0.117  hit 0.217  lane-correct 0.73  train reward (last 10) 0.046
+      wired      ep  30  held-out acc 0.094  hit 0.167  lane-correct 0.58  train reward (last 10) 0.065
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.000  hit 0.000  lane-correct 0.00  train reward (last 10) -0.007
+      blank      ep  20  held-out acc 0.189  hit 0.200  lane-correct 0.52  train reward (last 10) 0.096
+      blank      ep  30  held-out acc 0.200  hit 0.200  lane-correct 0.40  train reward (last 10) 0.052
+      thresholds ep   0  held-out acc 0.000
+      thresholds ep  10  held-out acc 0.025  hit 0.133  lane-correct 0.57  train reward (last 10) 0.079
