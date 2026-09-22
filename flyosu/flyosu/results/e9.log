@@ -421,3 +421,168 @@ retino #1               0.562       2.86         0.071      27.66         0.085 
 retino #2               0.358       5.07         0.070      27.71         0.079      23.42         0.152      12.89
 retino #3               0.564       2.85         0.074      26.94         0.090      22.21         0.165      12.94
 retino #4               0.442       3.98         0.073      26.54         0.089      21.20         0.156      12.60
+--- flywire: 71 networks planned ---
+  rewired topology #21         radius 0.64  fp True  PC1 0.164  top4 0.459  PR 13.55/61  (39s)
+  rewired topology #22         radius 0.69  fp True  PC1 0.136  top4 0.414  PR 15.86/61  (40s)
+  rewired topology #23         radius 0.72  fp True  PC1 0.127  top4 0.391  PR 16.95/61  (38s)
+  rewired topology #24         radius 0.76  fp True  PC1 0.149  top4 0.400  PR 16.02/61  (37s)
+  rewired topology #25         radius 0.74  fp True  PC1 0.139  top4 0.422  PR 15.64/61  (37s)
+  rewired topology #26         radius 0.83  fp True  PC1 0.149  top4 0.385  PR 16.31/61  (36s)
+  rewired topology #27         radius 0.72  fp True  PC1 0.107  top4 0.366  PR 18.41/61  (37s)
+  rewired topology #28         radius 0.71  fp True  PC1 0.171  top4 0.437  PR 14.47/61  (39s)
+  rewired topology #29         radius 0.75  fp True  PC1 0.194  top4 0.430  PR 13.50/61  (37s)
+  rewired topology #30         radius 0.82  fp True  PC1 0.174  top4 0.446  PR 13.72/61  (37s)
+  rewired topology #31         radius 0.71  fp True  PC1 0.140  top4 0.397  PR 16.38/61  (38s)
+  rewired topology #32         radius 0.71  fp True  PC1 0.134  top4 0.440  PR 14.48/61  (38s)
+  rewired topology #33         radius 0.71  fp True  PC1 0.139  top4 0.438  PR 14.34/61  (37s)
+  rewired topology #34         radius 0.87  fp True  PC1 0.144  top4 0.384  PR 16.79/61  (36s)
+  rewired topology #35         radius 0.68  fp True  PC1 0.143  top4 0.367  PR 17.37/61  (37s)
+  rewired topology #36         radius 0.70  fp True  PC1 0.131  top4 0.386  PR 17.10/61  (39s)
+  rewired topology #37         radius 0.69  fp True  PC1 0.119  top4 0.364  PR 18.70/61  (39s)
+  rewired topology #38         radius 0.70  fp True  PC1 0.113  top4 0.374  PR 18.28/61  (39s)
+  rewired topology #39         radius 0.72  fp True  PC1 0.094  top4 0.346  PR 19.35/61  (39s)
+  rewired topology #40         radius 0.69  fp True  PC1 0.174  top4 0.434  PR 14.37/61  (40s)
+
+================ flywire ================
+
+spectral radius -- flywire  (real claimed high)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    2.283 +- 0.000    2.283   2.283       -       -
+  rewired topology              40    0.733 +- 0.090    0.627   1.125    0/40   0.024
+  shuffled retinotopy           20    3.055 +- 0.146    2.661   3.266   20/20   1.000
+  shuffled channel labels       10    2.283 +- 0.000    2.283   2.283    5/10  identical to real
+  controls pooled, informative  60    1.507 +- 1.109    0.627   3.266   20/60   0.344
+  controls pooled, all          70    1.618 +- 1.062    0.627   3.266   25/70   0.366
+
+PC1 fraction -- flywire  (real claimed high)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    0.384 +- 0.000    0.384   0.384       -       -
+  rewired topology              40    0.144 +- 0.024    0.094   0.194    0/40   0.024
+  shuffled retinotopy           20    0.400 +- 0.144    0.209   0.820   12/20   0.619
+  shuffled channel labels       10    0.384 +- 0.000    0.384   0.384   10/10  identical to real
+  controls pooled, informative  60    0.230 +- 0.148    0.094   0.820   12/60   0.213
+  controls pooled, all          70    0.252 +- 0.147    0.094   0.820   22/70   0.324
+
+top-4 cumulative -- flywire  (real claimed high)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    0.820 +- 0.000    0.820   0.820       -       -
+  rewired topology              40    0.408 +- 0.033    0.346   0.480    0/40   0.024
+  shuffled retinotopy           20    0.749 +- 0.086    0.577   0.927    2/20   0.143
+  shuffled channel labels       10    0.820 +- 0.000    0.820   0.820   10/10  identical to real
+  controls pooled, informative  60    0.522 +- 0.171    0.346   0.927    2/60   0.049
+  controls pooled, all          70    0.564 +- 0.190    0.346   0.927   12/70   0.183
+
+participation ratio -- flywire  (real claimed low)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    4.371 +- 0.000    4.371   4.371       -       -
+  rewired topology              40   15.799 +- 1.754   12.537  19.349    0/40   0.024
+  shuffled retinotopy           20    5.064 +- 2.002    1.478   9.302    8/20   0.429
+  shuffled channel labels       10    4.371 +- 0.000    4.371   4.371   10/10  identical to real
+  controls pooled, informative  60   12.221 +- 5.419    1.478  19.349    8/60   0.148
+  controls pooled, all          70   11.099 +- 5.724    1.478  19.349   18/70   0.268
+
+PR / n_modes -- flywire  (real claimed low)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    0.072 +- 0.000    0.072   0.072       -       -
+  rewired topology              40    0.259 +- 0.029    0.206   0.317    0/40   0.024
+  shuffled retinotopy           20    0.083 +- 0.033    0.024   0.152    8/20   0.429
+  shuffled channel labels       10    0.072 +- 0.000    0.072   0.072   10/10  identical to real
+  controls pooled, informative  60    0.200 +- 0.089    0.024   0.317    8/60   0.148
+  controls pooled, all          70    0.182 +- 0.094    0.024   0.317   18/70   0.268
+
+sanity -- flywire
+  real                         n= 1  readout population 1303-1303 neurons  fixed point 1/1
+  rewired topology             n=40  readout population 1303-1303 neurons  fixed point 40/40
+  shuffled retinotopy          n=20  readout population 1303-1303 neurons  fixed point 6/20
+  shuffled channel labels      n=10  readout population 1303-1303 neurons  fixed point 10/10
+
+Spearman across control networks -- flywire
+  spectral_radius~pc1 | rewired topology                       n=40  rho +0.081  p 0.619  95% CI [-0.25, +0.40]
+  spectral_radius~pc1 | shuffled retinotopy                    n=20  rho -0.143  p 0.548  95% CI [-0.57, +0.35]
+  spectral_radius~pc1 | pooled raw, no channels                n=60  rho +0.686  p 0.000  95% CI [+0.51, +0.81]
+  spectral_radius~pc1 | pooled within-family                   n=60  rho +0.007  p 0.958  95% CI [-0.26, +0.27]
+  spectral_radius~pc1 | pooled raw, all families               n=70  rho +0.754  p 0.000  95% CI [+0.62, +0.84]
+  spectral_radius~top4 | rewired topology                      n=40  rho -0.125  p 0.443  95% CI [-0.44, +0.21]
+  spectral_radius~top4 | shuffled retinotopy                   n=20  rho +0.113  p 0.636  95% CI [-0.37, +0.55]
+  spectral_radius~top4 | pooled raw, no channels               n=60  rho +0.634  p 0.000  95% CI [+0.44, +0.77]
+  spectral_radius~top4 | pooled within-family                  n=60  rho -0.047  p 0.722  95% CI [-0.31, +0.22]
+  spectral_radius~top4 | pooled raw, all families              n=70  rho +0.671  p 0.000  95% CI [+0.51, +0.79]
+  spectral_radius~participation_ratio | rewired topology       n=40  rho +0.068  p 0.676  95% CI [-0.27, +0.39]
+  spectral_radius~participation_ratio | shuffled retinotopy    n=20  rho +0.039  p 0.870  95% CI [-0.43, +0.50]
+  spectral_radius~participation_ratio | pooled raw, no channels n=60  rho -0.645  p 0.000  95% CI [-0.78, -0.46]
+  spectral_radius~participation_ratio | pooled within-family   n=60  rho +0.055  p 0.678  95% CI [-0.22, +0.32]
+  spectral_radius~participation_ratio | pooled raw, all families n=70  rho -0.711  p 0.000  95% CI [-0.82, -0.56]
+  pc1~participation_ratio | rewired topology                   n=40  rho -0.837  p 0.000  95% CI [-0.91, -0.70]
+  pc1~participation_ratio | shuffled retinotopy                n=20  rho -0.964  p 0.000  95% CI [-0.99, -0.90]
+  pc1~participation_ratio | pooled raw, no channels            n=60  rho -0.950  p 0.000  95% CI [-0.97, -0.92]
+  pc1~participation_ratio | pooled within-family               n=60  rho -0.881  p 0.000  95% CI [-0.93, -0.80]
+  pc1~participation_ratio | pooled raw, all families           n=70  rho -0.957  p 0.000  95% CI [-0.97, -0.93]
+
+================ malecns ================
+
+spectral radius -- malecns  (real claimed high)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    2.055 +- 0.000    2.055   2.055       -       -
+  rewired topology              10    0.650 +- 0.026    0.629   0.720    0/10   0.091
+  shuffled retinotopy           10    2.662 +- 0.509    2.052   3.661    9/10   0.909
+  controls pooled, informative  20    1.656 +- 1.090    0.629   3.661    9/20   0.476
+  controls pooled, all          20    1.656 +- 1.090    0.629   3.661    9/20   0.476
+
+PC1 fraction -- malecns  (real claimed high)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    0.627 +- 0.000    0.627   0.627       -       -
+  rewired topology              10    0.196 +- 0.065    0.131   0.329    0/10   0.091
+  shuffled retinotopy           10    0.551 +- 0.190    0.252   0.873    3/10   0.364
+  controls pooled, informative  20    0.373 +- 0.229    0.131   0.873    3/20   0.190
+  controls pooled, all          20    0.373 +- 0.229    0.131   0.873    3/20   0.190
+
+top-4 cumulative -- malecns  (real claimed high)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    0.979 +- 0.000    0.979   0.979       -       -
+  rewired topology              10    0.485 +- 0.095    0.354   0.668    0/10   0.091
+  shuffled retinotopy           10    0.835 +- 0.095    0.628   0.982    1/10   0.182
+  controls pooled, informative  20    0.660 +- 0.202    0.354   0.982    1/20   0.095
+  controls pooled, all          20    0.660 +- 0.202    0.354   0.982    1/20   0.095
+
+participation ratio -- malecns  (real claimed low)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    2.094 +- 0.000    2.094   2.094       -       -
+  rewired topology              10   12.620 +- 3.960    6.884  18.929    0/10   0.091
+  shuffled retinotopy           10    3.375 +- 1.881    1.299   7.687    3/10   0.364
+  controls pooled, informative  20    7.997 +- 5.621    1.299  18.929    3/20   0.190
+  controls pooled, all          20    7.997 +- 5.621    1.299  18.929    3/20   0.190
+
+PR / n_modes -- malecns  (real claimed low)
+  family                         n        mean +- sd      min     max   n_ext       p
+  real                           1    0.034 +- 0.000    0.034   0.034       -       -
+  rewired topology              10    0.207 +- 0.065    0.113   0.310    0/10   0.091
+  shuffled retinotopy           10    0.055 +- 0.031    0.021   0.126    3/10   0.364
+  controls pooled, informative  20    0.131 +- 0.092    0.021   0.310    3/20   0.190
+  controls pooled, all          20    0.131 +- 0.092    0.021   0.310    3/20   0.190
+
+sanity -- malecns
+  real                         n= 1  readout population 348-348 neurons  fixed point 1/1
+  rewired topology             n=10  readout population 348-348 neurons  fixed point 10/10
+  shuffled retinotopy          n=10  readout population 348-348 neurons  fixed point 9/10
+
+Spearman across control networks -- malecns
+  spectral_radius~pc1 | rewired topology                       n=10  rho +0.200  p 0.580  95% CI [-0.52, +0.76]
+  spectral_radius~pc1 | shuffled retinotopy                    n=10  rho +0.079  p 0.829  95% CI [-0.61, +0.70]
+  spectral_radius~pc1 | pooled raw, no channels                n=20  rho +0.767  p 0.000  95% CI [+0.47, +0.91]
+  spectral_radius~pc1 | pooled within-family                   n=20  rho +0.139  p 0.558  95% CI [-0.35, +0.57]
+  spectral_radius~pc1 | pooled raw, all families               n=20  rho +0.767  p 0.000  95% CI [+0.47, +0.91]
+  spectral_radius~top4 | rewired topology                      n=10  rho +0.321  p 0.365  95% CI [-0.42, +0.81]
+  spectral_radius~top4 | shuffled retinotopy                   n=10  rho +0.297  p 0.405  95% CI [-0.45, +0.80]
+  spectral_radius~top4 | pooled raw, no channels               n=20  rho +0.826  p 0.000  95% CI [+0.59, +0.93]
+  spectral_radius~top4 | pooled within-family                  n=20  rho +0.309  p 0.185  95% CI [-0.18, +0.68]
+  spectral_radius~top4 | pooled raw, all families              n=20  rho +0.826  p 0.000  95% CI [+0.59, +0.93]
+  spectral_radius~participation_ratio | rewired topology       n=10  rho -0.188  p 0.603  95% CI [-0.75, +0.53]
+  spectral_radius~participation_ratio | shuffled retinotopy    n=10  rho -0.115  p 0.751  95% CI [-0.72, +0.58]
+  spectral_radius~participation_ratio | pooled raw, no channels n=20  rho -0.770  p 0.000  95% CI [-0.91, -0.47]
+  spectral_radius~participation_ratio | pooled within-family   n=20  rho -0.152  p 0.524  95% CI [-0.58, +0.34]
+  spectral_radius~participation_ratio | pooled raw, all families n=20  rho -0.770  p 0.000  95% CI [-0.91, -0.47]
+  pc1~participation_ratio | rewired topology                   n=10  rho -0.927  p 0.000  95% CI [-0.98, -0.69]
+  pc1~participation_ratio | shuffled retinotopy                n=10  rho -0.988  p 0.000  95% CI [-1.00, -0.94]
+  pc1~participation_ratio | pooled raw, no channels            n=20  rho -0.989  p 0.000  95% CI [-1.00, -0.97]
+  pc1~participation_ratio | pooled within-family               n=20  rho -0.958  p 0.000  95% CI [-0.98, -0.89]
+  pc1~participation_ratio | pooled raw, all families           n=20  rho -0.989  p 0.000  95% CI [-1.00, -0.97]

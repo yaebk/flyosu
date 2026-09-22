@@ -191,9 +191,11 @@ removes it**, so the next timing effort belongs in the readout.
 
 Experiment 9 gave the two surviving structural claims a proper treatment — 72
 networks, both connectomes. Rewiring the topology collapses the spectral radius
-(2.28 vs 0.74 ± 0.11, **0/20, p = 0.048**; male CNS 2.06 vs 0.65, 0/10) and
+(2.28 vs 0.73 ± 0.09, **0/40, p = 0.024**; male CNS 2.06 vs 0.65, 0/10) and
 raises the readout population's dimensionality (same counts on PC1, on the top
-four components, and on the gain-invariant participation ratio). They are two
+four components, and on the gain-invariant participation ratio). At n = 40 these
+are the only results in the project below 0.05, and the only ones that carry no
+protocol caveat. They are two
 *independent* properties: within every control family the correlation between
 them is ≈ 0. Three qualifications came with it, and they matter. The
 channel-label family cannot move either number by construction, so it is not a

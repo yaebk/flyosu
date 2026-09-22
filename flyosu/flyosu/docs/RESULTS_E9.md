@@ -1,9 +1,11 @@
 # Experiment 9 — the two structural claims, measured properly
 
 **Short answer: both survive, both are real, and both were being stated too
-broadly. Rewiring the topology collapses the spectral radius (FlyWire 0/20,
-p = 0.048; male CNS 0/10, p = 0.091) and raises the readout population's
-dimensionality (same 0/20 and 0/10, on three different measures of it). They
+broadly. Rewiring the topology collapses the spectral radius (FlyWire
+**0/40, p = 0.024**; male CNS 0/10, p = 0.091) and raises the readout
+population's dimensionality (same 0/40 and 0/10, on three different measures of
+it). At n = 40 these are the only results in the project below p = 0.05, and
+unlike the behavioural ones they carry no protocol caveat. They
 are two independent properties, not one restated twice (ρ ≈ 0 within every
 family). But neither claim holds against the *other* control families — the
 retinotopy shuffles have a **higher** radius than the real network (20/20 on
@@ -31,7 +33,7 @@ p = (n_ge + 1)/(n + 1).
 
 | dataset | family | n | mean ± sd | range | n ≥ real | p |
 |---|---|---|---|---|---|---|
-| FlyWire | rewired topology | 20 | 0.737 ± 0.114 | 0.63–1.13 | **0/20** | **0.048** |
+| FlyWire | rewired topology | **40** | 0.733 ± 0.089 | 0.63–1.12 | **0/40** | **0.024** |
 | FlyWire | shuffled retinotopy | 20 | 3.055 ± 0.142 | 2.66–3.27 | 20/20 | 1.000 |
 | FlyWire | shuffled channel labels | 10 | 2.283 ± 0.000 | — | degenerate | — |
 | male CNS | rewired topology | 10 | 0.650 ± 0.025 | 0.63–0.72 | **0/10** | **0.091** |
@@ -45,7 +47,7 @@ Real male CNS: PC1 0.627, top-4 0.979, PR 2.09.
 
 | dataset | family | n | PC1 | top-4 | PR | p (all three) |
 |---|---|---|---|---|---|---|
-| FlyWire | rewired | 20 | 0.147 ± 0.024 | 0.412 ± 0.033 | 15.52 ± 1.70 | **0.048** (0/20) |
+| FlyWire | rewired | **40** | 0.144 ± 0.024 | 0.409 ± 0.031 | 15.80 ± 1.73 | **0.024** (0/40) |
 | FlyWire | retino | 20 | 0.400 ± 0.144 | 0.749 ± 0.086 | 5.06 ± 2.00 | 0.14–0.62 |
 | FlyWire | channels | 10 | identical to real | identical | identical | degenerate |
 | male CNS | rewired | 10 | 0.196 ± 0.065 | 0.485 ± 0.095 | 12.62 ± 3.96 | **0.091** (0/10) |
@@ -128,13 +130,13 @@ number.
 
 ## What is solid, and at what n
 
-- **Rewiring the topology collapses the spectral radius.** FlyWire 0/20,
-  p = 0.048 — which is the floor the permutation convention allows at n = 20 —
-  and male CNS 0/10, p = 0.091. Effect ~3×, distributions non-overlapping.
-  Replicated on two independent connectomes.
+- **Rewiring the topology collapses the spectral radius.** FlyWire **0/40,
+  p = 0.024**; male CNS 0/10, p = 0.091. Effect ~3×, distributions
+  non-overlapping (rewired max 1.12 against real 2.28). Replicated on two
+  independent connectomes.
 - **Rewiring the topology raises the readout population's dimensionality.**
-  Same counts, on PC1, top-4 and the gain-invariant participation ratio alike,
-  and on FlyWire it is specific to the descending population.
+  Same **0/40**, on PC1, top-4 and the gain-invariant participation ratio
+  alike, and on FlyWire it is specific to the descending population.
 - **These are two properties, not one.** ρ ≈ 0 within every family on both
   datasets. The project has two independent structural claims, not one stated
   twice.
@@ -143,9 +145,13 @@ number.
 
 ## Honest caveats
 
-- **p = 0.048 is the floor at n = 20**, not a small p-value. A run extending
-  the rewired family to n = 40 is under way, which would give p = 0.024 if the
-  separation holds.
+- **p = 0.024 at n = 40 is still the floor the convention allows**, not a
+  measure of effect size. The effect size is the thing to quote: the rewired
+  radius maxes out at 1.12 against the real network's 2.28, and rewired PC1
+  maxes out well below the real 0.384. More seeds would lower p further
+  without telling anyone anything new.
+- **The male CNS family is still n = 10** (p = 0.091), so the replication is
+  directionally clear but not independently significant.
 - **At n = 20 per family the confidence interval on a null correlation is about
   ±0.45**, so section 4 establishes "no strong shared driver", not "exactly
   independent". Separating ρ = 0.3 from 0 would need ~80 seeds per family.
