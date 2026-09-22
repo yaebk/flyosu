@@ -1,0 +1,126 @@
+e1 regime blank field: {'drift': 0.9925661087036133, 'fixed_point': False, 'spectral_radius': 15.45093836228939, 'max_real': 0.5900725254969306, 'max_gain': 421.3627624511719}
+
+=== real connectome
+  A0 play regime: fixed point True  radius 2.28  Re 0.16
+  A1 static probe B: argmax 0.567  4ch 0.917  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.95  s2=0.10  s3=0.13  s4=0.18  s5=0.12
+  A2 untrained theta 2.0: acc s1=0.62  s2=0.25  s3=0.09  s4=0.06  s5=0.06
+  B  learning from anatomical wiring ...
+      ep   0  held-out acc 0.061  hit 0.100
+      ep  10  held-out acc 0.119  hit 0.183  lane-correct 0.73  train reward (last 10) 0.044
+      ep  20  held-out acc 0.272  hit 0.317  lane-correct 0.81  train reward (last 10) 0.094
+      ep  30  held-out acc 0.303  hit 0.333  lane-correct 0.91  train reward (last 10) 0.137
+  B  learning from W = 0 ...
+      ep   0  held-out acc 0.000  hit 0.000
+      ep  10  held-out acc 0.161  hit 0.233  lane-correct 0.64  train reward (last 10) 0.051
+      ep  20  held-out acc 0.439  hit 0.550  lane-correct 0.85  train reward (last 10) 0.036
+      ep  30  held-out acc 0.322  hit 0.450  lane-correct 0.68  train reward (last 10) 0.178
+
+=== rewired topology #1
+  A0 play regime: fixed point True  radius 0.73  Re -0.69
+  A1 static probe B: argmax 0.500  4ch 0.725  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.00  s2=0.00  s3=0.01  s4=0.09  s5=0.03
+  A2 untrained theta 2.0: acc s1=0.00  s2=0.00  s3=0.00  s4=0.04  s5=0.03
+  B  learning from anatomical wiring ...
+      ep   0  held-out acc 0.000  hit 0.000
+      ep  10  held-out acc 0.011  hit 0.033  lane-correct 0.40  train reward (last 10) 0.018
+      ep  20  held-out acc 0.022  hit 0.133  lane-correct 0.50  train reward (last 10) 0.003
+      ep  30  held-out acc 0.056  hit 0.150  lane-correct 0.27  train reward (last 10) 0.117
+  B  learning from W = 0 ...
+      ep   0  held-out acc 0.000  hit 0.000
+      ep  10  held-out acc 0.119  hit 0.183  lane-correct 0.24  train reward (last 10) 0.010
+      ep  20  held-out acc 0.136  hit 0.317  lane-correct 0.31  train reward (last 10) 0.120
+      ep  30  held-out acc 0.178  hit 0.233  lane-correct 0.24  train reward (last 10) 0.181
+
+=== rewired topology #2
+  A0 play regime: fixed point True  radius 0.70  Re 0.66
+  A1 static probe B: argmax 0.433  4ch 0.658  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.63  s2=0.14  s3=0.09  s4=0.10  s5=0.10
+  A2 untrained theta 2.0: acc s1=0.16  s2=0.12  s3=0.07  s4=0.07  s5=0.05
+  B  learning from anatomical wiring ...
+      ep   0  held-out acc 0.078  hit 0.367
+      ep  10  held-out acc 0.211  hit 0.333  lane-correct 0.42  train reward (last 10) 0.046
+      ep  20  held-out acc 0.208  hit 0.283  lane-correct 0.45  train reward (last 10) 0.129
+      ep  30  held-out acc 0.250  hit 0.300  lane-correct 0.45  train reward (last 10) 0.109
+  B  learning from W = 0 ...
+      ep   0  held-out acc 0.000  hit 0.000
+      ep  10  held-out acc 0.225  hit 0.383  lane-correct 0.53  train reward (last 10) 0.054
+      ep  20  held-out acc 0.225  hit 0.383  lane-correct 0.50  train reward (last 10) 0.149
+      ep  30  held-out acc 0.228  hit 0.317  lane-correct 0.44  train reward (last 10) 0.165
+
+=== rewired topology #3
+  A0 play regime: fixed point True  radius 0.72  Re 0.62
+  A1 static probe B: argmax 0.717  4ch 0.892  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.00  s2=0.08  s3=0.08  s4=0.10  s5=0.13
+  A2 untrained theta 2.0: acc s1=0.00  s2=0.08  s3=0.09  s4=0.12  s5=0.21
+
+=== shuffled retinotopy #1
+  A0 play regime: fixed point True  radius 2.83  Re 0.21
+  A1 static probe B: argmax 0.650  4ch 0.850  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.32  s2=0.00  s3=0.05  s4=0.07  s5=0.10
+  A2 untrained theta 2.0: acc s1=0.00  s2=0.02  s3=0.08  s4=0.07  s5=0.04
+
+=== shuffled retinotopy #2
+  A0 play regime: fixed point False  radius 3.08  Re 0.20
+  A1 static probe B: argmax 0.625  4ch 0.950  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.00  s2=0.28  s3=0.15  s4=0.08  s5=0.12
+  A2 untrained theta 2.0: acc s1=0.00  s2=0.00  s3=0.09  s4=0.03  s5=0.03
+
+=== shuffled retinotopy #3
+  A0 play regime: fixed point True  radius 3.07  Re 0.22
+  A1 static probe B: argmax 0.558  4ch 0.867  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.00  s2=0.42  s3=0.33  s4=0.23  s5=0.22
+  A2 untrained theta 2.0: acc s1=0.00  s2=0.25  s3=0.27  s4=0.22  s5=0.21
+
+=== shuffled channel labels #1
+  A0 play regime: fixed point True  radius 2.28  Re 0.16
+  A1 static probe B: argmax 0.533  4ch 0.958  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.00  s2=0.17  s3=0.14  s4=0.22  s5=0.10
+  A2 untrained theta 2.0: acc s1=0.63  s2=0.25  s3=0.21  s4=0.20  s5=0.10
+
+=== shuffled channel labels #2
+  A0 play regime: fixed point True  radius 2.28  Re 0.16
+  A1 static probe B: argmax 0.650  4ch 0.950  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.00  s2=0.25  s3=0.17  s4=0.12  s5=0.03
+  A2 untrained theta 2.0: acc s1=0.32  s2=0.25  s3=0.18  s4=0.15  s5=0.02
+
+=== shuffled channel labels #3
+  A0 play regime: fixed point True  radius 2.28  Re 0.16
+  A1 static probe B: argmax 0.550  4ch 0.983  DN 1.000
+  A2 untrained theta 1.5: acc s1=0.00  s2=0.25  s3=0.08  s4=0.07  s5=0.05
+  A2 untrained theta 2.0: acc s1=0.00  s2=0.25  s3=0.08  s4=0.07  s5=0.04
+
+--- summary: real vs each control family (p floor 1/(n+1)) ---------
+spectral radius                      real 2.283 | rewired t 0.719+-0.013 0/3 p=0.25 | shuffled  2.991+-0.115 3/3 p=1.00 | shuffled  2.283+-0.000 0/3 p=0.25
+static argmax                        real 0.567 | rewired t 0.550+-0.121 1/3 p=0.50 | shuffled  0.611+-0.039 2/3 p=0.75 | shuffled  0.578+-0.052 1/3 p=0.50
+static 4ch decoder                   real 0.917 | rewired t 0.758+-0.098 0/3 p=0.25 | shuffled  0.889+-0.044 1/3 p=0.50 | shuffled  0.964+-0.014 3/3 p=1.00
+untrained acc t1.5 s1                real 0.950 | rewired t 0.211+-0.299 0/3 p=0.25 | shuffled  0.106+-0.149 0/3 p=0.25 | shuffled  0.000+-0.000 0/3 p=0.25
+untrained lane-correct t1.5 s1       real 1.000 | rewired t 0.167+-0.236 0/3 p=0.25 | shuffled  0.317+-0.448 0/3 p=0.25 | shuffled  0.000+-0.000 0/3 p=0.25
+untrained acc t1.5 s2                real 0.100 | rewired t 0.075+-0.058 1/3 p=0.50 | shuffled  0.233+-0.174 2/3 p=0.75 | shuffled  0.222+-0.039 3/3 p=1.00
+untrained lane-correct t1.5 s2       real 1.000 | rewired t 0.220+-0.155 0/3 p=0.25 | shuffled  0.459+-0.083 0/3 p=0.25 | shuffled  0.278+-0.039 0/3 p=0.25
+untrained acc t1.5 s3                real 0.133 | rewired t 0.060+-0.037 0/3 p=0.25 | shuffled  0.175+-0.117 2/3 p=0.75 | shuffled  0.128+-0.039 2/3 p=0.75
+untrained lane-correct t1.5 s3       real 0.556 | rewired t 0.270+-0.144 0/3 p=0.25 | shuffled  0.396+-0.100 0/3 p=0.25 | shuffled  0.179+-0.045 0/3 p=0.25
+untrained acc t1.5 s4                real 0.179 | rewired t 0.096+-0.007 0/3 p=0.25 | shuffled  0.125+-0.071 1/3 p=0.50 | shuffled  0.139+-0.063 1/3 p=0.50
+untrained lane-correct t1.5 s4       real 0.625 | rewired t 0.447+-0.105 0/3 p=0.25 | shuffled  0.500+-0.082 0/3 p=0.25 | shuffled  0.267+-0.101 0/3 p=0.25
+untrained acc t1.5 s5                real 0.125 | rewired t 0.087+-0.046 1/3 p=0.50 | shuffled  0.150+-0.053 1/3 p=0.50 | shuffled  0.064+-0.030 0/3 p=0.25
+untrained lane-correct t1.5 s5       real 0.526 | rewired t 0.327+-0.152 1/3 p=0.50 | shuffled  0.446+-0.065 1/3 p=0.50 | shuffled  0.193+-0.058 0/3 p=0.25
+untrained acc t2.0 s1                real 0.617 | rewired t 0.053+-0.075 0/3 p=0.25 | shuffled  0.000+-0.000 0/3 p=0.25 | shuffled  0.317+-0.259 1/3 p=0.50
+untrained lane-correct t2.0 s1       real 0.500 | rewired t 0.167+-0.236 1/3 p=0.50 | shuffled  0.000+-0.000 0/3 p=0.25 | shuffled  0.278+-0.208 1/3 p=0.50
+untrained acc t2.0 s2                real 0.250 | rewired t 0.067+-0.049 0/3 p=0.25 | shuffled  0.089+-0.114 1/3 p=0.50 | shuffled  0.250+-0.000 3/3 p=1.00
+untrained lane-correct t2.0 s2       real 1.000 | rewired t 0.306+-0.219 0/3 p=0.25 | shuffled  0.241+-0.069 0/3 p=0.25 | shuffled  0.361+-0.104 0/3 p=0.25
+untrained acc t2.0 s3                real 0.092 | rewired t 0.051+-0.037 0/3 p=0.25 | shuffled  0.144+-0.086 1/3 p=0.50 | shuffled  0.156+-0.058 2/3 p=0.75
+untrained lane-correct t2.0 s3       real 0.600 | rewired t 0.345+-0.144 0/3 p=0.25 | shuffled  0.449+-0.044 0/3 p=0.25 | shuffled  0.231+-0.058 0/3 p=0.25
+untrained acc t2.0 s4                real 0.058 | rewired t 0.075+-0.032 2/3 p=0.75 | shuffled  0.104+-0.081 2/3 p=0.75 | shuffled  0.137+-0.055 3/3 p=1.00
+untrained lane-correct t2.0 s4       real 0.556 | rewired t 0.597+-0.071 2/3 p=0.75 | shuffled  0.501+-0.036 0/3 p=0.25 | shuffled  0.374+-0.112 0/3 p=0.25
+untrained acc t2.0 s5                real 0.058 | rewired t 0.094+-0.081 1/3 p=0.50 | shuffled  0.096+-0.083 1/3 p=0.50 | shuffled  0.051+-0.033 1/3 p=0.50
+untrained lane-correct t2.0 s5       real 0.643 | rewired t 0.354+-0.193 0/3 p=0.25 | shuffled  0.393+-0.121 0/3 p=0.25 | shuffled  0.217+-0.017 0/3 p=0.25
+
+--- learning (stage 3, held-out accuracy by episode) ------------------
+  learn_wired:
+    real connectome          ep0=0.06  ep10=0.12  ep20=0.27  ep30=0.30   lane-correct 0.65->0.91
+    rewired topology #1      ep0=0.00  ep10=0.01  ep20=0.02  ep30=0.06   lane-correct 0.38->0.27
+    rewired topology #2      ep0=0.08  ep10=0.21  ep20=0.21  ep30=0.25   lane-correct 0.42->0.45
+  learn_blank:
+    real connectome          ep0=0.00  ep10=0.16  ep20=0.44  ep30=0.32   lane-correct 0.00->0.68
+    rewired topology #1      ep0=0.00  ep10=0.12  ep20=0.14  ep30=0.18   lane-correct 0.00->0.24
+    rewired topology #2      ep0=0.00  ep10=0.23  ep20=0.23  ep30=0.23   lane-correct 0.00->0.44
