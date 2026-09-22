@@ -56,7 +56,8 @@ pooling into four anatomical groups well enough that a policy with *no learning
 at all* gets more than twice chance.
 
 **Does the real wiring beat random wiring?** Probably, but the evidence is
-suggestive rather than conclusive. Against 15 degree-matched rewired networks the
+suggestive rather than conclusive, and it got weaker rather than stronger as
+the controls got better (experiments 5 and 6). Against 15 degree-matched rewired networks the
 real connectome wins on every metric that does not let a trained decoder
 compensate — 0/15 controls reach it on untrained policy accuracy (+1.9 SD), on
 channel modulation depth (+3.7 SD), or on the note-approach timing signal
@@ -142,9 +143,23 @@ family (real 2.28, rewired 0.78 ± 0.16).
 Experiment 4 asked whether those two properties of the real wiring — high
 recurrent gain and good untrained lane choice — are one fact or two. Across 20
 rewired graphs they are uncorrelated (Spearman ρ = 0.20, p = 0.39): gain does
-not explain lane choice. But with 20 controls the untrained lane result clears
-0.05 for the first time in the project: real 0.82 vs rewired 0.29 ± 0.15,
-**0/20, p = 0.048**. **[`docs/RESULTS_E4.md`](docs/RESULTS_E4.md).**
+not explain lane choice. With 20 controls the untrained lane result reached
+**0/20, p = 0.048** — real 0.82 vs rewired 0.29 ± 0.15 — at the fixed threshold
+those experiments used. **[`docs/RESULTS_E4.md`](docs/RESULTS_E4.md).**
+
+Experiment 6 asked what that untrained advantage is made of, and corrected its
+p-value. The real connectome is the only network of 21 whose four channels
+admit **a single threshold** that fires each key on its own lane and not the
+others (0/20 controls, as is its channel selectivity) — which is exactly the
+policy's requirement and exactly what experiment 4's per-lane margin could not
+see. But what predicts play *among* the controls is different again: how spread
+out the four channels' peak times are (ρ = +0.57, p = 0.009), because four
+channels that peak together cross one threshold together and press all four
+keys. And the correction: experiments 2–4 fixed θ = 1.5, which is the real
+network's best and almost never a control's. Give every network its own best
+threshold and the gap halves — real 0.73 vs 0.43 ± 0.15, **1/20, p = 0.095**.
+About a third of the published untrained gap was the threshold.
+**[`docs/RESULTS_E6.md`](docs/RESULTS_E6.md).**
 
 Experiment 5 changed the method. The fly is a frozen recurrent network with a
 small linear readout — a reservoir computer — and osu!mania supplies free
@@ -187,6 +202,10 @@ python -m experiments.e4_covariate     # experiment 4 (~25 min at N_SEEDS=20)
 python -m experiments.figures_e4
 python -m experiments.e5_reservoir     # experiment 5 (~2 h at N_CTRL=10)
 python -m experiments.figures_e5
+python -m experiments.e6_timing        # experiment 6, phase 1 (~6 min)
+PHASE=2 python -m experiments.e6_timing     # per-key thresholds (~17 min)
+PHASE=3 python -m experiments.e6_timing     # threshold sweep (~32 min)
+python -m experiments.figures_e6
 ```
 
 Watch it play:
@@ -257,6 +276,7 @@ flyosu/
   play.py         the game loop that couples all of the above
   learn.py        reward-modulated perturbation of the readout            (step 9)
   reservoir.py    the same readout fitted in closed form (ridge), + population PCA
+  probes.py       time-resolved channel responses: shared threshold, timing, chords
   beatmap.py      .osu parser and writer                                   (step 11)
 experiments/
   e1_sensorimotor.py  experiment 1: tuning, decoding, approach, chords
@@ -266,10 +286,11 @@ experiments/
   e3_stability.py     spectral radius across control seeds
   e4_covariate.py     radius vs untrained behaviour across 20 rewired graphs
   e5_reservoir.py     closed-form readouts of four sizes, real vs three families
-  figures.py / figures_e2.py / figures_e3.py / figures_e4.py / figures_e5.py
+  e6_timing.py        what predicts untrained play; the threshold sweep
+  figures.py / figures_e2.py / ... / figures_e5.py / figures_e6.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
-tests/test_play.py      46 checks on the game side
+tests/test_play.py      53 checks on the game side, incl. the probes
 tests/test_reservoir.py 17 checks on the closed-form readout
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
 docs/RESULTS.md         experiment 1
@@ -277,6 +298,7 @@ docs/RESULTS_E2.md      experiment 2
 docs/RESULTS_E3.md      experiment 3
 docs/RESULTS_E4.md      experiment 4
 docs/RESULTS_E5.md      experiment 5
+docs/RESULTS_E6.md      experiment 6
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -288,7 +310,7 @@ python run_fly.py --fall D           # watch a note descend
 python run_fly.py --sweep            # azimuth tuning, as text
 python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 28 checks
-python -m tests.test_play            # 46 checks
+python -m tests.test_play            # 53 checks
 python -m tests.test_reservoir       # 17 checks
 ```
 
@@ -312,13 +334,18 @@ python -m tests.test_reservoir       # 17 checks
 Where the science is now: the connectome-vs-random comparison has moved from
 "can a decoder tell the lanes apart" (experiment 1: yes, and so can a random
 network) to "does the fly press the right key with no learning" (experiment 2:
-yes, and random networks mostly do not, p = 0.048 at n = 20) to "how much of
-that survives a better readout" (experiment 5: none of it). The stable claim is
+yes, and random networks mostly do not) to "how much of that survives a better
+readout" (experiment 5: none of it) to "what is the untrained advantage made
+of, and how much of it was our threshold" (experiment 6: a shared-threshold
+property, and about a third of it was the threshold). The stable claim is
 narrower than "the connectome helps" and more interesting: the task-relevant
 structure exists in every network, and the real wiring is what makes it
-*reachable* by a small reward-driven search. Three connectome-specific
-measurements stand on their own — spectral radius, population dimensionality,
-and untrained lane choice — and the first two replicate on a second dataset.
+*reachable* — by a small reward-driven search, and by a policy simple enough to
+use one threshold for four keys. Three connectome-specific measurements stand
+on their own — spectral radius, population dimensionality, and the
+shared-threshold band — and the first two replicate on a second dataset. The
+strongest behavioural claim is now p = 0.095 under the most generous control,
+not p = 0.048.
 
 Step 12 is built, not verified: `play_osu.py` simulates the fly on a beatmap
 and replays its presses against the wall clock through a pluggable sink

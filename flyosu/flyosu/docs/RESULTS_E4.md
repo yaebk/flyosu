@@ -8,6 +8,13 @@ lane-correct 0.82 against 0.29 ± 0.15 — but they are two separate facts about
 it. And with 20 controls the untrained lane result clears 0.05 for the first
 time in this project: 0/20 rewired graphs reach the real network, p = 0.048.**
 
+> **Superseded in part by experiment 6.** That p = 0.048 is measured at a
+> single shared threshold, θ = 1.5, which is the real network's best value and
+> almost never a control's. Giving every network its own best threshold leaves
+> the real one ahead but at **1/20, p = 0.095**, and the accuracy comparison
+> was never below 0.1. See `docs/RESULTS_E6.md`; the correlational results on
+> this page are unaffected.
+
 Raw numbers: `results/e4_covariate.json`, `results/e4.log`. Figure 13.
 
 ## Why this was run
@@ -85,7 +92,12 @@ and now has a p-value that means something.
 ## Honest caveats
 
 - **p = 0.048 on one metric, chosen in advance but after two experiments had
-  shown the direction.** It is a confirmatory number, not a discovery.
+  shown the direction.** It is a confirmatory number, not a discovery — and
+  experiment 6 showed it is also threshold-dependent: at each network's own
+  best threshold it is p = 0.095.
+- **The shared threshold θ = 1.5 is fixed across networks.** A matched
+  procedure, but 1.5 is where the real network peaks and 14 of 20 controls
+  prefer 2.0 or higher (experiment 6, phase 3).
 - **Twenty graphs bounds the correlation, it does not rule out a weak one.**
   With n = 20, |ρ| below about 0.4 is undetectable. The claim is "gain does not
   *explain* the behaviour", not "gain has zero effect".
@@ -101,8 +113,9 @@ and now has a p-value that means something.
 
 ## What this licenses
 
-- Report the untrained lane result with its p = 0.048 and 0/20; it is the
-  project's first control comparison to clear the conventional line.
+- Report the untrained lane result with both numbers: 0/20 (p = 0.048) at the
+  fixed θ these experiments used, and 1/20 (p = 0.095) when every control is
+  given its own best threshold. Experiment 6 has the sweep.
 - Stop describing the spectral radius as a candidate explanation for the
   behaviour. Describe it as what it is: a second, independent, connectome-
   specific property.

@@ -1,7 +1,7 @@
 FLYWIRE := https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/main
 ANNOT   := https://raw.githubusercontent.com/flyconnectome/flywire_annotations/main/supplemental_files
 
-.PHONY: all data cache check check-play check-reservoir experiment experiment2 experiment3 experiment4 experiment5 figures figures2 figures3 figures4 figures5 play clean-derived
+.PHONY: all data cache check check-play check-reservoir experiment experiment2 experiment3 experiment4 experiment5 experiment6 figures figures2 figures3 figures4 figures5 figures6 play clean-derived
 
 all: cache
 
@@ -50,6 +50,12 @@ experiment5: cache
 experiment5-malecns:
 	DATASET=malecns FAMILIES=rewired,retino N_CTRL=4 python3 -m experiments.e5_reservoir
 
+# what predicts untrained play: probes, per-key thresholds, and the theta sweep
+experiment6: cache
+	N_SEEDS=20 python3 -m experiments.e6_timing
+	PHASE=2 N_SEEDS=20 python3 -m experiments.e6_timing
+	PHASE=3 N_SEEDS=20 python3 -m experiments.e6_timing
+
 figures:
 	python3 -m experiments.figures
 
@@ -65,6 +71,9 @@ figures4:
 figures5:
 	python3 -m experiments.figures_e5
 	DATASET=malecns python3 -m experiments.figures_e5
+
+figures6:
+	python3 -m experiments.figures_e6
 
 play: cache
 	python3 run_play.py --stage 2

@@ -1,0 +1,49 @@
+  real connectome          lane 0.23 0.58 0.73 0.31 0.27 0.67  n  39  31  22  16  15   6   best 0.73@1.5 (1.5:0.73)  acc best 0.196@1.0 (1.5:0.146)  (95s)
+  rewired #1               lane 0.24 0.33 0.06 0.20 1.00 0.00  n  82  61  17  10   2   0   best 0.33@1.0 (1.5:0.06)  acc best 0.163@0.5 (1.5:0.004)  (90s)
+  rewired #2               lane 0.15 0.14 0.23 0.34 0.33 0.06  n  72  80  80  73  39  16   best 0.34@2.0 (1.5:0.23)  acc best 0.158@1.0 (1.5:0.100)  (90s)
+  rewired #3               lane 0.27 0.39 0.44 0.48 0.52 0.62  n  71  41  25  27  25  21   best 0.62@3.0 (1.5:0.44)  acc best 0.254@3.0 (1.5:0.075)  (89s)
+  rewired #4               lane 0.17 0.10 0.23 0.31 0.29 0.36  n  60  51  26  26  17  11   best 0.31@2.0 (1.5:0.23)  acc best 0.075@3.0 (1.5:0.067)  (90s)
+  rewired #5               lane 0.04 0.12 0.24 0.80 0.90 1.00  n  49  40  17  10  10   7   best 0.12@1.0 (1.5:0.24)  acc best 0.075@1.0 (1.5:0.025)  (90s)
+  rewired #6               lane 0.23 0.12 0.24 0.45 0.39 0.36  n  40  24  21  22  18  11   best 0.45@2.0 (1.5:0.24)  acc best 0.175@0.5 (1.5:0.067)  (91s)
+  rewired #7               lane 0.35 0.38 0.59 0.67 0.67 0.50  n  55  37  27  18  12   8   best 0.59@1.5 (1.5:0.59)  acc best 0.142@1.5 (1.5:0.142)  (89s)
+  rewired #8               lane 0.28 0.22 0.19 0.42 0.00 0.00  n  54  32  21  12   6   3   best 0.28@0.5 (1.5:0.19)  acc best 0.167@1.0 (1.5:0.008)  (90s)
+  rewired #9               lane 0.33 0.34 0.33 0.68 0.77 1.00  n  70  61  46  25  13   4   best 0.68@2.0 (1.5:0.33)  acc best 0.283@2.0 (1.5:0.138)  (89s)
+  rewired #10              lane 0.25 0.33 0.38 0.12 1.00 1.00  n  28  21  21   8   1   1   best 0.38@1.5 (1.5:0.38)  acc best 0.029@0.5 (1.5:0.025)  (90s)
+  rewired #11              lane 0.18 0.27 0.34 0.56 0.43 0.36  n  61  45  35  27  23  14   best 0.56@2.0 (1.5:0.34)  acc best 0.096@2.0 (1.5:0.071)  (90s)
+  rewired #12              lane 0.10 0.04 0.00 0.50 0.68 0.91  n  48  27  16  20  19  11   best 0.50@2.0 (1.5:0.00)  acc best 0.104@3.0 (1.5:0.000)  (90s)
+  rewired #13              lane 0.30 0.36 0.21 0.21 0.21 0.45  n  44  36  47  39  24  11   best 0.36@1.0 (1.5:0.21)  acc best 0.175@1.0 (1.5:0.142)  (90s)
+  rewired #14              lane 0.09 0.02 0.29 0.00 0.08 0.83  n  46  45  35  21  12   6   best 0.29@1.5 (1.5:0.29)  acc best 0.017@2.5 (1.5:0.000)  (90s)
+  rewired #15              lane 0.25 0.39 0.48 0.75 0.67 0.91  n  75  44  31  20  15  11   best 0.75@2.0 (1.5:0.48)  acc best 0.250@2.5 (1.5:0.158)  (89s)
+  rewired #16              lane 0.26 0.24 0.33 0.26 0.40 0.44  n  68  54  57  35  20   9   best 0.40@2.5 (1.5:0.33)  acc best 0.275@1.5 (1.5:0.275)  (90s)
+  rewired #17              lane 0.27 0.14 0.12 0.33 0.50 0.78  n  45  57  48  33  24   9   best 0.50@2.5 (1.5:0.12)  acc best 0.100@1.5 (1.5:0.100)  (90s)
+  rewired #18              lane 0.26 0.18 0.20 0.13 0.21 0.33  n  27  33  45  31  14   9   best 0.26@0.5 (1.5:0.20)  acc best 0.075@1.0 (1.5:0.075)  (90s)
+  rewired #19              lane 0.14 0.18 0.27 0.43 0.53 0.84  n  51  57  41  28  19  19   best 0.43@2.0 (1.5:0.27)  acc best 0.196@3.0 (1.5:0.029)  (90s)
+  rewired #20              lane 0.07 0.07 0.08 0.52 0.83 0.45  n  40  42  36  31  18  11   best 0.52@2.0 (1.5:0.08)  acc best 0.146@2.0 (1.5:0.000)  (90s)
+
+=== 20 rewired graphs, behaviour from experiment 4 ===
+predictor                          real   rewired mean  n>=real  rho(lane)       p  rho(acc)
+shared band (window)              -0.82    -2.22 +-0.78    0/20       -0.31   0.184     -0.22
+shared band (whole descent)       -2.64    -3.12 +-0.68    4/20       -0.35   0.128     -0.25
+worst-key margin                  -0.69    -1.55 +-0.89    4/20       -0.12   0.609     -0.02
+lanes crossing on time             1.00     0.25 +-0.43    5/20       +0.47   0.036     +0.37
+lanes crossing at all              3.00     2.40 +-0.80   10/20       -0.11   0.640     +0.09
+false keys driven                 -1.00    -3.25 +-1.61    3/20       -0.08   0.724     -0.35
+mean crossing lag (ms)          -314.67  -443.87 +-138.77    2/20       +0.06   0.796     +0.12
+peak lag, |mean| (ms)           -403.00  -339.57 +-61.53   18/20       -0.14   0.565     -0.06
+peak lag spread (ms)            -317.23  -247.60 +-81.62   16/20       -0.57   0.009     -0.42
+argmax fraction                    0.79     0.48 +-0.14    0/20       +0.18   0.439     +0.01
+peak margin                        1.00     0.54 +-0.39    2/20       +0.00   1.000     -0.02
+chord delta (z)                   -0.12     0.24 +-0.29   17/20       -0.17   0.462     +0.11
+chord, uninvolved keys            -0.04    -0.64 +-0.48    3/20       -0.02   0.945     -0.15
+
+=== phase 2: four per-key thresholds instead of one shared ===
+  real     lane-correct 0.82 -> 0.43  (-0.39)
+  rewired  lane-correct 0.29 +- 0.15 -> 0.30 +- 0.12  (+0.02, n=20)
+  4/20 rewired reach the real network  p 0.238   (was 0/20, p 0.048 with one threshold)
+
+=== phase 3: every network given its own best threshold (stage 3) ===
+  at theta 1.5 (as in experiments 2-4):  real 0.73  rewired 0.26 +- 0.14  0/20  p 0.048
+  each at its own best theta:            real 0.73 (theta 1.5)  rewired 0.43 +- 0.15  1/20  p 0.095
+  accuracy at 1.5:                       real 0.146  rewired 0.075 +- 0.069  2/20  p 0.143
+  accuracy, each at its own best theta:  real 0.196  rewired 0.148 +- 0.076  5/20  p 0.286
+  rewired best thetas: 1.0 2.0 3.0 2.0 1.0 2.0 1.5 0.5 2.0 1.5 2.0 2.0 1.0 1.5 2.0 2.5 2.5 0.5 2.0 2.0

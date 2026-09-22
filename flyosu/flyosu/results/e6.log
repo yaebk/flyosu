@@ -1,0 +1,37 @@
+  real connectome          band -0.82 (all -2.64)  cross 3/4 on-time 1  false 1  peak lag -284+-317 ms  argmax 0.79  (15s)
+  rewired #1               band -0.87 (all -2.94)  cross 1/4 on-time 0  false 3  peak lag -285+-90 ms  argmax 0.41  (15s)
+  rewired #2               band -2.47 (all -3.13)  cross 2/4 on-time 0  false 6  peak lag -206+-271 ms  argmax 0.35  (15s)
+  rewired #3               band -3.96 (all -3.96)  cross 1/4 on-time 1  false 2  peak lag -172+-362 ms  argmax 0.53  (15s)
+  rewired #4               band -1.42 (all -4.21)  cross 2/4 on-time 0  false 2  peak lag -502+-99 ms  argmax 0.32  (15s)
+  rewired #5               band -1.81 (all -2.17)  cross 3/4 on-time 0  false 2  peak lag -395+-295 ms  argmax 0.33  (15s)
+  rewired #6               band -2.11 (all -3.78)  cross 3/4 on-time 0  false 4  peak lag -323+-235 ms  argmax 0.45  (14s)
+  rewired #7               band -2.64 (all -2.64)  cross 2/4 on-time 1  false 3  peak lag -287+-248 ms  argmax 0.49  (14s)
+  rewired #8               band -1.54 (all -1.59)  cross 2/4 on-time 0  false 3  peak lag -268+-310 ms  argmax 0.29  (15s)
+  rewired #9               band -1.63 (all -2.96)  cross 2/4 on-time 0  false 3  peak lag -280+-364 ms  argmax 0.62  (15s)
+  rewired #10              band -1.66 (all -2.05)  cross 1/4 on-time 0  false 2  peak lag -382+-224 ms  argmax 0.61  (15s)
+  rewired #11              band -1.98 (all -3.36)  cross 3/4 on-time 1  false 6  peak lag -384+-339 ms  argmax 0.55  (15s)
+  rewired #12              band -2.71 (all -2.71)  cross 2/4 on-time 0  false 4  peak lag -258+-164 ms  argmax 0.65  (15s)
+  rewired #13              band -2.38 (all -2.63)  cross 4/4 on-time 1  false 5  peak lag -190+-202 ms  argmax 0.47  (15s)
+  rewired #14              band -3.92 (all -3.92)  cross 3/4 on-time 0  false 1  peak lag -318+-114 ms  argmax 0.37  (15s)
+  rewired #15              band -3.05 (all -3.98)  cross 2/4 on-time 1  false 1  peak lag -281+-320 ms  argmax 0.69  (15s)
+  rewired #16              band -1.72 (all -2.94)  cross 3/4 on-time 0  false 5  peak lag -116+-289 ms  argmax 0.43  (15s)
+  rewired #17              band -2.25 (all -3.26)  cross 3/4 on-time 0  false 2  peak lag -362+-216 ms  argmax 0.52  (15s)
+  rewired #18              band -2.69 (all -3.37)  cross 3/4 on-time 0  false 5  peak lag -430+-202 ms  argmax 0.25  (15s)
+  rewired #19              band -2.26 (all -3.63)  cross 3/4 on-time 0  false 5  peak lag -262+-314 ms  argmax 0.69  (14s)
+  rewired #20              band -1.33 (all -3.18)  cross 3/4 on-time 0  false 1  peak lag -302+-295 ms  argmax 0.65  (15s)
+
+=== 20 rewired graphs, behaviour from experiment 4 ===
+predictor                          real   rewired mean  n>=real  rho(lane)       p  rho(acc)
+shared band (window)              -0.82    -2.22 +-0.78    0/20       -0.31   0.184     -0.22
+shared band (whole descent)       -2.64    -3.12 +-0.68    4/20       -0.35   0.128     -0.25
+worst-key margin                  -0.69    -1.55 +-0.89    4/20       -0.12   0.609     -0.02
+lanes crossing on time             1.00     0.25 +-0.43    5/20       +0.47   0.036     +0.37
+lanes crossing at all              3.00     2.40 +-0.80   10/20       -0.11   0.640     +0.09
+false keys driven                 -1.00    -3.25 +-1.61    3/20       -0.08   0.724     -0.35
+mean crossing lag (ms)          -314.67  -443.87 +-138.77    2/20       +0.06   0.796     +0.12
+peak lag, |mean| (ms)           -403.00  -339.57 +-61.53   18/20       -0.14   0.565     -0.06
+peak lag spread (ms)            -317.23  -247.60 +-81.62   16/20       -0.57   0.009     -0.42
+argmax fraction                    0.79     0.48 +-0.14    0/20       +0.18   0.439     +0.01
+peak margin                        1.00     0.54 +-0.39    2/20       +0.00   1.000     -0.02
+chord delta (z)                   -0.12     0.24 +-0.29   17/20       -0.17   0.462     +0.11
+chord, uninvolved keys            -0.04    -0.64 +-0.48    3/20       -0.02   0.945     -0.15

@@ -221,6 +221,36 @@ carry forward:
     `learn.py`'s reward still uses 0.05, which is fine because perturbation
     never searches hard enough to find the degenerate solution.
 
+## What experiment 6 found (and corrected)
+
+`docs/RESULTS_E6.md`. Two findings and one correction.
+
+The untrained advantage is a **shared-threshold** property. `Controller.anatomical`
+gives all four keys the same threshold, and the real connectome is the only one
+of 21 networks whose channels admit a single theta that fires each key on its
+own lane and not the others (0/20 controls; its channel selectivity is also
+0/20). Experiment 4's per-lane margin could not see this because a scale
+mismatch between channels only shows up when the four are compared against one
+threshold.
+
+What predicts play *among* random graphs is different: the **spread of the four
+channels' peak times** (rho +0.57, p 0.009). Four channels that peak together
+cross one threshold together and press all four keys; staggered peaks let the
+right key win alone. That is the quantity to design a better wiring rule
+around. Related and cheap: on every network the channels peak 200-600 ms
+*before* the note reaches the line, so only about one lane in four crosses
+while a press would still be judged. That is a property of the encoder and the
+game and it caps every threshold policy on these channels.
+
+**The correction.** Experiments 2-4 fixed theta = 1.5 for every network. That
+is 1.5 = the real network's best, and 14 of 20 controls prefer 2.0 or higher.
+Give every network its own best threshold and real 0.73 vs 0.26 (0/20,
+p = 0.048) becomes real 0.73 vs 0.43 (1/20, **p = 0.095**); on accuracy the
+comparison was never below 0.1. Cite both numbers from now on. Also: lane-correct
+is a ratio over presses near a note, so a nearly silent network scores 1.00 --
+guard it with a minimum press count (experiment 4 is unaffected, 45-237 presses
+per network, but the sweep was not).
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on
