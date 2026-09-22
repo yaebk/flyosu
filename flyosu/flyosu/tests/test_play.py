@@ -178,11 +178,56 @@ def test_with_network():
     check("episode recorded", len(lrn.history) == 1 and np.isfinite(lrn.history[0].reward))
 
 
+def test_probes():
+    """The time-resolved probes, on a synthetic set of traces."""
+    from flyosu import probes as PR
+    print("probes")
+    t = np.arange(-800.0, 240.0, 2.0)
+    z = np.zeros((4, len(t), N_KEYS))
+    for lane in range(4):                      # each lane drives its own channel, on time
+        z[lane, :, lane] = 3.0 * np.exp(-0.5 * (t / 60.0) ** 2)
+    tr = PR.LaneTraces(t=t, z=z, approach_ms=800.0)
+    wiring = [0, 1, 2, 3]
+    st = PR.shared_threshold(tr, wiring)
+    check("clean traces: one threshold works", st["one_theta_works"] and st["shared_band"] > 2.0,
+          f"band {st['shared_band']:.2f}")
+    cr = PR.crossings(tr, wiring, theta=1.5)
+    check("all four lanes cross on time", cr["n_fire"] == 4 and cr["n_on_time"] == 4)
+    check("no wrong key is driven", cr["n_false_keys"] == 0)
+    check("timing is centred on the line", abs(PR.timing(tr, wiring)["peak_lag_mean_ms"]) < 2.0)
+    check("selectivity is total", PR.selectivity(tr, wiring)["argmax_mean"] == 1.0)
+
+    # four lanes at four different scales, each still winning its own channel:
+    # perfectly selective, and yet no single threshold serves all four keys,
+    # because a loud lane's crosstalk outruns a quiet lane's own response.
+    bump = np.exp(-0.5 * (t / 60.0) ** 2)
+    z2 = np.zeros_like(z)
+    for lane, amp in enumerate((5.0, 1.0, 3.0, 2.0)):
+        z2[lane] = 0.9 * amp * bump[:, None]
+        z2[lane, :, lane] = amp * bump
+    tr2 = PR.LaneTraces(t=t, z=z2, approach_ms=800.0)
+    st2 = PR.shared_threshold(tr2, wiring)
+    check("a mismatched channel breaks the shared threshold", not st2["one_theta_works"])
+    check("but every lane still wins its own channel",
+          PR.selectivity(tr2, wiring)["argmax_mean"] == 1.0)
+    check("per-key thresholds exist for it",
+          all(np.isfinite(st2["theta_per_key"])) and len(st2["theta_per_key"]) == 4)
+
+    # a channel that peaks early is selective and useless
+    z3 = np.zeros_like(z)
+    for lane in range(4):
+        z3[lane, :, lane] = 3.0 * np.exp(-0.5 * ((t + 500.0) / 60.0) ** 2)
+    tr3 = PR.LaneTraces(t=t, z=z3, approach_ms=800.0)
+    cr3 = PR.crossings(tr3, wiring, theta=1.5)
+    check("an early channel fires but never on time", cr3["n_fire"] == 4 and cr3["n_on_time"] == 0)
+
+
 def main():
     test_mania()
     test_beatmap()
     test_encoder_geometry()
     test_controller_logic()
+    test_probes()
     if "--fast" not in sys.argv:
         test_with_network()
     print()
