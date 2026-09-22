@@ -52,7 +52,7 @@ the judgment line, which its did not.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from itertools import combinations
+from itertools import combinations, permutations
 
 import numpy as np
 
@@ -235,6 +235,21 @@ def chord_linearity(tr: LaneTraces, pairs, Zc: np.ndarray, wiring: list[int],
     return {"delta_mean_z": float(np.mean(delta)), "delta_min_z": float(np.min(delta)),
             "single_peak_mean_z": float(np.mean(alone_all)),
             "uninvolved_peak_mean": float(np.mean(cross))}
+
+
+def band_assignment(tr: LaneTraces, hit_ms: tuple[float, float] = (-160.0, 160.0),
+                    false_scope: str = "window") -> list[int]:
+    """Lane -> channel assignment maximising the *shared-threshold band*.
+
+    The rule ``controller.best_assignment`` uses picks the permutation with the
+    largest summed mean response, which experiment 4 showed does not predict
+    play (rho = -0.03 across rewired graphs).  This picks the permutation that
+    leaves the widest band of thresholds serving all four keys at once --
+    experiment 6's one discriminating quantity.  Same 24 candidates, same
+    stimulus knowledge (log2(24) = 4.6 bits), different criterion.
+    """
+    return list(max(permutations(range(tr.z.shape[2])),
+                    key=lambda p: shared_threshold(tr, list(p), hit_ms, false_scope)["shared_band"]))
 
 
 def measure(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray, wiring: list[int] | None = None,

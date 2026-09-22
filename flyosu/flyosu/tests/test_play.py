@@ -213,6 +213,26 @@ def test_probes():
     check("per-key thresholds exist for it",
           all(np.isfinite(st2["theta_per_key"])) and len(st2["theta_per_key"]) == 4)
 
+    # the two wiring rules: the margin rule takes the permutation with the
+    # largest summed response, the band rule the one leaving the widest band of
+    # thresholds that serves all four keys.  They are different rules -- on
+    # random response matrices they disagree about a third of the time.
+    from itertools import permutations
+    from flyosu.controller import best_assignment
+    rng = np.random.default_rng(0)
+    n_dis, exact = 0, True
+    for _ in range(40):
+        A = rng.gamma(1.5, 1.0, (4, N_KEYS))
+        tr4 = PR.LaneTraces(t=t, z=A[:, None, :] * bump[None, :, None], approach_ms=800.0)
+        m = best_assignment(tr4.z[:, tr4.window(-400.0, 0.0)].mean(axis=1))
+        b = PR.band_assignment(tr4)
+        best = max(PR.shared_threshold(tr4, list(p))["shared_band"] for p in permutations(range(N_KEYS)))
+        exact &= abs(PR.shared_threshold(tr4, b)["shared_band"] - best) < 1e-9
+        exact &= sorted(b) == [0, 1, 2, 3]
+        n_dis += list(m) != list(b)
+    check("band rule is the exact argmax over the 24 permutations", exact)
+    check("the two wiring rules are not the same rule", 5 <= n_dis <= 35, f"{n_dis}/40 disagree")
+
     # a channel that peaks early is selective and useless
     z3 = np.zeros_like(z)
     for lane in range(4):
