@@ -3,17 +3,19 @@
 **Short answer: the more constrained the learning, the more the real wiring
 matters — and when the readout starts from nothing, it stops mattering.** With
 the connectome frozen and 20 readout parameters learning from reward, the real
-network beats all four rewired controls when only the four thresholds may move
-(0.21 vs 0.09 ± 0.05, 0/4), beats three of four when it starts from its
-anatomical wiring (0.24 vs 0.13 ± 0.10, 1/4), and is matched or beaten by two
-of four when it starts from `W = 0` (0.27 vs 0.24 ± 0.11, 2/4). That is the
-monotone ordering experiment 1 predicted, seen in a third independent protocol.
-The untrained result survives photoreceptor noise (lane-correct 1.00 / 1.00 /
-0.73 / 0.75 / 0.45 vs rewired 0.19–0.38; 0/4 on stages 2–4). Separately, the
-blank-field spectral radius is 2.28 for the real connectome and 0.78 ± 0.16
-(n = 6) for rewired networks, and it is a property of the graph alone.
+network beats all eight rewired controls and all eight channel-shuffled ones
+when only the four thresholds may move (0.21 vs 0.06 ± 0.05 and 0.07 ± 0.05,
+0/8 and 0/8), beats seven of eight when it starts from its anatomical wiring
+(0.24 vs 0.12 ± 0.08, 1/8), and is matched or beaten by two of eight when it
+starts from `W = 0` (0.27 vs 0.20 ± 0.11, 2/8). That is the monotone ordering
+experiment 1 predicted, seen in a third independent protocol. The untrained
+result survives photoreceptor noise (lane-correct 1.00 / 1.00 / 0.73 / 0.75 /
+0.45 vs rewired 0.19–0.38; 0/4 on stages 2–4). Separately, the blank-field
+spectral radius is 2.28 for the real connectome and 0.78 ± 0.16 (n = 6) for
+rewired networks, and it is a property of the graph alone.
 
-Four controls, so the smallest available p is 0.20. Raw numbers in
+Eight controls per family, so the smallest available p is 0.11 — still short of
+0.05, and every comparison below is one-sided by construction. Raw numbers in
 `results/e3_learning.json`, `results/e3_stability.json`; logs alongside.
 
 ## What changed from experiment 2
@@ -21,7 +23,10 @@ Four controls, so the smallest available p is 0.20. Raw numbers in
 - Learning rate annealed (×0.97 per episode). Experiment 2's un-annealed real
   network rose to 0.44 and fell back to 0.32; nothing here does that.
 - Every learner's seed is recorded.
-- Four rewired controls instead of two; each run in three conditions.
+- Eight rewired controls instead of two, plus eight channel-shuffled ones
+  (same network, descending neurons assigned to the four channels at random);
+  each run in three conditions. The run was resumable and the later seeds were
+  added after the first write-up, which is why the figures carry n = 8.
 - A `thresholds-only` condition, so "learn the timing" is separated from
   "learn the mapping".
 - The untrained curriculum sweep repeated with photoreceptor noise (σ 0.03 per
@@ -39,26 +44,35 @@ accuracy there is no chance level — a silent player scores 0):
 | condition | network | ep 0 | ep 10 | ep 20 | ep 30 | lane-correct 0 → 30 | timing error |
 |---|---|---|---|---|---|---|---|
 | **thresholds only** | **real** | 0.06 | 0.09 | 0.15 | **0.21** | 0.65 → 0.80 | +59 ms |
-| | rewired ×4 | 0.06 | 0.08 | 0.09 | 0.09 ± 0.05 | 0.40 → 0.42 | −15 to −89 ms |
+| | rewired ×8 | | | | 0.058 ± 0.051 | 0.46 → 0.42 | −15 to −149 ms |
+| | channels ×8 | | | | 0.068 ± 0.054 | 0.28 → 0.27 | |
 | **anatomical wiring** | **real** | 0.06 | 0.27 | 0.26 | **0.24** | 0.65 → 0.85 | +10 ms |
-| | rewired ×4 | 0.06 | 0.11 | 0.14 | 0.13 ± 0.10 | 0.40 → 0.43 | |
+| | rewired ×8 | | | | 0.118 ± 0.075 | 0.46 → 0.53 | |
+| | channels ×8 | | | | 0.088 ± 0.048 | 0.28 → 0.30 | |
 | | best rewired (#2) | 0.08 | 0.18 | 0.29 | 0.30 | 0.42 → 0.53 | +7 ms |
 | **W = 0** | real | 0.00 | 0.14 | 0.18 | 0.27 | 0 → 0.82 | −21 ms |
-| | rewired ×4 | 0.00 | 0.08 | 0.20 | 0.24 ± 0.11 | 0 → 0.39 | |
+| | rewired ×8 | | | | 0.196 ± 0.110 | 0 → 0.39 | |
+| | channels ×8 | | | | 0.079 ± 0.078 | 0 → 0.28 | |
 | | best rewired (#2, #4) | 0.00 | | 0.38 / 0.24 | 0.35 / 0.35 | 0 → 0.52 / 0.46 | |
 
 ![learning](../results/fig10_learning3.png)
 
 Real vs rewired, three ways of scoring each curve:
 
-| condition | metric | real | rewired | n ≥ real | p |
-|---|---|---|---|---|---|
-| thresholds only | final | 0.211 | 0.089 ± 0.050 | 0/4 | 0.20 |
-| | area under curve | 0.151 | 0.086 ± 0.047 | 0/4 | 0.20 |
-| anatomical wiring | final | 0.239 | 0.133 ± 0.101 | 1/4 | 0.40 |
-| | area under curve | 0.254 | 0.127 ± 0.086 | 1/4 | 0.40 |
-| W = 0 | final | 0.272 | 0.238 ± 0.114 | 2/4 | 0.60 |
-| | area under curve | 0.196 | 0.172 ± 0.094 | 2/4 | 0.60 |
+| condition | metric | real | rewired ×8 | n ≥ real | p | channels ×8 | n ≥ real | p |
+|---|---|---|---|---|---|---|---|---|
+| thresholds only | final | 0.211 | 0.058 ± 0.051 | 0/8 | 0.11 | 0.068 ± 0.054 | 0/8 | 0.11 |
+| | area under curve | 0.151 | 0.056 ± 0.048 | 0/8 | 0.11 | 0.070 ± 0.053 | 1/8 | 0.22 |
+| anatomical wiring | final | 0.239 | 0.118 ± 0.075 | 1/8 | 0.22 | 0.088 ± 0.048 | 0/8 | 0.11 |
+| | area under curve | 0.254 | 0.107 ± 0.069 | 1/8 | 0.22 | 0.080 ± 0.047 | 0/8 | 0.11 |
+| W = 0 | final | 0.272 | 0.196 ± 0.110 | 2/8 | 0.33 | 0.079 ± 0.078 | 0/8 | 0.11 |
+| | area under curve | 0.196 | 0.158 ± 0.088 | 4/8 | 0.56 | 0.072 ± 0.088 | 2/8 | 0.33 |
+
+The rewired means dropped when seeds 5–8 were added (thresholds-only 0.089 →
+0.058, `W = 0` 0.238 → 0.196) because the first four happened to include the
+two best learners in the family. The ordering across conditions did not move,
+and the extra seeds make it tighter: thresholds-only is now 0/8 rather than
+0/4.
 
 ### Reading it
 
@@ -67,7 +81,7 @@ four thresholds, everything about *which* key fires is fixed by the anatomical
 wiring and the network's dynamics. The real network's four channels carry
 enough lane-specific timing that tuning the thresholds alone triples its
 accuracy (0.06 → 0.21) and pushes lane-correctness to 0.80. No rewired network
-gets above 0.13; three of them do not improve at all. The real network's presses
+gets above 0.13; most of them do not improve at all. The real network's presses
 end up 59 ms late — it learned to wait for the peak — where the rewired
 networks stay 15–89 ms early.
 
@@ -77,8 +91,14 @@ usable anatomical wiring (lane-correct 0.42 untrained, 0.53 learned) and reaches
 lower than experiment 2's 0.30 for the same condition — different seed,
 annealed — and its curve has already flattened by episode 10.
 
-**From `W = 0`, the wiring stops mattering.** Two rewired networks reach 0.35,
-above the real network's 0.27. This is the "free decoder erases the gap" result
+**From `W = 0`, the wiring stops mattering — for the topology control.** Two
+rewired networks reach 0.35, above the real network's 0.27. The channel-shuffle
+family is the exception: it stays at 0.079 ± 0.078 in this condition (0/8), the
+widest margin anywhere in the table. Scrambling the *output grouping* hurts a
+blank-slate learner far more than scrambling the graph does, which says the
+thing the readout has to find is a mapping from lanes onto coherent groups of
+descending neurons — rewiring leaves the groups internally coherent and only
+changes what they respond to, and 20 parameters can re-learn that. This is the "free decoder erases the gap" result
 from experiment 1 in a new form: given a blank slate and a reward signal, a
 rewired network's four channels contain about as much linearly recoverable lane
 information as the real network's (experiment 1's 4-channel decoder: 3/15
@@ -90,7 +110,8 @@ from scratch.
 
 Together the three conditions say: the real connectome's contribution to this
 task is in the structure a small, constrained readout can exploit without
-searching for it. That is a more specific claim than "the connectome helps",
+searching for it. Experiment 5 turns this from an ordering into a curve, by
+fitting the readout in closed form and varying how much it is allowed to do. That is a more specific claim than "the connectome helps",
 and it is the claim experiment 1 set up.
 
 ## Untrained play with photoreceptor noise

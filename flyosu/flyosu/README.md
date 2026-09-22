@@ -123,15 +123,18 @@ is consistent, the size is large, and none of it is significant yet.
 **[`docs/RESULTS_E2.md`](docs/RESULTS_E2.md)** has the tables, figures and the
 caveats, including the ones about the learner.
 
-Experiment 3 re-ran the learning comparison with an annealed learner, four
-rewired controls and three conditions. The gap between real and rewired orders
-by how constrained the learning is: thresholds only, real 0.21 vs 0.09 ± 0.05
-(0/4 controls reach it); from the anatomical wiring, 0.24 vs 0.13 ± 0.10 (1/4);
-from a blank readout, 0.27 vs 0.24 ± 0.11 (2/4). The real wiring supplies a
-starting point a small readout can exploit, not a higher ceiling for one that
-learns from scratch — which is what experiment 1 predicted. The untrained
-lane result survives photoreceptor noise, and the spectral-radius gap holds at
-n = 6 per family (real 2.28, rewired 0.78 ± 0.16).
+Experiment 3 re-ran the learning comparison with an annealed learner, eight
+rewired controls, eight channel-shuffled controls and three conditions. The gap
+between real and rewired orders by how constrained the learning is: thresholds
+only, real 0.21 vs 0.06 ± 0.05 (0/8 controls reach it); from the anatomical
+wiring, 0.24 vs 0.12 ± 0.08 (1/8); from a blank readout, 0.27 vs 0.20 ± 0.11
+(2/8). The real wiring supplies a starting point a small readout can exploit,
+not a higher ceiling for one that learns from scratch — which is what
+experiment 1 predicted. Shuffling the *channel labels* is the harsher control
+in the blank condition (0.08 ± 0.08, 0/8): what a blank readout has to find is
+a mapping onto coherent groups of descending neurons. The untrained lane result
+survives photoreceptor noise, and the spectral-radius gap holds at n = 6 per
+family (real 2.28, rewired 0.78 ± 0.16).
 **[`docs/RESULTS_E3.md`](docs/RESULTS_E3.md).**
 
 Experiment 4 asked whether those two properties of the real wiring — high

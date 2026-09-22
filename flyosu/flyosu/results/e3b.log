@@ -12,3 +12,242 @@ resuming: 5 runs done
       blank      ep  30  held-out acc 0.200  hit 0.200  lane-correct 0.40  train reward (last 10) 0.052
       thresholds ep   0  held-out acc 0.000
       thresholds ep  10  held-out acc 0.025  hit 0.133  lane-correct 0.57  train reward (last 10) 0.079
+      thresholds ep  20  held-out acc 0.025  hit 0.133  lane-correct 0.54  train reward (last 10) 0.138
+      thresholds ep  30  held-out acc 0.025  hit 0.133  lane-correct 0.54  train reward (last 10) 0.150
+
+=== rewired topology #6
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.29  s3=0.24  s4=0.46  s5=0.26
+      wired      ep   0  held-out acc 0.100
+      wired      ep  10  held-out acc 0.158  hit 0.217  lane-correct 0.73  train reward (last 10) 0.037
+      wired      ep  20  held-out acc 0.128  hit 0.167  lane-correct 0.80  train reward (last 10) 0.056
+      wired      ep  30  held-out acc 0.128  hit 0.217  lane-correct 0.82  train reward (last 10) 0.073
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.111  hit 0.133  lane-correct 0.57  train reward (last 10) -0.001
+      blank      ep  20  held-out acc 0.228  hit 0.300  lane-correct 0.37  train reward (last 10) 0.123
+      blank      ep  30  held-out acc 0.256  hit 0.300  lane-correct 0.59  train reward (last 10) 0.218
+      thresholds ep   0  held-out acc 0.100
+      thresholds ep  10  held-out acc 0.011  hit 0.067  lane-correct 0.46  train reward (last 10) 0.080
+      thresholds ep  20  held-out acc 0.014  hit 0.083  lane-correct 0.46  train reward (last 10) 0.112
+      thresholds ep  30  held-out acc 0.014  hit 0.083  lane-correct 0.46  train reward (last 10) 0.076
+
+=== rewired topology #7
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.33  s3=0.59  s4=0.68  s5=0.62
+      wired      ep   0  held-out acc 0.067
+      wired      ep  10  held-out acc 0.083  hit 0.183  lane-correct 0.58  train reward (last 10) 0.073
+      wired      ep  20  held-out acc 0.117  hit 0.183  lane-correct 0.65  train reward (last 10) 0.081
+      wired      ep  30  held-out acc 0.117  hit 0.183  lane-correct 0.85  train reward (last 10) 0.072
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.247  hit 0.317  lane-correct 0.53  train reward (last 10) 0.050
+      blank      ep  20  held-out acc 0.292  hit 0.383  lane-correct 0.51  train reward (last 10) 0.091
+      blank      ep  30  held-out acc 0.147  hit 0.283  lane-correct 0.50  train reward (last 10) 0.137
+      thresholds ep   0  held-out acc 0.067
+      thresholds ep  10  held-out acc 0.067  hit 0.183  lane-correct 0.58  train reward (last 10) 0.103
+      thresholds ep  20  held-out acc 0.067  hit 0.183  lane-correct 0.58  train reward (last 10) 0.078
+      thresholds ep  30  held-out acc 0.069  hit 0.200  lane-correct 0.58  train reward (last 10) 0.088
+
+=== rewired topology #8
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.09  s3=0.19  s4=0.26  s5=0.12
+      wired      ep   0  held-out acc 0.000
+      wired      ep  10  held-out acc 0.000  hit 0.000  lane-correct 0.36  train reward (last 10) -0.014
+      wired      ep  20  held-out acc 0.022  hit 0.067  lane-correct 0.24  train reward (last 10) 0.014
+      wired      ep  30  held-out acc 0.072  hit 0.083  lane-correct 0.23  train reward (last 10) 0.023
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.017  hit 0.017  lane-correct 0.06  train reward (last 10) 0.020
+      blank      ep  20  held-out acc 0.028  hit 0.033  lane-correct 0.10  train reward (last 10) 0.062
+      blank      ep  30  held-out acc 0.017  hit 0.033  lane-correct 0.06  train reward (last 10) 0.051
+      thresholds ep   0  held-out acc 0.000
+      thresholds ep  10  held-out acc 0.000  hit 0.000  lane-correct 0.30  train reward (last 10) -0.025
+      thresholds ep  20  held-out acc 0.000  hit 0.000  lane-correct 0.30  train reward (last 10) -0.018
+      thresholds ep  30  held-out acc 0.000  hit 0.000  lane-correct 0.30  train reward (last 10) -0.021
+
+=== shuffled channel labels #1
+  untrained, noise 0.03, lane-correct: s1=0.36  s2=0.33  s3=0.25  s4=0.32  s5=0.22
+      wired      ep   0  held-out acc 0.200
+      wired      ep  10  held-out acc 0.206  hit 0.283  lane-correct 0.47  train reward (last 10) 0.014
+      wired      ep  20  held-out acc 0.156  hit 0.267  lane-correct 0.55  train reward (last 10) 0.002
+      wired      ep  30  held-out acc 0.200  hit 0.267  lane-correct 0.46  train reward (last 10) 0.033
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.011  hit 0.017  lane-correct 0.14  train reward (last 10) -0.007
+      blank      ep  20  held-out acc 0.017  hit 0.017  lane-correct 0.10  train reward (last 10) -0.001
+      blank      ep  30  held-out acc 0.017  hit 0.017  lane-correct 0.10  train reward (last 10) 0.027
+      thresholds ep   0  held-out acc 0.200
+      thresholds ep  10  held-out acc 0.203  hit 0.283  lane-correct 0.57  train reward (last 10) 0.035
+      thresholds ep  20  held-out acc 0.203  hit 0.283  lane-correct 0.57  train reward (last 10) 0.017
+      thresholds ep  30  held-out acc 0.206  hit 0.283  lane-correct 0.57  train reward (last 10) -0.006
+
+=== shuffled channel labels #2
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.33  s3=0.15  s4=0.24  s5=0.16
+      wired      ep   0  held-out acc 0.078
+      wired      ep  10  held-out acc 0.089  hit 0.100  lane-correct 0.43  train reward (last 10) 0.005
+      wired      ep  20  held-out acc 0.083  hit 0.100  lane-correct 0.43  train reward (last 10) -0.015
+      wired      ep  30  held-out acc 0.100  hit 0.100  lane-correct 0.43  train reward (last 10) 0.004
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.319  hit 0.417  lane-correct 0.41  train reward (last 10) 0.029
+      blank      ep  20  held-out acc 0.219  hit 0.650  lane-correct 0.41  train reward (last 10) 0.018
+      blank      ep  30  held-out acc 0.175  hit 0.517  lane-correct 0.33  train reward (last 10) 0.031
+      thresholds ep   0  held-out acc 0.078
+      thresholds ep  10  held-out acc 0.078  hit 0.100  lane-correct 0.27  train reward (last 10) 0.002
+      thresholds ep  20  held-out acc 0.078  hit 0.100  lane-correct 0.27  train reward (last 10) 0.014
+      thresholds ep  30  held-out acc 0.078  hit 0.100  lane-correct 0.27  train reward (last 10) 0.013
+
+=== shuffled channel labels #3
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.50  s3=0.15  s4=0.14  s5=0.00
+      wired      ep   0  held-out acc 0.050
+      wired      ep  10  held-out acc 0.111  hit 0.133  lane-correct 0.36  train reward (last 10) 0.025
+      wired      ep  20  held-out acc 0.067  hit 0.100  lane-correct 0.23  train reward (last 10) 0.029
+      wired      ep  30  held-out acc 0.089  hit 0.150  lane-correct 0.22  train reward (last 10) 0.032
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.017  hit 0.050  lane-correct 0.50  train reward (last 10) 0.010
+      blank      ep  20  held-out acc 0.050  hit 0.067  lane-correct 0.27  train reward (last 10) 0.013
+      blank      ep  30  held-out acc 0.067  hit 0.067  lane-correct 0.48  train reward (last 10) 0.056
+      thresholds ep   0  held-out acc 0.050
+      thresholds ep  10  held-out acc 0.050  hit 0.050  lane-correct 0.25  train reward (last 10) -0.005
+      thresholds ep  20  held-out acc 0.050  hit 0.050  lane-correct 0.25  train reward (last 10) -0.010
+      thresholds ep  30  held-out acc 0.050  hit 0.050  lane-correct 0.25  train reward (last 10) -0.013
+
+=== shuffled channel labels #4
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.17  s3=0.19  s4=0.31  s5=0.13
+      wired      ep   0  held-out acc 0.089
+      wired      ep  10  held-out acc 0.083  hit 0.083  lane-correct 0.21  train reward (last 10) 0.004
+      wired      ep  20  held-out acc 0.083  hit 0.083  lane-correct 0.20  train reward (last 10) -0.003
+      wired      ep  30  held-out acc 0.083  hit 0.083  lane-correct 0.20  train reward (last 10) 0.001
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.000  hit 0.000  lane-correct 0.00  train reward (last 10) -0.011
+      blank      ep  20  held-out acc 0.000  hit 0.000  lane-correct 0.00  train reward (last 10) 0.002
+      blank      ep  30  held-out acc 0.000  hit 0.000  lane-correct 0.00  train reward (last 10) -0.001
+      thresholds ep   0  held-out acc 0.089
+      thresholds ep  10  held-out acc 0.089  hit 0.117  lane-correct 0.24  train reward (last 10) 0.031
+      thresholds ep  20  held-out acc 0.067  hit 0.117  lane-correct 0.24  train reward (last 10) 0.044
+      thresholds ep  30  held-out acc 0.056  hit 0.083  lane-correct 0.19  train reward (last 10) 0.059
+
+=== shuffled channel labels #5
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.50  s3=0.20  s4=0.21  s5=0.14
+      wired      ep   0  held-out acc 0.033
+      wired      ep  10  held-out acc 0.056  hit 0.083  lane-correct 0.28  train reward (last 10) -0.003
+      wired      ep  20  held-out acc 0.083  hit 0.100  lane-correct 0.30  train reward (last 10) 0.002
+      wired      ep  30  held-out acc 0.083  hit 0.100  lane-correct 0.41  train reward (last 10) -0.006
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.017  hit 0.017  lane-correct 0.14  train reward (last 10) 0.008
+      blank      ep  20  held-out acc 0.044  hit 0.117  lane-correct 0.41  train reward (last 10) 0.058
+      blank      ep  30  held-out acc 0.125  hit 0.150  lane-correct 0.32  train reward (last 10) 0.049
+      thresholds ep   0  held-out acc 0.033
+      thresholds ep  10  held-out acc 0.033  hit 0.050  lane-correct 0.30  train reward (last 10) -0.026
+      thresholds ep  20  held-out acc 0.033  hit 0.050  lane-correct 0.30  train reward (last 10) -0.012
+      thresholds ep  30  held-out acc 0.033  hit 0.050  lane-correct 0.30  train reward (last 10) -0.018
+
+=== shuffled channel labels #6
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.26  s3=0.18  s4=0.16  s5=0.11
+      wired      ep   0  held-out acc 0.067
+      wired      ep  10  held-out acc 0.017  hit 0.017  lane-correct 0.06  train reward (last 10) -0.009
+      wired      ep  20  held-out acc 0.017  hit 0.017  lane-correct 0.21  train reward (last 10) -0.008
+      wired      ep  30  held-out acc 0.017  hit 0.017  lane-correct 0.21  train reward (last 10) -0.008
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.000  hit 0.000  lane-correct 0.00  train reward (last 10) -0.010
+      blank      ep  20  held-out acc 0.011  hit 0.033  lane-correct 0.14  train reward (last 10) 0.020
+      blank      ep  30  held-out acc 0.028  hit 0.033  lane-correct 0.07  train reward (last 10) 0.017
+      thresholds ep   0  held-out acc 0.067
+      thresholds ep  10  held-out acc 0.067  hit 0.067  lane-correct 0.21  train reward (last 10) 0.002
+      thresholds ep  20  held-out acc 0.067  hit 0.067  lane-correct 0.19  train reward (last 10) 0.024
+      thresholds ep  30  held-out acc 0.050  hit 0.067  lane-correct 0.19  train reward (last 10) 0.023
+
+=== shuffled channel labels #7
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.33  s3=0.29  s4=0.28  s5=0.22
+      wired      ep   0  held-out acc 0.039
+      wired      ep  10  held-out acc 0.044  hit 0.083  lane-correct 0.26  train reward (last 10) 0.006
+      wired      ep  20  held-out acc 0.056  hit 0.083  lane-correct 0.23  train reward (last 10) 0.011
+      wired      ep  30  held-out acc 0.072  hit 0.117  lane-correct 0.29  train reward (last 10) 0.021
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.200  hit 0.300  lane-correct 0.62  train reward (last 10) 0.028
+      blank      ep  20  held-out acc 0.183  hit 0.283  lane-correct 0.71  train reward (last 10) 0.020
+      blank      ep  30  held-out acc 0.217  hit 0.217  lane-correct 0.73  train reward (last 10) 0.099
+      thresholds ep   0  held-out acc 0.039
+      thresholds ep  10  held-out acc 0.033  hit 0.050  lane-correct 0.21  train reward (last 10) 0.018
+      thresholds ep  20  held-out acc 0.033  hit 0.050  lane-correct 0.21  train reward (last 10) 0.004
+      thresholds ep  30  held-out acc 0.033  hit 0.050  lane-correct 0.21  train reward (last 10) 0.018
+
+=== shuffled channel labels #8
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.25  s3=0.23  s4=0.22  s5=0.31
+      wired      ep   0  held-out acc 0.022
+      wired      ep  10  held-out acc 0.028  hit 0.033  lane-correct 0.10  train reward (last 10) 0.028
+      wired      ep  20  held-out acc 0.044  hit 0.083  lane-correct 0.20  train reward (last 10) 0.019
+      wired      ep  30  held-out acc 0.061  hit 0.083  lane-correct 0.21  train reward (last 10) 0.016
+      blank      ep   0  held-out acc 0.000
+      blank      ep  10  held-out acc 0.000  hit 0.000  lane-correct 0.00  train reward (last 10) 0.006
+      blank      ep  20  held-out acc 0.000  hit 0.000  lane-correct 0.00  train reward (last 10) 0.007
+      blank      ep  30  held-out acc 0.006  hit 0.017  lane-correct 0.17  train reward (last 10) -0.007
+      thresholds ep   0  held-out acc 0.022
+      thresholds ep  10  held-out acc 0.022  hit 0.033  lane-correct 0.13  train reward (last 10) 0.072
+      thresholds ep  20  held-out acc 0.022  hit 0.033  lane-correct 0.20  train reward (last 10) 0.016
+      thresholds ep  30  held-out acc 0.039  hit 0.083  lane-correct 0.19  train reward (last 10) 0.015
+
+--- untrained with photoreceptor noise 0.03, lane-correct by stage ---
+  stage 1: real 1.000 | rewired t 0.312+-0.428 2/8 p=0.33 | shuffled  0.044+-0.117 0/8 p=0.11
+  stage 2: real 1.000 | rewired t 0.184+-0.139 0/8 p=0.11 | shuffled  0.336+-0.108 0/8 p=0.11
+  stage 3: real 0.727 | rewired t 0.276+-0.154 0/8 p=0.11 | shuffled  0.206+-0.046 0/8 p=0.11
+  stage 4: real 0.750 | rewired t 0.386+-0.139 0/8 p=0.11 | shuffled  0.234+-0.061 0/8 p=0.11
+  stage 5: real 0.450 | rewired t 0.289+-0.170 2/8 p=0.33 | shuffled  0.161+-0.085 0/8 p=0.11
+
+--- learning: held-out accuracy (stage 3) by episode ------------------
+  wired:
+    real connectome              ep0=0.06  ep10=0.27  ep20=0.26  ep30=0.24   lane-correct 0.65->0.85   err +10 ms
+    rewired topology #1          ep0=0.00  ep10=0.01  ep20=0.01  ep30=0.02   lane-correct 0.38->0.43   err -79 ms
+    rewired topology #2          ep0=0.08  ep10=0.18  ep20=0.29  ep30=0.30   lane-correct 0.42->0.53   err +7 ms
+    rewired topology #3          ep0=0.07  ep10=0.14  ep20=0.11  ep30=0.11   lane-correct 0.54->0.54   err -95 ms
+    rewired topology #4          ep0=0.07  ep10=0.11  ep20=0.13  ep30=0.11   lane-correct 0.25->0.23   err -51 ms
+    rewired topology #5          ep0=0.00  ep10=0.02  ep20=0.12  ep30=0.09   lane-correct 0.43->0.58   err -77 ms
+    rewired topology #6          ep0=0.10  ep10=0.16  ep20=0.13  ep30=0.13   lane-correct 0.75->0.82   err -77 ms
+    rewired topology #7          ep0=0.07  ep10=0.08  ep20=0.12  ep30=0.12   lane-correct 0.58->0.85   err -65 ms
+    rewired topology #8          ep0=0.00  ep10=0.00  ep20=0.02  ep30=0.07   lane-correct 0.30->0.23   err +6 ms
+    shuffled channel labels #1   ep0=0.20  ep10=0.21  ep20=0.16  ep30=0.20   lane-correct 0.55->0.46   err +26 ms
+    shuffled channel labels #2   ep0=0.08  ep10=0.09  ep20=0.08  ep30=0.10   lane-correct 0.27->0.43   err +11 ms
+    shuffled channel labels #3   ep0=0.05  ep10=0.11  ep20=0.07  ep30=0.09   lane-correct 0.25->0.22   err -50 ms
+    shuffled channel labels #4   ep0=0.09  ep10=0.08  ep20=0.08  ep30=0.08   lane-correct 0.24->0.20   err +6 ms
+    shuffled channel labels #5   ep0=0.03  ep10=0.06  ep20=0.08  ep30=0.08   lane-correct 0.30->0.41   err -43 ms
+    shuffled channel labels #6   ep0=0.07  ep10=0.02  ep20=0.02  ep30=0.02   lane-correct 0.21->0.21   err +111 ms
+    shuffled channel labels #7   ep0=0.04  ep10=0.04  ep20=0.06  ep30=0.07   lane-correct 0.33->0.29   err -23 ms
+    shuffled channel labels #8   ep0=0.02  ep10=0.03  ep20=0.04  ep30=0.06   lane-correct 0.09->0.21   err +43 ms
+    final  real 0.239 | rewired t 0.118+-0.075 1/8 p=0.22 | shuffled  0.088+-0.048 0/8 p=0.11
+    best   real 0.267 | rewired t 0.132+-0.075 1/8 p=0.22 | shuffled  0.099+-0.043 0/8 p=0.11
+    area   real 0.254 | rewired t 0.107+-0.069 1/8 p=0.22 | shuffled  0.080+-0.047 0/8 p=0.11
+  blank:
+    real connectome              ep0=0.00  ep10=0.14  ep20=0.18  ep30=0.27   lane-correct 0.00->0.82   err -21 ms
+    rewired topology #1          ep0=0.00  ep10=0.03  ep20=0.06  ep30=0.13   lane-correct 0.00->0.30   err -57 ms
+    rewired topology #2          ep0=0.00  ep10=0.21  ep20=0.38  ep30=0.35   lane-correct 0.00->0.52   err -31 ms
+    rewired topology #3          ep0=0.00  ep10=0.08  ep20=0.11  ep30=0.12   lane-correct 0.00->0.27   err -70 ms
+    rewired topology #4          ep0=0.00  ep10=0.00  ep20=0.24  ep30=0.35   lane-correct 0.00->0.46   err -22 ms
+    rewired topology #5          ep0=0.00  ep10=0.00  ep20=0.19  ep30=0.20   lane-correct 0.00->0.40   err -32 ms
+    rewired topology #6          ep0=0.00  ep10=0.11  ep20=0.23  ep30=0.26   lane-correct 0.00->0.59   err -5 ms
+    rewired topology #7          ep0=0.00  ep10=0.25  ep20=0.29  ep30=0.15   lane-correct 0.00->0.50   err -11 ms
+    rewired topology #8          ep0=0.00  ep10=0.02  ep20=0.03  ep30=0.02   lane-correct 0.00->0.06   err +75 ms
+    shuffled channel labels #1   ep0=0.00  ep10=0.01  ep20=0.02  ep30=0.02   lane-correct 0.00->0.10   err +38 ms
+    shuffled channel labels #2   ep0=0.00  ep10=0.32  ep20=0.22  ep30=0.18   lane-correct 0.00->0.33   err -85 ms
+    shuffled channel labels #3   ep0=0.00  ep10=0.02  ep20=0.05  ep30=0.07   lane-correct 0.00->0.48   err +72 ms
+    shuffled channel labels #4   ep0=0.00  ep10=0.00  ep20=0.00  ep30=0.00   lane-correct 0.00->0.00
+    shuffled channel labels #5   ep0=0.00  ep10=0.02  ep20=0.04  ep30=0.12   lane-correct 0.00->0.32   err -42 ms
+    shuffled channel labels #6   ep0=0.00  ep10=0.00  ep20=0.01  ep30=0.03   lane-correct 0.00->0.07   err +34 ms
+    shuffled channel labels #7   ep0=0.00  ep10=0.20  ep20=0.18  ep30=0.22   lane-correct 0.00->0.73   err +31 ms
+    shuffled channel labels #8   ep0=0.00  ep10=0.00  ep20=0.00  ep30=0.01   lane-correct 0.00->0.17   err +98 ms
+    final  real 0.272 | rewired t 0.196+-0.110 2/8 p=0.33 | shuffled  0.079+-0.078 0/8 p=0.11
+    best   real 0.272 | rewired t 0.219+-0.114 3/8 p=0.44 | shuffled  0.097+-0.109 1/8 p=0.22
+    area   real 0.196 | rewired t 0.158+-0.088 4/8 p=0.56 | shuffled  0.072+-0.088 2/8 p=0.33
+  thresholds:
+    real connectome              ep0=0.06  ep10=0.09  ep20=0.15  ep30=0.21   lane-correct 0.65->0.80   err +59 ms
+    rewired topology #1          ep0=0.00  ep10=0.01  ep20=0.01  ep30=0.01   lane-correct 0.38->0.42   err -82 ms
+    rewired topology #2          ep0=0.08  ep10=0.08  ep20=0.11  ep30=0.13   lane-correct 0.42->0.41   err -15 ms
+    rewired topology #3          ep0=0.07  ep10=0.12  ep20=0.12  ep30=0.12   lane-correct 0.54->0.54   err -89 ms
+    rewired topology #4          ep0=0.07  ep10=0.11  ep20=0.12  ep30=0.09   lane-correct 0.25->0.29   err -80 ms
+    rewired topology #5          ep0=0.00  ep10=0.02  ep20=0.02  ep30=0.02   lane-correct 0.43->0.54   err -134 ms
+    rewired topology #6          ep0=0.10  ep10=0.01  ep20=0.01  ep30=0.01   lane-correct 0.75->0.46   err -132 ms
+    rewired topology #7          ep0=0.07  ep10=0.07  ep20=0.07  ep30=0.07   lane-correct 0.58->0.58   err -96 ms
+    rewired topology #8          ep0=0.00  ep10=0.00  ep20=0.00  ep30=0.00   lane-correct 0.30->0.30   err -149 ms
+    shuffled channel labels #1   ep0=0.20  ep10=0.20  ep20=0.20  ep30=0.21   lane-correct 0.55->0.57   err +13 ms
+    shuffled channel labels #2   ep0=0.08  ep10=0.08  ep20=0.08  ep30=0.08   lane-correct 0.27->0.27   err -16 ms
+    shuffled channel labels #3   ep0=0.05  ep10=0.05  ep20=0.05  ep30=0.05   lane-correct 0.25->0.25   err -7 ms
+    shuffled channel labels #4   ep0=0.09  ep10=0.09  ep20=0.07  ep30=0.06   lane-correct 0.24->0.19   err +54 ms
+    shuffled channel labels #5   ep0=0.03  ep10=0.03  ep20=0.03  ep30=0.03   lane-correct 0.30->0.30   err -62 ms
+    shuffled channel labels #6   ep0=0.07  ep10=0.07  ep20=0.07  ep30=0.05   lane-correct 0.21->0.19   err +36 ms
+    shuffled channel labels #7   ep0=0.04  ep10=0.03  ep20=0.03  ep30=0.03   lane-correct 0.33->0.21   err -48 ms
+    shuffled channel labels #8   ep0=0.02  ep10=0.02  ep20=0.02  ep30=0.04   lane-correct 0.09->0.19   err +74 ms
+    final  real 0.211 | rewired t 0.058+-0.051 0/8 p=0.11 | shuffled  0.068+-0.054 0/8 p=0.11
+    best   real 0.211 | rewired t 0.072+-0.051 0/8 p=0.11 | shuffled  0.075+-0.053 0/8 p=0.11
+    area   real 0.151 | rewired t 0.056+-0.048 0/8 p=0.11 | shuffled  0.070+-0.053 1/8 p=0.22
