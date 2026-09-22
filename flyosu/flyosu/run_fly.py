@@ -13,8 +13,12 @@ Poke the fly from the command line.
 from __future__ import annotations
 
 import argparse
+import sys
 
 import numpy as np
+
+if hasattr(sys.stdout, "reconfigure"):          # Windows consoles default to cp1252
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 from flyosu import model as M
 

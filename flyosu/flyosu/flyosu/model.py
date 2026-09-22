@@ -27,6 +27,23 @@ from . import subgraph as SG
 
 MODEL_DIR = os.path.join(C.DATA_DIR, "models")
 
+# Two operating regimes, selected by ``build(regime=...)``.
+#
+# "e1"    the calibration exactly as experiment 1 used it: every neuron's gain
+#         is set by its own input spread, so every neuron is maximally
+#         stimulus-sensitive.  In a recurrent network that is a loop gain of ~8
+#         and the blank-field state is chaotic; e1's "settled" responses were
+#         reproducible transients sampled 300 ms after a fixed start.  Kept as
+#         the default so experiment 1 remains reproducible.
+# "play"  the same calibration with each neuron's input spread floored at 30x
+#         the median.  That reduces the per-neuron sensitivity normalisation
+#         to per-neuron bias homeostasis plus a global gain cap, and gives the
+#         network a stable blank-field fixed point (spectral radius 2.3 for the
+#         real connectome, 0.7 for rewired controls, both with Re < 1).  This
+#         is what the game runs on.  docs/CALIBRATION.md, "Ongoing activity".
+REGIMES = {"e1": dict(sigma_floor=0.05), "play": dict(sigma_floor=30.0)}
+DT_PLAY = 2.0     # ms; at dt = 5 ms the oscillatory modes are badly under-damped
+
 # the training ensemble the operating points are calibrated on: a coarse sweep
 # of single bright points over the frontal-to-lateral visual field
 CAL_AZ = np.linspace(-110.0, 110.0, 15)
@@ -60,6 +77,34 @@ class Fly:
     def channels(self, r: np.ndarray) -> np.ndarray:
         return self.readout.activity(r)
 
+    def settle(self, duration_ms: float = 2000.0, dt: float = DT_PLAY) -> np.ndarray:
+        """Blank-field state after ``duration_ms``; the fixed point in the
+        "play" regime, a point on the chaotic attractor in the "e1" regime."""
+        r, _ = self.net.run(self.stimulus([]), duration_ms=duration_ms, dt=dt)
+        return r
+
+    def stability(self, r0: np.ndarray | None = None, dt: float = DT_PLAY) -> dict:
+        """Is the blank field a fixed point?  Runs 1 s more from ``r0`` and
+        reports the largest per-neuron change over the final 100 ms, plus the
+        leading eigenvalue of the Jacobian at the end state."""
+        import scipy.sparse as sp
+        import scipy.sparse.linalg as spl
+        r0 = self.settle(dt=dt) if r0 is None else r0
+        _, tr = self.net.run(self.stimulus([]), duration_ms=1000.0, dt=dt,
+                             r0=r0, record_every=int(round(100.0 / dt)))
+        drift = float(np.abs(tr[-1] - tr[-2]).max())
+        net = self.net
+        x = net.Wt @ tr[-1]
+        z = net.slope * (x - net.mu) / net.sigma + net.offset
+        phi = 1.0 / (1.0 + np.exp(-np.clip(z, -30, 30)))
+        g = phi * (1 - phi) * net.slope / net.sigma
+        g[net.is_input] = 0.0
+        J = sp.diags(g.astype(np.float64)) @ net.Wt.astype(np.float64)
+        ev = spl.eigs(J, k=2, which="LM", return_eigenvectors=False, maxiter=5000)
+        return {"drift": drift, "fixed_point": drift < 1e-4,
+                "spectral_radius": float(np.abs(ev).max()),
+                "max_real": float(ev.real.max()), "max_gain": float(g.max())}
+
     # -- introspection -----------------------------------------------------
 
     @property
@@ -90,8 +135,8 @@ def _key(**kw) -> str:
 def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
           tau: float = 20.0, sigma_deg: float = 10.0, rounds: int = 8,
           shuffle_seed: int | None = None, retino_seed: int | None = None,
-          channel_seed: int | None = None, cache: bool = True,
-          verbose: bool = False) -> Fly:
+          channel_seed: int | None = None, sigma_floor: float | None = None,
+          regime: str = "e1", cache: bool = True, verbose: bool = False) -> Fly:
     """Build (and calibrate) a fly.
 
     Three independent controls, each isolating one thing the connectome
@@ -112,21 +157,35 @@ def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
     ``channel_seed``  keep everything, assign descending neurons to the four
                       channels at random (same group sizes).  Tests whether the
                       anatomical *grouping of the output* matters.
+
+    ``regime``        "e1" (default) or "play"; see ``REGIMES``.
+    ``sigma_floor``   lower bound on each neuron's calibrated input spread, as
+                      a fraction of the median.  Caps per-neuron gain at
+                      ``slope / (sigma_floor * median sigma)``.  Overrides the
+                      regime's value when given.
     """
+    if regime not in REGIMES:
+        raise ValueError(f"regime {regime!r}; known: {sorted(REGIMES)}")
+    if sigma_floor is None:
+        sigma_floor = REGIMES[regime]["sigma_floor"]
     cx = C.load()
     ret = R.build(cx)
     pw = SG.visual_to_descending(cx, ret.idx, n_keep=n_keep)
 
-    tag = _key(n_keep=n_keep, slope=slope, offset=offset, tau=tau,
-               sigma=sigma_deg, rounds=rounds, shuffle=shuffle_seed,
-               retino=retino_seed, channel=channel_seed, v=4)
+    kw = dict(n_keep=n_keep, slope=slope, offset=offset, tau=tau,
+              sigma=sigma_deg, rounds=rounds, shuffle=shuffle_seed,
+              retino=retino_seed, channel=channel_seed, v=4)
+    if sigma_floor != 0.05:              # keep experiment-1 caches valid
+        kw["floor"] = sigma_floor
+    tag = _key(**kw)
     path = os.path.join(MODEL_DIR, f"fly_{tag}.pkl")
     if cache and os.path.exists(path):
         with open(path, "rb") as fh:
             blob = pickle.load(fh)
     else:
         blob = _fit(cx, ret, pw, slope, offset, tau, sigma_deg, rounds,
-                    shuffle_seed, retino_seed, channel_seed, verbose)
+                    shuffle_seed, retino_seed, channel_seed, verbose,
+                    sigma_floor=sigma_floor)
         if cache:
             os.makedirs(MODEL_DIR, exist_ok=True)
             with open(path, "wb") as fh:
@@ -144,6 +203,7 @@ def build(n_keep: int = 20000, slope: float = 2.5, offset: float = -1.2,
                meta={"n_keep": n_keep, "slope": slope, "offset": offset,
                      "sigma_deg": sigma_deg, "shuffle_seed": shuffle_seed,
                      "retino_seed": retino_seed, "channel_seed": channel_seed,
+                     "sigma_floor": sigma_floor, "regime": regime,
                      "cache": path})
 
 
@@ -163,7 +223,7 @@ def _shuffle_edges(pre, post, w, n, seed):
 
 
 def _fit(cx, ret, pw, slope, offset, tau, sigma_deg, rounds, shuffle_seed,
-         retino_seed, channel_seed, verbose):
+         retino_seed, channel_seed, verbose, sigma_floor=0.05):
     pre, post, w, node_ids = S.extract(cx, pw.node_ids, 1.0)
     label = "flywire783"
     if shuffle_seed is not None:
@@ -190,7 +250,7 @@ def _fit(cx, ret, pw, slope, offset, tau, sigma_deg, rounds, shuffle_seed,
             e[ph_local] = ret.drive([(az, el, 1.0)], sigma_deg=sigma_deg)
             ens.append(e)
     ens.append(np.zeros(net.n, np.float32))          # blank field
-    net.calibrate(ens, rounds=rounds, verbose=verbose)
+    net.calibrate(ens, rounds=rounds, sigma_floor=sigma_floor, verbose=verbose)
 
     readout = O.build(cx, node_ids, net.Wt)
     if channel_seed is not None:

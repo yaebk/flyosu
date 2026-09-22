@@ -155,3 +155,96 @@ to the four lanes would have guaranteed the result.
 groups are descending neurons grouped by hemisphere and input connectivity, not
 cells whose ventral-nerve-cord leg targets are known — that would need MANC,
 which is a separate dataset.
+
+## Ongoing activity, and the play regime
+
+*Added when the game was built (steps 5–8). This section changes how the
+experiment-1 numbers should be read.*
+
+Experiment 1 measured every response the same way: reset the network to zero,
+present a stimulus, read out at 300 ms. That protocol never asks whether the
+network has a resting state. The game does — notes fall continuously and the
+network runs for minutes without a reset — and the answer is no.
+
+**The calibrated network is chaotic.** With a blank visual field it never
+settles. Channel activity fluctuates with sd ≈ 0.01–0.02 and an autocorrelation
+time of ~70–130 ms, individual neurons flip between 0 and 1, and this persists
+at dt = 0.1 ms, so it is a property of the continuous-time model, not of the
+integrator. The blank-field Jacobian has spectral radius 15 and per-neuron gains
+up to 400. Meanwhile a note at the judgment line moves the pooled channels by
+0.001–0.02 — the same size as the fluctuation or smaller. In continuous play
+the untrained policy fell from 0.57 (experiment 1) to 0.35–0.45, and no amount
+of temporal smoothing, common-mode rejection, or projecting out the dominant
+blank-field modes recovered it: the ongoing activity is high-dimensional (30
+principal components for 92% of it).
+
+The cause is the calibration itself. `z_i = slope · (x_i − μ_i)/σ_i` makes
+every neuron's output vary O(1) across the stimulus ensemble. With normalised
+weights the median neuron's input varies by only 0.02, so the median gain is
+~30 and neurons whose input barely varies get gains in the hundreds. In a
+recurrent network that is a loop gain far above one. And it is
+**self-consistent**: lowering `slope` shrinks the fluctuations, which shrinks
+the measured σ_i, which restores the gain — the effective operating point is
+invariant to `slope` (checked at 1.0, 1.5, 2.0, 2.5). The calibration
+homeostatically parks the network deep in the chaotic regime whatever gain is
+asked for. Attempt 3 above (gain ≈ 1, signal decaying 10× per layer) was the
+other side of the same trade-off.
+
+**What experiment 1 actually measured.** Reproducible transients: the same
+deterministic start, the same 300 ms, so the same point on the chaotic
+trajectory for every trial. That is a legitimate measurement of how the
+stimulus shapes the trajectory, and the real-vs-control comparisons stand —
+the controls got the identical protocol. But the phrase "settled response" in
+experiment 1 should be read as "response at t = 300 ms from rest".
+
+### The play regime
+
+The one knob that breaks the self-consistency loop is the floor on σ_i. The
+`"play"` regime (`model.build(regime="play")`) sets `sigma_floor = 30`: every
+neuron's calibrated input spread is at least 30× the median. In practice that
+is every neuron, so the per-neuron sensitivity normalisation collapses to
+**per-neuron bias homeostasis (μ_i) plus one global gain** — fewer assumptions
+than the experiment-1 regime, not more. Floors of 0.3, 1, 3, 10, 15 and 20 were
+tried; the network becomes a fixed point between 20 and 25 at slope 2.5, and 30
+leaves margin for the controls.
+
+| | experiment-1 regime | play regime |
+|---|---|---|
+| blank field | chaotic (drift 0.99/100 ms) | fixed point (drift 0) |
+| spectral radius at blank | 15.5 | **2.28** (max Re 0.16) |
+| max per-neuron gain | 421 | 3.5 |
+| note at the line, channel delta | 10⁻³–10⁻² | 10⁻⁴–10⁻³ |
+| static probe B, untrained argmax | 0.567 | **0.567** |
+| static probe B, 4-channel decoder | 0.721 | **0.917** |
+| continuous play, untrained argmax | 0.35–0.45 | 0.60–0.80 |
+
+The stimulus response is ten times smaller in absolute terms and perfectly
+readable, because there is nothing to hide it behind: a deterministic network
+at a fixed point reproduces a 10⁻⁴ deflection to float precision. Static lane
+separation is as good or better than in experiment 1.
+
+**A new fact about the wiring falls out.** Rewired controls in the play regime
+have spectral radius 0.7. The real connectome has 2.3. Same neurons, same
+degree sequence, same weights, same gain cap — the real optic lobe contains
+structured recurrent loops that a degree-preserving rewiring destroys. The real
+network sits near the edge of stability; random wiring sits deep inside it. That
+is exactly the kind of property the project exists to find, and it is now a
+measured metric (`Fly.stability()`) reported per network in experiment 2.
+
+### Integration step
+
+The oscillatory modes at radius ~2.3 are badly under-damped by forward Euler at
+dt = 5 ms (multiplier 0.98 per step where the true decay is 0.82). The game and
+everything built on it integrate at **dt = 2 ms** (`model.DT_PLAY`), where the
+two agree to within 3%. Experiment 1's dt = 5 ms is left as it was.
+
+### What this does to the rest of the project
+
+- Every number in experiment 2 is in the play regime. It is a different model
+  from experiment 1 in one documented parameter, and part A0 of experiment 2
+  records both regimes' stability so the change is measured, not asserted.
+- The chaotic regime is kept as the default of `model.build()` so experiment 1
+  stays exactly reproducible. It is not used for anything else.
+- Photoreceptor noise is now the *only* noise in the system. Experiment 1's
+  0.03 per receptor per trial is used where noise is wanted; the untrained-play
+  numbers are reported noise-free and are deterministic.

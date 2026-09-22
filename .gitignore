@@ -1,0 +1,14 @@
+# environments
+.venv/
+__pycache__/
+*.pyc
+
+# raw connectome data (fetched by `make data`, ~130 MB) and derived caches
+flyosu/flyosu/data/Connectivity_783.parquet
+flyosu/flyosu/data/neuron_annotations.tsv
+flyosu/flyosu/data/flywire783_cache.npz
+flyosu/flyosu/data/flywire783_ann.parquet
+flyosu/flyosu/data/models/
+
+# session scratch
+flyosu/flyosu/scratch/

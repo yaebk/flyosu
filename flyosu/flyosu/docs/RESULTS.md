@@ -4,6 +4,16 @@
 every metric that does not let a trained decoder compensate — though with 15
 controls per family the best available p-value is 0.06.**
 
+> **Read after building the game (steps 5–8):** every "settled response" below is
+> the network state 300 ms after a reset to zero. The calibrated network turns
+> out to be chaotic when run continuously, so these are reproducible transients
+> on a chaotic trajectory, not fixed points. The real-vs-control comparisons are
+> unaffected — every network got the identical protocol — but the game runs in a
+> stabilised regime that differs in one documented parameter. See
+> [`CALIBRATION.md`](CALIBRATION.md), "Ongoing activity", and
+> [`RESULTS_E2.md`](RESULTS_E2.md), which re-runs probe B in that regime
+> (real: argmax 0.567 → 0.567, 4-channel decoder 0.721 → 0.917).
+
 Setup: 19,367 neurons and 729,558 signed synaptic connections from FlyWire v783,
 on the pathway between the photoreceptors and the descending neurons. No
 learning anywhere. Four lanes projected onto a cylindrical arena at azimuth
