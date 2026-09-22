@@ -1,0 +1,6545 @@
+{
+ "experiment": 8,
+ "question": "can a different sensory front end align the four motor channels to note ARRIVAL instead of note onset, and does that improve untrained play?",
+ "protocol": {
+  "wiring": "probes.band_assignment (experiment 7's rule)",
+  "theta_sweep": [
+   0.5,
+   1.0,
+   1.5,
+   2.0,
+   2.5,
+   3.0
+  ],
+  "scored_at": "each network's own best theta",
+  "min_counted": 20,
+  "stage": 3,
+  "n_charts": 2,
+  "n_notes": 20,
+  "interval_ms": 600.0,
+  "noise": 0.03,
+  "dt_ms": 2.0,
+  "eval_seed": 7030,
+  "normaliser": "ChannelNormaliser.fit on the ungated calibration ensemble -- identical for every front end and every network"
+ },
+ "front_ends": {
+  "static": {
+   "name": "static (default front end)",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg",
+   "runs": [
+    {
+     "label": "real connectome",
+     "seed": null,
+     "wiring": [
+      2,
+      0,
+      1,
+      3
+     ],
+     "peak_lag_ms": [
+      -462.0,
+      -316.0,
+      -596.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": -284.0,
+     "peak_lag_spread_ms": 317.2286241813623,
+     "peak_z": [
+      1.769933249378055,
+      1.8263883676222121,
+      1.0265244641161573,
+      3.112865908256943
+     ],
+     "shared_band": -0.8215025019762566,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.23076923076923078,
+      0.5806451612903226,
+      0.7272727272727273,
+      0.3125,
+      0.26666666666666666,
+      0.6666666666666666
+     ],
+     "accuracy_by_theta": [
+      0.15,
+      0.19583333333333333,
+      0.14583333333333331,
+      0.06666666666666667,
+      0.1,
+      0.058333333333333334
+     ],
+     "n_counted_by_theta": [
+      39,
+      31,
+      22,
+      16,
+      15,
+      6
+     ],
+     "best": {
+      "lane_correct": 0.7272727272727273,
+      "theta_lc": 1.5,
+      "n_lc": 22,
+      "accuracy": 0.19583333333333333,
+      "theta_acc": 1.0,
+      "n_acc": 31,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg"
+    },
+    {
+     "label": "rewired #1",
+     "seed": 1,
+     "wiring": [
+      1,
+      3,
+      0,
+      2
+     ],
+     "peak_lag_ms": [
+      -296.0,
+      -654.0,
+      238.0,
+      -270.0
+     ],
+     "peak_lag_mean_ms": -245.5,
+     "peak_lag_spread_ms": 317.7243301983655,
+     "peak_z": [
+      1.1453737241732607,
+      1.5065480860226073,
+      1.0335973874691957,
+      1.028525890843573
+     ],
+     "shared_band": -0.6295239658158218,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.23170731707317074,
+      0.3387096774193548,
+      0.3888888888888889,
+      0.5,
+      1.0,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.3208333333333333,
+      0.175,
+      0.029166666666666667,
+      0.0,
+      0.008333333333333333,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      82,
+      62,
+      18,
+      10,
+      2,
+      0
+     ],
+     "best": {
+      "lane_correct": 0.3387096774193548,
+      "theta_lc": 1.0,
+      "n_lc": 62,
+      "accuracy": 0.3208333333333333,
+      "theta_acc": 0.5,
+      "n_acc": 82,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg"
+    },
+    {
+     "label": "rewired #2",
+     "seed": 2,
+     "wiring": [
+      2,
+      0,
+      3,
+      1
+     ],
+     "peak_lag_ms": [
+      -332.0,
+      -490.0,
+      -240.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": -206.0,
+     "peak_lag_spread_ms": 271.4884896270927,
+     "peak_z": [
+      1.2536532836163943,
+      2.0368284608875946,
+      1.432336236805304,
+      4.223704727911413
+     ],
+     "shared_band": -2.4657383961654635,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.1527777777777778,
+      0.1375,
+      0.225,
+      0.3424657534246575,
+      0.3333333333333333,
+      0.0625
+     ],
+     "accuracy_by_theta": [
+      0.1,
+      0.15833333333333333,
+      0.1,
+      0.075,
+      0.1,
+      0.004166666666666667
+     ],
+     "n_counted_by_theta": [
+      72,
+      80,
+      80,
+      73,
+      39,
+      16
+     ],
+     "best": {
+      "lane_correct": 0.3424657534246575,
+      "theta_lc": 2.0,
+      "n_lc": 73,
+      "accuracy": 0.15833333333333333,
+      "theta_acc": 1.0,
+      "n_acc": 80,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg"
+    },
+    {
+     "label": "rewired #3",
+     "seed": 3,
+     "wiring": [
+      0,
+      3,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -716.0,
+      -698.0,
+      22.0,
+      158.0
+     ],
+     "peak_lag_mean_ms": -308.5,
+     "peak_lag_spread_ms": 401.44084246623436,
+     "peak_z": [
+      1.3053757907413843,
+      0.5263631598405946,
+      3.676898453833545,
+      3.729650130009396
+     ],
+     "shared_band": -0.5939101817960996,
+     "n_on_time_at_theta_1p5": 2,
+     "lane_correct_by_theta": [
+      0.3,
+      0.46511627906976744,
+      0.8,
+      0.7407407407407407,
+      0.8,
+      0.9047619047619048
+     ],
+     "accuracy_by_theta": [
+      0.058333333333333334,
+      0.07916666666666666,
+      0.17083333333333334,
+      0.2375,
+      0.30416666666666664,
+      0.35833333333333334
+     ],
+     "n_counted_by_theta": [
+      70,
+      43,
+      25,
+      27,
+      25,
+      21
+     ],
+     "best": {
+      "lane_correct": 0.9047619047619048,
+      "theta_lc": 3.0,
+      "n_lc": 21,
+      "accuracy": 0.35833333333333334,
+      "theta_acc": 3.0,
+      "n_acc": 21,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg"
+    },
+    {
+     "label": "rewired #4",
+     "seed": 4,
+     "wiring": [
+      3,
+      0,
+      2,
+      1
+     ],
+     "peak_lag_ms": [
+      -148.0,
+      -372.0,
+      -584.0,
+      -240.0
+     ],
+     "peak_lag_mean_ms": -336.0,
+     "peak_lag_spread_ms": 163.82917933017916,
+     "peak_z": [
+      0.7126217122277629,
+      0.9003036260521603,
+      1.3690793278779807,
+      0.7198125405436937
+     ],
+     "shared_band": -0.7195205198233312,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.21212121212121213,
+      0.5,
+      0.4074074074074074,
+      0.37037037037037035,
+      0.5294117647058824,
+      0.36363636363636365
+     ],
+     "accuracy_by_theta": [
+      0.08333333333333334,
+      0.10833333333333334,
+      0.10416666666666666,
+      0.17916666666666667,
+      0.14166666666666666,
+      0.06666666666666667
+     ],
+     "n_counted_by_theta": [
+      66,
+      54,
+      27,
+      27,
+      17,
+      11
+     ],
+     "best": {
+      "lane_correct": 0.5,
+      "theta_lc": 1.0,
+      "n_lc": 54,
+      "accuracy": 0.17916666666666667,
+      "theta_acc": 2.0,
+      "n_acc": 27,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg"
+    }
+   ]
+  },
+  "adapt": {
+   "name": "adaptation, tau 120 ms, gain 2",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, adaptation tau 120 ms gain 2 base 1",
+   "runs": [
+    {
+     "label": "real connectome",
+     "seed": null,
+     "wiring": [
+      2,
+      0,
+      1,
+      3
+     ],
+     "peak_lag_ms": [
+      -486.0,
+      -352.0,
+      -536.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": -284.0,
+     "peak_lag_spread_ms": 308.79443000157886,
+     "peak_z": [
+      2.462423679545191,
+      2.0343736372643324,
+      1.0671305450800563,
+      4.020499330562356
+     ],
+     "shared_band": -1.0239507586016234,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.24489795918367346,
+      0.2222222222222222,
+      0.5294117647058824,
+      0.42857142857142855,
+      0.56,
+      0.4
+     ],
+     "accuracy_by_theta": [
+      0.12083333333333332,
+      0.1375,
+      0.2,
+      0.09583333333333333,
+      0.10416666666666666,
+      0.10833333333333334
+     ],
+     "n_counted_by_theta": [
+      49,
+      45,
+      34,
+      35,
+      25,
+      15
+     ],
+     "best": {
+      "lane_correct": 0.56,
+      "theta_lc": 2.5,
+      "n_lc": 25,
+      "accuracy": 0.2,
+      "theta_acc": 1.5,
+      "n_acc": 34,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, adaptation tau 120 ms gain 2 base 1"
+    },
+    {
+     "label": "rewired #1",
+     "seed": 1,
+     "wiring": [
+      0,
+      3,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -468.0,
+      -630.0,
+      238.0,
+      -394.0
+     ],
+     "peak_lag_mean_ms": -313.5,
+     "peak_lag_spread_ms": 329.64943500634126,
+     "peak_z": [
+      1.3476887395587944,
+      2.156144908015178,
+      3.3663017727790288,
+      1.246393031536723
+     ],
+     "shared_band": -1.2884681589228737,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.24,
+      0.2553191489361702,
+      0.2911392405063291,
+      0.3409090909090909,
+      0.3333333333333333,
+      0.5454545454545454
+     ],
+     "accuracy_by_theta": [
+      0.29583333333333334,
+      0.25416666666666665,
+      0.25416666666666665,
+      0.15416666666666667,
+      0.05,
+      0.025
+     ],
+     "n_counted_by_theta": [
+      100,
+      94,
+      79,
+      44,
+      18,
+      11
+     ],
+     "best": {
+      "lane_correct": 0.3409090909090909,
+      "theta_lc": 2.0,
+      "n_lc": 44,
+      "accuracy": 0.29583333333333334,
+      "theta_acc": 0.5,
+      "n_acc": 100,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, adaptation tau 120 ms gain 2 base 1"
+    },
+    {
+     "label": "rewired #2",
+     "seed": 2,
+     "wiring": [
+      3,
+      2,
+      0,
+      1
+     ],
+     "peak_lag_ms": [
+      -236.0,
+      -558.0,
+      230.0,
+      208.0
+     ],
+     "peak_lag_mean_ms": -89.0,
+     "peak_lag_spread_ms": 328.4585209733491,
+     "peak_z": [
+      0.4484748000992413,
+      2.4658582748511084,
+      1.7035507060946715,
+      5.119149434361766
+     ],
+     "shared_band": -4.277361294714758,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.3333333333333333,
+      0.2361111111111111,
+      0.3176470588235294,
+      0.3493975903614458,
+      0.23170731707317074,
+      0.2602739726027397
+     ],
+     "accuracy_by_theta": [
+      0.16666666666666666,
+      0.20833333333333331,
+      0.24583333333333335,
+      0.10833333333333334,
+      0.07083333333333333,
+      0.058333333333333334
+     ],
+     "n_counted_by_theta": [
+      51,
+      72,
+      85,
+      83,
+      82,
+      73
+     ],
+     "best": {
+      "lane_correct": 0.3493975903614458,
+      "theta_lc": 2.0,
+      "n_lc": 83,
+      "accuracy": 0.24583333333333335,
+      "theta_acc": 1.5,
+      "n_acc": 85,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, adaptation tau 120 ms gain 2 base 1"
+    },
+    {
+     "label": "rewired #3",
+     "seed": 3,
+     "wiring": [
+      0,
+      3,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -722.0,
+      -704.0,
+      -24.0,
+      124.0
+     ],
+     "peak_lag_mean_ms": -331.5,
+     "peak_lag_spread_ms": 385.124330573907,
+     "peak_z": [
+      1.3035815794104277,
+      0.4950637103895565,
+      5.528792280845791,
+      4.905868375303016
+     ],
+     "shared_band": -0.9030545335182133,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.1702127659574468,
+      0.25,
+      0.24390243902439024,
+      0.5428571428571428,
+      0.5882352941176471,
+      0.625
+     ],
+     "accuracy_by_theta": [
+      0.07500000000000001,
+      0.037500000000000006,
+      0.06666666666666667,
+      0.06666666666666667,
+      0.1,
+      0.12083333333333332
+     ],
+     "n_counted_by_theta": [
+      47,
+      48,
+      41,
+      35,
+      34,
+      32
+     ],
+     "best": {
+      "lane_correct": 0.625,
+      "theta_lc": 3.0,
+      "n_lc": 32,
+      "accuracy": 0.12083333333333332,
+      "theta_acc": 3.0,
+      "n_acc": 32,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, adaptation tau 120 ms gain 2 base 1"
+    },
+    {
+     "label": "rewired #4",
+     "seed": 4,
+     "wiring": [
+      3,
+      1,
+      2,
+      0
+     ],
+     "peak_lag_ms": [
+      -196.0,
+      -730.0,
+      -586.0,
+      8.0
+     ],
+     "peak_lag_mean_ms": -376.0,
+     "peak_lag_spread_ms": 295.49619286887605,
+     "peak_z": [
+      1.30722992243214,
+      1.245953998857399,
+      2.5662619350061475,
+      0.5185956865853091
+     ],
+     "shared_band": -1.144545916649169,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.3384615384615385,
+      0.3787878787878788,
+      0.49019607843137253,
+      0.4186046511627907,
+      0.38095238095238093,
+      0.2962962962962963
+     ],
+     "accuracy_by_theta": [
+      0.17083333333333334,
+      0.0625,
+      0.19583333333333333,
+      0.05,
+      0.04583333333333334,
+      0.08333333333333333
+     ],
+     "n_counted_by_theta": [
+      65,
+      66,
+      51,
+      43,
+      21,
+      27
+     ],
+     "best": {
+      "lane_correct": 0.49019607843137253,
+      "theta_lc": 1.5,
+      "n_lc": 51,
+      "accuracy": 0.19583333333333333,
+      "theta_acc": 1.5,
+      "n_acc": 51,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, adaptation tau 120 ms gain 2 base 1"
+    }
+   ]
+  },
+  "loom": {
+   "name": "loom x9 by arrival (exp 2)",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2)",
+   "runs": [
+    {
+     "label": "real connectome",
+     "seed": null,
+     "wiring": [
+      0,
+      2,
+      1,
+      3
+     ],
+     "peak_lag_ms": [
+      238.0,
+      -334.0,
+      -602.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": -115.0,
+     "peak_lag_spread_ms": 365.4955540085269,
+     "peak_z": [
+      0.3020936397752618,
+      4.180277744672062,
+      1.0428427957184718,
+      5.857529759429745
+     ],
+     "shared_band": -2.04453016765577,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.4117647058823529,
+      0.5,
+      0.47368421052631576,
+      0.47368421052631576,
+      0.42857142857142855,
+      0.5833333333333334
+     ],
+     "accuracy_by_theta": [
+      0.016666666666666666,
+      0.10833333333333334,
+      0.225,
+      0.2,
+      0.11666666666666667,
+      0.04583333333333334
+     ],
+     "n_counted_by_theta": [
+      34,
+      22,
+      19,
+      19,
+      21,
+      12
+     ],
+     "best": {
+      "lane_correct": 0.5,
+      "theta_lc": 1.0,
+      "n_lc": 22,
+      "accuracy": 0.11666666666666667,
+      "theta_acc": 2.5,
+      "n_acc": 21,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2)"
+    },
+    {
+     "label": "rewired #1",
+     "seed": 1,
+     "wiring": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "peak_lag_ms": [
+      -70.0,
+      238.0,
+      70.0,
+      -420.0
+     ],
+     "peak_lag_mean_ms": -45.5,
+     "peak_lag_spread_ms": 242.15852245997868,
+     "peak_z": [
+      2.1233574491259946,
+      4.195193747569112,
+      1.6977393705089252,
+      3.385044472492279
+     ],
+     "shared_band": -1.7576977743060116,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.25,
+      0.2808988764044944,
+      0.26666666666666666,
+      0.3898305084745763,
+      0.3103448275862069,
+      0.24444444444444444
+     ],
+     "accuracy_by_theta": [
+      0.3041666666666667,
+      0.22083333333333333,
+      0.15833333333333333,
+      0.2625,
+      0.11249999999999999,
+      0.041666666666666664
+     ],
+     "n_counted_by_theta": [
+      84,
+      89,
+      75,
+      59,
+      58,
+      45
+     ],
+     "best": {
+      "lane_correct": 0.3898305084745763,
+      "theta_lc": 2.0,
+      "n_lc": 59,
+      "accuracy": 0.3041666666666667,
+      "theta_acc": 0.5,
+      "n_acc": 84,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2)"
+    },
+    {
+     "label": "rewired #2",
+     "seed": 2,
+     "wiring": [
+      3,
+      2,
+      1,
+      0
+     ],
+     "peak_lag_ms": [
+      -164.0,
+      -404.0,
+      238.0,
+      140.0
+     ],
+     "peak_lag_mean_ms": -47.5,
+     "peak_lag_spread_ms": 253.63901513765583,
+     "peak_z": [
+      0.9033499898549833,
+      3.0646552095279587,
+      5.615690846980531,
+      7.233051867956623
+     ],
+     "shared_band": -5.346172658121409,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.16666666666666666,
+      0.16279069767441862,
+      0.22950819672131148,
+      0.2878787878787879,
+      0.296875,
+      0.4
+     ],
+     "accuracy_by_theta": [
+      0.0125,
+      0.058333333333333334,
+      0.13333333333333333,
+      0.31666666666666665,
+      0.25,
+      0.14166666666666666
+     ],
+     "n_counted_by_theta": [
+      30,
+      43,
+      61,
+      66,
+      64,
+      65
+     ],
+     "best": {
+      "lane_correct": 0.4,
+      "theta_lc": 3.0,
+      "n_lc": 65,
+      "accuracy": 0.31666666666666665,
+      "theta_acc": 2.0,
+      "n_acc": 66,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2)"
+    },
+    {
+     "label": "rewired #3",
+     "seed": 3,
+     "wiring": [
+      3,
+      0,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -274.0,
+      238.0,
+      236.0,
+      112.0
+     ],
+     "peak_lag_mean_ms": 78.0,
+     "peak_lag_spread_ms": 209.53758612716717,
+     "peak_z": [
+      0.9674237296771676,
+      0.4250969180155532,
+      6.436787705681295,
+      5.802177009656752
+     ],
+     "shared_band": -1.952538357864022,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.21951219512195122,
+      0.21428571428571427,
+      0.39285714285714285,
+      0.34615384615384615,
+      0.6428571428571429,
+      0.8181818181818182
+     ],
+     "accuracy_by_theta": [
+      0.0125,
+      0.016666666666666666,
+      0.04583333333333334,
+      0.05,
+      0.05416666666666667,
+      0.05416666666666667
+     ],
+     "n_counted_by_theta": [
+      41,
+      42,
+      28,
+      26,
+      14,
+      11
+     ],
+     "best": {
+      "lane_correct": 0.39285714285714285,
+      "theta_lc": 1.5,
+      "n_lc": 28,
+      "accuracy": 0.05,
+      "theta_acc": 2.0,
+      "n_acc": 26,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2)"
+    },
+    {
+     "label": "rewired #4",
+     "seed": 4,
+     "wiring": [
+      3,
+      0,
+      2,
+      1
+     ],
+     "peak_lag_ms": [
+      -264.0,
+      -286.0,
+      -458.0,
+      -306.0
+     ],
+     "peak_lag_mean_ms": -328.5,
+     "peak_lag_spread_ms": 76.22827559377163,
+     "peak_z": [
+      1.9918197431786924,
+      2.285827123889379,
+      3.137425762121028,
+      2.1903526886502402
+     ],
+     "shared_band": -2.008225944373102,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.041666666666666664,
+      0.1111111111111111,
+      0.375,
+      0.40425531914893614,
+      0.6206896551724138,
+      0.5833333333333334
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.058333333333333334,
+      0.14166666666666666,
+      0.14166666666666666,
+      0.09166666666666667,
+      0.075
+     ],
+     "n_counted_by_theta": [
+      48,
+      45,
+      56,
+      47,
+      29,
+      24
+     ],
+     "best": {
+      "lane_correct": 0.6206896551724138,
+      "theta_lc": 2.5,
+      "n_lc": 29,
+      "accuracy": 0.14166666666666666,
+      "theta_acc": 1.5,
+      "n_acc": 56,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2)"
+    }
+   ]
+  },
+  "gate": {
+   "name": "ventral gate, below +0 deg, 2 deg edge",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, ventral gate below +0 deg (edge 2 deg)",
+   "runs": [
+    {
+     "label": "real connectome",
+     "seed": null,
+     "wiring": [
+      0,
+      2,
+      1,
+      3
+     ],
+     "peak_lag_ms": [
+      238.0,
+      -96.0,
+      -412.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": -8.0,
+     "peak_lag_spread_ms": 270.18142053072415,
+     "peak_z": [
+      0.20779457643267477,
+      0.8234274774781104,
+      0.5899142197332988,
+      3.1156246724584795
+     ],
+     "shared_band": -0.8018522326993013,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.45,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.15,
+      0.225,
+      0.04166666666666667,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      20,
+      9,
+      9,
+      0,
+      0,
+      0
+     ],
+     "best": {
+      "lane_correct": 0.45,
+      "theta_lc": 0.5,
+      "n_lc": 20,
+      "accuracy": 0.15,
+      "theta_acc": 0.5,
+      "n_acc": 20,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #1",
+     "seed": 1,
+     "wiring": [
+      1,
+      3,
+      0,
+      2
+     ],
+     "peak_lag_ms": [
+      238.0,
+      238.0,
+      238.0,
+      -244.0
+     ],
+     "peak_lag_mean_ms": 117.5,
+     "peak_lag_spread_ms": 208.7121223120497,
+     "peak_z": [
+      0.4044094199226271,
+      0.23977194179141373,
+      1.0370312381264042,
+      0.9272667870069217
+     ],
+     "shared_band": -0.6199984847500163,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.6875,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.004166666666666667,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      16,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "best": {
+      "lane_correct": 1.0,
+      "theta_lc": 1.0,
+      "n_lc": 1,
+      "accuracy": 0.004166666666666667,
+      "theta_acc": 0.5,
+      "n_acc": 16,
+      "any_eligible": false
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #2",
+     "seed": 2,
+     "wiring": [
+      2,
+      3,
+      0,
+      1
+     ],
+     "peak_lag_ms": [
+      -202.0,
+      -102.0,
+      238.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": 43.0,
+     "peak_lag_spread_ms": 198.17921182606415,
+     "peak_z": [
+      0.4941858207373364,
+      -0.040612948317816734,
+      1.282444884968332,
+      4.2247738638673535
+     ],
+     "shared_band": -2.7207925152288355,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.40816326530612246,
+      0.3958333333333333,
+      0.23684210526315788,
+      0.3333333333333333,
+      0.0,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.39166666666666666,
+      0.10833333333333334,
+      0.03333333333333333,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      49,
+      48,
+      38,
+      27,
+      12,
+      0
+     ],
+     "best": {
+      "lane_correct": 0.40816326530612246,
+      "theta_lc": 0.5,
+      "n_lc": 49,
+      "accuracy": 0.39166666666666666,
+      "theta_acc": 0.5,
+      "n_acc": 49,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #3",
+     "seed": 3,
+     "wiring": [
+      0,
+      3,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -780.0,
+      -796.0,
+      20.0,
+      160.0
+     ],
+     "peak_lag_mean_ms": -349.0,
+     "peak_lag_spread_ms": 441.81783576492245,
+     "peak_z": [
+      0.13230102568268437,
+      0.08414521486354899,
+      3.7209404535805297,
+      3.7239265289521466
+     ],
+     "shared_band": -0.5210863186803523,
+     "n_on_time_at_theta_1p5": 2,
+     "lane_correct_by_theta": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "accuracy_by_theta": [
+      0.075,
+      0.21666666666666667,
+      0.3125,
+      0.35833333333333334,
+      0.3416666666666667,
+      0.3416666666666667
+     ],
+     "n_counted_by_theta": [
+      18,
+      20,
+      20,
+      20,
+      20,
+      20
+     ],
+     "best": {
+      "lane_correct": 1.0,
+      "theta_lc": 1.0,
+      "n_lc": 20,
+      "accuracy": 0.35833333333333334,
+      "theta_acc": 2.0,
+      "n_acc": 20,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #4",
+     "seed": 4,
+     "wiring": [
+      3,
+      1,
+      2,
+      0
+     ],
+     "peak_lag_ms": [
+      -186.0,
+      -290.0,
+      142.0,
+      40.0
+     ],
+     "peak_lag_mean_ms": -73.5,
+     "peak_lag_spread_ms": 172.3738669288358,
+     "peak_z": [
+      0.9816085086888122,
+      0.6166935799804788,
+      0.6977173521192847,
+      0.3978210336058368
+     ],
+     "shared_band": -0.7382011441097653,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.3833333333333333,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      21,
+      11,
+      0,
+      0,
+      0,
+      0
+     ],
+     "best": {
+      "lane_correct": 1.0,
+      "theta_lc": 0.5,
+      "n_lc": 21,
+      "accuracy": 0.3833333333333333,
+      "theta_acc": 0.5,
+      "n_acc": 21,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, ventral gate below +0 deg (edge 2 deg)"
+    }
+   ]
+  },
+  "combo": {
+   "name": "ventral gate + loom",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)",
+   "runs": [
+    {
+     "label": "real connectome",
+     "seed": null,
+     "wiring": [
+      2,
+      0,
+      1,
+      3
+     ],
+     "peak_lag_ms": [
+      -102.0,
+      64.0,
+      -446.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": -61.5,
+     "peak_lag_spread_ms": 252.45346105767692,
+     "peak_z": [
+      0.5865367655250419,
+      1.1881636214795381,
+      0.632607529157959,
+      5.874695403350415
+     ],
+     "shared_band": -1.0351718785772859,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.8076923076923077,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "accuracy_by_theta": [
+      0.24583333333333335,
+      0.225,
+      0.225,
+      0.15,
+      0.075,
+      0.04583333333333334
+     ],
+     "n_counted_by_theta": [
+      26,
+      12,
+      9,
+      9,
+      9,
+      9
+     ],
+     "best": {
+      "lane_correct": 0.8076923076923077,
+      "theta_lc": 0.5,
+      "n_lc": 26,
+      "accuracy": 0.24583333333333335,
+      "theta_acc": 0.5,
+      "n_acc": 26,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #1",
+     "seed": 1,
+     "wiring": [
+      3,
+      1,
+      2,
+      0
+     ],
+     "peak_lag_ms": [
+      -110.0,
+      238.0,
+      68.0,
+      162.0
+     ],
+     "peak_lag_mean_ms": 89.5,
+     "peak_lag_spread_ms": 129.97211239338998,
+     "peak_z": [
+      2.0233072946783146,
+      4.194948139550846,
+      1.7543550063049915,
+      1.8662849752332527
+     ],
+     "shared_band": -1.7565324676411636,
+     "n_on_time_at_theta_1p5": 3,
+     "lane_correct_by_theta": [
+      0.775,
+      0.775,
+      0.6470588235294118,
+      0.30952380952380953,
+      0.15384615384615385,
+      0.07142857142857142
+     ],
+     "accuracy_by_theta": [
+      0.5166666666666667,
+      0.3416666666666667,
+      0.09583333333333333,
+      0.008333333333333333,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      40,
+      40,
+      51,
+      42,
+      39,
+      14
+     ],
+     "best": {
+      "lane_correct": 0.775,
+      "theta_lc": 0.5,
+      "n_lc": 40,
+      "accuracy": 0.5166666666666667,
+      "theta_acc": 0.5,
+      "n_acc": 40,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #2",
+     "seed": 2,
+     "wiring": [
+      3,
+      2,
+      1,
+      0
+     ],
+     "peak_lag_ms": [
+      -94.0,
+      -192.0,
+      238.0,
+      140.0
+     ],
+     "peak_lag_mean_ms": 23.0,
+     "peak_lag_spread_ms": 173.08090593707902,
+     "peak_z": [
+      0.735517844202918,
+      1.5882583371893888,
+      5.607426714996769,
+      7.262267775032626
+     ],
+     "shared_band": -5.616125576132701,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.375,
+      0.3548387096774194,
+      0.3829787234042553,
+      0.5,
+      0.5,
+      0.43478260869565216
+     ],
+     "accuracy_by_theta": [
+      0.11666666666666667,
+      0.275,
+      0.2791666666666667,
+      0.18333333333333335,
+      0.1875,
+      0.16666666666666669
+     ],
+     "n_counted_by_theta": [
+      32,
+      31,
+      47,
+      40,
+      40,
+      46
+     ],
+     "best": {
+      "lane_correct": 0.5,
+      "theta_lc": 2.0,
+      "n_lc": 40,
+      "accuracy": 0.2791666666666667,
+      "theta_acc": 1.5,
+      "n_acc": 47,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #3",
+     "seed": 3,
+     "wiring": [
+      3,
+      0,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -178.0,
+      238.0,
+      236.0,
+      112.0
+     ],
+     "peak_lag_mean_ms": 102.0,
+     "peak_lag_spread_ms": 169.5228598154243,
+     "peak_z": [
+      0.14931046733797707,
+      0.4340679746703364,
+      6.446752303206089,
+      5.755950728506482
+     ],
+     "shared_band": -1.700669880756218,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.4090909090909091,
+      0.6923076923076923,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.0,
+      0.0375,
+      0.05416666666666667,
+      0.075,
+      0.075
+     ],
+     "n_counted_by_theta": [
+      22,
+      13,
+      9,
+      9,
+      9,
+      9
+     ],
+     "best": {
+      "lane_correct": 0.4090909090909091,
+      "theta_lc": 0.5,
+      "n_lc": 22,
+      "accuracy": 0.0,
+      "theta_acc": 0.5,
+      "n_acc": 22,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #4",
+     "seed": 4,
+     "wiring": [
+      3,
+      1,
+      2,
+      0
+     ],
+     "peak_lag_ms": [
+      -246.0,
+      -24.0,
+      116.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": 21.0,
+     "peak_lag_spread_ms": 179.88051589874874,
+     "peak_z": [
+      1.9611994653897702,
+      2.1497428091759736,
+      3.070690662738357,
+      1.419040660160713
+     ],
+     "shared_band": -1.2131767882225761,
+     "n_on_time_at_theta_1p5": 2,
+     "lane_correct_by_theta": [
+      0.65,
+      0.775,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.29583333333333334,
+      0.33333333333333337,
+      0.42500000000000004,
+      0.19166666666666665,
+      0.05
+     ],
+     "n_counted_by_theta": [
+      20,
+      40,
+      24,
+      17,
+      11,
+      11
+     ],
+     "best": {
+      "lane_correct": 1.0,
+      "theta_lc": 1.5,
+      "n_lc": 24,
+      "accuracy": 0.33333333333333337,
+      "theta_acc": 1.5,
+      "n_acc": 24,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #5",
+     "seed": 5,
+     "wiring": [
+      3,
+      0,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -246.0,
+      138.0,
+      136.0,
+      176.0
+     ],
+     "peak_lag_mean_ms": 51.0,
+     "peak_lag_spread_ms": 172.2120785543221,
+     "peak_z": [
+      0.8976219658200608,
+      4.354402099069059,
+      0.41618821851272486,
+      6.9751299096959976
+     ],
+     "shared_band": -2.4287478338284947,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.3103448275862069,
+      0.75,
+      0.9375,
+      0.55,
+      0.7333333333333333,
+      1.0
+     ],
+     "accuracy_by_theta": [
+      0.22499999999999998,
+      0.03333333333333333,
+      0.18333333333333335,
+      0.275,
+      0.275,
+      0.18333333333333335
+     ],
+     "n_counted_by_theta": [
+      29,
+      20,
+      16,
+      20,
+      15,
+      11
+     ],
+     "best": {
+      "lane_correct": 0.75,
+      "theta_lc": 1.0,
+      "n_lc": 20,
+      "accuracy": 0.275,
+      "theta_acc": 2.0,
+      "n_acc": 20,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #6",
+     "seed": 6,
+     "wiring": [
+      3,
+      0,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      -244.0,
+      -364.0,
+      -182.0,
+      -46.0
+     ],
+     "peak_lag_mean_ms": -209.0,
+     "peak_lag_spread_ms": 114.61675270221191,
+     "peak_z": [
+      0.5366833620813828,
+      0.13655529565478589,
+      2.962809618953126,
+      4.264254662083727
+     ],
+     "shared_band": -3.0061981030290226,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.06451612903225806,
+      0.0,
+      0.0,
+      0.3333333333333333,
+      1.0,
+      1.0
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.0,
+      0.0,
+      0.016666666666666666,
+      0.0,
+      0.0375
+     ],
+     "n_counted_by_theta": [
+      31,
+      12,
+      11,
+      9,
+      1,
+      15
+     ],
+     "best": {
+      "lane_correct": 0.06451612903225806,
+      "theta_lc": 0.5,
+      "n_lc": 31,
+      "accuracy": 0.0,
+      "theta_acc": 0.5,
+      "n_acc": 31,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #7",
+     "seed": 7,
+     "wiring": [
+      0,
+      1,
+      3,
+      2
+     ],
+     "peak_lag_ms": [
+      -800.0,
+      238.0,
+      136.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": -47.0,
+     "peak_lag_spread_ms": 436.734473106944,
+     "peak_z": [
+      0.19872096841523412,
+      2.391795847148033,
+      5.160108050601333,
+      3.5001347948347274
+     ],
+     "shared_band": -3.8363346030974617,
+     "n_on_time_at_theta_1p5": 2,
+     "lane_correct_by_theta": [
+      0.273972602739726,
+      0.37735849056603776,
+      0.4583333333333333,
+      0.1875,
+      0.0,
+      0.8333333333333334
+     ],
+     "accuracy_by_theta": [
+      0.22500000000000003,
+      0.125,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      73,
+      53,
+      24,
+      16,
+      27,
+      12
+     ],
+     "best": {
+      "lane_correct": 0.4583333333333333,
+      "theta_lc": 1.5,
+      "n_lc": 24,
+      "accuracy": 0.22500000000000003,
+      "theta_acc": 0.5,
+      "n_acc": 73,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #8",
+     "seed": 8,
+     "wiring": [
+      0,
+      3,
+      1,
+      2
+     ],
+     "peak_lag_ms": [
+      50.0,
+      56.0,
+      232.0,
+      146.0
+     ],
+     "peak_lag_mean_ms": 121.0,
+     "peak_lag_spread_ms": 74.51845409024533,
+     "peak_z": [
+      1.0077810997532934,
+      5.413383604551005,
+      5.647168346442794,
+      4.6648298676806474
+     ],
+     "shared_band": -1.063369522237618,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.8571428571428571,
+      0.5,
+      0.7407407407407407,
+      0.8333333333333334,
+      1.0,
+      1.0
+     ],
+     "accuracy_by_theta": [
+      0.075,
+      0.15,
+      0.275,
+      0.4083333333333333,
+      0.5166666666666667,
+      0.575
+     ],
+     "n_counted_by_theta": [
+      14,
+      18,
+      27,
+      24,
+      31,
+      31
+     ],
+     "best": {
+      "lane_correct": 1.0,
+      "theta_lc": 2.5,
+      "n_lc": 31,
+      "accuracy": 0.575,
+      "theta_acc": 3.0,
+      "n_acc": 31,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #9",
+     "seed": 9,
+     "wiring": [
+      3,
+      2,
+      1,
+      0
+     ],
+     "peak_lag_ms": [
+      106.0,
+      -2.0,
+      30.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": 93.0,
+     "peak_lag_spread_ms": 92.44998647917694,
+     "peak_z": [
+      1.7954173270469411,
+      1.8332422297138251,
+      5.285037470282526,
+      6.115314804605284
+     ],
+     "shared_band": -3.272755893865442,
+     "n_on_time_at_theta_1p5": 1,
+     "lane_correct_by_theta": [
+      0.0,
+      0.225,
+      0.40625,
+      0.5,
+      0.7142857142857143,
+      0.6666666666666666
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.05,
+      0.016666666666666666,
+      0.03333333333333333,
+      0.0,
+      0.04583333333333334
+     ],
+     "n_counted_by_theta": [
+      31,
+      40,
+      32,
+      16,
+      28,
+      27
+     ],
+     "best": {
+      "lane_correct": 0.7142857142857143,
+      "theta_lc": 2.5,
+      "n_lc": 28,
+      "accuracy": 0.05,
+      "theta_acc": 1.0,
+      "n_acc": 40,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #10",
+     "seed": 10,
+     "wiring": [
+      2,
+      0,
+      1,
+      3
+     ],
+     "peak_lag_ms": [
+      238.0,
+      -250.0,
+      -36.0,
+      238.0
+     ],
+     "peak_lag_mean_ms": 47.5,
+     "peak_lag_spread_ms": 204.97499847542383,
+     "peak_z": [
+      0.3366880684516356,
+      1.4526245902453583,
+      5.589858970623949,
+      0.7725209953699488
+     ],
+     "shared_band": -2.8938386309361706,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.12,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      25,
+      11,
+      9,
+      9,
+      5,
+      0
+     ],
+     "best": {
+      "lane_correct": 0.12,
+      "theta_lc": 0.5,
+      "n_lc": 25,
+      "accuracy": 0.0,
+      "theta_acc": 0.5,
+      "n_acc": 25,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #11",
+     "seed": 11,
+     "wiring": [
+      0,
+      1,
+      2,
+      3
+     ],
+     "peak_lag_ms": [
+      -82.0,
+      238.0,
+      38.0,
+      -792.0
+     ],
+     "peak_lag_mean_ms": -149.5,
+     "peak_lag_spread_ms": 388.1607270191048,
+     "peak_z": [
+      4.855385610506611,
+      0.14348480615491532,
+      -0.07993410275627755,
+      0.0684543971928643
+     ],
+     "shared_band": -4.376644758415708,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      20,
+      26,
+      29,
+      31,
+      8,
+      0
+     ],
+     "best": {
+      "lane_correct": 0.0,
+      "theta_lc": 0.5,
+      "n_lc": 20,
+      "accuracy": 0.0,
+      "theta_acc": 0.5,
+      "n_acc": 20,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    },
+    {
+     "label": "rewired #12",
+     "seed": 12,
+     "wiring": [
+      2,
+      1,
+      0,
+      3
+     ],
+     "peak_lag_ms": [
+      -186.0,
+      160.0,
+      50.0,
+      -20.0
+     ],
+     "peak_lag_mean_ms": 1.0,
+     "peak_lag_spread_ms": 125.59060474414477,
+     "peak_z": [
+      1.162197500259771,
+      0.36845407038082234,
+      2.8581152370739447,
+      8.140549143933479
+     ],
+     "shared_band": -6.522955405521113,
+     "n_on_time_at_theta_1p5": 0,
+     "lane_correct_by_theta": [
+      0.16666666666666666,
+      0.0,
+      0.6363636363636364,
+      1.0,
+      0.55,
+      0.0
+     ],
+     "accuracy_by_theta": [
+      0.0,
+      0.0,
+      0.0,
+      0.04583333333333334,
+      0.18333333333333335,
+      0.0
+     ],
+     "n_counted_by_theta": [
+      24,
+      11,
+      11,
+      11,
+      20,
+      42
+     ],
+     "best": {
+      "lane_correct": 0.55,
+      "theta_lc": 2.5,
+      "n_lc": 20,
+      "accuracy": 0.18333333333333335,
+      "theta_acc": 2.5,
+      "n_acc": 20,
+      "any_eligible": true
+     },
+     "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)"
+    }
+   ]
+  }
+ },
+ "summary": [
+  {
+   "front_end": "static",
+   "name": "static (default front end)",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg",
+   "n_controls": 4,
+   "real_peak_lag_mean_ms": -284.0,
+   "real_peak_lag_spread_ms": 317.2286241813623,
+   "ctrl_peak_lag_mean_ms": -274.0,
+   "real_lane_correct": 0.7272727272727273,
+   "real_lane_correct_theta": 1.5,
+   "real_lane_correct_n": 22,
+   "real_accuracy": 0.19583333333333333,
+   "real_accuracy_theta": 1.0,
+   "real_accuracy_n": 31,
+   "ctrl_lane_correct_mean": 0.5214843339014793,
+   "ctrl_lane_correct_sd": 0.23066073578740792,
+   "ctrl_accuracy_mean": 0.25416666666666665,
+   "ctrl_accuracy_sd": 0.08675276172357088,
+   "n_ctrl_ge_real_lane_correct": 1,
+   "n_ctrl_ge_real_accuracy": 2,
+   "p_lane_correct": 0.4,
+   "p_accuracy": 0.6,
+   "gap_lane_correct": 0.205788393371248,
+   "gap_accuracy": -0.05833333333333332,
+   "n_ctrl_no_eligible_theta": 0
+  },
+  {
+   "front_end": "adapt",
+   "name": "adaptation, tau 120 ms, gain 2",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, adaptation tau 120 ms gain 2 base 1",
+   "n_controls": 4,
+   "real_peak_lag_mean_ms": -284.0,
+   "real_peak_lag_spread_ms": 308.79443000157886,
+   "ctrl_peak_lag_mean_ms": -277.5,
+   "real_lane_correct": 0.56,
+   "real_lane_correct_theta": 2.5,
+   "real_lane_correct_n": 25,
+   "real_accuracy": 0.2,
+   "real_accuracy_theta": 1.5,
+   "real_accuracy_n": 34,
+   "ctrl_lane_correct_mean": 0.45137568992547733,
+   "ctrl_lane_correct_sd": 0.11646332674016022,
+   "ctrl_accuracy_mean": 0.21458333333333335,
+   "ctrl_accuracy_sd": 0.06465050270492877,
+   "n_ctrl_ge_real_lane_correct": 1,
+   "n_ctrl_ge_real_accuracy": 2,
+   "p_lane_correct": 0.4,
+   "p_accuracy": 0.6,
+   "gap_lane_correct": 0.10862431007452272,
+   "gap_accuracy": -0.014583333333333337,
+   "n_ctrl_no_eligible_theta": 0
+  },
+  {
+   "front_end": "loom",
+   "name": "loom x9 by arrival (exp 2)",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2)",
+   "n_controls": 4,
+   "real_peak_lag_mean_ms": -115.0,
+   "real_peak_lag_spread_ms": 365.4955540085269,
+   "ctrl_peak_lag_mean_ms": -85.875,
+   "real_lane_correct": 0.5,
+   "real_lane_correct_theta": 1.0,
+   "real_lane_correct_n": 22,
+   "real_accuracy": 0.11666666666666667,
+   "real_accuracy_theta": 2.5,
+   "real_accuracy_n": 21,
+   "ctrl_lane_correct_mean": 0.45084432662603324,
+   "ctrl_lane_correct_sd": 0.09812973640282138,
+   "ctrl_accuracy_mean": 0.203125,
+   "ctrl_accuracy_sd": 0.112166751795411,
+   "n_ctrl_ge_real_lane_correct": 1,
+   "n_ctrl_ge_real_accuracy": 3,
+   "p_lane_correct": 0.4,
+   "p_accuracy": 0.8,
+   "gap_lane_correct": 0.04915567337396676,
+   "gap_accuracy": -0.08645833333333333,
+   "n_ctrl_no_eligible_theta": 0
+  },
+  {
+   "front_end": "gate",
+   "name": "ventral gate, below +0 deg, 2 deg edge",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, ventral gate below +0 deg (edge 2 deg)",
+   "n_controls": 4,
+   "real_peak_lag_mean_ms": -8.0,
+   "real_peak_lag_spread_ms": 270.18142053072415,
+   "ctrl_peak_lag_mean_ms": -65.5,
+   "real_lane_correct": 0.45,
+   "real_lane_correct_theta": 0.5,
+   "real_lane_correct_n": 20,
+   "real_accuracy": 0.15,
+   "real_accuracy_theta": 0.5,
+   "real_accuracy_n": 20,
+   "ctrl_lane_correct_mean": 0.8520408163265306,
+   "ctrl_lane_correct_sd": 0.2562728235688645,
+   "ctrl_accuracy_mean": 0.284375,
+   "ctrl_accuracy_sd": 0.16224271833514678,
+   "n_ctrl_ge_real_lane_correct": 3,
+   "n_ctrl_ge_real_accuracy": 3,
+   "p_lane_correct": 0.8,
+   "p_accuracy": 0.8,
+   "gap_lane_correct": -0.4020408163265306,
+   "gap_accuracy": -0.134375,
+   "n_ctrl_no_eligible_theta": 1
+  },
+  {
+   "front_end": "combo",
+   "name": "ventral gate + loom",
+   "encoder": "lanes at az [-60.0, -20.0, 20.0, 60.0] deg, el +35 -> -25 deg, sigma 10 deg, loom x9 by arrival (exp 2), ventral gate below +0 deg (edge 2 deg)",
+   "n_controls": 12,
+   "real_peak_lag_mean_ms": -61.5,
+   "real_peak_lag_spread_ms": 252.45346105767692,
+   "ctrl_peak_lag_mean_ms": 11.958333333333334,
+   "real_lane_correct": 0.8076923076923077,
+   "real_lane_correct_theta": 0.5,
+   "real_lane_correct_n": 26,
+   "real_accuracy": 0.24583333333333335,
+   "real_accuracy_theta": 0.5,
+   "real_accuracy_n": 26,
+   "ctrl_lane_correct_mean": 0.5284355071451846,
+   "ctrl_lane_correct_sd": 0.3254339674882564,
+   "ctrl_accuracy_mean": 0.203125,
+   "ctrl_accuracy_sd": 0.1944776137383693,
+   "n_ctrl_ge_real_lane_correct": 2,
+   "n_ctrl_ge_real_accuracy": 5,
+   "p_lane_correct": 0.23076923076923078,
+   "p_accuracy": 0.46153846153846156,
+   "gap_lane_correct": 0.2792568005471231,
+   "gap_accuracy": 0.04270833333333335,
+   "n_ctrl_no_eligible_theta": 0
+  }
+ ],
+ "e7_static_all_controls": {
+  "real connectome": {
+   "lane_correct": 0.7272727272727273,
+   "theta_lc": 1.5,
+   "n_lc": 22,
+   "accuracy": 0.19583333333333333,
+   "theta_acc": 1.0,
+   "n_acc": 31,
+   "any_eligible": true
+  },
+  "rewired #1": {
+   "lane_correct": 0.3387096774193548,
+   "theta_lc": 1.0,
+   "n_lc": 62,
+   "accuracy": 0.3208333333333333,
+   "theta_acc": 0.5,
+   "n_acc": 82,
+   "any_eligible": true
+  },
+  "rewired #2": {
+   "lane_correct": 0.3424657534246575,
+   "theta_lc": 2.0,
+   "n_lc": 73,
+   "accuracy": 0.15833333333333333,
+   "theta_acc": 1.0,
+   "n_acc": 80,
+   "any_eligible": true
+  },
+  "rewired #3": {
+   "lane_correct": 0.9047619047619048,
+   "theta_lc": 3.0,
+   "n_lc": 21,
+   "accuracy": 0.35833333333333334,
+   "theta_acc": 3.0,
+   "n_acc": 21,
+   "any_eligible": true
+  },
+  "rewired #4": {
+   "lane_correct": 0.5,
+   "theta_lc": 1.0,
+   "n_lc": 54,
+   "accuracy": 0.17916666666666667,
+   "theta_acc": 2.0,
+   "n_acc": 27,
+   "any_eligible": true
+  },
+  "rewired #5": {
+   "lane_correct": 0.28,
+   "theta_lc": 0.5,
+   "n_lc": 50,
+   "accuracy": 0.1875,
+   "theta_acc": 0.5,
+   "n_acc": 50,
+   "any_eligible": true
+  },
+  "rewired #6": {
+   "lane_correct": 0.45454545454545453,
+   "theta_lc": 2.0,
+   "n_lc": 22,
+   "accuracy": 0.175,
+   "theta_acc": 0.5,
+   "n_acc": 40,
+   "any_eligible": true
+  },
+  "rewired #7": {
+   "lane_correct": 0.5925925925925926,
+   "theta_lc": 1.5,
+   "n_lc": 27,
+   "accuracy": 0.14166666666666666,
+   "theta_acc": 1.5,
+   "n_acc": 27,
+   "any_eligible": true
+  },
+  "rewired #8": {
+   "lane_correct": 0.5,
+   "theta_lc": 1.0,
+   "n_lc": 34,
+   "accuracy": 0.21666666666666667,
+   "theta_acc": 0.5,
+   "n_acc": 51,
+   "any_eligible": true
+  },
+  "rewired #9": {
+   "lane_correct": 0.27586206896551724,
+   "theta_lc": 2.0,
+   "n_lc": 29,
+   "accuracy": 0.125,
+   "theta_acc": 1.0,
+   "n_acc": 54,
+   "any_eligible": true
+  },
+  "rewired #10": {
+   "lane_correct": 0.4074074074074074,
+   "theta_lc": 0.5,
+   "n_lc": 27,
+   "accuracy": 0.1,
+   "theta_acc": 1.5,
+   "n_acc": 21,
+   "any_eligible": true
+  },
+  "rewired #11": {
+   "lane_correct": 0.45161290322580644,
+   "theta_lc": 1.5,
+   "n_lc": 31,
+   "accuracy": 0.10416666666666666,
+   "theta_acc": 1.5,
+   "n_acc": 31,
+   "any_eligible": true
+  },
+  "rewired #12": {
+   "lane_correct": 0.5,
+   "theta_lc": 2.0,
+   "n_lc": 20,
+   "accuracy": 0.025,
+   "theta_acc": 1.0,
+   "n_acc": 27,
+   "any_eligible": true
+  },
+  "rewired #13": {
+   "lane_correct": 0.2916666666666667,
+   "theta_lc": 2.5,
+   "n_lc": 24,
+   "accuracy": 0.15833333333333333,
+   "theta_acc": 0.5,
+   "n_acc": 49,
+   "any_eligible": true
+  },
+  "rewired #14": {
+   "lane_correct": 0.5,
+   "theta_lc": 0.5,
+   "n_lc": 50,
+   "accuracy": 0.24583333333333335,
+   "theta_acc": 0.5,
+   "n_acc": 50,
+   "any_eligible": true
+  },
+  "rewired #15": {
+   "lane_correct": 0.65,
+   "theta_lc": 2.0,
+   "n_lc": 20,
+   "accuracy": 0.18333333333333332,
+   "theta_acc": 2.0,
+   "n_acc": 20,
+   "any_eligible": true
+  },
+  "rewired #16": {
+   "lane_correct": 0.5,
+   "theta_lc": 2.5,
+   "n_lc": 20,
+   "accuracy": 0.25416666666666665,
+   "theta_acc": 0.5,
+   "n_acc": 68,
+   "any_eligible": true
+  },
+  "rewired #17": {
+   "lane_correct": 0.375,
+   "theta_lc": 2.5,
+   "n_lc": 24,
+   "accuracy": 0.09999999999999999,
+   "theta_acc": 1.5,
+   "n_acc": 50,
+   "any_eligible": true
+  },
+  "rewired #18": {
+   "lane_correct": 0.5757575757575758,
+   "theta_lc": 1.0,
+   "n_lc": 33,
+   "accuracy": 0.22499999999999998,
+   "theta_acc": 1.5,
+   "n_acc": 45,
+   "any_eligible": true
+  },
+  "rewired #19": {
+   "lane_correct": 0.42857142857142855,
+   "theta_lc": 2.0,
+   "n_lc": 28,
+   "accuracy": 0.058333333333333334,
+   "theta_acc": 0.5,
+   "n_acc": 51,
+   "any_eligible": true
+  },
+  "rewired #20": {
+   "lane_correct": 0.5161290322580645,
+   "theta_lc": 2.0,
+   "n_lc": 31,
+   "accuracy": 0.14583333333333331,
+   "theta_acc": 2.0,
+   "n_acc": 31,
+   "any_eligible": true
+  }
+ },
+ "probe_sweeps_real_connectome": {
+  "adaptation": [
+   {
+    "label": "static",
+    "encoder": {},
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -462.0,
+     -316.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 317.2286241813623,
+    "peak_z": [
+     1.769933249378055,
+     1.8263883676222121,
+     1.0265244641161573,
+     3.112865908256943
+    ],
+    "shared_band": -0.8215025019762566,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau30 g1",
+    "encoder": {
+     "adapt": 30.0,
+     "adapt_gain": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -472.0,
+     -322.0,
+     -598.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -288.5,
+    "peak_lag_spread_ms": 319.2910114613313,
+    "peak_z": [
+     1.923949209804481,
+     1.9197568481028657,
+     1.0388580868388368,
+     3.310883872056098
+    ],
+    "shared_band": -0.8743201462768015,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau30 g2",
+    "encoder": {
+     "adapt": 30.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -478.0,
+     -328.0,
+     -592.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -290.0,
+    "peak_lag_spread_ms": 318.8949670346022,
+    "peak_z": [
+     2.061791908772264,
+     1.9900158541788393,
+     1.043981283969796,
+     3.484992546108605
+    ],
+    "shared_band": -0.9056489558341967,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau30 g4",
+    "encoder": {
+     "adapt": 30.0,
+     "adapt_gain": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -488.0,
+     -342.0,
+     -568.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -290.0,
+    "peak_lag_spread_ms": 315.42669512899505,
+    "peak_z": [
+     2.2958285157620426,
+     2.0567076259507346,
+     1.0608688596977727,
+     3.7795672569615273
+    ],
+    "shared_band": -0.953355199945022,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau30 g8",
+    "encoder": {
+     "adapt": 30.0,
+     "adapt_gain": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -508.0,
+     -312.0,
+     -560.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -285.5,
+    "peak_lag_spread_ms": 316.0739628631248,
+    "peak_z": [
+     2.627856059824777,
+     2.081833363222937,
+     1.0902798061903165,
+     4.228326233744751
+    ],
+    "shared_band": -1.031702161338049,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau60 g1",
+    "encoder": {
+     "adapt": 60.0,
+     "adapt_gain": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -472.0,
+     -328.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -289.5,
+    "peak_lag_spread_ms": 318.97766379481806,
+    "peak_z": [
+     2.036104964102654,
+     1.9701634197909264,
+     1.0396170790063863,
+     3.447595964710003
+    ],
+    "shared_band": -0.8958608418833879,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau60 g2",
+    "encoder": {
+     "adapt": 60.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -482.0,
+     -342.0,
+     -568.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -288.5,
+    "peak_lag_spread_ms": 314.494435562857,
+    "peak_z": [
+     2.2529112337214596,
+     2.0320471801094993,
+     1.051950701729066,
+     3.7246985022865293
+    ],
+    "shared_band": -0.9427536048515675,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau60 g4",
+    "encoder": {
+     "adapt": 60.0,
+     "adapt_gain": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -500.0,
+     -358.0,
+     -552.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -293.0,
+    "peak_lag_spread_ms": 314.6887351018463,
+    "peak_z": [
+     2.573099527566103,
+     2.051899614497412,
+     1.0826898845148214,
+     4.161502834196429
+    ],
+    "shared_band": -1.0286655504205504,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau60 g8",
+    "encoder": {
+     "adapt": 60.0,
+     "adapt_gain": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -526.0,
+     -320.0,
+     -570.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -294.5,
+    "peak_lag_spread_ms": 321.5971859329618,
+    "peak_z": [
+     2.9700315326458764,
+     2.0545362659395567,
+     1.0707357578759165,
+     4.733486611981603
+    ],
+    "shared_band": -1.0929074397867764,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau120 g1",
+    "encoder": {
+     "adapt": 120.0,
+     "adapt_gain": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -474.0,
+     -336.0,
+     -584.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -289.0,
+    "peak_lag_spread_ms": 316.697016089511,
+    "peak_z": [
+     2.170882142924681,
+     2.003199111389563,
+     1.0418940555090348,
+     3.6275286965213094
+    ],
+    "shared_band": -0.933886665498997,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau120 g2",
+    "encoder": {
+     "adapt": 120.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -486.0,
+     -352.0,
+     -536.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 308.79443000157886,
+    "peak_z": [
+     2.462423679545191,
+     2.0343736372643324,
+     1.0671305450800563,
+     4.020499330562356
+    ],
+    "shared_band": -1.0239507586016234,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau120 g4",
+    "encoder": {
+     "adapt": 120.0,
+     "adapt_gain": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -508.0,
+     -368.0,
+     -558.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -299.0,
+    "peak_lag_spread_ms": 317.7624899197512,
+    "peak_z": [
+     2.836311429736179,
+     2.019794505760709,
+     1.0802231599702854,
+     4.584819874454374
+    ],
+    "shared_band": -1.1275683750172485,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau120 g8",
+    "encoder": {
+     "adapt": 120.0,
+     "adapt_gain": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -526.0,
+     -326.0,
+     -560.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -293.5,
+    "peak_lag_spread_ms": 319.61969588872336,
+    "peak_z": [
+     3.3197122444445157,
+     1.9836568712889608,
+     1.0437915359279086,
+     5.232516403103931
+    ],
+    "shared_band": -1.1662441537277557,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "adapt tau250 g1",
+    "encoder": {
+     "adapt": 250.0,
+     "adapt_gain": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -474.0,
+     -340.0,
+     -508.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -271.0,
+    "peak_lag_spread_ms": 300.50790339024365,
+    "peak_z": [
+     2.3012196029149234,
+     2.021810768628231,
+     1.0481557408913185,
+     3.8123658980242356
+    ],
+    "shared_band": -1.0107268563733225,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau250 g2",
+    "encoder": {
+     "adapt": 250.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -490.0,
+     -358.0,
+     -540.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -287.5,
+    "peak_lag_spread_ms": 310.5974082312987,
+    "peak_z": [
+     2.6378982809919087,
+     2.036389900131855,
+     1.075099962839326,
+     4.299747573628966
+    ],
+    "shared_band": -1.1524812602191088,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau250 g4",
+    "encoder": {
+     "adapt": 250.0,
+     "adapt_gain": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -506.0,
+     -324.0,
+     -564.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -289.0,
+    "peak_lag_spread_ms": 316.8864149817723,
+    "peak_z": [
+     3.0641112888432125,
+     1.9921872141900174,
+     1.0682690333313805,
+     4.918936872195982
+    ],
+    "shared_band": -1.2403727407932608,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "adapt tau250 g8",
+    "encoder": {
+     "adapt": 250.0,
+     "adapt_gain": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     98.0,
+     -454.0,
+     -550.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -167.0,
+    "peak_lag_spread_ms": 340.33365981048655,
+    "peak_z": [
+     0.2715395024751144,
+     4.322560162471629,
+     1.0373401025037379,
+     5.561422401798192
+    ],
+    "shared_band": -1.2586681520176366,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "adapt tau500 g1",
+    "encoder": {
+     "adapt": 500.0,
+     "adapt_gain": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -472.0,
+     -342.0,
+     -510.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -271.5,
+    "peak_lag_spread_ms": 300.6838040201035,
+    "peak_z": [
+     2.3884283656821177,
+     2.0329777629714325,
+     1.0542276782317146,
+     3.931605817401745
+    ],
+    "shared_band": -1.1241746956487706,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "adapt tau500 g2",
+    "encoder": {
+     "adapt": 500.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -488.0,
+     -362.0,
+     -544.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -289.0,
+    "peak_lag_spread_ms": 311.3213773578679,
+    "peak_z": [
+     2.748891251786519,
+     2.037785774424755,
+     1.075099962839326,
+     4.460062426673792
+    ],
+    "shared_band": -1.3061340763565612,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "adapt tau500 g4",
+    "encoder": {
+     "adapt": 500.0,
+     "adapt_gain": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     122.0,
+     -432.0,
+     -564.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -159.0,
+    "peak_lag_spread_ms": 344.64619539463945,
+    "peak_z": [
+     0.27557202821015925,
+     4.154907922776151,
+     1.0610586077396602,
+     5.097643486584383
+    ],
+    "shared_band": -1.3166413522263405,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "adapt tau500 g8",
+    "encoder": {
+     "adapt": 500.0,
+     "adapt_gain": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     114.0,
+     -442.0,
+     -548.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -159.5,
+    "peak_lag_spread_ms": 340.421429995234,
+    "peak_z": [
+     0.33962714853991,
+     4.417379871807596,
+     1.060489363613998,
+     5.710089139325421
+    ],
+    "shared_band": -1.3882448670048861,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "pure-transient tau60 g2",
+    "encoder": {
+     "adapt": 60.0,
+     "adapt_gain": 2.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     40.0,
+     -570.0,
+     -544.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -209.0,
+    "peak_lag_spread_ms": 355.09012940378955,
+    "peak_z": [
+     0.23214482798659938,
+     1.144355724461384,
+     0.6745418464150698,
+     2.0590179832701114
+    ],
+    "shared_band": -0.6126337174395048,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "pure-transient tau60 g4",
+    "encoder": {
+     "adapt": 60.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     34.0,
+     -566.0,
+     -548.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -210.5,
+    "peak_lag_spread_ms": 353.9841098128559,
+    "peak_z": [
+     0.27820867965230395,
+     2.4100984218848747,
+     0.7747288125316056,
+     2.6622677553393626
+    ],
+    "shared_band": -0.7327610115076124,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "pure-transient tau60 g8",
+    "encoder": {
+     "adapt": 60.0,
+     "adapt_gain": 8.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     34.0,
+     -550.0,
+     -554.0,
+     184.0
+    ],
+    "peak_lag_mean_ms": -221.5,
+    "peak_lag_spread_ms": 334.7308620369505,
+    "peak_z": [
+     0.3129504398311518,
+     3.2774292079513305,
+     0.9295632147117067,
+     3.6483726927106943
+    ],
+    "shared_band": -0.8160551216718004,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "pure-transient tau120 g2",
+    "encoder": {
+     "adapt": 120.0,
+     "adapt_gain": 2.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     68.0,
+     -538.0,
+     -534.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -191.5,
+    "peak_lag_spread_ms": 349.7066627904021,
+    "peak_z": [
+     0.2645601310106137,
+     2.0013271665870094,
+     0.7295687785624095,
+     2.508390018764787
+    ],
+    "shared_band": -0.7057657895276674,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "pure-transient tau120 g4",
+    "encoder": {
+     "adapt": 120.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     68.0,
+     -528.0,
+     -540.0,
+     210.0
+    ],
+    "peak_lag_mean_ms": -197.5,
+    "peak_lag_spread_ms": 340.2510102850541,
+    "peak_z": [
+     0.30364461121181757,
+     3.1068171557013295,
+     0.8635308961348989,
+     3.479781547061259
+    ],
+    "shared_band": -0.7898617173244893,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "pure-transient tau120 g8",
+    "encoder": {
+     "adapt": 120.0,
+     "adapt_gain": 8.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -552.0,
+     -452.0,
+     -542.0,
+     214.0
+    ],
+    "peak_lag_mean_ms": -333.0,
+    "peak_lag_spread_ms": 318.20276554423594,
+    "peak_z": [
+     2.513586153701945,
+     1.8710563449950164,
+     0.9842106507752717,
+     4.604131223865128
+    ],
+    "shared_band": -0.8609027526679875,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "pure-transient tau250 g2",
+    "encoder": {
+     "adapt": 250.0,
+     "adapt_gain": 2.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     106.0,
+     -506.0,
+     -524.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -171.5,
+    "peak_lag_spread_ms": 346.714219494961,
+    "peak_z": [
+     0.28596353683508247,
+     2.6513231450784946,
+     0.7654311584791241,
+     3.1505690190112716
+    ],
+    "shared_band": -0.8501560944636557,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "pure-transient tau250 g4",
+    "encoder": {
+     "adapt": 250.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -518.0,
+     -420.0,
+     -534.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -308.5,
+    "peak_lag_spread_ms": 318.5259016155515,
+    "peak_z": [
+     2.017289012863187,
+     1.8937005279687298,
+     0.9284247264603824,
+     4.318139334972541
+    ],
+    "shared_band": -0.8590046891242716,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "pure-transient tau250 g8",
+    "encoder": {
+     "adapt": 250.0,
+     "adapt_gain": 8.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -538.0,
+     -446.0,
+     -532.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -319.5,
+    "peak_lag_spread_ms": 323.9239879971843,
+    "peak_z": [
+     2.9612578025735403,
+     1.8727624135752279,
+     1.0162780698542389,
+     5.290756980691918
+    ],
+    "shared_band": -0.9838879281593405,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 3.0
+   }
+  ],
+  "elevation_band_gate": [
+   {
+    "label": "static",
+    "encoder": {},
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -462.0,
+     -316.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 317.2286241813623,
+    "peak_z": [
+     1.769933249378055,
+     1.8263883676222121,
+     1.0265244641161573,
+     3.112865908256943
+    ],
+    "shared_band": -0.8215025019762566,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-25 sg5",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -138.0,
+     -4.0,
+     238.0,
+     62.0
+    ],
+    "peak_lag_mean_ms": 39.5,
+    "peak_lag_spread_ms": 135.37632732497954,
+    "peak_z": [
+     0.6851677367607629,
+     -0.22857447047233057,
+     0.1395518332242236,
+     1.132073211553945
+    ],
+    "shared_band": -0.8312018090120837,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-25 sg8",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     234.0,
+     -50.0,
+     -328.0,
+     230.0
+    ],
+    "peak_lag_mean_ms": 21.5,
+    "peak_lag_spread_ms": 232.32036070908637,
+    "peak_z": [
+     0.21415355932255317,
+     0.027872145858836017,
+     0.5320410669576483,
+     1.385879518095276
+    ],
+    "shared_band": -0.7286408546515812,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-25 sg12",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 12.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -50.0,
+     -346.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 20.0,
+    "peak_lag_spread_ms": 241.81811346547224,
+    "peak_z": [
+     0.20670889642708576,
+     0.4024998491884545,
+     0.5587955408637687,
+     2.1227760892611705
+    ],
+    "shared_band": -0.7804811539280296,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-25 sg18",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 18.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -66.0,
+     -392.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 4.5,
+    "peak_lag_spread_ms": 260.3972926126537,
+    "peak_z": [
+     0.20453753641590777,
+     0.6175090897562998,
+     0.5933296844872716,
+     2.5451735414519367
+    ],
+    "shared_band": -0.7754857182778542,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 3,
+    "best_ontime_theta": 0.5
+   },
+   {
+    "label": "gate el-25 sg25",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 25.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -78.0,
+     -416.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -4.5,
+    "peak_lag_spread_ms": 270.3456121338018,
+    "peak_z": [
+     0.20779457643267477,
+     0.714971488873091,
+     0.6650544443207008,
+     2.778748910515336
+    ],
+    "shared_band": -0.7927015012236225,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-15 sg5",
+    "encoder": {
+     "gate_el_deg": -15.0,
+     "gate_sigma_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -170.0,
+     -18.0,
+     236.0,
+     74.0
+    ],
+    "peak_lag_mean_ms": 30.5,
+    "peak_lag_spread_ms": 147.2030910001553,
+    "peak_z": [
+     0.7415229052013144,
+     0.36613643780431543,
+     0.17119165052996005,
+     0.6756510008775654
+    ],
+    "shared_band": -0.9681138272264929,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 0.5
+   },
+   {
+    "label": "gate el-15 sg8",
+    "encoder": {
+     "gate_el_deg": -15.0,
+     "gate_sigma_deg": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -74.0,
+     -366.0,
+     96.0
+    ],
+    "peak_lag_mean_ms": -26.5,
+    "peak_lag_spread_ms": 224.9905553573305,
+    "peak_z": [
+     0.18856253061938397,
+     0.5549301957463861,
+     0.5734061400890968,
+     1.0171247031566029
+    ],
+    "shared_band": -0.8668130409762137,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 3,
+    "best_ontime_theta": 0.5
+   },
+   {
+    "label": "gate el-15 sg12",
+    "encoder": {
+     "gate_el_deg": -15.0,
+     "gate_sigma_deg": 12.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -88.0,
+     -406.0,
+     198.0
+    ],
+    "peak_lag_mean_ms": -14.5,
+    "peak_lag_spread_ms": 258.64406043827876,
+    "peak_z": [
+     0.19926423353161837,
+     0.7202568684347392,
+     0.5904834638589609,
+     1.2323083108764272
+    ],
+    "shared_band": -0.7898332800230217,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-15 sg18",
+    "encoder": {
+     "gate_el_deg": -15.0,
+     "gate_sigma_deg": 18.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -82.0,
+     -424.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -7.5,
+    "peak_lag_spread_ms": 273.66174376408554,
+    "peak_z": [
+     0.20717418785805247,
+     0.7836814231745166,
+     0.6493053568440483,
+     2.024686695428772
+    ],
+    "shared_band": -0.7889791697758888,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-15 sg25",
+    "encoder": {
+     "gate_el_deg": -15.0,
+     "gate_sigma_deg": 25.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -386.0,
+     -320.0,
+     -440.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -227.0,
+    "peak_lag_spread_ms": 271.810595819957,
+    "peak_z": [
+     0.7436182460972238,
+     1.1172842268289422,
+     0.7456973621228368,
+     2.4430992659950967
+    ],
+    "shared_band": -0.657542625298206,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "gate el-5 sg5",
+    "encoder": {
+     "gate_el_deg": -5.0,
+     "gate_sigma_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     80.0,
+     -136.0,
+     -428.0,
+     -204.0
+    ],
+    "peak_lag_mean_ms": -172.0,
+    "peak_lag_spread_ms": 181.2181006411887,
+    "peak_z": [
+     0.4656783922050872,
+     0.5367484900543166,
+     0.5764421087592949,
+     0.8497416540230824
+    ],
+    "shared_band": -0.30204872188685394,
+    "wiring": [
+     3,
+     2,
+     1,
+     0
+    ],
+    "n_on_time_best": 0,
+    "n_fire_best": 0,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-5 sg8",
+    "encoder": {
+     "gate_el_deg": -5.0,
+     "gate_sigma_deg": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -800.0,
+     -90.0,
+     -432.0,
+     -226.0
+    ],
+    "peak_lag_mean_ms": -387.0,
+    "peak_lag_spread_ms": 267.73307602909284,
+    "peak_z": [
+     0.3985484633010395,
+     0.6453101862505689,
+     0.5902937158170736,
+     0.8157753795625124
+    ],
+    "shared_band": -0.57175643276786,
+    "wiring": [
+     3,
+     2,
+     1,
+     0
+    ],
+    "n_on_time_best": 0,
+    "n_fire_best": 0,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-5 sg12",
+    "encoder": {
+     "gate_el_deg": -5.0,
+     "gate_sigma_deg": 12.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -338.0,
+     -84.0,
+     -434.0,
+     124.0
+    ],
+    "peak_lag_mean_ms": -183.0,
+    "peak_lag_spread_ms": 218.56120424265603,
+    "peak_z": [
+     0.4601104864104189,
+     1.000961369087264,
+     0.6396282067077921,
+     0.7703685717969753
+    ],
+    "shared_band": -0.5614130170382629,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-5 sg18",
+    "encoder": {
+     "gate_el_deg": -5.0,
+     "gate_sigma_deg": 18.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -380.0,
+     -310.0,
+     -446.0,
+     228.0
+    ],
+    "peak_lag_mean_ms": -227.0,
+    "peak_lag_spread_ms": 267.0599183703912,
+    "peak_z": [
+     0.858310982584988,
+     1.2553206846824003,
+     0.730327770729959,
+     1.3046492388278212
+    ],
+    "shared_band": -0.5957679841889756,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-5 sg25",
+    "encoder": {
+     "gate_el_deg": -5.0,
+     "gate_sigma_deg": 25.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -408.0,
+     -328.0,
+     -452.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -237.5,
+    "peak_lag_spread_ms": 278.10564539397615,
+    "peak_z": [
+     1.1739538500066136,
+     1.5411647204396173,
+     0.8424688634853998,
+     2.033576046744833
+    ],
+    "shared_band": -0.68418436923592,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate sg8 + adapt120 g2",
+    "encoder": {
+     "gate_sigma_deg": 8.0,
+     "adapt": 120.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     236.0,
+     -80.0,
+     -354.0,
+     224.0
+    ],
+    "peak_lag_mean_ms": 6.5,
+    "peak_lag_spread_ms": 243.6283029534951,
+    "peak_z": [
+     0.21694530790835345,
+     0.2368560537264025,
+     0.5426669573033415,
+     1.7561669798125807
+    ],
+    "shared_band": -0.7782077938529773,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate sg8 + trans120 g4",
+    "encoder": {
+     "gate_sigma_deg": 8.0,
+     "adapt": 120.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     84.0,
+     -120.0,
+     -374.0,
+     146.0
+    ],
+    "peak_lag_mean_ms": -66.0,
+    "peak_lag_spread_ms": 203.23877582784246,
+    "peak_z": [
+     0.2530829423801014,
+     0.18823056175923986,
+     0.5424772092614542,
+     1.5026672026269756
+    ],
+    "shared_band": -0.695793122899496,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate sg12 + adapt120 g2",
+    "encoder": {
+     "gate_sigma_deg": 12.0,
+     "adapt": 120.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -122.0,
+     -376.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -5.5,
+    "peak_lag_spread_ms": 259.5317899603053,
+    "peak_z": [
+     0.20934554786923046,
+     0.5449936821704877,
+     0.5811858098064794,
+     2.6521522866003964
+    ],
+    "shared_band": -0.8825012900573013,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate sg12 + trans120 g4",
+    "encoder": {
+     "gate_sigma_deg": 12.0,
+     "adapt": 120.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     84.0,
+     -154.0,
+     -394.0,
+     162.0
+    ],
+    "peak_lag_mean_ms": -75.5,
+    "peak_lag_spread_ms": 217.62984629870968,
+    "peak_z": [
+     0.25789095383342414,
+     0.49816521925428536,
+     0.5802370695970425,
+     2.318648347570241
+    ],
+    "shared_band": -0.7314428940728068,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate sg18 + adapt120 g2",
+    "encoder": {
+     "gate_sigma_deg": 18.0,
+     "adapt": 120.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -142.0,
+     -442.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -27.0,
+    "peak_lag_spread_ms": 285.4382595238417,
+    "peak_z": [
+     0.20841496500729706,
+     0.8094740754353594,
+     0.6250176074824638,
+     3.252336765112385
+    ],
+    "shared_band": -0.8283422941625317,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate sg18 + trans120 g4",
+    "encoder": {
+     "gate_sigma_deg": 18.0,
+     "adapt": 120.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     78.0,
+     -172.0,
+     -452.0,
+     184.0
+    ],
+    "peak_lag_mean_ms": -90.5,
+    "peak_lag_spread_ms": 245.4928715869363,
+    "peak_z": [
+     0.2761924167847815,
+     0.7482693801114743,
+     0.6176174338488561,
+     2.7720052646893585
+    ],
+    "shared_band": -0.7287171280291876,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   }
+  ],
+  "band_gate_x_intensity": [
+   {
+    "label": "static",
+    "encoder": {},
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -462.0,
+     -316.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 317.2286241813623,
+    "peak_z": [
+     1.769933249378055,
+     1.8263883676222121,
+     1.0265244641161573,
+     3.112865908256943
+    ],
+    "shared_band": -0.8215025019762566,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-25 sg5 I2",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 5.0,
+     "intensity": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -204.0,
+     20.0,
+     -800.0,
+     -24.0
+    ],
+    "peak_lag_mean_ms": -252.0,
+    "peak_lag_spread_ms": 327.3285810924552,
+    "peak_z": [
+     0.6891524456403979,
+     -0.1589131678498084,
+     0.13071129603585604,
+     1.168243675529642
+    ],
+    "shared_band": -0.8325062740554412,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-25 sg5 I4",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 5.0,
+     "intensity": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     88.0,
+     -376.0,
+     188.0
+    ],
+    "peak_lag_mean_ms": 34.5,
+    "peak_lag_spread_ms": 243.07766248670404,
+    "peak_z": [
+     0.21849627934490914,
+     -0.1117675821599072,
+     0.5210356805281804,
+     1.259282894180337
+    ],
+    "shared_band": -0.9079379234247867,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 0,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-25 sg5 I8",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 5.0,
+     "intensity": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     128.0,
+     -408.0,
+     198.0
+    ],
+    "peak_lag_mean_ms": 39.0,
+    "peak_lag_spread_ms": 261.061295484413,
+    "peak_z": [
+     0.20128049639914078,
+     -0.08481214639550182,
+     0.5223639168213919,
+     1.547727017918734
+    ],
+    "shared_band": -0.8931263623411735,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-25 sg8 I2",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 8.0,
+     "intensity": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -4.0,
+     -342.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 32.5,
+    "peak_lag_spread_ms": 237.71989819954072,
+    "peak_z": [
+     0.2107414221621306,
+     0.20746934336363898,
+     0.5420977131776794,
+     1.7108006351650964
+    ],
+    "shared_band": -0.8245768484156676,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-25 sg8 I4",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 8.0,
+     "intensity": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     76.0,
+     -376.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 44.0,
+    "peak_lag_spread_ms": 251.34438525656387,
+    "peak_z": [
+     0.16917538766243762,
+     0.2433042167916132,
+     0.5532928476490347,
+     2.072505274922066
+    ],
+    "shared_band": -0.9393328188381534,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-25 sg8 I8",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 8.0,
+     "intensity": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     54.0,
+     6.0,
+     -684.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -96.5,
+    "peak_lag_spread_ms": 350.07249249262645,
+    "peak_z": [
+     -0.148765239091444,
+     1.1369578244946117,
+     0.13086639317951163,
+     2.5227968984839206
+    ],
+    "shared_band": -1.0022292245622602,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-25 sg12 I2",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 12.0,
+     "intensity": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -30.0,
+     -386.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 15.0,
+    "peak_lag_spread_ms": 256.06835025047513,
+    "peak_z": [
+     0.18856253061938397,
+     0.5236407487414293,
+     0.5811858098064794,
+     2.7370609181365664
+    ],
+    "shared_band": -0.9795100674831156,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-25 sg12 I4",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 12.0,
+     "intensity": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -88.0,
+     -236.0,
+     -508.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -148.5,
+    "peak_lag_spread_ms": 269.229920328332,
+    "peak_z": [
+     -0.07899822887768888,
+     1.1880000477623165,
+     0.13334794747800074,
+     3.3415368076287226
+    ],
+    "shared_band": -1.0055129690102789,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-25 sg12 I8",
+    "encoder": {
+     "gate_el_deg": -25.0,
+     "gate_sigma_deg": 12.0,
+     "intensity": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -86.0,
+     -22.0,
+     -542.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -103.0,
+    "peak_lag_spread_ms": 281.0035586963268,
+    "peak_z": [
+     0.044785360456109986,
+     1.3583937893771825,
+     0.1369151817820789,
+     3.9487714613224147
+    ],
+    "shared_band": -1.1584205659634585,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-18 sg5 I2",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 5.0,
+     "intensity": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     124.0,
+     -190.0,
+     -800.0,
+     50.0
+    ],
+    "peak_lag_mean_ms": -204.0,
+    "peak_lag_spread_ms": 363.1501067052026,
+    "peak_z": [
+     -0.25045594185755377,
+     1.1382860607878234,
+     0.13071129603585604,
+     1.1204250960363475
+    ],
+    "shared_band": -0.9682099266297455,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-18 sg5 I4",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 5.0,
+     "intensity": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     54.0,
+     -260.0,
+     -800.0,
+     84.0
+    ],
+    "peak_lag_mean_ms": -230.5,
+    "peak_lag_spread_ms": 355.33470137322644,
+    "peak_z": [
+     -0.20130191193422628,
+     1.2014721587363204,
+     0.13071129603585604,
+     1.1792787323357867
+    ],
+    "shared_band": -1.000128725785529,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-18 sg5 I8",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 5.0,
+     "intensity": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     64.0,
+     -28.0,
+     -800.0,
+     144.0
+    ],
+    "peak_lag_mean_ms": -155.0,
+    "peak_lag_spread_ms": 377.3314193119889,
+    "peak_z": [
+     -0.1417885380700685,
+     1.3477678990314894,
+     0.13071129603585604,
+     1.259282894180337
+    ],
+    "shared_band": -1.0453562710432043,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 0,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-18 sg8 I2",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 8.0,
+     "intensity": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -58.0,
+     -180.0,
+     -548.0,
+     48.0
+    ],
+    "peak_lag_mean_ms": -184.5,
+    "peak_lag_spread_ms": 224.83938711889428,
+    "peak_z": [
+     -0.17445218376105387,
+     1.1811691182543709,
+     0.13179697604144505,
+     1.165791440683832
+    ],
+    "shared_band": -0.9970518376444114,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-18 sg8 I4",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 8.0,
+     "intensity": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -58.0,
+     -252.0,
+     -528.0,
+     132.0
+    ],
+    "peak_lag_mean_ms": -176.5,
+    "peak_lag_spread_ms": 244.16541524138918,
+    "peak_z": [
+     -0.05077430201848795,
+     1.2648480047267048,
+     0.13288265604703406,
+     1.2586698354688843
+    ],
+    "shared_band": -0.8975691103121146,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-18 sg8 I8",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 8.0,
+     "intensity": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -42.0,
+     -30.0,
+     -558.0,
+     182.0
+    ],
+    "peak_lag_mean_ms": -112.0,
+    "peak_lag_spread_ms": 272.47752200869706,
+    "peak_z": [
+     0.06190999023584988,
+     1.4401751954306428,
+     0.1352091132018676,
+     1.4735469138329824
+    ],
+    "shared_band": -1.0241064395577344,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-18 sg12 I2",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 12.0,
+     "intensity": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -144.0,
+     -192.0,
+     238.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 35.0,
+    "peak_lag_spread_ms": 203.70812453115363,
+    "peak_z": [
+     0.09161382337231229,
+     1.1447374942119941,
+     0.1331928503343452,
+     1.7595388027255694
+    ],
+    "shared_band": -0.8640461873051851,
+    "wiring": [
+     2,
+     1,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "gate el-18 sg12 I4",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 12.0,
+     "intensity": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -182.0,
+     134.0,
+     -478.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -72.0,
+    "peak_lag_spread_ms": 280.8344708186657,
+    "peak_z": [
+     0.38146403853309496,
+     0.969166454637872,
+     0.618566174058293,
+     2.0942688591786296
+    ],
+    "shared_band": -0.8219885174561246,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "gate el-18 sg12 I8",
+    "encoder": {
+     "gate_el_deg": -18.0,
+     "gate_sigma_deg": 12.0,
+     "intensity": 8.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -172.0,
+     44.0,
+     -528.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -104.5,
+    "peak_lag_spread_ms": 284.28286969143954,
+    "peak_z": [
+     0.619623241580959,
+     1.122092238282265,
+     0.6212226466447163,
+     2.535977660780149
+    ],
+    "shared_band": -1.1170467225909984,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   }
+  ],
+  "ventral_edge_gate": [
+   {
+    "label": "static",
+    "encoder": {},
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -462.0,
+     -316.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 317.2286241813623,
+    "peak_z": [
+     1.769933249378055,
+     1.8263883676222121,
+     1.0265244641161573,
+     3.112865908256943
+    ],
+    "shared_band": -0.8215025019762566,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below5 w2",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -214.0,
+     -102.0,
+     -440.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -129.5,
+    "peak_lag_spread_ms": 244.62369059434943,
+    "peak_z": [
+     0.18093673796416546,
+     1.0155405005908877,
+     0.5684726910000251,
+     3.1131724376126697
+    ],
+    "shared_band": -0.757183476001709,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below5 w5",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -82.0,
+     -426.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -8.0,
+    "peak_lag_spread_ms": 274.42303110344074,
+    "peak_z": [
+     0.20934554786923046,
+     0.8108482741213879,
+     0.6109762523827978,
+     3.1143985550355744
+    ],
+    "shared_band": -0.8054194670033794,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below5 w10",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 10.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -78.0,
+     -414.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -4.0,
+    "peak_lag_spread_ms": 269.58486604407153,
+    "peak_z": [
+     0.20825986786364148,
+     0.715077196464324,
+     0.6587927589384173,
+     3.097539440470631
+    ],
+    "shared_band": -0.7976646098206008,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below0 w2",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -96.0,
+     -412.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -8.0,
+    "peak_lag_spread_ms": 270.18142053072415,
+    "peak_z": [
+     0.20779457643267477,
+     0.8234274774781104,
+     0.5899142197332988,
+     3.1156246724584795
+    ],
+    "shared_band": -0.8018522326993013,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below0 w5",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -88.0,
+     -408.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -5.0,
+    "peak_lag_spread_ms": 268.04663773306316,
+    "peak_z": [
+     0.20453753641590777,
+     0.740341310769002,
+     0.5908629599427357,
+     3.116237731169932
+    ],
+    "shared_band": -0.8010767469810234,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below0 w10",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 10.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -68.0,
+     -408.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 0.0,
+    "peak_lag_spread_ms": 266.6345814030881,
+    "peak_z": [
+     0.2060885078524635,
+     0.6535553783667399,
+     0.6280535761526619,
+     3.086504383664486
+    ],
+    "shared_band": -0.7886689754885777,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below-5 w2",
+    "encoder": {
+     "gate_below_deg": -5.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -66.0,
+     -366.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 11.0,
+    "peak_lag_spread_ms": 250.55737865806307,
+    "peak_z": [
+     0.19259505635442883,
+     0.5345286306384244,
+     0.5688521870837998,
+     3.1211422008615517
+    ],
+    "shared_band": -0.915355552597926,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below-5 w5",
+    "encoder": {
+     "gate_below_deg": -5.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -76.0,
+     -376.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 6.0,
+    "peak_lag_spread_ms": 255.09606033806168,
+    "peak_z": [
+     0.2001948163935518,
+     0.5930906361814855,
+     0.5773908489687318,
+     3.118689966015742
+    ],
+    "shared_band": -0.7881155648653845,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below-5 w10",
+    "encoder": {
+     "gate_below_deg": -5.0,
+     "gate_width_deg": 10.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -62.0,
+     -398.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 4.0,
+    "peak_lag_spread_ms": 262.42713274354844,
+    "peak_z": [
+     0.2048477307032189,
+     0.5716319951611942,
+     0.6018683463722037,
+     3.0678060929651854
+    ],
+    "shared_band": -0.7663349868021756,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 3,
+    "best_ontime_theta": 0.5
+   },
+   {
+    "label": "below-10 w2",
+    "encoder": {
+     "gate_below_deg": -10.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -16.0,
+     -346.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 28.5,
+    "peak_lag_spread_ms": 239.79731024346373,
+    "peak_z": [
+     0.19197466777980654,
+     0.33548123634675636,
+     0.5457029259735395,
+     3.1278858466875294
+    ],
+    "shared_band": -0.9848659825380698,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below-10 w5",
+    "encoder": {
+     "gate_below_deg": -10.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -52.0,
+     -346.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 19.5,
+    "peak_lag_spread_ms": 241.9643568792726,
+    "peak_z": [
+     0.2034518564103188,
+     0.42025872451559215,
+     0.5612622654083046,
+     3.1171573192371107
+    ],
+    "shared_band": -0.7952600162541915,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below-10 w10",
+    "encoder": {
+     "gate_below_deg": -10.0,
+     "gate_width_deg": 10.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -56.0,
+     -376.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 11.0,
+    "peak_lag_spread_ms": 253.63162263408717,
+    "peak_z": [
+     0.20469263355956335,
+     0.46433879005973744,
+     0.5819448019740289,
+     3.036540098681108
+    ],
+    "shared_band": -0.7196507465618488,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below-15 w2",
+    "encoder": {
+     "gate_below_deg": -15.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     230.0,
+     -46.0,
+     -334.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 22.0,
+    "peak_lag_spread_ms": 235.2020408074726,
+    "peak_z": [
+     0.22190841650533172,
+     -0.05901949413465901,
+     0.5248306413659279,
+     3.1459710786753776
+    ],
+    "shared_band": -0.7876302789627406,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below-15 w5",
+    "encoder": {
+     "gate_below_deg": -15.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -54.0,
+     -334.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 22.0,
+    "peak_lag_spread_ms": 237.60471375795558,
+    "peak_z": [
+     0.2085700621509526,
+     0.16973173329347144,
+     0.5428567053452289,
+     3.1018308514507984
+    ],
+    "shared_band": -0.649967365165443,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below-15 w10",
+    "encoder": {
+     "gate_below_deg": -15.0,
+     "gate_width_deg": 10.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -54.0,
+     -366.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 14.0,
+    "peak_lag_spread_ms": 249.68780506864968,
+    "peak_z": [
+     0.20407224498494106,
+     0.31951939007057906,
+     0.5658162184136017,
+     2.986269284342004
+    ],
+    "shared_band": -0.6594730548234873,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below0 w5 x2",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 5.0,
+     "gate_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -198.0,
+     126.0,
+     -446.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -70.0,
+    "peak_lag_spread_ms": 269.7406161481804,
+    "peak_z": [
+     0.40757381356763667,
+     0.9893290833130962,
+     0.6187559221001804,
+     4.0870162007549515
+    ],
+    "shared_band": -0.7426738359472003,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below-5 w5 x2",
+    "encoder": {
+     "gate_below_deg": -5.0,
+     "gate_width_deg": 5.0,
+     "gate_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -108.0,
+     -414.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -11.5,
+    "peak_lag_spread_ms": 271.94622630218646,
+    "peak_z": [
+     0.18933801633766184,
+     0.8450975336808677,
+     0.6014888502884289,
+     4.091307611735119
+    ],
+    "shared_band": -0.9462466493508097,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below-10 w5 x2",
+    "encoder": {
+     "gate_below_deg": -10.0,
+     "gate_width_deg": 5.0,
+     "gate_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -88.0,
+     -374.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 3.5,
+    "peak_lag_spread_ms": 255.3717877918389,
+    "peak_z": [
+     0.18716665632648385,
+     0.6278684336971301,
+     0.5859295108536638,
+     4.092227199802298
+    ],
+    "shared_band": -0.9892895065172923,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   }
+  ],
+  "gate_matched_normaliser": [
+   {
+    "label": "static (ungated norm)",
+    "encoder": {},
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -462.0,
+     -316.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 317.2286241813623,
+    "peak_z": [
+     1.769933249378055,
+     1.8263883676222121,
+     1.0265244641161573,
+     3.112865908256943
+    ],
+    "shared_band": -0.8215025019762566,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below5 w2",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     138.0,
+     -114.0,
+     -800.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -134.5,
+    "peak_lag_spread_ms": 405.0688213131196,
+    "peak_z": [
+     0.34664744940412606,
+     2.7402006803040937,
+     0.28038410448650675,
+     3.355324255488249
+    ],
+    "shared_band": -1.7408740456015512,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "below5 w5",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     128.0,
+     -82.0,
+     -800.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -129.0,
+    "peak_lag_spread_ms": 404.1002350902558,
+    "peak_z": [
+     0.35755212538527237,
+     2.582808974035582,
+     0.2822702916206975,
+     3.3790824829594746
+    ],
+    "shared_band": -1.7974205958395513,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "below0 w2",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     122.0,
+     -96.0,
+     -488.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -56.0,
+    "peak_lag_spread_ms": 276.7417568781408,
+    "peak_z": [
+     0.34305565863199733,
+     3.2054413724980075,
+     0.2669739119864643,
+     3.4376091744097366
+    ],
+    "shared_band": -2.4498150466031268,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "below0 w5",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     112.0,
+     -88.0,
+     -800.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -134.5,
+    "peak_lag_spread_ms": 401.42589602565505,
+    "peak_z": [
+     0.34347971373718694,
+     3.0136823922696703,
+     0.2705765100743874,
+     3.4658189685973935
+    ],
+    "shared_band": -2.2424331923048784,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "below-5 w2",
+    "encoder": {
+     "gate_below_deg": -5.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     238.0,
+     -132.0,
+     -62.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 70.5,
+    "peak_lag_spread_ms": 169.31848688197044,
+    "peak_z": [
+     0.3752166985827565,
+     1.524422094596649,
+     0.01875835890270686,
+     3.5007196020422144
+    ],
+    "shared_band": -3.289068455626861,
+    "wiring": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below-5 w5",
+    "encoder": {
+     "gate_below_deg": -5.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     66.0,
+     -76.0,
+     -800.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -143.0,
+    "peak_lag_spread_ms": 395.27838291512984,
+    "peak_z": [
+     0.328744000701675,
+     3.3235584189728664,
+     0.22071942804650743,
+     3.5451293951273106
+    ],
+    "shared_band": -2.9683492703385688,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 3.0
+   },
+   {
+    "label": "below-10 w2",
+    "encoder": {
+     "gate_below_deg": -10.0,
+     "gate_width_deg": 2.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     -180.0,
+     -16.0,
+     -800.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -189.5,
+    "peak_lag_spread_ms": 382.6418037799843,
+    "peak_z": [
+     0.5319299811439793,
+     3.500837601689184,
+     0.04110102409947209,
+     3.6008847360198386
+    ],
+    "shared_band": -3.324032447791019,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "below-10 w5",
+    "encoder": {
+     "gate_below_deg": -10.0,
+     "gate_width_deg": 5.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     238.0,
+     -166.0,
+     -76.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 58.5,
+    "peak_lag_spread_ms": 182.29851891883268,
+    "peak_z": [
+     0.4478296978760986,
+     1.3653578849177448,
+     0.079157572592301,
+     3.6366760021938673
+    ],
+    "shared_band": -3.4499975717354796,
+    "wiring": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "band sg8",
+    "encoder": {
+     "gate_sigma_deg": 8.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     -200.0,
+     80.0,
+     -32.0,
+     230.0
+    ],
+    "peak_lag_mean_ms": 19.5,
+    "peak_lag_spread_ms": 157.16472250476568,
+    "peak_z": [
+     0.47494891305897874,
+     3.692554533659017,
+     0.12885528431138096,
+     2.0249242322856595
+    ],
+    "shared_band": -3.114489982065086,
+    "wiring": [
+     1,
+     0,
+     2,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "band sg12",
+    "encoder": {
+     "gate_sigma_deg": 12.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     8.0,
+     -50.0,
+     238.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 108.5,
+    "peak_lag_spread_ms": 131.11350044903844,
+    "peak_z": [
+     0.18886113820430508,
+     3.7356974629194575,
+     0.09622456530469536,
+     2.8951366143081816
+    ],
+    "shared_band": -3.5063531342815946,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "band sg18",
+    "encoder": {
+     "gate_sigma_deg": 18.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     82.0,
+     -66.0,
+     -800.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -136.5,
+    "peak_lag_spread_ms": 397.8677544109349,
+    "peak_z": [
+     0.3268188831111134,
+     3.085036076865807,
+     0.23578802056940004,
+     3.1239491650486357
+    ],
+    "shared_band": -2.3778661508150862,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "below0 w2 + trans120g4",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 2.0,
+     "adapt": 120.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     -32.0,
+     -200.0,
+     -534.0,
+     210.0
+    ],
+    "peak_lag_mean_ms": -139.0,
+    "peak_lag_spread_ms": 270.6455246258471,
+    "peak_z": [
+     0.46928923252857174,
+     3.451465405427571,
+     0.2778353454601672,
+     3.866881979197829
+    ],
+    "shared_band": -2.282399158232603,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "below0 w2 + adapt120g2",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 2.0,
+     "adapt": 120.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": true,
+    "peak_lag_ms": [
+     140.0,
+     -176.0,
+     -522.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -80.0,
+    "peak_lag_spread_ms": 297.53319142576345,
+    "peak_z": [
+     0.22416124600847956,
+     3.62636004108158,
+     0.2767117488939221,
+     4.508802138000578
+    ],
+    "shared_band": -2.5378301109589954,
+    "wiring": [
+     1,
+     2,
+     0,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   }
+  ],
+  "loom": [
+   {
+    "label": "static",
+    "encoder": {},
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -462.0,
+     -316.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 317.2286241813623,
+    "peak_z": [
+     1.769933249378055,
+     1.8263883676222121,
+     1.0265244641161573,
+     3.112865908256943
+    ],
+    "shared_band": -0.8215025019762566,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "loom2^1",
+    "encoder": {
+     "loom": 2.0,
+     "loom_exp": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     202.0,
+     -366.0,
+     -604.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -132.5,
+    "peak_lag_spread_ms": 362.6275637620505,
+    "peak_z": [
+     0.2519972623745125,
+     3.820977642071223,
+     1.0646638205355203,
+     4.664824036298924
+    ],
+    "shared_band": -1.6368952541408948,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 3.0
+   },
+   {
+    "label": "loom4^1",
+    "encoder": {
+     "loom": 4.0,
+     "loom_exp": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     228.0,
+     -352.0,
+     -600.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -121.5,
+    "peak_lag_spread_ms": 365.19960295706784,
+    "peak_z": [
+     0.27433125106091466,
+     4.214632711822775,
+     1.1022339328292212,
+     5.3333645611378655
+    ],
+    "shared_band": -1.749443696461794,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "loom8^1",
+    "encoder": {
+     "loom": 8.0,
+     "loom_exp": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -322.0,
+     -590.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -109.0,
+    "peak_lag_spread_ms": 359.70404501478714,
+    "peak_z": [
+     0.30690165122858454,
+     4.5588166288773,
+     1.1916052605581766,
+     5.8599819942755556
+    ],
+    "shared_band": -2.3391379218744652,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "loom4^2",
+    "encoder": {
+     "loom": 4.0,
+     "loom_exp": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     230.0,
+     -352.0,
+     -600.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -121.0,
+    "peak_lag_spread_ms": 365.67882082505133,
+    "peak_z": [
+     0.26921304532028084,
+     3.7609357302509,
+     1.0367708583780757,
+     5.3333645611378655
+    ],
+    "shared_band": -1.6939710030061446,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "loom8^2",
+    "encoder": {
+     "loom": 8.0,
+     "loom_exp": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -334.0,
+     -602.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -115.0,
+    "peak_lag_spread_ms": 365.4955540085269,
+    "peak_z": [
+     0.3020936397752618,
+     4.180277744672062,
+     1.0428427957184718,
+     5.857529759429745
+    ],
+    "shared_band": -2.04453016765577,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 3.0
+   },
+   {
+    "label": "loom20^2",
+    "encoder": {
+     "loom": 20.0,
+     "loom_exp": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -308.0,
+     -602.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -108.5,
+    "peak_lag_spread_ms": 361.7550967159965,
+    "peak_z": [
+     0.36630385724866815,
+     4.6324948199666744,
+     1.0612483557815475,
+     6.260309332854032
+    ],
+    "shared_band": -2.7472657180859783,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "loom8^3",
+    "encoder": {
+     "loom": 8.0,
+     "loom_exp": 3.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -338.0,
+     -600.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -115.5,
+    "peak_lag_spread_ms": 365.43501474270363,
+    "peak_z": [
+     0.2968203368909724,
+     3.722669582224568,
+     1.0295604327863552,
+     5.855690583295388
+    ],
+    "shared_band": -1.7848579291883093,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "loom20^3",
+    "encoder": {
+     "loom": 20.0,
+     "loom_exp": 3.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -308.0,
+     -600.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -108.0,
+    "peak_lag_spread_ms": 361.0733997402744,
+    "peak_z": [
+     0.36056526293341207,
+     4.3316510153176635,
+     1.033924637749765,
+     6.254791804450959
+    ],
+    "shared_band": -2.4543293900155563,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 3.0
+   },
+   {
+    "label": "loom50^4",
+    "encoder": {
+     "loom": 50.0,
+     "loom_exp": 4.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -296.0,
+     -602.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -105.5,
+    "peak_lag_spread_ms": 360.13434993068904,
+    "peak_z": [
+     0.4143839717818951,
+     4.476998953262987,
+     1.0291809367025806,
+     6.311499735260315
+    ],
+    "shared_band": -2.7614981423053777,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 3.0
+   },
+   {
+    "label": "loom8^2+trans120g4",
+    "encoder": {
+     "loom": 8.0,
+     "loom_exp": 2.0,
+     "adapt": 120.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     52.0,
+     -454.0,
+     -526.0,
+     166.0
+    ],
+    "peak_lag_mean_ms": -190.5,
+    "peak_lag_spread_ms": 303.2700941405202,
+    "peak_z": [
+     0.5569182468013647,
+     3.751104924266235,
+     0.9413275933087242,
+     5.653994267227518
+    ],
+    "shared_band": -1.4770922933745805,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 3.0
+   },
+   {
+    "label": "loom8^2+adapt120g2",
+    "encoder": {
+     "loom": 8.0,
+     "loom_exp": 2.0,
+     "adapt": 120.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -350.0,
+     -582.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -114.0,
+    "peak_lag_spread_ms": 361.4304912427838,
+    "peak_z": [
+     0.3160523827042632,
+     4.47245352683997,
+     1.043412039844134,
+     6.179079053586577
+    ],
+    "shared_band": -2.1924905896156006,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "loom20^3+trans120g4",
+    "encoder": {
+     "loom": 20.0,
+     "loom_exp": 3.0,
+     "adapt": 120.0,
+     "adapt_gain": 4.0,
+     "adapt_base": 0.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     74.0,
+     -440.0,
+     -524.0,
+     138.0
+    ],
+    "peak_lag_mean_ms": -188.0,
+    "peak_lag_spread_ms": 296.36126602509984,
+    "peak_z": [
+     0.7704870136150858,
+     3.7786946055780377,
+     0.9098294183554193,
+     5.932016392871223
+    ],
+    "shared_band": -2.162687015044348,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   },
+   {
+    "label": "loom20^3+adapt120g2",
+    "encoder": {
+     "loom": 20.0,
+     "loom_exp": 3.0,
+     "adapt": 120.0,
+     "adapt_gain": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -338.0,
+     -558.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -105.0,
+    "peak_lag_spread_ms": 351.7086862731712,
+    "peak_z": [
+     0.3900337202279705,
+     4.541374876323861,
+     1.0695972696245921,
+     6.3767904880300055
+    ],
+    "shared_band": -2.711949312508243,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.5
+   }
+  ],
+  "gate_plus_loom": [
+   {
+    "label": "static",
+    "encoder": {},
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -462.0,
+     -316.0,
+     -596.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -284.0,
+    "peak_lag_spread_ms": 317.2286241813623,
+    "peak_z": [
+     1.769933249378055,
+     1.8263883676222121,
+     1.0265244641161573,
+     3.112865908256943
+    ],
+    "shared_band": -0.8215025019762566,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 3,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below10+loom4^1",
+    "encoder": {
+     "gate_below_deg": 10.0,
+     "gate_width_deg": 2.0,
+     "loom": 4.0,
+     "loom_exp": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     228.0,
+     -270.0,
+     -494.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -74.5,
+    "peak_lag_spread_ms": 317.554326060912,
+    "peak_z": [
+     0.26936814246393637,
+     2.1725734643844086,
+     0.6559465383101066,
+     5.3339776198493185
+    ],
+    "shared_band": -1.2665175567825517,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "below10+loom8^2",
+    "encoder": {
+     "gate_below_deg": 10.0,
+     "gate_width_deg": 2.0,
+     "loom": 8.0,
+     "loom_exp": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -256.0,
+     -474.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -63.5,
+    "peak_lag_spread_ms": 311.19567799055307,
+    "peak_z": [
+     0.296975434034628,
+     2.210945320001974,
+     0.65860301089653,
+     5.858142818141198
+    ],
+    "shared_band": -1.4482971274557204,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "below10+loom20^3",
+    "encoder": {
+     "gate_below_deg": 10.0,
+     "gate_width_deg": 2.0,
+     "loom": 20.0,
+     "loom_exp": 3.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -242.0,
+     -464.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -57.5,
+    "peak_lag_spread_ms": 305.7462182922301,
+    "peak_z": [
+     0.35467157147450035,
+     2.325532348898505,
+     0.6618287276086153,
+     6.255711392518139
+    ],
+    "shared_band": -1.7228032582967594,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 2.0
+   },
+   {
+    "label": "below5+loom4^1",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 2.0,
+     "loom": 4.0,
+     "loom_exp": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     230.0,
+     -218.0,
+     -488.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -59.5,
+    "peak_lag_spread_ms": 308.64664261903124,
+    "peak_z": [
+     0.2623887709994357,
+     1.4693008599115103,
+     0.5836525343510153,
+     5.334590678560771
+    ],
+    "shared_band": -1.0767314611938683,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below5+loom8^2",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 2.0,
+     "loom": 8.0,
+     "loom_exp": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -202.0,
+     -468.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -48.5,
+    "peak_lag_spread_ms": 301.54062744512555,
+    "peak_z": [
+     0.2889103825645383,
+     1.537376548665538,
+     0.5921911962359474,
+     5.8599819942755556
+    ],
+    "shared_band": -1.2936652752311164,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below5+loom20^3",
+    "encoder": {
+     "gate_below_deg": 5.0,
+     "gate_width_deg": 2.0,
+     "loom": 20.0,
+     "loom_exp": 3.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     -134.0,
+     -460.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -29.5,
+    "peak_lag_spread_ms": 291.27435520484806,
+    "peak_z": [
+     0.3447453542805438,
+     1.7377981416432344,
+     0.5992118737857803,
+     6.259389744786853
+    ],
+    "shared_band": -1.538972018526907,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.5
+   },
+   {
+    "label": "below0+loom4^1",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 2.0,
+     "loom": 4.0,
+     "loom_exp": 1.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -126.0,
+     166.0,
+     -458.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -45.0,
+    "peak_lag_spread_ms": 274.65432820183264,
+    "peak_z": [
+     0.5116957909321045,
+     1.0825424666500942,
+     0.6280535761526619,
+     5.3419473830982005
+    ],
+    "shared_band": -0.8749258292309515,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below0+loom8^2",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 2.0,
+     "loom": 8.0,
+     "loom_exp": 2.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     -102.0,
+     64.0,
+     -446.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": -61.5,
+    "peak_lag_spread_ms": 252.45346105767692,
+    "peak_z": [
+     0.5865367655250419,
+     1.1881636214795381,
+     0.632607529157959,
+     5.874695403350415
+    ],
+    "shared_band": -1.0351718785772859,
+    "wiring": [
+     2,
+     0,
+     1,
+     3
+    ],
+    "n_on_time_best": 2,
+    "n_fire_best": 2,
+    "best_ontime_theta": 1.0
+   },
+   {
+    "label": "below0+loom20^3",
+    "encoder": {
+     "gate_below_deg": 0.0,
+     "gate_width_deg": 2.0,
+     "loom": 20.0,
+     "loom_exp": 3.0
+    },
+    "gated_norm": false,
+    "peak_lag_ms": [
+     238.0,
+     4.0,
+     -442.0,
+     238.0
+    ],
+    "peak_lag_mean_ms": 9.5,
+    "peak_lag_spread_ms": 277.6269979666963,
+    "peak_z": [
+     0.3096933998143848,
+     1.4293433904254504,
+     0.6388692145402425,
+     6.2961732674740025
+    ],
+    "shared_band": -1.342675972626277,
+    "wiring": [
+     0,
+     2,
+     1,
+     3
+    ],
+    "n_on_time_best": 1,
+    "n_fire_best": 1,
+    "best_ontime_theta": 1.5
+   }
+  ]
+ },
+ "static_reference": {
+  "source": "results/e7_wiring.json, band rule, re-scored with the identical guarded rule",
+  "n12": {
+   "real_lane_correct": 0.7272727272727273,
+   "ctrl_lane_correct_mean": 0.46232981352855784,
+   "ctrl_lane_correct_sd": 0.16274399797800143,
+   "n_ge_lane_correct": 1,
+   "n": 12,
+   "real_accuracy": 0.19583333333333333,
+   "ctrl_accuracy_mean": 0.17430555555555552,
+   "ctrl_accuracy_sd": 0.08841835094566408,
+   "n_ge_accuracy": 3
+  },
+  "n20": {
+   "real_lane_correct": 0.7272727272727273,
+   "ctrl_lane_correct_mean": 0.4692541232798216,
+   "ctrl_lane_correct_sd": 0.14292984603895473,
+   "n_ge_lane_correct": 1,
+   "n": 20,
+   "real_accuracy": 0.19583333333333333,
+   "ctrl_accuracy_mean": 0.17312500000000003,
+   "ctrl_accuracy_sd": 0.07998996247793984,
+   "n_ge_accuracy": 6
+  }
+ }
+}

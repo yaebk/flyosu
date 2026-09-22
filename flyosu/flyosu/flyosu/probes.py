@@ -34,7 +34,10 @@ Three of them, and the first is the one experiment 4's probe could not see:
     osu!mania's windows are tens of milliseconds wide.  A channel that is
     perfectly selective and 400 ms early scores nothing.  Reported per lane,
     plus the spread across lanes: four channels that peak at four different
-    times cannot share one threshold *and* be on time.
+    times cannot share one threshold *and* be on time.  Experiment 8 went
+    after this with the encoder (pass one through ``encoder=``) and got the
+    mean lag down from 365 to 185 ms without touching the spread, which is
+    the network's own dynamics rather than the stimulus.
 
 ``chord behaviour``
     With two notes on screen at once, does each channel still do what it does
@@ -77,15 +80,22 @@ class LaneTraces:
 
 def lane_traces(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray, dt: float = DT_PLAY,
                 approach_ms: float = 800.0, overshoot_ms: float = OVERSHOOT_MS,
-                lanes: tuple[int, ...] | None = None) -> LaneTraces:
-    """One silent falling note per lane, recorded from spawn to past the line."""
-    enc = Encoder(fly.ret)
+                lanes: tuple[int, ...] | None = None,
+                encoder: Encoder | None = None) -> LaneTraces:
+    """One silent falling note per lane, recorded from spawn to past the line.
+
+    ``encoder`` injects a sensory front end other than the default static one
+    (experiment 8).  It is reset before each lane, so a stateful front end
+    starts each descent from a blank field; the default ``Encoder`` is
+    stateless and its output is unchanged."""
+    enc = Encoder(fly.ret) if encoder is None else encoder
     ph = fly.ph_local
     ext = np.zeros(fly.net.n, dtype=np.float32)
     steps = int(round((approach_ms + overshoot_ms) / dt))
     lanes = tuple(range(len(LANE_AZ))) if lanes is None else lanes
     out = np.zeros((len(lanes), steps, N_KEYS))
     for li, lane in enumerate(lanes):
+        enc.reset()
         r = r0.copy()
         for i in range(steps):
             ext[ph] = enc([(lane, i * dt / approach_ms)], dt)
@@ -96,17 +106,19 @@ def lane_traces(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray, dt: float = D
 
 
 def chord_traces(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray, dt: float = DT_PLAY,
-                 approach_ms: float = 800.0, overshoot_ms: float = OVERSHOOT_MS
+                 approach_ms: float = 800.0, overshoot_ms: float = OVERSHOOT_MS,
+                 encoder: Encoder | None = None
                  ) -> tuple[list[tuple[int, int]], np.ndarray, np.ndarray]:
     """The same, for all six two-note chords.  Returns the pairs, their traces
     ``(6, T, 4)`` and the time axis."""
-    enc = Encoder(fly.ret)
+    enc = Encoder(fly.ret) if encoder is None else encoder
     ph = fly.ph_local
     ext = np.zeros(fly.net.n, dtype=np.float32)
     steps = int(round((approach_ms + overshoot_ms) / dt))
     pairs = list(combinations(range(len(LANE_AZ)), 2))
     out = np.zeros((len(pairs), steps, N_KEYS))
     for pi, (a, b) in enumerate(pairs):
+        enc.reset()
         r = r0.copy()
         for i in range(steps):
             prog = i * dt / approach_ms
@@ -253,10 +265,11 @@ def band_assignment(tr: LaneTraces, hit_ms: tuple[float, float] = (-160.0, 160.0
 
 
 def measure(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray, wiring: list[int] | None = None,
-            dt: float = DT_PLAY, chords: bool = True, theta: float = 1.5) -> dict:
+            dt: float = DT_PLAY, chords: bool = True, theta: float = 1.5,
+            encoder: Encoder | None = None) -> dict:
     """All of the above for one network.  ``wiring`` defaults to the anatomical
     assignment, derived from the same traces (so the probe is self-contained)."""
-    tr = lane_traces(fly, norm, r0, dt=dt)
+    tr = lane_traces(fly, norm, r0, dt=dt, encoder=encoder)
     if wiring is None:
         pre = tr.window(-400.0, 0.0)
         wiring = best_assignment(tr.z[:, pre].mean(axis=1))
@@ -266,6 +279,6 @@ def measure(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray, wiring: list[int]
            "crossings": crossings(tr, wiring, theta=theta),
            "timing": timing(tr, wiring), "selectivity": selectivity(tr, wiring)}
     if chords:
-        pairs, Zc, _ = chord_traces(fly, norm, r0, dt=dt)
+        pairs, Zc, _ = chord_traces(fly, norm, r0, dt=dt, encoder=encoder)
         out["chords"] = chord_linearity(tr, pairs, Zc, wiring)
     return out

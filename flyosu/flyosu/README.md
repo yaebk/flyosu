@@ -176,6 +176,19 @@ durable one. Three experiments in a row, a gap shrank as soon as the controls
 were given a fairer procedure, which is by now the most robust finding here.
 **[`docs/RESULTS_E7.md`](docs/RESULTS_E7.md).**
 
+Experiment 8 went after the one cap that has nothing to do with the connectome:
+every network's channels peak 200–600 ms *before* the note arrives, because a
+note is visible from spawn and the total light reaching the eye barely changes
+as it falls. A ventral gate plus a looming note halves the lag (365 → 185 ms
+across networks) and lifts the real network to 0.808 lane-correct and 0.246
+accuracy — but the controls gain as much, so the comparison weakens again
+(3/12 → 5/12 on accuracy), and the front end that does it assumes the fly sees
+only the bottom third of the playfield and that notes grow as they fall. Both
+stay off by default. The finding worth keeping is the ceiling: **the spread of
+the four channels' peak times is set by the network's own dynamics and no eye
+removes it**, so the next timing effort belongs in the readout.
+**[`docs/RESULTS_E8.md`](docs/RESULTS_E8.md).**
+
 Experiment 5 changed the method. The fly is a frozen recurrent network with a
 small linear readout — a reservoir computer — and osu!mania supplies free
 supervision, because the notes fall whether or not the player presses. Fitting
@@ -288,7 +301,7 @@ flyosu/
   outputs.py      descending neurons -> four channels, defined blind to stimulus
   model.py        assembles and calibrates a runnable fly; regimes; controls; stability
   mania.py        4K osu!mania: notes, charts, curriculum, clock, judge   (steps 5, 8)
-  encoder.py      playfield -> light on the eye                            (step 6)
+  encoder.py      playfield -> light on the eye; declared variants      (step 6)
   controller.py   channels -> keys: normaliser, 20-parameter threshold policy (step 7)
   play.py         the game loop that couples all of the above
   learn.py        reward-modulated perturbation of the readout            (step 9)
@@ -318,6 +331,7 @@ docs/RESULTS_E4.md      experiment 4
 docs/RESULTS_E5.md      experiment 5
 docs/RESULTS_E6.md      experiment 6
 docs/RESULTS_E7.md      experiment 7
+docs/RESULTS_E8.md      experiment 8
 data/SOURCES.md         where the data comes from, with citations
 ```
 

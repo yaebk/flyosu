@@ -1,0 +1,20 @@
+=== experiment 8: does a different sensory front end fix the timing? ===
+
+static (default front end)               lag real  -284.0 ctrl  -274.0 | LC 0.727@1.5(n=22) vs 0.521+-0.231 [1/4] | ACC 0.196@1.0(n=31) vs 0.254+-0.087 [2/4]
+adaptation, tau 120 ms, gain 2           lag real  -284.0 ctrl  -277.5 | LC 0.560@2.5(n=25) vs 0.451+-0.116 [1/4] | ACC 0.200@1.5(n=34) vs 0.215+-0.065 [2/4]
+loom x9 by arrival (exp 2)               lag real  -115.0 ctrl   -85.9 | LC 0.500@1.0(n=22) vs 0.451+-0.098 [1/4] | ACC 0.117@2.5(n=21) vs 0.203+-0.112 [3/4]
+ventral gate, below +0 deg, 2 deg edge   lag real    -8.0 ctrl   -65.5 | LC 0.450@0.5(n=20) vs 0.852+-0.256 [3/4] | ACC 0.150@0.5(n=20) vs 0.284+-0.162 [3/4]  (1 control(s) never reached 20 presses at any theta)
+ventral gate + loom                      lag real   -61.5 ctrl   +12.0 | LC 0.808@0.5(n=26) vs 0.528+-0.325 [2/12] | ACC 0.246@0.5(n=26) vs 0.203+-0.194 [5/12]
+
+static front end, same 12 controls, straight from experiment 7:
+  LC real 0.727 vs 0.462+-0.163 [1/12]   ACC real 0.196 vs 0.174+-0.088 [3/12]
+static front end, all 20 controls (experiment 7):
+  LC real 0.727 vs 0.469+-0.143 [1/20]   ACC real 0.196 vs 0.173+-0.080 [6/20]
+
+timing (probes.timing; peaks reported relative to the judgment line, 0 = on the line;
+a peak at +238 ms is the last sample of the probe window, i.e. censored)
+static   n= 5  real peaks [-462. -316. -596.  238.] mean  -284.0 |mean|  403.0 spread 317.2 | all-networks |lag|  365.4 spread  294.3  on-time@1.5 3/20 (real 1/4)
+adapt    n= 5  real peaks [-486. -352. -536.  238.] mean  -284.0 |mean|  403.0 spread 308.8 | all-networks |lag|  383.4 spread  329.5  on-time@1.5 3/20 (real 1/4)
+loom     n= 5  real peaks [ 238. -334. -602.  238.] mean  -115.0 |mean|  353.0 spread 365.5 | all-networks |lag|  266.5 spread  229.4  on-time@1.5 4/20 (real 1/4)
+gate     n= 5  real peaks [ 238.  -96. -412.  238.] mean    -8.0 |mean|  246.0 spread 270.2 | all-networks |lag|  256.8 spread  258.3  on-time@1.5 4/20 (real 1/4)
+combo    n=13  real peaks [-102.   64. -446.  238.] mean   -61.5 |mean|  212.5 spread 252.5 | all-networks |lag|  184.8 spread  193.4  on-time@1.5 13/52 (real 1/4)

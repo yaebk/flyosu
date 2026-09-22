@@ -276,6 +276,28 @@ comparison to be adversarial to the real connectome from the start. What is
 untouched by all of it: the spectral radius and the population dimensionality,
 neither of which needs a behavioural protocol.
 
+## What experiment 8 found (the timing ceiling)
+
+`docs/RESULTS_E8.md`. The channels peak 200-600 ms before the note arrives
+because the total light reaching the eye is nearly flat during a descent -- the
+only change the network sees is the step at spawn. The adaptation front end
+already in `encoder.py` does not fix this (29 configurations, mean lag unmoved)
+because a per-pixel high-pass adds gain, not global timing. A ventral gate plus
+a looming note does halve the lag and lifts the real network's play, but the
+controls gain as much, and it assumes the fly sees only the bottom third of the
+playfield and that notes grow on approach. Both are off by default and should
+stay that way; they are diagnostics.
+
+The durable result is a ceiling: **no front end moved the spread of the four
+channels' peak times below ~190 ms**, because that spread is the network's own
+latency structure rather than the stimulus. With one shared threshold and a
++-64 ms "300" window, at most 1-2 lanes of 4 can be on time whatever the eye
+does. The lever is per-key delays in the controller, which would be the first
+change to the policy's *form* rather than its numbers. Note the tension with
+experiment 6: peak-time spread is the strongest correlate of play across random
+graphs (staggered peaks let one key win under a shared threshold) while also
+being what wrecks the timing. Reconciling those is the interesting problem.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on
