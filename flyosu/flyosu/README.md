@@ -161,6 +161,19 @@ threshold and the gap halves — real 0.73 vs 0.43 ± 0.15, **1/20, p = 0.095**.
 About a third of the published untrained gap was the threshold.
 **[`docs/RESULTS_E6.md`](docs/RESULTS_E6.md).**
 
+Experiment 7 took the obvious next step and swapped the wiring rule's criterion
+for the one that discriminates, then re-ran the fair protocol. The new rule
+works — it widens the band on 15 of 21 networks — but the real connectome was
+*already at its optimum under the old rule*, so only the controls improve.
+Untrained accuracy ends level (real 0.196 vs 0.186 ± 0.075, **8/20, p = 0.43**)
+and lane-correctness stays at 1/20, p = 0.095. It also retracts experiment 6's
+central claim: with each network wired by the rule that optimises the band,
+**5 of 20 controls match the real network's band**, so it is not the only
+network that admits a single working threshold. Three experiments in a row, a
+gap shrank as soon as the controls were given a fairer procedure — which is by
+now the most robust finding here.
+**[`docs/RESULTS_E7.md`](docs/RESULTS_E7.md).**
+
 Experiment 5 changed the method. The fly is a frozen recurrent network with a
 small linear readout — a reservoir computer — and osu!mania supplies free
 supervision, because the notes fall whether or not the player presses. Fitting
@@ -206,6 +219,8 @@ python -m experiments.e6_timing        # experiment 6, phase 1 (~6 min)
 PHASE=2 python -m experiments.e6_timing     # per-key thresholds (~17 min)
 PHASE=3 python -m experiments.e6_timing     # threshold sweep (~32 min)
 python -m experiments.figures_e6
+python -m experiments.e7_wiring        # experiment 7 (~50 min)
+python -m experiments.figures_e7
 ```
 
 Watch it play:
@@ -287,10 +302,11 @@ experiments/
   e4_covariate.py     radius vs untrained behaviour across 20 rewired graphs
   e5_reservoir.py     closed-form readouts of four sizes, real vs three families
   e6_timing.py        what predicts untrained play; the threshold sweep
-  figures.py / figures_e2.py / ... / figures_e5.py / figures_e6.py
+  e7_wiring.py        a wiring rule chosen on the shared-threshold band
+  figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
-tests/test_play.py      53 checks on the game side, incl. the probes
+tests/test_play.py      55 checks on the game side, incl. the probes
 tests/test_reservoir.py 17 checks on the closed-form readout
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
 docs/RESULTS.md         experiment 1
@@ -299,6 +315,7 @@ docs/RESULTS_E3.md      experiment 3
 docs/RESULTS_E4.md      experiment 4
 docs/RESULTS_E5.md      experiment 5
 docs/RESULTS_E6.md      experiment 6
+docs/RESULTS_E7.md      experiment 7
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -310,7 +327,7 @@ python run_fly.py --fall D           # watch a note descend
 python run_fly.py --sweep            # azimuth tuning, as text
 python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 28 checks
-python -m tests.test_play            # 53 checks
+python -m tests.test_play            # 55 checks
 python -m tests.test_reservoir       # 17 checks
 ```
 
@@ -337,15 +354,16 @@ network) to "does the fly press the right key with no learning" (experiment 2:
 yes, and random networks mostly do not) to "how much of that survives a better
 readout" (experiment 5: none of it) to "what is the untrained advantage made
 of, and how much of it was our threshold" (experiment 6: a shared-threshold
-property, and about a third of it was the threshold). The stable claim is
-narrower than "the connectome helps" and more interesting: the task-relevant
-structure exists in every network, and the real wiring is what makes it
-*reachable* — by a small reward-driven search, and by a policy simple enough to
-use one threshold for four keys. Three connectome-specific measurements stand
-on their own — spectral radius, population dimensionality, and the
-shared-threshold band — and the first two replicate on a second dataset. The
-strongest behavioural claim is now p = 0.095 under the most generous control,
-not p = 0.048.
+property, and about a third of it was the threshold). — to "what happens when the controls
+get every advantage the real network had" (experiment 7: the accuracy gap
+closes). The honest summary is that **the behavioural gap shrank every time the
+controls were given a fairer procedure**, and that is now the most robust thing
+here. What still stands are the two measurements that need no behavioural
+protocol at all — spectral radius (2.28 vs 0.78) and population dimensionality
+(PC1 0.38 vs 0.11–0.17), both replicated on the male CNS. What does not: the
+untrained accuracy advantage (8/20, p = 0.43) and the supervised ceiling
+(experiment 5, no advantage at any readout size). Untrained lane-correctness
+survives in direction at 1/20, p = 0.095.
 
 Step 12 is built, not verified: `play_osu.py` simulates the fly on a beatmap
 and replays its presses against the wall clock through a pluggable sink

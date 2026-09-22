@@ -1,0 +1,35 @@
+  real connectome          margin [2, 0, 1, 3] band [2, 0, 1, 3] (same)  band width -0.82 -> -0.82  lane-correct best 0.73@1.5  acc 0.196  (140s)
+  rewired #1               margin [1, 0, 2, 3] band [1, 3, 0, 2] (DIFFERENT)  band width -0.87 -> -0.63  lane-correct best 0.34@1.0  acc 0.321  (140s)
+  rewired #2               margin [2, 0, 3, 1] band [2, 0, 3, 1] (same)  band width -2.47 -> -2.47  lane-correct best 0.34@2.0  acc 0.158  (145s)
+  rewired #3               margin [2, 0, 1, 3] band [0, 3, 1, 2] (DIFFERENT)  band width -3.96 -> -0.59  lane-correct best 0.90@3.0  acc 0.358  (148s)
+  rewired #4               margin [1, 2, 0, 3] band [3, 0, 2, 1] (DIFFERENT)  band width -1.42 -> -0.72  lane-correct best 0.50@1.0  acc 0.179  (147s)
+  rewired #5               margin [1, 3, 0, 2] band [0, 3, 1, 2] (DIFFERENT)  band width -1.81 -> -0.78  lane-correct best 0.28@0.5  acc 0.188  (140s)
+  rewired #6               margin [0, 1, 3, 2] band [0, 1, 3, 2] (same)  band width -2.11 -> -2.11  lane-correct best 0.45@2.0  acc 0.175  (149s)
+  rewired #7               margin [3, 0, 1, 2] band [3, 0, 1, 2] (same)  band width -2.64 -> -2.64  lane-correct best 0.59@1.5  acc 0.142  (148s)
+  rewired #8               margin [1, 3, 2, 0] band [0, 3, 1, 2] (DIFFERENT)  band width -1.54 -> +0.04  lane-correct best 0.50@1.0  acc 0.246  (146s)
+  rewired #9               margin [3, 0, 1, 2] band [1, 0, 3, 2] (DIFFERENT)  band width -1.63 -> -1.63  lane-correct best 0.28@2.0  acc 0.125  (139s)
+  rewired #10              margin [3, 0, 1, 2] band [0, 1, 3, 2] (DIFFERENT)  band width -1.66 -> -1.37  lane-correct best 0.41@0.5  acc 0.100  (120s)
+  rewired #11              margin [0, 3, 2, 1] band [3, 0, 2, 1] (DIFFERENT)  band width -1.98 -> -1.92  lane-correct best 0.45@1.5  acc 0.104  (131s)
+  rewired #12              margin [3, 2, 1, 0] band [3, 1, 2, 0] (DIFFERENT)  band width -2.71 -> -2.69  lane-correct best 0.50@2.0  acc 0.054  (131s)
+  rewired #13              margin [1, 0, 3, 2] band [1, 0, 2, 3] (DIFFERENT)  band width -2.38 -> -2.38  lane-correct best 0.29@2.5  acc 0.158  (135s)
+  rewired #14              margin [3, 0, 2, 1] band [0, 3, 1, 2] (DIFFERENT)  band width -3.92 -> -2.95  lane-correct best 0.50@0.5  acc 0.246  (129s)
+  rewired #15              margin [2, 3, 1, 0] band [0, 3, 1, 2] (DIFFERENT)  band width -3.05 -> -3.05  lane-correct best 0.65@2.0  acc 0.250  (131s)
+  rewired #16              margin [3, 1, 2, 0] band [1, 3, 2, 0] (DIFFERENT)  band width -1.72 -> -1.48  lane-correct best 0.50@2.5  acc 0.254  (118s)
+  rewired #17              margin [3, 0, 2, 1] band [1, 0, 2, 3] (DIFFERENT)  band width -2.25 -> -1.72  lane-correct best 0.38@2.5  acc 0.100  (113s)
+  rewired #18              margin [0, 1, 2, 3] band [2, 1, 3, 0] (DIFFERENT)  band width -2.69 -> -1.97  lane-correct best 0.58@1.0  acc 0.225  (112s)
+  rewired #19              margin [3, 0, 2, 1] band [3, 0, 2, 1] (same)  band width -2.26 -> -2.26  lane-correct best 0.43@2.0  acc 0.196  (114s)
+  rewired #20              margin [0, 1, 2, 3] band [0, 1, 2, 3] (same)  band width -1.33 -> -1.33  lane-correct best 0.52@2.0  acc 0.146  (113s)
+
+=== experiment 7: wiring chosen on the shared-threshold band ===
+  the two rules disagree on 15/21 networks (real: same)
+  band width gained: +0.46 z on average, max +3.37
+
+  lane-correct, own best theta
+    band rule    real 0.727  rewired 0.469 +- 0.143  1/20  p 0.095
+    margin rule  real 0.727  rewired 0.433 +- 0.153  1/20  p 0.095   (experiment 6)
+    change       real +0.000   rewired +0.036
+
+  accuracy, own best theta
+    band rule    real 0.196  rewired 0.186 +- 0.075  8/20  p 0.429
+    margin rule  real 0.196  rewired 0.148 +- 0.076  5/20  p 0.286   (experiment 6)
+    change       real +0.000   rewired +0.039

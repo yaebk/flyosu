@@ -9,6 +9,15 @@ threshold that fires each key on its own lane and not on the others (band
 leads for most of the hit window (0.79 against 0.48 ± 0.14, **0/20**). Neither
 quantity predicts play *among* the controls.
 
+> **Partly retracted by experiment 7.** The band was measured with every
+> network wired by the *margin* rule, which does not optimise it. Give each
+> network the wiring that does and 5 of 20 rewired graphs match or beat the
+> real network's band (−1.73 ± 0.85, p = 0.286). The real network has one of
+> the widest bands and is one of the few networks where the naive rule finds
+> it — it is not alone in having one. The selectivity result (0/20) is measured
+> under the same wiring and has not been re-tested. See
+> `docs/RESULTS_E7.md`.
+
 **(2)** What predicts play among the controls is something else entirely: how
 *spread out* the four channels' peak times are (ρ = +0.57, p = 0.009) and how
 many lanes cross threshold while a press would still be judged (ρ = +0.47,
@@ -167,9 +176,10 @@ use of this metric needs the guard.
   p = 0.095** when a reviewer asks for the strongest control, and as p = 0.048
   at the fixed θ the earlier experiments used — with the difference stated.
   Do not cite 0.048 alone any more.
-- Describe the real network's distinguishing property precisely: it is the only
-  one of 21 that admits a single working threshold for all four keys, and the
-  only one that does not need that threshold tuned.
+- Describe the real network's distinguishing property precisely, and note that
+  experiment 7 narrowed it: it has one of the widest shared-threshold bands, it
+  is one of six networks of 21 where the naive wiring rule happens to find that
+  band, and it is the one network that needs no threshold tuning.
 - Treat the spread of channel peak times as the most promising design variable
   for a better wiring rule, and stop using mean response margins for that job.
 - Add a press-count guard wherever lane-correctness is used.

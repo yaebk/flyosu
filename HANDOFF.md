@@ -251,6 +251,31 @@ is a ratio over presses near a note, so a nearly silent network scores 1.00 --
 guard it with a minimum press count (experiment 4 is unaffected, 45-237 presses
 per network, but the sweep was not).
 
+## What experiment 7 found (and retracted)
+
+`docs/RESULTS_E7.md`. The wiring rule now picks the permutation that maximises
+the shared-threshold band (`probes.band_assignment`) rather than the summed
+mean response. It is a better rule -- it changes the choice on 15 of 21
+networks and widens the band by 0.46 z on average -- and it helps only the
+controls, because the real connectome was **already at the band optimum under
+the old rule**. Under the fairest protocol yet (band rule + each network at its
+own best threshold), untrained accuracy is level: real 0.196 vs rewired
+0.186 +- 0.075, 8/20, p = 0.43. Lane-correctness stays at 1/20, p = 0.095.
+
+It also retracts experiment 6's headline. "The real network is the only one of
+21 admitting a single working threshold" was measured with every network wired
+by the margin rule, which was not optimising that band. Wire each network by
+the rule that does, and 5 of 20 controls match or beat the real network's band.
+
+The pattern across experiments 5, 6 and 7 is now the most robust result in the
+project: **the behavioural gap shrinks every time the controls are given a
+fairer procedure.** Two procedural choices made early (theta = 1.5, and the
+margin wiring rule) both happened to suit the network they were developed on.
+A successor should assume there are more of these and design the next
+comparison to be adversarial to the real connectome from the start. What is
+untouched by all of it: the spectral radius and the population dimensionality,
+neither of which needs a behavioural protocol.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on
