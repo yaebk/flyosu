@@ -62,3 +62,34 @@ Built on first run and cached; safe to delete.
 | `flywire783_cache.npz` | index-aligned edge arrays (pre, post, syn, sign) |
 | `flywire783_ann.parquet` | annotations re-indexed to match |
 | `models/fly_*.pkl` | calibrated networks, keyed by their settings |
+
+## Male CNS connectome v1.0 — `data/malecns/` (added later; not yet used)
+
+The whole adult male central nervous system — brain, optic lobes **and ventral
+nerve cord** — fully proofread and annotated (FlyEM, Janelia; published in
+*Cell*, September 2026). This is the dataset the project originally wanted: it
+contains the descending neurons *and* the 708 leg/VNC motor neurons below them,
+so the four keys can become four real motor pools. Licensed CC-BY; the bulk
+files are on a public Google Cloud bucket with no token (verified from this
+machine, unlike the earlier neuPrint route).
+
+```
+B=https://storage.googleapis.com/flyem-male-cns/v1.0/connectome-data/flat-connectome
+curl -fsSL -o data/malecns/body-annotations-male-cns-v1.0-minconf-0.5.feather  $B/body-annotations-male-cns-v1.0-minconf-0.5.feather   # 14 MB
+curl -fsSL -o data/malecns/body-neurotransmitters-male-cns-v1.0.feather        $B/body-neurotransmitters-male-cns-v1.0.feather         # 43 MB
+curl -fsSL -o data/malecns/connectome-weights-male-cns-v1.0-minconf-0.5.feather $B/connectome-weights-male-cns-v1.0-minconf-0.5.feather  # 1.05 GB
+```
+
+| file | contents |
+|---|---|
+| `body-annotations-…` | 211,577 bodies; `superclass` (28 values incl. `descending_neuron` 1,314, `vnc_motor` 708, `ol_sensory` 6,098), `class`, `type` (11,752 cell types; `R1-R6` 3,377), `somaSide` / `rootSide`, `somaLocation`, `somaNeuromere`, `entryNerve`/`exitNerve` |
+| `body-neurotransmitters-…` | per body: `consensus_nt`, `predicted_nt`, confidences (1.8 M rows — one per body per prediction bucket) |
+| `connectome-weights-…` | `body_pre`, `body_post`, `weight` (synapse count); ~152 M edges at synapse confidence ≥ 0.5, in 2,318 Feather record batches — stream it and threshold on `weight` |
+
+Download page: https://male-cns.janelia.org/download/  ·  neuPrint dataset `male-cns:v1.0`.
+
+Citation: the Male CNS connectome consortium, *Cell* (2026) — see
+https://www.cell.com/consortium/male-fly-connectome for the paper set.
+
+Status: downloaded and schema-inspected; no loader, retina fit or experiment
+uses it yet. See HANDOFF.md, "Male CNS".

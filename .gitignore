@@ -12,3 +12,8 @@ flyosu/flyosu/data/models/
 
 # session scratch
 flyosu/flyosu/scratch/
+
+# male CNS raw data (fetched from the public FlyEM bucket, ~1.1 GB)
+flyosu/flyosu/data/malecns/*.feather
+flyosu/flyosu/data/malecns/*.npz
+flyosu/flyosu/data/malecns/*.parquet
