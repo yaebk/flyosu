@@ -40,6 +40,7 @@ band-optimal wiring and ask again.  Probes only, no play, so it is cheap.
 
     N_SEEDS=20 python -m experiments.e7_wiring
     PHASE=selectivity N_SEEDS=20 python -m experiments.e7_wiring
+    DATASET=malecns N_SEEDS=10 python -m experiments.e7_wiring
     python -m experiments.e7_wiring report
 """
 
@@ -58,7 +59,8 @@ from flyosu import learn as L, model as M, play as P, probes as PR  # noqa: E402
 from flyosu.controller import best_assignment  # noqa: E402
 
 RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
-PATH = os.path.join(RESULTS, "e7_wiring.json")
+DATASET = os.environ.get("DATASET", "flywire")
+PATH = os.path.join(RESULTS, "e7_wiring" + ("" if DATASET == "flywire" else f"_{DATASET}") + ".json")
 E6 = os.path.join(RESULTS, "e6_timing.json")
 THETA_SWEEP = (0.5, 1.0, 1.5, 2.0, 2.5, 3.0)
 SWEEP_STAGE = 3
@@ -88,7 +90,7 @@ def sweep(player, wiring):
 
 def measure(label, kw):
     t0 = time.time()
-    fly = M.build(regime="play", **kw)
+    fly = M.build(regime="play", dataset=DATASET, **kw)
     player = P.Player.untrained(fly, theta=1.5, noise=NOISE)
     tr = PR.lane_traces(fly, player.norm, player.r0)
     pre = tr.window(-400.0, 0.0)
@@ -112,7 +114,7 @@ def measure(label, kw):
 def selectivity_one(label, kw):
     """Selectivity and the other probe quantities under BOTH wirings."""
     t0 = time.time()
-    fly = M.build(regime="play", **kw)
+    fly = M.build(regime="play", dataset=DATASET, **kw)
     player = P.Player.untrained(fly, theta=1.5)
     tr = PR.lane_traces(fly, player.norm, player.r0)
     pre = tr.window(-400.0, 0.0)
@@ -204,8 +206,13 @@ def report(results):
     if real is None or len(ctrl) < 3:
         print("not enough networks yet")
         return
-    with open(E6) as fh:
-        margin = {r["label"]: r for r in json.load(fh).get("theta_sweep", [])}
+    # experiment 6's theta sweep is the margin-rule baseline, and it exists for
+    # FlyWire only -- the labels are identical across datasets, so comparing a
+    # male CNS run against it would silently mix connectomes.
+    margin = {}
+    if DATASET == "flywire" and os.path.exists(E6):
+        with open(E6) as fh:
+            margin = {r["label"]: r for r in json.load(fh).get("theta_sweep", [])}
 
     n_diff = sum(1 for r in runs.values() if not r["same"])
     print(f"\n=== experiment 7: wiring chosen on the shared-threshold band ===")
