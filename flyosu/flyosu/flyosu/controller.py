@@ -1,0 +1,203 @@
+"""
+Controller: four channel activations -> key presses.
+
+Step 7.  Everything downstream of the descending neurons.  Kept deliberately
+small, because experiment 1 predicts that a free readout is exactly what erases
+the difference between the real connectome and a rewired one: the fewer
+parameters live here, the more the result is about the wiring.
+
+Two pieces:
+
+``ChannelNormaliser``  puts the four channels on a common scale.  The channels
+    have very different baselines and modulation depths (see run_fly.py), so
+    each is z-scored against its own mean and spread over the same 61-stimulus
+    ensemble the network was calibrated on, settled from the blank fixed
+    point.  Label-free, never sees a lane or a key, applied identically to the
+    real network and every control.
+
+``Controller``  a leaky integrator on the z-scored channels followed by a
+    threshold with hysteresis:
+
+        tau_s dz_s/dt = -z_s + z                 (smoothing, optional)
+        u             = W z_s + b                (4 x 4 mixing + 4 thresholds)
+        press key k when u_k crosses 0 upward, at most once per refractory
+        period
+
+    ``W`` and ``b`` are the *only* learnable parameters in the whole system --
+    20 numbers.  The connectome stays frozen.
+
+``Controller.anatomical`` builds the untrained policy: ``W`` is a permutation
+matrix that wires each key to the channel that responds most while a single
+note falls in its lane (one silent note per lane, no feedback; mean z over the
+second half of the descent; best one-to-one assignment over the 24
+permutations), ``b`` is one shared threshold.  Static point responses at the
+judgment line were tried first and are a poor guide to the moving-note
+response, which is dominated by the network's transient dynamics.  That assignment is the
+one place stimulus knowledge enters before any learning -- log2(24) = 4.6
+bits -- and it is reported as such; the learning experiments also start from
+``W = 0`` so the mapping has to be discovered from reward alone.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+from itertools import permutations
+
+import numpy as np
+
+from .encoder import EL_JUDGE, EL_SPAWN, LANE_AZ, SIGMA_DEG, Encoder
+from .model import CAL_AZ, CAL_EL, DT_PLAY, Fly
+
+N_KEYS = 4
+
+
+@dataclass
+class ChannelNormaliser:
+    mu: np.ndarray
+    sd: np.ndarray
+
+    def z(self, a: np.ndarray) -> np.ndarray:
+        return (np.asarray(a, dtype=np.float64) - self.mu) / self.sd
+
+    @classmethod
+    def fit(cls, fly: Fly, r0: np.ndarray, dt: float = DT_PLAY,
+            duration_ms: float = 300.0) -> "ChannelNormaliser":
+        """Channel mean and spread over the calibration ensemble, each stimulus
+        settled from the blank state ``r0`` for ``duration_ms``."""
+        rows = []
+        for az in CAL_AZ:
+            for el in CAL_EL:
+                r, _ = fly.net.run(fly.stimulus([(float(az), float(el), 1.0)],
+                                                sigma_deg=SIGMA_DEG),
+                                   duration_ms=duration_ms, dt=dt, r0=r0)
+                rows.append(fly.channels(r))
+        rows.append(fly.channels(r0))
+        A = np.array(rows, dtype=np.float64)
+        sd = A.std(0)
+        sd[sd <= 0] = 1.0
+        return cls(mu=A.mean(0), sd=sd)
+
+
+@dataclass
+class Controller:
+    W: np.ndarray                      # (4, 4) key <- channel mixing
+    b: np.ndarray                      # (4,) thresholds (u = W z + b > 0 fires)
+    refractory_ms: float = 150.0
+    smooth_ms: float = 40.0            # leaky-integrator time constant; 0 = none
+    z_s: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS))
+    u_prev: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
+    last_press: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
+
+    # -- parameters --------------------------------------------------------
+
+    @property
+    def params(self) -> np.ndarray:
+        return np.concatenate([self.W.ravel(), self.b])
+
+    @params.setter
+    def params(self, p: np.ndarray) -> None:
+        p = np.asarray(p, dtype=np.float64)
+        self.W = p[:N_KEYS * N_KEYS].reshape(N_KEYS, N_KEYS).copy()
+        self.b = p[N_KEYS * N_KEYS:].copy()
+
+    @property
+    def n_params(self) -> int:
+        return N_KEYS * N_KEYS + N_KEYS
+
+    def copy(self) -> "Controller":
+        return Controller(self.W.copy(), self.b.copy(), self.refractory_ms,
+                          self.smooth_ms)
+
+    # -- dynamics ----------------------------------------------------------
+
+    def reset(self) -> None:
+        self.z_s = np.zeros(N_KEYS)
+        self.u_prev = np.full(N_KEYS, -np.inf)
+        self.last_press = np.full(N_KEYS, -np.inf)
+
+    def step(self, z: np.ndarray, t_ms: float, dt_ms: float) -> list[int]:
+        """Feed one frame of z-scored channel activity; return keys pressed."""
+        if self.smooth_ms > 0:
+            self.z_s += (dt_ms / self.smooth_ms) * (np.asarray(z) - self.z_s)
+        else:
+            self.z_s = np.asarray(z, dtype=np.float64)
+        u = self.W @ self.z_s + self.b
+        fire = ((u > 0) & (self.u_prev <= 0)
+                & (t_ms - self.last_press >= self.refractory_ms))
+        self.u_prev = u
+        keys = np.flatnonzero(fire).tolist()
+        for k in keys:
+            self.last_press[k] = t_ms
+        return keys
+
+    def drive(self) -> np.ndarray:
+        """Current pre-threshold drive, for display."""
+        return self.W @ self.z_s + self.b
+
+    # -- construction ------------------------------------------------------
+
+    @classmethod
+    def anatomical(cls, fly: Fly, norm: ChannelNormaliser, r0: np.ndarray,
+                   theta: float = 1.0, dt: float = DT_PLAY, **kw) -> "Controller":
+        """Untrained policy: each key wired to the channel that prefers its lane."""
+        Z = lane_response_matrix(fly, norm, r0, dt=dt)
+        perm = best_assignment(Z)
+        W = np.zeros((N_KEYS, N_KEYS))
+        for lane, ch in enumerate(perm):
+            W[lane, ch] = 1.0
+        return cls(W=W, b=np.full(N_KEYS, -float(theta)), **kw)
+
+    @classmethod
+    def blank(cls, theta: float = 1.0, **kw) -> "Controller":
+        """No wiring at all: ``W = 0``.  Learning has to find the mapping."""
+        return cls(W=np.zeros((N_KEYS, N_KEYS)), b=np.full(N_KEYS, -float(theta)), **kw)
+
+    def wiring(self, names: list[str]) -> str:
+        rows = []
+        for k, key in enumerate("DFJK"):
+            terms = [f"{self.W[k, c]:+.2f}*{names[c]}" for c in range(N_KEYS)
+                     if abs(self.W[k, c]) > 1e-3]
+            rows.append(f"  {key}: " + (" ".join(terms) if terms else "(nothing)")
+                        + f"  {self.b[k]:+.2f}")
+        return "\n".join(rows)
+
+
+def lane_response_matrix(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray,
+                         dt: float = DT_PLAY, approach_ms: float = 800.0,
+                         window: tuple[float, float] = (0.5, 1.0)) -> np.ndarray:
+    """(lane, channel) mean z-scored response while one note falls in each lane,
+    averaged over the part of the descent given by ``window`` (progress units)."""
+    enc = Encoder(fly.ret)
+    ph = fly.ph_local
+    ext = np.zeros(fly.net.n, dtype=np.float32)
+    steps = int(round(approach_ms / dt))
+    rows = []
+    for lane in range(len(LANE_AZ)):
+        r = r0.copy()
+        acc, n = np.zeros(N_KEYS), 0
+        for i in range(steps):
+            prog = i / steps
+            ext[ph] = enc([(lane, prog)], dt)
+            r = fly.net.step(r, ext, dt)
+            if window[0] <= prog <= window[1]:
+                acc += norm.z(fly.channels(r)); n += 1
+        rows.append(acc / max(n, 1))
+    return np.array(rows)
+
+
+def static_response_matrix(fly: Fly, norm: ChannelNormaliser, r0: np.ndarray,
+                           dt: float = DT_PLAY, duration_ms: float = 300.0) -> np.ndarray:
+    """(lane, channel) z-scored settled response to a point at the judgment line
+    (experiment 1's stimulus), kept for comparison."""
+    rows = []
+    for az in LANE_AZ:
+        r, _ = fly.net.run(fly.stimulus([(float(az), EL_JUDGE, 1.0)], sigma_deg=SIGMA_DEG),
+                           duration_ms=duration_ms, dt=dt, r0=r0)
+        rows.append(norm.z(fly.channels(r)))
+    return np.array(rows)
+
+
+def best_assignment(Z: np.ndarray) -> list[int]:
+    """Lane -> channel one-to-one assignment maximising the summed response."""
+    return list(max(permutations(range(Z.shape[1])),
+                    key=lambda p: sum(Z[i, p[i]] for i in range(Z.shape[0]))))
