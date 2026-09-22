@@ -214,6 +214,18 @@ def report(results):
         with open(E6) as fh:
             margin = {r["label"]: r for r in json.load(fh).get("theta_sweep", [])}
 
+    # lane-correctness is a ratio over presses landing near a note, so a
+    # network that never reaches MIN_COUNTED at any threshold gets a fallback
+    # score, not a measurement.  Say so loudly -- on the male CNS the real
+    # network is the only one of eleven in that position, and its "0.80" came
+    # from eight presses.
+    bad = [r["label"] for r in runs.values()
+           if not any(n >= MIN_COUNTED for n in r["band"]["n_counted"])]
+    if bad:
+        msg = ", ".join(bad)
+        print("")
+        print("  !! no threshold reaches " + str(MIN_COUNTED) + " counted presses for: " + msg)
+        print("     their lane-correct is a fallback, not a score; read accuracy instead")
     n_diff = sum(1 for r in runs.values() if not r["same"])
     print(f"\n=== experiment 7: wiring chosen on the shared-threshold band ===")
     print(f"  the two rules disagree on {n_diff}/{len(runs)} networks "

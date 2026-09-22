@@ -52,11 +52,12 @@ has touched them.
 rewired 0.50 ± 0.17, 1/20, **p = 0.095**, re-measured under the corrected
 wiring rule. `docs/RESULTS_E7.md`.
 
-**5. Untrained lane-correctness.** Real 0.73 vs rewired 0.47 ± 0.14, 1/20,
-**p = 0.095**, under the best protocol available (band wiring, every network at
-its own best threshold). Direction has been consistent across every version of
-this comparison; significance has not been reached under a fair protocol.
-`docs/RESULTS_E6.md`, `docs/RESULTS_E7.md`.
+**5. Untrained lane-correctness, on FlyWire.** Real 0.73 vs rewired
+0.47 ± 0.14, 1/20, **p = 0.095**, under the best protocol available (band
+wiring, every network at its own best threshold). Direction has been consistent
+across every version of this comparison; significance has not been reached
+under a fair protocol. **It does not replicate on the male CNS** — see
+claim 15. `docs/RESULTS_E6.md`, `docs/RESULTS_E7.md`.
 
 **6. Learning, thresholds-only.** Real 0.211 vs rewired 0.101 ± 0.079, 1/8,
 p = 0.22. The condition where the wiring does the most work, and the part of
@@ -76,6 +77,18 @@ readout size (best 3/10, p = 0.36) — while playing far better in absolute term
 **9. Recurrent gain as an explanation for behaviour.** Radius does not predict
 untrained play across random graphs (ρ = 0.20, p = 0.39).
 `docs/RESULTS_E4.md`.
+
+**15. The untrained comparison does not replicate on the male CNS — it
+reverses.** Under the same fair protocol, the real male CNS network scores
+0.067 accuracy against its rewired controls' 0.237 (9/10 beat it), and it is
+the only network of eleven that never reaches the press-count guard at any
+threshold (8 presses over 40 notes against controls' 44–80), so its
+lane-correctness is undefined rather than high. The cause is known and specific:
+the male CNS readout is four real leg motor pools that respond to visual input
+as a common mode, and eight principal components of the same 348 neurons reach
+0.86 accuracy — the information is there and the anatomical pooling discards
+it. This says the readout is bad on that dataset, not that the connectome is.
+`docs/RESULTS_E7.md`.
 
 ## Retracted
 

@@ -1,0 +1,25 @@
+  real connectome          margin [3, 1, 0, 2] band [1, 0, 2, 3] (DIFFERENT)  band width -1.34 -> -1.12  lane-correct best 0.80@1.0  acc 0.067  (120s)
+  rewired #1               margin [0, 3, 1, 2] band [0, 3, 1, 2] (same)  band width -0.25 -> -0.25  lane-correct best 0.30@2.5  acc 0.104  (117s)
+  rewired #2               margin [1, 2, 0, 3] band [2, 3, 0, 1] (DIFFERENT)  band width -1.74 -> -1.07  lane-correct best 0.51@1.0  acc 0.254  (117s)
+  rewired #3               margin [3, 1, 0, 2] band [3, 1, 0, 2] (same)  band width -0.66 -> -0.66  lane-correct best 0.29@1.5  acc 0.050  (116s)
+  rewired #4               margin [0, 3, 1, 2] band [0, 2, 3, 1] (DIFFERENT)  band width -2.42 -> -1.18  lane-correct best 0.44@3.0  acc 0.217  (118s)
+  rewired #5               margin [2, 1, 3, 0] band [3, 1, 2, 0] (DIFFERENT)  band width -3.13 -> -2.53  lane-correct best 0.38@1.5  acc 0.233  (119s)
+  rewired #6               margin [0, 2, 1, 3] band [0, 2, 1, 3] (same)  band width -0.41 -> -0.41  lane-correct best 0.44@2.0  acc 0.183  (118s)
+  rewired #7               margin [0, 2, 3, 1] band [1, 2, 3, 0] (DIFFERENT)  band width -1.63 -> -1.29  lane-correct best 0.42@2.0  acc 0.287  (118s)
+  rewired #8               margin [1, 0, 2, 3] band [2, 0, 1, 3] (DIFFERENT)  band width -2.51 -> -1.32  lane-correct best 0.63@2.0  acc 0.254  (120s)
+  rewired #9               margin [1, 3, 2, 0] band [3, 2, 0, 1] (DIFFERENT)  band width -2.33 -> -1.52  lane-correct best 0.51@0.5  acc 0.350  (122s)
+  rewired #10              margin [3, 1, 0, 2] band [2, 1, 0, 3] (DIFFERENT)  band width -3.44 -> -1.06  lane-correct best 0.80@1.5  acc 0.442  (128s)
+
+=== experiment 7: wiring chosen on the shared-threshold band ===
+  the two rules disagree on 8/11 networks (real: different)
+  band width gained: +0.68 z on average, max +2.38
+
+  lane-correct, own best theta
+    band rule    real 0.800  rewired 0.472 +- 0.146  1/10  p 0.182
+    margin rule  real 0.727  rewired 0.411 +- 0.165  0/10  p 0.091   (experiment 6)
+    change       real +0.073   rewired +0.061
+
+  accuracy, own best theta
+    band rule    real 0.067  rewired 0.237 +- 0.107  9/10  p 0.909
+    margin rule  real 0.196  rewired 0.152 +- 0.075  2/10  p 0.273   (experiment 6)
+    change       real -0.129   rewired +0.085

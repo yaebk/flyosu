@@ -141,6 +141,47 @@ four channels are unusually lane-selective**, at p = 0.095.
 - **The supervised ceiling shows no advantage at any readout size**
   (experiment 5).
 
+## Replication on the male CNS
+
+The same protocol on the second connectome — band wiring, θ swept per network,
+each scored at its own best, 10 rewired controls. `DATASET=malecns`,
+`results/e7_wiring_malecns.json`.
+
+**It does not replicate. It reverses, and the reason is that the real male CNS
+network barely presses at all.**
+
+| | real | rewired ×10 | n ≥ real | p |
+|---|---|---|---|---|
+| accuracy, own best θ | **0.067** | 0.237 ± 0.107 | **9/10** | 0.909 |
+| lane-correct, own best θ | *(0.800 — not a valid score, see below)* | 0.472 ± 0.146 | — | — |
+
+**The lane-correct number must not be quoted.** Lane-correctness is a ratio over
+presses landing near a note, and the real network is the **only one of eleven**
+that never reaches the 20-press guard at any threshold in the sweep — its best
+is 8 presses over 40 notes, where all ten controls reach 44–80. Its 0.800 is the
+fallback the code emits when nothing is eligible, computed on those 8 presses.
+The report now prints a warning rather than the number.
+
+So the honest reading is the accuracy row: under the fair protocol the real
+male CNS network scores 0.067 against its controls' 0.237, and nine of ten beat
+it. On this connectome the untrained comparison does not merely fail to reach
+significance — it points the other way.
+
+This is consistent with what `docs/MALECNS.md` already documented. The male CNS
+readout is four *real leg motor pools* grouped by neuromere and side, and those
+pools respond to visual input as a common mode: lane identity is present in the
+population at 0.98 but almost absent from the pool means. A threshold policy
+reading those four pools has nothing lane-specific to threshold, so it fires
+almost never. Experiment 5 made the same point from the other direction — eight
+principal components of the same 348 neurons reach 0.86 accuracy, so the
+information is there and the anatomical pooling is what discards it.
+
+**What this does and does not say.** It is not evidence that the male CNS
+connectome is worse than FlyWire's. It is evidence that *this readout* — four
+pools defined by neuromere and side — is a bad readout on this dataset, which
+was already known. The comparison that would be worth running on the male CNS
+is one whose readout is not known in advance to destroy the signal.
+
 ## Honest caveats
 
 - **"Own best θ" and "own best wiring" are optimistic for the controls**, both
