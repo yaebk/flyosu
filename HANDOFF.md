@@ -298,6 +298,37 @@ experiment 6: peak-time spread is the strongest correlate of play across random
 graphs (staggered peaks let one key win under a shared threshold) while also
 being what wrecks the timing. Reconciling those is the interesting problem.
 
+## What experiment 9 found (the structural claims, properly)
+
+`docs/RESULTS_E9.md`. 72 networks across both connectomes. Both surviving
+claims are real and both were being overstated.
+
+Solid: **rewiring the topology collapses the spectral radius** (FlyWire 0/20,
+p = 0.048; male CNS 0/10, p = 0.091) and **raises the readout population's
+dimensionality** (same counts, and it holds on the gain-invariant participation
+ratio, so it is not an artefact of the large gain). They are **two independent
+properties** -- within every family the correlation between them is about zero,
+and the big pooled correlation (+0.74) is a two-blob artefact that should never
+be quoted.
+
+Three corrections a successor must carry:
+
+  * **The channel-label family is not a control for either quantity.**
+    `channel_seed` regroups readout neurons; it touches neither the graph nor
+    the set of neurons the projection reads, so both numbers come back
+    identical to the real network's. It remains a real control for behavioural
+    claims.
+  * **The real network's radius is not unusual -- retinotopy shuffles exceed
+    it, 20/20.** State the claim directionally: rewiring collapses the radius.
+    (Caveat: only 6 of 20 of those reach a blank-field fixed point, so their
+    radii are measured at a non-stationary state. `max_real` stays below 1, so
+    it is slow settling, not instability.)
+  * **On FlyWire the dimensionality effect is specific to the
+    descending-neuron population.** The whole network, the hidden population
+    and a size-matched random population show no separation, and the random one
+    reverses sign. On the male CNS it is network-wide instead. The datasets
+    agree on the readout and disagree on the locus, and that is unexplained.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on

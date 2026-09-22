@@ -1,7 +1,7 @@
 FLYWIRE := https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/main
 ANNOT   := https://raw.githubusercontent.com/flyconnectome/flywire_annotations/main/supplemental_files
 
-.PHONY: all data cache check check-play check-reservoir experiment experiment2 experiment3 experiment4 experiment5 experiment6 experiment7 figures figures2 figures3 figures4 figures5 figures6 figures7 play clean-derived
+.PHONY: all data cache check check-play check-reservoir experiment experiment2 experiment3 experiment4 experiment5 experiment6 experiment7 experiment9 figures figures2 figures3 figures4 figures5 figures6 figures7 play clean-derived
 
 all: cache
 
@@ -59,6 +59,11 @@ experiment6: cache
 # the same comparison with the wiring rule chosen on the band
 experiment7: cache
 	N_SEEDS=20 python3 -m experiments.e7_wiring
+
+# spectral radius and readout dimensionality, real vs control families
+experiment9: cache
+	N_REWIRED=20 N_RETINO=20 N_CHANNEL=10 python3 -m experiments.e9_structure
+	DATASET=malecns N_REWIRED=10 N_RETINO=10 N_CHANNEL=0 python3 -m experiments.e9_structure
 
 figures:
 	python3 -m experiments.figures

@@ -120,11 +120,18 @@ four channels are unusually lane-selective**, at p = 0.095.
 
 ## What is left standing
 
-- **Spectral radius.** Real 2.28 vs rewired 0.78 ± 0.16, replicated on the male
-  CNS (2.05 vs 0.64–0.72). A property of the graph, measured without any
-  behavioural protocol, so none of these procedural corrections touch it.
-- **Population dimensionality.** Real PC1 0.38 of ensemble variance vs
-  0.11–0.17 rewired; male CNS 0.63 vs 0.13–0.28. Same standing as the radius.
+- **Spectral radius, against rewiring.** Real 2.28 vs rewired 0.74 ± 0.11
+  (0/20, p = 0.048), replicated on the male CNS (2.05 vs 0.65 ± 0.03, 0/10).
+  A property of the graph, measured without any behavioural protocol, so none
+  of these procedural corrections touch it. **Experiment 9 narrowed the
+  wording**: retinotopy-shuffled controls have a *higher* radius than the real
+  network (20/20), so the claim is "rewiring the topology collapses the
+  radius", not "the real network's radius is unusual".
+- **Population dimensionality, against rewiring.** Real PC1 0.38 of ensemble
+  variance vs 0.15 ± 0.02 rewired (0/20); male CNS 0.63 vs 0.20 ± 0.07 (0/10).
+  Holds on the gain-invariant participation ratio too, and on FlyWire it is
+  specific to the descending-neuron population. Same standing and the same
+  narrowing as the radius. See `docs/RESULTS_E9.md`.
 - **Untrained lane-correctness, 1/20, p = 0.095**, under the best protocol
   available. Direction consistent across every version of the comparison,
   significance not reached.

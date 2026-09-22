@@ -189,6 +189,22 @@ the four channels' peak times is set by the network's own dynamics and no eye
 removes it**, so the next timing effort belongs in the readout.
 **[`docs/RESULTS_E8.md`](docs/RESULTS_E8.md).**
 
+Experiment 9 gave the two surviving structural claims a proper treatment — 72
+networks, both connectomes. Rewiring the topology collapses the spectral radius
+(2.28 vs 0.74 ± 0.11, **0/20, p = 0.048**; male CNS 2.06 vs 0.65, 0/10) and
+raises the readout population's dimensionality (same counts on PC1, on the top
+four components, and on the gain-invariant participation ratio). They are two
+*independent* properties: within every control family the correlation between
+them is ≈ 0. Three qualifications came with it, and they matter. The
+channel-label family cannot move either number by construction, so it is not a
+control here. Retinotopy-shuffled networks have a **higher** radius than the
+real connectome (20/20), so the claim is "rewiring collapses the radius", not
+"the real radius is unusual" — the wording elsewhere has been corrected. And on
+FlyWire the low dimensionality belongs to the *descending-neuron population*
+specifically: the whole network and a size-matched random population show no
+separation at all.
+**[`docs/RESULTS_E9.md`](docs/RESULTS_E9.md).**
+
 Experiment 5 changed the method. The fly is a frozen recurrent network with a
 small linear readout — a reservoir computer — and osu!mania supplies free
 supervision, because the notes fall whether or not the player presses. Fitting
@@ -318,6 +334,7 @@ experiments/
   e5_reservoir.py     closed-form readouts of four sizes, real vs three families
   e6_timing.py        what predicts untrained play; the threshold sweep
   e7_wiring.py        a wiring rule chosen on the shared-threshold band
+  e9_structure.py     spectral radius and dimensionality, both datasets
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
@@ -332,6 +349,7 @@ docs/RESULTS_E5.md      experiment 5
 docs/RESULTS_E6.md      experiment 6
 docs/RESULTS_E7.md      experiment 7
 docs/RESULTS_E8.md      experiment 8
+docs/RESULTS_E9.md      experiment 9
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -375,8 +393,9 @@ get every advantage the real network had" (experiment 7: the accuracy gap
 closes). The honest summary is that **the behavioural gap shrank every time the
 controls were given a fairer procedure**, and that is now the most robust thing
 here. What still stands are the two measurements that need no behavioural
-protocol at all — spectral radius (2.28 vs 0.78) and population dimensionality
-(PC1 0.38 vs 0.11–0.17), both replicated on the male CNS. What does not: the
+protocol at all — spectral radius and readout-population dimensionality — both
+measured against degree- and weight-preserving rewiring, both replicated on the
+male CNS, and both shown to be independent of each other (experiment 9). What does not: the
 untrained accuracy advantage (8/20, p = 0.43) and the supervised ceiling
 (experiment 5, no advantage at any readout size). Untrained lane-correctness
 survives in direction at 1/20, p = 0.095.
