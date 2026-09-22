@@ -72,8 +72,10 @@ Two findings worth flagging:
   preservation and useful structure are not the same thing**, and without the
   control, 0.992 would have looked like a result about the connectome.
 - The gap grows as the readout gets dumber. The freer the decoder, the less the
-  wiring matters. That is a prediction about the learning stage, not just a
-  description of this one.
+  wiring matters. That was a prediction about the learning stage rather than a
+  description of this one, and experiment 5 confirmed it in closed-loop play:
+  with the readout fitted in closed form the real network plays far better than
+  it ever has (0.92) and no better than its rewired controls.
 
 **[`docs/RESULTS.md`](docs/RESULTS.md) has the full table, the control-by-control
 breakdown, the figures, and the caveats.**
@@ -144,6 +146,23 @@ not explain lane choice. But with 20 controls the untrained lane result clears
 0.05 for the first time in the project: real 0.82 vs rewired 0.29 ± 0.15,
 **0/20, p = 0.048**. **[`docs/RESULTS_E4.md`](docs/RESULTS_E4.md).**
 
+Experiment 5 changed the method. The fly is a frozen recurrent network with a
+small linear readout — a reservoir computer — and osu!mania supplies free
+supervision, because the notes fall whether or not the player presses. Fitting
+the readout by ridge regression on one recording per network takes 40 seconds
+instead of an hour, and the real network reaches **0.92 accuracy** on held-out
+charts with 68 parameters, against 0.27 for the same network under reward-
+modulated perturbation. It also **erases the connectome result**: at every
+readout size the real network sits inside the rewired distribution (best 3/10,
+p = 0.36). Both facts matter. The lane information is in every network; what
+distinguishes the real one is that a small, constrained, reward-driven search
+finds it. A third connectome-specific property fell out of the same data: the
+real network's descending population is far more low-dimensional than any
+rewired one's (PC1 0.38 vs 0.11–0.17), and because that low dimension is a
+common mode carrying no lane information, *variance ordering is not information
+ordering*. Replicated on the male CNS.
+**[`docs/RESULTS_E5.md`](docs/RESULTS_E5.md).**
+
 ## Quick start
 
 ```bash
@@ -166,6 +185,8 @@ python -m experiments.e3_stability
 python -m experiments.figures_e3
 python -m experiments.e4_covariate     # experiment 4 (~25 min at N_SEEDS=20)
 python -m experiments.figures_e4
+python -m experiments.e5_reservoir     # experiment 5 (~2 h at N_CTRL=10)
+python -m experiments.figures_e5
 ```
 
 Watch it play:
@@ -235,6 +256,7 @@ flyosu/
   controller.py   channels -> keys: normaliser, 20-parameter threshold policy (step 7)
   play.py         the game loop that couples all of the above
   learn.py        reward-modulated perturbation of the readout            (step 9)
+  reservoir.py    the same readout fitted in closed form (ridge), + population PCA
   beatmap.py      .osu parser and writer                                   (step 11)
 experiments/
   e1_sensorimotor.py  experiment 1: tuning, decoding, approach, chords
@@ -243,15 +265,18 @@ experiments/
   e3_learning.py      experiment 3: annealed learning in three conditions, noisy untrained
   e3_stability.py     spectral radius across control seeds
   e4_covariate.py     radius vs untrained behaviour across 20 rewired graphs
-  figures.py / figures_e2.py / figures_e3.py / figures_e4.py
+  e5_reservoir.py     closed-form readouts of four sizes, real vs three families
+  figures.py / figures_e2.py / figures_e3.py / figures_e4.py / figures_e5.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
 tests/test_play.py      46 checks on the game side
+tests/test_reservoir.py 17 checks on the closed-form readout
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
 docs/RESULTS.md         experiment 1
 docs/RESULTS_E2.md      experiment 2
 docs/RESULTS_E3.md      experiment 3
 docs/RESULTS_E4.md      experiment 4
+docs/RESULTS_E5.md      experiment 5
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -264,6 +289,7 @@ python run_fly.py --sweep            # azimuth tuning, as text
 python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 28 checks
 python -m tests.test_play            # 46 checks
+python -m tests.test_reservoir       # 17 checks
 ```
 
 ## Where this is
@@ -277,8 +303,8 @@ python -m tests.test_play            # 46 checks
  6  sensory encoder              done   playfield -> eye (static; adaptation optional)
  7  fly controller               done   20-parameter threshold policy
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
- 9  plasticity                   done   reward-modulated perturbation, connectome frozen
-10  training experiments         run twice  e2: real vs 3/family, 2 trained; e3: 4 rewired x 3 conditions
+ 9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
+10  training experiments         run five times  e2-e5; best play 0.92 accuracy (ridge, 68 params)
 11  beatmap parser               done   .osu v14 mania, both directions
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
@@ -286,10 +312,13 @@ python -m tests.test_play            # 46 checks
 Where the science is now: the connectome-vs-random comparison has moved from
 "can a decoder tell the lanes apart" (experiment 1: yes, and so can a random
 network) to "does the fly press the right key with no learning" (experiment 2:
-yes, and random networks mostly do not) and "how fast does a 20-parameter
-readout learn" (experiment 2: faster and higher for the real wiring, n = 2).
-The measurement that most needs more controls is the learning one. The
-measurement that is cheapest and newest is the spectral radius.
+yes, and random networks mostly do not, p = 0.048 at n = 20) to "how much of
+that survives a better readout" (experiment 5: none of it). The stable claim is
+narrower than "the connectome helps" and more interesting: the task-relevant
+structure exists in every network, and the real wiring is what makes it
+*reachable* by a small reward-driven search. Three connectome-specific
+measurements stand on their own — spectral radius, population dimensionality,
+and untrained lane choice — and the first two replicate on a second dataset.
 
 Step 12 is built, not verified: `play_osu.py` simulates the fly on a beatmap
 and replays its presses against the wall clock through a pluggable sink

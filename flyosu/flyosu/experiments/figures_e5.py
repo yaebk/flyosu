@@ -33,7 +33,7 @@ def fig_capacity(res, path):
     x = np.arange(len(names))
     fams = [(fam, key) for key, (fam, _) in FAMILIES.items()
             if any(r["label"].startswith(fam) for r in runs)]
-    fig, axes = plt.subplots(1, 2, figsize=(9.0, 3.8), sharey=True)
+    fig, axes = plt.subplots(1, 2, figsize=(9.0, 4.3), sharey=True)
     for ax, metric, title in zip(axes, ("held_out", "transfer"),
                                  ("held-out stage 3 (fitted on stage 3)", "stage 4 with chords, no refit")):
         width = 0.8 / (len(fams) + 1)
@@ -63,12 +63,14 @@ def fig_capacity(res, path):
         ax.set_ylim(0, 1.08); ax.set_title(title, fontsize=9.5, loc="left", color=INK2)
         _clean(ax); ax.grid(axis="y", visible=True)
     axes[0].set_ylabel("osu!mania accuracy, ridge-fitted readout")
-    axes[0].legend(loc="lower right", fontsize=8, frameon=False)
+    h, la = axes[0].get_legend_handles_labels()
+    fig.legend(h, la, loc="upper left", bbox_to_anchor=(0.015, 0.90), fontsize=8,
+               frameon=False, ncol=4, columnspacing=1.6, handletextpad=0.5)
     fig.suptitle(f"How much of the gap survives a bigger readout?  ({res['dataset']})",
-                 fontsize=10.5, fontweight="bold", x=0.02, ha="left")
-    fig.text(0.02, 0.9, "one recording per network; every readout label-free and fitted identically; "
+                 fontsize=10.5, fontweight="bold", x=0.015, y=0.985, ha="left")
+    fig.text(0.015, 0.935, "one recording per network; every readout label-free and fitted identically; "
              "numbers above: rewired graphs reaching the real network", fontsize=8, color=MUTED)
-    fig.tight_layout(rect=(0, 0, 1, 0.9)); fig.savefig(path, dpi=160); plt.close(fig)
+    fig.tight_layout(rect=(0, 0, 1, 0.84)); fig.savefig(path, dpi=160); plt.close(fig)
 
 
 def main():

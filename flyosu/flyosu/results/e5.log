@@ -1,0 +1,144 @@
+  real connectome            channels  20 params  train 0.33  held-out acc 0.414 hit 0.50 lane 0.83  stage-4 acc 0.162
+  real connectome            pca4      20 params  train 0.18  held-out acc 0.258 hit 0.30 lane 1.00  stage-4 acc 0.071
+  real connectome            pca8      36 params  train 0.53  held-out acc 0.631 hit 0.92 lane 1.00  stage-4 acc 0.158
+  real connectome            pca16     68 params  train 0.90  held-out acc 0.917 hit 0.97 lane 1.00  stage-4 acc 0.583
+  real connectome            radius 2.28  (232s)
+  rewired topology #1        channels  20 params  train 0.13  held-out acc 0.108 hit 0.15 lane 0.69  stage-4 acc 0.158
+  rewired topology #1        pca4      20 params  train 0.38  held-out acc 0.489 hit 0.72 lane 0.94  stage-4 acc 0.213
+  rewired topology #1        pca8      36 params  train 0.61  held-out acc 0.672 hit 0.77 lane 0.92  stage-4 acc 0.400
+  rewired topology #1        pca16     68 params  train 0.98  held-out acc 0.944 hit 0.95 lane 1.00  stage-4 acc 0.721
+  rewired topology #1        radius 0.73  (236s)
+  rewired topology #2        channels  20 params  train 0.31  held-out acc 0.367 hit 0.43 lane 0.57  stage-4 acc 0.383
+  rewired topology #2        pca4      20 params  train 0.37  held-out acc 0.383 hit 0.50 lane 0.68  stage-4 acc 0.354
+  rewired topology #2        pca8      36 params  train 0.60  held-out acc 0.639 hit 0.80 lane 0.87  stage-4 acc 0.429
+  rewired topology #2        pca16     68 params  train 0.79  held-out acc 0.789 hit 0.95 lane 0.79  stage-4 acc 0.571
+  rewired topology #2        radius 0.70  (247s)
+  rewired topology #3        channels  20 params  train 0.43  held-out acc 0.353 hit 0.42 lane 0.84  stage-4 acc 0.479
+  rewired topology #3        pca4      20 params  train 0.54  held-out acc 0.606 hit 0.70 lane 0.81  stage-4 acc 0.463
+  rewired topology #3        pca8      36 params  train 0.66  held-out acc 0.617 hit 0.68 lane 0.76  stage-4 acc 0.592
+  rewired topology #3        pca16     68 params  train 0.88  held-out acc 0.736 hit 0.95 lane 1.00  stage-4 acc 0.767
+  rewired topology #3        radius 0.72  (243s)
+  rewired topology #4        channels  20 params  train 0.36  held-out acc 0.531 hit 0.67 lane 0.82  stage-4 acc 0.300
+  rewired topology #4        pca4      20 params  train 0.55  held-out acc 0.483 hit 0.50 lane 0.86  stage-4 acc 0.321
+  rewired topology #4        pca8      36 params  train 0.65  held-out acc 0.531 hit 0.67 lane 1.00  stage-4 acc 0.408
+  rewired topology #4        pca16     68 params  train 0.93  held-out acc 0.911 hit 0.97 lane 1.00  stage-4 acc 0.621
+  rewired topology #4        radius 0.75  (242s)
+  rewired topology #5        channels  20 params  train 0.43  held-out acc 0.689 hit 0.82 lane 0.76  stage-4 acc 0.300
+  rewired topology #5        pca4      20 params  train 0.50  held-out acc 0.450 hit 0.45 lane 1.00  stage-4 acc 0.242
+  rewired topology #5        pca8      36 params  train 0.52  held-out acc 0.475 hit 0.53 lane 1.00  stage-4 acc 0.408
+  rewired topology #5        pca16     68 params  train 0.96  held-out acc 0.894 hit 0.97 lane 0.72  stage-4 acc 0.771
+  rewired topology #5        radius 0.64  (244s)
+  rewired topology #6        channels  20 params  train 0.34  held-out acc 0.356 hit 0.45 lane 0.97  stage-4 acc 0.154
+  rewired topology #6        pca4      20 params  train 0.08  held-out acc 0.122 hit 0.20 lane 0.60  stage-4 acc 0.037
+  rewired topology #6        pca8      36 params  train 0.37  held-out acc 0.311 hit 0.43 lane 1.00  stage-4 acc 0.213
+  rewired topology #6        pca16     68 params  train 0.83  held-out acc 0.850 hit 0.97 lane 1.00  stage-4 acc 0.646
+  rewired topology #6        radius 1.12  (237s)
+  rewired topology #7        channels  20 params  train 0.31  held-out acc 0.575 hit 0.68 lane 0.65  stage-4 acc 0.371
+  rewired topology #7        pca4      20 params  train 0.24  held-out acc 0.239 hit 0.43 lane 0.94  stage-4 acc 0.133
+  rewired topology #7        pca8      36 params  train 0.52  held-out acc 0.550 hit 0.75 lane 0.94  stage-4 acc 0.279
+  rewired topology #7        pca16     68 params  train 0.83  held-out acc 0.717 hit 0.83 lane 0.98  stage-4 acc 0.542
+  rewired topology #7        radius 0.90  (239s)
+  rewired topology #8        channels  20 params  train 0.46  held-out acc 0.381 hit 0.67 lane 1.00  stage-4 acc 0.271
+  rewired topology #8        pca4      20 params  train 0.38  held-out acc 0.297 hit 0.37 lane 0.92  stage-4 acc 0.396
+  rewired topology #8        pca8      36 params  train 0.54  held-out acc 0.567 hit 0.85 lane 0.93  stage-4 acc 0.433
+  rewired topology #8        pca16     68 params  train 0.95  held-out acc 0.944 hit 0.97 lane 0.64  stage-4 acc 0.812
+  rewired topology #8        radius 0.63  (241s)
+  rewired topology #9        channels  20 params  train 0.57  held-out acc 0.611 hit 0.70 lane 0.98  stage-4 acc 0.383
+  rewired topology #9        pca4      20 params  train 0.28  held-out acc 0.303 hit 0.38 lane 0.96  stage-4 acc 0.204
+  rewired topology #9        pca8      36 params  train 0.56  held-out acc 0.592 hit 0.78 lane 0.98  stage-4 acc 0.296
+  rewired topology #9        pca16     68 params  train 0.94  held-out acc 0.939 hit 0.95 lane 1.00  stage-4 acc 0.725
+  rewired topology #9        radius 0.71  (230s)
+  rewired topology #10       channels  20 params  train 0.39  held-out acc 0.494 hit 0.52 lane 0.80  stage-4 acc 0.279
+  rewired topology #10       pca4      20 params  train 0.29  held-out acc 0.289 hit 0.43 lane 0.88  stage-4 acc 0.242
+  rewired topology #10       pca8      36 params  train 0.68  held-out acc 0.708 hit 0.85 lane 0.92  stage-4 acc 0.617
+  rewired topology #10       pca16     68 params  train 0.98  held-out acc 0.956 hit 0.97 lane 0.72  stage-4 acc 0.792
+  rewired topology #10       radius 0.78  (216s)
+  shuffled retinotopy #1     channels  20 params  train 0.44  held-out acc 0.561 hit 0.70 lane 1.00  stage-4 acc 0.342
+  shuffled retinotopy #1     pca4      20 params  train 0.52  held-out acc 0.589 hit 0.65 lane 0.98  stage-4 acc 0.367
+  shuffled retinotopy #1     pca8      36 params  train 0.90  held-out acc 0.867 hit 0.88 lane 1.00  stage-4 acc 0.679
+  shuffled retinotopy #1     pca16     68 params  train 1.00  held-out acc 0.983 hit 0.98 lane 1.00  stage-4 acc 0.800
+  shuffled retinotopy #1     radius 2.83  (213s)
+  shuffled retinotopy #2     channels  20 params  train 0.41  held-out acc 0.372 hit 0.53 lane 0.86  stage-4 acc 0.267
+  shuffled retinotopy #2     pca4      20 params  train 0.38  held-out acc 0.397 hit 0.60 lane 0.95  stage-4 acc 0.421
+  shuffled retinotopy #2     pca8      36 params  train 0.79  held-out acc 0.814 hit 0.90 lane 0.98  stage-4 acc 0.654
+  shuffled retinotopy #2     pca16     68 params  train 0.97  held-out acc 0.983 hit 0.98 lane 1.00  stage-4 acc 0.733
+  shuffled retinotopy #2     radius 3.08  (212s)
+  shuffled retinotopy #3     channels  20 params  train 0.53  held-out acc 0.711 hit 0.90 lane 0.74  stage-4 acc 0.479
+  shuffled retinotopy #3     pca4      20 params  train 0.32  held-out acc 0.433 hit 0.62 lane 0.90  stage-4 acc 0.225
+  shuffled retinotopy #3     pca8      36 params  train 0.86  held-out acc 0.744 hit 0.87 lane 1.00  stage-4 acc 0.650
+  shuffled retinotopy #3     pca16     68 params  train 0.98  held-out acc 0.989 hit 1.00 lane 1.00  stage-4 acc 0.921
+  shuffled retinotopy #3     radius 3.07  (211s)
+  shuffled retinotopy #4     channels  20 params  train 0.51  held-out acc 0.642 hit 0.85 lane 0.82  stage-4 acc 0.367
+  shuffled retinotopy #4     pca4      20 params  train 0.56  held-out acc 0.550 hit 0.62 lane 0.97  stage-4 acc 0.408
+  shuffled retinotopy #4     pca8      36 params  train 0.75  held-out acc 0.839 hit 0.93 lane 0.84  stage-4 acc 0.625
+  shuffled retinotopy #4     pca16     68 params  train 0.95  held-out acc 0.933 hit 0.98 lane 1.00  stage-4 acc 0.792
+  shuffled retinotopy #4     radius 3.07  (211s)
+  shuffled retinotopy #5     channels  20 params  train 0.56  held-out acc 0.600 hit 0.67 lane 0.85  stage-4 acc 0.558
+  shuffled retinotopy #5     pca4      20 params  train 0.32  held-out acc 0.458 hit 0.62 lane 0.95  stage-4 acc 0.267
+  shuffled retinotopy #5     pca8      36 params  train 0.74  held-out acc 0.525 hit 0.68 lane 1.00  stage-4 acc 0.546
+  shuffled retinotopy #5     pca16     68 params  train 0.94  held-out acc 0.917 hit 1.00 lane 1.00  stage-4 acc 0.825
+  shuffled retinotopy #5     radius 2.93  (211s)
+  shuffled retinotopy #6     channels  20 params  train 0.27  held-out acc 0.339 hit 0.53 lane 0.80  stage-4 acc 0.433
+  shuffled retinotopy #6     pca4      20 params  train 0.23  held-out acc 0.208 hit 0.38 lane 0.89  stage-4 acc 0.396
+  shuffled retinotopy #6     pca8      36 params  train 0.80  held-out acc 0.778 hit 0.98 lane 0.90  stage-4 acc 0.625
+  shuffled retinotopy #6     pca16     68 params  train 0.95  held-out acc 0.828 hit 0.93 lane 1.00  stage-4 acc 0.717
+  shuffled retinotopy #6     radius 3.06  (195s)
+  shuffled retinotopy #7     channels  20 params  train 0.49  held-out acc 0.544 hit 0.65 lane 0.80  stage-4 acc 0.608
+  shuffled retinotopy #7     pca4      20 params  train 0.48  held-out acc 0.683 hit 0.73 lane 0.68  stage-4 acc 0.567
+  shuffled retinotopy #7     pca8      36 params  train 0.86  held-out acc 0.739 hit 0.83 lane 0.94  stage-4 acc 0.667
+  shuffled retinotopy #7     pca16     68 params  train 0.92  held-out acc 0.886 hit 1.00 lane 1.00  stage-4 acc 0.700
+  shuffled retinotopy #7     radius 3.09  (214s)
+  shuffled retinotopy #8     channels  20 params  train 0.17  held-out acc 0.261 hit 0.42 lane 0.68  stage-4 acc 0.388
+  shuffled retinotopy #8     pca4      20 params  train 0.41  held-out acc 0.269 hit 0.35 lane 0.96  stage-4 acc 0.271
+  shuffled retinotopy #8     pca8      36 params  train 0.72  held-out acc 0.681 hit 0.90 lane 1.00  stage-4 acc 0.467
+  shuffled retinotopy #8     pca16     68 params  train 0.92  held-out acc 0.789 hit 0.95 lane 1.00  stage-4 acc 0.621
+  shuffled retinotopy #8     radius 3.08  (212s)
+  shuffled retinotopy #9     channels  20 params  train 0.45  held-out acc 0.694 hit 0.83 lane 0.56  stage-4 acc 0.492
+  shuffled retinotopy #9     pca4      20 params  train 0.36  held-out acc 0.267 hit 0.28 lane 1.00  stage-4 acc 0.275
+  shuffled retinotopy #9     pca8      36 params  train 0.60  held-out acc 0.706 hit 0.90 lane 0.95  stage-4 acc 0.454
+  shuffled retinotopy #9     pca16     68 params  train 0.94  held-out acc 0.889 hit 0.93 lane 1.00  stage-4 acc 0.696
+  shuffled retinotopy #9     radius 2.66  (214s)
+  shuffled retinotopy #10    channels  20 params  train 0.35  held-out acc 0.656 hit 0.78 lane 0.59  stage-4 acc 0.492
+  shuffled retinotopy #10    pca4      20 params  train 0.47  held-out acc 0.811 hit 0.85 lane 0.78  stage-4 acc 0.458
+  shuffled retinotopy #10    pca8      36 params  train 0.81  held-out acc 0.794 hit 0.82 lane 0.94  stage-4 acc 0.621
+  shuffled retinotopy #10    pca16     68 params  train 0.98  held-out acc 0.900 hit 0.92 lane 0.95  stage-4 acc 0.658
+  shuffled retinotopy #10    radius 3.27  (213s)
+  shuffled channel labels #1 channels  20 params  train 0.18  held-out acc 0.300 hit 0.58 lane 0.95  stage-4 acc 0.129
+  shuffled channel labels #1 radius 2.28  (84s)
+  shuffled channel labels #2 channels  20 params  train 0.40  held-out acc 0.525 hit 0.63 lane 0.81  stage-4 acc 0.433
+  shuffled channel labels #2 radius 2.28  (85s)
+  shuffled channel labels #3 channels  20 params  train 0.32  held-out acc 0.319 hit 0.58 lane 1.00  stage-4 acc 0.237
+  shuffled channel labels #3 radius 2.28  (85s)
+  shuffled channel labels #4 channels  20 params  train 0.29  held-out acc 0.467 hit 0.72 lane 0.90  stage-4 acc 0.438
+  shuffled channel labels #4 radius 2.28  (84s)
+  shuffled channel labels #5 channels  20 params  train 0.38  held-out acc 0.506 hit 0.65 lane 0.91  stage-4 acc 0.304
+  shuffled channel labels #5 radius 2.28  (85s)
+  shuffled channel labels #6 channels  20 params  train 0.25  held-out acc 0.278 hit 0.43 lane 1.00  stage-4 acc 0.129
+  shuffled channel labels #6 radius 2.28  (85s)
+  shuffled channel labels #7 channels  20 params  train 0.37  held-out acc 0.525 hit 0.80 lane 0.66  stage-4 acc 0.258
+  shuffled channel labels #7 radius 2.28  (84s)
+  shuffled channel labels #8 channels  20 params  train 0.20  held-out acc 0.333 hit 0.60 lane 0.89  stage-4 acc 0.125
+  shuffled channel labels #8 radius 2.28  (84s)
+  shuffled channel labels #9 channels  20 params  train 0.26  held-out acc 0.389 hit 0.58 lane 1.00  stage-4 acc 0.204
+  shuffled channel labels #9 radius 2.28  (103s)
+  shuffled channel labels #10 channels  20 params  train 0.30  held-out acc 0.261 hit 0.43 lane 0.81  stage-4 acc 0.317
+  shuffled channel labels #10 radius 2.28  (104s)
+
+=== experiment 5, flywire: supervised ceiling vs readout capacity ===
+
+channels (20 params)   real: held-out acc 0.414  lane 0.83  stage-4 0.162
+   rewired topology           n=10 acc 0.446 +- 0.159  lane 0.81  stage-4 0.308   5/10 reach real  p 0.545
+   shuffled retinotopy        n=10 acc 0.538 +- 0.151  lane 0.77  stage-4 0.443   7/10 reach real  p 0.727
+   shuffled channel labels    n=10 acc 0.390 +- 0.101  lane 0.89  stage-4 0.258   4/10 reach real  p 0.455
+
+pca4 (20 params)   real: held-out acc 0.258  lane 1.00  stage-4 0.071
+   rewired topology           n=10 acc 0.366 +- 0.136  lane 0.86  stage-4 0.260   8/10 reach real  p 0.818
+   shuffled retinotopy        n=10 acc 0.467 +- 0.184  lane 0.91  stage-4 0.365   9/10 reach real  p 0.909
+
+pca8 (36 params)   real: held-out acc 0.631  lane 1.00  stage-4 0.158
+   rewired topology           n=10 acc 0.566 +- 0.107  lane 0.93  stage-4 0.408   3/10 reach real  p 0.364
+   shuffled retinotopy        n=10 acc 0.749 +- 0.093  lane 0.95  stage-4 0.599   9/10 reach real  p 0.909
+
+pca16 (68 params)   real: held-out acc 0.917  lane 1.00  stage-4 0.583
+   rewired topology           n=10 acc 0.868 +- 0.086  lane 0.89  stage-4 0.697   4/10 reach real  p 0.455
+   shuffled retinotopy        n=10 acc 0.910 +- 0.063  lane 0.99  stage-4 0.746   5/10 reach real  p 0.545

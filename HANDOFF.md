@@ -191,6 +191,36 @@ while seeing within-pool pattern; (3) the e2/e3 protocols with ≥ 4 rewired
 controls; (4) `Fly.stability()` for every control, since the play floor was
 set on the real network only.
 
+## What experiment 5 found (the method change)
+
+`docs/RESULTS_E5.md`. The readout is now fitted in closed form
+(`flyosu/reservoir.py`): record the descending population once per network
+while charts fall past a silent controller, ridge-regress a per-frame press
+target on label-free features, choose each lane's target-window position and
+threshold offset by replaying the crossing rule through the judge. Forty
+seconds per network instead of an hour, and the real network plays at 0.92
+accuracy with 68 parameters.
+
+It is also the project's clearest negative result: at every readout size the
+real network is inside the rewired distribution (best 3/10, p = 0.36), where
+the reward-trained comparison on the same networks and charts was 0/8. Read the
+two together — the lane information is in every network, and the real wiring is
+what makes it reachable by a constrained search. Two things a successor should
+carry forward:
+
+  * **Variance ordering is not information ordering.** The real network's
+    descending population is much more low-dimensional than any rewired one's
+    (PC1 0.38 vs 0.11-0.17; male CNS 0.63 vs 0.13-0.28), and the leading
+    components are a common mode with no lane information. `pca4` therefore
+    plays *worse* than the four anatomical channels on the real network and
+    better on the controls. Population dimensionality is a third
+    connectome-specific measurement, cheap, and it replicates across datasets.
+  * **The judge does not punish stray presses.** Any fitting criterion built on
+    accuracy alone will discover "fire every lane at every note" (it did, at
+    1.5 strays per note). `reservoir.STRAY_PENALTY_FIT` is 0.4 for that reason;
+    `learn.py`'s reward still uses 0.05, which is fine because perturbation
+    never searches hard enough to find the degenerate solution.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on
@@ -273,6 +303,18 @@ set on the real network only.
    to a falling note (peak latency relative to the judgment line) and
    behaviour with two notes on screen, real vs rewired. If a quantity there
    predicts play across rewired graphs, make it the wiring rule's criterion.
+   The recordings `reservoir.record()` produces are exactly the right data for
+   this and cost 10 s per chart.
+4. **Chords are where the real network looks worst.** Fitted on stage 3 and
+   asked to play stage 4 without refitting, it falls below the rewired mean at
+   three of four readout sizes. Fit on stage 4 and see whether that survives;
+   if it does, the amplified common mode responding to both lanes at once is
+   the explanation to test.
+5. **A learning rule that meets the ceiling.** e5 measures what a linear
+   readout of size k can do; e3 measures what antithetic perturbation finds in
+   30 episodes. The gap between them is large. A rule that closes it while
+   staying biologically plausible (eligibility traces, a per-lane reward
+   signal) would make the learning comparison as sharp as the untrained one.
 4. **The J lane.** Untrained J is never pressed. Either accept it as the
    honest cost of e1's lane placement or run the declared "lanes in the frontal
    zone" experiment as a separate condition.

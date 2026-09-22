@@ -1,7 +1,7 @@
 FLYWIRE := https://raw.githubusercontent.com/philshiu/Drosophila_brain_model/main
 ANNOT   := https://raw.githubusercontent.com/flyconnectome/flywire_annotations/main/supplemental_files
 
-.PHONY: all data cache check check-play experiment experiment2 experiment3 figures figures2 figures3 play clean-derived
+.PHONY: all data cache check check-play check-reservoir experiment experiment2 experiment3 experiment4 experiment5 figures figures2 figures3 figures4 figures5 play clean-derived
 
 all: cache
 
@@ -24,6 +24,9 @@ check: cache
 check-play: cache
 	python3 -m tests.test_play
 
+check-reservoir: cache
+	python3 -m tests.test_reservoir
+
 experiment: cache
 	python3 -m experiments.e1_sensorimotor
 
@@ -36,6 +39,17 @@ experiment3: cache
 	N_LEARN=4 N_EPISODES=30 python3 -m experiments.e3_learning
 	N_SEEDS=6 python3 -m experiments.e3_stability
 
+# recurrent gain vs untrained behaviour across 20 rewired graphs
+experiment4: cache
+	N_SEEDS=20 python3 -m experiments.e4_covariate
+
+# closed-form (ridge) readouts of four sizes, real vs three control families
+experiment5: cache
+	N_CTRL=10 python3 -m experiments.e5_reservoir
+
+experiment5-malecns:
+	DATASET=malecns FAMILIES=rewired,retino N_CTRL=4 python3 -m experiments.e5_reservoir
+
 figures:
 	python3 -m experiments.figures
 
@@ -44,6 +58,13 @@ figures2:
 
 figures3:
 	python3 -m experiments.figures_e3
+
+figures4:
+	python3 -m experiments.figures_e4
+
+figures5:
+	python3 -m experiments.figures_e5
+	DATASET=malecns python3 -m experiments.figures_e5
 
 play: cache
 	python3 run_play.py --stage 2
