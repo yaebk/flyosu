@@ -1,0 +1,137 @@
+
+=== real connectome
+  untrained, noise 0.03, lane-correct: s1=1.00  s2=1.00  s3=0.73  s4=0.74  s5=0.45
+      thresholds ep   0  held-out acc 0.061
+      thresholds ep  10  held-out acc 0.092  hit 0.317  lane-correct 0.75  train reward (last 10) 0.052
+      thresholds ep  20  held-out acc 0.150  hit 0.383  lane-correct 0.77  train reward (last 10) 0.034
+      thresholds ep  30  held-out acc 0.211  hit 0.467  lane-correct 0.80  train reward (last 10) 0.059
+      wired      ep   0  held-out acc 0.061
+      wired      ep  10  held-out acc 0.267  hit 0.283  lane-correct 0.81  train reward (last 10) 0.056
+      wired      ep  20  held-out acc 0.256  hit 0.283  lane-correct 0.81  train reward (last 10) 0.172
+      wired      ep  30  held-out acc 0.239  hit 0.283  lane-correct 0.85  train reward (last 10) 0.151
+
+=== rewired topology #1
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.50  s3=0.39  s4=0.33  s5=0.47
+      thresholds ep   0  held-out acc 0.000
+      thresholds ep  10  held-out acc 0.000  hit 0.000  lane-correct 0.61  train reward (last 10) 0.009
+      thresholds ep  20  held-out acc 0.000  hit 0.000  lane-correct 0.48  train reward (last 10) 0.008
+      thresholds ep  30  held-out acc 0.003  hit 0.017  lane-correct 0.48  train reward (last 10) 0.042
+      wired      ep   0  held-out acc 0.000
+      wired      ep  10  held-out acc 0.008  hit 0.033  lane-correct 0.63  train reward (last 10) 0.033
+      wired      ep  20  held-out acc 0.006  hit 0.017  lane-correct 0.86  train reward (last 10) 0.021
+      wired      ep  30  held-out acc 0.003  hit 0.017  lane-correct 0.61  train reward (last 10) 0.036
+
+=== rewired topology #2
+resuming: 2 runs done
+
+=== rewired topology #2
+  untrained, noise 0.03, lane-correct: s1=0.50  s2=0.31  s3=0.23  s4=0.26  s5=0.28
+      thresholds ep   0  held-out acc 0.078
+      thresholds ep  10  held-out acc 0.083  hit 0.350  lane-correct 0.38  train reward (last 10) -0.046
+      thresholds ep  20  held-out acc 0.111  hit 0.350  lane-correct 0.37  train reward (last 10) 0.006
+      thresholds ep  30  held-out acc 0.133  hit 0.383  lane-correct 0.41  train reward (last 10) 0.040
+      wired      ep   0  held-out acc 0.078
+      wired      ep  10  held-out acc 0.181  hit 0.350  lane-correct 0.57  train reward (last 10) 0.066
+      wired      ep  20  held-out acc 0.289  hit 0.383  lane-correct 0.58  train reward (last 10) 0.189
+      wired      ep  30  held-out acc 0.297  hit 0.417  lane-correct 0.53  train reward (last 10) 0.195
+
+=== rewired topology #3
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.67  s3=0.80  s4=0.85  s5=0.83
+      thresholds ep   0  held-out acc 0.200
+      thresholds ep  10  held-out acc 0.256  hit 0.350  lane-correct 0.77  train reward (last 10) 0.297
+      thresholds ep  20  held-out acc 0.267  hit 0.417  lane-correct 0.77  train reward (last 10) 0.299
+      thresholds ep  30  held-out acc 0.261  hit 0.417  lane-correct 0.77  train reward (last 10) 0.280
+      wired      ep   0  held-out acc 0.200
+      wired      ep  10  held-out acc 0.261  hit 0.417  lane-correct 0.76  train reward (last 10) 0.185
+      wired      ep  20  held-out acc 0.272  hit 0.417  lane-correct 0.76  train reward (last 10) 0.198
+      wired      ep  30  held-out acc 0.261  hit 0.350  lane-correct 0.77  train reward (last 10) 0.186
+
+=== rewired topology #4
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.00  s3=0.41  s4=0.49  s5=0.28
+      thresholds ep   0  held-out acc 0.067
+      thresholds ep  10  held-out acc 0.067  hit 0.100  lane-correct 0.15  train reward (last 10) 0.015
+      thresholds ep  20  held-out acc 0.061  hit 0.100  lane-correct 0.14  train reward (last 10) 0.046
+      thresholds ep  30  held-out acc 0.161  hit 0.200  lane-correct 0.24  train reward (last 10) 0.044
+      wired      ep   0  held-out acc 0.067
+      wired      ep  10  held-out acc 0.061  hit 0.100  lane-correct 0.25  train reward (last 10) 0.003
+      wired      ep  20  held-out acc 0.158  hit 0.200  lane-correct 0.36  train reward (last 10) 0.051
+      wired      ep  30  held-out acc 0.217  hit 0.250  lane-correct 0.38  train reward (last 10) 0.091
+
+=== rewired topology #5
+  untrained, noise 0.03, lane-correct: s1=1.00  s2=0.00  s3=0.18  s4=0.57  s5=0.35
+      thresholds ep   0  held-out acc 0.067
+      thresholds ep  10  held-out acc 0.069  hit 0.117  lane-correct 0.79  train reward (last 10) 0.113
+      thresholds ep  20  held-out acc 0.069  hit 0.117  lane-correct 0.79  train reward (last 10) 0.137
+      thresholds ep  30  held-out acc 0.069  hit 0.117  lane-correct 0.77  train reward (last 10) 0.155
+      wired      ep   0  held-out acc 0.067
+      wired      ep  10  held-out acc 0.194  hit 0.317  lane-correct 0.61  train reward (last 10) 0.109
+      wired      ep  20  held-out acc 0.300  hit 0.350  lane-correct 0.46  train reward (last 10) 0.109
+      wired      ep  30  held-out acc 0.250  hit 0.333  lane-correct 0.60  train reward (last 10) 0.142
+
+=== rewired topology #6
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.29  s3=0.24  s4=0.46  s5=0.26
+      thresholds ep   0  held-out acc 0.100
+      thresholds ep  10  held-out acc 0.011  hit 0.067  lane-correct 0.46  train reward (last 10) 0.080
+      thresholds ep  20  held-out acc 0.014  hit 0.083  lane-correct 0.46  train reward (last 10) 0.112
+      thresholds ep  30  held-out acc 0.014  hit 0.083  lane-correct 0.46  train reward (last 10) 0.076
+      wired      ep   0  held-out acc 0.100
+      wired      ep  10  held-out acc 0.158  hit 0.217  lane-correct 0.73  train reward (last 10) 0.037
+      wired      ep  20  held-out acc 0.128  hit 0.167  lane-correct 0.80  train reward (last 10) 0.056
+      wired      ep  30  held-out acc 0.128  hit 0.217  lane-correct 0.82  train reward (last 10) 0.073
+
+=== rewired topology #7
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.33  s3=0.59  s4=0.68  s5=0.62
+      thresholds ep   0  held-out acc 0.067
+      thresholds ep  10  held-out acc 0.067  hit 0.183  lane-correct 0.58  train reward (last 10) 0.103
+      thresholds ep  20  held-out acc 0.067  hit 0.183  lane-correct 0.58  train reward (last 10) 0.078
+      thresholds ep  30  held-out acc 0.069  hit 0.200  lane-correct 0.58  train reward (last 10) 0.088
+      wired      ep   0  held-out acc 0.067
+      wired      ep  10  held-out acc 0.083  hit 0.183  lane-correct 0.58  train reward (last 10) 0.073
+      wired      ep  20  held-out acc 0.117  hit 0.183  lane-correct 0.65  train reward (last 10) 0.081
+      wired      ep  30  held-out acc 0.117  hit 0.183  lane-correct 0.85  train reward (last 10) 0.072
+
+=== rewired topology #8
+  untrained, noise 0.03, lane-correct: s1=0.00  s2=0.45  s3=0.68  s4=0.62  s5=0.64
+      thresholds ep   0  held-out acc 0.094
+      thresholds ep  10  held-out acc 0.089  hit 0.117  lane-correct 0.80  train reward (last 10) 0.179
+      thresholds ep  20  held-out acc 0.094  hit 0.117  lane-correct 0.80  train reward (last 10) 0.100
+      thresholds ep  30  held-out acc 0.094  hit 0.117  lane-correct 0.88  train reward (last 10) 0.080
+      wired      ep   0  held-out acc 0.094
+      wired      ep  10  held-out acc 0.094  hit 0.117  lane-correct 0.54  train reward (last 10) 0.132
+      wired      ep  20  held-out acc 0.117  hit 0.233  lane-correct 0.67  train reward (last 10) 0.094
+      wired      ep  30  held-out acc 0.172  hit 0.233  lane-correct 0.67  train reward (last 10) 0.168
+
+--- untrained with photoreceptor noise 0.03, lane-correct by stage ---
+  stage 1: real 1.000 | rewired t 0.188+-0.348 1/8 p=0.22
+  stage 2: real 1.000 | rewired t 0.319+-0.217 0/8 p=0.11
+  stage 3: real 0.727 | rewired t 0.439+-0.216 1/8 p=0.22
+  stage 4: real 0.737 | rewired t 0.534+-0.178 1/8 p=0.22
+  stage 5: real 0.450 | rewired t 0.466+-0.197 4/8 p=0.56
+
+--- learning: held-out accuracy (stage 3) by episode ------------------
+  thresholds:
+    real connectome              ep0=0.06  ep10=0.09  ep20=0.15  ep30=0.21   lane-correct 0.65->0.80   err +59 ms
+    rewired topology #1          ep0=0.00  ep10=0.00  ep20=0.00  ep30=0.00   lane-correct 0.69->0.48   err -18 ms
+    rewired topology #2          ep0=0.08  ep10=0.08  ep20=0.11  ep30=0.13   lane-correct 0.42->0.41   err -15 ms
+    rewired topology #3          ep0=0.20  ep10=0.26  ep20=0.27  ep30=0.26   lane-correct 0.77->0.77   err -34 ms
+    rewired topology #4          ep0=0.07  ep10=0.07  ep20=0.06  ep30=0.16   lane-correct 0.17->0.24   err -46 ms
+    rewired topology #5          ep0=0.07  ep10=0.07  ep20=0.07  ep30=0.07   lane-correct 0.64->0.77   err -81 ms
+    rewired topology #6          ep0=0.10  ep10=0.01  ep20=0.01  ep30=0.01   lane-correct 0.75->0.46   err -132 ms
+    rewired topology #7          ep0=0.07  ep10=0.07  ep20=0.07  ep30=0.07   lane-correct 0.58->0.58   err -96 ms
+    rewired topology #8          ep0=0.09  ep10=0.09  ep20=0.09  ep30=0.09   lane-correct 0.80->0.88   err +56 ms
+    final  real 0.211 | rewired t 0.101+-0.079 1/8 p=0.22
+    best   real 0.211 | rewired t 0.112+-0.073 1/8 p=0.22
+    area   real 0.151 | rewired t 0.089+-0.075 1/8 p=0.22
+  wired:
+    real connectome              ep0=0.06  ep10=0.27  ep20=0.26  ep30=0.24   lane-correct 0.65->0.85   err +10 ms
+    rewired topology #1          ep0=0.00  ep10=0.01  ep20=0.01  ep30=0.00   lane-correct 0.69->0.61   err -24 ms
+    rewired topology #2          ep0=0.08  ep10=0.18  ep20=0.29  ep30=0.30   lane-correct 0.42->0.53   err +7 ms
+    rewired topology #3          ep0=0.20  ep10=0.26  ep20=0.27  ep30=0.26   lane-correct 0.77->0.77   err -41 ms
+    rewired topology #4          ep0=0.07  ep10=0.06  ep20=0.16  ep30=0.22   lane-correct 0.17->0.38   err -4 ms
+    rewired topology #5          ep0=0.07  ep10=0.19  ep20=0.30  ep30=0.25   lane-correct 0.64->0.60   err -58 ms
+    rewired topology #6          ep0=0.10  ep10=0.16  ep20=0.13  ep30=0.13   lane-correct 0.75->0.82   err -77 ms
+    rewired topology #7          ep0=0.07  ep10=0.08  ep20=0.12  ep30=0.12   lane-correct 0.58->0.85   err -65 ms
+    rewired topology #8          ep0=0.09  ep10=0.09  ep20=0.12  ep30=0.17   lane-correct 0.80->0.67   err +10 ms
+    final  real 0.239 | rewired t 0.181+-0.090 3/8 p=0.44
+    best   real 0.267 | rewired t 0.193+-0.094 3/8 p=0.44
+    area   real 0.254 | rewired t 0.161+-0.084 2/8 p=0.33

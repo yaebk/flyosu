@@ -138,7 +138,12 @@ in the blank condition (0.08 ± 0.08, 0/8): what a blank readout has to find is
 a mapping onto coherent groups of descending neurons. The untrained lane result
 survives photoreceptor noise, and the spectral-radius gap holds at n = 6 per
 family (real 2.28, rewired 0.78 ± 0.16).
-**[`docs/RESULTS_E3.md`](docs/RESULTS_E3.md).**
+**[`docs/RESULTS_E3.md`](docs/RESULTS_E3.md)** — which has since been re-run
+under the corrected wiring rule. The real network is unchanged and the controls
+improve, so thresholds-only goes 0/8 → 1/8 and the anatomical-wiring condition
+1/8 → 3/8. The ordering now depends on the metric: it holds on area under the
+learning curve (1/8 → 2/8 → 4/8) and breaks on final accuracy
+(1/8 → 3/8 → 2/8). Thresholds-only is the condition that survives best.
 
 Experiment 4 asked whether those two properties of the real wiring — high
 recurrent gain and good untrained lane choice — are one fact or two. Across 20

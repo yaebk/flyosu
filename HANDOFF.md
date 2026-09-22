@@ -329,6 +329,26 @@ Three corrections a successor must carry:
     reverses sign. On the male CNS it is network-wide instead. The datasets
     agree on the readout and disagree on the locus, and that is unexplained.
 
+## Experiment 3 re-run under the corrected wiring rule
+
+`docs/RESULTS_E3.md`, final section. The learning comparison was measured with
+the margin wiring rule, and two of its three conditions start from the
+anatomical wiring, so it was exposed to the experiment 6/7 correction. Re-run
+with `WIRING=band` (results in `results/e3_learning_band.json`): the real
+network's numbers are identical, the controls improve, and thresholds-only goes
+0/8 to 1/8 while the anatomical-wiring condition goes 1/8 to 3/8.
+
+The consequence a successor needs: **the monotone ordering is now
+metric-dependent.** On area under the learning curve it survives
+(1/8, 2/8, 4/8 as constraint loosens); on final accuracy it does not
+(1/8, 3/8, 2/8). Quote it with the metric attached. Thresholds-only remains the
+strongest condition on both metrics and is the part of experiment 3 that
+survives best. Nothing in the learning comparison reaches significance -- at
+n = 8 the floor is p = 0.11 and the best is p = 0.22.
+
+This was the last pre-correction result awaiting re-measurement. Everything in
+the project has now been measured under the corrected protocol.
+
 ## Design decisions a successor needs to know
 
 1. **Controller = 20 parameters, connectome frozen.** `u = W·z_s + b`, press on

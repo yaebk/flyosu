@@ -114,6 +114,54 @@ searching for it. Experiment 5 turns this from an ordering into a curve, by
 fitting the readout in closed form and varying how much it is allowed to do. That is a more specific claim than "the connectome helps",
 and it is the claim experiment 1 set up.
 
+## Re-run under the corrected wiring rule (experiments 6–7)
+
+Experiments 6 and 7 found that two procedural choices made early — the fixed
+threshold θ = 1.5 and the *margin* wiring rule — both happened to suit the
+network they were developed on, and that fixing either helps only the controls.
+The numbers above were measured with the margin rule, and two of the three
+conditions start from the anatomical wiring, so they were exposed to exactly
+that correction. This re-runs them with `probes.band_assignment`
+(`WIRING=band`, `results/e3_learning_band.json`). The `blank` condition starts
+from `W = 0` and cannot be affected, so it is not re-run.
+
+The real network's numbers are **identical** — the band rule picks the same
+permutation for it, which is the point experiment 7 made — so every change
+below is the controls improving.
+
+| condition | rule | real | rewired ×8 | n ≥ real | area: real | rewired | n ≥ real |
+|---|---|---|---|---|---|---|---|
+| thresholds only | margin | 0.211 | 0.058 ± 0.051 | **0/8** | 0.128 | 0.054 ± 0.042 | **0/8** |
+| | **band** | 0.211 | 0.101 ± 0.079 | **1/8** | 0.128 | 0.088 ± 0.067 | **1/8** |
+| anatomical wiring | margin | 0.239 | 0.118 ± 0.075 | 1/8 | 0.206 | 0.092 ± 0.060 | 1/8 |
+| | **band** | 0.239 | 0.181 ± 0.090 | **3/8** | 0.206 | 0.142 ± 0.072 | **2/8** |
+| `W = 0` | margin | 0.272 | 0.196 ± 0.110 | 2/8 | 0.147 | 0.119 ± 0.066 | 4/8 |
+| | *(immune)* | — | — | — | — | — | — |
+
+### What survives
+
+**The ordering is now metric-dependent, which is weaker than this page
+originally claimed.** On area under the learning curve it holds:
+1/8 → 2/8 → 4/8 as the learning gets less constrained, the same shape as
+before. On final accuracy it does not: 1/8 → **3/8** → 2/8, because the
+anatomical-wiring condition improved most for the controls and now sits worse
+than the blank-start one. The headline "the more constrained the learning, the
+more the real wiring matters" should be quoted with the metric attached, and no
+longer as a clean monotone result.
+
+**Thresholds-only remains the strongest condition** on both metrics — 1/8,
+p = 0.22 — and it is the condition where the wiring does the most work, since
+learning may only move four numbers. That is the part of experiment 3 that
+survives the correction best.
+
+**Nothing here reaches significance.** At n = 8 the floor is p = 0.11 and the
+best result is p = 0.22. The learning comparison was never significant and is
+now further from it.
+
+This is the fifth case of the project's recurring pattern: give the controls a
+fairer procedure and the gap shrinks. It is also the last of the pre-correction
+results to be re-measured.
+
 ## Untrained play with photoreceptor noise
 
 θ = 1.5, two 20-note charts per stage, σ 0.03 per receptor per frame:
