@@ -192,7 +192,10 @@ real network once, no exclusions, no parameter changed, no endpoint
 recomputed. Result in `docs/RESULTS_E14.md`.
 
 **2026-09-23 — the `retino_seed` secondary was run after the primary reported,
-not before.** Section 4 declared it in advance, so running it is within the
+not before, and came back 0/20, p = 0.048.** It is not treated as support; see
+§10 and `docs/RESULTS_E14.md`.
+
+**2026-09-23 — original wording of the above deviation, kept:** Section 4 declared it in advance, so running it is within the
 registration, but the *order* is a deviation worth recording: it was executed
 knowing the primary had failed, which is the condition under which a secondary
 is most likely to be over-read. It is reported with its multiplicity warning
@@ -216,6 +219,17 @@ the others.
   distrusts. That is a real limit and cannot be fixed from inside the project.
 - **One connectome, one task, one control family for the primary.** Nothing here
   generalises to other connectomes or other behaviours.
+- **A design error found on contact with the data, recorded not fixed.** §4
+  excluded the `channel_seed` family because shuffling the channel groups makes
+  this endpoint partly degenerate. The same reasoning applies to `retino_seed`
+  and was not applied: scrambling which photoreceptor sees which direction
+  degrades lane identity *at the input*, before the graph is reached, so it is a
+  weaker null for a lane-selectivity measure than rewiring is. It duly came in
+  0.14 below the rewired family and handed the real network a 0/20 while the
+  primary gave 4/40. Declaring a control family without checking whether it is
+  degenerate for the endpoint is the same class of mistake this document was
+  written to prevent, committed inside the document itself. It stands as
+  written; `docs/RESULTS_E14.md` reports the secondary with this attached.
 - **n = 40 gives a p-floor of 0.024.** No outcome can be significant beyond
   that, and the design has no power to distinguish a large effect from an
   enormous one.

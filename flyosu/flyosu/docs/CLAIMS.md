@@ -67,7 +67,17 @@ distribution committed before the real network was run once
 **Nothing about the procedure changed and the real value did not move** — 0.79
 then, 0.790 now. Twenty more controls were drawn and four of them reached it,
 which is roughly what a distribution 1.4 SD below the real value predicts. The
-direction survives and the claim does not. `docs/RESULTS_E14.md`.
+direction survives and the claim does not.
+
+The declared `retino_seed` secondary gives 0/20, p = 0.048, and **must not be
+quoted as support**: retinotopy-shuffled networks average 0.407 on this
+endpoint against the rewired family's 0.547, so they are a *weaker* null —
+scrambling which photoreceptor sees which direction degrades lane identity at
+the input, before the graph is reached. The real network cleared the easy bar
+and failed the hard one, and its p is pinned to the n = 20 floor. The
+registration should have excluded that family for the same reason it excluded
+`channel_seed`; that it did not is recorded as an error in the registration.
+`docs/RESULTS_E14.md`.
 
 **6. Untrained accuracy.** Real 0.242 vs rewired 0.539 ± 0.169, **19/20,
 p = 0.95**, once the controller may wait before pressing (experiment 11).

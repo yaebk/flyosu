@@ -1,0 +1,425 @@
+{
+ "protocol": "docs/PREREGISTRATION.md (secondary)",
+ "runs": [
+  {
+   "label": "retino #1",
+   "wiring": [
+    3,
+    0,
+    2,
+    1
+   ],
+   "argmax_mean": 0.468944099378882,
+   "argmax_fraction": [
+    0.6583850931677019,
+    0.16149068322981366,
+    0.055900621118012424,
+    1.0
+   ],
+   "peak_margin_mean": 0.5203082318773462,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 2.827724568180902,
+   "seconds": 17.7
+  },
+  {
+   "label": "retino #2",
+   "wiring": [
+    2,
+    0,
+    3,
+    1
+   ],
+   "argmax_mean": 0.2437888198757764,
+   "argmax_fraction": [
+    0.2608695652173913,
+    0.2732919254658385,
+    0.422360248447205,
+    0.018633540372670808
+   ],
+   "peak_margin_mean": 1.4338558336069362,
+   "drift": 0.5882296562194824,
+   "fixed_point": false,
+   "spectral_radius": 3.0753647550924814,
+   "seconds": 17.5
+  },
+  {
+   "label": "retino #3",
+   "wiring": [
+    1,
+    0,
+    3,
+    2
+   ],
+   "argmax_mean": 0.2888198757763975,
+   "argmax_fraction": [
+    0.0,
+    0.15527950310559005,
+    0.0,
+    1.0
+   ],
+   "peak_margin_mean": 0.017183449390796857,
+   "drift": 2.384185791015625e-07,
+   "fixed_point": true,
+   "spectral_radius": 3.0692111525670622,
+   "seconds": 16.3
+  },
+  {
+   "label": "retino #4",
+   "wiring": [
+    1,
+    2,
+    0,
+    3
+   ],
+   "argmax_mean": 0.4503105590062112,
+   "argmax_fraction": [
+    1.0,
+    0.0,
+    0.8012422360248447,
+    0.0
+   ],
+   "peak_margin_mean": -0.2444866489720671,
+   "drift": 4.4465065002441406e-05,
+   "fixed_point": true,
+   "spectral_radius": 3.069830049761379,
+   "seconds": 16.0
+  },
+  {
+   "label": "retino #5",
+   "wiring": [
+    0,
+    2,
+    1,
+    3
+   ],
+   "argmax_mean": 0.5993788819875777,
+   "argmax_fraction": [
+    0.0,
+    1.0,
+    0.9627329192546584,
+    0.43478260869565216
+   ],
+   "peak_margin_mean": 0.7784992057013984,
+   "drift": 3.6954879760742188e-06,
+   "fixed_point": true,
+   "spectral_radius": 2.9298103014255634,
+   "seconds": 16.5
+  },
+  {
+   "label": "retino #6",
+   "wiring": [
+    0,
+    2,
+    1,
+    3
+   ],
+   "argmax_mean": 0.2996894409937888,
+   "argmax_fraction": [
+    0.062111801242236024,
+    0.7453416149068323,
+    0.33540372670807456,
+    0.055900621118012424
+   ],
+   "peak_margin_mean": 2.645131930420541,
+   "drift": 0.568256139755249,
+   "fixed_point": false,
+   "spectral_radius": 3.0572170061932464,
+   "seconds": 16.7
+  },
+  {
+   "label": "retino #7",
+   "wiring": [
+    1,
+    3,
+    0,
+    2
+   ],
+   "argmax_mean": 0.36645962732919257,
+   "argmax_fraction": [
+    0.0,
+    1.0,
+    0.4658385093167702,
+    0.0
+   ],
+   "peak_margin_mean": 0.37254745920572424,
+   "drift": 2.181529998779297e-05,
+   "fixed_point": true,
+   "spectral_radius": 3.0945292804881936,
+   "seconds": 17.1
+  },
+  {
+   "label": "retino #8",
+   "wiring": [
+    3,
+    0,
+    2,
+    1
+   ],
+   "argmax_mean": 0.27329192546583847,
+   "argmax_fraction": [
+    0.09937888198757763,
+    0.2857142857142857,
+    0.6459627329192547,
+    0.062111801242236024
+   ],
+   "peak_margin_mean": 1.0680730294215552,
+   "drift": 0.35879987478256226,
+   "fixed_point": false,
+   "spectral_radius": 3.0753281090718247,
+   "seconds": 16.9
+  },
+  {
+   "label": "retino #9",
+   "wiring": [
+    2,
+    3,
+    0,
+    1
+   ],
+   "argmax_mean": 0.47360248447204967,
+   "argmax_fraction": [
+    0.4720496894409938,
+    0.8322981366459627,
+    0.5900621118012422,
+    0.0
+   ],
+   "peak_margin_mean": 0.8506988191369391,
+   "drift": 0.016691356897354126,
+   "fixed_point": false,
+   "spectral_radius": 2.6611344818188494,
+   "seconds": 17.3
+  },
+  {
+   "label": "retino #10",
+   "wiring": [
+    2,
+    1,
+    0,
+    3
+   ],
+   "argmax_mean": 0.4891304347826087,
+   "argmax_fraction": [
+    0.3167701863354037,
+    0.9440993788819876,
+    0.2236024844720497,
+    0.4720496894409938
+   ],
+   "peak_margin_mean": 1.3548181901139469,
+   "drift": 0.32667863368988037,
+   "fixed_point": false,
+   "spectral_radius": 3.2662654948524708,
+   "seconds": 16.9
+  },
+  {
+   "label": "retino #11",
+   "wiring": [
+    0,
+    1,
+    3,
+    2
+   ],
+   "argmax_mean": 0.7127329192546584,
+   "argmax_fraction": [
+    0.8881987577639752,
+    0.7515527950310559,
+    1.0,
+    0.2111801242236025
+   ],
+   "peak_margin_mean": 1.134088471623044,
+   "drift": 0.00022789835929870605,
+   "fixed_point": false,
+   "spectral_radius": 2.998165581339062,
+   "seconds": 16.5
+  },
+  {
+   "label": "retino #12",
+   "wiring": [
+    1,
+    3,
+    2,
+    0
+   ],
+   "argmax_mean": 0.2468944099378882,
+   "argmax_fraction": [
+    0.16149068322981366,
+    0.422360248447205,
+    0.39751552795031053,
+    0.006211180124223602
+   ],
+   "peak_margin_mean": -0.794330409681157,
+   "drift": 0.3389374911785126,
+   "fixed_point": false,
+   "spectral_radius": 2.985781864458157,
+   "seconds": 15.5
+  },
+  {
+   "label": "retino #13",
+   "wiring": [
+    0,
+    1,
+    3,
+    2
+   ],
+   "argmax_mean": 0.4798136645962733,
+   "argmax_fraction": [
+    0.639751552795031,
+    0.14285714285714285,
+    0.6956521739130435,
+    0.4409937888198758
+   ],
+   "peak_margin_mean": 0.6609745196295064,
+   "drift": 0.0015472173690795898,
+   "fixed_point": false,
+   "spectral_radius": 3.0954996211638766,
+   "seconds": 15.6
+  },
+  {
+   "label": "retino #14",
+   "wiring": [
+    1,
+    2,
+    3,
+    0
+   ],
+   "argmax_mean": 0.6568322981366459,
+   "argmax_fraction": [
+    0.7888198757763976,
+    0.8819875776397516,
+    0.4472049689440994,
+    0.5093167701863354
+   ],
+   "peak_margin_mean": 0.9386744426739067,
+   "drift": 0.04782825708389282,
+   "fixed_point": false,
+   "spectral_radius": 3.2003046453744464,
+   "seconds": 15.5
+  },
+  {
+   "label": "retino #15",
+   "wiring": [
+    3,
+    0,
+    2,
+    1
+   ],
+   "argmax_mean": 0.3524844720496894,
+   "argmax_fraction": [
+    0.0,
+    0.9813664596273292,
+    0.0,
+    0.42857142857142855
+   ],
+   "peak_margin_mean": 0.012760999192458433,
+   "drift": 3.069639205932617e-06,
+   "fixed_point": true,
+   "spectral_radius": 3.18685745055913,
+   "seconds": 15.7
+  },
+  {
+   "label": "retino #16",
+   "wiring": [
+    1,
+    0,
+    2,
+    3
+   ],
+   "argmax_mean": 0.44254658385093165,
+   "argmax_fraction": [
+    0.39751552795031053,
+    0.30434782608695654,
+    0.7763975155279503,
+    0.2919254658385093
+   ],
+   "peak_margin_mean": 0.39143389714938326,
+   "drift": 0.005007684230804443,
+   "fixed_point": false,
+   "spectral_radius": 2.9191940411506123,
+   "seconds": 15.5
+  },
+  {
+   "label": "retino #17",
+   "wiring": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "argmax_mean": 0.27173913043478265,
+   "argmax_fraction": [
+    0.0,
+    0.07453416149068323,
+    0.9006211180124224,
+    0.11180124223602485
+   ],
+   "peak_margin_mean": 0.5940878295781629,
+   "drift": 0.0030947327613830566,
+   "fixed_point": false,
+   "spectral_radius": 3.1793051485225985,
+   "seconds": 15.5
+  },
+  {
+   "label": "retino #18",
+   "wiring": [
+    0,
+    2,
+    3,
+    1
+   ],
+   "argmax_mean": 0.2795031055900621,
+   "argmax_fraction": [
+    0.2857142857142857,
+    0.7391304347826086,
+    0.031055900621118012,
+    0.062111801242236024
+   ],
+   "peak_margin_mean": 1.5820607906377906,
+   "drift": 0.10655170679092407,
+   "fixed_point": false,
+   "spectral_radius": 3.176682623859283,
+   "seconds": 15.4
+  },
+  {
+   "label": "retino #19",
+   "wiring": [
+    1,
+    2,
+    0,
+    3
+   ],
+   "argmax_mean": 0.39285714285714285,
+   "argmax_fraction": [
+    0.37888198757763975,
+    0.0,
+    0.30434782608695654,
+    0.8881987577639752
+   ],
+   "peak_margin_mean": 1.6418072031900781,
+   "drift": 0.31937044858932495,
+   "fixed_point": false,
+   "spectral_radius": 2.9913675195675373,
+   "seconds": 15.4
+  },
+  {
+   "label": "retino #20",
+   "wiring": [
+    0,
+    3,
+    2,
+    1
+   ],
+   "argmax_mean": 0.35248447204968947,
+   "argmax_fraction": [
+    0.19254658385093168,
+    0.4968944099378882,
+    0.6956521739130435,
+    0.024844720496894408
+   ],
+   "peak_margin_mean": 0.18507624979163673,
+   "drift": 0.49014750123023987,
+   "fixed_point": false,
+   "spectral_radius": 3.24174007916926,
+   "seconds": 15.5
+  }
+ ]
+}

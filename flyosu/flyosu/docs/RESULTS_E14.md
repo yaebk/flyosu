@@ -58,6 +58,54 @@ that five-controls-at-the-value is fairer than calling it four.
 
 The four that reach it: `#8` 0.874, `#38` 0.866, `#29` 0.809, `#23` 0.807.
 
+## The secondary that looks like a rescue, and is not
+
+The `retino_seed` family was declared as a secondary in §4 of the registration
+and run **after** the primary had already failed (logged as a deviation in §9).
+It comes back at:
+
+| | real | retino-shuffled ×20 | n ≥ real | p | floor |
+|---|---|---|---|---|---|
+| argmax_mean | 0.790 | 0.407 ± 0.137 | **0/20** | **0.048** | 0.048 |
+
+**That is nominally below 0.05 and it does not rescue anything.** Three reasons,
+all of which were knowable before the number was seen:
+
+**It is a weaker null, not a stronger result.** Retinotopy-shuffled networks
+average 0.407 on this endpoint against the rewired family's 0.547 — 0.14 *below*
+the controls the primary used. Shuffling which photoreceptor sees which
+direction attacks the lane→channel mapping directly, which is the very thing
+`argmax_mean` measures. Beating this family is an easier bar than beating
+rewiring, and the real network cleared the easy bar while failing the hard one.
+Reporting that as support would be choosing the control family by its answer.
+
+**p = 0.048 is the floor.** With 20 controls the smallest attainable p is
+1/21 = 0.0476. A perfect 0/20 cannot do better, and it clears the
+pre-registered 0.05 by 0.002 — entirely an artefact of where n put the floor. A
+result whose p-value is pinned to the floor carries no information about effect
+size, and the retino maximum (0.713) sits 0.078 below the real value, a
+narrower margin than the count suggests.
+
+**The registration should have excluded it.** §4 excluded the `channel_seed`
+family on exactly this reasoning — that shuffling the channel groups makes the
+endpoint partly degenerate, since `band_assignment` re-derives the permutation
+from the shuffled groups. The same scrutiny was not applied to `retino_seed`,
+and it should have been: scrambling retinotopy degrades lane identity at the
+input, before the graph is reached at all. **This is an error in the
+pre-registration, not a discovery in the data**, and it is recorded in §10 of
+that document rather than quietly fixed.
+
+Per §4, no secondary may be promoted to primary "for any reason, including the
+primary failing". That clause was written before any of this was known and it
+binds here. **The claim stays not supported.**
+
+The per-lane numbers make the degeneracy visible. Retino-shuffled networks show
+scattered per-lane selectivity — `[0.66, 0.16, 0.06, 1.00]`,
+`[0.00, 0.16, 0.00, 1.00]`, `[1.00, 0.00, 0.80, 0.00]` — which is lane identity
+destroyed at the input rather than a graph that routes differently. The rewired
+family, which keeps retinotopy and scrambles the wiring, is the control that
+actually asks whether the *connectome* matters.
+
 ## Why n = 20 said 1/20 and n = 40 says 4/40
 
 The real value is identical to three decimal places. The control *mean* is also
@@ -113,9 +161,10 @@ Anyone who wants to test it must pre-register it as a new experiment.
 
 ## Honest caveats
 
-- **One connectome, one control family, one endpoint.** The `retino_seed`
-  secondary declared in the pre-registration was not run; it is recorded here as
-  not run rather than omitted.
+- **One connectome, one endpoint.** The `retino_seed` secondary was run late
+  and is reported above with the reasons it should not be read as support. The
+  experiment-11 behavioural secondaries were not run and are recorded as not
+  run rather than omitted.
 - **p = 0.122 is not evidence of no effect.** The direction is +1.4 SD and an
   effect could be real and this design underpowered to show it. The correct
   statement is that the claim is not supported, not that it is refuted.
@@ -131,5 +180,8 @@ Anyone who wants to test it must pre-register it as a new experiment.
 - **Treat every "0/20" and "1/20" in this project's history as weaker than it
   reads.** The two structural claims are at 0/40 and are the exception.
 - Pre-register the per-lane version before measuring it, or leave it alone.
+- **Do not quote the 0/20 against retinotopy-shuffled networks as evidence for
+  lane-selectivity.** It is a weaker control family for this endpoint than the
+  one the primary used, and its p-value is pinned to the n = 20 floor.
 - Keep running the controls before the real network. It cost nothing here and
   it is the reason this write-up needs no one to take anything on trust.
