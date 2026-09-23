@@ -126,6 +126,11 @@ ARMS = {
     # are tried; 20 charts so five specs cycle evenly.
     "fastest_a400": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0)), n_charts=20, k=32, approach=400.0),
     "fastest_a300": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0)), n_charts=20, k=32, approach=300.0),
+    # round 9: hold notes.  `hold_a400` puts stage-7 charts in the diet;
+    # `fast_a400` is the control, having never held a key on purpose.  The
+    # jack result says to expect the control to do well and the trained arm to
+    # pay for whatever the stage-7 charts displaced.
+    "hold_a400":    dict(specs=((4, 600.0), (4, 350.0), (7, 600.0), (7, 400.0)), n_charts=16, k=32, approach=400.0),
 }
 
 # Held-out battery: the conditions experiment 5 measured, plus a denser
@@ -165,6 +170,12 @@ DEEP = {
     # close that question rather than because the fly can play them.
     "s6_150": dict(stage=6, interval_ms=150.0),      # 6.7 notes/s, at the refractory
     "s6_120": dict(stage=6, interval_ms=120.0),      # 8.3 notes/s, inside it
+    # Hold notes (stage 7).  These ask the controller something nothing else
+    # does -- not when to press but how long to stay pressed -- and the answer
+    # comes from the same threshold, since a key is down while its drive is.
+    "s7_600": dict(stage=7, interval_ms=600.0),      # 1.7 notes/s, holds
+    "s7_400": dict(stage=7, interval_ms=400.0),      # 2.5 notes/s, holds
+    "s7_300": dict(stage=7, interval_ms=300.0),      # 3.3 notes/s, holds
 }
 DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 
