@@ -317,21 +317,36 @@ class ManiaEnv:
     def end_ms(self) -> float:
         return self.chart.end_ms + self.win["MISS"] + self.tail
 
-    def visible(self) -> list[tuple[int, float, int]]:
-        """``(lane, progress, note_index)`` for every note on screen.
+    def visible(self) -> list[tuple[int, float, int, float | None]]:
+        """``(lane, progress, note_index, tail_progress)`` for every note on screen.
 
         progress = 0 at spawn, 1 at the judgment line, >1 sliding past it.
-        A judged note is off screen.
+        A judged note is off screen -- except a hold note currently being held,
+        whose body is still on the playfield and still has to be let go of.
+
+        ``tail_progress`` is the same measure for a hold note's tail and is
+        ``None`` for an ordinary note, so a chart without holds produces exactly
+        the tuples this returned before hold notes existed (plus a trailing
+        ``None``, which every consumer ignores).
         """
         out = []
         a = self.chart.approach_ms
+        # A held note's head is judged, so the scan below skips it and the
+        # cursor has usually moved past it; emit it explicitly or the fly would
+        # lose sight of the body at the instant it pressed.
+        for i in self.holding:
+            if i is not None:
+                n = self.chart.notes[i]
+                out.append((n.lane, (self.t - (n.hit_ms - a)) / a, i,
+                            (self.t - (n.end_ms - a)) / a))
         for i in range(self._cursor, len(self.chart)):
             n = self.chart.notes[i]
             if n.hit_ms - a > self.t:
                 break
             if self.judged[i] is not None:
                 continue
-            out.append((n.lane, (self.t - (n.hit_ms - a)) / a, i))
+            out.append((n.lane, (self.t - (n.hit_ms - a)) / a, i,
+                        ((self.t - (n.end_ms - a)) / a) if n.is_hold else None))
         return out
 
     def press(self, lane: int) -> Press:

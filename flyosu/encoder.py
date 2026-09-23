@@ -93,12 +93,21 @@ class Encoder:
                  adapt_base: float = 1.0, gate_sigma_deg: float | None = None,
                  gate_el_deg: float = EL_JUDGE, gate_below_deg: float | None = None,
                  gate_width_deg: float = 4.0, gate_gain: float = 1.0,
-                 loom: float = 0.0, loom_exp: float = 1.0):
+                 loom: float = 0.0, loom_exp: float = 1.0,
+                 hold_intensity: float = 0.6, hold_step: float = 0.08,
+                 hold_points: int = 10):
         self.ret = retina
         self.sigma = float(sigma_deg)
         self.intensity = float(intensity)
         self.loom = float(loom)
         self.loom_exp = float(loom_exp)
+        # A hold note's body is drawn as points every ``hold_step`` of progress,
+        # at ``hold_intensity`` of a head's brightness and at most
+        # ``hold_points`` of them, so a long hold is a dimmer bar rather than a
+        # row of things that each look like a note to press.
+        self.hold_intensity = float(hold_intensity)
+        self.hold_step = float(hold_step)
+        self.hold_points = int(hold_points)
         self.adapt_tau = float(adapt if adapt is not None else adapt_tau_ms)
         self.adapt_gain = float(adapt_gain) if adapt is not None else 0.0
         self.adapt_base = float(adapt_base)
@@ -124,15 +133,47 @@ class Encoder:
     def reset(self) -> None:
         self.slow = None
 
-    def targets(self, visible) -> list[tuple[float, float, float]]:
-        """``visible`` is ``[(lane, progress, ...), ...]`` from the environment."""
+    def _intensity(self, prog: float) -> float:
         if self.loom <= 0:
-            return [(float(LANE_AZ[lane]), float(elevation(prog)), self.intensity)
-                    for lane, prog, *_ in visible]
-        return [(float(LANE_AZ[lane]), float(elevation(prog)),
-                 self.intensity * (1.0 + self.loom
-                                   * min(max(float(prog), 0.0), 1.0) ** self.loom_exp))
-                for lane, prog, *_ in visible]
+            return self.intensity
+        return self.intensity * (1.0 + self.loom
+                                 * min(max(float(prog), 0.0), 1.0) ** self.loom_exp)
+
+    def targets(self, visible) -> list[tuple[float, float, float]]:
+        """``visible`` is ``[(lane, progress, note, tail_progress), ...]``.
+
+        A hold note is drawn as a *bar*: its head, plus points spread along the
+        body between the tail and the judgment line.  Before experiment 20 only
+        the head was drawn, which meant the fly could not see that a note was a
+        hold, how long it lasted, or when to let go -- and it duly scored about
+        zero on them however it was trained, because the information was not in
+        the input at all.  Once the head has been taken the head point is
+        dropped and only the shrinking body remains, which is the cue to
+        release.
+
+        An ordinary note has ``tail_progress`` of ``None`` and is drawn exactly
+        as before, so a chart without holds is bit-identical.
+        """
+        out = []
+        for item in visible:
+            lane, prog = item[0], float(item[1])
+            tail = item[3] if len(item) > 3 else None
+            az = float(LANE_AZ[lane])
+            if tail is None:
+                out.append((az, float(elevation(prog)), self._intensity(prog)))
+                continue
+            held = prog > 1.0          # head already judged; body is what is left
+            if not held:
+                out.append((az, float(elevation(prog)), self._intensity(prog)))
+            lo, hi = float(tail), min(prog, 1.0)
+            if hi <= lo:
+                continue
+            k = int(min(self.hold_points, max(1, round((hi - lo) / self.hold_step))))
+            for j in range(1, k + 1):
+                p = lo + (hi - lo) * j / (k + 1)
+                out.append((az, float(elevation(p)),
+                            self._intensity(p) * self.hold_intensity))
+        return out
 
     def __call__(self, visible, dt_ms: float) -> np.ndarray:
         """Photoreceptor drive vector (len(retina),) for this frame."""

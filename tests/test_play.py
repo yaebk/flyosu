@@ -103,6 +103,33 @@ def test_mania():
     check("worse() orders judgments", mania.worse("MAX", "100") == "100"
           and mania.worse("MISS", "MAX") == "MISS")
 
+    # The fly has to be able to *see* a hold, or no readout on top of the input
+    # can learn when to let go -- experiment 20's finding. These pin the
+    # rendering: an ordinary note is one point exactly as before, a hold is a
+    # head plus a dimmer body, and once the head is taken only the shrinking
+    # body remains.
+    enc = E.Encoder.__new__(E.Encoder)
+    enc.intensity, enc.loom, enc.loom_exp = 1.0, 0.0, 1.0
+    enc.hold_intensity, enc.hold_step, enc.hold_points = 0.6, 0.08, 10
+    check("an ordinary note is still one point",
+          enc.targets([(0, 0.5, 0, None)]) == [(-60.0, 5.0, 1.0)])
+    body = enc.targets([(0, 0.5, 0, 0.1)])
+    check("a hold is a head plus a body", len(body) > 1 and body[0][2] == 1.0
+          and all(p[2] < 1.0 for p in body[1:]), f"{len(body)} points")
+    check("the body sits above the head",
+          all(p[1] > body[0][1] for p in body[1:]))
+    held = enc.targets([(0, 2.5, 0, 0.6)])
+    check("a held note drops its head", len(held) > 0
+          and all(p[2] < 1.0 for p in held), f"{len(held)} points")
+    check("a finished hold renders nothing", enc.targets([(0, 2.5, 0, 1.2)]) == [])
+    # and the environment keeps a held note on screen
+    env = mania.ManiaEnv(_hold_chart(), dt_ms=5.0)
+    while env.t < 2000.0 - env.dt:
+        env.step()
+    env.press(0)
+    env.step()
+    check("a held note stays visible", any(v[3] is not None for v in env.visible()))
+
     # an oracle that presses each note exactly on time gets 100%
     c = mania.stage_chart(3, n_notes=20, seed=1)
     env = mania.ManiaEnv(c)
@@ -172,7 +199,7 @@ def test_mania():
     env = mania.ManiaEnv(c)
     while env.t < first.hit_ms:
         env.step()
-    vis = {i: prog for _, prog, i in env.visible()}
+    vis = {i: prog for _, prog, i, *_ in env.visible()}
     check("note is at the judgment line at its hit time", abs(vis.get(0, 9) - 1.0) < 0.01,
           f"progress {vis.get(0)}")
 

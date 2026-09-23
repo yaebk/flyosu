@@ -31,7 +31,7 @@ def render(res: mania.PlayResult, every_ms: float = 20.0) -> None:
     for i in range(0, len(tr.t), step):
         t = tr.t[i]
         lanes = [" "] * 4
-        for lane, prog, _ in tr.visible[i]:
+        for lane, prog, *_ in tr.visible[i]:
             lanes[lane] = "=" if abs(prog - 1.0) < 0.05 else ("o" if prog < 1 else ".")
         d = tr.drive[i]
         cells = "".join(f"{v:7.2f}" for v in d)
