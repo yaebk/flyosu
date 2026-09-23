@@ -1,5 +1,5 @@
 {
- "arm": "fast_a400",
+ "arm": "hold_a400",
  "deep_kw": {
   "n_charts": 10,
   "n_notes": 20,
@@ -22,8 +22,8 @@
   },
   "s3_350": {
    "notes_per_s": 2.86,
-   "accuracy": 1.0,
-   "hit_rate": 1.0,
+   "accuracy": 0.99,
+   "hit_rate": 0.99,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
@@ -43,8 +43,8 @@
   },
   "s4_300": {
    "notes_per_s": 3.33,
-   "accuracy": 1.0,
-   "hit_rate": 1.0,
+   "accuracy": 0.86,
+   "hit_rate": 0.865,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
@@ -57,29 +57,29 @@
   },
   "s3_300": {
    "notes_per_s": 3.33,
-   "accuracy": 1.0,
-   "hit_rate": 1.0,
+   "accuracy": 0.9,
+   "hit_rate": 0.9,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
   "s3_250": {
    "notes_per_s": 4.0,
-   "accuracy": 0.9833333333333332,
-   "hit_rate": 0.985,
+   "accuracy": 0.8549999999999999,
+   "hit_rate": 0.8549999999999999,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
   "s4_250": {
    "notes_per_s": 4.0,
-   "accuracy": 0.9883333333333333,
-   "hit_rate": 0.9949999999999999,
+   "accuracy": 0.7866666666666666,
+   "hit_rate": 0.7999999999999999,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
   "s4_200": {
    "notes_per_s": 5.0,
-   "accuracy": 0.7183333333333333,
-   "hit_rate": 0.74,
+   "accuracy": 0.5858333333333333,
+   "hit_rate": 0.6199999999999999,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
@@ -92,29 +92,29 @@
   },
   "s6_300": {
    "notes_per_s": 3.33,
-   "accuracy": 1.0,
-   "hit_rate": 1.0,
+   "accuracy": 0.7500000000000001,
+   "hit_rate": 0.7500000000000001,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
   "s6_250": {
    "notes_per_s": 4.0,
-   "accuracy": 0.8949999999999999,
-   "hit_rate": 0.8949999999999999,
+   "accuracy": 0.705,
+   "hit_rate": 0.705,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
   "s6_150": {
    "notes_per_s": 6.67,
-   "accuracy": 0.43083333333333335,
-   "hit_rate": 0.545,
+   "accuracy": 0.3441666666666667,
+   "hit_rate": 0.445,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
   "s6_120": {
    "notes_per_s": 8.33,
-   "accuracy": 0.4291666666666666,
-   "hit_rate": 0.48,
+   "accuracy": 0.39666666666666667,
+   "hit_rate": 0.45500000000000007,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   },
@@ -134,8 +134,8 @@
   },
   "s7_300": {
    "notes_per_s": 3.33,
-   "accuracy": 0.6708333333333333,
-   "hit_rate": 0.8400000000000001,
+   "accuracy": 0.5991666666666667,
+   "hit_rate": 0.6950000000000001,
    "stray_per_note": 0.0,
    "lane_correct": 1.0
   }

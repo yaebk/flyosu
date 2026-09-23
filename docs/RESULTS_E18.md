@@ -231,6 +231,48 @@ My earlier caveat that it "would bind on a real beatmap with jacks" is now
 precise: it binds on 1/4 jacks above roughly 100 BPM, which is out of reach for
 other reasons. Do not spend effort tuning it.
 
+## Rounds 8 and 9: the last density gap, and holds
+
+**Adding a 200 ms chart to the diet closes the density ceiling.** Five events a
+second was the one weak point left, at 0.718, and it was extrapolation -- the
+diet's fastest chart was 250 ms. With a 200 ms chart added:
+
+| condition | fast_a400 | fastest_a400 | **fastest_a300** |
+|---|---|---|---|
+| chords @ 5.0/s | 0.718 | 0.908 | **0.948** |
+| chords @ 4.0/s | 0.988 | 1.000 | **1.000** |
+| jacks @ 4.0/s | 0.895 | 1.000 | **1.000** |
+| mean, non-hold | 0.968 | 0.993 | **0.996** |
+
+`fastest_a300` scores a clean 1.000 on nine of the ten non-hold conditions.
+**The synthetic curriculum is saturated** -- there is no headroom left in it, and
+further capability work has to come from real maps.
+
+**Holds, by contrast, are immovable, and that is the point.**
+
+| | never trained on holds | trained on holds |
+|---|---|---|
+| holds @ 600 ms | 0.630 | **0.630** |
+| holds @ 400 ms | 0.630 | **0.630** |
+
+Training on hold notes changes the score by *nothing*. Stage 7 is 40% holds, so
+0.630 is very close to what you get if every ordinary note scores 1.000 and
+**every hold scores 0** -- the fly presses the head correctly and then misses the
+tail, essentially always.
+
+This is the third independent line of evidence for the same cause, and together
+they are conclusive. Experiment 20's regression on real maps puts the cost of a
+fully-held chart at 0.432 of accuracy. Holds here score about zero. And training
+on them does not help at all -- which is what you expect when the information is
+not in the input rather than when the policy is merely untuned. `Encoder.targets`
+draws one point per visible note, so a hold is rendered as its head and nothing
+else. **The fly cannot see that a note is a hold**, and no readout fitted on top
+of that input can learn when to let go.
+
+Note also that `hold_a400` is *worse* everywhere else (0.879 against 0.996),
+which is the displacement lesson for the third time: its stage-7 charts came out
+of the density budget, and bought nothing.
+
 ## In osu!mania terms
 
 Roughly: from a comfortable **1.5–2★** to about **4★**. Chords at 150 BPM now
