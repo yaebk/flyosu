@@ -487,7 +487,7 @@ experiments/
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  32 checks on the network side
-tests/test_play.py      70 checks on the game side, incl. the probes, firing edges and stray semantics
+tests/test_play.py      75 checks on the game side, incl. the probes, firing edges, jacks and stray semantics
 tests/test_reservoir.py 20 checks on the closed-form readout
 tests/test_malecns.py   the male CNS loader, pinning the numbers docs/MALECNS.md quotes
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
@@ -519,7 +519,7 @@ python run_fly.py --fall D           # watch a note descend
 python run_fly.py --sweep            # azimuth tuning, as text
 python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 32 checks
-python -m tests.test_play            # 70 checks
+python -m tests.test_play            # 75 checks
 python -m tests.test_reservoir       # 20 checks
 ```
 

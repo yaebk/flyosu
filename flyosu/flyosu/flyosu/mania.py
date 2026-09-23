@@ -122,12 +122,14 @@ STAGES = {
     3: "random lanes, regular",
     4: "random lanes with chords",
     5: "random lanes, varied intervals",
+    6: "random lanes with jacks",
 }
 
 
 def stage_chart(stage: int, n_notes: int = 24, interval_ms: float = 600.0,
                 approach_ms: float = 800.0, od: float = 8.0, seed: int = 0,
-                lane: int = 1, chord_p: float = 0.3, lead_ms: float = 1000.0) -> Chart:
+                lane: int = 1, chord_p: float = 0.3, lead_ms: float = 1000.0,
+                jack_p: float = 0.4) -> Chart:
     """One chart from the staged curriculum (see ``STAGES``).
 
     ``lane`` is the lane used by stage 1.  ``lead_ms`` is the silence before the
@@ -155,6 +157,22 @@ def stage_chart(stage: int, n_notes: int = 24, interval_ms: float = 600.0,
         for _ in range(n_notes):
             notes.append(Note(int(rng.integers(N_LANES)), t))
             t += float(rng.uniform(0.5, 1.5) * interval_ms)
+    elif stage == 6:
+        # Jacks: the same lane twice or more in a row.  Stages 1-5 spread notes
+        # over four lanes at a uniform interval, so two notes in one lane are
+        # never closer than the interval and the controller's refractory has
+        # never had the chance to bind -- experiment 18 found it makes no
+        # difference between 150 ms and 50 ms for exactly that reason.  Real
+        # beatmaps are full of this pattern, and it asks a different question:
+        # not whether the four channels can be told apart, but whether *one*
+        # channel can resolve two notes in quick succession.
+        prev = int(rng.integers(N_LANES))
+        for i in range(n_notes):
+            if i and rng.random() < jack_p:
+                ln = prev
+            else:
+                ln = int(rng.integers(N_LANES))
+            notes.append(Note(ln, t)); prev = ln; t += interval_ms
     else:
         raise ValueError(f"unknown stage {stage}; known: {sorted(STAGES)}")
     return Chart(notes, approach_ms=approach_ms, od=od,

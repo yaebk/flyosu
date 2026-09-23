@@ -45,6 +45,22 @@ def test_mania():
     c5 = mania.stage_chart(5, n_notes=24, seed=1)
     check("stage 5 varies intervals", np.diff(c5.times()).std() > 50)
 
+    # Stage 6 is the only generator that puts two notes in the same lane at the
+    # interval; every other stage spreads them over four lanes, which is why
+    # the controller's refractory never binds on stages 1-5 (experiment 18).
+    c6 = mania.stage_chart(6, n_notes=40, interval_ms=300.0, seed=1)
+    t6, l6 = c6.times(), c6.lanes()
+    same = int((np.diff(l6) == 0).sum())
+    check("stage 6 makes jacks", same > 5, f"{same} same-lane repeats of 39")
+    gaps = [np.diff(np.sort(t6[l6 == k])).min() for k in range(4) if (l6 == k).sum() > 1]
+    check("stage 6 reaches the interval in one lane", min(gaps) == 300.0,
+          f"min same-lane gap {min(gaps):.0f} ms")
+    c3 = mania.stage_chart(3, n_notes=40, interval_ms=300.0, seed=1)
+    t3, l3 = c3.times(), c3.lanes()
+    g3 = [np.diff(np.sort(t3[l3 == k])).min() for k in range(4) if (l3 == k).sum() > 1]
+    check("stage 3 never does", min(g3) >= 300.0)
+    check("stage 7 is rejected", _raises(lambda: mania.stage_chart(7)))
+
     # an oracle that presses each note exactly on time gets 100%
     c = mania.stage_chart(3, n_notes=20, seed=1)
     env = mania.ManiaEnv(c)
