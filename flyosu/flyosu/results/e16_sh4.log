@@ -1,0 +1,4 @@
+interval 1400 ms -> e16_heldout_interval1400_shard4of6.json (0 done, 3 planned)
+  rewired #4           th 0.5  sweep 0.708 -> held-out 0.494  lane 0.829  presses 41
+  rewired #10          th 0.5  sweep 0.625 -> held-out 0.744  lane 0.546  presses 97
+  rewired #11          th 0.5  sweep 1.000 -> held-out 1.000  lane 0.426  presses 141

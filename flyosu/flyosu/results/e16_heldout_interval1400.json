@@ -1,0 +1,428 @@
+{
+ "interval_ms": 1400.0,
+ "source": "e11_delays_cap1000_interval1400.json",
+ "held_out": {
+  "stage": 3,
+  "n_charts": 3,
+  "n_notes": 20,
+  "seed": 999,
+  "interval_ms": 1400.0
+ },
+ "runs": [
+  {
+   "label": "real connectome",
+   "theta": 0.5,
+   "delays": [
+    696.0,
+    678.0,
+    800.0,
+    150.0
+   ],
+   "sweep_accuracy": 0.45416666666666666,
+   "sweep_index": 0,
+   "accuracy": 0.5694444444444445,
+   "hit_rate": 0.8333333333333334,
+   "stray_per_note": 0.48333333333333334,
+   "n_counted": 80,
+   "eligible": true,
+   "lane_correct": 0.75,
+   "seconds": 86.6
+  },
+  {
+   "label": "rewired #6",
+   "theta": 1.0,
+   "delays": [
+    0.0,
+    472.0,
+    526.0,
+    418.0
+   ],
+   "sweep_accuracy": 0.6083333333333334,
+   "sweep_index": 1,
+   "accuracy": 0.4166666666666667,
+   "hit_rate": 0.5666666666666667,
+   "stray_per_note": 1.15,
+   "n_counted": 42,
+   "eligible": true,
+   "lane_correct": 0.8095238095238095,
+   "seconds": 82.6
+  },
+  {
+   "label": "rewired #14",
+   "theta": 0.5,
+   "delays": [
+    0.0,
+    518.0,
+    748.0,
+    50.0
+   ],
+   "sweep_accuracy": 0.7583333333333333,
+   "sweep_index": 0,
+   "accuracy": 0.5499999999999999,
+   "hit_rate": 0.5666666666666667,
+   "stray_per_note": 2.35,
+   "n_counted": 94,
+   "eligible": true,
+   "lane_correct": 0.3617021276595745,
+   "seconds": 86.9
+  },
+  {
+   "label": "rewired #15",
+   "theta": 0.5,
+   "delays": [
+    678.0,
+    794.0,
+    150.0,
+    572.0
+   ],
+   "sweep_accuracy": 0.95,
+   "sweep_index": 0,
+   "accuracy": 0.9499999999999998,
+   "hit_rate": 1.0,
+   "stray_per_note": 1.8166666666666667,
+   "n_counted": 113,
+   "eligible": true,
+   "lane_correct": 0.5309734513274337,
+   "seconds": 67.4
+  },
+  {
+   "label": "rewired #1",
+   "theta": 0.5,
+   "delays": [
+    418.0,
+    756.0,
+    0.0,
+    426.0
+   ],
+   "sweep_accuracy": 0.5,
+   "sweep_index": 0,
+   "accuracy": 0.5833333333333334,
+   "hit_rate": 0.7833333333333333,
+   "stray_per_note": 2.35,
+   "n_counted": 74,
+   "eligible": true,
+   "lane_correct": 0.8108108108108109,
+   "seconds": 85.9
+  },
+  {
+   "label": "rewired #7",
+   "theta": 0.5,
+   "delays": [
+    444.0,
+    318.0,
+    174.0,
+    754.0
+   ],
+   "sweep_accuracy": 0.875,
+   "sweep_index": 0,
+   "accuracy": 0.9222222222222222,
+   "hit_rate": 1.0,
+   "stray_per_note": 1.8333333333333333,
+   "n_counted": 82,
+   "eligible": true,
+   "lane_correct": 0.7317073170731707,
+   "seconds": 85.1
+  },
+  {
+   "label": "rewired #16",
+   "theta": 0.5,
+   "delays": [
+    324.0,
+    712.0,
+    112.0,
+    308.0
+   ],
+   "sweep_accuracy": 0.85,
+   "sweep_index": 0,
+   "accuracy": 0.7722222222222221,
+   "hit_rate": 1.0,
+   "stray_per_note": 2.783333333333333,
+   "n_counted": 109,
+   "eligible": true,
+   "lane_correct": 0.5504587155963303,
+   "seconds": 86.2
+  },
+  {
+   "label": "rewired #17",
+   "theta": 0.5,
+   "delays": [
+    0.0,
+    790.0,
+    770.0,
+    0.0
+   ],
+   "sweep_accuracy": 0.55,
+   "sweep_index": 0,
+   "accuracy": 0.3333333333333333,
+   "hit_rate": 0.3333333333333333,
+   "stray_per_note": 3.283333333333333,
+   "n_counted": 79,
+   "eligible": true,
+   "lane_correct": 0.25316455696202533,
+   "seconds": 68.4
+  },
+  {
+   "label": "rewired #2",
+   "theta": 0.5,
+   "delays": [
+    502.0,
+    752.0,
+    748.0,
+    790.0
+   ],
+   "sweep_accuracy": 1.0,
+   "sweep_index": 0,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 2.25,
+   "n_counted": 87,
+   "eligible": true,
+   "lane_correct": 0.6896551724137931,
+   "seconds": 85.6
+  },
+  {
+   "label": "rewired #8",
+   "theta": 0.5,
+   "delays": [
+    750.0,
+    360.0,
+    92.0,
+    774.0
+   ],
+   "sweep_accuracy": 0.85,
+   "sweep_index": 0,
+   "accuracy": 0.8444444444444444,
+   "hit_rate": 1.0,
+   "stray_per_note": 2.283333333333333,
+   "n_counted": 133,
+   "eligible": true,
+   "lane_correct": 0.45112781954887216,
+   "seconds": 83.8
+  },
+  {
+   "label": "rewired #18",
+   "theta": 0.5,
+   "delays": [
+    606.0,
+    796.0,
+    290.0,
+    0.0
+   ],
+   "sweep_accuracy": 0.65,
+   "sweep_index": 0,
+   "accuracy": 0.5944444444444444,
+   "hit_rate": 0.7666666666666666,
+   "stray_per_note": 2.0166666666666666,
+   "n_counted": 108,
+   "eligible": true,
+   "lane_correct": 0.42592592592592593,
+   "seconds": 86.6
+  },
+  {
+   "label": "rewired #19",
+   "theta": 0.5,
+   "delays": [
+    400.0,
+    790.0,
+    258.0,
+    0.0
+   ],
+   "sweep_accuracy": 0.7583333333333333,
+   "sweep_index": 0,
+   "accuracy": 0.75,
+   "hit_rate": 0.7666666666666666,
+   "stray_per_note": 2.7,
+   "n_counted": 69,
+   "eligible": true,
+   "lane_correct": 0.6666666666666666,
+   "seconds": 67.5
+  },
+  {
+   "label": "rewired #3",
+   "theta": 0.5,
+   "delays": [
+    786.0,
+    718.0,
+    166.0,
+    122.0
+   ],
+   "sweep_accuracy": 0.725,
+   "sweep_index": 0,
+   "accuracy": 0.8833333333333333,
+   "hit_rate": 0.8833333333333333,
+   "stray_per_note": 2.9166666666666665,
+   "n_counted": 103,
+   "eligible": true,
+   "lane_correct": 0.5145631067961165,
+   "seconds": 86.1
+  },
+  {
+   "label": "rewired #9",
+   "theta": 0.5,
+   "delays": [
+    252.0,
+    0.0,
+    0.0,
+    554.0
+   ],
+   "sweep_accuracy": 0.225,
+   "sweep_index": 0,
+   "accuracy": 0.2333333333333333,
+   "hit_rate": 0.2333333333333333,
+   "stray_per_note": 3.0,
+   "n_counted": 62,
+   "eligible": true,
+   "lane_correct": 0.22580645161290322,
+   "seconds": 83.5
+  },
+  {
+   "label": "rewired #20",
+   "theta": 0.5,
+   "delays": [
+    490.0,
+    768.0,
+    348.0,
+    792.0
+   ],
+   "sweep_accuracy": 0.875,
+   "sweep_index": 0,
+   "accuracy": 0.85,
+   "hit_rate": 1.0,
+   "stray_per_note": 1.5666666666666667,
+   "n_counted": 113,
+   "eligible": true,
+   "lane_correct": 0.5309734513274337,
+   "seconds": 86.7
+  },
+  {
+   "label": "rewired #4",
+   "theta": 0.5,
+   "delays": [
+    244.0,
+    528.0,
+    766.0,
+    318.0
+   ],
+   "sweep_accuracy": 0.7083333333333333,
+   "sweep_index": 0,
+   "accuracy": 0.49444444444444446,
+   "hit_rate": 0.5666666666666667,
+   "stray_per_note": 1.8333333333333333,
+   "n_counted": 41,
+   "eligible": true,
+   "lane_correct": 0.8292682926829268,
+   "seconds": 86.1
+  },
+  {
+   "label": "rewired #10",
+   "theta": 0.5,
+   "delays": [
+    774.0,
+    0.0,
+    788.0,
+    750.0
+   ],
+   "sweep_accuracy": 0.625,
+   "sweep_index": 0,
+   "accuracy": 0.7444444444444445,
+   "hit_rate": 0.8833333333333333,
+   "stray_per_note": 1.7166666666666666,
+   "n_counted": 97,
+   "eligible": true,
+   "lane_correct": 0.5463917525773195,
+   "seconds": 82.3
+  },
+  {
+   "label": "rewired #11",
+   "theta": 0.5,
+   "delays": [
+    792.0,
+    702.0,
+    784.0,
+    792.0
+   ],
+   "sweep_accuracy": 1.0,
+   "sweep_index": 0,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 2.8333333333333335,
+   "n_counted": 141,
+   "eligible": true,
+   "lane_correct": 0.425531914893617,
+   "seconds": 85.7
+  },
+  {
+   "label": "rewired #5",
+   "theta": 0.5,
+   "delays": [
+    726.0,
+    610.0,
+    792.0,
+    330.0
+   ],
+   "sweep_accuracy": 0.6833333333333333,
+   "sweep_index": 0,
+   "accuracy": 0.5277777777777778,
+   "hit_rate": 0.5666666666666667,
+   "stray_per_note": 1.4333333333333333,
+   "n_counted": 74,
+   "eligible": true,
+   "lane_correct": 0.4594594594594595,
+   "seconds": 86.1
+  },
+  {
+   "label": "rewired #12",
+   "theta": 0.5,
+   "delays": [
+    0.0,
+    784.0,
+    474.0,
+    686.0
+   ],
+   "sweep_accuracy": 0.5916666666666667,
+   "sweep_index": 0,
+   "accuracy": 0.4388888888888889,
+   "hit_rate": 0.5666666666666667,
+   "stray_per_note": 1.7833333333333334,
+   "n_counted": 99,
+   "eligible": true,
+   "lane_correct": 0.3434343434343434,
+   "seconds": 82.8
+  },
+  {
+   "label": "rewired #13",
+   "theta": 0.5,
+   "delays": [
+    614.0,
+    452.0,
+    566.0,
+    464.0
+   ],
+   "sweep_accuracy": 0.9333333333333333,
+   "sweep_index": 0,
+   "accuracy": 0.9611111111111111,
+   "hit_rate": 1.0,
+   "stray_per_note": 2.35,
+   "n_counted": 82,
+   "eligible": true,
+   "lane_correct": 0.7317073170731707,
+   "seconds": 85.8
+  }
+ ],
+ "summary": {
+  "n": 20,
+  "real_sweep": 0.45416666666666666,
+  "real_heldout": 0.5694444444444445,
+  "ctl_sweep_mean": 0.7358333333333335,
+  "ctl_heldout_mean": 0.6924999999999999,
+  "ctl_heldout_sd": 0.2368042800637907,
+  "n_ge_sweep": 19,
+  "p_sweep": 0.9523809523809523,
+  "n_ge_heldout": 13,
+  "p_heldout": 0.6666666666666666,
+  "gap_sweep": 0.2816666666666668,
+  "gap_heldout": 0.12305555555555536,
+  "real_drop": 0.11527777777777787,
+  "ctl_drop_mean": -0.04333333333333335
+ }
+}
