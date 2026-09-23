@@ -461,6 +461,8 @@ experiments/
   e13_malecns_readout.py  male CNS: four readouts on the same networks
   e14_prereg.py       the pre-registered comparison: controls first, real network last
   e15_trigger.py      firing edge: crossing vs peak vs falling edge
+  e16_heldout.py      the same frozen policies on charts nobody tuned against
+  e17_strays.py       pre-registered: stray presses, declared threshold
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  32 checks on the network side
@@ -512,7 +514,7 @@ python -m tests.test_reservoir       # 20 checks
  7  fly controller               done   20-parameter threshold policy; per-key delays optional
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
-10  training experiments         run eleven times  e1-e11, two connectomes; best play 0.92 (ridge, 68 params)
+10  training experiments         run sixteen times e1-e16, two connectomes; best play 0.92 (ridge, 68 params)
 11  beatmap parser               done   .osu v14 mania, both directions
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
@@ -540,15 +542,31 @@ test at n = 40 and came back **4/40, p = 0.122** (experiment 14). The male CNS
 comparison, re-run with a readout that can see lane identity, reaches level and
 not ahead (experiment 13). The honest summary is that **the gap shrank every
 time the comparison was made more careful**, and that is now the most robust
-thing here — ten times over, and twice what dissolved was an *explanation*
-rather than a difference.
+thing here — twelve times over, and twice what dissolved was an *explanation*
+rather than a difference. The twelfth is the first one to run the other way:
+experiment 16 shrank a gap that had been *against* the real connectome.
 
-Experiment 15 is running: it tests whether a later firing edge — the channel's
-peak, or its falling edge, neither of which declares a single extra parameter
-the way per-key delays do — times the press better than the upward crossing
-every earlier experiment used. It was motivated by a no-delay lane-correctness
-figure that turned out to be a press-guard artefact (see experiment 12), so it
-is now a question about the controller rather than a lead about the connectome.
+Experiment 15 closed the controller as a hiding place: no firing edge — upward
+crossing, channel peak or falling edge — favours the real connectome, and the
+falling edge fixes the timing almost completely (610 ms early becomes 86 ms)
+without converting any of it into accuracy.
+
+Experiment 16 then found that the measure itself had a hole in it. Every one of
+those comparisons was scored on `accuracy`, which is a judgment-weighted mean
+over **notes** and is blind to a press that lands on nothing. Scored on charts
+nobody tuned against, the rewired controls make **2.21 stray presses per note
+against the real network's 0.48, all twenty worse with no overlap**, while the
+real network's hit rate sits above their mean. Some of what has been reported
+as controls playing better is controls mashing a measure that cannot charge
+them for it. The same experiment also showed that about half the accuracy
+deficit was threshold selection: held out, the 1400 ms arm goes from 19/20 and
+a +0.282 gap to 13/20 and +0.123.
+
+None of that is yet a result in the real connectome's favour — on the project's
+own declared evaluation reward the comparison is null — and it was found after
+the numbers were in rather than predicted. **Experiment 17 is the
+pre-registered test of it**, with the endpoints, the charts and a declared
+(not swept) threshold frozen and committed before the real network was built.
 
 What still stands are the two measurements that need no behavioural protocol at
 all: rewiring the topology **collapses the spectral radius** (2.28 vs
@@ -569,8 +587,19 @@ of the beatmap — and closing that loop is a separate project.
 
 ## Gotchas
 
-Three operational hazards that have each cost a session, recorded here because
-they live nowhere else.
+Four hazards that have each cost a session, recorded here because they live
+nowhere else.
+
+**`accuracy` cannot see a stray press, and the best threshold is therefore not
+the best policy.** `PlayResult.accuracy` is a judgment-weighted mean over
+*notes*; a press that lands on nothing is counted by `n_stray` and is invisible
+to it. So pressing more can only raise accuracy, and every "best threshold" this
+project chose by `argmax(accuracy)` over a sweep landed on the **lowest value
+offered** — 0.5, for the real network and 19 of 20 controls in experiment 11.
+Sixteen experiments were scored that way before anyone noticed, and the two
+populations turn out to differ on strays (2.21 vs 0.48 per note) more than on
+anything else measured. Never quote an accuracy figure from here without the
+stray count beside it, and prefer `learn.reward`, which charges for both.
 
 **The model cache is keyed on parameters, not code.** `model._key` hashes only
 the build arguments, so any change to code feeding the calibration — retina,
