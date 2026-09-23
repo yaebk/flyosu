@@ -331,7 +331,7 @@ flyosu/
   model.py        assembles and calibrates a runnable fly; regimes; controls; stability
   mania.py        4K osu!mania: notes, charts, curriculum, clock, judge   (steps 5, 8)
   encoder.py      playfield -> light on the eye; declared variants      (step 6)
-  controller.py   channels -> keys: normaliser, 20-parameter threshold policy (step 7)
+  controller.py   channels -> keys: normaliser, threshold policy, per-key delays (step 7)
   play.py         the game loop that couples all of the above
   learn.py        reward-modulated perturbation of the readout            (step 9)
   reservoir.py    the same readout fitted in closed form (ridge), + population PCA
@@ -349,6 +349,7 @@ experiments/
   e7_wiring.py        a wiring rule chosen on the shared-threshold band
   e9_structure.py     spectral radius and dimensionality, both datasets
   e10_chords.py       chords: fit on stage 4, and chord additivity
+  e11_delays.py       per-key delays: a crossing schedules a press
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
@@ -366,6 +367,7 @@ docs/RESULTS_E7.md      experiment 7
 docs/RESULTS_E8.md      experiment 8
 docs/RESULTS_E9.md      experiment 9
 docs/RESULTS_E10.md     experiment 10
+docs/RESULTS_E11.md     experiment 11
 data/SOURCES.md         where the data comes from, with citations
 ```
 

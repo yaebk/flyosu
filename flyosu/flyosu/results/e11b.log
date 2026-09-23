@@ -1,0 +1,14 @@
+
+=== experiment 11: per-key delays, on top of the band wiring ===
+
+  lane-correct, own best theta
+    with delays   real 0.645  rewired 0.655 +- 0.183  11/20  p 0.571
+    no delays     real 0.727  rewired 0.469 +- 0.143  1/20  p 0.095   (experiment 7)
+    change        real -0.082   rewired +0.185
+
+  accuracy, own best theta
+    with delays   real 0.442  rewired 0.430 +- 0.131  9/20  p 0.476
+    no delays     real 0.196  rewired 0.186 +- 0.075  8/20  p 0.429   (experiment 7)
+    change        real +0.246   rewired +0.244
+
+  delays chosen: real [600, 600, 600, 24] ms, rewired mean 196 ms (max 600)

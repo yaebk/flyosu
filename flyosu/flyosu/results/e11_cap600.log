@@ -1,0 +1,35 @@
+  real connectome          lane 0.62 0.65 0.59 0.31 0.27 0.67   best 0.65@1.0  acc 0.442  delays [600, 600, 600, 24] ms  (126s)
+  rewired #1               lane 0.45 0.43 0.22 0.50 1.00 0.00   best 0.45@0.5  acc 0.438  delays [418, 600, 0, 426] ms  (122s)
+  rewired #2               lane 0.38 0.71 0.45 0.68 0.74 0.42   best 0.74@2.5  acc 0.292  delays [0, 0, 0, 600] ms  (120s)
+  rewired #3               lane 0.33 0.61 0.74 0.74 0.80 0.90   best 0.90@3.0  acc 0.492  delays [0, 0, 50, 0] ms  (120s)
+  rewired #4               lane 0.62 0.51 0.41 0.37 0.53 0.36   best 0.62@0.5  acc 0.379  delays [244, 528, 600, 318] ms  (121s)
+  rewired #5               lane 0.54 0.51 0.77 0.91 1.00 1.00   best 1.00@2.5  acc 0.396  delays [0, 444, 0, 152] ms  (119s)
+  rewired #6               lane 0.62 0.82 0.79 0.76 0.69 0.36   best 0.82@1.0  acc 0.512  delays [0, 472, 526, 418] ms  (120s)
+  rewired #7               lane 0.56 0.58 0.77 0.67 0.67 0.50   best 0.77@1.5  acc 0.650  delays [0, 0, 124, 600] ms  (119s)
+  rewired #8               lane 0.44 0.51 0.80 0.80 1.00 1.00   best 0.80@1.5  acc 0.525  delays [0, 278, 0, 0] ms  (125s)
+  rewired #9               lane 0.23 0.33 0.37 0.28 0.23 0.25   best 0.37@1.5  acc 0.275  delays [0, 0, 0, 338] ms  (144s)
+  rewired #10              lane 0.41 0.27 0.60 0.50 0.50 0.00   best 0.60@1.5  acc 0.283  delays [0, 0, 290, 0] ms  (129s)
+  rewired #11              lane 0.40 0.29 0.47 0.36 0.21 0.14   best 0.47@1.5  acc 0.300  delays [600, 0, 600, 158] ms  (108s)
+  rewired #12              lane 0.47 0.71 0.67 0.54 0.45 0.55   best 0.71@1.0  acc 0.350  delays [0, 0, 380, 264] ms  (113s)
+  rewired #13              lane 0.58 0.61 0.73 0.40 0.53 0.45   best 0.73@1.5  acc 0.583  delays [490, 348, 454, 0] ms  (113s)
+  rewired #14              lane 0.40 0.40 0.32 0.17 0.25 0.00   best 0.40@0.5  acc 0.271  delays [0, 518, 600, 50] ms  (114s)
+  rewired #15              lane 0.39 0.57 0.60 0.70 0.93 0.91   best 0.70@2.0  acc 0.517  delays [0, 600, 62, 0] ms  (119s)
+  rewired #16              lane 0.42 0.41 0.41 0.36 0.50 0.33   best 0.50@2.5  acc 0.442  delays [0, 0, 0, 0] ms  (107s)
+  rewired #17              lane 0.24 0.33 0.36 0.38 0.38 0.78   best 0.38@2.0  acc 0.375  delays [0, 190, 0, 0] ms  (104s)
+  rewired #18              lane 0.53 0.43 0.33 0.37 0.21 0.00   best 0.53@0.5  acc 0.250  delays [600, 600, 290, 0] ms  (100s)
+  rewired #19              lane 0.47 0.50 0.49 0.77 0.91 0.84   best 0.91@2.5  acc 0.692  delays [212, 336, 124, 0] ms  (96s)
+  rewired #20              lane 0.41 0.46 0.63 0.70 0.83 0.45   best 0.70@2.0  acc 0.588  delays [0, 0, 142, 600] ms  (93s)
+
+=== experiment 11: per-key delays, on top of the band wiring ===
+
+  lane-correct, own best theta
+    with delays   real 0.645  rewired 0.655 +- 0.183  11/20  p 0.571
+    no delays     real 0.727  rewired 0.469 +- 0.143  1/20  p 0.095   (experiment 7)
+    change        real -0.082   rewired +0.185
+
+  accuracy, own best theta
+    with delays   real 0.442  rewired 0.430 +- 0.131  9/20  p 0.476
+    no delays     real 0.196  rewired 0.186 +- 0.075  8/20  p 0.429   (experiment 7)
+    change        real +0.246   rewired +0.244
+
+  delays chosen: real [600, 600, 600, 24] ms, rewired mean 196 ms (max 600)

@@ -45,13 +45,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from flyosu import learn as L, model as M, play as P, probes as PR  # noqa: E402
 
 RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
-PATH = os.path.join(RESULTS, "e11_delays.json")
+MAX_DELAY_MS = float(os.environ.get("MAX_DELAY_MS", 1000.0))
+PATH = os.path.join(RESULTS, f"e11_delays_cap{int(MAX_DELAY_MS)}.json")
 E7 = os.path.join(RESULTS, "e7_wiring.json")
 THETA_SWEEP = (0.5, 1.0, 1.5, 2.0, 2.5, 3.0)
 SWEEP_STAGE = 3
 MIN_COUNTED = 20
 NOISE = 0.03
-MAX_DELAY_MS = 600.0
 
 
 def delays_from_probe(tr, wiring, theta):
@@ -61,6 +61,14 @@ def delays_from_probe(tr, wiring, theta):
     relative to the judgment line; a channel that never crosses gets no delay.
     Recomputed for every theta in the sweep, because where a channel crosses
     depends on the threshold it is crossing.
+
+    ``MAX_DELAY_MS`` must be large enough never to bind, or it becomes exactly
+    the kind of procedural choice experiments 6 and 7 were about.  The first
+    run of this experiment capped at 600 ms and it bound on 3 of the real
+    network's 4 lanes against 11 of 80 control lanes -- an asymmetry favouring
+    the controls, the mirror image of the earlier ones.  A note is visible for
+    ``approach_ms`` (800), so no crossing can be earlier than that; the default
+    1000 ms cannot bind.
     """
     out = np.zeros(len(wiring))
     for lane, ch in enumerate(wiring):
