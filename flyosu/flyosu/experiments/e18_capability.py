@@ -69,10 +69,24 @@ N_NOTES = 24
 TRAIN_SEED = 100
 
 ARMS = {
-    "s3_600":     ((3, 600.0),),
-    "s4_600":     ((4, 600.0),),
-    "mixed":      ((3, 600.0), (4, 600.0), (5, 600.0), (3, 450.0)),
-    "mixed_fast": ((3, 600.0), (4, 600.0), (4, 400.0), (3, 450.0)),
+    # round 1: what should the readout be shown while it is fitted?
+    "s3_600":     dict(specs=((3, 600.0),)),
+    "s4_600":     dict(specs=((4, 600.0),)),
+    "mixed":      dict(specs=((3, 600.0), (4, 600.0), (5, 600.0), (3, 450.0))),
+    "mixed_fast": dict(specs=((3, 600.0), (4, 600.0), (4, 400.0), (3, 450.0))),
+    # round 2: stage 4 won round 1 outright, so push on it three ways --
+    # denser training chords, more of them, and a bigger readout.
+    "s4_450":     dict(specs=((4, 450.0),)),
+    "s4_dense":   dict(specs=((4, 600.0), (4, 450.0), (4, 350.0))),
+    "s4_x16":     dict(specs=((4, 600.0),), n_charts=16),
+    "s4_pca32":   dict(specs=((4, 600.0),), k=32),
+    # round 3: more data and more capacity each helped on their own and in
+    # different places -- pca32 is superb near its training condition and
+    # brittle away from it, x16 is even -- so combine them, and check whether
+    # more data alone keeps paying.
+    "s4_x16_pca32": dict(specs=((4, 600.0),), n_charts=16, k=32),
+    "s4_x24_pca32": dict(specs=((4, 600.0),), n_charts=24, k=32),
+    "s4_x16_var":   dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32),
 }
 
 # Held-out battery: the conditions experiment 5 measured, plus a denser
@@ -80,11 +94,27 @@ ARMS = {
 BATTERY = {
     "s3_600": dict(stage=3, interval_ms=600.0),
     "s3_450": dict(stage=3, interval_ms=450.0),
+    "s3_350": dict(stage=3, interval_ms=350.0),      # 2.9 notes/s, single notes
     "s4_600": dict(stage=4, interval_ms=600.0),
     "s4_400": dict(stage=4, interval_ms=400.0),
+    "s4_300": dict(stage=4, interval_ms=300.0),      # 200 BPM with chords
     "s5_600": dict(stage=5, interval_ms=600.0),
 }
 BATTERY_KW = dict(n_charts=3, n_notes=20, seed=999)
+
+# The arm was chosen by reading the battery above, so those numbers are
+# selection-optimistic in exactly the way experiments 13 and 16 warned about.
+# `validate` re-scores one arm on a fresh seed with three times the notes, and
+# pushes on past the old conditions to find where the new ceiling is.  Quote
+# these numbers, not the battery's.
+DEEP = {
+    **BATTERY,
+    "s3_300": dict(stage=3, interval_ms=300.0),      # 3.3 notes/s, single notes
+    "s3_250": dict(stage=3, interval_ms=250.0),      # 4.0 notes/s
+    "s4_250": dict(stage=4, interval_ms=250.0),      # 240 BPM with chords
+    "s4_200": dict(stage=4, interval_ms=200.0),      # 300 BPM with chords
+}
+DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 
 # What experiment 5's readout scored on the same conditions, for reference.
 E5_REFERENCE = {"s3_600": 0.917, "s4_600": 0.506, "s4_400": 0.286, "s5_600": 0.608}
@@ -98,19 +128,23 @@ def _load(path, default):
 
 
 def run_arm(arm: str) -> dict:
-    specs = ARMS[arm]
+    cfg = ARMS[arm]
+    specs = cfg["specs"]
+    n_charts = int(cfg.get("n_charts", N_CHARTS))
+    k = int(cfg.get("k", READOUT_K))
     t0 = time.time()
     fly = M.build(regime="play")
     player = P.Player.untrained(fly, theta=THETA, noise=NOISE)
     states = calibration_states(fly, player.r0)
-    rr = R.RidgeReadout(player, n_charts=N_CHARTS, n_notes=N_NOTES,
+    rr = R.RidgeReadout(player, n_charts=n_charts, n_notes=N_NOTES,
                         seed=TRAIN_SEED, chart_specs=specs)
-    rr.features = R.PopulationProjection.fit(fly, player.r0, k=READOUT_K, states=states)
-    print(f"[{arm}] recording {N_CHARTS} charts: "
+    rr.features = R.PopulationProjection.fit(fly, player.r0, k=k, states=states)
+    print(f"[{arm}] recording {n_charts} charts (pca{k}): "
           + ", ".join(f"s{s}@{i:.0f}" for s, i in specs), flush=True)
     rr.record()
     d = rr.solve()
-    out = {"arm": arm, "specs": [list(s) for s in specs], "n_params": d["n_params"],
+    out = {"arm": arm, "specs": [list(s) for s in specs],
+           "n_charts": n_charts, "k": k, "n_params": d["n_params"],
            "train_reward": d["train_reward"], "frames": d["frames"],
            "lanes": d["lanes"], "battery": {}}
     for name, cond in BATTERY.items():
@@ -154,34 +188,81 @@ def report():
           f"{BATTERY_KW['n_charts']} held-out charts x {BATTERY_KW['n_notes']} notes")
     head = f"  {'condition':<10s}" + "".join(f"{a:>12s}" for a in order) + f"{'e5':>9s}"
     print("\n  ACCURACY\n" + head)
+    def cell(a, name, key):
+        b = runs[a]["battery"].get(name)
+        return None if b is None else b[key]
+
     for name in BATTERY:
         row = f"  {name:<10s}"
-        best = max(runs[a]["battery"][name]["accuracy"] for a in order)
+        vals = [v for v in (cell(a, name, "accuracy") for a in order) if v is not None]
+        best = max(vals) if vals else None
         for a in order:
-            v = runs[a]["battery"][name]["accuracy"]
-            row += f"{('*' if v == best else ' ') + format(v, '.3f'):>12s}"
+            v = cell(a, name, "accuracy")
+            row += f"{'-':>12s}" if v is None else \
+                   f"{('*' if v == best else ' ') + format(v, '.3f'):>12s}"
         ref = E5_REFERENCE.get(name)
         row += f"{format(ref, '.3f') if ref else '-':>9s}"
         print(row)
-    print("\n  HIT RATE\n" + head[:-9])
-    for name in BATTERY:
-        print(f"  {name:<10s}" + "".join(
-            f"{runs[a]['battery'][name]['hit_rate']:>12.3f}" for a in order))
-    print("\n  STRAYS PER NOTE\n" + head[:-9])
-    for name in BATTERY:
-        print(f"  {name:<10s}" + "".join(
-            f"{runs[a]['battery'][name]['stray_per_note']:>12.3f}" for a in order))
-    print("\n  mean accuracy over the battery")
+    for title, key in (("HIT RATE", "hit_rate"), ("STRAYS PER NOTE", "stray_per_note")):
+        print(f"\n  {title}\n" + head[:-9])
+        for name in BATTERY:
+            print(f"  {name:<10s}" + "".join(
+                (f"{'-':>12s}" if cell(a, name, key) is None
+                 else f"{cell(a, name, key):>12.3f}") for a in order))
+    print("\n  mean accuracy over the battery (arms missing a condition are marked)")
     for a in order:
-        m = float(np.mean([runs[a]["battery"][n]["accuracy"] for n in BATTERY]))
-        print(f"    {a:<12s} {m:.3f}   ({runs[a]['seconds']:.0f}s, "
-              f"{runs[a]['n_params']} params)")
+        vals = [cell(a, n, "accuracy") for n in BATTERY]
+        got = [v for v in vals if v is not None]
+        print(f"    {a:<12s} {float(np.mean(got)):.3f}"
+              + ("" if len(got) == len(vals) else f"  (only {len(got)}/{len(vals)})")
+              + f"   ({runs[a]['seconds']:.0f}s, {runs[a]['n_params']} params, "
+              + f"{runs[a].get('n_charts', N_CHARTS)} charts, pca{runs[a].get('k', READOUT_K)})")
     with open(PATH, "w") as fh:
         json.dump({"arms": runs, "battery": BATTERY, "e5_reference": E5_REFERENCE}, fh, indent=1)
 
 
+def validate():
+    """Re-score one arm on fresh charts, deeper, and past the old ceiling."""
+    arm = os.environ.get("ARM")
+    if arm not in ARMS:
+        raise SystemExit(f"set ARM to one of: {', '.join(ARMS)}")
+    cfg = ARMS[arm]
+    fly = M.build(regime="play")
+    player = P.Player.untrained(fly, theta=THETA, noise=NOISE)
+    states = calibration_states(fly, player.r0)
+    rr = R.RidgeReadout(player, n_charts=int(cfg.get("n_charts", N_CHARTS)),
+                        n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=cfg["specs"])
+    rr.features = R.PopulationProjection.fit(fly, player.r0,
+                                             k=int(cfg.get("k", READOUT_K)), states=states)
+    print(f"[{arm}] validating on seed {DEEP_KW['seed']}, "
+          f"{DEEP_KW['n_charts']} charts x {DEEP_KW['n_notes']} notes per condition", flush=True)
+    rr.record()
+    rr.solve()
+    out = {"arm": arm, "deep_kw": DEEP_KW, "conditions": {}}
+    for name, cond in DEEP.items():
+        e = L.evaluate(player, **cond, **DEEP_KW)
+        n_c = int(np.array(e["confusion"]).sum())
+        nps = 1000.0 / cond["interval_ms"]
+        out["conditions"][name] = {
+            "notes_per_s": round(nps, 2), **{k: float(e[k]) for k in
+            ("accuracy", "hit_rate", "stray_per_note")},
+            "lane_correct": (float(e["lane_correct"]) if n_c >= 20 else None)}
+        b = out["conditions"][name]
+        sel = E5_REFERENCE.get(name)
+        print(f"  {name:<8s} {nps:>4.1f}/s  acc {b['accuracy']:.3f}  hit {b['hit_rate']:.2f}  "
+              f"stray {b['stray_per_note']:.2f}"
+              + (f"   (e5 {sel:.3f})" if sel else ""), flush=True)
+    path = PATH[:-5] + f"_validate_{arm}.json"
+    with open(path, "w") as fh:
+        json.dump(out, fh, indent=1)
+    print(f"wrote {os.path.basename(path)}", flush=True)
+
+
 if __name__ == "__main__":
-    if (sys.argv[1] if len(sys.argv) > 1 else "") == "report":
+    cmd = sys.argv[1] if len(sys.argv) > 1 else ""
+    if cmd == "report":
         report()
+    elif cmd == "validate":
+        validate()
     else:
         main()

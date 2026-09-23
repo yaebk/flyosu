@@ -1,0 +1,92 @@
+{
+ "arm": "s4_pca32",
+ "specs": [
+  [
+   4,
+   600.0
+  ]
+ ],
+ "n_charts": 8,
+ "k": 32,
+ "n_params": 132,
+ "train_reward": 1.0,
+ "frames": 47964,
+ "lanes": [
+  {
+   "lead_ms": 0.0,
+   "offset": -0.7999999999999998,
+   "train_reward": 1.0,
+   "train_corr": 0.610473283132314
+  },
+  {
+   "lead_ms": -20.0,
+   "offset": -0.7,
+   "train_reward": 1.0,
+   "train_corr": 0.6283884980955176
+  },
+  {
+   "lead_ms": 0.0,
+   "offset": -0.7,
+   "train_reward": 1.0,
+   "train_corr": 0.5929764785518388
+  },
+  {
+   "lead_ms": -20.0,
+   "offset": -0.7,
+   "train_reward": 1.0,
+   "train_corr": 0.558230062313772
+  }
+ ],
+ "battery": {
+  "s3_600": {
+   "accuracy": 0.9666666666666667,
+   "hit_rate": 0.9666666666666667,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.9666666666666667
+  },
+  "s3_450": {
+   "accuracy": 0.45555555555555555,
+   "hit_rate": 0.5833333333333334,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.45555555555555555
+  },
+  "s3_350": {
+   "accuracy": 0.2833333333333333,
+   "hit_rate": 0.3333333333333333,
+   "stray_per_note": 0.016666666666666666,
+   "lane_correct": 1.0,
+   "reward": 0.2825
+  },
+  "s4_600": {
+   "accuracy": 0.9833333333333334,
+   "hit_rate": 0.9833333333333334,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.9833333333333334
+  },
+  "s4_400": {
+   "accuracy": 0.39444444444444443,
+   "hit_rate": 0.5666666666666668,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.39444444444444443
+  },
+  "s4_300": {
+   "accuracy": 0.5750000000000001,
+   "hit_rate": 0.6666666666666666,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.5750000000000001
+  },
+  "s5_600": {
+   "accuracy": 0.5833333333333334,
+   "hit_rate": 0.65,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.5833333333333334
+  }
+ },
+ "seconds": 277.8
+}

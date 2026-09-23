@@ -1,0 +1,9 @@
+[s4_dense] recording 8 charts (pca16): s4@600, s4@450, s4@350
+  [s4_dense] s3_600   acc 0.717 (e5 0.917, -0.200)  hit 0.83  stray 0.00
+  [s4_dense] s3_450   acc 0.533  hit 0.70  stray 0.00
+  [s4_dense] s3_350   acc 0.514  hit 0.68  stray 0.00
+  [s4_dense] s4_600   acc 0.578 (e5 0.506, +0.072)  hit 0.78  stray 0.02
+  [s4_dense] s4_400   acc 0.494 (e5 0.286, +0.208)  hit 0.75  stray 0.02
+  [s4_dense] s4_300   acc 0.419  hit 0.70  stray 0.00
+  [s4_dense] s5_600   acc 0.589 (e5 0.608, -0.019)  hit 0.77  stray 0.02
+wrote e18_capability_s4_dense.json

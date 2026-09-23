@@ -1,7 +1,9 @@
-[mixed_fast] recording 8 charts: s3@600, s4@600, s4@400, s3@450
+[mixed_fast] recording 8 charts (pca16): s3@600, s4@600, s4@400, s3@450
   [mixed_fast] s3_600   acc 0.772 (e5 0.917, -0.145)  hit 1.00  stray 0.00
   [mixed_fast] s3_450   acc 0.656  hit 0.82  stray 0.00
+  [mixed_fast] s3_350   acc 0.447  hit 0.70  stray 0.00
   [mixed_fast] s4_600   acc 0.608 (e5 0.506, +0.102)  hit 0.87  stray 0.00
   [mixed_fast] s4_400   acc 0.508 (e5 0.286, +0.222)  hit 0.77  stray 0.02
+  [mixed_fast] s4_300   acc 0.392  hit 0.68  stray 0.00
   [mixed_fast] s5_600   acc 0.642 (e5 0.608, +0.034)  hit 0.85  stray 0.00
 wrote e18_capability_mixed_fast.json

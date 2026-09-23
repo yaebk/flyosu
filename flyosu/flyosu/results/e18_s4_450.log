@@ -1,0 +1,9 @@
+[s4_450] recording 8 charts (pca16): s4@450
+  [s4_450] s3_600   acc 0.211 (e5 0.917, -0.706)  hit 0.28  stray 0.03
+  [s4_450] s3_450   acc 0.592  hit 0.73  stray 0.02
+  [s4_450] s3_350   acc 0.347  hit 0.52  stray 0.03
+  [s4_450] s4_600   acc 0.164 (e5 0.506, -0.342)  hit 0.27  stray 0.15
+  [s4_450] s4_400   acc 0.625 (e5 0.286, +0.339)  hit 0.80  stray 0.02
+  [s4_450] s4_300   acc 0.328  hit 0.42  stray 0.07
+  [s4_450] s5_600   acc 0.464 (e5 0.608, -0.144)  hit 0.75  stray 0.00
+wrote e18_capability_s4_450.json

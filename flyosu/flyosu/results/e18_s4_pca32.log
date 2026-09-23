@@ -1,0 +1,9 @@
+[s4_pca32] recording 8 charts (pca32): s4@600
+  [s4_pca32] s3_600   acc 0.967 (e5 0.917, +0.050)  hit 0.97  stray 0.00
+  [s4_pca32] s3_450   acc 0.456  hit 0.58  stray 0.00
+  [s4_pca32] s3_350   acc 0.283  hit 0.33  stray 0.02
+  [s4_pca32] s4_600   acc 0.983 (e5 0.506, +0.477)  hit 0.98  stray 0.00
+  [s4_pca32] s4_400   acc 0.394 (e5 0.286, +0.108)  hit 0.57  stray 0.00
+  [s4_pca32] s4_300   acc 0.575  hit 0.67  stray 0.00
+  [s4_pca32] s5_600   acc 0.583 (e5 0.608, -0.025)  hit 0.65  stray 0.00
+wrote e18_capability_s4_pca32.json

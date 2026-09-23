@@ -1,0 +1,9 @@
+[s4_x16_var] recording 16 charts (pca32): s4@600, s4@450, s4@350
+  [s4_x16_var] s3_600   acc 1.000 (e5 0.917, +0.083)  hit 1.00  stray 0.05
+  [s4_x16_var] s3_450   acc 0.922  hit 1.00  stray 0.00
+  [s4_x16_var] s3_350   acc 0.822  hit 0.95  stray 0.03
+  [s4_x16_var] s4_600   acc 0.967 (e5 0.506, +0.461)  hit 1.00  stray 0.08
+  [s4_x16_var] s4_400   acc 0.797 (e5 0.286, +0.511)  hit 0.93  stray 0.03
+  [s4_x16_var] s4_300   acc 0.611  hit 0.78  stray 0.05
+  [s4_x16_var] s5_600   acc 0.978 (e5 0.608, +0.370)  hit 1.00  stray 0.05
+wrote e18_capability_s4_x16_var.json
