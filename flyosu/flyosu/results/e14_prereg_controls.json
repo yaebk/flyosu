@@ -1,0 +1,845 @@
+{
+ "protocol": "docs/PREREGISTRATION.md",
+ "runs": [
+  {
+   "label": "rewired #1",
+   "wiring": [
+    1,
+    3,
+    0,
+    2
+   ],
+   "argmax_mean": 0.3586956521739131,
+   "argmax_fraction": [
+    0.16770186335403728,
+    0.13664596273291926,
+    0.30434782608695654,
+    0.8260869565217391
+   ],
+   "peak_margin_mean": 0.13966396488530117,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7351731876155072,
+   "seconds": 13.3
+  },
+  {
+   "label": "rewired #2",
+   "wiring": [
+    2,
+    0,
+    3,
+    1
+   ],
+   "argmax_mean": 0.35248447204968947,
+   "argmax_fraction": [
+    0.5714285714285714,
+    0.08074534161490683,
+    0.7329192546583851,
+    0.024844720496894408
+   ],
+   "peak_margin_mean": 0.36911477230870016,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7110348689317446,
+   "seconds": 14.2
+  },
+  {
+   "label": "rewired #3",
+   "wiring": [
+    0,
+    3,
+    1,
+    2
+   ],
+   "argmax_mean": 0.687888198757764,
+   "argmax_fraction": [
+    0.3105590062111801,
+    0.45962732919254656,
+    1.0,
+    0.9813664596273292
+   ],
+   "peak_margin_mean": 1.735043914378054,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.723736142406904,
+   "seconds": 13.1
+  },
+  {
+   "label": "rewired #4",
+   "wiring": [
+    3,
+    0,
+    2,
+    1
+   ],
+   "argmax_mean": 0.5,
+   "argmax_fraction": [
+    1.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "peak_margin_mean": 0.2884819087472148,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.747430871182061,
+   "seconds": 13.1
+  },
+  {
+   "label": "rewired #5",
+   "wiring": [
+    0,
+    3,
+    1,
+    2
+   ],
+   "argmax_mean": 0.7236024844720497,
+   "argmax_fraction": [
+    0.8074534161490683,
+    0.3167701863354037,
+    0.7701863354037267,
+    1.0
+   ],
+   "peak_margin_mean": 1.4855488348992911,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6434981569755349,
+   "seconds": 15.2
+  },
+  {
+   "label": "rewired #6",
+   "wiring": [
+    0,
+    1,
+    3,
+    2
+   ],
+   "argmax_mean": 0.44565217391304346,
+   "argmax_fraction": [
+    0.0,
+    0.782608695652174,
+    0.0,
+    1.0
+   ],
+   "peak_margin_mean": 1.1937580012498088,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 1.124607421115859,
+   "seconds": 12.5
+  },
+  {
+   "label": "rewired #7",
+   "wiring": [
+    3,
+    0,
+    1,
+    2
+   ],
+   "argmax_mean": 0.4937888198757764,
+   "argmax_fraction": [
+    0.4409937888198758,
+    0.8012422360248447,
+    0.7329192546583851,
+    0.0
+   ],
+   "peak_margin_mean": 0.46563037620252157,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.9021027554420029,
+   "seconds": 12.3
+  },
+  {
+   "label": "rewired #8",
+   "wiring": [
+    0,
+    3,
+    1,
+    2
+   ],
+   "argmax_mean": 0.8742236024844721,
+   "argmax_fraction": [
+    1.0,
+    1.0,
+    0.8385093167701864,
+    0.6583850931677019
+   ],
+   "peak_margin_mean": 1.3569051810415067,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6211450629151561,
+   "seconds": 14.2
+  },
+  {
+   "label": "rewired #9",
+   "wiring": [
+    1,
+    0,
+    3,
+    2
+   ],
+   "argmax_mean": 0.15372670807453417,
+   "argmax_fraction": [
+    0.0,
+    0.0,
+    0.0,
+    0.6149068322981367
+   ],
+   "peak_margin_mean": -0.139281540636067,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7083924801307345,
+   "seconds": 13.0
+  },
+  {
+   "label": "rewired #10",
+   "wiring": [
+    0,
+    1,
+    3,
+    2
+   ],
+   "argmax_mean": 0.5791925465838509,
+   "argmax_fraction": [
+    0.8944099378881988,
+    0.30434782608695654,
+    0.2111801242236025,
+    0.906832298136646
+   ],
+   "peak_margin_mean": 0.3303951877371468,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7725956262292142,
+   "seconds": 13.1
+  },
+  {
+   "label": "rewired #11",
+   "wiring": [
+    3,
+    0,
+    2,
+    1
+   ],
+   "argmax_mean": 0.38975155279503104,
+   "argmax_fraction": [
+    0.0,
+    0.5590062111801242,
+    0.0,
+    1.0
+   ],
+   "peak_margin_mean": 0.04264529315435572,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7300006207660582,
+   "seconds": 12.8
+  },
+  {
+   "label": "rewired #12",
+   "wiring": [
+    3,
+    1,
+    2,
+    0
+   ],
+   "argmax_mean": 0.5807453416149069,
+   "argmax_fraction": [
+    1.0,
+    0.7204968944099379,
+    0.0,
+    0.6024844720496895
+   ],
+   "peak_margin_mean": 0.15435182183883925,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6392314941203152,
+   "seconds": 14.0
+  },
+  {
+   "label": "rewired #13",
+   "wiring": [
+    1,
+    0,
+    2,
+    3
+   ],
+   "argmax_mean": 0.406832298136646,
+   "argmax_fraction": [
+    0.9254658385093167,
+    0.45962732919254656,
+    0.0,
+    0.2422360248447205
+   ],
+   "peak_margin_mean": 0.11421303906040214,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.698344716196036,
+   "seconds": 13.9
+  },
+  {
+   "label": "rewired #14",
+   "wiring": [
+    0,
+    3,
+    1,
+    2
+   ],
+   "argmax_mean": 0.25,
+   "argmax_fraction": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "peak_margin_mean": -0.6624293113427768,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7110640289450547,
+   "seconds": 14.6
+  },
+  {
+   "label": "rewired #15",
+   "wiring": [
+    0,
+    3,
+    1,
+    2
+   ],
+   "argmax_mean": 0.5652173913043478,
+   "argmax_fraction": [
+    0.0,
+    0.639751552795031,
+    1.0,
+    0.6211180124223602
+   ],
+   "peak_margin_mean": 0.0639380075022053,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7149897722616652,
+   "seconds": 14.3
+  },
+  {
+   "label": "rewired #16",
+   "wiring": [
+    1,
+    3,
+    2,
+    0
+   ],
+   "argmax_mean": 0.5838509316770186,
+   "argmax_fraction": [
+    1.0,
+    0.0,
+    0.33540372670807456,
+    1.0
+   ],
+   "peak_margin_mean": 0.36140833015195467,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6577953335832717,
+   "seconds": 16.5
+  },
+  {
+   "label": "rewired #17",
+   "wiring": [
+    1,
+    0,
+    2,
+    3
+   ],
+   "argmax_mean": 0.36645962732919257,
+   "argmax_fraction": [
+    0.0,
+    1.0,
+    0.0,
+    0.4658385093167702
+   ],
+   "peak_margin_mean": 0.24244834545012733,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.8808638764140259,
+   "seconds": 14.0
+  },
+  {
+   "label": "rewired #18",
+   "wiring": [
+    2,
+    1,
+    3,
+    0
+   ],
+   "argmax_mean": 0.3447204968944099,
+   "argmax_fraction": [
+    0.391304347826087,
+    0.0,
+    0.9875776397515528,
+    0.0
+   ],
+   "peak_margin_mean": -0.11367399959962088,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6450754659678557,
+   "seconds": 18.5
+  },
+  {
+   "label": "rewired #19",
+   "wiring": [
+    3,
+    0,
+    2,
+    1
+   ],
+   "argmax_mean": 0.6940993788819876,
+   "argmax_fraction": [
+    1.0,
+    1.0,
+    0.7763975155279503,
+    0.0
+   ],
+   "peak_margin_mean": 1.6176623411687658,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6508071106229544,
+   "seconds": 15.1
+  },
+  {
+   "label": "rewired #20",
+   "wiring": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "argmax_mean": 0.6475155279503105,
+   "argmax_fraction": [
+    1.0,
+    0.5900621118012422,
+    1.0,
+    0.0
+   ],
+   "peak_margin_mean": 0.8446290066797855,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7289702920091107,
+   "seconds": 14.8
+  },
+  {
+   "label": "rewired #21",
+   "wiring": [
+    0,
+    2,
+    1,
+    3
+   ],
+   "argmax_mean": 0.327639751552795,
+   "argmax_fraction": [
+    0.0,
+    0.0,
+    1.0,
+    0.3105590062111801
+   ],
+   "peak_margin_mean": 0.6175257825675715,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6408488656793905,
+   "seconds": 19.0
+  },
+  {
+   "label": "rewired #22",
+   "wiring": [
+    0,
+    3,
+    2,
+    1
+   ],
+   "argmax_mean": 0.6506211180124223,
+   "argmax_fraction": [
+    0.39751552795031053,
+    0.9130434782608695,
+    0.8695652173913043,
+    0.422360248447205
+   ],
+   "peak_margin_mean": 0.6266447230734071,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6933507940630775,
+   "seconds": 15.9
+  },
+  {
+   "label": "rewired #23",
+   "wiring": [
+    2,
+    3,
+    1,
+    0
+   ],
+   "argmax_mean": 0.8074534161490683,
+   "argmax_fraction": [
+    1.0,
+    0.9316770186335404,
+    0.45962732919254656,
+    0.8385093167701864
+   ],
+   "peak_margin_mean": 1.6184452728252223,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7228618244563259,
+   "seconds": 16.4
+  },
+  {
+   "label": "rewired #24",
+   "wiring": [
+    0,
+    3,
+    2,
+    1
+   ],
+   "argmax_mean": 0.5807453416149069,
+   "argmax_fraction": [
+    1.0,
+    0.0,
+    0.4161490683229814,
+    0.906832298136646
+   ],
+   "peak_margin_mean": 1.2986260879249105,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7560347096971562,
+   "seconds": 14.5
+  },
+  {
+   "label": "rewired #25",
+   "wiring": [
+    2,
+    0,
+    1,
+    3
+   ],
+   "argmax_mean": 0.5388198757763976,
+   "argmax_fraction": [
+    0.16770186335403728,
+    1.0,
+    0.9875776397515528,
+    0.0
+   ],
+   "peak_margin_mean": 0.16021322564727752,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7356014354486513,
+   "seconds": 12.9
+  },
+  {
+   "label": "rewired #26",
+   "wiring": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "argmax_mean": 0.734472049689441,
+   "argmax_fraction": [
+    1.0,
+    1.0,
+    0.0,
+    0.937888198757764
+   ],
+   "peak_margin_mean": 0.9556126520750551,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.8284471079994203,
+   "seconds": 12.8
+  },
+  {
+   "label": "rewired #27",
+   "wiring": [
+    1,
+    2,
+    3,
+    0
+   ],
+   "argmax_mean": 0.6599378881987578,
+   "argmax_fraction": [
+    1.0,
+    0.5403726708074534,
+    0.14285714285714285,
+    0.9565217391304348
+   ],
+   "peak_margin_mean": 0.8392566071350582,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7211506580174561,
+   "seconds": 13.4
+  },
+  {
+   "label": "rewired #28",
+   "wiring": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "argmax_mean": 0.5543478260869565,
+   "argmax_fraction": [
+    0.5031055900621118,
+    0.0,
+    0.7142857142857143,
+    1.0
+   ],
+   "peak_margin_mean": 0.7745605262581302,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7138294700263004,
+   "seconds": 15.6
+  },
+  {
+   "label": "rewired #29",
+   "wiring": [
+    3,
+    1,
+    0,
+    2
+   ],
+   "argmax_mean": 0.8090062111801242,
+   "argmax_fraction": [
+    0.7391304347826086,
+    1.0,
+    0.8881987577639752,
+    0.6086956521739131
+   ],
+   "peak_margin_mean": 1.2202096339220003,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7550471684240508,
+   "seconds": 14.3
+  },
+  {
+   "label": "rewired #30",
+   "wiring": [
+    3,
+    0,
+    2,
+    1
+   ],
+   "argmax_mean": 0.2981366459627329,
+   "argmax_fraction": [
+    0.0,
+    0.07453416149068323,
+    0.11801242236024845,
+    1.0
+   ],
+   "peak_margin_mean": 0.3333301768905468,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.8153383737351545,
+   "seconds": 14.9
+  },
+  {
+   "label": "rewired #31",
+   "wiring": [
+    3,
+    2,
+    0,
+    1
+   ],
+   "argmax_mean": 0.7888198757763976,
+   "argmax_fraction": [
+    1.0,
+    0.5962732919254659,
+    0.7142857142857143,
+    0.84472049689441
+   ],
+   "peak_margin_mean": 0.8341850977549028,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7013311422954864,
+   "seconds": 17.1
+  },
+  {
+   "label": "rewired #32",
+   "wiring": [
+    2,
+    3,
+    1,
+    0
+   ],
+   "argmax_mean": 0.5217391304347826,
+   "argmax_fraction": [
+    0.06832298136645963,
+    0.7639751552795031,
+    0.5031055900621118,
+    0.7515527950310559
+   ],
+   "peak_margin_mean": 0.8667690626206459,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7088644133175208,
+   "seconds": 17.2
+  },
+  {
+   "label": "rewired #33",
+   "wiring": [
+    2,
+    1,
+    0,
+    3
+   ],
+   "argmax_mean": 0.5372670807453416,
+   "argmax_fraction": [
+    0.7391304347826086,
+    0.40993788819875776,
+    1.0,
+    0.0
+   ],
+   "peak_margin_mean": 0.8974051620243173,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7072706749130553,
+   "seconds": 16.3
+  },
+  {
+   "label": "rewired #34",
+   "wiring": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "argmax_mean": 0.5714285714285714,
+   "argmax_fraction": [
+    0.9316770186335404,
+    1.0,
+    0.0,
+    0.35403726708074534
+   ],
+   "peak_margin_mean": 0.5659861559207924,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.8735705566124513,
+   "seconds": 15.9
+  },
+  {
+   "label": "rewired #35",
+   "wiring": [
+    2,
+    3,
+    0,
+    1
+   ],
+   "argmax_mean": 0.4596273291925466,
+   "argmax_fraction": [
+    0.2981366459627329,
+    0.0,
+    1.0,
+    0.5403726708074534
+   ],
+   "peak_margin_mean": 1.0286697150481792,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6798441313186605,
+   "seconds": 17.0
+  },
+  {
+   "label": "rewired #36",
+   "wiring": [
+    1,
+    0,
+    2,
+    3
+   ],
+   "argmax_mean": 0.41770186335403725,
+   "argmax_fraction": [
+    0.8074534161490683,
+    0.19254658385093168,
+    0.6708074534161491,
+    0.0
+   ],
+   "peak_margin_mean": 1.1204657866936776,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7024003597411341,
+   "seconds": 18.2
+  },
+  {
+   "label": "rewired #37",
+   "wiring": [
+    2,
+    3,
+    0,
+    1
+   ],
+   "argmax_mean": 0.7375776397515528,
+   "argmax_fraction": [
+    0.6086956521739131,
+    0.3416149068322981,
+    1.0,
+    1.0
+   ],
+   "peak_margin_mean": 1.2645553261880789,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6969140665821444,
+   "seconds": 17.9
+  },
+  {
+   "label": "rewired #38",
+   "wiring": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "argmax_mean": 0.8664596273291925,
+   "argmax_fraction": [
+    1.0,
+    1.0,
+    0.8695652173913043,
+    0.5962732919254659
+   ],
+   "peak_margin_mean": 1.3200213945553907,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6988244211900266,
+   "seconds": 21.7
+  },
+  {
+   "label": "rewired #39",
+   "wiring": [
+    0,
+    3,
+    2,
+    1
+   ],
+   "argmax_mean": 0.5465838509316769,
+   "argmax_fraction": [
+    0.3105590062111801,
+    0.8757763975155279,
+    0.0,
+    1.0
+   ],
+   "peak_margin_mean": 1.562799868537031,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.7225243204967506,
+   "seconds": 18.7
+  },
+  {
+   "label": "rewired #40",
+   "wiring": [
+    0,
+    1,
+    3,
+    2
+   ],
+   "argmax_mean": 0.468944099378882,
+   "argmax_fraction": [
+    0.42857142857142855,
+    0.11801242236024845,
+    1.0,
+    0.32919254658385094
+   ],
+   "peak_margin_mean": 1.3969153118043849,
+   "drift": 0.0,
+   "fixed_point": true,
+   "spectral_radius": 0.6881213644538736,
+   "seconds": 31.9
+  }
+ ]
+}
