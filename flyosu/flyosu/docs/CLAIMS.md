@@ -1,8 +1,8 @@
 # What this project actually shows
 
-One page, kept current, superseding anything older that contradicts it. Nine
-experiments, two connectomes, and five occasions on which a result got weaker
-once the controls were treated better. Written for someone deciding what to
+One page, kept current, superseding anything older that contradicts it.
+Eleven experiments, two connectomes, and seven occasions on which a result got
+weaker once the controls were treated better. Written for someone deciding what to
 believe, not what was believed at the time.
 
 Each claim below carries the control family it holds *against*. That
@@ -52,7 +52,10 @@ protocol and none favours the real connectome**; the one that comes closest is
 
 **4. The real network's channels are unusually lane-selective.** Real 0.79 vs
 rewired 0.50 ± 0.17, 1/20, **p = 0.095**, re-measured under the corrected
-wiring rule. `docs/RESULTS_E7.md`.
+wiring rule. `docs/RESULTS_E7.md`. **This claim is now under a pre-registered
+test at n = 40** whose protocol was frozen and tagged before any network was
+measured — see `docs/PREREGISTRATION.md`. Do not restate it until that test
+reports; it will either fall below 0.05 or be moved to "Not supported".
 
 **5. Learning, thresholds-only.** Real 0.211 vs rewired 0.101 ± 0.079, 1/8,
 p = 0.22. The condition where the wiring does the most work, and the part of
@@ -152,6 +155,17 @@ be adversarial to the real connectome from the start.** Give every control its
 own best operating point on every free parameter, decide the metric before
 looking, and treat any procedure tuned on the real network as suspect until it
 has been swept per network.
+
+All seven were caught **after** the fact, which is the weakness in this record.
+A pattern of self-caught errors shows the mistake is easy to make here, not
+that it has stopped happening. Experiment 14 is the response: one comparison in
+which the mistake is structurally impossible, because the forty controls are
+run and committed before the real network is measured at all, so there is no
+distribution available to tune against. Its protocol is frozen and tagged
+(`docs/PREREGISTRATION.md`, tag `e14-prereg`), it names one primary endpoint,
+and it says in advance what a null licenses. **Until it reports, it is the only
+thing in this project entitled to be called adversarial by design; everything
+above was made fair by correction rather than by construction.**
 
 ## Absolute performance, separately from any comparison
 

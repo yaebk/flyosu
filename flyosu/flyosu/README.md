@@ -64,16 +64,22 @@ Lane identity arrives essentially intact at the descending neurons, and survives
 pooling into four anatomical groups well enough that a policy with *no learning
 at all* gets more than twice chance.
 
-**Does the real wiring beat random wiring?** Probably, but the evidence is
-suggestive rather than conclusive, and it got weaker rather than stronger as
-the controls got better — by experiment 11 the behavioural answer is no, and
-what follows is the question as it stood at experiment 1. Against 15 degree-matched rewired networks the
-real connectome wins on every metric that does not let a trained decoder
-compensate — 0/15 controls reach it on untrained policy accuracy (+1.9 SD), on
-channel modulation depth (+3.7 SD), or on the note-approach timing signal
-(+2.0 SD). But p = (n+1)/16, so **0.062 is the best p-value 15 controls can
-produce**, and the metric that lets a trained decoder compensate shows a much
-smaller gap (3/15 controls reach it).
+**Does the real wiring beat random wiring at playing?** **On behaviour, no.**
+Eleven experiments later, every behavioural comparison has been run under a
+protocol that gives each control its own best operating point, and none favours
+the real connectome. What survives is structural and is set out in
+[`docs/CLAIMS.md`](docs/CLAIMS.md).
+
+The rest of this section is **the answer as it stood at experiment 1**, kept
+because how it fell apart is the most useful thing in this repository. It
+looked strong: against 15 degree-matched rewired networks the real connectome
+won on every metric that did not let a trained decoder compensate — 0/15
+controls reached it on untrained policy accuracy (+1.9 SD), on channel
+modulation depth (+3.7 SD), or on the note-approach timing signal (+2.0 SD).
+Even then p = (n+1)/16, so **0.062 was the best p-value 15 controls could
+produce**, and the metric that let a trained decoder compensate already showed
+a much smaller gap (3/15). Each of those margins shrank as the controls were
+given fairer treatment — seven times, across experiments 5 to 11.
 
 Two findings worth flagging:
 
@@ -396,6 +402,7 @@ experiments/
   e9_structure.py     spectral radius and dimensionality, both datasets
   e10_chords.py       chords: fit on stage 4, and chord additivity
   e11_delays.py       per-key delays: a crossing schedules a press
+  e14_prereg.py       the pre-registered comparison: controls first, real network last
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  28 checks on the network side
@@ -405,6 +412,7 @@ tests/test_malecns.py   the male CNS loader, pinning the numbers docs/MALECNS.md
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
 docs/MALECNS.md         the second connectome: loader, decisions, what transfers
 docs/CLAIMS.md          what is and is not supported, current
+docs/PREREGISTRATION.md protocol for experiment 14, frozen before it was run
 docs/RESULTS.md         experiment 1
 docs/RESULTS_E2.md      experiment 2
 docs/RESULTS_E3.md      experiment 3
