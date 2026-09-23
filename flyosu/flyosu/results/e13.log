@@ -1,0 +1,93 @@
+  real connectome      channels         feat [1, 0, 2, 3] sign [1, 1, 1, 1]  band -1.12  acc 0.042 @ th 0.25  score -0.208  lane 0.46  strays/note 0.62  presses 24
+  real connectome      channels_signed  feat [3, 0, 1, 2] sign [1, 1, -1, 1]  band -0.36  acc 0.067 @ th 0.25  score -0.293  lane 0.34  strays/note 0.90  presses 35
+  real connectome      pc4              feat [1, 0, 2, 3] sign [1, -1, 1, -1]  band -0.15  acc 0.100 @ th 0.25  score -0.100  lane 0.29  strays/note 0.50  presses 14
+  real connectome      pc8              feat [0, 5, 1, 6] sign [-1, 1, -1, 1]  band -0.01  acc 0.258 @ th 2.00  score +0.128  lane 0.64  strays/note 0.33  presses 22
+  real connectome      radius 2.05  fixed point True  (651s)
+  rewired #1           channels         feat [0, 3, 1, 2] sign [1, 1, 1, 1]  band -0.25  acc 0.075 @ th 2.50  score -0.145  lane 0.30  strays/note 0.55  presses 20
+  rewired #1           channels_signed  feat [0, 3, 1, 2] sign [1, 1, 1, 1]  band -0.25  acc 0.075 @ th 2.50  score -0.145  lane 0.30  strays/note 0.55  presses 20
+  rewired #1           pc4              feat [2, 0, 3, 1] sign [1, 1, 1, 1]  band +0.02  acc 0.092 @ th 0.50  score -0.238  lane 0.35  strays/note 0.82  presses 31
+  rewired #1           pc8              feat [4, 2, 6, 1] sign [1, -1, 1, 1]  band +0.22  acc 0.092 @ th 1.00  score -0.158  lane 0.16  strays/note 0.62  presses 25
+  rewired #1           radius 0.72  fixed point True  (620s)
+  rewired #2           channels         feat [2, 3, 0, 1] sign [1, 1, 1, 1]  band -1.07  acc 0.254 @ th 1.00  score -0.026  lane 0.51  strays/note 0.70  presses 37
+  rewired #2           channels_signed  feat [0, 3, 1, 2] sign [-1, -1, -1, -1]  band -0.70  acc 0.054 @ th 1.50  score -0.146  lane 0.20  strays/note 0.50  presses 25
+  rewired #2           pc4              feat [3, 1, 2, 0] sign [1, -1, 1, -1]  band -0.49  acc 0.229 @ th 0.50  score +0.039  lane 0.62  strays/note 0.47  presses 26
+  rewired #2           pc8              feat [3, 5, 1, 4] sign [1, 1, -1, 1]  band +0.05  acc 0.108 @ th 0.50  score -0.102  lane 0.48  strays/note 0.53  presses 29
+  rewired #2           radius 0.64  fixed point True  (664s)
+  rewired #3           channels         feat [3, 1, 0, 2] sign [1, 1, 1, 1]  band -0.66  acc 0.013 @ th 1.50  score -0.358  lane 0.29  strays/note 0.93  presses 35
+  rewired #3           channels_signed  feat [3, 1, 2, 0] sign [1, -1, -1, -1]  band -0.28  acc 0.000 @ th 1.50  score -0.510  lane 0.09  strays/note 1.27  presses 22
+  rewired #3           pc4              feat [1, 2, 0, 3] sign [1, -1, -1, -1]  band -0.14  acc 0.042 @ th 0.25  score -0.508  lane 0.40  strays/note 1.38  presses 20
+  rewired #3           pc8              feat [5, 6, 2, 4] sign [-1, -1, 1, 1]  band +0.13  acc 0.075 @ th 0.75  score -0.195  lane 0.64  strays/note 0.68  presses 25
+  rewired #3           radius 0.65  fixed point True  (627s)
+  rewired #4           channels         feat [0, 2, 3, 1] sign [1, 1, 1, 1]  band -1.18  acc 0.217 @ th 3.00  score +0.007  lane 0.44  strays/note 0.53  presses 34
+  rewired #4           channels_signed  feat [3, 2, 0, 1] sign [-1, 1, -1, 1]  band -0.42  acc 0.050 @ th 0.75  score -0.360  lane 0.46  strays/note 1.02  presses 26
+  rewired #4           pc4              feat [3, 1, 2, 0] sign [-1, 1, -1, 1]  band -0.37  acc 0.121 @ th 0.50  score -0.119  lane 0.39  strays/note 0.60  presses 31
+  rewired #4           pc8              feat [6, 1, 5, 7] sign [-1, 1, -1, -1]  band +0.11  acc 0.054 @ th 0.50  score -0.396  lane 0.39  strays/note 1.12  presses 23
+  rewired #4           radius 0.65  fixed point True  (623s)
+  rewired #5           channels         feat [3, 1, 2, 0] sign [1, 1, 1, 1]  band -2.53  acc 0.188 @ th 1.50  score -0.213  lane 0.38  strays/note 1.00  presses 52
+  rewired #5           channels_signed  feat [2, 3, 1, 0] sign [-1, 1, -1, 1]  band -0.40  acc 0.283 @ th 1.50  score +0.143  lane 0.84  strays/note 0.35  presses 25
+  rewired #5           pc4              feat [3, 0, 1, 2] sign [1, -1, 1, 1]  band -0.41  acc 0.133 @ th 1.50  score +0.003  lane 0.35  strays/note 0.33  presses 20
+  rewired #5           pc8              feat [5, 0, 4, 7] sign [1, -1, 1, -1]  band +0.11  acc 0.183 @ th 1.50  score +0.093  lane 0.62  strays/note 0.23  presses 21
+  rewired #5           radius 0.65  fixed point True  (622s)
+  rewired #6           channels         feat [0, 2, 1, 3] sign [1, 1, 1, 1]  band -0.41  acc 0.142 @ th 2.00  score -0.158  lane 0.44  strays/note 0.75  presses 32
+  rewired #6           channels_signed  feat [1, 2, 0, 3] sign [1, 1, -1, 1]  band +0.02  acc 0.117 @ th 2.00  score -0.163  lane 0.48  strays/note 0.70  presses 31
+  rewired #6           pc4              feat [0, 1, 2, 3] sign [-1, 1, -1, -1]  band -0.27  acc 0.217 @ th 0.50  score +0.217  lane 1.00  strays/note 0.00  presses 22
+  rewired #6           pc8              feat [7, 0, 5, 6] sign [-1, 1, -1, 1]  band -0.07  acc 0.192 @ th 1.50  score +0.022  lane 0.78  strays/note 0.42  presses 23
+  rewired #6           radius 0.63  fixed point True  (613s)
+  rewired #7           channels         feat [1, 2, 3, 0] sign [1, 1, 1, 1]  band -1.29  acc 0.054 @ th 2.00  score -0.246  lane 0.42  strays/note 0.75  presses 31
+  rewired #7           channels_signed  feat [1, 2, 3, 0] sign [-1, 1, 1, 1]  band +0.17  acc 0.054 @ th 2.00  score -0.246  lane 0.42  strays/note 0.75  presses 31
+  rewired #7           pc4              feat [1, 2, 3, 0] sign [-1, -1, 1, 1]  band -0.10  acc 0.004 @ th 0.25  score -0.336  lane 0.20  strays/note 0.85  presses 5
+  rewired #7           pc8              feat [1, 2, 3, 0] sign [-1, -1, 1, 1]  band -0.10  acc 0.004 @ th 0.25  score -0.336  lane 0.20  strays/note 0.85  presses 5
+  rewired #7           radius 0.65  fixed point True  (623s)
+  rewired #8           channels         feat [2, 0, 1, 3] sign [1, 1, 1, 1]  band -1.32  acc 0.221 @ th 2.50  score +0.111  lane 0.62  strays/note 0.28  presses 24
+  rewired #8           channels_signed  feat [2, 0, 3, 1] sign [-1, 1, 1, -1]  band -0.35  acc 0.196 @ th 2.50  score +0.076  lane 0.60  strays/note 0.30  presses 25
+  rewired #8           pc4              feat [0, 3, 1, 2] sign [1, -1, 1, -1]  band -0.51  acc 0.033 @ th 0.75  score -0.207  lane 0.21  strays/note 0.60  presses 24
+  rewired #8           pc8              feat [6, 2, 7, 1] sign [-1, 1, -1, -1]  band +0.50  acc 0.125 @ th 2.00  score -0.035  lane 0.27  strays/note 0.40  presses 22
+  rewired #8           radius 0.63  fixed point True  (676s)
+  rewired #9           channels         feat [3, 2, 0, 1] sign [1, 1, 1, 1]  band -1.52  acc 0.121 @ th 2.00  score -0.059  lane 0.42  strays/note 0.45  presses 31
+  rewired #9           channels_signed  feat [0, 2, 1, 3] sign [-1, 1, -1, -1]  band -0.37  acc 0.058 @ th 1.50  score -0.102  lane 0.41  strays/note 0.40  presses 22
+  rewired #9           pc4              feat [3, 0, 2, 1] sign [-1, 1, -1, 1]  band -0.16  acc 0.067 @ th 0.25  score -0.243  lane 0.43  strays/note 0.78  presses 35
+  rewired #9           pc8              feat [2, 5, 0, 1] sign [1, -1, 1, 1]  band -0.04  acc 0.275 @ th 0.50  score +0.205  lane 0.71  strays/note 0.17  presses 24
+  rewired #9           radius 0.64  fixed point True  (680s)
+  rewired #10          channels         feat [2, 1, 0, 3] sign [1, 1, 1, 1]  band -1.06  acc 0.442 @ th 2.50  score +0.372  lane 0.75  strays/note 0.17  presses 24
+  rewired #10          channels_signed  feat [2, 1, 0, 3] sign [1, 1, 1, -1]  band -0.20  acc 0.271 @ th 1.50  score +0.251  lane 1.00  strays/note 0.05  presses 22
+  rewired #10          pc4              feat [3, 1, 0, 2] sign [-1, 1, -1, -1]  band -0.26  acc 0.317 @ th 0.50  score +0.067  lane 0.49  strays/note 0.62  presses 43
+  rewired #10          pc8              feat [6, 4, 3, 5] sign [-1, -1, 1, -1]  band -0.03  acc 0.204 @ th 0.50  score +0.054  lane 0.59  strays/note 0.38  presses 27
+  rewired #10          radius 0.64  fixed point True  (656s)
+
+=== experiment 13, malecns: untrained play on 348 motor neurons, four readouts ===
+  10 rewired controls, one-sided p = (n_ge + 1)/(n + 1), floor 0.091
+
+  stability (blank-field fixed point / spectral radius)
+    real    2.05  fixed point True
+    rewired 0.65 +- 0.02  fixed point on 10/10
+
+  !! no threshold reaches 20 counted presses for: real connectome, rewired #7
+     their lane-correct is a fallback, not a score; read accuracy instead
+
+  channels  (4.6 declared bits, 1 threshold, no fitted weights)
+    accuracy at own best theta         real +0.042   rewired +0.173 +- 0.117   9/10 reach real   p 0.909
+    score = acc - 0.4*strays/note      real -0.208   rewired -0.072 +- 0.196   7/10 reach real   p 0.727
+    max accuracy over the grid         real +0.100   rewired +0.265 +- 0.111   9/10 reach real   p 0.909
+    lane-correct (guarded)             real +0.458   rewired +0.474 +- 0.147   4/10 reach real   p 0.455
+    shared-threshold band              real -1.118   rewired -1.129 +- 0.607   5/10 reach real   p 0.545
+
+  channels_signed  (8.6 declared bits, 1 threshold, no fitted weights)
+    accuracy at own best theta         real +0.067   rewired +0.116 +- 0.094   5/10 reach real   p 0.545
+    score = acc - 0.4*strays/note      real -0.293   rewired -0.120 +- 0.218   8/10 reach real   p 0.818
+    max accuracy over the grid         real +0.100   rewired +0.203 +- 0.106   9/10 reach real   p 0.909
+    lane-correct (guarded)             real +0.343   rewired +0.507 +- 0.233   8/10 reach real   p 0.818
+    shared-threshold band              real -0.359   rewired -0.278 +- 0.229   6/10 reach real   p 0.636
+
+  pc4  (8.6 declared bits, 1 threshold, no fitted weights)
+    accuracy at own best theta         real +0.100   rewired +0.125 +- 0.095   5/10 reach real   p 0.545
+    score = acc - 0.4*strays/note      real -0.100   rewired -0.133 +- 0.205   4/10 reach real   p 0.455
+    max accuracy over the grid         real +0.100   rewired +0.145 +- 0.118   5/10 reach real   p 0.545
+    lane-correct (guarded)             real +1.000   rewired +0.508 +- 0.203   1/10 reach real   p 0.182
+    shared-threshold band              real -0.153   rewired -0.269 +- 0.167   3/10 reach real   p 0.364
+
+  pc8  (14.7 declared bits, 1 threshold, no fitted weights)
+    accuracy at own best theta         real +0.258   rewired +0.131 +- 0.077   1/10 reach real   p 0.182
+    score = acc - 0.4*strays/note      real +0.128   rewired -0.085 +- 0.181   1/10 reach real   p 0.182
+    max accuracy over the grid         real +0.258   rewired +0.157 +- 0.074   1/10 reach real   p 0.182
+    lane-correct (guarded)             real +0.636   rewired +0.562 +- 0.170   5/10 reach real   p 0.545
+    shared-threshold band              real -0.010   rewired +0.088 +- 0.169   6/10 reach real   p 0.636

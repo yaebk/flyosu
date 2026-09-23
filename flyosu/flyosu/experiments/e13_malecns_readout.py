@@ -87,6 +87,24 @@ for a claim about topology and the existing male CNS budget.  p = (n_ge + 1) /
 (n + 1), one-sided, so the floor is 1/11 = 0.091 and nothing here can be
 significant at 0.05.
 
+## Which arm is the comparison, and multiplicity
+
+``pc8`` is the arm this experiment exists to run: experiment 5 measured 0.856
+supervised accuracy from eight components of these 348 neurons, so eight is the
+number already on the record as sufficient, and the task was to see whether an
+untrained policy can reach it.  ``channels`` is experiment 7's rule re-run on
+the same grid, so it is a replication rather than a new test.
+``channels_signed`` and ``pc4`` are there to say what ``pc8``'s number *means*
+-- they hold the declared bits fixed while the readout changes -- and any
+comparison decided by them alone is exploratory.
+
+Four arms on the same eleven networks is four chances at a low p, so the report
+prints a Bonferroni-corrected floor alongside the per-arm one.  With ten
+controls that corrected floor is 4/11 = 0.36, which is the honest summary of
+this experiment's statistical power: **no arm here can reach significance, and
+none should be described as if it had.**  What the arms can do is show whether
+the readout moves the comparison, which is the question.
+
     DATASET=malecns N_SEEDS=10 python -m experiments.e13_malecns_readout
     python -m experiments.e13_malecns_readout report
 """
@@ -233,8 +251,12 @@ def sweep(player, feat, W) -> dict:
             "accuracy_at_best": float(acc[i]), "lane_correct_at_best": float(lc[i]),
             "stray_at_best": float(st[i]), "n_counted_at_best": int(n[i]),
             "any_eligible": bool(ok.any()),
-            "lane_correct_guarded": float(lc[j]),
-            "lane_correct_guarded_theta": float(THETA_SWEEP[j]),
+            # a ratio over presses landing near a note: undefined, not zero and
+            # not 1.0, when no threshold reaches MIN_COUNTED.  Experiment 7's
+            # male CNS run emitted 0.800 from eight presses; None is what that
+            # should have been.
+            "lane_correct_guarded": (float(lc[j]) if ok.any() else None),
+            "lane_correct_guarded_theta": (float(THETA_SWEEP[j]) if ok.any() else None),
             "max_accuracy": float(max(acc))}
 
 
@@ -285,6 +307,107 @@ def measure(label, kw) -> dict:
     return out
 
 
+# -- phase 2: the same policies on charts they were not tuned on -----------
+
+HELD_OUT = dict(stage=3, n_charts=3, n_notes=20, interval_ms=600.0, seed=999)
+
+
+def heldout_one(run: dict) -> dict:
+    """Replay a finished network's chosen policy (its features, signs and
+    theta) on three charts it has never seen.
+
+    Everything about the policy was chosen on the sweep charts -- the
+    lane-to-feature map on the silent probe, the threshold on the sweep charts
+    themselves -- so the sweep numbers are optimistic for every network in the
+    same way experiment 7 flagged.  This is the generalisation test: nothing is
+    re-chosen here, the charts are experiment 3's held-out seeds, and the
+    ranking is what it is."""
+    kw = {} if run["label"] == "real connectome" else {
+        "shuffle_seed": int(run["label"].split("#")[1])}
+    fly = M.build(regime="play", dataset=DATASET, **kw)
+    player = P.Player.untrained(fly, theta=1.5, noise=NOISE)
+    states = calibration_states(fly, player.r0)
+    chan = RS.ChannelFeatures(player)
+    feats = {"channels": chan, "channels_signed": chan,
+             "pc4": RS.PopulationProjection.fit(fly, player.r0, k=4, states=states),
+             "pc8": RS.PopulationProjection.fit(fly, player.r0, k=8, states=states)}
+    out = {"label": run["label"], "arms": {}}
+    for arm in ARMS:
+        a, f = run["arms"][arm], feats[arm]
+        player.features = None if isinstance(f, RS.ChannelFeatures) else f
+        player.controller = Controller(W=selection_matrix(a["selection"], f.k),
+                                       b=np.full(N_KEYS, -float(a["best_theta"])),
+                                       refractory_ms=150.0, smooth_ms=40.0)
+        e = L.evaluate(player, **HELD_OUT)
+        n_c = int(np.array(e["confusion"]).sum())
+        out["arms"][arm] = {
+            "theta": a["best_theta"], "accuracy": e["accuracy"],
+            "hit_rate": e["hit_rate"], "stray_per_note": e["stray_per_note"],
+            "score": e["accuracy"] - STRAY_PENALTY * e["stray_per_note"],
+            "n_counted": n_c, "eligible": bool(n_c >= MIN_COUNTED),
+            "lane_correct": (e["lane_correct"] if n_c >= MIN_COUNTED else None),
+            "sweep_accuracy": a["accuracy_at_best"]}
+        d = out["arms"][arm]
+        print(f"  {run['label']:<20s} {arm:<16s} th {d['theta']:.2f}  "
+              f"sweep acc {d['sweep_accuracy']:.3f} -> held-out {d['accuracy']:.3f}  "
+              f"score {d['score']:+.3f}  lane "
+              + ("-" if d["lane_correct"] is None else f"{d['lane_correct']:.2f}")
+              + f"  presses {d['n_counted']}", flush=True)
+    player.features = None
+    return out
+
+
+def phase_heldout():
+    with open(PATH) as fh:
+        results = json.load(fh)
+    runs = results.get("held_out", [])
+    done = {r["label"] for r in runs}
+    for run in results["runs"]:
+        if run["label"] in done:
+            continue
+        runs.append(heldout_one(run))
+        results["held_out"] = runs
+        with open(PATH, "w") as fh:
+            json.dump(results, fh, indent=1)
+    report_heldout(results)
+
+
+def report_heldout(results):
+    runs = results.get("held_out", [])
+    real = next((r for r in runs if r["label"] == "real connectome"), None)
+    ctrl = [r for r in runs if r["label"] != "real connectome"]
+    if real is None or len(ctrl) < 3:
+        print("not enough networks yet")
+        return
+    n = len(ctrl)
+    print(f"\n=== experiment 13, held-out charts (nothing re-chosen) ===")
+    print(f"  {n} rewired controls, floor {1.0 / (n + 1):.3f}, "
+          f"Bonferroni floor over {len(ARMS)} arms {len(ARMS) / (n + 1):.3f}")
+    summary = {}
+    for arm in ARMS:
+        print(f"\n  {arm}")
+        summary[arm] = {}
+        for key, label in (("accuracy", "accuracy"), ("score", "score"),
+                           ("lane_correct", "lane-correct (guarded)")):
+            rv = real["arms"][arm][key]
+            if rv is None:
+                print(f"    {label:<24s} real -   (press guard not met; no comparison)")
+                summary[arm][key] = {"real": None, "reason": "press guard not met"}
+                continue
+            keep = [r for r in ctrl if r["arms"][arm][key] is not None]
+            x = np.array([r["arms"][arm][key] for r in keep], dtype=float)
+            m = len(x)
+            n_ge = int((x >= rv).sum())
+            print(f"    {label:<24s} real {rv:+.3f}   rewired {x.mean():+.3f} +- {x.std():.3f}"
+                  f"   {n_ge}/{m}   p {_p(n_ge, m):.3f} (floor {1.0 / (m + 1):.3f})")
+            summary[arm][key] = {"real": float(rv), "ctrl_mean": float(x.mean()),
+                                 "ctrl_sd": float(x.std()), "n_ge": n_ge, "n": m,
+                                 "p": _p(n_ge, m), "p_floor": 1.0 / (m + 1)}
+    results["held_out_summary"] = summary
+    with open(PATH, "w") as fh:
+        json.dump(results, fh, indent=1)
+
+
 def main():
     n = int(os.environ.get("N_SEEDS", 10))
     results = {"dataset": DATASET, "theta": list(THETA_SWEEP), "sweep": SWEEP,
@@ -328,32 +451,59 @@ def report(results):
     print(f"    rewired {rad.mean():.2f} +- {rad.std():.2f}  "
           f"fixed point on {sum(r['stability']['fixed_point'] for r in ctrl)}/{n}")
 
-    bad = [r["label"] for r in runs for a in ARMS if not r["arms"][a]["any_eligible"]]
+    bad = [f"{r['label']} / {a}" for r in runs for a in ARMS
+           if not r["arms"][a]["any_eligible"]]
     if bad:
         print("\n  !! no threshold reaches " + str(MIN_COUNTED) + " counted presses for: "
-              + ", ".join(sorted(set(bad))))
-        print("     their lane-correct is a fallback, not a score; read accuracy instead")
+              + ", ".join(bad))
+        print("     lane-correctness is undefined there (a ratio over too few presses);")
+        print("     it is printed as '-' and those networks are dropped from that row.")
+        print("     their accuracy is at the threshold maximising accuracy, not the score.")
 
-    summary = {}
+    # four arms on the same eleven networks.  pc8 is the arm this experiment
+    # was built to run; the other three exist to say what pc8's number means.
+    # Nothing here can be significant anyway: see the Bonferroni line below.
+    print(f"\n  multiplicity: {len(ARMS)} arms on the same networks.  Per-arm floor "
+          f"{floor:.3f}; Bonferroni-corrected floor {len(ARMS) * floor:.3f}.")
+    summary = {"p_floor": floor, "n_arms": len(ARMS),
+               "p_floor_bonferroni": len(ARMS) * floor,
+               "primary_arm": "pc8", "guard_failures": bad}
     for arm in ARMS:
         a_real = real["arms"][arm]
         print(f"\n  {arm}  ({a_real['selection']['bits']:.1f} declared bits, "
-              f"1 threshold, no fitted weights)")
+              f"1 threshold, no fitted weights)"
+              + ("" if a_real["any_eligible"] else "   [real network fails the press guard]"))
         summary[arm] = {}
         for key, label, hi in (("accuracy_at_best", "accuracy at own best theta", True),
                                ("best_score", "score = acc - 0.4*strays/note", True),
                                ("max_accuracy", "max accuracy over the grid", True),
                                ("lane_correct_guarded", "lane-correct (guarded)", True),
                                ("band", "shared-threshold band", True)):
-            rv = (a_real["selection"]["band"] if key == "band" else a_real[key])
-            x = np.array([(r["arms"][arm]["selection"]["band"] if key == "band"
-                           else r["arms"][arm][key]) for r in ctrl], dtype=float)
+            def val(r):
+                a = r["arms"][arm]
+                if key == "band":
+                    return a["selection"]["band"]
+                if key == "lane_correct_guarded" and not a["any_eligible"]:
+                    return None            # also catches JSON written before the guard
+                return a[key]
+            rv = val(real)
+            if rv is None:
+                print(f"    {label:<34s} real -   (undefined: press guard not met; "
+                      f"no comparison)")
+                summary[arm][key] = {"real": None, "reason": "press guard not met"}
+                continue
+            keep = [r for r in ctrl if val(r) is not None]
+            x = np.array([val(r) for r in keep], dtype=float)
+            m = len(x)
             n_ge = int((x >= rv).sum() if hi else (x <= rv).sum())
+            drop = "" if m == n else f"  ({n - m} control(s) dropped: guard not met)"
             print(f"    {label:<34s} real {rv:+.3f}   rewired {x.mean():+.3f} +- {x.std():.3f}"
-                  f"   {n_ge}/{n} reach real   p {_p(n_ge, n):.3f}")
+                  f"   {n_ge}/{m} reach real   p {_p(n_ge, m):.3f} (floor {1.0 / (m + 1):.3f})"
+                  + drop)
             summary[arm][key] = {"real": float(rv), "ctrl_mean": float(x.mean()),
-                                 "ctrl_sd": float(x.std()), "n_ge": n_ge, "n": n,
-                                 "p": _p(n_ge, n), "p_floor": floor}
+                                 "ctrl_sd": float(x.std()), "n_ge": n_ge, "n": m,
+                                 "p": _p(n_ge, m), "p_floor": 1.0 / (m + 1),
+                                 "p_bonferroni": min(1.0, len(ARMS) * _p(n_ge, m))}
     results["summary"] = summary
     with open(PATH, "w") as fh:
         json.dump(results, fh, indent=1)
@@ -362,6 +512,11 @@ def report(results):
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "report":
         with open(PATH) as fh:
-            report(json.load(fh))
+            res = json.load(fh)
+        report(res)
+        if res.get("held_out"):
+            report_heldout(res)
+    elif os.environ.get("PHASE") == "heldout":
+        phase_heldout()
     else:
         main()

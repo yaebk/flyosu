@@ -1,0 +1,67 @@
+  real connectome      channels         th 0.25  sweep acc 0.042 -> held-out 0.019  score -0.367  lane 0.15  presses 48
+  real connectome      channels_signed  th 0.25  sweep acc 0.067 -> held-out 0.186  score -0.254  lane 0.28  presses 61
+  real connectome      pc4              th 0.25  sweep acc 0.100 -> held-out 0.044  score -0.222  lane 0.10  presses 30
+  real connectome      pc8              th 2.00  sweep acc 0.258 -> held-out 0.122  score -0.111  lane 0.33  presses 42
+  rewired #1           channels         th 2.50  sweep acc 0.075 -> held-out 0.044  score -0.129  lane -  presses 19
+  rewired #1           channels_signed  th 2.50  sweep acc 0.075 -> held-out 0.044  score -0.129  lane -  presses 19
+  rewired #1           pc4              th 0.50  sweep acc 0.092 -> held-out 0.056  score -0.278  lane 0.21  presses 42
+  rewired #1           pc8              th 1.00  sweep acc 0.092 -> held-out 0.056  score -0.131  lane 0.15  presses 26
+  rewired #2           channels         th 1.00  sweep acc 0.254 -> held-out 0.161  score +0.001  lane 0.60  presses 40
+  rewired #2           channels_signed  th 1.50  sweep acc 0.054 -> held-out 0.111  score -0.116  lane 0.31  presses 45
+  rewired #2           pc4              th 0.50  sweep acc 0.229 -> held-out 0.433  score +0.240  lane 0.70  presses 56
+  rewired #2           pc8              th 0.50  sweep acc 0.108 -> held-out 0.258  score -0.035  lane 0.50  presses 70
+  rewired #3           channels         th 1.50  sweep acc 0.013 -> held-out 0.011  score -0.442  lane 0.17  presses 36
+  rewired #3           channels_signed  th 1.50  sweep acc 0.000 -> held-out 0.000  score -0.620  lane 0.09  presses 35
+  rewired #3           pc4              th 0.25  sweep acc 0.042 -> held-out 0.008  score -0.478  lane -  presses 19
+  rewired #3           pc8              th 0.75  sweep acc 0.075 -> held-out 0.033  score -0.240  lane 0.67  presses 30
+  rewired #4           channels         th 3.00  sweep acc 0.217 -> held-out 0.158  score -0.042  lane 0.48  presses 56
+  rewired #4           channels_signed  th 0.75  sweep acc 0.050 -> held-out 0.028  score -0.386  lane 0.24  presses 41
+  rewired #4           pc4              th 0.50  sweep acc 0.121 -> held-out 0.106  score -0.074  lane 0.42  presses 38
+  rewired #4           pc8              th 0.50  sweep acc 0.054 -> held-out 0.194  score -0.266  lane 0.71  presses 35
+  rewired #5           channels         th 1.50  sweep acc 0.188 -> held-out 0.247  score -0.133  lane 0.41  presses 87
+  rewired #5           channels_signed  th 1.50  sweep acc 0.283 -> held-out 0.192  score +0.032  lane 0.66  presses 41
+  rewired #5           pc4              th 1.50  sweep acc 0.133 -> held-out 0.100  score -0.047  lane 0.31  presses 26
+  rewired #5           pc8              th 1.50  sweep acc 0.183 -> held-out 0.133  score +0.020  lane 0.48  presses 33
+  rewired #6           channels         th 2.00  sweep acc 0.142 -> held-out 0.106  score -0.241  lane 0.36  presses 66
+  rewired #6           channels_signed  th 2.00  sweep acc 0.117 -> held-out 0.106  score -0.121  lane 0.57  presses 56
+  rewired #6           pc4              th 0.50  sweep acc 0.217 -> held-out 0.150  score +0.150  lane 1.00  presses 25
+  rewired #6           pc8              th 1.50  sweep acc 0.192 -> held-out 0.219  score +0.139  lane 0.86  presses 36
+  rewired #7           channels         th 2.00  sweep acc 0.054 -> held-out 0.033  score -0.247  lane 0.36  presses 50
+  rewired #7           channels_signed  th 2.00  sweep acc 0.054 -> held-out 0.033  score -0.247  lane 0.36  presses 50
+  rewired #7           pc4              th 0.25  sweep acc 0.004 -> held-out 0.000  score -0.320  lane -  presses 8
+  rewired #7           pc8              th 0.25  sweep acc 0.004 -> held-out 0.000  score -0.320  lane -  presses 8
+  rewired #8           channels         th 2.50  sweep acc 0.221 -> held-out 0.128  score +0.094  lane 0.82  presses 22
+  rewired #8           channels_signed  th 2.50  sweep acc 0.196 -> held-out 0.089  score -0.044  lane 0.32  presses 28
+  rewired #8           pc4              th 0.75  sweep acc 0.033 -> held-out 0.022  score -0.091  lane -  presses 17
+  rewired #8           pc8              th 2.00  sweep acc 0.125 -> held-out 0.139  score +0.059  lane -  presses 19
+  rewired #9           channels         th 2.00  sweep acc 0.121 -> held-out 0.139  score +0.066  lane 0.74  presses 38
+  rewired #9           channels_signed  th 1.50  sweep acc 0.058 -> held-out 0.017  score -0.130  lane -  presses 19
+  rewired #9           pc4              th 0.25  sweep acc 0.067 -> held-out 0.044  score -0.362  lane 0.32  presses 69
+  rewired #9           pc8              th 0.50  sweep acc 0.275 -> held-out 0.272  score +0.246  lane 0.89  presses 35
+  rewired #10          channels         th 2.50  sweep acc 0.442 -> held-out 0.678  score +0.544  lane 0.68  presses 60
+  rewired #10          channels_signed  th 1.50  sweep acc 0.271 -> held-out 0.342  score +0.322  lane 1.00  presses 40
+  rewired #10          pc4              th 0.50  sweep acc 0.317 -> held-out 0.394  score -0.079  lane 0.38  presses 103
+  rewired #10          pc8              th 0.50  sweep acc 0.204 -> held-out 0.075  score -0.005  lane 0.76  presses 34
+
+=== experiment 13, held-out charts (nothing re-chosen) ===
+  10 rewired controls, floor 0.091, Bonferroni floor over 4 arms 0.364
+
+  channels
+    accuracy                 real +0.019   rewired +0.171 +- 0.182   9/10   p 0.909 (floor 0.091)
+    score                    real -0.367   rewired -0.053 +- 0.251   9/10   p 0.909 (floor 0.091)
+    lane-correct (guarded)   real +0.146   rewired +0.514 +- 0.199   9/9   p 1.000 (floor 0.100)
+
+  channels_signed
+    accuracy                 real +0.186   rewired +0.096 +- 0.098   2/10   p 0.273 (floor 0.091)
+    score                    real -0.254   rewired -0.144 +- 0.236   8/10   p 0.818 (floor 0.091)
+    lane-correct (guarded)   real +0.279   rewired +0.444 +- 0.269   6/8   p 0.778 (floor 0.111)
+
+  pc4
+    accuracy                 real +0.044   rewired +0.131 +- 0.148   7/10   p 0.727 (floor 0.091)
+    score                    real -0.222   rewired -0.134 +- 0.215   6/10   p 0.636 (floor 0.091)
+    lane-correct (guarded)   real +0.100   rewired +0.477 +- 0.256   7/7   p 1.000 (floor 0.125)
+
+  pc8
+    accuracy                 real +0.122   rewired +0.138 +- 0.091   6/10   p 0.636 (floor 0.091)
+    score                    real -0.111   rewired -0.053 +- 0.174   6/10   p 0.636 (floor 0.091)
+    lane-correct (guarded)   real +0.333   rewired +0.629 +- 0.226   7/8   p 0.889 (floor 0.111)
