@@ -91,5 +91,6 @@ Download page: https://male-cns.janelia.org/download/  ·  neuPrint dataset `mal
 Citation: the Male CNS connectome consortium, *Cell* (2026) — see
 https://www.cell.com/consortium/male-fly-connectome for the paper set.
 
-Status: downloaded and schema-inspected; no loader, retina fit or experiment
-uses it yet. See HANDOFF.md, "Male CNS".
+Status: loaded, retina-fitted, and used as the second connectome in
+experiments 5, 7 and 9. See `docs/MALECNS.md` for the readout definition and
+what replicates on it.
