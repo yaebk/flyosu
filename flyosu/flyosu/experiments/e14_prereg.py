@@ -44,6 +44,7 @@ from flyosu import model as M, play as P, probes as PR  # noqa: E402
 RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
 CONTROLS = os.path.join(RESULTS, "e14_prereg_controls.json")
 REAL = os.path.join(RESULTS, "e14_prereg_real.json")
+RETINO = os.path.join(RESULTS, "e14_prereg_retino.json")
 
 # --- frozen protocol (docs/PREREGISTRATION.md section 5) ---------------------
 DATASET = "flywire"
@@ -108,6 +109,25 @@ def run_controls():
         print("Commit this file before running the real network.")
 
 
+def run_retino():
+    """Declared secondary (section 4): the retinotopy-shuffled family, n = 20.
+
+    Run after the primary reported, which is logged as a deviation in section 9
+    of the pre-registration.  Reported with a multiplicity warning and not
+    eligible for promotion to primary under any outcome.
+    """
+    res = _load(RETINO, {"protocol": "docs/PREREGISTRATION.md (secondary)", "runs": []})
+    done = {r["label"] for r in res["runs"]}
+    for k in range(1, 21):
+        label = f"retino #{k}"
+        if label in done:
+            continue
+        res["runs"].append(endpoint(label, {"retino_seed": k}))
+        with open(RETINO, "w") as fh:
+            json.dump(res, fh, indent=1)
+    print(f"\n{len(res['runs'])}/20 retinotopy-shuffled done.")
+
+
 def run_real():
     """Guarded: the null must be complete first (section 7 of the freeze)."""
     res = _load(CONTROLS, {"runs": []})
@@ -152,7 +172,17 @@ def report():
     print(f"\n  H1 {'SUPPORTED' if p < 0.05 else 'NOT supported'} at the "
           "pre-registered threshold of 0.05.")
 
+    if os.path.exists(RETINO):
+        rv = np.array([x["argmax_mean"] for x in _load(RETINO, {"runs": []})["runs"]])
+        m = len(rv)
+        nge2 = int((rv >= r).sum())
+        print("\nSECONDARY (declared; multiplicity applies -- never quote as primary)")
+        print(f"  retinotopy-shuffled n = {m}: {rv.mean():.3f} +- {rv.std(ddof=1):.3f}"
+              f"   n >= real {nge2}/{m}   p = {(nge2 + 1) / (m + 1):.3f} "
+              f"(floor {1 / (m + 1):.3f})")
+
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "report"
-    {"controls": run_controls, "real": run_real, "report": report}[cmd]()
+    {"controls": run_controls, "real": run_real, "retino": run_retino,
+     "report": report}[cmd]()

@@ -183,10 +183,26 @@ Not reinterpreted, not re-run with a different endpoint, not explained.
 
 ## 9. Deviations
 
-None yet. Anything that happens after the freeze goes here, with the date, what
-changed, and why — including deviations forced by cost or by bugs. An empty
-section at the end is the claim; a populated one is still honest, and a
-populated section nobody wrote is the failure mode.
+Anything that happens after the freeze goes here, with the date, what changed,
+and why — including deviations forced by cost or by bugs. A populated section is
+still honest; a populated section nobody wrote is the failure mode.
+
+**2026-09-22 — the primary ran exactly as specified.** Forty controls, then the
+real network once, no exclusions, no parameter changed, no endpoint
+recomputed. Result in `docs/RESULTS_E14.md`.
+
+**2026-09-23 — the `retino_seed` secondary was run after the primary reported,
+not before.** Section 4 declared it in advance, so running it is within the
+registration, but the *order* is a deviation worth recording: it was executed
+knowing the primary had failed, which is the condition under which a secondary
+is most likely to be over-read. It is reported with its multiplicity warning
+and, per section 4, is not eligible for promotion to primary whatever it shows.
+A reader who distrusts it on these grounds is reasoning correctly.
+
+**Not run: nothing else.** The other secondaries in section 4 (`peak_margin_mean`
+and the experiment-11 behavioural pair) — `peak_margin_mean` was computed from
+the same probe and is reported at 14/40, p = 0.366; the behavioural pair was
+not run and is recorded here as not run rather than omitted.
 
 ## 10. Known limits of this design
 
