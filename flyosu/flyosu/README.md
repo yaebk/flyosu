@@ -9,13 +9,16 @@ synaptic connections from the FlyWire whole-brain reconstruction; the fly's
 descending neurons — its actual output to the legs — are grouped into four
 channels and read as D / F / J / K.
 
-**Current state: all 12 steps built; experiment 2 run once at small n.** The
-fly plays. Untrained, it hits 19/20 notes in a one-lane chart and presses the
-right key for the nearest note far more often than any matched random network;
-with 20 readout parameters learning from reward and the connectome frozen, it
-improves on random charts where rewired networks mostly do not. Finding the
-regime in which the network could play at all turned out to be the main event
-of the session — see [What changed](#what-changed-when-the-fly-started-playing).
+**Current state: all 12 steps built; eleven experiments run.** The fly plays,
+and plays well: the best readout reaches 0.92 accuracy on held-out charts with
+68 parameters and the connectome frozen. Whether the *real* wiring plays better
+than matched random wiring is a separate question, and the answer has got more
+negative every time the controls were treated better — as of experiment 11 no
+behavioural comparison favours the real connectome. Two structural
+measurements do survive, at p = 0.024 and replicated on a second connectome.
+Finding the regime in which the network could play at all turned out to be the
+main event of the first session — see
+[What changed](#what-changed-when-the-fly-started-playing).
 
 ```
                  osu!mania lanes  D    F    J    K
@@ -39,7 +42,7 @@ of the session — see [What changed](#what-changed-when-the-fly-started-playing
 ```
 
 > **Reading this repository:** the sections below are written in the order the
-> experiments happened, and five of them were later weakened or corrected by a
+> experiments happened, and seven of them were later weakened or corrected by a
 > better control. **[`docs/CLAIMS.md`](docs/CLAIMS.md) is the single current
 > statement of what is and is not supported**, and supersedes anything here
 > that disagrees with it.
@@ -63,7 +66,8 @@ at all* gets more than twice chance.
 
 **Does the real wiring beat random wiring?** Probably, but the evidence is
 suggestive rather than conclusive, and it got weaker rather than stronger as
-the controls got better (experiments 5 and 6). Against 15 degree-matched rewired networks the
+the controls got better — by experiment 11 the behavioural answer is no, and
+what follows is the question as it stood at experiment 1. Against 15 degree-matched rewired networks the
 real connectome wins on every metric that does not let a trained decoder
 compensate — 0/15 controls reach it on untrained policy accuracy (+1.9 SD), on
 channel modulation depth (+3.7 SD), or on the note-approach timing signal
@@ -235,6 +239,41 @@ common mode carrying no lane information, *variance ordering is not information
 ordering*. Replicated on the male CNS.
 **[`docs/RESULTS_E5.md`](docs/RESULTS_E5.md).**
 
+Experiment 10 went after the explanation experiment 5 had left on record — that
+the real network transfers to chords badly because its amplified common mode
+responds to both lanes at once — and every measurement made to test it points
+the other way. **All thirteen networks respond to a two-note chord as the sum of
+the two single notes to within 3–4%** (α = 0.985 real, 0.990 ± 0.010 rewired); a
+2.28-radius recurrent network and a 0.63-radius one are equally linear about
+chords. The real network's common-mode gain is slightly *sub*-additive, and
+during a chord its two uninvolved channels sit at −0.11 z while 11 of 12
+controls' rise. Refitting the readout on stage 4 fixes the `channels` deficit
+(5/12, p = 0.46) and leaves `pca8` at 12/12 — where it is 12/12 on *single
+notes* too, under the same fit, which no chord-specific limitation can explain.
+What is left is a fitting pathology at the top-8-PC level, and that is a
+hypothesis for a further experiment rather than a result.
+**[`docs/RESULTS_E10.md`](docs/RESULTS_E10.md).**
+
+Experiment 11 carried out experiment 8's prescription — put the timing fix in
+the controller, so that a threshold crossing *schedules* a press rather than
+making one — and it works for every network except the fly. Four per-key delays,
+read off each network's own silent probe so no control inherits the real one's,
+nearly triple untrained accuracy across the rewired family (0.186 → 0.539) and
+move the real network from 0.196 to 0.242: **19 of 20 controls now beat it,
+p = 0.95**. Untrained lane-correctness, the last behavioural comparison still
+pointing the real connectome's way, goes from 1/20, p = 0.095 to **11/20,
+p = 0.571**. The real network's channels cross so early that three of its four
+keys want to wait 630–652 ms against a 600 ms gap between notes — the scheduled
+press lands while the next note is on screen — and only 1 of 20 controls is in
+that position; that is a candidate explanation and not a demonstrated one, since
+within the control family longer delays go with *larger* gains (ρ = +0.39,
+p = 0.088). The experiment also produced the mirror image of experiments 6 and
+7: a first run capped the delays at 600 ms, which bound on 3 of the real
+network's 4 lanes and 11 of 80 control lanes, was worth 0.2 accuracy, and
+flipped the comparison the *other* way. It was caught before the number was
+reported and the whole run repeated with the cap where it cannot bind.
+**[`docs/RESULTS_E11.md`](docs/RESULTS_E11.md).**
+
 ## Quick start
 
 ```bash
@@ -265,7 +304,13 @@ PHASE=3 python -m experiments.e6_timing     # threshold sweep (~32 min)
 python -m experiments.figures_e6
 python -m experiments.e7_wiring        # experiment 7 (~50 min)
 python -m experiments.figures_e7
+python -m experiments.e9_structure     # experiment 9 (~20 min, 72 networks)
+python -m experiments.e10_chords       # experiment 10 (~55 min at N_CTRL=12)
+python -m experiments.e11_delays       # experiment 11 (~32 min at N_SEEDS=20)
 ```
+
+`make experiment2 … experiment9` wrap these with the seed counts the published
+numbers used; the male CNS variants are `DATASET=malecns`.
 
 Watch it play:
 
@@ -324,6 +369,7 @@ run_play.py       watch the fly play in the terminal; optional learning first
 play_osu.py       simulate a .osu beatmap and replay the presses (log or keyboard)
 flyosu/
   connectome.py   load FlyWire v783, join annotations, cache
+  malecns.py      the same loader for male CNS v1.0 (brain + VNC), for replication
   retina.py       photoreceptor -> (azimuth, elevation) retinotopic map
   subgraph.py     rank neurons on the retina -> descending pathway
   sim.py          LIF engine (kept, with its failure modes) + rate engine
@@ -355,7 +401,9 @@ experiments/
 tests/test_pipeline.py  28 checks on the network side
 tests/test_play.py      55 checks on the game side, incl. the probes
 tests/test_reservoir.py 17 checks on the closed-form readout
+tests/test_malecns.py   the male CNS loader, pinning the numbers docs/MALECNS.md quotes
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
+docs/MALECNS.md         the second connectome: loader, decisions, what transfers
 docs/CLAIMS.md          what is and is not supported, current
 docs/RESULTS.md         experiment 1
 docs/RESULTS_E2.md      experiment 2
@@ -392,10 +440,10 @@ python -m tests.test_reservoir       # 17 checks
  4  sensorimotor test            done   lanes are decodable at the motor output
  5  mania environment            done   4K notes, curriculum, osu!mania judge
  6  sensory encoder              done   playfield -> eye (static; adaptation optional)
- 7  fly controller               done   20-parameter threshold policy
+ 7  fly controller               done   20-parameter threshold policy; per-key delays optional
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
-10  training experiments         run five times  e2-e5; best play 0.92 accuracy (ridge, 68 params)
+10  training experiments         run eleven times  e1-e11, two connectomes; best play 0.92 (ridge, 68 params)
 11  beatmap parser               done   .osu v14 mania, both directions
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
@@ -406,23 +454,67 @@ network) to "does the fly press the right key with no learning" (experiment 2:
 yes, and random networks mostly do not) to "how much of that survives a better
 readout" (experiment 5: none of it) to "what is the untrained advantage made
 of, and how much of it was our threshold" (experiment 6: a shared-threshold
-property, and about a third of it was the threshold). — to "what happens when the controls
-get every advantage the real network had" (experiment 7: the accuracy gap
-closes). The honest summary is that **the behavioural gap shrank every time the
-controls were given a fairer procedure**, and that is now the most robust thing
-here. What still stands are the two measurements that need no behavioural
-protocol at all — spectral radius and readout-population dimensionality — both
-measured against degree- and weight-preserving rewiring, both replicated on the
-male CNS, and both shown to be independent of each other (experiment 9). What does not: the
-untrained accuracy advantage (8/20, p = 0.43) and the supervised ceiling
-(experiment 5, no advantage at any readout size). Untrained lane-correctness
-survives in direction at 1/20, p = 0.095.
+property, and about a third of it was the threshold) to "what happens when the
+controls get every advantage the real network had" (experiment 7: the accuracy
+gap closes, and the shared-threshold property is retracted) to "what happens
+when the controller is allowed to wait" (experiment 11: the last behavioural
+gap closes too).
+
+**Every behavioural comparison has now been run under a fair protocol and none
+favours the real connectome.** The closest is thresholds-only learning — real
+0.211 vs rewired 0.101 ± 0.079, 1/8, **p = 0.22** — directional and not
+significant. Untrained accuracy is 19/20 against (p = 0.95), untrained
+lane-correctness 11/20 (p = 0.571), and the supervised ceiling shows no
+advantage at any readout size. The one non-behavioural measurement in that
+territory, how lane-selective the four channels are, survives in direction at
+1/20, p = 0.095. The honest summary is that **the behavioural gap shrank every
+time the controls were given a fairer procedure**, and that is now the most
+robust thing here.
+
+What still stands are the two measurements that need no behavioural protocol at
+all: rewiring the topology **collapses the spectral radius** (2.28 vs
+0.73 ± 0.09) and **raises the readout population's dimensionality** (PC1 0.38 vs
+0.14 ± 0.02), both **0/40, p = 0.024** against degree- and weight-preserving
+rewiring, both replicated on the male CNS, and shown to be independent of each
+other (experiment 9). They are the only results in the project below p = 0.05
+and the only ones no procedural correction has touched.
+**[`docs/CLAIMS.md`](docs/CLAIMS.md)** carries the current list claim by claim,
+with the control family attached to each — which matters, because the three
+families are not interchangeable.
 
 Step 12 is built, not verified: `play_osu.py` simulates the fly on a beatmap
 and replays its presses against the wall clock through a pluggable sink
 (logging always; keyboard via `pynput`). Nobody has yet pointed it at a live
 client. It is not screen-capture vision — the fly sees the encoder's rendering
 of the beatmap — and closing that loop is a separate project.
+
+## Gotchas
+
+Three operational hazards that have each cost a session, recorded here because
+they live nowhere else.
+
+**The model cache is keyed on parameters, not code.** `model._key` hashes only
+the build arguments, so any change to code feeding the calibration — retina,
+encoder, sim — silently leaves two populations of models side by side in
+`data/models`: cached-before and fresh-after, compared against each other
+without warning. The calibration amplifies float-level differences: rewriting
+the retina's Gaussian as `exp(c·θ·θ)` changed `drive()` by 10⁻⁷ and moved the
+spectral radius by 2% (2.28 → 2.33). If you touch that path, either keep it
+bit-identical and verify against the committed version, or bump the `v=` in
+`model.build`'s cache key and rebuild everything — knowing that this
+invalidates comparability with experiments 1–3.
+
+**Experiment 2's learner seeds are unrecoverable.** That run seeded the learner
+from Python's salted `hash(label)`, which differs between interpreter
+processes. It was fixed to `zlib.crc32` and the seeds have been saved from
+experiment 3 onward, so everything since is reproducible; `results/e2_play.json`
+is not, and e2's learning streams cannot be regenerated bit-for-bit.
+
+**Set `PYTHONUTF8=1`** (or pass `encoding="utf-8"` explicitly) for any script
+that rewrites a file containing non-ASCII. `figures_e2.py` was once truncated to
+0 bytes because Windows' cp1252 default choked on a `θ` in its own source. The
+docs are full of θ, × and —, so this applies to almost any tooling run over
+them.
 
 ## Citations
 

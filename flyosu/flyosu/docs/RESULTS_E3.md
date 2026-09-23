@@ -233,8 +233,8 @@ randomisation destroys is optic-lobe-internal.
   changed `drive()` by 10⁻⁷ and moved the calibrated spectral radius by 2%
   (2.28 → 2.33). The original expression is restored and the affected model
   caches were rebuilt before any number here was taken. The lesson is written
-  into the handoff: the model cache is keyed on parameters, not code, and the
-  calibration amplifies float-level differences.
+  into the README's "Gotchas" section: the model cache is keyed on parameters,
+  not code, and the calibration amplifies float-level differences.
 
 ## What this licenses
 
