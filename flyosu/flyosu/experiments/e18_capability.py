@@ -103,6 +103,19 @@ ARMS = {
     "var_a600":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=600.0),
     "var_a400":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=400.0),
     "var_a300":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=300.0),
+    # round 6: 400 ms beat both 600 and 300, so bracket it more finely; and the
+    # diet's fastest chart is 350 ms, which makes everything past 3 notes/s an
+    # extrapolation -- so add a 250 ms chart and see whether the top end lifts.
+    "var_a450":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=450.0),
+    "var_a350":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=350.0),
+    "fast_a400":    dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0)), n_charts=16, k=32, approach=400.0),
+    "fast_a300":    dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0)), n_charts=16, k=32, approach=300.0),
+    # round 7: jacks.  `jack_a400` keeps the chord diet and adds stage-6 charts
+    # so the readout has seen the pattern; `fast_a400` is the control for it,
+    # having never seen a jack, and the difference between them is how much of
+    # jack difficulty is unfamiliarity rather than the 150 ms refractory.
+    "jack_a400":    dict(specs=((4, 600.0), (4, 350.0), (6, 450.0), (6, 300.0)), n_charts=16, k=32, approach=400.0),
+    "jack_r50":     dict(specs=((4, 600.0), (4, 350.0), (6, 450.0), (6, 300.0)), n_charts=16, k=32, approach=400.0, refr=50.0),
 }
 
 # Held-out battery: the conditions experiment 5 measured, plus a denser
@@ -129,6 +142,13 @@ DEEP = {
     "s3_250": dict(stage=3, interval_ms=250.0),      # 4.0 notes/s
     "s4_250": dict(stage=4, interval_ms=250.0),      # 240 BPM with chords
     "s4_200": dict(stage=4, interval_ms=200.0),      # 300 BPM with chords
+    # Jacks (stage 6): the same lane twice or more in a row.  Every other stage
+    # spreads notes over four lanes, so this is the first condition in the
+    # project that asks one channel to resolve two notes in succession -- and
+    # the first where the controller's refractory can bind.
+    "s6_450": dict(stage=6, interval_ms=450.0),      # 2.2 notes/s, jacks
+    "s6_300": dict(stage=6, interval_ms=300.0),      # 3.3 notes/s, jacks
+    "s6_250": dict(stage=6, interval_ms=250.0),      # 4.0 notes/s, jacks
 }
 DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 

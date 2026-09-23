@@ -1,0 +1,87 @@
+{
+ "arm": "var_a350",
+ "deep_kw": {
+  "n_charts": 10,
+  "n_notes": 20,
+  "seed": 4242
+ },
+ "conditions": {
+  "s3_600": {
+   "notes_per_s": 1.67,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_450": {
+   "notes_per_s": 2.22,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_350": {
+   "notes_per_s": 2.86,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_600": {
+   "notes_per_s": 1.67,
+   "accuracy": 0.9949999999999999,
+   "hit_rate": 0.9949999999999999,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_400": {
+   "notes_per_s": 2.5,
+   "accuracy": 0.9800000000000001,
+   "hit_rate": 0.9800000000000001,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_300": {
+   "notes_per_s": 3.33,
+   "accuracy": 0.8283333333333334,
+   "hit_rate": 0.8300000000000001,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s5_600": {
+   "notes_per_s": 1.67,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_300": {
+   "notes_per_s": 3.33,
+   "accuracy": 0.8549999999999999,
+   "hit_rate": 0.8549999999999999,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_250": {
+   "notes_per_s": 4.0,
+   "accuracy": 0.6900000000000001,
+   "hit_rate": 0.6950000000000001,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_250": {
+   "notes_per_s": 4.0,
+   "accuracy": 0.6516666666666667,
+   "hit_rate": 0.665,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_200": {
+   "notes_per_s": 5.0,
+   "accuracy": 0.5316666666666666,
+   "hit_rate": 0.5650000000000001,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  }
+ }
+}
