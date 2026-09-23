@@ -191,6 +191,18 @@ class Controller:
         """Current pre-threshold drive, for display."""
         return self.W @ self.z_s + self.b
 
+    def down(self) -> np.ndarray:
+        """Which keys the drive is currently holding above threshold.
+
+        Used for hold notes: a key goes down on the crossing that presses it and
+        comes back up when its drive falls again, so the same threshold that
+        decides *whether* to press also decides *how long* to hold.  Note this
+        follows the crossing, not the scheduled press, so it is not meaningful
+        together with ``delay_ms`` -- the untrained delay policy and hold notes
+        have never been used on the same chart.
+        """
+        return np.asarray(self.u_prev > 0)
+
     # -- construction ------------------------------------------------------
 
     @classmethod

@@ -116,6 +116,16 @@ ARMS = {
     # jack difficulty is unfamiliarity rather than the 150 ms refractory.
     "jack_a400":    dict(specs=((4, 600.0), (4, 350.0), (6, 450.0), (6, 300.0)), n_charts=16, k=32, approach=400.0),
     "jack_r50":     dict(specs=((4, 600.0), (4, 350.0), (6, 450.0), (6, 300.0)), n_charts=16, k=32, approach=400.0, refr=50.0),
+    # The best arm, with the refractory cut, scored on jacks fast enough that it
+    # has to matter.  If these two differ, the constraint is real and simply out
+    # of reach; if they do not, it never mattered at all.
+    "fast_r50":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0)), n_charts=16, k=32, approach=400.0, refr=50.0),
+    # round 8: five notes a second is the one weak point left (0.718), and the
+    # diet's fastest chart is 250 ms, so that condition is still extrapolation.
+    # Add a 200 ms chart.  A 300 ms approach beat 400 at that density, so both
+    # are tried; 20 charts so five specs cycle evenly.
+    "fastest_a400": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0)), n_charts=20, k=32, approach=400.0),
+    "fastest_a300": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0)), n_charts=20, k=32, approach=300.0),
 }
 
 # Held-out battery: the conditions experiment 5 measured, plus a denser
@@ -149,6 +159,12 @@ DEEP = {
     "s6_450": dict(stage=6, interval_ms=450.0),      # 2.2 notes/s, jacks
     "s6_300": dict(stage=6, interval_ms=300.0),      # 3.3 notes/s, jacks
     "s6_250": dict(stage=6, interval_ms=250.0),      # 4.0 notes/s, jacks
+    # Below 150 ms the refractory MUST bind: a jack at this interval puts two
+    # notes in one lane closer together than the controller's dead time, so the
+    # second is unpressable whatever the readout wants.  These two exist to
+    # close that question rather than because the fly can play them.
+    "s6_150": dict(stage=6, interval_ms=150.0),      # 6.7 notes/s, at the refractory
+    "s6_120": dict(stage=6, interval_ms=120.0),      # 8.3 notes/s, inside it
 }
 DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 

@@ -26,8 +26,16 @@ costs nothing in osu!mania and costs nothing here, but it is counted, because a
 controller that mashes every key would otherwise look competent.
 
 Accuracy is osu!mania's:  (300 MAX + 300 x300 + 200 x200 + 100 x100 + 50 x50)
-/ (300 total).  Hold notes are parsed (``end_ms``) but judged on their head
-only; release timing is not modelled.
+/ (300 total).
+
+Hold notes are scored on both ends.  ``press`` puts the key down and ``release``
+lifts it; the tail is judged on the release error against a window scaled by
+``HOLD_TAIL_LENIENCY`` (1.5x, the stable figure), and the note earns the *worse*
+of its head and tail.  Overholding past the tail window misses, as does letting
+go early, so a key that is pressed and never released scores MISS rather than
+keeping its head's judgment.  One judgment per note either way, which is what
+lets accuracy stay a mean over notes.  Charts without holds are unaffected in
+every respect.
 """
 
 from __future__ import annotations
@@ -41,6 +49,15 @@ N_LANES = 4
 
 JUDGMENTS = ("MAX", "300", "200", "100", "50", "MISS")
 ACC_WEIGHT = {"MAX": 300, "300": 300, "200": 200, "100": 100, "50": 50, "MISS": 0}
+
+# osu!mania stable gives a hold note's tail a more forgiving window than a
+# normal note.  1.5x is the stable figure.
+HOLD_TAIL_LENIENCY = 1.5
+
+
+def worse(a: str, b: str) -> str:
+    """The worse of two judgments.  ``JUDGMENTS`` is ordered best to worst."""
+    return a if JUDGMENTS.index(a) >= JUDGMENTS.index(b) else b
 
 
 def windows(od: float) -> dict[str, float]:
@@ -92,7 +109,11 @@ class Chart:
 
     @property
     def end_ms(self) -> float:
-        return self.notes[-1].hit_ms if self.notes else 0.0
+        """When the last thing on the chart happens -- a hold note's *tail*, not
+        its head, or the clock would stop before the tail could be released."""
+        if not self.notes:
+            return 0.0
+        return max((n.end_ms if n.is_hold else n.hit_ms) for n in self.notes)
 
     def lanes(self) -> np.ndarray:
         return np.array([n.lane for n in self.notes], dtype=np.int64)
@@ -123,13 +144,15 @@ STAGES = {
     4: "random lanes with chords",
     5: "random lanes, varied intervals",
     6: "random lanes with jacks",
+    7: "random lanes with hold notes",
 }
 
 
 def stage_chart(stage: int, n_notes: int = 24, interval_ms: float = 600.0,
                 approach_ms: float = 800.0, od: float = 8.0, seed: int = 0,
                 lane: int = 1, chord_p: float = 0.3, lead_ms: float = 1000.0,
-                jack_p: float = 0.4) -> Chart:
+                jack_p: float = 0.4, hold_p: float = 0.4,
+                hold_frac: float = 0.8) -> Chart:
     """One chart from the staged curriculum (see ``STAGES``).
 
     ``lane`` is the lane used by stage 1.  ``lead_ms`` is the silence before the
@@ -173,6 +196,17 @@ def stage_chart(stage: int, n_notes: int = 24, interval_ms: float = 600.0,
             else:
                 ln = int(rng.integers(N_LANES))
             notes.append(Note(ln, t)); prev = ln; t += interval_ms
+    elif stage == 7:
+        # Hold notes.  The tail sits ``hold_frac`` of the interval after the
+        # head, so it always closes before the next note could land in that
+        # lane and no two holds in one lane can overlap.  Holds are the one
+        # thing a real beatmap has that this curriculum never did, and they ask
+        # the controller a question nothing else does: not when to press, but
+        # how long to stay pressed.
+        for _ in range(n_notes):
+            ln = int(rng.integers(N_LANES))
+            end = t + hold_frac * interval_ms if rng.random() < hold_p else None
+            notes.append(Note(ln, t, end_ms=end)); t += interval_ms
     else:
         raise ValueError(f"unknown stage {stage}; known: {sorted(STAGES)}")
     return Chart(notes, approach_ms=approach_ms, od=od,
@@ -267,6 +301,13 @@ class ManiaEnv:
         self.presses: list[Press] = []
         self._cursor = 0          # first note that could still be on screen
         self.hold: np.ndarray = np.zeros(N_LANES, dtype=bool)   # key currently down
+        # Index of the hold note each lane is currently holding, and the head
+        # judgment it earned.  A held note has a *provisional* entry in
+        # ``judged`` -- the head's -- which ``release`` replaces with the
+        # combined one.  That keeps one judgment per note, so accuracy stays a
+        # mean over notes and every existing metric keeps its meaning.
+        self.holding: list[int | None] = [None] * N_LANES
+        self._head: dict[int, str] = {}
 
     @property
     def done(self) -> bool:
@@ -314,13 +355,57 @@ class ManiaEnv:
             j = judge(err, self.chart.od)
             self.judged[best] = j
             p = Press(self.t, lane, best, err, j)
+            if self.chart.notes[best].is_hold:
+                # Provisional: ``judged[best]`` now holds the head's judgment and
+                # is replaced when the key comes back up.
+                self.holding[lane] = best
+                self._head[best] = j
+        self.hold[lane] = True
         self.presses.append(p)
         return p
+
+    def release(self, lane: int) -> str | None:
+        """Lift the key in ``lane``.  Finalises a hold note if one is being held.
+
+        A chart with no hold notes never reaches the interesting branch, so this
+        is a no-op for every result recorded before hold notes existed.
+        """
+        self.hold[lane] = False
+        i = self.holding[lane]
+        if i is None:
+            return None
+        self.holding[lane] = None
+        return self._finish_hold(i, self.t - self.chart.notes[i].end_ms)
+
+    def _finish_hold(self, i: int, err_ms: float) -> str:
+        """Combine a hold note's head and tail into its one judgment.
+
+        The tail is judged on the release error against a window scaled by
+        ``HOLD_TAIL_LENIENCY``, and the note scores the *worse* of head and
+        tail -- so a clean press followed by an early release is penalised, and
+        a hold cannot rescue a badly-timed head.
+        """
+        od = self.chart.od
+        scaled = {k: v * HOLD_TAIL_LENIENCY for k, v in windows(od).items()}
+        e = abs(err_ms)
+        tail = next((name for name, half in scaled.items() if e <= half), "MISS")
+        j = worse(self._head.get(i, "MISS"), tail)
+        self.judged[i] = j
+        return j
 
     def step(self) -> None:
         """Advance the clock by ``dt`` and retire notes whose miss window closed."""
         self.t += self.dt
         half = self.win["MISS"]
+        # A key still down well past its hold note's tail has overheld it: the
+        # tail misses.  Without this a never-released key would leave the note
+        # on its provisional head judgment and quietly score better than it
+        # played -- the same shape of bug as the press-guard fallback.
+        late = half * HOLD_TAIL_LENIENCY
+        for lane, i in enumerate(self.holding):
+            if i is not None and self.t - self.chart.notes[i].end_ms > late:
+                self.holding[lane] = None
+                self._finish_hold(i, self.t - self.chart.notes[i].end_ms)
         while self._cursor < len(self.chart):
             i = self._cursor
             n = self.chart.notes[i]

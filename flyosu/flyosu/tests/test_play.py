@@ -59,7 +59,49 @@ def test_mania():
     t3, l3 = c3.times(), c3.lanes()
     g3 = [np.diff(np.sort(t3[l3 == k])).min() for k in range(4) if (l3 == k).sum() > 1]
     check("stage 3 never does", min(g3) >= 300.0)
-    check("stage 7 is rejected", _raises(lambda: mania.stage_chart(7)))
+    check("an unknown stage is rejected", _raises(lambda: mania.stage_chart(8)))
+    c7 = mania.stage_chart(7, n_notes=40, interval_ms=600.0, seed=1)
+    holds = [n for n in c7.notes if n.is_hold]
+    check("stage 7 makes hold notes", 5 < len(holds) < 40, f"{len(holds)} of 40")
+    check("no hold outlives its lane's next note",
+          all(h.end_ms < min((n.hit_ms for n in c7.notes
+                              if n.lane == h.lane and n.hit_ms > h.hit_ms), default=1e9)
+              for h in holds))
+
+    # -- hold notes --------------------------------------------------------
+    # One 1000 ms hold in lane 0. A hold scores the worse of its head and its
+    # tail, so there are four cases worth pinning: clean, early release, never
+    # released, and never pressed.
+    def _hold_chart():
+        return mania.Chart([mania.Note(0, 2000.0, end_ms=3000.0)], od=8.0)
+
+    def _run(press_at, release_at):
+        env = mania.ManiaEnv(_hold_chart(), dt_ms=5.0)
+        while not env.done:
+            if press_at is not None and abs(env.t - press_at) < env.dt / 2:
+                env.press(0)
+            if release_at is not None and abs(env.t - release_at) < env.dt / 2:
+                env.release(0)
+            env.step()
+        return env.result()
+
+    check("chart end waits for the tail", _hold_chart().end_ms == 3000.0)
+    r = _run(2000.0, 3000.0)
+    check("clean hold scores MAX", r.judgments == ["MAX"], str(r.judgments))
+    r = _run(2000.0, 2500.0)
+    check("early release misses the hold", r.judgments == ["MISS"], str(r.judgments))
+    r = _run(2000.0, None)
+    check("never releasing misses the hold", r.judgments == ["MISS"], str(r.judgments))
+    r = _run(None, None)
+    check("unpressed hold is a MISS", r.judgments == ["MISS"], str(r.judgments))
+    # the head still limits the note: a late head cannot be rescued by a clean tail
+    r = _run(2000.0 + 90.0, 3000.0)   # 90 ms is inside the 100 window (103 at OD 8)
+    check("a bad head caps the hold", r.judgments == ["100"], str(r.judgments))
+    # the tail is more forgiving than a normal note, but not unboundedly
+    r = _run(2000.0, 3000.0 + 55.0)
+    check("tail leniency is 1.5x", r.judgments == ["300"], str(r.judgments))
+    check("worse() orders judgments", mania.worse("MAX", "100") == "100"
+          and mania.worse("MISS", "MAX") == "MISS")
 
     # an oracle that presses each note exactly on time gets 100%
     c = mania.stage_chart(3, n_notes=20, seed=1)

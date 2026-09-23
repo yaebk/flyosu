@@ -101,6 +101,14 @@ class Player:
             keys = ctrl.step(z, env.t, env.dt)
             for k in keys:
                 env.press(k)
+            # Hold notes: a key stays down while its drive stays above
+            # threshold and lifts when it falls.  On a chart with no holds
+            # ``release`` only clears a flag nothing reads, so this leaves every
+            # earlier result untouched.
+            down = ctrl.down()
+            for k in range(len(down)):
+                if env.hold[k] and not down[k]:
+                    env.release(k)
             if tr is not None:
                 tr.t.append(env.t); tr.channels.append(a); tr.z.append(z)
                 tr.drive.append(ctrl.drive().copy()); tr.visible.append(vis)
