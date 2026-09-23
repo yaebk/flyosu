@@ -1,0 +1,13 @@
+interval 1400 ms -> e15_trigger_interval1400_shard0of6.json (0 done)
+  real connectome      cross  acc 0.175  lane - @th 0.5  counted [9, 9, 9, 0, 0, 0]
+  real connectome      peak   acc 0.000  lane - @th 0.5  counted [0, 0, 0, 0, 0, 0]
+  real connectome      fall   acc 0.158  lane 0.500 @th 1.0  counted [31, 22, 11, 0, 0, 0]
+  rewired #6           cross  acc 0.042  lane - @th 2.0  counted [0, 0, 11, 9, 0, 0]
+  rewired #6           peak   acc 0.225  lane 0.450 @th 0.5  counted [20, 20, 20, 9, 0, 0]
+  rewired #6           fall   acc 0.550  lane 1.000 @th 2.0  counted [33, 33, 31, 20, 11, 0]
+  rewired #12          cross  acc 0.142  lane - @th 2.5  counted [9, 9, 0, 11, 9, 9]
+  rewired #12          peak   acc 0.217  lane 0.341 @th 0.5  counted [44, 44, 31, 18, 18, 9]
+  rewired #12          fall   acc 0.275  lane 0.550 @th 0.5  counted [20, 31, 20, 18, 18, 9]
+  rewired #18          cross  acc 0.175  lane - @th 2.0  counted [2, 2, 19, 7, 0, 0]
+  rewired #18          peak   acc 0.275  lane 0.550 @th 1.5  counted [41, 31, 20, 7, 0, 0]
+  rewired #18          fall   acc 0.175  lane 0.379 @th 1.5  counted [55, 33, 29, 7, 0, 0]

@@ -1,0 +1,10 @@
+interval 1400 ms -> e15_trigger_interval1400_shard5of6.json (0 done)
+  rewired #5           cross  acc 0.263  lane 0.690 @th 0.5  counted [29, 13, 0, 9, 9, 9]
+  rewired #5           peak   acc 0.358  lane 0.592 @th 0.5  counted [49, 13, 9, 9, 9, 9]
+  rewired #5           fall   acc 0.275  lane 0.645 @th 0.5  counted [31, 15, 11, 11, 11, 0]
+  rewired #11          cross  acc 0.062  lane 0.000 @th 0.5  counted [20, 18, 18, 9, 0, 0]
+  rewired #11          peak   acc 0.217  lane 0.333 @th 1.5  counted [36, 36, 27, 9, 0, 0]
+  rewired #11          fall   acc 0.000  lane 0.333 @th 1.5  counted [0, 18, 27, 9, 0, 0]
+  rewired #17          cross  acc 0.000  lane 0.000 @th 0.5  counted [22, 12, 22, 11, 0, 0]
+  rewired #17          peak   acc 0.158  lane 0.324 @th 1.0  counted [54, 34, 34, 12, 0, 0]
+  rewired #17          fall   acc 0.275  lane 0.550 @th 1.0  counted [38, 20, 42, 16, 0, 0]

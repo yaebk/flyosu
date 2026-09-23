@@ -1,8 +1,9 @@
 # What this project actually shows
 
 One page, kept current, superseding anything older that contradicts it.
-Fourteen experiments, two connectomes, and ten occasions on which a result got
-weaker once the comparison was pushed harder. Written for someone deciding what to
+Fifteen experiments, two connectomes, and eleven occasions on which a result
+got weaker once the comparison was pushed harder — one of them a retraction of a
+number this document itself carried. Written for someone deciding what to
 believe, not what was believed at the time.
 
 Each claim below carries the control family it holds *against*. That
@@ -248,3 +249,15 @@ What is true is weaker: without delays at a wide interval the real network
 **presses very rarely** — 9 presses against 40 notes — and is in the right lane
 when it does. Six of twenty controls are in the same position, so it is not
 unusual. `docs/RESULTS_E12.md`.
+
+**Experiment 15 then tested the controller idea anyway and closed it.** Changing
+which edge of the drive fires the key favours the real connectome on no arm —
+11/20 on the upward crossing, 11/20 on the falling edge, 20/20 on the peak — and
+no free trigger comes near what four declared delay numbers achieve (controls
+0.196 against 0.736). The falling edge does fix the timing almost completely, a
+median 610 ms early becoming 86 ms, and that does not convert into accuracy:
+what the delays buy is consistency, not offset. **Seven distinct parts of the
+untrained policy have now been varied — shared threshold, wiring rule, sensory
+front end, per-key delays, note interval, readout and firing edge — and none
+produces a behavioural comparison favouring the real connectome.**
+`docs/RESULTS_E15.md`.
