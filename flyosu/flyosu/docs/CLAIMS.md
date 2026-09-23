@@ -1,10 +1,15 @@
 # What this project actually shows
 
 One page, kept current, superseding anything older that contradicts it.
-Fifteen experiments, two connectomes, and eleven occasions on which a result
+Sixteen experiments, two connectomes, and twelve occasions on which a result
 got weaker once the comparison was pushed harder — one of them a retraction of a
-number this document itself carried. Written for someone deciding what to
+number this document itself carried, and the most recent one a result that had
+been running *against* the real connectome. Written for someone deciding what to
 believe, not what was believed at the time.
+
+**Read the stray-press warning in claim 6 before quoting any accuracy figure
+from this project.** Accuracy here cannot see presses that land on nothing, and
+the two populations differ on those more than on anything else measured.
 
 Each claim below carries the control family it holds *against*. That
 qualification is load-bearing: the project has three control families and they
@@ -54,9 +59,18 @@ under "supported in direction".
 
 **4. Learning, thresholds-only.** Real 0.211 vs rewired 0.101 ± 0.079, 1/8,
 p = 0.22. The condition where the wiring does the most work, and the part of
-experiment 3 that best survives re-measurement. This is now the **only**
-behavioural comparison in the project pointing the real connectome's way, and
-it is not significant. `docs/RESULTS_E3.md`.
+experiment 3 that best survives re-measurement. `docs/RESULTS_E3.md`.
+
+**4b. Untrained lane-correctness, held out.** Real 0.750 vs rewired 0.544 ±
+0.183, 3/20, p = 0.190, with the policies frozen from experiment 11 and scored
+on unseen charts (experiment 16). Note that on the *sweep* charts the same
+comparison is level (claim 7), so this is the selection correction working in
+the real connectome's favour rather than a new measurement. It was not
+pre-registered, and at 3/20 it is not significant.
+
+Those two, plus the stray-press asymmetry in claim 6, are the only behavioural
+comparisons in the project pointing the real connectome's way. None is
+significant, and none was pre-registered. `docs/RESULTS_E16.md`.
 
 ## Not supported
 
@@ -84,6 +98,23 @@ registration should have excluded that family for the same reason it excluded
 p = 0.95**, once the controller may wait before pressing (experiment 11).
 Without delays it was already level at 8/20. `docs/RESULTS_E11.md`,
 `docs/RESULTS_E7.md`.
+
+*Two corrections to the size of this, both from experiment 16, neither of which
+makes it a claim in the real connectome's favour.* First, **about half of the
+gap was threshold selection.** Freezing the same policies and scoring them on
+charts nobody tuned against takes the 1400 ms arm from 19/20 and a +0.282 gap
+to **13/20, p = 0.667, and a +0.123 gap**; the real network was the only one of
+the 21 to gain much from the change. Quote the held-out numbers, not the sweep
+ones. Second, and more important, **`accuracy` is blind to stray presses**: it
+is a judgment-weighted mean over notes, and a press landing on nothing costs
+nothing. Held out, the controls make **2.21 strays per note against the real
+network's 0.48, all twenty worse with no overlap**, while its hit rate is above
+their mean. Some of what has been reported as controls playing better is
+controls mashing. On the project's own declared evaluation reward the
+comparison is null (0.545 vs 0.582, p = 0.571), and the apparent 0/40 under the
+ridge-fitting penalty is **not a result** — that constant was picked after
+seeing the strays. Experiment 17 is the pre-registered test of it.
+`docs/RESULTS_E16.md`.
 
 **7. Untrained lane-correctness.** Real 0.655 vs rewired 0.652 ± 0.178,
 **11/20, p = 0.571**, under the same protocol. This was the last behavioural
@@ -261,3 +292,12 @@ untrained policy have now been varied — shared threshold, wiring rule, sensory
 front end, per-key delays, note interval, readout and firing edge — and none
 produces a behavioural comparison favouring the real connectome.**
 `docs/RESULTS_E15.md`.
+
+**Experiment 16 then found that the eighth thing had never been varied because
+nobody had noticed it was a choice.** All seven of those comparisons were scored
+on `accuracy`, which cannot see a press that lands on nothing, and the two
+populations differ on exactly that more than on anything else in the project.
+The sentence above should be read as "none produces a comparison favouring the
+real connectome *on a measure blind to stray presses*" — which is a weaker
+sentence than it has been taken to be, and is why experiment 17 exists.
+`docs/RESULTS_E16.md`.
