@@ -1,0 +1,13 @@
+[s4_x16_var] validating on seed 4242, 10 charts x 20 notes per condition
+  s3_600    1.7/s  acc 1.000  hit 1.00  stray 0.10   (e5 0.917)
+  s3_450    2.2/s  acc 0.948  hit 1.00  stray 0.00
+  s3_350    2.9/s  acc 0.851  hit 0.93  stray 0.04
+  s4_600    1.7/s  acc 0.977  hit 1.00  stray 0.10   (e5 0.506)
+  s4_400    2.5/s  acc 0.852  hit 0.97  stray 0.01   (e5 0.286)
+  s4_300    3.3/s  acc 0.584  hit 0.74  stray 0.10
+  s5_600    1.7/s  acc 0.961  hit 0.98  stray 0.05   (e5 0.608)
+  s3_300    3.3/s  acc 0.682  hit 0.84  stray 0.12
+  s3_250    4.0/s  acc 0.572  hit 0.80  stray 0.09
+  s4_250    4.0/s  acc 0.529  hit 0.73  stray 0.06
+  s4_200    5.0/s  acc 0.432  hit 0.68  stray 0.03
+wrote e18_capability_validate_s4_x16_var.json
