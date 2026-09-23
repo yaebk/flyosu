@@ -1,7 +1,7 @@
 # What this project actually shows
 
 One page, kept current, superseding anything older that contradicts it.
-Eleven experiments, two connectomes, and seven occasions on which a result got
+Twelve experiments, two connectomes, and eight occasions on which a result got
 weaker once the controls were treated better. Written for someone deciding what to
 believe, not what was believed at the time.
 
@@ -46,24 +46,28 @@ These three are the only results in the project below p = 0.05, and the only
 ones that need no behavioural protocol — which is why no procedural correction
 has touched them. **Every behavioural comparison has now been run under a fair
 protocol and none favours the real connectome**; the one that comes closest is
-"learning, thresholds-only" above, at p = 0.22.
+"learning, thresholds-only" below, at p = 0.22, which is now the sole entry
+under "supported in direction".
 
 ## Supported in direction, not significant
 
-**4. The real network's channels are unusually lane-selective.** Real 0.79 vs
-rewired 0.50 ± 0.17, 1/20, **p = 0.095**, re-measured under the corrected
-wiring rule. `docs/RESULTS_E7.md`. **This claim is now under a pre-registered
-test at n = 40** whose protocol was frozen and tagged before any network was
-measured — see `docs/PREREGISTRATION.md`. Do not restate it until that test
-reports; it will either fall below 0.05 or be moved to "Not supported".
-
-**5. Learning, thresholds-only.** Real 0.211 vs rewired 0.101 ± 0.079, 1/8,
+**4. Learning, thresholds-only.** Real 0.211 vs rewired 0.101 ± 0.079, 1/8,
 p = 0.22. The condition where the wiring does the most work, and the part of
 experiment 3 that best survives re-measurement. This is now the **only**
 behavioural comparison in the project pointing the real connectome's way, and
 it is not significant. `docs/RESULTS_E3.md`.
 
 ## Not supported
+
+**5. The real network's channels are unusually lane-selective.** Real 0.790 vs
+rewired 0.547 ± 0.174 over 40 seeds, **4/40, p = 0.122**, under a protocol
+frozen and tagged before any network was measured and with the full control
+distribution committed before the real network was run once
+(`docs/PREREGISTRATION.md`, tag `e14-prereg`). It stood at 1/20, p = 0.095.
+**Nothing about the procedure changed and the real value did not move** — 0.79
+then, 0.790 now. Twenty more controls were drawn and four of them reached it,
+which is roughly what a distribution 1.4 SD below the real value predicts. The
+direction survives and the claim does not. `docs/RESULTS_E14.md`.
 
 **6. Untrained accuracy.** Real 0.242 vs rewired 0.539 ± 0.169, **19/20,
 p = 0.95**, once the controller may wait before pressing (experiment 11).
@@ -129,12 +133,12 @@ fit, so it is a fitting pathology rather than anything to do with chords.
 
 ## The methodological result
 
-**Seven times, a gap shrank or an explanation dissolved once the comparison
+**Eight times, a gap shrank or an explanation dissolved once the comparison
 was made more carefully** — readout fitting (e5), the shared threshold (e6),
 the wiring rule (e7), the sensory front end (e8), the learning comparison's
 starting wiring (e3 re-run), the chord hypothesis (e10), and per-key delays
-(e11). Four times the thing that fell was a claim this project had already
-written down.
+(e11), and channel lane-selectivity under a pre-registered test (e14). Five
+times the thing that fell was a claim this project had already written down.
 
 The mechanism was the same each time and is worth naming: a choice that is
 *matched as a procedure* — the same rule applied to every network — can still
@@ -156,16 +160,33 @@ own best operating point on every free parameter, decide the metric before
 looking, and treat any procedure tuned on the real network as suspect until it
 has been swept per network.
 
-All seven were caught **after** the fact, which is the weakness in this record.
+The first seven were caught **after** the fact, which is the weakness in this
+record.
 A pattern of self-caught errors shows the mistake is easy to make here, not
 that it has stopped happening. Experiment 14 is the response: one comparison in
 which the mistake is structurally impossible, because the forty controls are
 run and committed before the real network is measured at all, so there is no
 distribution available to tune against. Its protocol is frozen and tagged
 (`docs/PREREGISTRATION.md`, tag `e14-prereg`), it names one primary endpoint,
-and it says in advance what a null licenses. **Until it reports, it is the only
-thing in this project entitled to be called adversarial by design; everything
-above was made fair by correction rather than by construction.**
+and it said in advance what a null licenses.
+
+**It reported, and it is a null**: real 0.790 against 0.547 ± 0.174, 4/40,
+p = 0.122 (`docs/RESULTS_E14.md`). Its eighth instance has a different cause
+from the other seven and is worth separating out. Those were procedures
+developed while looking at the real network. **This one was plain
+undersampling: the procedure was beyond reproach, the real value did not move,
+and twenty more controls were enough to dissolve the claim.** No fairness fix
+would have prevented it.
+
+The consequence is uncomfortable and should be stated in full: **this project
+has reported "0/20" and "1/20" throughout, and at n = 20 those counts read as
+far stronger than they are.** A single exceedance already gives p = 0.095, so
+such a result was never significant, and the count created an impression the
+p-value did not support. Treat every 20-control result in these documents as
+weaker than it looks. The two structural claims are the exception — they are at
+0/40, and experiment 14 independently reproduced the spectral radius at
+2.283 vs 0.733 ± 0.090 on forty freshly built networks. **A claim that is
+really there does not soften when the controls double.**
 
 ## Absolute performance, separately from any comparison
 

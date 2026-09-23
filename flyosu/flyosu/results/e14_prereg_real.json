@@ -1,0 +1,21 @@
+{
+ "label": "real connectome",
+ "wiring": [
+  2,
+  0,
+  1,
+  3
+ ],
+ "argmax_mean": 0.7903726708074534,
+ "argmax_fraction": [
+  0.18633540372670807,
+  1.0,
+  0.9751552795031055,
+  1.0
+ ],
+ "peak_margin_mean": 0.9978427625018274,
+ "drift": 0.0,
+ "fixed_point": true,
+ "spectral_radius": 2.2827758641477596,
+ "seconds": 16.3
+}
