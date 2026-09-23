@@ -1,8 +1,8 @@
 # What this project actually shows
 
 One page, kept current, superseding anything older that contradicts it.
-Twelve experiments, two connectomes, and eight occasions on which a result got
-weaker once the controls were treated better. Written for someone deciding what to
+Fourteen experiments, two connectomes, and ten occasions on which a result got
+weaker once the comparison was pushed harder. Written for someone deciding what to
 believe, not what was believed at the time.
 
 Each claim below carries the control family it holds *against*. That
@@ -88,7 +88,9 @@ Without delays it was already level at 8/20. `docs/RESULTS_E11.md`,
 **11/20, p = 0.571**, under the same protocol. This was the last behavioural
 claim standing — it held at 1/20, p = 0.095 with a controller that had to press
 the instant a channel crossed, and does not survive one that can wait. It also
-reverses on the male CNS ("does not replicate on the male CNS", below). `docs/RESULTS_E11.md`.
+reverses on the male CNS, where experiment 13 has since shown the reversal
+itself to be an artefact of the anatomical readout ("the male CNS untrained
+reversal", below). `docs/RESULTS_E11.md`.
 
 **8. Any advantage at the supervised ceiling.** With the readout fitted in
 closed form, the real network is inside the rewired distribution at every
@@ -99,16 +101,19 @@ readout size (best 3/10, p = 0.36) — while playing far better in absolute term
 untrained play across random graphs (ρ = 0.20, p = 0.39).
 `docs/RESULTS_E4.md`.
 
-**10. The untrained comparison does not replicate on the male CNS — it
-reverses.** Under the same fair protocol, the real male CNS network scores
-0.067 accuracy against its rewired controls' 0.237 (9/10 beat it), and it is
-the only network of eleven that never reaches the press-count guard at any
-threshold (8 presses over 40 notes against controls' 44–80), so its
-lane-correctness is undefined rather than high. The cause is known and specific:
-the male CNS readout is four real leg motor pools that respond to visual input
-as a common mode, and eight principal components of the same 348 neurons reach
-0.86 accuracy — the information is there and the anatomical pooling discards
-it. This says the readout is bad on that dataset, not that the connectome is.
+**10. The male CNS untrained reversal is an artefact of the anatomical
+readout, and removing it reaches level, not ahead.** Experiment 13 ran four
+readouts on the same male CNS networks, charts and threshold grid. On the four
+leg-motor pools the real network loses **9/10** on the scored charts and 9/10
+again on held-out ones — a robust disadvantage, and the one experiment 7
+reported. On eight principal components of the same 348 neurons it wins 1/10 on
+the scored charts and **loses that entirely on charts nothing was re-chosen
+for**: 0.258 → 0.122 while the controls hold at 0.131 → 0.138, giving 6/10,
+p = 0.636. So the pooling is a real handicap and removing it leaves the real
+connectome level with its controls rather than ahead of them. Nothing here is
+significant — 10 controls give a floor of 0.091 and four arms a Bonferroni floor
+of 0.364 — and the arms declare different amounts of lane knowledge (14.7 bits
+against 4.6), so they are not a ranking of readouts. `docs/RESULTS_E13.md`,
 `docs/RESULTS_E7.md`.
 
 ## Retracted
@@ -143,12 +148,15 @@ fit, so it is a fitting pathology rather than anything to do with chords.
 
 ## The methodological result
 
-**Eight times, a gap shrank or an explanation dissolved once the comparison
+**Ten times, a gap shrank or an explanation dissolved once the comparison
 was made more carefully** — readout fitting (e5), the shared threshold (e6),
 the wiring rule (e7), the sensory front end (e8), the learning comparison's
 starting wiring (e3 re-run), the chord hypothesis (e10), and per-key delays
-(e11), and channel lane-selectivity under a pre-registered test (e14). Five
-times the thing that fell was a claim this project had already written down.
+(e11), channel lane-selectivity under a pre-registered test (e14), the note
+interval as the reason delays fail the real network (e12), and the male CNS
+PC-readout advantage once it met held-out charts (e13). Six times the thing that
+fell was a claim this project had already written down, and twice what fell was
+a *mechanism* rather than a difference.
 
 The mechanism was the same each time and is worth naming: a choice that is
 *matched as a procedure* — the same rule applied to every network — can still
@@ -210,7 +218,25 @@ sensory front end removes it. `docs/RESULTS_E8.md`.
 
 Per-key delays in the controller were the prescription, and they work —
 untrained accuracy nearly triples, from 0.186 to 0.539, giving the project its
-best untrained play. The real connectome is the one network that cannot use
-them: its channels cross so early that three of its four keys need to wait
-longer than the 600 ms gap between notes, a position only 1 of 20 controls is
-in. `docs/RESULTS_E11.md`.
+best untrained play. The real connectome gains least from them.
+`docs/RESULTS_E11.md`.
+
+**Experiment 12 refuted the explanation experiment 11 offered for that.** The
+story was that the real network's required waits (~650 ms) exceed the 600 ms
+note gap, so each scheduled press lands on the following note. Tested at 450,
+1000 and 1400 ms with 20 controls each: the gap to the controls never closes
+(0.226, 0.297, 0.268, 0.282), and at 1000 ms and above **none of its lanes
+overruns the interval** while it remains 18/20 and 19/20. It also gains +0.29
+from delays once the chart leaves room, so "cannot use them" was wrong in the
+other direction. The delay-versus-gain correlation quoted there as
+counter-evidence (+0.39, p = 0.088) comes back +0.30, p = 0.200 at n = 20 and is
+flat elsewhere; it was noise and should not be quoted either way.
+`docs/RESULTS_E12.md`.
+
+One result from that sweep points somewhere new. At the wide intervals the real
+network's lane-correctness **without** delays is 1.000, against controls'
+0.56 ± 0.40 (7/20) — its best showing anywhere in this project. Given room it
+presses the right key almost every time and simply presses too early to score,
+and adding delays trades that away (−0.355) while lifting the controls. A policy
+that fixes the timing without discarding the early, accurate lane choice has not
+been built, and is the most promising untried thing here.
