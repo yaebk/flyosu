@@ -67,6 +67,18 @@ INTERVAL_MS = float(os.environ.get("INTERVAL_MS", 600.0))
 # is reused rather than recomputed.
 _TAG = "" if INTERVAL_MS == 600.0 else f"_interval{int(INTERVAL_MS)}"
 PATH = os.path.join(RESULTS, f"e11_delays_cap{int(MAX_DELAY_MS)}{_TAG}.json")
+
+# Networks are independent -- different W, no shared state -- so they can be run
+# in parallel processes for an exact speedup.  The machine has 12 cores and the
+# sparse matvec is single-threaded, so this is the one large win available
+# without touching the numerics (batching trajectories as a sparse-dense product
+# would only be 1.4x overall and would perturb the arithmetic, which this
+# project cannot afford: the model cache is keyed on parameters, not code).
+# Each shard writes its own file so the checkpoint writes cannot race; ``merge``
+# folds them into PATH.
+SHARD = os.environ.get("SHARD")
+NSHARD = int(os.environ.get("NSHARD", 1))
+SHARD_PATH = PATH if SHARD is None else PATH[:-5] + f"_shard{int(SHARD)}of{NSHARD}.json"
 E7 = os.path.join(RESULTS, "e7_wiring.json")
 THETA_SWEEP = (0.5, 1.0, 1.5, 2.0, 2.5, 3.0)
 SWEEP_STAGE = 3
@@ -172,8 +184,8 @@ def main():
     n = int(os.environ.get("N_SEEDS", 20))
     results = {"sweep_stage": SWEEP_STAGE, "theta": list(THETA_SWEEP),
                "interval_ms": INTERVAL_MS, "max_delay_ms": MAX_DELAY_MS, "runs": []}
-    if os.path.exists(PATH):
-        with open(PATH) as fh:
+    if os.path.exists(SHARD_PATH):
+        with open(SHARD_PATH) as fh:
             results = json.load(fh)
         # belt and braces on top of the filename: refuse to append runs made at
         # one interval to a file recorded at another.
@@ -183,16 +195,27 @@ def main():
         results["interval_ms"] = INTERVAL_MS
         results["max_delay_ms"] = MAX_DELAY_MS
     done = {r["label"] for r in results["runs"]}
+    # a shard must also skip anything the canonical file already holds, so a
+    # resumed parallel run does not redo the sequential run's networks
+    if SHARD is not None and os.path.exists(PATH):
+        with open(PATH) as fh:
+            done |= {r["label"] for r in json.load(fh)["runs"]}
     print(f"interval {INTERVAL_MS:.0f} ms, delay cap {MAX_DELAY_MS:.0f} ms -> "
-          f"{os.path.basename(PATH)} ({len(done)} networks already done)", flush=True)
+          f"{os.path.basename(SHARD_PATH)} ({len(done)} networks already done)", flush=True)
     plan = [("real connectome", {})] + [(f"rewired #{s}", {"shuffle_seed": s}) for s in range(1, n + 1)]
+    if SHARD is not None:
+        plan = [pk for i, pk in enumerate(plan) if i % NSHARD == int(SHARD)]
     for label, kw in plan:
         if label in done:
             continue
         results["runs"].append(measure(label, kw))
-        with open(PATH, "w") as fh:
+        with open(SHARD_PATH, "w") as fh:
             json.dump(results, fh, indent=1)
-    report(results)
+    if SHARD is None:
+        report(results)
+    else:
+        print(f"shard {SHARD} done: {len(results['runs'])} networks in "
+              f"{os.path.basename(SHARD_PATH)}; run `merge` to fold in.")
 
 
 def report(results):
@@ -243,9 +266,36 @@ def report(results):
         json.dump(results, fh, indent=1)
 
 
+def merge():
+    """Fold every shard file for this (interval, cap) into the canonical PATH."""
+    import glob
+    results = {"sweep_stage": SWEEP_STAGE, "theta": list(THETA_SWEEP),
+               "interval_ms": INTERVAL_MS, "max_delay_ms": MAX_DELAY_MS, "runs": []}
+    if os.path.exists(PATH):
+        with open(PATH) as fh:
+            results = json.load(fh)
+    seen = {r["label"] for r in results["runs"]}
+    for f in sorted(glob.glob(PATH[:-5] + "_shard*of*.json")):
+        with open(f) as fh:
+            got = json.load(fh)
+        if float(got.get("interval_ms", 600.0)) != INTERVAL_MS:
+            raise SystemExit(f"{f} holds a different interval; refusing to merge")
+        for r in got["runs"]:
+            if r["label"] not in seen:
+                results["runs"].append(r); seen.add(r["label"])
+        print(f"  {os.path.basename(f):<52s} {len(got['runs']):>2} runs")
+    with open(PATH, "w") as fh:
+        json.dump(results, fh, indent=1)
+    print(f"merged -> {os.path.basename(PATH)}: {len(results['runs'])} networks")
+    report(results)
+
+
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "report":
+    cmd = sys.argv[1] if len(sys.argv) > 1 else ""
+    if cmd == "report":
         with open(PATH) as fh:
             report(json.load(fh))
+    elif cmd == "merge":
+        merge()
     else:
         main()
