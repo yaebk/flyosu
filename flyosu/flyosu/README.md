@@ -9,12 +9,16 @@ synaptic connections from the FlyWire whole-brain reconstruction; the fly's
 descending neurons — its actual output to the legs — are grouped into four
 channels and read as D / F / J / K.
 
-**Current state: all 12 steps built; eleven experiments run.** The fly plays,
+**Current state: all 12 steps built; sixteen experiments run.** The fly plays,
 and plays well: the best readout reaches 0.92 accuracy on held-out charts with
 68 parameters and the connectome frozen. Whether the *real* wiring plays better
-than matched random wiring is a separate question, and the answer has got more
-negative every time the controls were treated better — as of experiment 11 no
-behavioural comparison favours the real connectome. Two structural
+than matched random wiring is a separate question, and the answer got more
+negative every time the controls were treated better — through experiment 15 no
+behavioural comparison favoured the real connectome. Experiment 16 complicated
+that: the measure those comparisons used cannot see a press that lands on
+nothing, and that is where the two populations differ most (2.21 strays per
+note against 0.48). It is not yet a result either way, and experiment 17 is the
+pre-registered test. Two structural
 measurements do survive, at p = 0.024 and replicated on a second connectome.
 Finding the regime in which the network could play at all turned out to be the
 main event of the first session — see
@@ -64,10 +68,14 @@ Lane identity arrives essentially intact at the descending neurons, and survives
 pooling into four anatomical groups well enough that a policy with *no learning
 at all* gets more than twice chance.
 
-**Does the real wiring beat random wiring at playing?** **On behaviour, no.**
-Eleven experiments later, every behavioural comparison has been run under a
-protocol that gives each control its own best operating point, and none favours
-the real connectome. What survives is structural and is set out in
+**Does the real wiring beat random wiring at playing?** **On behaviour, no —
+with one qualification added at experiment 16.** Every behavioural comparison
+has been run under a protocol that gives each control its own best operating
+point, and none favours the real connectome. The qualification is that they
+were all scored on `accuracy`, which charges nothing for a press that lands on
+nothing; on that one dimension the real connectome is cleanly ahead, and
+whether it means anything is what experiment 17 is testing. What survives
+otherwise is structural and is set out in
 [`docs/CLAIMS.md`](docs/CLAIMS.md).
 
 The rest of this section is **the answer as it stood at experiment 1**, kept
@@ -466,7 +474,7 @@ experiments/
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  32 checks on the network side
-tests/test_play.py      67 checks on the game side, incl. the probes and firing edges
+tests/test_play.py      70 checks on the game side, incl. the probes, firing edges and stray semantics
 tests/test_reservoir.py 20 checks on the closed-form readout
 tests/test_malecns.py   the male CNS loader, pinning the numbers docs/MALECNS.md quotes
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
@@ -498,7 +506,7 @@ python run_fly.py --fall D           # watch a note descend
 python run_fly.py --sweep            # azimuth tuning, as text
 python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 32 checks
-python -m tests.test_play            # 67 checks
+python -m tests.test_play            # 70 checks
 python -m tests.test_reservoir       # 20 checks
 ```
 

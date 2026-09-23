@@ -78,6 +78,38 @@ def test_mania():
     p2 = env.press(first.lane)
     check("a judged note cannot be hit twice", p2.note is None or p2.note != 0)
 
+    # Accuracy is a weighted mean over NOTES and cannot see a press that lands
+    # on nothing.  Experiment 16 found the rewired controls exploiting exactly
+    # this -- 2.21 strays per note against the real network's 0.48, on a
+    # measure that charges nothing for them -- and every threshold this project
+    # chose by argmax over an accuracy sweep sat at the bottom of the sweep as a
+    # result.  These checks pin the semantics so the blindness cannot be
+    # quietly fixed, which would silently invalidate every number already
+    # published against it, and so that `reward` remains the measure that does
+    # charge for strays.
+    # Junk presses are confined to the lead-in, before the earliest note is
+    # anywhere near its window, so they cannot judge a note by accident; the
+    # check above established that a press 600 ms early is stray.  Play is then
+    # perfect, so any drop in accuracy would have to come from the strays.
+    env = mania.ManiaEnv(c)
+    n_junk = 0
+    while env.t < c.notes[0].hit_ms - 600:
+        env.press(c.notes[0].lane)
+        n_junk += 1
+        env.step()
+    while not env.done:
+        for n in c.notes:
+            if abs(n.hit_ms - env.t) < env.dt / 2:
+                env.press(n.lane)
+        env.step()
+    r_mash = env.result()
+    check("mashing does not cost accuracy", r_mash.accuracy == 1.0 and n_junk > 0,
+          f"accuracy {r_mash.accuracy:.3f} after {n_junk} junk presses")
+    check("mashing does show up in n_stray", r_mash.n_stray == n_junk,
+          f"n_stray {r_mash.n_stray}, junk {n_junk}")
+    check("reward does charge for strays", L.reward(r_mash) < r_mash.accuracy,
+          f"reward {L.reward(r_mash):+.3f} vs accuracy {r_mash.accuracy:.3f}")
+
     # visible notes have the right progress at the hit time
     env = mania.ManiaEnv(c)
     while env.t < first.hit_ms:
