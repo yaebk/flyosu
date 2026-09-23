@@ -295,12 +295,24 @@ class RidgeReadout:
     n_notes: int = 24
     interval_ms: float = 600.0
     seed: int = 100
+    # Optional ``((stage, interval_ms), ...)`` cycled over ``n_charts``, so one
+    # readout can be fitted across several conditions at once.  Experiment 5
+    # fitted on stage 3 at 600 ms only and then transferred, which cost it
+    # chords (0.917 -> 0.506) and varied tempo (-> 0.608); its write-up named
+    # "fit on stage 4 and see" as the cheap follow-up.  ``None`` keeps the
+    # single-condition behaviour every earlier experiment used, unchanged.
+    chart_specs: tuple | None = None
     offsets: np.ndarray = field(default_factory=lambda: np.linspace(-2.0, 2.0, 41))
     recordings: list[Recording] = field(default_factory=list)
 
     def charts(self) -> list[Chart]:
-        return [stage_chart(self.stage, n_notes=self.n_notes, interval_ms=self.interval_ms,
-                            seed=self.seed + c) for c in range(self.n_charts)]
+        if self.chart_specs is None:
+            return [stage_chart(self.stage, n_notes=self.n_notes, interval_ms=self.interval_ms,
+                                seed=self.seed + c) for c in range(self.n_charts)]
+        specs = list(self.chart_specs)
+        return [stage_chart(int(specs[c % len(specs)][0]), n_notes=self.n_notes,
+                            interval_ms=float(specs[c % len(specs)][1]), seed=self.seed + c)
+                for c in range(self.n_charts)]
 
     def record(self) -> None:
         """Record the training charts (the only expensive step; ~10 s per chart)."""

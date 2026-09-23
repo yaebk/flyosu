@@ -1,0 +1,7 @@
+[s3_600] recording 8 charts: s3@600
+  [s3_600] s3_600   acc 0.956 (e5 0.917, +0.039)  hit 1.00  stray 0.03
+  [s3_600] s3_450   acc 0.461  hit 0.57  stray 0.03
+  [s3_600] s4_600   acc 0.556 (e5 0.506, +0.050)  hit 0.80  stray 0.05
+  [s3_600] s4_400   acc 0.311 (e5 0.286, +0.025)  hit 0.48  stray 0.03
+  [s3_600] s5_600   acc 0.650 (e5 0.608, +0.042)  hit 0.77  stray 0.03
+wrote e18_capability_s3_600.json

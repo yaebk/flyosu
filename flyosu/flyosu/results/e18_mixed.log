@@ -1,0 +1,7 @@
+[mixed] recording 8 charts: s3@600, s4@600, s5@600, s3@450
+  [mixed] s3_600   acc 0.878 (e5 0.917, -0.039)  hit 0.98  stray 0.00
+  [mixed] s3_450   acc 0.575  hit 0.72  stray 0.00
+  [mixed] s4_600   acc 0.647 (e5 0.506, +0.141)  hit 0.78  stray 0.02
+  [mixed] s4_400   acc 0.433 (e5 0.286, +0.147)  hit 0.62  stray 0.02
+  [mixed] s5_600   acc 0.722 (e5 0.608, +0.114)  hit 0.87  stray 0.00
+wrote e18_capability_mixed.json
