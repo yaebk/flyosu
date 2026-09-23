@@ -9,16 +9,24 @@ synaptic connections from the FlyWire whole-brain reconstruction; the fly's
 descending neurons — its actual output to the legs — are grouped into four
 channels and read as D / F / J / K.
 
-**Current state: all 12 steps built; sixteen experiments run.** The fly plays,
+**Current state: all 12 steps built; seventeen experiments run.** The fly plays,
 and plays well: the best readout reaches 0.92 accuracy on held-out charts with
 68 parameters and the connectome frozen. Whether the *real* wiring plays better
 than matched random wiring is a separate question, and the answer got more
 negative every time the controls were treated better — through experiment 15 no
-behavioural comparison favoured the real connectome. Experiment 16 complicated
-that: the measure those comparisons used cannot see a press that lands on
-nothing, and that is where the two populations differ most (2.21 strays per
-note against 0.48). It is not yet a result either way, and experiment 17 is the
-pre-registered test. Two structural
+behavioural comparison favoured the real connectome.
+
+Experiments 16 and 17 then found a hole in how that was measured. `accuracy`
+cannot see a press that lands on nothing, so choosing each network's threshold
+by sweeping accuracy was choosing how hard it could mash — and the chosen value
+was the bottom of the sweep for the real network and 19 of 20 controls. Declare
+the threshold instead, on fresh charts with 40 controls, and the real connectome
+is **level on accuracy** (14/40), hits more notes than 34 of 40, and makes a
+third the stray presses. **None of that is significant** — the pre-registered
+stray endpoint came to p = 0.073 against a declared floor of 0.049 — and it is
+behind on lane-correctness. The honest position is that the project's central
+negative result rests on a selection rule now known to be biased and has to be
+redone. Two structural
 measurements do survive, at p = 0.024 and replicated on a second connectome.
 Finding the regime in which the network could play at all turned out to be the
 main event of the first session — see
@@ -68,14 +76,16 @@ Lane identity arrives essentially intact at the descending neurons, and survives
 pooling into four anatomical groups well enough that a policy with *no learning
 at all* gets more than twice chance.
 
-**Does the real wiring beat random wiring at playing?** **On behaviour, no —
-with one qualification added at experiment 16.** Every behavioural comparison
-has been run under a protocol that gives each control its own best operating
-point, and none favours the real connectome. The qualification is that they
-were all scored on `accuracy`, which charges nothing for a press that lands on
-nothing; on that one dimension the real connectome is cleanly ahead, and
-whether it means anything is what experiment 17 is testing. What survives
-otherwise is structural and is set out in
+**Does the real wiring beat random wiring at playing?** **Currently: nobody
+knows, and the earlier "no" was measured badly.** Fifteen experiments said no,
+each under a protocol that gave every control its own best operating point —
+but that operating point was chosen by sweeping `accuracy`, which charges
+nothing for a press landing on nothing, so the sweep was rewarding whichever
+network could press most. With the threshold declared rather than swept the
+deficit disappears, and the real connectome is level on accuracy and ahead on
+hit rate and strays. Nothing there is significant, so it is not a reversal — it
+means the comparison has to be run again properly. What survives independently
+of all this is structural and is set out in
 [`docs/CLAIMS.md`](docs/CLAIMS.md).
 
 The rest of this section is **the answer as it stood at experiment 1**, kept
@@ -522,7 +532,7 @@ python -m tests.test_reservoir       # 20 checks
  7  fly controller               done   20-parameter threshold policy; per-key delays optional
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
-10  training experiments         run sixteen times e1-e16, two connectomes; best play 0.92 (ridge, 68 params)
+10  training experiments         run 17 times      e1-e17, two connectomes; best play 0.92 (ridge, 68 params)
 11  beatmap parser               done   .osu v14 mania, both directions
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
@@ -570,11 +580,22 @@ them for it. The same experiment also showed that about half the accuracy
 deficit was threshold selection: held out, the 1400 ms arm goes from 19/20 and
 a +0.282 gap to 13/20 and +0.123.
 
-None of that is yet a result in the real connectome's favour — on the project's
-own declared evaluation reward the comparison is null — and it was found after
-the numbers were in rather than predicted. **Experiment 17 is the
-pre-registered test of it**, with the endpoints, the charts and a declared
-(not swept) threshold frozen and committed before the real network was built.
+Experiment 17 was the pre-registered test, with endpoints, charts and a declared
+(not swept) threshold frozen and committed before the controls ran, and the
+control distribution committed before the real network was built. **Both
+co-primary endpoints failed.** Strays replicate at 0.220 against 0.739 ± 0.369,
+a third as many and 1.45 SD below the control mean, beating 38 of 40 outright —
+but the last two tie it at exactly 0.220, giving p = 0.073 against a declared
+Bonferroni floor of 0.049. Ties count against the hypothesis here as everywhere
+else, and the convention was not adjusted after seeing which way it cut.
+
+The unpredicted finding is the larger one: with the threshold declared, the
+accuracy deficit is gone (0.357 vs 0.299, level at 14/40) and the real network
+hits more notes than 34 of 40 controls. That was a descriptive secondary on a
+condition chosen for another purpose, so no inference is claimed from it — and
+on the same run the real network is *behind* on lane-correctness. The next
+registered test should name accuracy-under-a-declared-threshold as its primary
+endpoint, because that is now the open question.
 
 What still stands are the two measurements that need no behavioural protocol at
 all: rewiring the topology **collapses the spectral radius** (2.28 vs

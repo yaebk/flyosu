@@ -1,15 +1,18 @@
 # What this project actually shows
 
 One page, kept current, superseding anything older that contradicts it.
-Sixteen experiments, two connectomes, and twelve occasions on which a result
+Seventeen experiments, two connectomes, and thirteen occasions on which a result
 got weaker once the comparison was pushed harder — one of them a retraction of a
-number this document itself carried, and the most recent one a result that had
-been running *against* the real connectome. Written for someone deciding what to
+number this document itself carried, and the last two results that had been
+running *against* the real connectome. Written for someone deciding what to
 believe, not what was believed at the time.
 
-**Read the stray-press warning in claim 6 before quoting any accuracy figure
-from this project.** Accuracy here cannot see presses that land on nothing, and
-the two populations differ on those more than on anything else measured.
+**Read the threshold and stray warnings in claim 6 before quoting any accuracy
+figure from this project.** Accuracy here cannot see presses that land on
+nothing; the two populations differ on those more than on anything else
+measured; and every threshold chosen by sweeping accuracy was therefore chosen
+for mashing. Under a *declared* threshold the untrained accuracy deficit is not
+present at all.
 
 Each claim below carries the control family it holds *against*. That
 qualification is load-bearing: the project has three control families and they
@@ -68,9 +71,22 @@ comparison is level (claim 7), so this is the selection correction working in
 the real connectome's favour rather than a new measurement. It was not
 pre-registered, and at 3/20 it is not significant.
 
-Those two, plus the stray-press asymmetry in claim 6, are the only behavioural
-comparisons in the project pointing the real connectome's way. None is
-significant, and none was pre-registered. `docs/RESULTS_E16.md`.
+**4c. Stray presses.** Real 0.220 per note vs rewired 0.739 ± 0.369 over 40
+seeds, **2/40, p = 0.073** against a declared Bonferroni floor of 0.049, under a
+protocol frozen and committed before the controls ran and with the full control
+distribution committed before the real network was built
+(`experiments/e17_strays.py`, commit `bac88d3`). A third as many strays, 1.45 SD
+below the control mean, beating 38 of 40 outright. **It fails.** The two
+remaining controls tie it at exactly 0.220 — three of 41 networks on precisely
+22 strays per 100 notes, which looks like a floor in the policy — and ties count
+against the hypothesis here as everywhere else in this project. This is the
+best-supported behavioural direction in the project and it is still not
+significant. `docs/RESULTS_E17.md`.
+
+Those three are the only behavioural comparisons pointing the real connectome's
+way. None is significant; only 4c was pre-registered, and it failed its declared
+floor. Against them, on the same run as 4c, the real network is *behind* the
+controls on lane-correctness (0.741 vs 0.809, 24/37).
 
 ## Not supported
 
@@ -113,8 +129,21 @@ their mean. Some of what has been reported as controls playing better is
 controls mashing. On the project's own declared evaluation reward the
 comparison is null (0.545 vs 0.582, p = 0.571), and the apparent 0/40 under the
 ridge-fitting penalty is **not a result** — that constant was picked after
-seeing the strays. Experiment 17 is the pre-registered test of it.
-`docs/RESULTS_E16.md`.
+seeing the strays. `docs/RESULTS_E16.md`.
+
+*And then a third correction, from experiment 17, which is why this claim should
+now be treated as open rather than settled.* **The deficit does not survive
+declaring the threshold.** Sweeping theta and taking the accuracy argmax is not
+finding each network's best operating point, it is finding how hard each one can
+mash — the chosen value was the lowest offered for the real network and 19 of 20
+controls. Fix theta at 1.5, the never-fitted default, run 40 controls on a fresh
+chart set, and the real connectome scores **0.357 against 0.299 ± 0.191, level
+at 14/40**, while hitting more notes than 34 of the 40. That is a *different
+comparison* — other charts, other threshold, twice the controls — so it does not
+overturn the 19/20 above, and it was a descriptive secondary with no inference
+claimed. What it does is make the question live. **The honest state of claim 6
+is that nobody currently knows**, and the registered test that would settle it
+has not been run. `docs/RESULTS_E17.md`.
 
 **7. Untrained lane-correctness.** Real 0.655 vs rewired 0.652 ± 0.178,
 **11/20, p = 0.571**, under the same protocol. This was the last behavioural
@@ -301,3 +330,15 @@ The sentence above should be read as "none produces a comparison favouring the
 real connectome *on a measure blind to stray presses*" — which is a weaker
 sentence than it has been taken to be, and is why experiment 17 exists.
 `docs/RESULTS_E16.md`.
+
+**Experiment 17 then removed the eighth thing and the deficit went with it.**
+All seven of those varied policies shared a procedure nobody had counted as a
+choice: the threshold was picked by argmax over an accuracy sweep, on a measure
+that cannot charge for pressing. Declare the threshold instead and the real
+connectome is level on accuracy and ahead on hit rate. So the correct summary is
+now: **seven parts of the untrained policy were varied and none helped, but all
+seven were varied on top of a selection rule that was quietly optimising for the
+controls' failure mode.** That does not mean the real connectome plays better —
+the pre-registered endpoint failed — it means the project's central negative
+result rests on a procedure that is now known to be biased, and has to be redone.
+`docs/RESULTS_E17.md`.
