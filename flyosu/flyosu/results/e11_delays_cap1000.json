@@ -2072,5 +2072,7 @@
    "base_ctrl_mean": 0.18625,
    "base_n_ge": 8
   }
- ]
+ ],
+ "interval_ms": 600.0,
+ "max_delay_ms": 1000.0
 }

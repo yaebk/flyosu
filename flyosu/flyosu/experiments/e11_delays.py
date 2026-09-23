@@ -27,8 +27,19 @@ Protocol is otherwise the project's current fair one: band wiring
 best, press-count guard on lane-correctness.  Experiment 7's no-delay numbers
 are the baseline and are reused rather than repeated.
 
+``INTERVAL_MS`` is experiment 12's handle.  Experiment 11 found that the real
+network wants to wait 630-652 ms on three of its four lanes while the gap
+between notes is 600 ms, and offered "the scheduled press lands on the next
+note" as a candidate explanation for why delays help every control and not it.
+Widening the interval is the test: the delays come from an 800 ms silent probe
+and so do not move, the gap does.  Each run also records a paired no-delay arm
+(same network, threshold, charts and noise seed) so "gain from delays" is a
+within-network difference at that interval; at 600 ms the arm is experiment 7's.
+
     N_SEEDS=20 python -m experiments.e11_delays
+    INTERVAL_MS=1400 N_SEEDS=10 python -m experiments.e11_delays
     python -m experiments.e11_delays report
+    INTERVAL_MS=1400 python -m experiments.e11_delays report
 """
 
 from __future__ import annotations
@@ -46,7 +57,16 @@ from flyosu import learn as L, model as M, play as P, probes as PR  # noqa: E402
 
 RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
 MAX_DELAY_MS = float(os.environ.get("MAX_DELAY_MS", 1000.0))
-PATH = os.path.join(RESULTS, f"e11_delays_cap{int(MAX_DELAY_MS)}.json")
+INTERVAL_MS = float(os.environ.get("INTERVAL_MS", 600.0))
+
+# Every parameter that changes the result goes in the filename.  This project
+# has already lost a run to the opposite habit: a second run wrote the first
+# one's path, found every label in ``done``, skipped all the work and looked
+# like it had succeeded.  The one exception is the default (600 ms interval,
+# 1000 ms cap), which keeps the original name so experiment 11's completed run
+# is reused rather than recomputed.
+_TAG = "" if INTERVAL_MS == 600.0 else f"_interval{int(INTERVAL_MS)}"
+PATH = os.path.join(RESULTS, f"e11_delays_cap{int(MAX_DELAY_MS)}{_TAG}.json")
 E7 = os.path.join(RESULTS, "e7_wiring.json")
 THETA_SWEEP = (0.5, 1.0, 1.5, 2.0, 2.5, 3.0)
 SWEEP_STAGE = 3
@@ -69,6 +89,13 @@ def delays_from_probe(tr, wiring, theta):
     the controls, the mirror image of the earlier ones.  A note is visible for
     ``approach_ms`` (800), so no crossing can be earlier than that; the default
     1000 ms cannot bind.
+
+    The cap deliberately does *not* move with ``INTERVAL_MS``.  The delays come
+    from the silent probe, which is an 800 ms descent whatever the chart does,
+    so the largest delay any network can ask for is 800 ms at every interval
+    and 1000 ms is non-binding at every interval.  Tying the cap to the
+    interval would make the wider-interval conditions a different procedure as
+    well as a different chart.
     """
     out = np.zeros(len(wiring))
     for lane, ch in enumerate(wiring):
@@ -91,36 +118,73 @@ def measure(label, kw):
     base = player.controller
     base.W = W
     lc, acc, n, dl = [], [], [], []
+    lc0, acc0, n0 = [], [], []
     for th in THETA_SWEEP:
         d = delays_from_probe(tr, wiring, th)
         ctrl = base.with_delays(d)
         ctrl.b = np.full(4, -float(th))
         player.controller = ctrl
         e = L.evaluate(player, stage=SWEEP_STAGE, n_charts=2, n_notes=20,
-                       interval_ms=600.0, seed=7000 + 10 * SWEEP_STAGE)
+                       interval_ms=INTERVAL_MS, seed=7000 + 10 * SWEEP_STAGE)
         lc.append(e["lane_correct"]); acc.append(e["accuracy"])
         n.append(int(np.array(e["confusion"]).sum())); dl.append(d.tolist())
+        # Paired no-delay arm: the same network, threshold, charts and noise
+        # seed with the crossing pressing immediately, so "gain from delays"
+        # is a within-network difference at this interval rather than a
+        # comparison against experiment 7, which only exists at 600 ms.
+        # When every delay is zero the two policies are the same policy
+        # (``tests.test_play`` asserts it), so the play is not repeated.
+        if float(d.max()) <= 0.0:
+            e0 = e
+        else:
+            ctrl0 = base.copy()
+            ctrl0.b = np.full(4, -float(th))
+            player.controller = ctrl0
+            e0 = L.evaluate(player, stage=SWEEP_STAGE, n_charts=2, n_notes=20,
+                            interval_ms=INTERVAL_MS, seed=7000 + 10 * SWEEP_STAGE)
+        lc0.append(e0["lane_correct"]); acc0.append(e0["accuracy"])
+        n0.append(int(np.array(e0["confusion"]).sum()))
     ok = np.array(n) >= MIN_COUNTED
     i = int(np.argmax(np.where(ok, lc, -1.0))) if ok.any() else int(np.argmax(lc))
+    ok0 = np.array(n0) >= MIN_COUNTED
+    i0 = int(np.argmax(np.where(ok0, lc0, -1.0))) if ok0.any() else int(np.argmax(lc0))
     out = {"label": label, "wiring": list(wiring), "theta": list(THETA_SWEEP),
+           "interval_ms": INTERVAL_MS, "max_delay_ms": MAX_DELAY_MS,
            "lane_correct": lc, "accuracy": acc, "n_counted": n, "delays": dl,
            "eligible": ok.tolist(), "best_theta": float(THETA_SWEEP[i]),
            "best_lane_correct": float(lc[i]), "best_accuracy": float(max(acc)),
-           "delays_at_best": dl[i], "seconds": round(time.time() - t0, 1)}
+           "delays_at_best": dl[i],
+           "nodelay_lane_correct": lc0, "nodelay_accuracy": acc0,
+           "nodelay_n_counted": n0, "nodelay_eligible": ok0.tolist(),
+           "nodelay_best_theta": float(THETA_SWEEP[i0]),
+           "nodelay_best_lane_correct": float(lc0[i0]),
+           "nodelay_best_accuracy": float(max(acc0)),
+           "seconds": round(time.time() - t0, 1)}
     print(f"  {label:<24s} lane " + " ".join(f"{v:.2f}" for v in lc) +
           f"   best {out['best_lane_correct']:.2f}@{out['best_theta']:.1f}  "
-          f"acc {out['best_accuracy']:.3f}  delays {np.round(dl[i]).astype(int).tolist()} ms  "
+          f"acc {out['best_accuracy']:.3f} (no delays {out['nodelay_best_accuracy']:.3f})  "
+          f"delays {np.round(dl[i]).astype(int).tolist()} ms  "
           f"({out['seconds']:.0f}s)", flush=True)
     return out
 
 
 def main():
     n = int(os.environ.get("N_SEEDS", 20))
-    results = {"sweep_stage": SWEEP_STAGE, "theta": list(THETA_SWEEP), "runs": []}
+    results = {"sweep_stage": SWEEP_STAGE, "theta": list(THETA_SWEEP),
+               "interval_ms": INTERVAL_MS, "max_delay_ms": MAX_DELAY_MS, "runs": []}
     if os.path.exists(PATH):
         with open(PATH) as fh:
             results = json.load(fh)
+        # belt and braces on top of the filename: refuse to append runs made at
+        # one interval to a file recorded at another.
+        prev = results.get("interval_ms", 600.0)
+        if float(prev) != INTERVAL_MS:
+            raise SystemExit(f"{PATH} holds interval {prev} ms, not {INTERVAL_MS} ms")
+        results["interval_ms"] = INTERVAL_MS
+        results["max_delay_ms"] = MAX_DELAY_MS
     done = {r["label"] for r in results["runs"]}
+    print(f"interval {INTERVAL_MS:.0f} ms, delay cap {MAX_DELAY_MS:.0f} ms -> "
+          f"{os.path.basename(PATH)} ({len(done)} networks already done)", flush=True)
     plan = [("real connectome", {})] + [(f"rewired #{s}", {"shuffle_seed": s}) for s in range(1, n + 1)]
     for label, kw in plan:
         if label in done:
@@ -139,10 +203,16 @@ def report(results):
         print("not enough networks yet")
         return
     base = {}
-    if os.path.exists(E7):
+    if os.path.exists(E7) and results.get("interval_ms", 600.0) == 600.0:
+        # experiment 7's no-delay sweep is only comparable at its own interval
         with open(E7) as fh:
             base = {r["label"]: r["band"] for r in json.load(fh)["runs"]}
-    print("\n=== experiment 11: per-key delays, on top of the band wiring ===")
+    elif "nodelay_accuracy" in real:
+        base = {r["label"]: {"best_lane_correct": r["nodelay_best_lane_correct"],
+                             "best_accuracy": r["nodelay_best_accuracy"]}
+                for r in results["runs"]}
+    print(f"\n=== experiment 11: per-key delays, band wiring, "
+          f"{results.get('interval_ms', 600.0):.0f} ms note interval ===")
     summary = []
     for key, lbl in (("best_lane_correct", "lane-correct, own best theta"),
                      ("best_accuracy", "accuracy, own best theta")):
@@ -160,7 +230,7 @@ def report(results):
             bc = np.array([base[r["label"]][key] for r in ctrl if r["label"] in base])
             b_ge = int((bc >= br).sum())
             print(f"    no delays     real {br:.3f}  rewired {bc.mean():.3f} +- {bc.std():.3f}  "
-                  f"{b_ge}/{len(bc)}  p {(b_ge + 1) / (len(bc) + 1):.3f}   (experiment 7)")
+                  f"{b_ge}/{len(bc)}  p {(b_ge + 1) / (len(bc) + 1):.3f}")
             print(f"    change        real {rv - br:+.3f}   rewired {cv.mean() - bc.mean():+.3f}")
             row.update({"base_real": float(br), "base_ctrl_mean": float(bc.mean()),
                         "base_n_ge": b_ge})
