@@ -270,11 +270,74 @@ def test_probes():
     check("an early channel fires but never on time", cr3["n_fire"] == 4 and cr3["n_on_time"] == 0)
 
 
+def test_triggers():
+    """The three press triggers (experiment 15).
+
+    "cross" must stay bit-identical to the committed rising-edge rule, because
+    every untrained number in this project was measured with it; "peak" and
+    "fall" must fire strictly later, since their whole purpose is to move the
+    press back without declaring extra parameters the way per-key delays do.
+    """
+    print("\ntriggers")
+    from flyosu.controller import Controller, N_KEYS
+    W = np.eye(N_KEYS); b = np.full(N_KEYS, -1.0)
+
+    def reference(zs, dt=2.0, refractory=150.0, smooth=40.0):
+        z_s = np.zeros(N_KEYS); u_prev = np.full(N_KEYS, -np.inf)
+        last = np.full(N_KEYS, -np.inf); out = []; t = 0.0
+        for z in zs:
+            z_s = z_s + (dt / smooth) * (np.asarray(z) - z_s)
+            u = W @ z_s + b
+            fire = (u > 0) & (u_prev <= 0) & (t - last >= refractory)
+            u_prev = u
+            k = np.flatnonzero(fire).tolist()
+            for i in k:
+                last[i] = t
+            out.append(k); t += dt
+        return out
+
+    zs = np.random.default_rng(0).normal(0.5, 1.5, size=(4000, N_KEYS))
+    c = Controller(W=W.copy(), b=b.copy())
+    got, t = [], 0.0
+    for z in zs:
+        got.append(c.step(z, t, 2.0)); t += 2.0
+    ref = reference(zs)
+    check("default trigger is bit-identical to the committed rule", got == ref,
+          f"{sum(len(x) for x in ref)} presses over 4000 frames")
+
+    ramp = np.concatenate([np.linspace(-2, 3, 150), np.linspace(3, -2, 150)])
+    zz = np.stack([ramp] * N_KEYS, axis=1)
+    first = {}
+    for trig in ("cross", "peak", "fall"):
+        c = Controller(W=W.copy(), b=b.copy(), trigger=trig)
+        f = [i for i, z in enumerate(zz) if c.step(z, i * 2.0, 2.0)]
+        first[trig] = f[0] if f else None
+        check(f"trigger {trig} fires exactly once on a single bump", len(f) == 1)
+    check("peak fires later than cross", first["peak"] > first["cross"],
+          f"{first['cross']} -> {first['peak']}")
+    check("fall fires later than peak", first["fall"] > first["peak"],
+          f"{first['peak']} -> {first['fall']}")
+    check("an unknown trigger is rejected",
+          _raises(lambda: Controller(W=W.copy(), b=b.copy(),
+                                     trigger="nope").step(zz[0], 0.0, 2.0)))
+    c = Controller(W=W.copy(), b=b.copy(), trigger="peak")
+    check("copy carries the trigger", c.copy().trigger == "peak")
+
+
+def _raises(fn):
+    try:
+        fn()
+    except ValueError:
+        return True
+    return False
+
+
 def main():
     test_mania()
     test_beatmap()
     test_encoder_geometry()
     test_controller_logic()
+    test_triggers()
     test_probes()
     if "--fast" not in sys.argv:
         test_with_network()

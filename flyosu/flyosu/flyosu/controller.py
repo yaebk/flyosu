@@ -98,8 +98,18 @@ class Controller:
     refractory_ms: float = 150.0
     smooth_ms: float = 40.0            # leaky-integrator time constant; 0 = none
     delay_ms: np.ndarray | None = None  # (4,) per-key wait between crossing and press
+    # Which edge of the drive fires the key.  "cross" is the rising edge and is
+    # the original behaviour, bit for bit.  The other two exist because of
+    # experiment 12: given a wide enough note gap the real connectome picks the
+    # right lane essentially every time (lane-correct 1.000) and merely presses
+    # too early, and the per-key delay fix trades that accuracy away.  "peak"
+    # and "fall" move the press later *without declaring a single extra
+    # parameter* -- they reuse the same W and the same threshold, where delays
+    # need four more numbers off a probe.
+    trigger: str = "cross"              # "cross" | "peak" | "fall"
     z_s: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS))
     u_prev: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
+    du_prev: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS))
     last_press: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
     pending: list = field(default_factory=list)   # [(press time, key), ...]
 
@@ -127,13 +137,15 @@ class Controller:
     def copy(self) -> "Controller":
         return Controller(self.W.copy(), self.b.copy(), self.refractory_ms,
                           self.smooth_ms,
-                          None if self.delay_ms is None else self.delay_ms.copy())
+                          None if self.delay_ms is None else self.delay_ms.copy(),
+                          self.trigger)
 
     # -- dynamics ----------------------------------------------------------
 
     def reset(self) -> None:
         self.z_s = np.zeros(self.n_features)
         self.u_prev = np.full(N_KEYS, -np.inf)
+        self.du_prev = np.zeros(N_KEYS)
         self.last_press = np.full(N_KEYS, -np.inf)
         self.pending = []
 
@@ -144,8 +156,20 @@ class Controller:
         else:
             self.z_s = np.asarray(z, dtype=np.float64)
         u = self.W @ self.z_s + self.b
-        fire = ((u > 0) & (self.u_prev <= 0)
-                & (t_ms - self.last_press >= self.refractory_ms))
+        ready = t_ms - self.last_press >= self.refractory_ms
+        if self.trigger == "cross":
+            fire = (u > 0) & (self.u_prev <= 0) & ready
+        elif self.trigger == "peak":
+            # the drive has just turned over while still above threshold: this
+            # is the channel's own peak, which arrives later than its crossing
+            # and needs no parameter to locate
+            du = u - self.u_prev
+            fire = (u > 0) & (du < 0) & (self.du_prev >= 0) & np.isfinite(self.u_prev) & ready
+            self.du_prev = np.where(np.isfinite(self.u_prev), du, 0.0)
+        elif self.trigger == "fall":
+            fire = (u <= 0) & (self.u_prev > 0) & ready
+        else:
+            raise ValueError(f"unknown trigger {self.trigger!r}")
         self.u_prev = u
         crossed = np.flatnonzero(fire).tolist()
         for k in crossed:
