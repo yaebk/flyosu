@@ -17,3 +17,7 @@ flyosu/flyosu/scratch/
 flyosu/flyosu/data/malecns/*.feather
 flyosu/flyosu/data/malecns/*.npz
 flyosu/flyosu/data/malecns/*.parquet
+
+# per-shard checkpoints from parallel runs; `merge` folds them into the
+# canonical results file, so they are intermediate rather than data
+flyosu/flyosu/results/*_shard*of*.json

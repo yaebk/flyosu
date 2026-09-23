@@ -141,9 +141,10 @@
     false
    ],
    "nodelay_best_theta": 0.5,
-   "nodelay_best_lane_correct": 1.0,
+   "nodelay_best_lane_correct": null,
    "nodelay_best_accuracy": 0.175,
-   "seconds": 340.7
+   "seconds": 340.7,
+   "nodelay_best_lane_correct_unguarded": 1.0
   },
   {
    "label": "rewired #1",
@@ -275,9 +276,10 @@
     false
    ],
    "nodelay_best_theta": 0.5,
-   "nodelay_best_lane_correct": 1.0,
+   "nodelay_best_lane_correct": null,
    "nodelay_best_accuracy": 0.0,
-   "seconds": 325.1
+   "seconds": 325.1,
+   "nodelay_best_lane_correct_unguarded": 1.0
   },
   {
    "label": "rewired #2",
@@ -677,9 +679,10 @@
     false
    ],
    "nodelay_best_theta": 0.5,
-   "nodelay_best_lane_correct": 0.6875,
+   "nodelay_best_lane_correct": null,
    "nodelay_best_accuracy": 0.13333333333333333,
-   "seconds": 292.7
+   "seconds": 292.7,
+   "nodelay_best_lane_correct_unguarded": 0.6875
   },
   {
    "label": "rewired #5",
@@ -945,9 +948,10 @@
     false
    ],
    "nodelay_best_theta": 2.0,
-   "nodelay_best_lane_correct": 1.0,
+   "nodelay_best_lane_correct": null,
    "nodelay_best_accuracy": 0.041666666666666664,
-   "seconds": 418.0
+   "seconds": 418.0,
+   "nodelay_best_lane_correct_unguarded": 1.0
   },
   {
    "label": "rewired #7",
@@ -1481,9 +1485,10 @@
     false
    ],
    "nodelay_best_theta": 0.5,
-   "nodelay_best_lane_correct": 0.0,
+   "nodelay_best_lane_correct": null,
    "nodelay_best_accuracy": 0.0,
-   "seconds": 334.0
+   "seconds": 334.0,
+   "nodelay_best_lane_correct_unguarded": 0.0
   },
   {
    "label": "rewired #12",
@@ -1615,9 +1620,10 @@
     false
    ],
    "nodelay_best_theta": 2.5,
-   "nodelay_best_lane_correct": 1.0,
+   "nodelay_best_lane_correct": null,
    "nodelay_best_accuracy": 0.14166666666666666,
-   "seconds": 535.4
+   "seconds": 535.4,
+   "nodelay_best_lane_correct_unguarded": 1.0
   },
   {
    "label": "rewired #14",
@@ -2017,9 +2023,10 @@
     false
    ],
    "nodelay_best_theta": 2.0,
-   "nodelay_best_lane_correct": 1.0,
+   "nodelay_best_lane_correct": null,
    "nodelay_best_accuracy": 0.175,
-   "seconds": 417.0
+   "seconds": 417.0,
+   "nodelay_best_lane_correct_unguarded": 1.0
   },
   {
    "label": "rewired #20",
@@ -2834,10 +2841,7 @@
    "ctrl_sd": 0.25555186351769676,
    "n_ge": 13,
    "n": 20,
-   "p": 0.6666666666666666,
-   "base_real": 1.0,
-   "base_ctrl_mean": 0.5622890786749484,
-   "base_n_ge": 7
+   "p": 0.6666666666666666
   },
   {
    "metric": "accuracy, own best theta",
