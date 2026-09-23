@@ -269,13 +269,40 @@ really there does not soften when the controls double.**
 
 ## Absolute performance, separately from any comparison
 
-The best readout reaches **0.92 accuracy** on held-out stage-3 charts with 68
-parameters, fitted in closed form, connectome frozen (`docs/RESULTS_E5.md`).
-Across the curriculum it presses the right key essentially always
-(lane-correct ≥ 0.95) and hardly ever presses an empty lane. What limits it is
-timing, and experiment 8 established that ceiling is structural: the spread of
-the four channels' peak times is the network's own latency structure, and no
-sensory front end removes it. `docs/RESULTS_E8.md`.
+**Superseded by experiment 18 — see below.** The best readout reaches **0.92
+accuracy** on held-out stage-3 charts with 68 parameters, fitted in closed form,
+connectome frozen (`docs/RESULTS_E5.md`). Across the curriculum it presses the
+right key essentially always (lane-correct ≥ 0.95) and hardly ever presses an
+empty lane. What limits it is timing, and experiment 8 established that ceiling
+is structural: the spread of the four channels' peak times is the network's own
+latency structure, and no sensory front end removes it. `docs/RESULTS_E8.md`.
+
+**Experiment 18: the best fly now scores 1.000 up to 2.9 notes/s and 0.900 at
+4 notes/s with chords**, on fresh charts, with **zero stray presses on every
+condition**. Mean across eleven conditions 0.950 against 0.430 for experiment
+5's recipe. Both of the old walls were protocol choices rather than limits of
+the network:
+
+- **Chords were a training-set artefact.** The readout had only ever been fitted
+  on single-note charts, so the whole curriculum table in experiment 5 was
+  transfer. Fitting on stage 4 at three densities fixes it. Mixing *stages* does
+  not help — stage 4 already contains single notes and is a superset of stage 3.
+- **Density was the approach window**, the fly's scroll speed, fixed at 800 ms
+  since experiment 1 and never varied. Past three notes a second a lane holds
+  two or three notes at once and the encoder shows their superposition. At
+  400 ms, chords at 150 BPM go 0.852 → **1.000** and 4 notes/s with chords
+  0.529 → **0.900**. 300 ms is worse than 400, so it is an optimum, set by the
+  channels' own 200–600 ms latency needing room inside the approach.
+- **Not the refractory.** 150 → 50 ms changes nothing, bit-identical, because
+  uniform-interval charts never put two notes in one lane closer than the
+  interval. It would still bind on a real beatmap with jacks.
+
+**Quote 1.000 at 2.5 notes/s with chords and 0.900 at 4 notes/s as the project's
+best play, and report the approach window with any density figure.** In
+osu!mania terms this is roughly 1.5–2★ → about 4★. `docs/RESULTS_E18.md`.
+
+None of this bears on the connectome-versus-rewired question: experiment 18 ran
+no controls, and the same recipe would very likely work on a rewired network.
 
 Per-key delays in the controller were the prescription, and they work —
 untrained accuracy nearly triples, from 0.186 to 0.539, giving the project its

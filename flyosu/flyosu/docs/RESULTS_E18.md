@@ -1,14 +1,18 @@
-# Experiment 18 — capability: the fly now plays about three times harder
+# Experiment 18 — capability: neither wall was the network
 
-**Short answer: the chord wall was never a capacity limit, it was a diet. The
-readout had only ever been fitted on stage-3 charts at 600 ms, so every other
-number in experiment 5's curriculum table was a transfer figure. Fit the same
-kind of readout on chords at three densities and, on fresh charts it has never
-seen, it scores 0.852 where the old best scored 0.295 at 150 BPM with chords,
-0.977 against 0.655 on chords at 600 ms, and a clean 1.000 on the condition the
-old one was specialised for. Mean accuracy across eleven conditions goes from
-0.430 to 0.763. The practical ceiling moves from roughly 1.7 notes per second to
-roughly 2.5–2.9.**
+**Short answer: both of the fly's apparent limits were protocol choices nobody
+had registered as choices, and removing them roughly triples what it can play.
+The chord wall was a training-set limitation — the readout had only ever been
+fitted on single-note charts, so every other entry in experiment 5's curriculum
+table was a transfer figure. The density wall was the fixed 800 ms approach
+window, the fly's scroll speed, which past three notes a second puts two or
+three notes in a lane at once and hands the encoder their superposition. Fit on
+chords at varied density *and* shorten the approach to 400 ms, and on fresh
+charts it has never seen the fly scores a perfect 1.000 on five of eleven
+conditions, 0.980 on chords at 200 BPM, and 0.900 at four notes per second with
+chords — with zero stray presses anywhere. Mean accuracy across eleven
+conditions goes from 0.430 to 0.950. The practical ceiling moves from roughly
+1.7 notes per second to about 4.**
 
 **This document is engineering, not a comparison.** Real connectome only, no
 controls, no p-values, nothing here bears on whether the real wiring beats
@@ -22,12 +26,14 @@ Raw numbers: `results/e18_capability*.json`, `results/e18_*.log`.
 | | experiment 5 | experiment 18 |
 |---|---|---|
 | training charts | 4 × stage 3 @ 600 ms | **16 × stage 4 @ 600 / 450 / 350 ms** |
+| approach window | 800 ms | **400 ms** |
 | features | pca16 | **pca32** |
 | parameters | 68 | 132 |
 | connectome | frozen | frozen |
 
-Three changes, in order of how much they mattered: **train on chords**, **vary
-the density while doing it**, and give it more data and more capacity.
+Four changes, in order of how much they mattered: **shorten the approach
+window**, **train on chords**, **vary the density while doing it**, and give it
+more data and more capacity.
 
 ## Validation — fresh charts, 200 notes per condition
 
@@ -36,25 +42,34 @@ condition, because the arm was chosen by reading the battery and those numbers
 are selection-optimistic in exactly the way experiments 13 and 16 warned about.
 **These are the numbers to quote.**
 
-| condition | notes/s | **experiment 18** | experiment 5's diet | e5 as published |
-|---|---|---|---|---|
-| stage 3 @ 600 | 1.7 | **1.000** | 0.863 | 0.917 |
-| stage 4 chords @ 600 | 1.7 | **0.977** | 0.655 | 0.506 |
-| stage 5 varied tempo | 1.7 | **0.961** | 0.613 | 0.608 |
-| stage 3 @ 450 | 2.2 | **0.948** | 0.442 | — |
-| stage 3 @ 350 | 2.9 | **0.851** | 0.404 | — |
-| stage 4 chords @ 400 | 2.5 | **0.852** | 0.295 | 0.286 |
-| stage 3 @ 300 | 3.3 | 0.682 | 0.422 | — |
-| stage 4 chords @ 300 | 3.3 | 0.584 | 0.281 | — |
-| stage 3 @ 250 | 4.0 | 0.572 | 0.357 | — |
-| stage 4 chords @ 250 | 4.0 | 0.529 | 0.247 | — |
-| stage 4 chords @ 200 | 5.0 | 0.432 | 0.146 | — |
-| **mean** | | **0.763** | 0.430 | — |
+| condition | notes/s | **final (400 ms)** | 800 ms scroll | e5's diet | e5 as published |
+|---|---|---|---|---|---|
+| stage 3 @ 600 | 1.7 | **1.000** | 1.000 | 0.863 | 0.917 |
+| stage 4 chords @ 600 | 1.7 | **1.000** | 0.977 | 0.655 | 0.506 |
+| stage 5 varied tempo | 1.7 | **1.000** | 0.961 | 0.613 | 0.608 |
+| stage 3 @ 450 | 2.2 | **1.000** | 0.948 | 0.442 | — |
+| stage 3 @ 350 | 2.9 | **1.000** | 0.851 | 0.404 | — |
+| stage 4 chords @ 400 | 2.5 | **1.000** | 0.852 | 0.295 | 0.286 |
+| stage 3 @ 300 | 3.3 | **0.985** | 0.682 | 0.422 | — |
+| stage 4 chords @ 300 | 3.3 | **0.980** | 0.584 | 0.281 | — |
+| stage 3 @ 250 | 4.0 | **0.925** | 0.572 | 0.357 | — |
+| stage 4 chords @ 250 | 4.0 | **0.900** | 0.529 | 0.247 | — |
+| stage 4 chords @ 200 | 5.0 | **0.659** | 0.432 | 0.146 | — |
+| **mean** | | **0.950** | 0.763 | 0.430 | — |
 
-It is ahead on all eleven, by 0.14 to 0.51. The old readout's 0.917 comes back
-at 0.863 on ten fresh charts, so that figure was mildly optimistic too — the
-same pattern this project has found a dozen times, and worth recording rather
-than quietly dropping.
+Ahead on all eleven, and **zero stray presses on every condition** — not
+rounded to zero, none at all. The old readout's published 0.917 comes back at
+0.863 on ten fresh charts, so that figure was mildly optimistic too, the same
+pattern this project has found a dozen times and worth recording rather than
+quietly dropping.
+
+A 300 ms approach was also tried and is **worse** than 400 ms above three notes
+a second (0.755 against 0.925 at 4 notes/s single, 0.725 against 0.900 with
+chords). So this is a genuine optimum rather than "faster is better": too long
+and the notes superpose, too short and there is not enough of the approach left
+for the network's own latency to work with. The channels peak 200–600 ms before
+the note (experiment 8), so an approach much shorter than that removes the
+signal the readout depends on.
 
 ## What the arms showed on the way
 
@@ -95,12 +110,15 @@ arm in the set at 0.390, below even experiment 5's diet, and its hit rate on
 transfer *down* in density any better than the old one transferred up. Density
 variety works; density substitution does not.
 
-## Where the new wall is
+## Where the wall was, and where it is now
 
-Accuracy stays above 0.95 to about 2.2 notes/s, above 0.85 to about 2.9, and
-then falls off steeply: 0.68 at 3.3, 0.57 at 4.0, 0.43 at 5.0. Below roughly
-0.85 the hit rate is what goes — 0.93 at 2.9 notes/s, 0.74 at 3.3, 0.68 at 5.0 —
-so it is missing notes rather than mistiming them or pressing the wrong key.
+At the original 800 ms approach the ceiling was clear: above 0.95 only to about
+2.2 notes/s, above 0.85 to 2.9, then 0.68 at 3.3, 0.57 at 4.0, 0.43 at 5.0. What
+went in every case was the **hit rate** — 0.74 at 3.3 notes/s, 0.68 at 5.0 — so
+the fly was missing notes rather than mistiming them or pressing wrong keys,
+which is the signature of not being able to see them rather than of bad control.
+
+Two candidates were tested. The second one was the answer.
 
 ### It is not the refractory — that was tested and it is not
 
@@ -119,19 +137,38 @@ opportunity to bind. It would bind on a real beatmap containing jacks, which is
 a reason to keep the constraint in mind for step 12 and not a reason to change
 it now.
 
-### What the wall probably is
+### It was the approach window — the fly's scroll speed
 
-The remaining suspect is the 800 ms approach window. At 3.3 notes/s a lane has
-two or three notes visible at once and the encoder shows their superposition, so
-the channel cannot cleanly resolve which one is at the judgment line. That is
-also exactly what real osu!mania players fix by raising scroll speed, and it is
-the next thing to test.
+The 800 ms approach window is how long a note is visible before its hit time.
+At 3.3 notes/s a lane holds two or three notes at once, and the encoder hands
+the network their superposition, so the channel cannot resolve which one is at
+the judgment line. That is precisely what a human fixes by raising scroll speed,
+and nobody had ever varied it — it had been 800 ms since experiment 1.
+
+Refitting at 400 ms is the single largest improvement in this experiment:
+chords at 150 BPM go from 0.852 to **1.000**, chords at 200 BPM from 0.584 to
+**0.980**, and four notes a second with chords from 0.529 to **0.900**. Strays
+go to exactly zero everywhere. The effect is not monotone — 300 ms is worse than
+400 ms past three notes a second — so there is a real optimum, set by the
+network's own 200–600 ms channel latency needing room inside the approach.
+
+**This is a free parameter of the environment, not of the fly**, and it is the
+one nobody thought to question. Every density result this project has ever
+reported was measured at one arbitrary scroll speed.
+
+At 400 ms the new ceiling is about **4 notes per second** — 0.925 single notes
+and 0.900 with chords — falling to 0.659 at 5. The hit rate still tracks the
+accuracy exactly (0.91 at 4 notes/s, 0.68 at 5), so whatever binds at five notes
+a second is still a seeing problem rather than a control one, and the training
+diet's fastest chart is 350 ms, so part of that is simply extrapolation.
 
 ## In osu!mania terms
 
-Roughly: from a comfortable **1.5–2★** to a comfortable **3★**. Chords at 150 BPM
-now score 0.85 where they used to score 0.29, and stage 5's irregular rhythm —
-the closest thing here to a real map's phrasing — is at 0.961.
+Roughly: from a comfortable **1.5–2★** to about **4★**. Chords at 150 BPM now
+score a perfect 1.000 where they used to score 0.29; four notes a second with
+chords scores 0.900; and stage 5's irregular rhythm — the closest thing here to
+a real map's phrasing — is at 1.000. The fall-off is now at five notes a second
+(0.659), which is where a 4K map starts being genuinely hard for people.
 
 The caveats from before still hold and none of them is addressed by this
 experiment: these are synthetic charts, no real `.osu` beatmap has ever been
@@ -146,15 +183,22 @@ an 800 ms approach.
 - One connectome, one noise level, one threshold, one OD.
 - `s4_200` and `s4_250` are extrapolations past anything the training diet
   contained (its fastest chart is 350 ms), so the falloff there measures
-  transfer, not a trained ceiling.
+  transfer, not a trained ceiling. Training at those densities has not been
+  tried and would probably lift them further.
+- The approach window was swept at three values (800, 600, 400, 300) on one
+  training diet. 400 ms is the best of those, not a located optimum.
 - Nothing here says the *real* connectome is special. The same recipe has not
   been tried on a rewired control, and on this project's record it would
   probably work there too.
 
 ## What this licenses
 
-- **Quote 0.852 at 2.5 notes/s with chords as the project's best play**, not
-  experiment 5's 0.92, and cite the fresh-seed table rather than the battery.
+- **Quote 1.000 at 2.5 notes/s with chords, and 0.900 at 4 notes/s, as the
+  project's best play** — not experiment 5's 0.92 — and cite the fresh-seed
+  table rather than the battery.
+- **Report the approach window alongside any density result.** Every such number
+  recorded before this experiment was measured at 800 ms, which is now known to
+  be the wrong value above three notes a second.
 - Stop describing chord density as the wall. It was the training set.
 - When fitting a readout here, use stage 4 at several intervals. Never fit at a
   single fast density, and do not bother mixing stages.

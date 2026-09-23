@@ -9,9 +9,11 @@ synaptic connections from the FlyWire whole-brain reconstruction; the fly's
 descending neurons — its actual output to the legs — are grouped into four
 channels and read as D / F / J / K.
 
-**Current state: all 12 steps built; seventeen experiments run.** The fly plays,
-and plays well: the best readout reaches 0.92 accuracy on held-out charts with
-68 parameters and the connectome frozen. Whether the *real* wiring plays better
+**Current state: all 12 steps built; eighteen experiments run.** The fly plays,
+and plays very well: the best readout scores **1.000 up to 2.9 notes per second
+and 0.900 at 4 notes per second with chords**, on fresh charts, with zero stray
+presses, 132 parameters and the connectome frozen. That is roughly 4-star
+osu!mania, up from about 1.5-2 stars before experiment 18. Whether the *real* wiring plays better
 than matched random wiring is a separate question, and the answer got more
 negative every time the controls were treated better — through experiment 15 no
 behavioural comparison favoured the real connectome.
@@ -481,6 +483,7 @@ experiments/
   e15_trigger.py      firing edge: crossing vs peak vs falling edge
   e16_heldout.py      the same frozen policies on charts nobody tuned against
   e17_strays.py       pre-registered: stray presses, declared threshold
+  e18_capability.py   capability: training diet, readout size, scroll speed
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  32 checks on the network side
@@ -532,7 +535,7 @@ python -m tests.test_reservoir       # 20 checks
  7  fly controller               done   20-parameter threshold policy; per-key delays optional
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
-10  training experiments         run 17 times      e1-e17, two connectomes; best play 0.92 (ridge, 68 params)
+10  training experiments         run 18 times      e1-e18, two connectomes; best play 1.000 @ 2.9 notes/s (ridge, 132 params)
 11  beatmap parser               done   .osu v14 mania, both directions
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
@@ -588,6 +591,20 @@ a third as many and 1.45 SD below the control mean, beating 38 of 40 outright �
 but the last two tie it at exactly 0.220, giving p = 0.073 against a declared
 Bonferroni floor of 0.049. Ties count against the hypothesis here as everywhere
 else, and the convention was not adjusted after seeing which way it cut.
+
+**Experiment 18 then went after capability rather than the comparison**, and
+found that both of the fly's apparent limits were protocol choices nobody had
+registered as choices. Chord difficulty was a training-set artefact -- the
+readout had only ever been fitted on single-note charts, so experiment 5's whole
+curriculum table was transfer. The density ceiling was the 800 ms approach
+window, the fly's scroll speed, fixed since experiment 1 and never varied; past
+three notes a second a lane holds two or three notes at once and the encoder
+shows their superposition. Fit on chords at varied density and shorten the
+approach to 400 ms, and chords at 150 BPM go from 0.286 to **1.000** and four
+notes a second with chords to **0.900**, with no stray presses anywhere. The
+150 ms refractory, the obvious suspect, turned out to change nothing at all.
+It ran no controls and says nothing about the connectome.
+[`docs/RESULTS_E18.md`](docs/RESULTS_E18.md).
 
 The unpredicted finding is the larger one: with the threshold declared, the
 accuracy deficit is gone (0.357 vs 0.299, level at 14/40) and the real network
