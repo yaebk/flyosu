@@ -1,0 +1,8 @@
+controls -> e17_strays_shard1of6.json (0 done, 7 planned)
+  rewired #2           acc 0.480  hit 0.480  stray/note 1.160  reward +0.422  presses 48
+  rewired #8           acc 0.188  hit 0.390  stray/note 0.320  reward +0.172  presses 48
+  rewired #14          acc 0.000  hit 0.000  stray/note 1.050  reward -0.053  presses 27
+  rewired #20          acc 0.613  hit 0.700  stray/note 0.390  reward +0.594  presses 70
+  rewired #26          acc 0.433  hit 0.740  stray/note 0.480  reward +0.409  presses 100
+  rewired #32          acc 0.022  hit 0.130  stray/note 0.530  reward -0.005  presses 22
+  rewired #38          acc 0.257  hit 0.260  stray/note 0.280  reward +0.243  presses 52
