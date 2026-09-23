@@ -191,9 +191,10 @@ and lane-correctness stays at 1/20, p = 0.095. It also retracts experiment 6's
 central claim: with each network wired by the rule that optimises the band,
 **5 of 20 controls match the real network's band**, so it is not the only
 network that admits a single working threshold. Its companion claim, channel
-selectivity, was re-measured the same way and *does* survive — real 0.79 vs
-0.50 ± 0.17, **1/20, p = 0.095** — so the two came apart and selectivity is the
-durable one. Three experiments in a row, a gap shrank as soon as the controls
+selectivity, was re-measured the same way and appeared to survive — real 0.79
+vs 0.50 ± 0.17, **1/20, p = 0.095** — so the two came apart and selectivity
+looked like the durable one. Experiment 14 later put that to a pre-registered
+test at n = 40 and it failed. Three experiments in a row, a gap shrank as soon as the controls
 were given a fairer procedure, which is by now the most robust finding here.
 **[`docs/RESULTS_E7.md`](docs/RESULTS_E7.md).**
 
@@ -279,6 +280,28 @@ network's 4 lanes and 11 of 80 control lanes, was worth 0.2 accuracy, and
 flipped the comparison the *other* way. It was caught before the number was
 reported and the whole run repeated with the cap where it cannot bind.
 **[`docs/RESULTS_E11.md`](docs/RESULTS_E11.md).**
+
+Experiment 14 is the first comparison here that was **pre-registered**. Seven
+times a gap had shrunk once a comparison was made fairer, and every one of
+those was caught after the fact — which shows the mistake is easy to make, not
+that it stopped happening. So the protocol was frozen and tagged before
+anything ran, one primary endpoint was named (channel lane-selectivity: no
+threshold, no presses, no chart, so it could inherit none of the earlier
+failure modes), and **all forty controls were run and committed to git before
+the real network was measured once**. The result: real **0.790** against
+0.547 ± 0.174, **4/40, p = 0.122**, and the claim moves to not supported. What
+makes it interesting is what did not change — the real network scored 0.79 at
+n = 20 and 0.790 here, with an identical procedure. **Twenty more controls were
+the entire difference.** So this eighth correction has a cause the other seven
+did not: not an unfair procedure but plain undersampling, which no fairness fix
+would have caught. Its lesson applies backwards across the whole project — at
+twenty controls a single exceedance already gives p = 0.095, so **every "0/20"
+and "1/20" here reads stronger than it is**. The exception, measured on the
+same forty networks, is the spectral radius: 2.283 vs 0.733 ± 0.090, 0/40,
+identical to experiment 9. A claim that is really there does not soften when
+the controls double.
+**[`docs/RESULTS_E14.md`](docs/RESULTS_E14.md)**, protocol in
+**[`docs/PREREGISTRATION.md`](docs/PREREGISTRATION.md)**.
 
 ## Quick start
 
@@ -424,6 +447,7 @@ docs/RESULTS_E8.md      experiment 8
 docs/RESULTS_E9.md      experiment 9
 docs/RESULTS_E10.md     experiment 10
 docs/RESULTS_E11.md     experiment 11
+docs/RESULTS_E14.md     experiment 14
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -474,10 +498,10 @@ favours the real connectome.** The closest is thresholds-only learning — real
 significant. Untrained accuracy is 19/20 against (p = 0.95), untrained
 lane-correctness 11/20 (p = 0.571), and the supervised ceiling shows no
 advantage at any readout size. The one non-behavioural measurement in that
-territory, how lane-selective the four channels are, survives in direction at
-1/20, p = 0.095. The honest summary is that **the behavioural gap shrank every
-time the controls were given a fairer procedure**, and that is now the most
-robust thing here.
+territory, how lane-selective the four channels are, went to a pre-registered
+test at n = 40 and came back **4/40, p = 0.122** (experiment 14). The honest
+summary is that **the gap shrank every time the comparison was made more
+careful**, and that is now the most robust thing here.
 
 What still stands are the two measurements that need no behavioural protocol at
 all: rewiring the topology **collapses the spectral radius** (2.28 vs
