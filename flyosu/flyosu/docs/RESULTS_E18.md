@@ -7,12 +7,12 @@ fitted on single-note charts, so every other entry in experiment 5's curriculum
 table was a transfer figure. The density wall was the fixed 800 ms approach
 window, the fly's scroll speed, which past three notes a second puts two or
 three notes in a lane at once and hands the encoder their superposition. Fit on
-chords at varied density *and* shorten the approach to 400 ms, and on fresh
-charts it has never seen the fly scores a perfect 1.000 on five of eleven
-conditions, 0.980 on chords at 200 BPM, and 0.900 at four notes per second with
-chords — with zero stray presses anywhere. Mean accuracy across eleven
-conditions goes from 0.430 to 0.950. The practical ceiling moves from roughly
-1.7 notes per second to about 4.**
+chords across four densities *and* shorten the approach to 400 ms, and on fresh
+charts it has never seen the fly scores a perfect **1.000 on eight of eleven
+conditions**, 0.988 at four notes per second with chords, and 1.000 on jacks it
+was never trained for — with **zero stray presses on every condition**. Mean
+accuracy across eleven conditions goes from 0.430 to **0.972**. The practical
+ceiling moves from roughly 1.7 notes per second to about 4.**
 
 **This document is engineering, not a comparison.** Real connectome only, no
 controls, no p-values, nothing here bears on whether the real wiring beats
@@ -25,7 +25,7 @@ Raw numbers: `results/e18_capability*.json`, `results/e18_*.log`.
 
 | | experiment 5 | experiment 18 |
 |---|---|---|
-| training charts | 4 × stage 3 @ 600 ms | **16 × stage 4 @ 600 / 450 / 350 ms** |
+| training charts | 4 × stage 3 @ 600 ms | **16 × stage 4 @ 600 / 450 / 350 / 250 ms** |
 | approach window | 800 ms | **400 ms** |
 | features | pca16 | **pca32** |
 | parameters | 68 | 132 |
@@ -42,20 +42,28 @@ condition, because the arm was chosen by reading the battery and those numbers
 are selection-optimistic in exactly the way experiments 13 and 16 warned about.
 **These are the numbers to quote.**
 
-| condition | notes/s | **final (400 ms)** | 800 ms scroll | e5's diet | e5 as published |
-|---|---|---|---|---|---|
-| stage 3 @ 600 | 1.7 | **1.000** | 1.000 | 0.863 | 0.917 |
-| stage 4 chords @ 600 | 1.7 | **1.000** | 0.977 | 0.655 | 0.506 |
-| stage 5 varied tempo | 1.7 | **1.000** | 0.961 | 0.613 | 0.608 |
-| stage 3 @ 450 | 2.2 | **1.000** | 0.948 | 0.442 | — |
-| stage 3 @ 350 | 2.9 | **1.000** | 0.851 | 0.404 | — |
-| stage 4 chords @ 400 | 2.5 | **1.000** | 0.852 | 0.295 | 0.286 |
-| stage 3 @ 300 | 3.3 | **0.985** | 0.682 | 0.422 | — |
-| stage 4 chords @ 300 | 3.3 | **0.980** | 0.584 | 0.281 | — |
-| stage 3 @ 250 | 4.0 | **0.925** | 0.572 | 0.357 | — |
-| stage 4 chords @ 250 | 4.0 | **0.900** | 0.529 | 0.247 | — |
-| stage 4 chords @ 200 | 5.0 | **0.659** | 0.432 | 0.146 | — |
-| **mean** | | **0.950** | 0.763 | 0.430 | — |
+| condition | notes/s | **final** | 350 ms diet | 800 ms scroll | e5's diet | e5 published |
+|---|---|---|---|---|---|---|
+| stage 3 @ 600 | 1.7 | **1.000** | 1.000 | 1.000 | 0.863 | 0.917 |
+| stage 4 chords @ 600 | 1.7 | **1.000** | 1.000 | 0.977 | 0.655 | 0.506 |
+| stage 5 varied tempo | 1.7 | **1.000** | 1.000 | 0.961 | 0.613 | 0.608 |
+| stage 3 @ 450 | 2.2 | **1.000** | 1.000 | 0.948 | 0.442 | — |
+| stage 3 @ 350 | 2.9 | **1.000** | 1.000 | 0.851 | 0.404 | — |
+| stage 4 chords @ 400 | 2.5 | **1.000** | 1.000 | 0.852 | 0.295 | 0.286 |
+| stage 3 @ 300 | 3.3 | **1.000** | 0.985 | 0.682 | 0.422 | — |
+| stage 4 chords @ 300 | 3.3 | **1.000** | 0.980 | 0.584 | 0.281 | — |
+| stage 3 @ 250 | 4.0 | **0.983** | 0.925 | 0.572 | 0.357 | — |
+| stage 4 chords @ 250 | 4.0 | **0.988** | 0.900 | 0.529 | 0.247 | — |
+| stage 4 chords @ 200 | 5.0 | **0.718** | 0.659 | 0.432 | 0.146 | — |
+| **mean** | | **0.972** | 0.950 | 0.763 | 0.430 | — |
+| *jacks @ 450* | *2.2* | ***1.000*** | — | — | — | — |
+| *jacks @ 300* | *3.3* | ***1.000*** | — | — | — | — |
+| *jacks @ 250* | *4.0* | ***0.895*** | — | — | — | — |
+
+The "350 ms diet" column is the same recipe whose fastest training chart is
+350 ms. Adding a 250 ms chart to it is what lifts the top end: 4 notes/s with
+chords 0.900 → **0.988**. The jack rows are italicised because they use a chart
+generator (stage 6) that did not exist when the other columns were measured.
 
 Ahead on all eleven, and **zero stray presses on every condition** — not
 rounded to zero, none at all. The old readout's published 0.917 comes back at
@@ -63,13 +71,17 @@ rounded to zero, none at all. The old readout's published 0.917 comes back at
 pattern this project has found a dozen times and worth recording rather than
 quietly dropping.
 
-A 300 ms approach was also tried and is **worse** than 400 ms above three notes
-a second (0.755 against 0.925 at 4 notes/s single, 0.725 against 0.900 with
-chords). So this is a genuine optimum rather than "faster is better": too long
-and the notes superpose, too short and there is not enough of the approach left
-for the network's own latency to work with. The channels peak 200–600 ms before
-the note (experiment 8), so an approach much shorter than that removes the
-signal the readout depends on.
+**400 ms is a real optimum, not the best of a coarse grid.** The window was
+swept at 800, 600, 450, 400, 350 and 300 ms on the same diet, and 400 wins:
+at 4 notes/s with chords it scores 0.900 against 0.678 at 450 ms, 0.652 at
+350 ms and 0.725 at 300 ms. Too long and the notes superpose; too short and
+there is not enough approach left for the network's own latency, since the
+channels peak 200–600 ms before the note (experiment 8).
+
+The one place the ranking inverts is the densest condition: at 5 notes/s a
+300 ms approach beats a 400 ms one, 0.790 against 0.718. That fits the same
+story — the denser the chart, the more a shorter window pays, right up until it
+starts eating the latency.
 
 ## What the arms showed on the way
 
@@ -162,13 +174,54 @@ accuracy exactly (0.91 at 4 notes/s, 0.68 at 5), so whatever binds at five notes
 a second is still a seeing problem rather than a control one, and the training
 diet's fastest chart is 350 ms, so part of that is simply extrapolation.
 
+## Jacks: easy, and you must not train for them
+
+Stage 6 was added for this experiment because stages 1–5 never generate a jack —
+they spread notes over four lanes at a uniform interval, so two notes are never
+in the same lane close together. It asks a different question from the rest of
+the curriculum: not whether the four channels can be told apart, but whether
+*one* channel can resolve two notes in succession. It is also the only pattern
+where the refractory could bind.
+
+Three arms, all validated on fresh charts:
+
+| | jacks @ 2.2/s | jacks @ 3.3/s | jacks @ 4.0/s | chords @ 4.0/s | chords @ 5.0/s |
+|---|---|---|---|---|---|
+| `fast_a400` — **never saw a jack** | **1.000** | **1.000** | **0.895** | **0.988** | **0.718** |
+| `jack_a400` — trained on jacks | 1.000 | 1.000 | 0.815 | 0.905 | 0.552 |
+| `jack_r50` — jacks, 50 ms refractory | 1.000 | 1.000 | 0.815 | 0.905 | 0.569 |
+
+**Jacks are not hard for this fly.** The arm that has never seen one plays them
+at 1.000 up to 3.3 notes/s, as well as it plays anything else at that density.
+The worry that a single channel could not fire twice in quick succession was
+unfounded at every rate it can actually play.
+
+**Training on jacks makes it worse at jacks.** `jack_a400` is below `fast_a400`
+on every condition including the jacks it was trained for, 0.815 against 0.895.
+The reason is the same lesson as round 1, now with a second instance: its diet
+spent two of its four slots on stage-6 charts and so dropped the 250 ms chord
+chart, and **density training is worth more than pattern familiarity**. Adding a
+pattern to the diet is not free — it displaces something, and here the thing it
+displaced mattered more.
+
+**The refractory still does nothing, even here.** `jack_r50` matches
+`jack_a400` to three decimals on every condition. At 4 notes/s a jack puts two
+notes in one lane 250 ms apart, still comfortably outside the 150 ms dead time,
+so it cannot bind. To make it bind needs a jack interval under 150 ms — above
+6.7 notes/s in a single lane — which is far past where this fly falls apart
+anyway (0.718 at 5 notes/s). **On this evidence the refractory is not a
+practical constraint at any density the fly can play**, and my earlier caveat
+that it "would bind on a real beatmap with jacks" is only true for 1/4 jacks
+above roughly 100 BPM, which is out of reach for other reasons.
+
 ## In osu!mania terms
 
 Roughly: from a comfortable **1.5–2★** to about **4★**. Chords at 150 BPM now
 score a perfect 1.000 where they used to score 0.29; four notes a second with
-chords scores 0.900; and stage 5's irregular rhythm — the closest thing here to
-a real map's phrasing — is at 1.000. The fall-off is now at five notes a second
-(0.659), which is where a 4K map starts being genuinely hard for people.
+chords scores 0.988; jacks score 1.000 up to 3.3 notes a second; and stage 5's
+irregular rhythm — the closest thing here to a real map's phrasing — is at
+1.000. The fall-off is at five notes a second (0.718), which is where a 4K map
+starts being genuinely hard for people.
 
 The caveats from before still hold and none of them is addressed by this
 experiment: these are synthetic charts, no real `.osu` beatmap has ever been
@@ -193,9 +246,12 @@ an 800 ms approach.
 
 ## What this licenses
 
-- **Quote 1.000 at 2.5 notes/s with chords, and 0.900 at 4 notes/s, as the
+- **Quote 1.000 up to 3.3 notes/s with chords, and 0.988 at 4 notes/s, as the
   project's best play** — not experiment 5's 0.92 — and cite the fresh-seed
   table rather than the battery.
+- **Do not add a pattern to the training diet without asking what it displaces.**
+  Training on jacks made the fly worse at jacks, because the slots it took came
+  out of density training, which was worth more.
 - **Report the approach window alongside any density result.** Every such number
   recorded before this experiment was measured at 800 ms, which is now known to
   be the wrong value above three notes a second.

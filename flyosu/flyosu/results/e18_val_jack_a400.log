@@ -1,0 +1,16 @@
+[jack_a400] validating on seed 4242, 10 charts x 20 notes per condition
+  s3_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.917)
+  s3_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s3_350    2.9/s  acc 1.000  hit 1.00  stray 0.00
+  s4_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.506)
+  s4_400    2.5/s  acc 0.998  hit 1.00  stray 0.00   (e5 0.286)
+  s4_300    3.3/s  acc 0.982  hit 0.99  stray 0.00
+  s5_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.608)
+  s3_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s3_250    4.0/s  acc 0.945  hit 0.94  stray 0.00
+  s4_250    4.0/s  acc 0.905  hit 0.92  stray 0.00
+  s4_200    5.0/s  acc 0.552  hit 0.59  stray 0.00
+  s6_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s6_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s6_250    4.0/s  acc 0.815  hit 0.82  stray 0.00
+wrote e18_capability_validate_jack_a400.json
