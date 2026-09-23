@@ -310,9 +310,14 @@ class RidgeReadout:
             return [stage_chart(self.stage, n_notes=self.n_notes, interval_ms=self.interval_ms,
                                 seed=self.seed + c) for c in range(self.n_charts)]
         specs = list(self.chart_specs)
-        return [stage_chart(int(specs[c % len(specs)][0]), n_notes=self.n_notes,
-                            interval_ms=float(specs[c % len(specs)][1]), seed=self.seed + c)
-                for c in range(self.n_charts)]
+        out = []
+        for c in range(self.n_charts):
+            s = specs[c % len(specs)]
+            # (stage, interval_ms) or (stage, interval_ms, approach_ms)
+            kw = {} if len(s) < 3 else {"approach_ms": float(s[2])}
+            out.append(stage_chart(int(s[0]), n_notes=self.n_notes,
+                                   interval_ms=float(s[1]), seed=self.seed + c, **kw))
+        return out
 
     def record(self) -> None:
         """Record the training charts (the only expensive step; ~10 s per chart)."""

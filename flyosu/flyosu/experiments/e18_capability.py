@@ -87,6 +87,22 @@ ARMS = {
     "s4_x16_pca32": dict(specs=((4, 600.0),), n_charts=16, k=32),
     "s4_x24_pca32": dict(specs=((4, 600.0),), n_charts=24, k=32),
     "s4_x16_var":   dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32),
+    # round 4: the refractory is a declared 150 ms that makes two notes in the
+    # same lane closer than that physically unpressable, whatever the readout
+    # does.  At 3-5 notes/s over four lanes it is plausibly what is now binding,
+    # and it has never been varied.  Same winning diet, shorter dead time.
+    "var_r100":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, refr=100.0),
+    "var_r75":      dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, refr=75.0),
+    "var_r50":      dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, refr=50.0),
+    # round 5: the approach window is how long a note is visible -- the fly's
+    # scroll speed.  At 800 ms and 3+ notes/s a lane holds two or three notes at
+    # once and the encoder shows their superposition, which is the thing real
+    # players fix by scrolling faster.  `approach` applies to the training
+    # charts and the battery together, so the fly is never tested at a scroll
+    # speed it was not fitted at.
+    "var_a600":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=600.0),
+    "var_a400":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=400.0),
+    "var_a300":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0)), n_charts=16, k=32, approach=300.0),
 }
 
 # Held-out battery: the conditions experiment 5 measured, plus a denser
@@ -120,6 +136,19 @@ DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 E5_REFERENCE = {"s3_600": 0.917, "s4_600": 0.506, "s4_400": 0.286, "s5_600": 0.608}
 
 
+def _approach(cfg) -> dict:
+    """``{}`` unless the arm declares a scroll speed, so the default path is
+    exactly what every earlier round ran."""
+    return {} if "approach" not in cfg else {"approach_ms": float(cfg["approach"])}
+
+
+def _specs(cfg) -> tuple:
+    """Training specs with the arm's approach appended, if it declares one."""
+    if "approach" not in cfg:
+        return cfg["specs"]
+    return tuple((s[0], s[1], float(cfg["approach"])) for s in cfg["specs"])
+
+
 def _load(path, default):
     if os.path.exists(path):
         with open(path) as fh:
@@ -129,18 +158,21 @@ def _load(path, default):
 
 def run_arm(arm: str) -> dict:
     cfg = ARMS[arm]
-    specs = cfg["specs"]
+    specs = _specs(cfg)
     n_charts = int(cfg.get("n_charts", N_CHARTS))
     k = int(cfg.get("k", READOUT_K))
     t0 = time.time()
     fly = M.build(regime="play")
     player = P.Player.untrained(fly, theta=THETA, noise=NOISE)
+    if "refr" in cfg:
+        player.controller.refractory_ms = float(cfg["refr"])
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=n_charts, n_notes=N_NOTES,
                         seed=TRAIN_SEED, chart_specs=specs)
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=k, states=states)
     print(f"[{arm}] recording {n_charts} charts (pca{k}): "
-          + ", ".join(f"s{s}@{i:.0f}" for s, i in specs), flush=True)
+          + ", ".join(f"s{s[0]}@{s[1]:.0f}"
+                      + (f"/a{s[2]:.0f}" if len(s) > 2 else "") for s in specs), flush=True)
     rr.record()
     d = rr.solve()
     out = {"arm": arm, "specs": [list(s) for s in specs],
@@ -148,7 +180,7 @@ def run_arm(arm: str) -> dict:
            "train_reward": d["train_reward"], "frames": d["frames"],
            "lanes": d["lanes"], "battery": {}}
     for name, cond in BATTERY.items():
-        e = L.evaluate(player, **cond, **BATTERY_KW)
+        e = L.evaluate(player, **cond, **BATTERY_KW, **_approach(cfg))
         n_c = int(np.array(e["confusion"]).sum())
         out["battery"][name] = {
             "accuracy": float(e["accuracy"]), "hit_rate": float(e["hit_rate"]),
@@ -229,9 +261,11 @@ def validate():
     cfg = ARMS[arm]
     fly = M.build(regime="play")
     player = P.Player.untrained(fly, theta=THETA, noise=NOISE)
+    if "refr" in cfg:
+        player.controller.refractory_ms = float(cfg["refr"])
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=int(cfg.get("n_charts", N_CHARTS)),
-                        n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=cfg["specs"])
+                        n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=_specs(cfg))
     rr.features = R.PopulationProjection.fit(fly, player.r0,
                                              k=int(cfg.get("k", READOUT_K)), states=states)
     print(f"[{arm}] validating on seed {DEEP_KW['seed']}, "
@@ -240,7 +274,7 @@ def validate():
     rr.solve()
     out = {"arm": arm, "deep_kw": DEEP_KW, "conditions": {}}
     for name, cond in DEEP.items():
-        e = L.evaluate(player, **cond, **DEEP_KW)
+        e = L.evaluate(player, **cond, **DEEP_KW, **_approach(cfg))
         n_c = int(np.array(e["confusion"]).sum())
         nps = 1000.0 / cond["interval_ms"]
         out["conditions"][name] = {

@@ -102,12 +102,30 @@ then falls off steeply: 0.68 at 3.3, 0.57 at 4.0, 0.43 at 5.0. Below roughly
 0.85 the hit rate is what goes — 0.93 at 2.9 notes/s, 0.74 at 3.3, 0.68 at 5.0 —
 so it is missing notes rather than mistiming them or pressing the wrong key.
 
-**The next thing to test is the 150 ms refractory in `controller.py`.** It is a
-declared constant that makes two notes in the same lane closer than 150 ms
-physically unpressable, and at 4–5 notes/s across four lanes that is now
-plausibly binding. It has never been varied. Whether the remaining wall is the
-refractory, the channels' temporal resolution, or the readout is an open and
-cheap question.
+### It is not the refractory — that was tested and it is not
+
+The obvious suspect was the 150 ms refractory in `controller.py`, a declared
+constant that makes two notes in the same lane closer than 150 ms physically
+unpressable. This document previously predicted it was "plausibly binding" at
+4–5 notes/s. **It is not, and the prediction was wrong.** Refitting the winning
+arm at 100, 75 and 50 ms gives results *bit-identical* to 150 ms on all seven
+battery conditions — not close, identical.
+
+The reason is a property of the charts rather than of the fly. `stage_chart`
+spreads notes over four lanes at a uniform interval, so the minimum gap between
+two notes *in the same lane* is the full interval: 600 ms at `s4_600`, and still
+200 ms at the most extreme condition tested. The refractory has never had an
+opportunity to bind. It would bind on a real beatmap containing jacks, which is
+a reason to keep the constraint in mind for step 12 and not a reason to change
+it now.
+
+### What the wall probably is
+
+The remaining suspect is the 800 ms approach window. At 3.3 notes/s a lane has
+two or three notes visible at once and the encoder shows their superposition, so
+the channel cannot cleanly resolve which one is at the judgment line. That is
+also exactly what real osu!mania players fix by raising scroll speed, and it is
+the next thing to test.
 
 ## In osu!mania terms
 
@@ -140,5 +158,10 @@ an 800 ms approach.
 - Stop describing chord density as the wall. It was the training set.
 - When fitting a readout here, use stage 4 at several intervals. Never fit at a
   single fast density, and do not bother mixing stages.
-- Vary the refractory next; it is the only untested hard constraint left between
-  the current ceiling and 4 notes per second.
+- **Do not blame the refractory for the density ceiling.** It was varied from
+  150 ms down to 50 ms and changes nothing, because uniform-interval stage
+  charts never put two notes in one lane closer than the interval. It remains a
+  real constraint for any beatmap with jacks.
+- Try the approach window next. 800 ms puts two or three notes in a lane at once
+  past 3 notes/s, which is the superposition a real player fixes with scroll
+  speed.

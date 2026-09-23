@@ -1,0 +1,103 @@
+{
+ "arm": "var_a600",
+ "specs": [
+  [
+   4,
+   600.0,
+   600.0
+  ],
+  [
+   4,
+   450.0,
+   600.0
+  ],
+  [
+   4,
+   350.0,
+   600.0
+  ]
+ ],
+ "n_charts": 16,
+ "k": 32,
+ "n_params": 132,
+ "train_reward": 0.9939546130952381,
+ "frames": 78003,
+ "lanes": [
+  {
+   "lead_ms": -20.0,
+   "offset": -0.5999999999999999,
+   "train_reward": 0.9784226190476191,
+   "train_corr": 0.5960906193997341
+  },
+  {
+   "lead_ms": 0.0,
+   "offset": -0.7,
+   "train_reward": 1.0,
+   "train_corr": 0.7024441548600743
+  },
+  {
+   "lead_ms": 0.0,
+   "offset": -0.7,
+   "train_reward": 1.0,
+   "train_corr": 0.644539764874722
+  },
+  {
+   "lead_ms": -40.0,
+   "offset": -0.3999999999999999,
+   "train_reward": 0.9973958333333333,
+   "train_corr": 0.6216361037165067
+  }
+ ],
+ "battery": {
+  "s3_600": {
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 1.0
+  },
+  "s3_450": {
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 1.0
+  },
+  "s3_350": {
+   "accuracy": 0.85,
+   "hit_rate": 0.85,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.85
+  },
+  "s4_600": {
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 1.0
+  },
+  "s4_400": {
+   "accuracy": 0.9944444444444445,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.016666666666666666,
+   "lane_correct": 0.9836065573770492,
+   "reward": 0.9936111111111111
+  },
+  "s4_300": {
+   "accuracy": 0.8166666666666668,
+   "hit_rate": 0.85,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 0.8166666666666668
+  },
+  "s5_600": {
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0,
+   "reward": 1.0
+  }
+ },
+ "seconds": 271.7
+}

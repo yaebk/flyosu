@@ -1,0 +1,9 @@
+[var_a400] recording 16 charts (pca32): s4@600/a400, s4@450/a400, s4@350/a400
+  [var_a400] s3_600   acc 1.000 (e5 0.917, +0.083)  hit 1.00  stray 0.00
+  [var_a400] s3_450   acc 1.000  hit 1.00  stray 0.00
+  [var_a400] s3_350   acc 1.000  hit 1.00  stray 0.00
+  [var_a400] s4_600   acc 1.000 (e5 0.506, +0.494)  hit 1.00  stray 0.00
+  [var_a400] s4_400   acc 1.000 (e5 0.286, +0.714)  hit 1.00  stray 0.00
+  [var_a400] s4_300   acc 0.933  hit 0.93  stray 0.00
+  [var_a400] s5_600   acc 1.000 (e5 0.608, +0.392)  hit 1.00  stray 0.00
+wrote e18_capability_var_a400.json

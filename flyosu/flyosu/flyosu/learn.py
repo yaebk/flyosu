@@ -132,12 +132,18 @@ class ReadoutLearner:
 
 
 def evaluate(player: Player, stage: int = 3, n_charts: int = 3, n_notes: int = 20,
-             interval_ms: float = 600.0, seed: int = 999) -> dict:
-    """Held-out performance on fresh charts (fixed seeds, never used in training)."""
+             interval_ms: float = 600.0, seed: int = 999,
+             approach_ms: float = 800.0) -> dict:
+    """Held-out performance on fresh charts (fixed seeds, never used in training).
+
+    ``approach_ms`` is how long a note is visible before its hit time -- the
+    fly's scroll speed.  The default is ``stage_chart``'s own, so every result
+    recorded before this argument existed is unaffected.
+    """
     accs, hits, rws, strays, errs, conf = [], [], [], [], [], np.zeros((4, 4), int)
     for c in range(n_charts):
         res = player.play(stage_chart(stage, n_notes=n_notes, interval_ms=interval_ms,
-                                      seed=seed + c), seed=seed + c)
+                                      approach_ms=approach_ms, seed=seed + c), seed=seed + c)
         accs.append(res.accuracy); hits.append(res.hit_rate); rws.append(reward(res))
         strays.append(res.n_stray); errs += res.errors_ms.tolist()
         conf += res.lane_confusion
