@@ -1,0 +1,91 @@
+===== interval 1000 ms, N_SEEDS=10 =====
+Tue Sep 22 23:53:02 EDT 2026
+interval 1000 ms, delay cap 1000 ms -> e11_delays_cap1000_interval1000.json (0 networks already done)
+  real connectome          lane 0.62 0.56 0.65 0.00 0.00 0.00   best 0.65@1.5  acc 0.454 (no delays 0.167)  delays [570, 412, 0, 0] ms  (276s)
+  rewired #1               lane 0.78 0.45 0.00 0.00 0.00 0.00   best 0.78@0.5  acc 0.525 (no delays 0.000)  delays [418, 756, 0, 426] ms  (254s)
+  rewired #2               lane 0.66 0.69 0.74 1.00 1.00 1.00   best 1.00@2.0  acc 0.975 (no delays 0.225)  delays [0, 524, 0, 772] ms  (343s)
+  rewired #3               lane 0.52 1.00 1.00 1.00 1.00 1.00   best 1.00@1.0  acc 0.725 (no delays 0.408)  delays [760, 0, 142, 74] ms  (323s)
+  rewired #4               lane 0.74 0.50 0.00 0.00 0.00 0.00   best 0.74@0.5  acc 0.667 (no delays 0.158)  delays [244, 528, 766, 318] ms  (232s)
+  rewired #5               lane 0.63 0.76 1.00 1.00 1.00 1.00   best 1.00@1.5  acc 0.683 (no delays 0.279)  delays [0, 524, 776, 228] ms  (356s)
+  rewired #6               lane 0.47 0.79 1.00 1.00 1.00 0.00   best 1.00@1.5  acc 0.608 (no delays 0.037)  delays [0, 434, 444, 346] ms  (306s)
+  rewired #7               lane 0.66 0.68 1.00 0.92 1.00 0.00   best 1.00@1.5  acc 0.883 (no delays 0.275)  delays [0, 0, 124, 702] ms  (328s)
+  rewired #8               lane 0.41 0.56 1.00 1.00 0.00 0.00   best 1.00@1.5  acc 0.833 (no delays 0.425)  delays [0, 278, 0, 0] ms  (281s)
+  rewired #9               lane 0.21 0.31 1.00 1.00 0.00 0.00   best 0.31@1.0  acc 0.225 (no delays 0.071)  delays [0, 0, 0, 456] ms  (254s)
+  rewired #10              lane 0.46 0.50 1.00 0.00 0.00 0.00   best 0.46@0.5  acc 0.408 (no delays 0.000)  delays [774, 0, 788, 750] ms  (251s)
+
+=== experiment 11: per-key delays, band wiring, 1000 ms note interval ===
+
+  lane-correct, own best theta
+    with delays   real 0.645  rewired 0.829 +- 0.243  8/10  p 0.818
+    no delays     real 1.000  rewired 0.662 +- 0.391  4/10  p 0.455
+    change        real -0.355   rewired +0.167
+
+  accuracy, own best theta
+    with delays   real 0.454  rewired 0.653 +- 0.214  8/10  p 0.818
+    no delays     real 0.167  rewired 0.188 +- 0.152  5/10  p 0.545
+    change        real +0.288   rewired +0.465
+
+  delays chosen: real [570, 412, 0, 0] ms, rewired mean 309 ms (max 788)
+===== interval 1000 ms done =====
+Wed Sep 23 00:46:30 EDT 2026
+===== interval 1400 ms, N_SEEDS=10 =====
+Wed Sep 23 00:46:30 EDT 2026
+interval 1400 ms, delay cap 1000 ms -> e11_delays_cap1000_interval1400.json (0 networks already done)
+  real connectome          lane 0.65 0.62 0.65 0.00 0.00 0.00   best 0.65@0.5  acc 0.454 (no delays 0.175)  delays [696, 678, 800, 150] ms  (341s)
+  rewired #1               lane 0.78 0.50 0.00 0.00 0.00 0.00   best 0.78@0.5  acc 0.500 (no delays 0.000)  delays [418, 756, 0, 426] ms  (325s)
+  rewired #2               lane 0.65 0.68 1.00 1.00 1.00 1.00   best 1.00@1.5  acc 1.000 (no delays 0.225)  delays [0, 634, 0, 780] ms  (425s)
+  rewired #3               lane 0.54 1.00 1.00 1.00 1.00 1.00   best 1.00@1.0  acc 0.725 (no delays 0.408)  delays [760, 0, 142, 74] ms  (415s)
+  rewired #4               lane 0.74 0.50 0.00 0.00 0.00 0.00   best 0.74@0.5  acc 0.708 (no delays 0.133)  delays [244, 528, 766, 318] ms  (293s)
+  rewired #5               lane 0.63 0.89 1.00 1.00 1.00 1.00   best 1.00@1.5  acc 0.683 (no delays 0.263)  delays [0, 524, 776, 228] ms  (445s)
+  rewired #6               lane 0.46 0.79 1.00 1.00 1.00 0.00   best 1.00@1.5  acc 0.608 (no delays 0.042)  delays [0, 434, 444, 346] ms  (418s)
+  rewired #7               lane 0.67 0.67 1.00 1.00 1.00 0.00   best 1.00@1.5  acc 0.875 (no delays 0.275)  delays [0, 0, 124, 702] ms  (459s)
+  rewired #8               lane 0.45 0.55 1.00 1.00 0.00 0.00   best 1.00@1.5  acc 0.850 (no delays 0.425)  delays [0, 278, 0, 0] ms  (382s)
+  rewired #9               lane 0.21 0.31 1.00 1.00 0.00 0.00   best 0.31@1.0  acc 0.225 (no delays 0.071)  delays [0, 0, 0, 456] ms  (340s)
+  rewired #10              lane 0.49 0.47 1.00 0.00 0.00 0.00   best 0.49@0.5  acc 0.625 (no delays 0.000)  delays [774, 0, 788, 750] ms  (334s)
+
+=== experiment 11: per-key delays, band wiring, 1400 ms note interval ===
+
+  lane-correct, own best theta
+    with delays   real 0.645  rewired 0.832 +- 0.238  8/10  p 0.818
+    no delays     real 1.000  rewired 0.662 +- 0.388  4/10  p 0.455
+    change        real -0.355   rewired +0.170
+
+  accuracy, own best theta
+    with delays   real 0.454  rewired 0.680 +- 0.205  9/10  p 0.909
+    no delays     real 0.175  rewired 0.184 +- 0.151  5/10  p 0.545
+    change        real +0.279   rewired +0.496
+
+  delays chosen: real [696, 678, 800, 150] ms, rewired mean 312 ms (max 788)
+===== interval 1400 ms done =====
+Wed Sep 23 01:56:09 EDT 2026
+===== interval 450 ms, N_SEEDS=10 =====
+Wed Sep 23 01:56:09 EDT 2026
+interval 450 ms, delay cap 1000 ms -> e11_delays_cap1000_interval450.json (0 networks already done)
+  real connectome          lane 0.49 0.55 0.54 0.33 0.00 0.20   best 0.55@1.0  acc 0.183 (no delays 0.125)  delays [652, 630, 634, 24] ms  (151s)
+  rewired #1               lane 0.48 0.38 0.35 0.44 0.00 0.00   best 0.48@0.5  acc 0.404 (no delays 0.242)  delays [418, 756, 0, 426] ms  (148s)
+  rewired #2               lane 0.44 0.49 0.37 0.43 0.58 0.62   best 0.58@2.5  acc 0.621 (no delays 0.200)  delays [0, 0, 0, 762] ms  (200s)
+  rewired #3               lane 0.59 0.76 0.71 1.00 1.00 1.00   best 0.76@1.0  acc 0.488 (no delays 0.321)  delays [760, 0, 142, 74] ms  (191s)
+  rewired #4               lane 0.45 0.13 0.23 0.50 0.57 0.00   best 0.45@0.5  acc 0.533 (no delays 0.046)  delays [244, 528, 766, 318] ms  (124s)
+  rewired #5               lane 0.57 0.57 0.86 0.77 1.00 1.00   best 0.86@1.5  acc 0.504 (no delays 0.171)  delays [0, 524, 776, 228] ms  (174s)
+  rewired #6               lane 0.46 0.50 0.67 0.48 0.58 0.25   best 0.67@1.5  acc 0.338 (no delays 0.183)  delays [0, 434, 444, 346] ms  (162s)
+  rewired #7               lane 0.56 0.39 0.92 0.67 0.50 0.80   best 0.56@0.5  acc 0.604 (no delays 0.129)  delays [444, 318, 174, 754] ms  (177s)
+  rewired #8               lane 0.45 0.45 0.59 0.88 0.88 1.00   best 0.59@1.5  acc 0.500 (no delays 0.208)  delays [0, 278, 0, 0] ms  (150s)
+  rewired #9               lane 0.47 0.48 0.26 0.20 0.11 0.17   best 0.48@1.0  acc 0.229 (no delays 0.071)  delays [0, 0, 0, 456] ms  (136s)
+  rewired #10              lane 0.45 0.19 0.71 0.00 0.00 0.00   best 0.45@0.5  acc 0.254 (no delays 0.013)  delays [774, 0, 788, 750] ms  (138s)
+
+=== experiment 11: per-key delays, band wiring, 450 ms note interval ===
+
+  lane-correct, own best theta
+    with delays   real 0.550  rewired 0.588 +- 0.130  6/10  p 0.636
+    no delays     real 0.172  rewired 0.384 +- 0.151  10/10  p 1.000
+    change        real +0.378   rewired +0.204
+
+  accuracy, own best theta
+    with delays   real 0.183  rewired 0.447 +- 0.130  10/10  p 1.000
+    no delays     real 0.125  rewired 0.158 +- 0.090  7/10  p 0.727
+    change        real +0.058   rewired +0.289
+
+  delays chosen: real [652, 630, 634, 24] ms, rewired mean 317 ms (max 788)
+===== interval 450 ms done =====
+Wed Sep 23 02:25:23 EDT 2026
+ALL DONE

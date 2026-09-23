@@ -169,6 +169,18 @@ def summarise(interval: float, runs: dict, n_ctrl: int) -> dict | None:
             rho, pv = spearmanr(x, y)
             row["ctrl_delay_vs_gain"][name] = {"spearman": float(rho), "p": float(pv),
                                                "n": len(c), "constant": None}
+    # A gain is a difference, and differences favour whoever started low.  If
+    # wanting long delays goes with playing badly without them, the positive
+    # correlation above is a floor effect rather than evidence that long delays
+    # are good, so both halves are reported.
+    md = np.array([np.mean(v["delays"]) for v in c])
+    for name, z in (("nodelay_accuracy", np.array([v["nodelay_accuracy"] for v in c])),
+                    ("accuracy", np.array([v["accuracy"] for v in c]))):
+        if np.ptp(md) == 0:
+            row["ctrl_delay_vs_gain"]["vs_" + name] = {"spearman": None, "p": None}
+            continue
+        rho, pv = spearmanr(md, z)
+        row["ctrl_delay_vs_gain"]["vs_" + name] = {"spearman": float(rho), "p": float(pv)}
     return row
 
 
@@ -232,6 +244,15 @@ def main():
                          if c["spearman"] is not None
                          else f"no variance (all {c['constant']:.2f})")
         print(f"   {s['interval_ms']:6.0f}   {cells[0]:<25s}  {cells[1]}")
+    print("\n  within the controls: mean delay vs where the network started and ended")
+    print("   interval   vs accuracy without delays   vs accuracy with delays")
+    for s in rows:
+        cells = []
+        for name in ("vs_nodelay_accuracy", "vs_accuracy"):
+            c = s["ctrl_delay_vs_gain"][name]
+            cells.append(f"rho {c['spearman']:+.2f}  p {c['p']:.3f}"
+                         if c["spearman"] is not None else "no variance")
+        print(f"   {s['interval_ms']:6.0f}   {cells[0]:<28s} {cells[1]}")
     print(f"\n  permutation p floor at n = {rows[0]['n']}: "
           f"{rows[0]['p_floor']:.3f}")
 

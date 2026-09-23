@@ -1,0 +1,7 @@
+interval 450 ms, delay cap 1000 ms -> e11_delays_cap1000_interval450_shard0of2.json (11 networks already done)
+  rewired #12              lane 0.30 0.48 0.47 0.35 0.54 0.86   best 0.48@1.0  acc 0.258 (no delays 0.108)  delays [0, 0, 380, 264] ms  (242s)
+  rewired #14              lane 0.43 0.33 0.37 0.29 0.30 0.42   best 0.43@0.5  acc 0.183 (no delays 0.196)  delays [0, 518, 748, 50] ms  (165s)
+  rewired #16              lane 0.48 0.35 0.41 0.42 0.56 0.50   best 0.48@0.5  acc 0.271 (no delays 0.254)  delays [324, 712, 112, 308] ms  (202s)
+  rewired #18              lane 0.35 0.46 0.35 0.31 0.47 0.57   best 0.46@1.0  acc 0.296 (no delays 0.167)  delays [0, 792, 220, 0] ms  (202s)
+  rewired #20              lane 0.35 0.48 0.59 0.56 0.58 0.69   best 0.59@1.5  acc 0.458 (no delays 0.225)  delays [0, 192, 244, 778] ms  (202s)
+shard 0 done: 5 networks in e11_delays_cap1000_interval450_shard0of2.json; run `merge` to fold in.
