@@ -281,6 +281,36 @@ flipped the comparison the *other* way. It was caught before the number was
 reported and the whole run repeated with the cap where it cannot bind.
 **[`docs/RESULTS_E11.md`](docs/RESULTS_E11.md).**
 
+Experiment 12 tested experiment 11's explanation and refuted it. If the real
+network's trouble is that its 650 ms waits overrun a 600 ms note gap, widening
+the gap should rescue it. Across 450, 1000 and 1400 ms with 20 controls each,
+**the gap to the controls never closes** — 0.226, 0.297, 0.268, 0.282 — and at
+1000 ms and above **not one of its lanes overruns the interval** while it stays
+18/20 and 19/20. The mechanism is switched off and the deficit is unchanged, so
+the note interval is not what puts it last. Two corrections came with that: it
+*does* gain +0.29 from delays once the chart leaves room, so "cannot use them"
+was wrong; and the delay-versus-gain correlation experiment 11 quoted against
+itself (+0.39, p = 0.088) returns +0.30, p = 0.200 at n = 20 and is flat
+elsewhere — it was noise. The sweep also turned up the most promising untried
+thing here: at wide intervals the real network's lane-correctness *without any
+delays* is **1.000** against controls' 0.56, so given room it presses the right
+key almost every time and merely presses too early to score.
+**[`docs/RESULTS_E12.md`](docs/RESULTS_E12.md).**
+
+Experiment 13 went back to the male CNS with a readout not known in advance to
+destroy the signal. Four readouts on the same networks, charts and threshold
+grid: on the four anatomical leg-motor pools the real connectome loses 9/10,
+and on eight principal components of *the same 348 neurons* it wins 1/10. That
+confirms experiment 7's suspicion — **the male CNS reversal is the pooling, not
+the connectome.** But the held-out phase takes the interesting half back: replay
+each network's chosen policy on charts nothing was re-tuned for and the real
+network's PC accuracy halves, 0.258 → 0.122, while the controls hold at 0.131 →
+0.138, so 1/10 becomes 6/10. It had been fitting its threshold to the scored
+charts harder than the controls were. The anatomical disadvantage survives
+held-out intact. So removing the pooling removes a real handicap and leaves the
+real network **level** with its controls, not ahead.
+**[`docs/RESULTS_E13.md`](docs/RESULTS_E13.md).**
+
 Experiment 14 is the first comparison here that was **pre-registered**. Seven
 times a gap had shrunk once a comparison was made fairer, and every one of
 those was caught after the fact — which shows the mistake is easy to make, not
@@ -425,12 +455,15 @@ experiments/
   e9_structure.py     spectral radius and dimensionality, both datasets
   e10_chords.py       chords: fit on stage 4, and chord additivity
   e11_delays.py       per-key delays: a crossing schedules a press
+  e12_interval.py     does the note interval explain the delay result?
+  e13_malecns_readout.py  male CNS: four readouts on the same networks
   e14_prereg.py       the pre-registered comparison: controls first, real network last
+  e15_trigger.py      firing edge: crossing vs peak vs falling edge
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
-tests/test_pipeline.py  28 checks on the network side
-tests/test_play.py      55 checks on the game side, incl. the probes
-tests/test_reservoir.py 17 checks on the closed-form readout
+tests/test_pipeline.py  32 checks on the network side
+tests/test_play.py      67 checks on the game side, incl. the probes and firing edges
+tests/test_reservoir.py 20 checks on the closed-form readout
 tests/test_malecns.py   the male CNS loader, pinning the numbers docs/MALECNS.md quotes
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
 docs/MALECNS.md         the second connectome: loader, decisions, what transfers
@@ -447,6 +480,8 @@ docs/RESULTS_E8.md      experiment 8
 docs/RESULTS_E9.md      experiment 9
 docs/RESULTS_E10.md     experiment 10
 docs/RESULTS_E11.md     experiment 11
+docs/RESULTS_E12.md     experiment 12
+docs/RESULTS_E13.md     experiment 13
 docs/RESULTS_E14.md     experiment 14
 data/SOURCES.md         where the data comes from, with citations
 ```
@@ -458,9 +493,9 @@ python run_fly.py                    # the four lanes side by side
 python run_fly.py --fall D           # watch a note descend
 python run_fly.py --sweep            # azimuth tuning, as text
 python run_fly.py --control rewired  # the same, on a randomised network
-python -m tests.test_pipeline        # 28 checks
-python -m tests.test_play            # 55 checks
-python -m tests.test_reservoir       # 17 checks
+python -m tests.test_pipeline        # 32 checks
+python -m tests.test_play            # 67 checks
+python -m tests.test_reservoir       # 20 checks
 ```
 
 ## Where this is
@@ -499,9 +534,21 @@ significant. Untrained accuracy is 19/20 against (p = 0.95), untrained
 lane-correctness 11/20 (p = 0.571), and the supervised ceiling shows no
 advantage at any readout size. The one non-behavioural measurement in that
 territory, how lane-selective the four channels are, went to a pre-registered
-test at n = 40 and came back **4/40, p = 0.122** (experiment 14). The honest
-summary is that **the gap shrank every time the comparison was made more
-careful**, and that is now the most robust thing here.
+test at n = 40 and came back **4/40, p = 0.122** (experiment 14). The male CNS
+comparison, re-run with a readout that can see lane identity, reaches level and
+not ahead (experiment 13). The honest summary is that **the gap shrank every
+time the comparison was made more careful**, and that is now the most robust
+thing here — ten times over, and twice what dissolved was an *explanation*
+rather than a difference.
+
+One thing is not yet closed, and it is the only place a behavioural advantage
+could still be hiding. Given a wide enough note gap the real connectome's
+lane-correctness **without any delays is 1.000**, against the controls'
+0.56 ± 0.40 — its best showing anywhere in this project. It picks the right key
+almost every time and simply presses too early to score, and the per-key delay
+fix trades that accuracy away. Experiment 15 is testing whether a later firing
+edge — the channel's peak, or its falling edge, neither of which declares a
+single extra parameter — fixes the timing without discarding the lane choice.
 
 What still stands are the two measurements that need no behavioural protocol at
 all: rewiring the topology **collapses the spectral radius** (2.28 vs
