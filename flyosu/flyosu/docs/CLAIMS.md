@@ -233,10 +233,18 @@ counter-evidence (+0.39, p = 0.088) comes back +0.30, p = 0.200 at n = 20 and is
 flat elsewhere; it was noise and should not be quoted either way.
 `docs/RESULTS_E12.md`.
 
-One result from that sweep points somewhere new. At the wide intervals the real
-network's lane-correctness **without** delays is 1.000, against controls'
-0.56 ± 0.40 (7/20) — its best showing anywhere in this project. Given room it
-presses the right key almost every time and simply presses too early to score,
-and adding delays trades that away (−0.355) while lifting the controls. A policy
-that fixes the timing without discarding the early, accurate lane choice has not
-been built, and is the most promising untried thing here.
+**A correction, recorded because it is the third instance of the same
+mistake.** This section previously said that at wide intervals the real
+network's lane-correctness without delays is 1.000 against controls' 0.56, and
+called it the most promising untried lead in the project. That 1.000 was the
+**fallback value on 9 presses**: no threshold in the sweep reaches the 20-press
+guard, so lane-correctness is undefined there and the code emitted an argmax
+over ineligible entries. The same fallback produced the male CNS 0.800 in
+experiment 7 and the `pc4` value in experiment 13. In all three the guard
+existed and the fallback branch defeated it; it now returns `None`, existing
+result files are re-guarded on read, and the offending network is named.
+
+What is true is weaker: without delays at a wide interval the real network
+**presses very rarely** — 9 presses against 40 notes — and is in the right lane
+when it does. Six of twenty controls are in the same position, so it is not
+unusual. `docs/RESULTS_E12.md`.

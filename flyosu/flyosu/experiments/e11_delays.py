@@ -159,21 +159,40 @@ def measure(label, kw):
     ok = np.array(n) >= MIN_COUNTED
     i = int(np.argmax(np.where(ok, lc, -1.0))) if ok.any() else int(np.argmax(lc))
     ok0 = np.array(n0) >= MIN_COUNTED
+    # The fallback below has now produced a phantom number three times in this
+    # project -- the male CNS 0.800 in experiment 7, pc4 in experiment 13, and
+    # the real network's "1.000" no-delay lane-correctness here, which was a
+    # ratio over 9 presses and got as far as CLAIMS.md before it was caught.
+    # The guard is kept for choosing *which* threshold to report, but the
+    # lane-correct value is now emitted as None when nothing is eligible, so a
+    # consumer cannot mistake it for a score.
     i0 = int(np.argmax(np.where(ok0, lc0, -1.0))) if ok0.any() else int(np.argmax(lc0))
+    if not ok.any():
+        print(f"  !! {label}: no threshold reaches {MIN_COUNTED} counted presses "
+              f"with delays; lane-correct is undefined", flush=True)
+    if not ok0.any():
+        print(f"  !! {label}: no threshold reaches {MIN_COUNTED} counted presses "
+              f"without delays; lane-correct is undefined", flush=True)
     out = {"label": label, "wiring": list(wiring), "theta": list(THETA_SWEEP),
            "interval_ms": INTERVAL_MS, "max_delay_ms": MAX_DELAY_MS,
            "lane_correct": lc, "accuracy": acc, "n_counted": n, "delays": dl,
            "eligible": ok.tolist(), "best_theta": float(THETA_SWEEP[i]),
-           "best_lane_correct": float(lc[i]), "best_accuracy": float(max(acc)),
+           "any_eligible": bool(ok.any()),
+           "best_lane_correct": (float(lc[i]) if ok.any() else None),
+           "best_lane_correct_unguarded": float(lc[i]),
+           "best_accuracy": float(max(acc)),
            "delays_at_best": dl[i],
            "nodelay_lane_correct": lc0, "nodelay_accuracy": acc0,
            "nodelay_n_counted": n0, "nodelay_eligible": ok0.tolist(),
            "nodelay_best_theta": float(THETA_SWEEP[i0]),
-           "nodelay_best_lane_correct": float(lc0[i0]),
+           "nodelay_any_eligible": bool(ok0.any()),
+           "nodelay_best_lane_correct": (float(lc0[i0]) if ok0.any() else None),
+           "nodelay_best_lane_correct_unguarded": float(lc0[i0]),
            "nodelay_best_accuracy": float(max(acc0)),
            "seconds": round(time.time() - t0, 1)}
     print(f"  {label:<24s} lane " + " ".join(f"{v:.2f}" for v in lc) +
-          f"   best {out['best_lane_correct']:.2f}@{out['best_theta']:.1f}  "
+          f"   best {'-' if out['best_lane_correct'] is None else format(out['best_lane_correct'], '.2f')}"
+          f"@{out['best_theta']:.1f}  "
           f"acc {out['best_accuracy']:.3f} (no delays {out['nodelay_best_accuracy']:.3f})  "
           f"delays {np.round(dl[i]).astype(int).tolist()} ms  "
           f"({out['seconds']:.0f}s)", flush=True)
@@ -218,7 +237,25 @@ def main():
               f"{os.path.basename(SHARD_PATH)}; run `merge` to fold in.")
 
 
+def _guard(results):
+    """Retrofit the press guard onto runs written before it emitted None.
+
+    Older result files stored the fallback value for lane-correctness when no
+    threshold met MIN_COUNTED, which is how a ratio over 9 presses reached
+    CLAIMS.md as "1.000".  The eligibility flags were stored too, so the fix is
+    applied to existing files here rather than by re-running them.
+    """
+    for r in results["runs"]:
+        for flag, key in (("eligible", "best_lane_correct"),
+                          ("nodelay_eligible", "nodelay_best_lane_correct")):
+            if flag in r and key in r and r[key] is not None and not any(r[flag]):
+                r[key + "_unguarded"] = r[key]
+                r[key] = None
+    return results
+
+
 def report(results):
+    results = _guard(results)
     runs = {r["label"]: r for r in results["runs"]}
     real = runs.get("real connectome")
     ctrl = [r for k, r in runs.items() if k != "real connectome"]
@@ -240,7 +277,16 @@ def report(results):
     for key, lbl in (("best_lane_correct", "lane-correct, own best theta"),
                      ("best_accuracy", "accuracy, own best theta")):
         rv = real[key]
-        cv = np.array([r[key] for r in ctrl])
+        if rv is None:
+            print(f"\n  {lbl}\n    real: undefined (no threshold reaches "
+                  f"{MIN_COUNTED} counted presses) -- no comparison made")
+            continue
+        drop = [r["label"] for r in ctrl if r[key] is None]
+        ctrl_k = [r for r in ctrl if r[key] is not None]
+        if drop:
+            print(f"\n  !! {len(drop)} control(s) dropped from '{lbl}': "
+                  f"{', '.join(drop)} (press guard never met)")
+        cv = np.array([r[key] for r in ctrl_k])
         n_ge = int((cv >= rv).sum())
         print(f"\n  {lbl}")
         print(f"    with delays   real {rv:.3f}  rewired {cv.mean():.3f} +- {cv.std():.3f}  "
@@ -248,9 +294,10 @@ def report(results):
         row = {"metric": lbl, "real": float(rv), "ctrl_mean": float(cv.mean()),
                "ctrl_sd": float(cv.std()), "n_ge": n_ge, "n": len(cv),
                "p": (n_ge + 1) / (len(cv) + 1)}
-        if base:
+        if base and base["real connectome"].get(key) is not None:
             br = base["real connectome"][key]
-            bc = np.array([base[r["label"]][key] for r in ctrl if r["label"] in base])
+            bc = np.array([base[r["label"]][key] for r in ctrl
+                           if r["label"] in base and base[r["label"]][key] is not None])
             b_ge = int((bc >= br).sum())
             print(f"    no delays     real {br:.3f}  rewired {bc.mean():.3f} +- {bc.std():.3f}  "
                   f"{b_ge}/{len(bc)}  p {(b_ge + 1) / (len(bc) + 1):.3f}")

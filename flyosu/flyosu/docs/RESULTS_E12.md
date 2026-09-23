@@ -88,20 +88,37 @@ This is now the eighth time in this project that an explanation or a gap
 dissolved once the comparison was pushed harder, and the second time the thing
 that dissolved was a *mechanism* rather than a difference.
 
-## An oddity worth recording
+## An oddity that turned out to be the press guard again — corrected
 
-At 1000 and 1400 ms the real network's **no-delay** lane-correctness is 1.000,
-against controls' 0.562 ± 0.40 (7/20) — its best showing anywhere in the
-project. Adding delays *reduces* it to 0.645 (−0.355) while raising the
-controls' (+0.22).
+**This section originally reported that at 1000 and 1400 ms the real network's
+no-delay lane-correctness is 1.000 against controls' 0.56, called it "its best
+showing anywhere in the project", and proposed that the real connectome presses
+the right key essentially every time and merely presses too early. That was
+wrong, it was propagated to `docs/CLAIMS.md` and the README, and experiment 15
+was built on it. The correction follows.**
 
-So with a wide enough gap and no delays, the real connectome presses the right
-key essentially every time, and simply presses too early to score. That is
-consistent with everything experiment 8 established about its latency structure,
-and it means the delays are trading lane-correctness for timing in a way that
-helps the controls and hurts it. Nobody has tested a policy that keeps the early
-crossing and fixes timing some other way, and this is the clearest hint so far
-that one is worth building.
+The 1.000 is the **fallback value on 9 presses**. Across the whole threshold
+sweep the real network's no-delay arm records `n_counted = [9, 9, 9, 0, 0, 0]`
+and `eligible = [False]*6` — **no threshold reaches the 20-press guard at any
+value**, so lane-correctness is undefined there, and the code emitted
+`argmax(lane_correct)` over ineligible entries rather than refusing.
+
+This is the third time this specific degeneracy has produced a phantom number in
+this project: the 0.800 reported for the male CNS in experiment 7, the `pc4`
+fallback in experiment 13, and this. In all three the guard existed and the
+*fallback branch* defeated it.
+
+What is actually true is weaker and different. With no delays at a wide
+interval the real network **barely presses at all** — 9 presses against 40 notes
+— and those few presses are in the right lane. "Presses the right key almost
+every time" was never supported; "presses very rarely, and is right when it
+does" is. Six of the twenty controls are in the same position, so it is not even
+unusual.
+
+**What this does not touch:** the accuracy comparison that carries this
+experiment. `best_accuracy` is a maximum over the sweep, not a ratio over
+counted presses, so it needs no guard and is unaffected. The refutation of
+experiment 11's interval explanation stands exactly as reported above.
 
 ## Honest caveats
 

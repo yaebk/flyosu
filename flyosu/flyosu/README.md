@@ -291,10 +291,12 @@ the note interval is not what puts it last. Two corrections came with that: it
 *does* gain +0.29 from delays once the chart leaves room, so "cannot use them"
 was wrong; and the delay-versus-gain correlation experiment 11 quoted against
 itself (+0.39, p = 0.088) returns +0.30, p = 0.200 at n = 20 and is flat
-elsewhere — it was noise. The sweep also turned up the most promising untried
-thing here: at wide intervals the real network's lane-correctness *without any
-delays* is **1.000** against controls' 0.56, so given room it presses the right
-key almost every time and merely presses too early to score.
+elsewhere — it was noise. A third correction belongs to this write-up itself:
+it first reported the real network's no-delay lane-correctness at wide intervals
+as **1.000**, "its best showing anywhere", and that was the press-guard fallback
+on 9 presses rather than a score. What is true is that without delays it presses
+very rarely — 9 presses against 40 notes — and is in the right lane when it
+does, which six of twenty controls also manage.
 **[`docs/RESULTS_E12.md`](docs/RESULTS_E12.md).**
 
 Experiment 13 went back to the male CNS with a readout not known in advance to
@@ -541,14 +543,12 @@ time the comparison was made more careful**, and that is now the most robust
 thing here — ten times over, and twice what dissolved was an *explanation*
 rather than a difference.
 
-One thing is not yet closed, and it is the only place a behavioural advantage
-could still be hiding. Given a wide enough note gap the real connectome's
-lane-correctness **without any delays is 1.000**, against the controls'
-0.56 ± 0.40 — its best showing anywhere in this project. It picks the right key
-almost every time and simply presses too early to score, and the per-key delay
-fix trades that accuracy away. Experiment 15 is testing whether a later firing
-edge — the channel's peak, or its falling edge, neither of which declares a
-single extra parameter — fixes the timing without discarding the lane choice.
+Experiment 15 is running: it tests whether a later firing edge — the channel's
+peak, or its falling edge, neither of which declares a single extra parameter
+the way per-key delays do — times the press better than the upward crossing
+every earlier experiment used. It was motivated by a no-delay lane-correctness
+figure that turned out to be a press-guard artefact (see experiment 12), so it
+is now a question about the controller rather than a lead about the connectome.
 
 What still stands are the two measurements that need no behavioural protocol at
 all: rewiring the topology **collapses the spectral radius** (2.28 vs
