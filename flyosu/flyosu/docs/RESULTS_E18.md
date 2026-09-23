@@ -204,15 +204,32 @@ chart, and **density training is worth more than pattern familiarity**. Adding a
 pattern to the diet is not free — it displaces something, and here the thing it
 displaced mattered more.
 
-**The refractory still does nothing, even here.** `jack_r50` matches
-`jack_a400` to three decimals on every condition. At 4 notes/s a jack puts two
-notes in one lane 250 ms apart, still comfortably outside the 150 ms dead time,
-so it cannot bind. To make it bind needs a jack interval under 150 ms — above
-6.7 notes/s in a single lane — which is far past where this fly falls apart
-anyway (0.718 at 5 notes/s). **On this evidence the refractory is not a
-practical constraint at any density the fly can play**, and my earlier caveat
-that it "would bind on a real beatmap with jacks" is only true for 1/4 jacks
-above roughly 100 BPM, which is out of reach for other reasons.
+### The refractory, finally pinned down
+
+`jack_r50` matches `jack_a400` to three decimals on every jack condition at
+250 ms and slower, because a jack at 4 notes/s still leaves 250 ms between two
+notes in a lane — outside the 150 ms dead time. So the question was pushed past
+the point where it *must* bind: jacks at 150 ms, exactly the refractory, and at
+120 ms, inside it. Best arm, refractory 150 ms against 50 ms:
+
+| jacks at | notes/s | same-lane gap | refractory 150 ms | refractory 50 ms | gain |
+|---|---|---|---|---|---|
+| 450 ms | 2.2 | 450 ms | 1.000 | 1.000 | +0.000 |
+| 300 ms | 3.3 | 300 ms | 1.000 | 1.000 | +0.000 |
+| 250 ms | 4.0 | 250 ms | 0.895 | 0.895 | +0.000 |
+| **150 ms** | 6.7 | **150 ms** | 0.431 | 0.467 | **+0.036** |
+| **120 ms** | 8.3 | **120 ms** | 0.429 | 0.500 | **+0.071** |
+
+**Exactly zero above the dead time, and nonzero at and below it** — the effect
+appears precisely where the structural argument says it must and grows as the
+gap goes further inside. That is as clean a confirmation as this project has
+produced, and it settles the question in both directions: the refractory is a
+real constraint, and it is **not a practical one**, because the only charts
+where it binds are ones the fly plays at 0.43–0.50 for unrelated reasons.
+
+My earlier caveat that it "would bind on a real beatmap with jacks" is now
+precise: it binds on 1/4 jacks above roughly 100 BPM, which is out of reach for
+other reasons. Do not spend effort tuning it.
 
 ## In osu!mania terms
 
