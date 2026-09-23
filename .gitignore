@@ -4,20 +4,20 @@ __pycache__/
 *.pyc
 
 # raw connectome data (fetched by `make data`, ~130 MB) and derived caches
-flyosu/flyosu/data/Connectivity_783.parquet
-flyosu/flyosu/data/neuron_annotations.tsv
-flyosu/flyosu/data/flywire783_cache.npz
-flyosu/flyosu/data/flywire783_ann.parquet
-flyosu/flyosu/data/models/
+data/Connectivity_783.parquet
+data/neuron_annotations.tsv
+data/flywire783_cache.npz
+data/flywire783_ann.parquet
+data/models/
 
 # session scratch
-flyosu/flyosu/scratch/
+scratch/
 
 # male CNS raw data (fetched from the public FlyEM bucket, ~1.1 GB)
-flyosu/flyosu/data/malecns/*.feather
-flyosu/flyosu/data/malecns/*.npz
-flyosu/flyosu/data/malecns/*.parquet
+data/malecns/*.feather
+data/malecns/*.npz
+data/malecns/*.parquet
 
 # per-shard checkpoints from parallel runs; `merge` folds them into the
 # canonical results file, so they are intermediate rather than data
-flyosu/flyosu/results/*_shard*of*.json
+results/*_shard*of*.json
