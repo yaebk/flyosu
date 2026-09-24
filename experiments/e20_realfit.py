@@ -45,9 +45,13 @@ DECIDE_SEED = 4242
 # difficulty (None = the whole even pool), taken evenly spaced through the map.
 ARMS = {
     "syn": dict(n_syn=36, per_map=0),
+    "mix3": dict(n_syn=36, per_map=3),
     "mix": dict(n_syn=36, per_map=6),
+    "mix10": dict(n_syn=36, per_map=10),
     "mix_all": dict(n_syn=36, per_map=None),
-    "real": dict(n_syn=0, per_map=None),
+    # mix without its synthetic charts; recorded with project_on_record, which
+    # moves features by ~1e-13 and changed no press in a side-by-side check
+    "real": dict(n_syn=0, per_map=6, proj=True),
 }
 ARM = os.environ.get("ARM", "syn")
 PATH = os.path.join(B.RESULTS, f"e20_realfit_{ARM}.json")
@@ -107,6 +111,7 @@ def fitted_player(cfg, train):
     rr = R.RidgeReadout(player, n_charts=cfg["n_syn"], n_notes=B.N_NOTES_FIT,
                         seed=B.TRAIN_SEED, chart_specs=specs, extra_charts=extra,
                         release_levels=tuple(F["release"]), hold_oracle=True,
+                        project_on_record=bool(cfg.get("proj")),
                         tail_lead_ms=float(F.get("tail_lead", 130.0)))
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=F["k"], states=states)
     t0 = time.time()
@@ -139,6 +144,46 @@ def run():
     with open(PATH, "w") as fh:
         json.dump(res, fh, indent=1)
     summarize(res)
+
+
+def holdout():
+    """The milestone check: refit ``ARM`` (deterministic, so the same readout
+    the decision clips scored) and play the held-out songs in full, against
+    round 15 on the same maps.  Run once, for the chosen arm only."""
+    cfg = ARMS[ARM]
+    train, _ = pools()
+    player, diag = fitted_player(cfg, train)
+    B.MAP_SET = "holdout"
+    rows = sorted(B.charts(), key=lambda r: r["events_per_s"])
+    t0 = time.time()
+    results = player.play_many([r["chart"] for r in rows], seeds=[4242] * len(rows))
+    runs = []
+    for r, pr in zip(rows, results):
+        row = {k: v for k, v in r.items() if k != "chart"}
+        row.update({"accuracy": float(pr.accuracy), "hit_rate": float(pr.hit_rate),
+                    "n_stray": int(pr.n_stray),
+                    "stray_per_note": float(pr.n_stray / max(len(r["chart"]), 1)),
+                    "counts": pr.counts, "loss": B.loss_breakdown(r["chart"], pr)})
+        runs.append(row)
+    a = np.array([r["accuracy"] for r in runs])
+    res = {"arm": ARM, "cfg": cfg, "fit": {k: v for k, v in diag.items() if k != "lanes"},
+           "play_s": round(time.time() - t0, 1), "runs": runs,
+           "summary": {"n": len(runs), "best": float(a.max()), "mean": float(a.mean())}}
+    with open(PATH[:-5] + "_holdout.json", "w") as fh:
+        json.dump(res, fh, indent=1)
+    base = B._load(os.path.join(B.RESULTS, "e20_beatmaps_fast_sm20_k48_a250_holdout.json"), None)
+    b = {(r["song"], r["version"]): r["accuracy"] for r in base["runs"]}
+    bands = ((0, 5.5), (5.5, 8.5), (8.5, 99))
+    for name, rs in (("round 15", base["runs"]), (ARM, runs)):
+        band = [np.mean([r["accuracy"] for r in rs if lo < r["events_per_s"] <= hi]) for lo, hi in bands]
+        print(f"{name:<10s} held-out mean {np.mean([r['accuracy'] for r in rs]):.3f}  "
+              f"bands {' / '.join(f'{x:.3f}' for x in band)}")
+    print(f"better than round 15 on {sum(r['accuracy'] > b[(r['song'], r['version'])] for r in runs)}"
+          f" of {len(runs)}")
+    for kind in B.LOSS_KINDS:
+        acc = lambda rs: (sum(r["loss"][kind]["n"] * (r["loss"][kind]["acc"] or 0) for r in rs)
+                          / max(sum(r["loss"][kind]["n"] for r in rs), 1))
+        print(f"   {kind:<11s} {acc(base['runs']):.3f} -> {acc(runs):.3f}")
 
 
 def per_map(res) -> dict:
@@ -182,6 +227,8 @@ def report():
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "report":
         report()
+    elif len(sys.argv) > 1 and sys.argv[1] == "holdout":
+        holdout()
     elif len(sys.argv) > 1 and sys.argv[1] == "pools":
         tr, de = pools()
         print(f"train pool {sum(len(e) for _, e in tr)} clips, "

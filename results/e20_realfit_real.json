@@ -1,0 +1,5411 @@
+{
+ "arm": "real",
+ "cfg": {
+  "n_syn": 0,
+  "per_map": 6,
+  "proj": true
+ },
+ "clip_s": 6.0,
+ "fit": {
+  "n_params": 200,
+  "n_features": 48,
+  "frames": 374925,
+  "train_reward": 0.7551135697068412,
+  "seconds_solve": 288.2,
+  "seconds_record": 969.4,
+  "n_real": 102,
+  "real_notes": 5360
+ },
+ "lanes": [
+  {
+   "lead_ms": 0.0,
+   "offset": -0.19999999999999996,
+   "train_reward": 0.7350253505793982,
+   "train_corr": 0.6653187663193693,
+   "release": 0.1,
+   "train_reward_release": 0.7366682628692023
+  },
+  {
+   "lead_ms": 20.0,
+   "offset": -0.2999999999999998,
+   "train_reward": 0.7611377855498378,
+   "train_corr": 0.7443241866540343,
+   "release": 0.1,
+   "train_reward_release": 0.7636079328969961
+  },
+  {
+   "lead_ms": 0.0,
+   "offset": -0.19999999999999996,
+   "train_reward": 0.7565760200265902,
+   "train_corr": 0.659502302316028,
+   "release": 0.1,
+   "train_reward_release": 0.7694861626628005
+  },
+  {
+   "lead_ms": 20.0,
+   "offset": -0.2999999999999998,
+   "train_reward": 0.7677151226715389,
+   "train_corr": 0.7434380156987027,
+   "release": 0.0,
+   "train_reward_release": 0.7677151226715389
+  }
+ ],
+ "play_s": 1636.9,
+ "clips": [
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 0,
+   "notes": 39,
+   "accuracy": 0.9316239316239316,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 1,
+     "acc": 0.333,
+     "loss_share": 0.25
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 22,
+     "acc": 0.955,
+     "loss_share": 0.375
+    },
+    "tap": {
+     "n": 16,
+     "acc": 0.938,
+     "loss_share": 0.375
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 1,
+   "notes": 45,
+   "accuracy": 0.8888888888888888,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 34,
+     "acc": 0.882,
+     "loss_share": 0.8
+    },
+    "tap": {
+     "n": 11,
+     "acc": 0.909,
+     "loss_share": 0.2
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 2,
+   "notes": 53,
+   "accuracy": 1.0,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 38,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 15,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 3,
+   "notes": 21,
+   "accuracy": 0.9682539682539683,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 1,
+     "acc": 0.333,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 20,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 4,
+   "notes": 39,
+   "accuracy": 0.9658119658119658,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.833,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 21,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 5,
+   "notes": 43,
+   "accuracy": 0.9496124031007752,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 6,
+     "acc": 0.639,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 22,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 15,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 6,
+   "notes": 51,
+   "accuracy": 0.9117647058823529,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 12,
+     "acc": 0.708,
+     "loss_share": 0.778
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 21,
+     "acc": 0.952,
+     "loss_share": 0.222
+    },
+    "tap": {
+     "n": 18,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "clip": 7,
+   "notes": 51,
+   "accuracy": 0.9509803921568627,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.812,
+     "loss_share": 0.6
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 25,
+     "acc": 0.96,
+     "loss_share": 0.4
+    },
+    "tap": {
+     "n": 18,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 0,
+   "notes": 73,
+   "accuracy": 0.9315068493150684,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 30,
+     "acc": 0.933,
+     "loss_share": 0.4
+    },
+    "tap": {
+     "n": 43,
+     "acc": 0.93,
+     "loss_share": 0.6
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 1,
+   "notes": 66,
+   "accuracy": 0.9343434343434344,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 44,
+     "acc": 0.97,
+     "loss_share": 0.308
+    },
+    "tap": {
+     "n": 22,
+     "acc": 0.864,
+     "loss_share": 0.692
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 2,
+   "notes": 83,
+   "accuracy": 0.8433734939759037,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.789,
+     "loss_share": 0.308
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 21,
+     "acc": 0.762,
+     "loss_share": 0.385
+    },
+    "tap": {
+     "n": 43,
+     "acc": 0.907,
+     "loss_share": 0.308
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 3,
+   "notes": 25,
+   "accuracy": 0.9,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 3,
+     "acc": 0.167,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 18,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 4,
+   "notes": 67,
+   "accuracy": 0.9154228855721394,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 6,
+     "acc": 0.722,
+     "loss_share": 0.294
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 22,
+     "acc": 0.955,
+     "loss_share": 0.176
+    },
+    "tap": {
+     "n": 39,
+     "acc": 0.923,
+     "loss_share": 0.529
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 5,
+   "notes": 74,
+   "accuracy": 0.954954954954955,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 3,
+     "acc": 0.889,
+     "loss_share": 0.1
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 31,
+     "acc": 0.968,
+     "loss_share": 0.3
+    },
+    "tap": {
+     "n": 40,
+     "acc": 0.95,
+     "loss_share": 0.6
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 6,
+   "notes": 70,
+   "accuracy": 0.8214285714285714,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 16,
+     "acc": 0.792,
+     "loss_share": 0.267
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 23,
+     "acc": 0.819,
+     "loss_share": 0.333
+    },
+    "tap": {
+     "n": 31,
+     "acc": 0.839,
+     "loss_share": 0.4
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "clip": 7,
+   "notes": 73,
+   "accuracy": 0.910958904109589,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.762,
+     "loss_share": 0.256
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 25,
+     "acc": 0.887,
+     "loss_share": 0.436
+    },
+    "tap": {
+     "n": 41,
+     "acc": 0.951,
+     "loss_share": 0.308
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 0,
+   "notes": 83,
+   "accuracy": 0.9176706827309237,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 4,
+     "acc": 0.833,
+     "loss_share": 0.098
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 44,
+     "acc": 0.958,
+     "loss_share": 0.268
+    },
+    "tap": {
+     "n": 35,
+     "acc": 0.876,
+     "loss_share": 0.634
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 1,
+   "notes": 75,
+   "accuracy": 0.9355555555555556,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 56,
+     "acc": 0.967,
+     "loss_share": 0.379
+    },
+    "tap": {
+     "n": 19,
+     "acc": 0.842,
+     "loss_share": 0.621
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 2,
+   "notes": 100,
+   "accuracy": 0.7,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.614,
+     "loss_share": 0.244
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.5,
+     "loss_share": 0.167
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 13,
+     "acc": 0.692,
+     "loss_share": 0.133
+    },
+    "tap": {
+     "n": 58,
+     "acc": 0.764,
+     "loss_share": 0.456
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 3,
+   "notes": 25,
+   "accuracy": 0.78,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 18,
+     "acc": 0.694,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 4,
+   "notes": 84,
+   "accuracy": 0.9365079365079365,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 12,
+     "acc": 0.917,
+     "loss_share": 0.187
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.187
+    },
+    "chord": {
+     "n": 27,
+     "acc": 0.914,
+     "loss_share": 0.438
+    },
+    "tap": {
+     "n": 43,
+     "acc": 0.977,
+     "loss_share": 0.187
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 5,
+   "notes": 99,
+   "accuracy": 0.8569023569023569,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 12,
+     "acc": 0.667,
+     "loss_share": 0.282
+    },
+    "after_hold": {
+     "n": 4,
+     "acc": 0.542,
+     "loss_share": 0.129
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 53,
+     "acc": 0.899,
+     "loss_share": 0.376
+    },
+    "tap": {
+     "n": 30,
+     "acc": 0.9,
+     "loss_share": 0.212
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 6,
+   "notes": 105,
+   "accuracy": 0.6523809523809524,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 25,
+     "acc": 0.42,
+     "loss_share": 0.397
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.5,
+     "loss_share": 0.137
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 44,
+     "acc": 0.742,
+     "loss_share": 0.311
+    },
+    "tap": {
+     "n": 26,
+     "acc": 0.782,
+     "loss_share": 0.155
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "clip": 7,
+   "notes": 97,
+   "accuracy": 0.8865979381443299,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.542,
+     "loss_share": 0.333
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 50,
+     "acc": 0.913,
+     "loss_share": 0.394
+    },
+    "tap": {
+     "n": 39,
+     "acc": 0.923,
+     "loss_share": 0.273
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 0,
+   "notes": 104,
+   "accuracy": 0.7708333333333334,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 28,
+     "acc": 0.667,
+     "loss_share": 0.392
+    },
+    "after_hold": {
+     "n": 6,
+     "acc": 0.5,
+     "loss_share": 0.126
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 56,
+     "acc": 0.851,
+     "loss_share": 0.35
+    },
+    "tap": {
+     "n": 14,
+     "acc": 0.774,
+     "loss_share": 0.133
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 1,
+   "notes": 92,
+   "accuracy": 0.9456521739130435,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 80,
+     "acc": 0.963,
+     "loss_share": 0.6
+    },
+    "tap": {
+     "n": 12,
+     "acc": 0.833,
+     "loss_share": 0.4
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 2,
+   "notes": 107,
+   "accuracy": 0.49221183800623053,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 96,
+     "acc": 0.472,
+     "loss_share": 0.933
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.542,
+     "loss_share": 0.067
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 3,
+   "notes": 25,
+   "accuracy": 0.58,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 21,
+     "acc": 0.5,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 4,
+   "notes": 95,
+   "accuracy": 0.8666666666666667,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 21,
+     "acc": 0.794,
+     "loss_share": 0.342
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 0.889,
+     "loss_share": 0.026
+    },
+    "fast_jack": {
+     "n": 4,
+     "acc": 0.0,
+     "loss_share": 0.316
+    },
+    "chord": {
+     "n": 37,
+     "acc": 0.973,
+     "loss_share": 0.079
+    },
+    "tap": {
+     "n": 30,
+     "acc": 0.9,
+     "loss_share": 0.237
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 5,
+   "notes": 107,
+   "accuracy": 0.6370716510903427,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 57,
+     "acc": 0.488,
+     "loss_share": 0.751
+    },
+    "after_hold": {
+     "n": 9,
+     "acc": 0.352,
+     "loss_share": 0.15
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 29,
+     "acc": 0.966,
+     "loss_share": 0.026
+    },
+    "tap": {
+     "n": 12,
+     "acc": 0.764,
+     "loss_share": 0.073
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 6,
+   "notes": 117,
+   "accuracy": 0.44017094017094016,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 90,
+     "acc": 0.391,
+     "loss_share": 0.837
+    },
+    "after_hold": {
+     "n": 16,
+     "acc": 0.542,
+     "loss_share": 0.112
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 0.833,
+     "loss_share": 0.015
+    },
+    "tap": {
+     "n": 5,
+     "acc": 0.533,
+     "loss_share": 0.036
+    }
+   }
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "clip": 7,
+   "notes": 120,
+   "accuracy": 0.6652777777777777,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 33,
+     "acc": 0.409,
+     "loss_share": 0.485
+    },
+    "after_hold": {
+     "n": 5,
+     "acc": 0.5,
+     "loss_share": 0.062
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 58,
+     "acc": 0.721,
+     "loss_share": 0.402
+    },
+    "tap": {
+     "n": 24,
+     "acc": 0.917,
+     "loss_share": 0.05
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 0,
+   "notes": 7,
+   "accuracy": 0.8333333333333334,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 2,
+     "acc": 0.417,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 1,
+   "notes": 21,
+   "accuracy": 0.8888888888888888,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.667,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 14,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 2,
+   "notes": 18,
+   "accuracy": 1.0,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 12,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 3,
+   "notes": 21,
+   "accuracy": 0.8888888888888888,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.667,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 14,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 4,
+   "notes": 22,
+   "accuracy": 0.8787878787878788,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.667,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 13,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 5,
+   "notes": 23,
+   "accuracy": 0.8478260869565217,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.643,
+     "loss_share": 0.714
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 5,
+     "acc": 0.8,
+     "loss_share": 0.286
+    },
+    "tap": {
+     "n": 11,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 6,
+   "notes": 21,
+   "accuracy": 0.8492063492063492,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 6,
+     "acc": 0.472,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 7,
+   "notes": 22,
+   "accuracy": 0.7878787878787878,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 6,
+     "acc": 0.389,
+     "loss_share": 0.786
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 9,
+     "acc": 0.889,
+     "loss_share": 0.214
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 8,
+   "notes": 7,
+   "accuracy": 1.0,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 9,
+   "notes": 26,
+   "accuracy": 0.9166666666666666,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.729,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 13,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 10,
+   "notes": 17,
+   "accuracy": 0.7058823529411765,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.429,
+     "loss_share": 0.8
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 8,
+     "acc": 0.875,
+     "loss_share": 0.2
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "clip": 11,
+   "notes": 21,
+   "accuracy": 0.8571428571428571,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.714,
+     "loss_share": 0.667
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 14,
+     "acc": 0.929,
+     "loss_share": 0.333
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 0,
+   "notes": 23,
+   "accuracy": 0.7608695652173914,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 13,
+     "acc": 0.654,
+     "loss_share": 0.818
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 10,
+     "acc": 0.9,
+     "loss_share": 0.182
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 1,
+   "notes": 36,
+   "accuracy": 0.7314814814814815,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.649,
+     "loss_share": 0.69
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 9,
+     "acc": 0.778,
+     "loss_share": 0.207
+    },
+    "tap": {
+     "n": 8,
+     "acc": 0.875,
+     "loss_share": 0.103
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 2,
+   "notes": 39,
+   "accuracy": 0.9358974358974359,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.688,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 11,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 20,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 3,
+   "notes": 35,
+   "accuracy": 0.919047619047619,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.738,
+     "loss_share": 0.647
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 19,
+     "acc": 0.947,
+     "loss_share": 0.353
+    },
+    "tap": {
+     "n": 9,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 4,
+   "notes": 41,
+   "accuracy": 0.8983739837398373,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 12,
+     "acc": 0.653,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 15,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 5,
+   "notes": 45,
+   "accuracy": 0.9074074074074074,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 10,
+     "acc": 0.583,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 21,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 11,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 6,
+   "notes": 42,
+   "accuracy": 0.9087301587301587,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.595,
+     "loss_share": 0.739
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 20,
+     "acc": 0.95,
+     "loss_share": 0.261
+    },
+    "tap": {
+     "n": 14,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 7,
+   "notes": 38,
+   "accuracy": 0.7236842105263158,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 18,
+     "acc": 0.528,
+     "loss_share": 0.81
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 15,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 5,
+     "acc": 0.6,
+     "loss_share": 0.19
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 8,
+   "notes": 26,
+   "accuracy": 0.8717948717948718,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 5,
+     "acc": 0.333,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 11,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 9,
+   "notes": 45,
+   "accuracy": 0.8666666666666667,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 10,
+     "acc": 0.6,
+     "loss_share": 0.667
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 20,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 12,
+     "acc": 0.833,
+     "loss_share": 0.333
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 10,
+   "notes": 33,
+   "accuracy": 0.9292929292929293,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 3,
+     "acc": 0.556,
+     "loss_share": 0.571
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 12,
+     "acc": 0.917,
+     "loss_share": 0.429
+    },
+    "tap": {
+     "n": 18,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "clip": 11,
+   "notes": 36,
+   "accuracy": 0.7685185185185185,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.719,
+     "loss_share": 0.64
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 9,
+     "acc": 0.889,
+     "loss_share": 0.12
+    },
+    "tap": {
+     "n": 8,
+     "acc": 0.75,
+     "loss_share": 0.24
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 0,
+   "notes": 33,
+   "accuracy": 0.6818181818181818,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 24,
+     "acc": 0.562,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 1,
+   "notes": 56,
+   "accuracy": 0.7797619047619048,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 33,
+     "acc": 0.687,
+     "loss_share": 0.838
+    },
+    "after_hold": {
+     "n": 7,
+     "acc": 0.857,
+     "loss_share": 0.081
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 13,
+     "acc": 0.923,
+     "loss_share": 0.081
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 2,
+   "notes": 58,
+   "accuracy": 0.8218390804597702,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 31,
+     "acc": 0.677,
+     "loss_share": 0.968
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.958,
+     "loss_share": 0.032
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 17,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 3,
+   "notes": 55,
+   "accuracy": 0.8242424242424242,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 27,
+     "acc": 0.741,
+     "loss_share": 0.724
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 15,
+     "acc": 0.844,
+     "loss_share": 0.241
+    },
+    "tap": {
+     "n": 10,
+     "acc": 0.967,
+     "loss_share": 0.034
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 4,
+   "notes": 59,
+   "accuracy": 0.6073446327683616,
+   "n_stray": 3,
+   "loss": {
+    "hold": {
+     "n": 41,
+     "acc": 0.541,
+     "loss_share": 0.813
+    },
+    "after_hold": {
+     "n": 4,
+     "acc": 0.75,
+     "loss_share": 0.043
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 0.778,
+     "loss_share": 0.058
+    },
+    "tap": {
+     "n": 8,
+     "acc": 0.75,
+     "loss_share": 0.086
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 5,
+   "notes": 65,
+   "accuracy": 0.6717948717948717,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 51,
+     "acc": 0.601,
+     "loss_share": 0.953
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.875,
+     "loss_share": 0.047
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 6,
+   "notes": 56,
+   "accuracy": 0.7827380952380952,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 27,
+     "acc": 0.623,
+     "loss_share": 0.836
+    },
+    "after_hold": {
+     "n": 7,
+     "acc": 0.714,
+     "loss_share": 0.164
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 12,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 7,
+   "notes": 73,
+   "accuracy": 0.7968036529680366,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 34,
+     "acc": 0.681,
+     "loss_share": 0.73
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.667,
+     "loss_share": 0.225
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 11,
+     "acc": 0.97,
+     "loss_share": 0.022
+    },
+    "tap": {
+     "n": 17,
+     "acc": 0.98,
+     "loss_share": 0.022
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 8,
+   "notes": 35,
+   "accuracy": 0.8047619047619048,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 20,
+     "acc": 0.658,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 9,
+   "notes": 62,
+   "accuracy": 0.6720430107526881,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 49,
+     "acc": 0.646,
+     "loss_share": 0.852
+    },
+    "after_hold": {
+     "n": 7,
+     "acc": 0.714,
+     "loss_share": 0.098
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 5,
+     "acc": 0.8,
+     "loss_share": 0.049
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 10,
+   "notes": 33,
+   "accuracy": 0.6262626262626263,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 15,
+     "acc": 0.244,
+     "loss_share": 0.919
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 0.833,
+     "loss_share": 0.081
+    },
+    "tap": {
+     "n": 12,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "clip": 11,
+   "notes": 56,
+   "accuracy": 0.7410714285714286,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 33,
+     "acc": 0.692,
+     "loss_share": 0.701
+    },
+    "after_hold": {
+     "n": 7,
+     "acc": 0.857,
+     "loss_share": 0.069
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 13,
+     "acc": 0.744,
+     "loss_share": 0.23
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 0,
+   "notes": 32,
+   "accuracy": 0.734375,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 15,
+     "acc": 0.522,
+     "loss_share": 0.843
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 9,
+     "acc": 0.852,
+     "loss_share": 0.157
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 1,
+   "notes": 49,
+   "accuracy": 0.8469387755102041,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 16,
+     "acc": 0.615,
+     "loss_share": 0.822
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 21,
+     "acc": 0.937,
+     "loss_share": 0.178
+    },
+    "tap": {
+     "n": 12,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 2,
+   "notes": 53,
+   "accuracy": 0.8490566037735849,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 17,
+     "acc": 0.588,
+     "loss_share": 0.875
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 20,
+     "acc": 0.95,
+     "loss_share": 0.125
+    },
+    "tap": {
+     "n": 13,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 3,
+   "notes": 54,
+   "accuracy": 0.8518518518518519,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 15,
+     "acc": 0.689,
+     "loss_share": 0.583
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 20,
+     "acc": 0.933,
+     "loss_share": 0.167
+    },
+    "tap": {
+     "n": 19,
+     "acc": 0.895,
+     "loss_share": 0.25
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 4,
+   "notes": 48,
+   "accuracy": 0.6770833333333334,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 25,
+     "acc": 0.62,
+     "loss_share": 0.613
+    },
+    "after_hold": {
+     "n": 4,
+     "acc": 0.75,
+     "loss_share": 0.065
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 13,
+     "acc": 0.615,
+     "loss_share": 0.323
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 5,
+   "notes": 56,
+   "accuracy": 0.7529761904761905,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 30,
+     "acc": 0.628,
+     "loss_share": 0.807
+    },
+    "after_hold": {
+     "n": 5,
+     "acc": 0.8,
+     "loss_share": 0.072
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 11,
+     "acc": 0.848,
+     "loss_share": 0.12
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 6,
+   "notes": 50,
+   "accuracy": 0.8166666666666667,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 16,
+     "acc": 0.49,
+     "loss_share": 0.891
+    },
+    "after_hold": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 14,
+     "acc": 0.929,
+     "loss_share": 0.109
+    },
+    "tap": {
+     "n": 18,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 7,
+   "notes": 61,
+   "accuracy": 0.7377049180327869,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 28,
+     "acc": 0.536,
+     "loss_share": 0.813
+    },
+    "after_hold": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 18,
+     "acc": 0.889,
+     "loss_share": 0.125
+    },
+    "tap": {
+     "n": 10,
+     "acc": 0.9,
+     "loss_share": 0.062
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 8,
+   "notes": 33,
+   "accuracy": 0.8333333333333334,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 11,
+     "acc": 0.591,
+     "loss_share": 0.818
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 16,
+     "acc": 0.938,
+     "loss_share": 0.182
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 9,
+   "notes": 54,
+   "accuracy": 0.6820987654320988,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 27,
+     "acc": 0.512,
+     "loss_share": 0.767
+    },
+    "after_hold": {
+     "n": 6,
+     "acc": 0.5,
+     "loss_share": 0.175
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 13,
+     "acc": 0.923,
+     "loss_share": 0.058
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 10,
+   "notes": 32,
+   "accuracy": 0.78125,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 12,
+     "acc": 0.444,
+     "loss_share": 0.952
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 8,
+     "acc": 0.958,
+     "loss_share": 0.048
+    },
+    "tap": {
+     "n": 12,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "clip": 11,
+   "notes": 49,
+   "accuracy": 0.8163265306122449,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 16,
+     "acc": 0.562,
+     "loss_share": 0.778
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 21,
+     "acc": 0.952,
+     "loss_share": 0.111
+    },
+    "tap": {
+     "n": 12,
+     "acc": 0.917,
+     "loss_share": 0.111
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 0,
+   "notes": 33,
+   "accuracy": 0.5707070707070707,
+   "n_stray": 3,
+   "loss": {
+    "hold": {
+     "n": 30,
+     "acc": 0.561,
+     "loss_share": 0.929
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 2,
+     "acc": 0.5,
+     "loss_share": 0.071
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 1,
+   "notes": 62,
+   "accuracy": 0.6854838709677419,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 44,
+     "acc": 0.633,
+     "loss_share": 0.829
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.767,
+     "loss_share": 0.12
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 0.833,
+     "loss_share": 0.051
+    },
+    "tap": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 2,
+   "notes": 64,
+   "accuracy": 0.7265625,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 38,
+     "acc": 0.68,
+     "loss_share": 0.695
+    },
+    "after_hold": {
+     "n": 13,
+     "acc": 0.744,
+     "loss_share": 0.19
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 9,
+     "acc": 0.778,
+     "loss_share": 0.114
+    },
+    "tap": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 3,
+   "notes": 60,
+   "accuracy": 0.7527777777777778,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 31,
+     "acc": 0.629,
+     "loss_share": 0.775
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 0.667,
+     "loss_share": 0.067
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 17,
+     "acc": 0.922,
+     "loss_share": 0.09
+    },
+    "tap": {
+     "n": 9,
+     "acc": 0.889,
+     "loss_share": 0.067
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 4,
+   "notes": 66,
+   "accuracy": 0.5959595959595959,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 51,
+     "acc": 0.556,
+     "loss_share": 0.85
+    },
+    "after_hold": {
+     "n": 7,
+     "acc": 0.429,
+     "loss_share": 0.15
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 5,
+   "notes": 72,
+   "accuracy": 0.6967592592592593,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 60,
+     "acc": 0.681,
+     "loss_share": 0.878
+    },
+    "after_hold": {
+     "n": 9,
+     "acc": 0.815,
+     "loss_share": 0.076
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.046
+    },
+    "chord": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 6,
+   "notes": 62,
+   "accuracy": 0.7204301075268817,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 38,
+     "acc": 0.579,
+     "loss_share": 0.923
+    },
+    "after_hold": {
+     "n": 5,
+     "acc": 0.933,
+     "loss_share": 0.019
+    },
+    "fast_jack": {
+     "n": 2,
+     "acc": 0.5,
+     "loss_share": 0.058
+    },
+    "chord": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 9,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 7,
+   "notes": 85,
+   "accuracy": 0.6784313725490196,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 42,
+     "acc": 0.54,
+     "loss_share": 0.707
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.625,
+     "loss_share": 0.11
+    },
+    "fast_jack": {
+     "n": 7,
+     "acc": 0.286,
+     "loss_share": 0.183
+    },
+    "chord": {
+     "n": 9,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 19,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 8,
+   "notes": 37,
+   "accuracy": 0.8018018018018018,
+   "n_stray": 3,
+   "loss": {
+    "hold": {
+     "n": 27,
+     "acc": 0.741,
+     "loss_share": 0.955
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 0.667,
+     "loss_share": 0.045
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 9,
+   "notes": 73,
+   "accuracy": 0.5958904109589042,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 63,
+     "acc": 0.585,
+     "loss_share": 0.887
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.583,
+     "loss_share": 0.113
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 10,
+   "notes": 42,
+   "accuracy": 0.6428571428571429,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 18,
+     "acc": 0.278,
+     "loss_share": 0.867
+    },
+    "after_hold": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.067
+    },
+    "chord": {
+     "n": 7,
+     "acc": 0.857,
+     "loss_share": 0.067
+    },
+    "tap": {
+     "n": 14,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "clip": 11,
+   "notes": 62,
+   "accuracy": 0.5403225806451613,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 44,
+     "acc": 0.489,
+     "loss_share": 0.789
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.5,
+     "loss_share": 0.175
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.035
+    },
+    "chord": {
+     "n": 6,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 0,
+   "notes": 28,
+   "accuracy": 0.7857142857142857,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 15,
+     "acc": 0.6,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 1,
+   "notes": 49,
+   "accuracy": 0.8979591836734694,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 17,
+     "acc": 0.765,
+     "loss_share": 0.8
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 23,
+     "acc": 0.957,
+     "loss_share": 0.2
+    },
+    "tap": {
+     "n": 9,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 2,
+   "notes": 44,
+   "accuracy": 0.8522727272727273,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 13,
+     "acc": 0.654,
+     "loss_share": 0.692
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 16,
+     "acc": 0.938,
+     "loss_share": 0.154
+    },
+    "tap": {
+     "n": 15,
+     "acc": 0.933,
+     "loss_share": 0.154
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 3,
+   "notes": 48,
+   "accuracy": 0.9131944444444444,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 13,
+     "acc": 0.679,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 21,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 14,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 4,
+   "notes": 46,
+   "accuracy": 0.7644927536231884,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 23,
+     "acc": 0.659,
+     "loss_share": 0.723
+    },
+    "after_hold": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 12,
+     "acc": 0.75,
+     "loss_share": 0.277
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 5,
+   "notes": 55,
+   "accuracy": 0.8484848484848485,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.632,
+     "loss_share": 0.84
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 0.889,
+     "loss_share": 0.04
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 20,
+     "acc": 0.95,
+     "loss_share": 0.12
+    },
+    "tap": {
+     "n": 13,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 6,
+   "notes": 50,
+   "accuracy": 0.7933333333333333,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 14,
+     "acc": 0.619,
+     "loss_share": 0.516
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 18,
+     "acc": 0.889,
+     "loss_share": 0.194
+    },
+    "tap": {
+     "n": 18,
+     "acc": 0.833,
+     "loss_share": 0.29
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 7,
+   "notes": 60,
+   "accuracy": 0.8638888888888889,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.271,
+     "loss_share": 0.714
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 27,
+     "acc": 0.951,
+     "loss_share": 0.163
+    },
+    "tap": {
+     "n": 25,
+     "acc": 0.96,
+     "loss_share": 0.122
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 8,
+   "notes": 26,
+   "accuracy": 0.7628205128205128,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 13,
+     "acc": 0.603,
+     "loss_share": 0.838
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 6,
+     "acc": 0.833,
+     "loss_share": 0.162
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 9,
+   "notes": 55,
+   "accuracy": 0.8424242424242424,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 18,
+     "acc": 0.685,
+     "loss_share": 0.654
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 20,
+     "acc": 0.95,
+     "loss_share": 0.115
+    },
+    "tap": {
+     "n": 14,
+     "acc": 0.857,
+     "loss_share": 0.231
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 10,
+   "notes": 34,
+   "accuracy": 0.8774509803921569,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 6,
+     "acc": 0.472,
+     "loss_share": 0.76
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 12,
+     "acc": 0.917,
+     "loss_share": 0.24
+    },
+    "tap": {
+     "n": 16,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "clip": 11,
+   "notes": 49,
+   "accuracy": 0.8639455782312925,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 17,
+     "acc": 0.725,
+     "loss_share": 0.7
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 23,
+     "acc": 0.913,
+     "loss_share": 0.3
+    },
+    "tap": {
+     "n": 9,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "clip": 0,
+   "notes": 19,
+   "accuracy": 0.9298245614035088,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 1,
+     "acc": 0.667,
+     "loss_share": 0.25
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 15,
+     "acc": 0.933,
+     "loss_share": 0.75
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "clip": 1,
+   "notes": 20,
+   "accuracy": 0.9833333333333333,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 1,
+     "acc": 0.667,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 14,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "clip": 2,
+   "notes": 16,
+   "accuracy": 0.9791666666666666,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 2,
+     "acc": 0.833,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 4,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "clip": 3,
+   "notes": 21,
+   "accuracy": 0.8968253968253969,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 6,
+     "acc": 0.639,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "clip": 4,
+   "notes": 26,
+   "accuracy": 1.0,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 16,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "clip": 5,
+   "notes": 25,
+   "accuracy": 0.92,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.714,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 13,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 5,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "clip": 6,
+   "notes": 22,
+   "accuracy": 0.8787878787878788,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 8,
+     "acc": 0.667,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 11,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "clip": 0,
+   "notes": 75,
+   "accuracy": 0.8533333333333334,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 23,
+     "acc": 0.797,
+     "loss_share": 0.424
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 0.444,
+     "loss_share": 0.152
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 30,
+     "acc": 0.878,
+     "loss_share": 0.333
+    },
+    "tap": {
+     "n": 19,
+     "acc": 0.947,
+     "loss_share": 0.091
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "clip": 1,
+   "notes": 68,
+   "accuracy": 0.9509803921568627,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.825,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 37,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 12,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "clip": 2,
+   "notes": 55,
+   "accuracy": 0.896969696969697,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 23,
+     "acc": 0.754,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 19,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 13,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "clip": 3,
+   "notes": 91,
+   "accuracy": 0.782051282051282,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 69,
+     "acc": 0.843,
+     "loss_share": 0.546
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.05
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 19,
+     "acc": 0.579,
+     "loss_share": 0.403
+    },
+    "tap": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "clip": 4,
+   "notes": 83,
+   "accuracy": 0.7530120481927711,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 64,
+     "acc": 0.732,
+     "loss_share": 0.837
+    },
+    "after_hold": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 16,
+     "acc": 0.792,
+     "loss_share": 0.163
+    },
+    "tap": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "clip": 5,
+   "notes": 99,
+   "accuracy": 0.7205387205387206,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 67,
+     "acc": 0.701,
+     "loss_share": 0.723
+    },
+    "after_hold": {
+     "n": 2,
+     "acc": 0.167,
+     "loss_share": 0.06
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 27,
+     "acc": 0.778,
+     "loss_share": 0.217
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "clip": 6,
+   "notes": 90,
+   "accuracy": 0.6833333333333333,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 69,
+     "acc": 0.64,
+     "loss_share": 0.871
+    },
+    "after_hold": {
+     "n": 4,
+     "acc": 0.583,
+     "loss_share": 0.058
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 14,
+     "acc": 0.857,
+     "loss_share": 0.07
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "clip": 0,
+   "notes": 49,
+   "accuracy": 0.8809523809523809,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 21,
+     "acc": 0.722,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 21,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "clip": 1,
+   "notes": 61,
+   "accuracy": 0.9316939890710383,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 4,
+     "acc": 0.208,
+     "loss_share": 0.76
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 45,
+     "acc": 0.978,
+     "loss_share": 0.24
+    },
+    "tap": {
+     "n": 12,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "clip": 2,
+   "notes": 49,
+   "accuracy": 0.9149659863945578,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 13,
+     "acc": 0.833,
+     "loss_share": 0.52
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 25,
+     "acc": 0.96,
+     "loss_share": 0.24
+    },
+    "tap": {
+     "n": 11,
+     "acc": 0.909,
+     "loss_share": 0.24
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "clip": 3,
+   "notes": 75,
+   "accuracy": 0.8977777777777778,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 13,
+     "acc": 0.718,
+     "loss_share": 0.478
+    },
+    "after_hold": {
+     "n": 2,
+     "acc": 0.5,
+     "loss_share": 0.13
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 42,
+     "acc": 0.952,
+     "loss_share": 0.261
+    },
+    "tap": {
+     "n": 18,
+     "acc": 0.944,
+     "loss_share": 0.13
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "clip": 4,
+   "notes": 78,
+   "accuracy": 0.9529914529914529,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 7,
+     "acc": 0.619,
+     "loss_share": 0.727
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 46,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 25,
+     "acc": 0.96,
+     "loss_share": 0.273
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "clip": 5,
+   "notes": 78,
+   "accuracy": 0.8311965811965812,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 21,
+     "acc": 0.643,
+     "loss_share": 0.57
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 36,
+     "acc": 0.88,
+     "loss_share": 0.329
+    },
+    "tap": {
+     "n": 21,
+     "acc": 0.937,
+     "loss_share": 0.101
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "clip": 6,
+   "notes": 73,
+   "accuracy": 0.8470319634703196,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 17,
+     "acc": 0.618,
+     "loss_share": 0.582
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 34,
+     "acc": 0.931,
+     "loss_share": 0.209
+    },
+    "tap": {
+     "n": 22,
+     "acc": 0.894,
+     "loss_share": 0.209
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "clip": 0,
+   "notes": 59,
+   "accuracy": 0.8022598870056498,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 18,
+     "acc": 0.741,
+     "loss_share": 0.4
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 22,
+     "acc": 0.909,
+     "loss_share": 0.171
+    },
+    "tap": {
+     "n": 18,
+     "acc": 0.722,
+     "loss_share": 0.429
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "clip": 1,
+   "notes": 58,
+   "accuracy": 0.8362068965517241,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.658,
+     "loss_share": 0.684
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 26,
+     "acc": 0.885,
+     "loss_share": 0.316
+    },
+    "tap": {
+     "n": 13,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "clip": 2,
+   "notes": 54,
+   "accuracy": 0.8487654320987654,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 15,
+     "acc": 0.611,
+     "loss_share": 0.714
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 26,
+     "acc": 0.949,
+     "loss_share": 0.163
+    },
+    "tap": {
+     "n": 13,
+     "acc": 0.923,
+     "loss_share": 0.122
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "clip": 3,
+   "notes": 83,
+   "accuracy": 0.7670682730923695,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 45,
+     "acc": 0.77,
+     "loss_share": 0.534
+    },
+    "after_hold": {
+     "n": 9,
+     "acc": 0.667,
+     "loss_share": 0.155
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 20,
+     "acc": 0.75,
+     "loss_share": 0.259
+    },
+    "tap": {
+     "n": 9,
+     "acc": 0.889,
+     "loss_share": 0.052
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "clip": 4,
+   "notes": 76,
+   "accuracy": 0.7960526315789473,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 26,
+     "acc": 0.654,
+     "loss_share": 0.581
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.625,
+     "loss_share": 0.194
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 18,
+     "acc": 0.963,
+     "loss_share": 0.043
+    },
+    "tap": {
+     "n": 24,
+     "acc": 0.882,
+     "loss_share": 0.183
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "clip": 5,
+   "notes": 90,
+   "accuracy": 0.8648148148148148,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 64,
+     "acc": 0.883,
+     "loss_share": 0.616
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 15,
+     "acc": 0.8,
+     "loss_share": 0.247
+    },
+    "tap": {
+     "n": 11,
+     "acc": 0.848,
+     "loss_share": 0.137
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "clip": 6,
+   "notes": 82,
+   "accuracy": 0.709349593495935,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 63,
+     "acc": 0.743,
+     "loss_share": 0.678
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 0.0,
+     "loss_share": 0.126
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 12,
+     "acc": 0.75,
+     "loss_share": 0.126
+    },
+    "tap": {
+     "n": 4,
+     "acc": 0.583,
+     "loss_share": 0.07
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "clip": 0,
+   "notes": 31,
+   "accuracy": 0.8064516129032258,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 9,
+     "acc": 0.556,
+     "loss_share": 0.667
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 17,
+     "acc": 0.941,
+     "loss_share": 0.167
+    },
+    "tap": {
+     "n": 5,
+     "acc": 0.8,
+     "loss_share": 0.167
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "clip": 1,
+   "notes": 42,
+   "accuracy": 0.9285714285714286,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 3,
+     "acc": 0.667,
+     "loss_share": 0.333
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 33,
+     "acc": 0.97,
+     "loss_share": 0.333
+    },
+    "tap": {
+     "n": 6,
+     "acc": 0.833,
+     "loss_share": 0.333
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "clip": 2,
+   "notes": 41,
+   "accuracy": 0.991869918699187,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 2,
+     "acc": 0.833,
+     "loss_share": 1.0
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 29,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 10,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "clip": 3,
+   "notes": 53,
+   "accuracy": 0.9182389937106918,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 10,
+     "acc": 0.867,
+     "loss_share": 0.308
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 30,
+     "acc": 0.933,
+     "loss_share": 0.462
+    },
+    "tap": {
+     "n": 13,
+     "acc": 0.923,
+     "loss_share": 0.231
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "clip": 4,
+   "notes": 55,
+   "accuracy": 0.8939393939393939,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 6,
+     "acc": 0.694,
+     "loss_share": 0.314
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 32,
+     "acc": 0.938,
+     "loss_share": 0.343
+    },
+    "tap": {
+     "n": 17,
+     "acc": 0.882,
+     "loss_share": 0.343
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "clip": 5,
+   "notes": 57,
+   "accuracy": 0.9035087719298246,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 14,
+     "acc": 0.75,
+     "loss_share": 0.636
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 29,
+     "acc": 0.931,
+     "loss_share": 0.364
+    },
+    "tap": {
+     "n": 14,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "clip": 6,
+   "notes": 51,
+   "accuracy": 0.8856209150326797,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 11,
+     "acc": 0.652,
+     "loss_share": 0.657
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 25,
+     "acc": 0.92,
+     "loss_share": 0.343
+    },
+    "tap": {
+     "n": 15,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "clip": 0,
+   "notes": 83,
+   "accuracy": 0.5662650602409639,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 41,
+     "acc": 0.5,
+     "loss_share": 0.569
+    },
+    "after_hold": {
+     "n": 11,
+     "acc": 0.409,
+     "loss_share": 0.181
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 18,
+     "acc": 0.611,
+     "loss_share": 0.194
+    },
+    "tap": {
+     "n": 13,
+     "acc": 0.846,
+     "loss_share": 0.056
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "clip": 1,
+   "notes": 66,
+   "accuracy": 0.7929292929292929,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 27,
+     "acc": 0.63,
+     "loss_share": 0.732
+    },
+    "after_hold": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 30,
+     "acc": 0.878,
+     "loss_share": 0.268
+    },
+    "tap": {
+     "n": 7,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "clip": 2,
+   "notes": 65,
+   "accuracy": 0.8666666666666667,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 11,
+     "acc": 0.636,
+     "loss_share": 0.462
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 2,
+     "acc": 0.0,
+     "loss_share": 0.231
+    },
+    "chord": {
+     "n": 46,
+     "acc": 0.949,
+     "loss_share": 0.269
+    },
+    "tap": {
+     "n": 6,
+     "acc": 0.944,
+     "loss_share": 0.038
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "clip": 3,
+   "notes": 99,
+   "accuracy": 0.5723905723905723,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 67,
+     "acc": 0.525,
+     "loss_share": 0.752
+    },
+    "after_hold": {
+     "n": 13,
+     "acc": 0.397,
+     "loss_share": 0.185
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 0.722,
+     "loss_share": 0.039
+    },
+    "tap": {
+     "n": 13,
+     "acc": 0.923,
+     "loss_share": 0.024
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "clip": 4,
+   "notes": 99,
+   "accuracy": 0.4797979797979798,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 91,
+     "acc": 0.463,
+     "loss_share": 0.948
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 0.444,
+     "loss_share": 0.032
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 3,
+     "acc": 0.667,
+     "loss_share": 0.019
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "clip": 5,
+   "notes": 117,
+   "accuracy": 0.48148148148148145,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 105,
+     "acc": 0.479,
+     "loss_share": 0.901
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.4,
+     "loss_share": 0.099
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 2,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "clip": 6,
+   "notes": 109,
+   "accuracy": 0.4892966360856269,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 100,
+     "acc": 0.487,
+     "loss_share": 0.922
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.458,
+     "loss_share": 0.078
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "clip": 0,
+   "notes": 78,
+   "accuracy": 0.7307692307692307,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 30,
+     "acc": 0.522,
+     "loss_share": 0.683
+    },
+    "after_hold": {
+     "n": 6,
+     "acc": 0.056,
+     "loss_share": 0.27
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 25,
+     "acc": 0.96,
+     "loss_share": 0.048
+    },
+    "tap": {
+     "n": 17,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "clip": 1,
+   "notes": 58,
+   "accuracy": 0.8735632183908046,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 19,
+     "acc": 0.719,
+     "loss_share": 0.727
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 31,
+     "acc": 0.935,
+     "loss_share": 0.273
+    },
+    "tap": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "clip": 2,
+   "notes": 58,
+   "accuracy": 0.735632183908046,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 21,
+     "acc": 0.587,
+     "loss_share": 0.565
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 25,
+     "acc": 0.807,
+     "loss_share": 0.315
+    },
+    "tap": {
+     "n": 12,
+     "acc": 0.847,
+     "loss_share": 0.12
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "clip": 3,
+   "notes": 93,
+   "accuracy": 0.7562724014336918,
+   "n_stray": 0,
+   "loss": {
+    "hold": {
+     "n": 69,
+     "acc": 0.742,
+     "loss_share": 0.787
+    },
+    "after_hold": {
+     "n": 8,
+     "acc": 0.5,
+     "loss_share": 0.176
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 8,
+     "acc": 0.896,
+     "loss_share": 0.037
+    },
+    "tap": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "clip": 4,
+   "notes": 91,
+   "accuracy": 0.47435897435897434,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 72,
+     "acc": 0.458,
+     "loss_share": 0.815
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.317,
+     "loss_share": 0.143
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 7,
+     "acc": 0.857,
+     "loss_share": 0.021
+    },
+    "tap": {
+     "n": 2,
+     "acc": 0.5,
+     "loss_share": 0.021
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "clip": 5,
+   "notes": 102,
+   "accuracy": 0.5555555555555556,
+   "n_stray": 1,
+   "loss": {
+    "hold": {
+     "n": 77,
+     "acc": 0.494,
+     "loss_share": 0.86
+    },
+    "after_hold": {
+     "n": 14,
+     "acc": 0.548,
+     "loss_share": 0.14
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 8,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "clip": 6,
+   "notes": 88,
+   "accuracy": 0.5284090909090909,
+   "n_stray": 2,
+   "loss": {
+    "hold": {
+     "n": 72,
+     "acc": 0.525,
+     "loss_share": 0.823
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.367,
+     "loss_share": 0.153
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 3,
+     "acc": 0.667,
+     "loss_share": 0.024
+    },
+    "tap": {
+     "n": 3,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   }
+  }
+ ]
+}
