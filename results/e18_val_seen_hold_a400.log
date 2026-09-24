@@ -1,0 +1,21 @@
+[hold_a400] validating on seed 4242, 10 charts x 20 notes per condition
+  s3_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.917)
+  s3_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s3_350    2.9/s  acc 1.000  hit 1.00  stray 0.00
+  s4_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.506)
+  s4_400    2.5/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.286)
+  s4_300    3.3/s  acc 0.998  hit 1.00  stray 0.00
+  s5_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.608)
+  s3_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s3_250    4.0/s  acc 0.863  hit 0.86  stray 0.00
+  s4_250    4.0/s  acc 0.870  hit 0.89  stray 0.00
+  s4_200    5.0/s  acc 0.622  hit 0.66  stray 0.00
+  s6_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s6_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s6_250    4.0/s  acc 0.895  hit 0.90  stray 0.00
+  s6_150    6.7/s  acc 0.328  hit 0.45  stray 0.00
+  s6_120    8.3/s  acc 0.314  hit 0.41  stray 0.00
+  s7_600    1.7/s  acc 0.668  hit 0.73  stray 0.01
+  s7_400    2.5/s  acc 0.692  hit 0.77  stray 0.00
+  s7_300    3.3/s  acc 0.704  hit 0.84  stray 0.04
+wrote e18_capability_validate_hold_a400.json

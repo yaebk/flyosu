@@ -203,10 +203,22 @@ def smooth(Z: np.ndarray, dt: float, smooth_ms: float) -> np.ndarray:
 
 def target(rec: Recording, lead_ms: float = 20.0, width_ms: float = 80.0) -> np.ndarray:
     """(T, 4) in {-1, +1}: +1 for ``width_ms`` from ``lead_ms`` before each
-    note's hit time, in its lane."""
+    note's hit time, in its lane.
+
+    A **hold note** stays +1 through its body, to ``lead_ms`` before the tail.
+    The controller keeps a key down while its drive is above threshold, so a
+    fixed-width pulse can only ever produce a fixed-length hold however long the
+    note is -- which is why experiment 20 found holds scoring near zero even
+    after the encoder was taught to draw them. An ordinary note has no tail and
+    is unchanged, so a chart without holds fits exactly as before.
+    """
     Y = -np.ones((len(rec.t), N_KEYS))
     for n in rec.chart.notes:
-        m = (rec.t >= n.hit_ms - lead_ms) & (rec.t <= n.hit_ms - lead_ms + width_ms)
+        start = n.hit_ms - lead_ms
+        end = start + width_ms
+        if n.is_hold:
+            end = max(end, n.end_ms - lead_ms)
+        m = (rec.t >= start) & (rec.t <= end)
         Y[m, n.lane] = 1.0
     return Y
 
