@@ -17,6 +17,8 @@
   --btn-on: #17201c;
   --btn-on-ink: #ffffff;
   --screen: #0c0f14;
+  --held-bg: #dcebe2;
+  --held-ink: #1d5a3c;
   --lane0: #3d7fc4;
   --lane1: #c98a17;
   --lane2: #2a987a;
@@ -32,6 +34,7 @@
     --rule: #2b3632; --accent: #e0705f; --focus: #7fb3ea; --strip-bg: #141b18;
     --zero: #e4ebe7; --btn: #232d29; --btn-on: #e4ebe7; --btn-on-ink: #111714;
     --lane0: #6aa7e6; --lane1: #e2a83c; --lane2: #4cc49f; --lane3: #e07399;
+    --held-bg: #1d3a2b; --held-ink: #9fdcb9;
   }
 }
 :root[data-theme="dark"] {
@@ -40,6 +43,7 @@
   --rule: #2b3632; --accent: #e0705f; --focus: #7fb3ea; --strip-bg: #141b18;
   --zero: #e4ebe7; --btn: #232d29; --btn-on: #e4ebe7; --btn-on-ink: #111714;
   --lane0: #6aa7e6; --lane1: #e2a83c; --lane2: #4cc49f; --lane3: #e07399;
+    --held-bg: #1d3a2b; --held-ink: #9fdcb9;
 }
 * { box-sizing: border-box; }
 body {
@@ -53,15 +57,20 @@ h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 5vw, 
 .lede { max-width: 72ch; margin: 0; color: var(--muted); }
 .lede b { color: var(--ink); font-weight: 600; }
 
-.maps { display: flex; gap: 8px; flex-wrap: wrap; }
-.maps .song { flex-basis: 100%; font-size: 13px; color: var(--muted); }
+.maps { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 8px; }
+.maps-note { margin: -8px 0 0; font-size: 12.5px; color: var(--muted); max-width: 90ch; }
+.maps-note b { font: 500 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); }
 .map-btn {
   font: inherit; cursor: pointer; border: 1px solid var(--rule); background: var(--panel); color: var(--ink);
-  border-radius: 6px; padding: 8px 14px; text-align: left; display: grid; gap: 0; min-width: 0;
+  border-radius: 6px; padding: 8px 12px; text-align: left; display: grid; gap: 1px; min-width: 0; align-content: start;
 }
-.map-btn .n { font-family: var(--display); font-weight: 600; font-size: 17px; }
+.map-btn .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.map-btn .n { font-family: var(--display); font-weight: 600; font-size: 17px; min-width: 0; overflow-wrap: anywhere; }
+.map-btn .s { font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
 .map-btn .m { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .map-btn[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.tag { flex: none; font: 500 10.5px var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; background: var(--btn); color: var(--muted); }
+.tag.held-out { background: var(--held-bg); color: var(--held-ink); }
 
 .stage { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 20px; align-items: start; }
 @media (max-width: 800px) { .stage { grid-template-columns: minmax(0, 1fr); } }
@@ -120,10 +129,11 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   <header>
     <div class="eyebrow">FlyWire connectome · osu!mania-style 4-key replay</div>
     <h1>A fly's wiring diagram plays a rhythm game</h1>
-    <p class="lede">A simulation of the adult fruit fly brain, built from the real FlyWire wiring and never trained, watches notes fall through its simulated eyes. <b>Only a small linear readout</b> on top was fitted, on synthetic practice charts. Each key goes down when that readout's drive crosses zero. Below is a deterministic replay of two real community beatmaps it never saw during fitting, with the simulated brain's activity alongside.</p>
+    <p class="lede">A simulation of the adult fruit fly brain, built from the real FlyWire wiring and never trained, watches notes fall through its simulated eyes. <b>Only a small linear readout</b> on top was fitted, on synthetic practice charts. Each key goes down when that readout's drive crosses zero. Below are deterministic replays of six real community beatmaps from five songs, none of which it saw during fitting, with the simulated brain's activity alongside.</p>
   </header>
 
   <div class="maps" id="maps" role="group" aria-label="Choose a beatmap"></div>
+  <p class="maps-note"><b>Tuning</b> maps come from songs that were looked at when earlier readout settings were chosen. <b>Held-out</b> maps come from songs that were never used for any choice. Maps longer than 90 s are shown as a 90 s clip.</p>
 
   <div class="stage">
     <div class="field-box"><canvas id="field" aria-label="Playfield: four lanes with notes falling to a judgment line, and an illustrated fly pressing four keys"></canvas></div>
@@ -726,46 +736,63 @@ function draw(now) { drawField(now ?? performance.now()); drawBrain(); drawDrive
 // ---- sound: the song is the master clock while it plays; hit sounds are
 // scheduled ahead on the Web Audio clock and cancelled on scrub or pause ----
 const AU = {
-  el: null, failed: false, active: false, waiting: false,
-  ctx: null, hitBuf: null, hitGain: null, hitFailed: false,
+  el: null, src: null, failedSongs: new Set(), active: false, waiting: false, blocked: false,
+  ctx: null, hitBufs: new Map(), hitGain: null,
   muted: false, music: 0.6, hits: 0.5,
   scheduled: new Set(), sIdx: 0,
 };
 const LOOKAHEAD = 120;   // ms of real time scheduled ahead
 function offset() { return MAP && MAP.audio_offset_ms != null ? MAP.audio_offset_ms : null; }
+function songFile() { return MAP && MAP.audio ? MAP.audio.song : null; }
+function hitFile() { return MAP && MAP.audio ? MAP.audio.hit : null; }
 function soundNote(msg) { const s = $("sound-note"); s.hidden = !msg; s.textContent = msg || ""; }
 function setRate(el) {
   el.playbackRate = speed;
   el.preservesPitch = true; el.mozPreservesPitch = true; el.webkitPreservesPitch = true;
 }
-function initSongElement() {
-  if (AU.el || !DATA || !DATA.audio) return;
+const SONG_FAIL = "This map's song could not be loaded, so its replay runs without music.";
+function ensureSong() {         // point the audio element at the current map's song
+  const f = songFile();
+  if (!f || AU.src === f) return;
+  if (AU.el) { const old = AU.el; AU.el = null; old.pause(); old.removeAttribute("src"); old.load(); }
+  AU.active = false; AU.waiting = false; AU.src = f;
+  soundNote(AU.failedSongs.has(f) ? SONG_FAIL : "");
   const el = new Audio();
-  el.preload = "auto"; el.src = DATA.audio.song;
+  el.preload = "auto"; el.src = f;
   el.volume = AU.music; el.muted = AU.muted; setRate(el);
-  el.addEventListener("error", () => { AU.failed = true; AU.active = false; soundNote("The song could not be loaded, so the replay runs without music."); });
-  el.addEventListener("waiting", () => { AU.waiting = true; });
-  el.addEventListener("playing", () => { AU.waiting = false; });
-  el.addEventListener("seeked", () => { AU.waiting = false; });
-  el.addEventListener("ended", () => { AU.active = false; });
+  const mine = () => AU.el === el;
+  el.addEventListener("error", () => { if (!mine()) return; AU.failedSongs.add(f); AU.active = false; soundNote(SONG_FAIL); });
+  el.addEventListener("waiting", () => { if (mine()) AU.waiting = true; });
+  el.addEventListener("playing", () => { if (mine()) AU.waiting = false; });
+  el.addEventListener("seeked", () => { if (mine()) AU.waiting = false; });
+  el.addEventListener("ended", () => { if (mine()) AU.active = false; });
   AU.el = el;
 }
-async function initAudioContext() {
-  if (AU.ctx) { if (AU.ctx.state === "suspended") AU.ctx.resume().catch(() => {}); return; }
-  const Ctx = window.AudioContext || window.webkitAudioContext;
-  if (!Ctx) { AU.hitFailed = true; return; }
-  AU.ctx = new Ctx();
-  AU.hitGain = AU.ctx.createGain(); AU.hitGain.gain.value = AU.muted ? 0 : AU.hits; AU.hitGain.connect(AU.ctx.destination);
+async function loadHit(file) {
+  if (!AU.ctx || !file || AU.hitBufs.has(file)) return;
+  AU.hitBufs.set(file, "loading");
   try {
-    const r = await fetch(DATA.audio.hit);
+    const r = await fetch(file);
     if (!r.ok) throw new Error("HTTP " + r.status);
     const raw = await r.arrayBuffer();
-    AU.hitBuf = await new Promise((res, rej) => { const p = AU.ctx.decodeAudioData(raw, res, rej); if (p && p.then) p.then(res, rej); });
-  } catch (e) { AU.hitFailed = true; if (!AU.failed) soundNote("The hit sound could not be loaded, so hits on notes are silent."); }
+    AU.hitBufs.set(file, await new Promise((res, rej) => { const p = AU.ctx.decodeAudioData(raw, res, rej); if (p && p.then) p.then(res, rej); }));
+  } catch (e) {
+    AU.hitBufs.set(file, null);
+    if (file === hitFile()) soundNote("The hit sound could not be loaded, so hits on notes are silent.");
+  }
+}
+function initAudioContext() {
+  if (!AU.ctx) {
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    AU.ctx = new Ctx();
+    AU.hitGain = AU.ctx.createGain(); AU.hitGain.gain.value = AU.muted ? 0 : AU.hits; AU.hitGain.connect(AU.ctx.destination);
+  } else if (AU.ctx.state === "suspended") AU.ctx.resume().catch(() => {});
+  loadHit(hitFile());
 }
 function songWanted() {
   const off = offset();
-  if (AU.failed || AU.blocked || !AU.el || off == null) return false;
+  if (AU.blocked || !AU.el || off == null || AU.src !== songFile() || AU.failedSongs.has(AU.src)) return false;
   const st = (t + off) / 1000, dur = AU.el.duration;
   return st >= 0 && (!isFinite(dur) || st < dur - 0.05);
 }
@@ -790,8 +817,9 @@ function resync() {             // after scrub, speed change, map change
 function voice(kind, when) {
   const c = AU.ctx; let node;
   if (kind === "hit") {
-    if (!AU.hitBuf) return;
-    node = c.createBufferSource(); node.buffer = AU.hitBuf; node.connect(AU.hitGain); node.start(when);
+    const buf = AU.hitBufs.get(hitFile());
+    if (!(buf && typeof buf === "object")) return;
+    node = c.createBufferSource(); node.buffer = buf; node.connect(AU.hitGain); node.start(when);
   } else if (kind === "stray") {
     node = c.createOscillator(); const g = c.createGain();
     node.type = "triangle";
@@ -855,6 +883,8 @@ function selectMap(i) {
   t = Math.min(MAP.tEnd, MAP.notes[0][1] + 2500);   // open on a moment with notes in play
   document.querySelectorAll(".map-btn").forEach((b, q) => b.setAttribute("aria-pressed", String(q === i)));
   setPlaying(playing);
+  if (AU.el) ensureSong();                // switch songs only once sound has been started
+  if (AU.ctx) loadHit(hitFile());
   resync();
   loadBrain(MAP.brain);
   draw();
@@ -863,9 +893,15 @@ function selectMap(i) {
 function init(data) {
   DATA = data; NV = data.neurons_view;
   DATA.maps = data.maps.map(prepare);
-  $("maps").innerHTML = `<span class="song">Song: ${songName(DATA.maps[0].song)} · two difficulties</span>` + DATA.maps.map((m, i) =>
-    `<button type="button" class="map-btn" data-i="${i}" aria-pressed="false"><span class="n">${m.difficulty}</span>` +
-    `<span class="m">${m.events_per_s} events/s · ${m.notes.length} notes · accuracy ${(100 * m.accuracy).toFixed(1)}%</span></button>`).join("");
+  const esc = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+  const TAG_TIP = { tuning: "Tuning map: earlier readout settings were chosen partly by looking at this song's maps.", "held-out": "Held-out map: never looked at when choosing any readout setting." };
+  $("maps").innerHTML = DATA.maps.map((m, i) => {
+    const set = m.set || "tuning";
+    return `<button type="button" class="map-btn" data-i="${i}" aria-pressed="false">` +
+      `<span class="row"><span class="n">${esc(m.difficulty)}</span><span class="tag ${set}" title="${esc(TAG_TIP[set] || "")}">${esc(set)}</span></span>` +
+      `<span class="s">${esc(songName(m.song))}</span>` +
+      `<span class="m">${m.events_per_s} events/s · accuracy ${(100 * m.accuracy).toFixed(1)}%${m.window && m.window.clipped ? " · 90 s clip" : ""}</span></button>`;
+  }).join("");
   document.querySelectorAll(".map-btn").forEach((b) => b.addEventListener("click", () => selectMap(+b.dataset.i)));
   $("legend").innerHTML = J.map((j) => `<span><i class="chip" style="background:${JCOL[j]}"></i>${j}</span>`).join("")
     + `<span><i class="chip" style="background:${STRAY}"></i>stray press (no note)</span>`;
@@ -896,7 +932,7 @@ $("play").addEventListener("click", () => {
   if (!MAP) return;
   if (!playing) {                          // audio may start only from this gesture
     AU.blocked = false;
-    initSongElement();
+    ensureSong();
     initAudioContext();
   }
   if (t >= MAP.tEnd) t = MAP.tStart;

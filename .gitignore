@@ -25,4 +25,5 @@ results/*_shard*of*.json
 # the replay page's sound, extracted from the map archive in osumaps/ by
 # `python experiments/demo_replay.py audio`; no need for a second copy
 demo/audio.ogg
-demo/soft-hitnormal.wav
+demo/song_*.ogg
+demo/*.wav

@@ -31,10 +31,18 @@ SPECS = ((4, 600.), (4, 450.), (4, 350.), (4, 250.), (4, 200.), (4, 150.), (4, 1
          (7, 600.), (7, 400.))
 OUT_DIR = os.path.join(ROOT, "demo")
 OUT = os.path.join(OUT_DIR, "replay_data.json")
-MAX_PLAY_S = 120.0
-WINDOW_S = 80.0
 LEAD_MS = 1000.0
-PICK = ("Easy", "Hard")
+PLAY_S = 90.0              # at most this much play per map
+AUDIO_PAD_S = 2.0          # audio kept either side of the window when a song is trimmed
+# (page key, map set, song id, difficulty); map set "tune" = the tuning songs
+SELECT = (("easy", "tune", "2600298", "Easy"),
+          ("hard", "tune", "2600298", "Hard"),
+          ("ongeki_adv", "tune", "2543258", "LINQAQ's ADVANCED"),
+          ("happyend_normal", "holdout", "171880", "4K Normal"),
+          ("boulafacet_mx", "holdout", "254581", "MX"),
+          ("empress_sc", "holdout", "315435", "SC"))
+SONG_KEYS = {"2600298": "mirairo", "2543258": "ongeki", "171880": "happyend",
+             "254581": "boulafacet", "315435": "empress"}
 K = 48                      # population-projection components (round 14's best)
 # brain view: neurons per class (small classes are kept whole)
 SAMPLE = {"photoreceptor": 350, "sensory": 50, "optic": 450, "visual_projection": 250,
@@ -121,19 +129,38 @@ def encode_brain(frames, r0, pick, path):
 
 
 def trim(chart):
-    """Keep a ~WINDOW_S stretch of a long chart, whole holds only, shifted so the
-    first note lands LEAD_MS in."""
+    """Keep at most PLAY_S of play: a contiguous window that starts on a note.
+    It is the opening of the chart unless the opening is sparse, in which case
+    it is the first window holding at least 90% of the chart's average number
+    of events per window.  Every note whose head falls in the window is kept,
+    holds whole.  Times are shifted so the first kept note lands LEAD_MS in.
+    Returns the new chart and a record of the window in the map's own time."""
     notes = chart.notes
-    if (chart.end_ms - chart.start_ms) / 1000.0 <= MAX_PLAY_S:
-        lo, hi = chart.start_ms, chart.end_ms
+    t = np.array([n.hit_ms for n in notes])
+    span = (chart.end_ms - chart.start_ms) / 1000.0
+    W = PLAY_S * 1000.0
+    if span <= PLAY_S:
+        keep = list(notes)
     else:
-        mid = 0.5 * (chart.start_ms + chart.end_ms)
-        lo, hi = mid - 500.0 * WINDOW_S, mid + 500.0 * WINDOW_S
-    keep = [n for n in notes if n.hit_ms >= lo and (n.end_ms if n.is_hold else n.hit_ms) <= hi]
-    shift = LEAD_MS - keep[0].hit_ms
+        ev = np.unique(t)
+        target = 0.9 * len(ev) * W / (ev[-1] - ev[0])
+        s = ev[0]
+        for x in ev:
+            if x + W > ev[-1]:
+                break
+            if np.searchsorted(ev, x + W) - np.searchsorted(ev, x) >= target:
+                s = x
+                break
+        keep = [n for n in notes if s <= n.hit_ms < s + W]
+    first = keep[0].hit_ms
+    shift = LEAD_MS - first
     new = [mania.Note(n.lane, n.hit_ms + shift, None if n.end_ms is None else n.end_ms + shift)
            for n in keep]
-    return mania.Chart(new, approach_ms=chart.approach_ms, od=chart.od, name=chart.name)
+    last = max((n.end_ms if n.is_hold else n.hit_ms) for n in keep)
+    window = {"raw_first_ms": round(first, 1), "raw_last_ms": round(last, 1),
+              "n_notes": len(keep), "of_notes": len(notes),
+              "full_span_s": round(span, 1), "clipped": len(keep) != len(notes)}
+    return mania.Chart(new, approach_ms=chart.approach_ms, od=chart.od, name=chart.name), window
 
 
 def key_intervals(res, t, drive):
@@ -192,18 +219,36 @@ def export(res, meta):
     }
 
 
-def main():
+def select_charts():
+    """The six demo maps, by (map set, song id prefix, difficulty name)."""
     from experiments import e20_beatmaps as E20
-    cs = {c["version"]: c for c in E20.charts()}
-    print("difficulties:", {k: v["events_per_s"] for k, v in cs.items()}, flush=True)
+    pool = {}
+    for ms in ("tune", "holdout"):
+        E20.MAP_SET = ms                   # charts() reads this at call time
+        for c in E20.charts():
+            pool[(ms, c["song"].split(" ")[0], c["version"])] = c
+    out = []
+    for key, ms, sid, ver in SELECT:
+        c = pool.get((ms, sid, ver))
+        if c is None:
+            names = sorted(v for (m2, s2, v) in pool if m2 == ms and s2 == sid)
+            raise SystemExit(f"{key}: no difficulty {ver!r} for song {sid} in {ms}; have {names}")
+        print(f"{key}: {c['song']} [{c['version']}]  {c['events_per_s']} ev/s  "
+              f"{c['seconds']} s  {c['notes']} notes", flush=True)
+        out.append((key, "tuning" if ms == "tune" else "held-out", c))
+    return out
+
+
+def main():
+    chosen = select_charts()
     fly, player, fit, fit_s = build_player()
     pick, neurons = sample_neurons(fly)
     os.makedirs(OUT_DIR, exist_ok=True)
     maps = []
-    for name in PICK:
-        c = cs[name]
-        chart = trim(c["chart"])
-        meta = dict(c, trimmed=len(chart) != len(c["chart"]))
+    for key, map_set, c in chosen:
+        name = f"{key} ({c['version']})"
+        chart, window = trim(c["chart"])
+        meta = dict(c, trimmed=window["clipped"])
         frames, count = [], [0]
 
         def tap(r, env):
@@ -214,8 +259,9 @@ def main():
         res = player.play(chart, record=True, seed=4242, tap=tap)
         print(f"{name}: {len(chart)} notes  acc={res.accuracy:.4f}  {res.counts}", flush=True)
         m = export(res, meta)
+        m.update(key=key, set=map_set, window=window)
         m["brain"] = encode_brain(frames, np.asarray(player.r0), pick,
-                                  os.path.join(OUT_DIR, f"brain_{name.lower()}.b64.txt"))
+                                  os.path.join(OUT_DIR, f"brain_{key}.b64.txt"))
         m["brain"].update(t0=m["trace"]["t0"], dt=round(2.0 * BRAIN_EVERY, 3))
         maps.append(m)
         del res, frames
@@ -252,43 +298,161 @@ def _raw_hitobjects(txt):
     return general, sorted(objs, key=lambda o: (o[0], o[1]))
 
 
+def _match_window(m, raw):
+    """Match the replay's notes, in order, against the raw hit objects of the
+    kept window; the offset (raw - replay) must be constant.  Returns it."""
+    notes = sorted(((n[1], n[0]) for n in m["notes"]), key=lambda o: (o[0], o[1]))
+    w = m["window"]
+    i0 = next(i for i, o in enumerate(raw) if o[0] >= w["raw_first_ms"] - 0.5)
+    seg = raw[i0:i0 + len(notes)]
+    tag = f"{m['key']} [{m['difficulty']}]"
+    if len(seg) != len(notes):
+        raise SystemExit(f"{tag}: {len(notes)} replay notes vs {len(seg)} raw hit objects")
+    if not w["clipped"] and (i0 != 0 or len(raw) != len(notes)):
+        raise SystemExit(f"{tag}: unclipped map does not cover every hit object")
+    if w["clipped"] and i0 + len(notes) < len(raw) \
+            and raw[i0 + len(notes)][0] < w["raw_first_ms"] + PLAY_S * 1000.0:
+        raise SystemExit(f"{tag}: window is not contiguous in the raw map")
+    lanes_ok = all(a[1] == b[1] for a, b in zip(notes, seg))
+    off = np.array([b[0] - a[0] for a, b in zip(notes, seg)])
+    dev = float(np.abs(off - np.median(off)).max())
+    if dev > 1.0 or not lanes_ok:
+        raise SystemExit(f"{tag}: offset not constant (max dev {dev:.2f} ms, lanes match {lanes_ok})")
+    return float(np.median(off)), dev
+
+
+def _ff(*args, pcm=False):
+    import subprocess
+    r = subprocess.run(["ffmpeg", "-v", "error", "-y", *args], capture_output=True, check=True)
+    return np.frombuffer(r.stdout, np.int16).astype(np.float32) if pcm else None
+
+
+def _duration_s(path):
+    import subprocess
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration",
+                        "-of", "csv=p=0", path], capture_output=True, text=True, check=True)
+    return float(r.stdout.strip())
+
+
+def _clip_lag_ms(src, clip, start_s):
+    """Cross-correlate the clip's first 12 s with the source at start_s; the
+    lag should be 0 if the trim kept timing exact."""
+    sr = 16000
+    a = _ff("-i", src, "-ss", f"{start_s:.3f}", "-t", "12", "-ac", "1", "-ar", str(sr),
+            "-f", "s16le", "-", pcm=True)
+    b = _ff("-i", clip, "-t", "12", "-ac", "1", "-ar", str(sr), "-f", "s16le", "-", pcm=True)
+    n = min(len(a), len(b)) - 2 * sr
+    lags = range(-1600, 1601, 4)
+    ref = a[sr:sr + n]
+    best = max(lags, key=lambda L: float(np.dot(ref, b[sr + L:sr + L + n])))
+    fine = max(range(best - 4, best + 5), key=lambda L: float(np.dot(ref, b[sr + L:sr + L + n])))
+    return 1000.0 * fine / sr
+
+
+def _good_hit_sample(blob):
+    """A usable hit sample: a readable PCM wav, not silent, not long."""
+    import io
+    import wave
+    try:
+        with wave.open(io.BytesIO(blob)) as w:
+            n, sr, ch, sw = w.getnframes(), w.getframerate(), w.getnchannels(), w.getsampwidth()
+            x = np.frombuffer(w.readframes(n), {1: np.uint8, 2: np.int16}[sw]).astype(np.float32)
+    except Exception as e:                   # noqa: BLE001 - any unreadable file falls back
+        return False, f"unreadable ({e})"
+    if sw == 1:
+        x -= 128.0
+    full = 127.0 if sw == 1 else 32767.0
+    dur = n / sr
+    peak = float(np.abs(x).max() / full) if len(x) else 0.0
+    ok = 0.01 < dur <= 1.0 and peak >= 0.2          # near-silent samples would be inaudible
+    return ok, f"{dur:.2f} s, peak {peak:.3f}"
+
+
 def audio():
-    """Light entry point (no model, no fit): extract the song and hit sound from
-    the .osz and add a per-map ``audio_offset_ms`` to replay_data.json, so that
-    song time = replay time + offset.  The offset is found by matching the
-    replay's notes against the raw hit objects in order, and must be constant."""
+    """Light entry point (no model, no fit).  For every map in replay_data.json:
+    extract its song and hit sample from the map's own .osz, trim a long song to
+    the kept window +-AUDIO_PAD_S (re-encoded to Ogg Vorbis, with the timing
+    checked by cross-correlation), and store the offset so that
+    file time = replay time + offset."""
+    import tempfile
     import zipfile
-    z = zipfile.ZipFile(SONG_OSZ)
-    for name in ("audio.ogg", "soft-hitnormal.wav"):
-        with open(os.path.join(OUT_DIR, name), "wb") as fh:
-            fh.write(z.read(name))
-        print(f"extracted {name}  {os.path.getsize(os.path.join(OUT_DIR, name)) / 1e6:.2f} MB")
     with open(OUT) as fh:
         data = json.load(fh)
-    osus = {n: z.read(n).decode("utf-8-sig", errors="replace")
-            for n in z.namelist() if n.lower().endswith(".osu")}
+    by_song = {}
     for m in data["maps"]:
-        txt = next(v for n, v in osus.items() if n.endswith(f"[{m['difficulty']}].osu"))
-        general, raw = _raw_hitobjects(txt)
-        if general.get("AudioFilename") != "audio.ogg":
-            raise SystemExit(f"{m['difficulty']}: AudioFilename is {general.get('AudioFilename')!r}")
-        notes = sorted(((n[1], n[0]) for n in m["notes"]), key=lambda o: (o[0], o[1]))
-        if len(notes) != len(raw):
-            raise SystemExit(f"{m['difficulty']}: {len(notes)} replay notes vs {len(raw)} hit objects")
-        lanes_ok = all(a[1] == b[1] for a, b in zip(notes, raw))
-        off = np.array([b[0] - a[0] for a, b in zip(notes, raw)])
-        dev = float(np.abs(off - np.median(off)).max())
-        if dev > 1.0 or not lanes_ok:
-            raise SystemExit(f"{m['difficulty']}: offset not constant (max dev {dev:.2f} ms, "
-                             f"lanes match {lanes_ok})")
-        m["audio_offset_ms"] = round(float(np.median(off)), 1)
-        print(f"{m['difficulty']}: offset {m['audio_offset_ms']} ms over {len(off)} notes, "
-              f"max dev {dev:.2f} ms, lanes match {lanes_ok}, "
-              f"AudioLeadIn={general.get('AudioLeadIn', '(absent)')}")
-    data["audio"] = {"song": "audio.ogg", "hit": "soft-hitnormal.wav"}
+        by_song.setdefault(m["song"], []).append(m)
+    tmp = tempfile.mkdtemp(prefix="flyosu_demo_")
+    fallback_hit = "soft-hitnormal.wav"
+    with zipfile.ZipFile(SONG_OSZ) as z0, open(os.path.join(OUT_DIR, fallback_hit), "wb") as fh:
+        fh.write(z0.read("soft-hitnormal.wav"))
+    for song, ms in by_song.items():
+        skey = SONG_KEYS[song.split(" ")[0]]
+        z = zipfile.ZipFile(os.path.join(ROOT, "osumaps", song))
+        offs, general = [], None
+        for m in ms:
+            txt = next(z.read(n).decode("utf-8-sig", errors="replace") for n in z.namelist()
+                       if n.endswith(f"[{m['difficulty']}].osu"))
+            general, raw = _raw_hitobjects(txt)
+            raw_off, dev = _match_window(m, raw)
+            offs.append(raw_off)
+            print(f"{m['key']}: raw offset {raw_off:.1f} ms over {len(m['notes'])} notes "
+                  f"(max dev {dev:.2f} ms), window {m['window']['raw_first_ms']:.0f}-"
+                  f"{m['window']['raw_last_ms']:.0f} ms of {m['window']['full_span_s']} s, "
+                  f"AudioLeadIn={general.get('AudioLeadIn', '(absent)')}", flush=True)
+        src_name = general["AudioFilename"]
+        ext = os.path.splitext(src_name)[1].lower()
+        src = os.path.join(tmp, "src" + ext)
+        with open(src, "wb") as fh:
+            fh.write(z.read(src_name))
+        dur = _duration_s(src)
+        lo = min(m["window"]["raw_first_ms"] for m in ms) / 1000.0 - AUDIO_PAD_S
+        hi = max(m["window"]["raw_last_ms"] for m in ms) / 1000.0 + AUDIO_PAD_S
+        lo, hi = max(0.0, lo), min(dur, hi)
+        if hi - lo < 0.8 * dur:
+            out_name = f"song_{skey}.ogg"
+            _ff("-i", src, "-ss", f"{lo:.3f}", "-t", f"{hi - lo:.3f}", "-map", "0:a:0", "-vn",
+                "-c:a", "libvorbis", "-q:a", "5", os.path.join(OUT_DIR, out_name))
+            lag = _clip_lag_ms(src, os.path.join(OUT_DIR, out_name), lo)
+            if abs(lag) > 1.0:
+                raise SystemExit(f"{skey}: trimmed audio is misaligned by {lag:.2f} ms")
+            clip_ms = lo * 1000.0
+            how = f"trimmed {lo:.2f}-{hi:.2f} s of {dur:.1f} s, clip lag {lag:+.2f} ms"
+        else:
+            out_name = f"song_{skey}{ext}"
+            with open(os.path.join(OUT_DIR, out_name), "wb") as fh:
+                fh.write(z.read(src_name))
+            clip_ms, how = 0.0, f"full file, {dur:.1f} s"
+        # hit sample: the archive's own <sampleset>-hitnormal.wav, else the fallback
+        ss = general.get("SampleSet", "Normal").lower()
+        cands = [f"{ss}-hitnormal.wav"] + sorted(n for n in z.namelist()
+                                                 if n.lower().endswith("-hitnormal.wav"))
+        hit, why = fallback_hit, "none in archive"
+        if skey == "mirairo":                  # its sample *is* the fallback
+            cands, why = [], "this archive's soft-hitnormal.wav"
+        for n in cands:
+            if n in z.namelist():
+                ok, why = _good_hit_sample(z.read(n))
+                if ok:
+                    hit = f"hit_{skey}.wav"
+                    with open(os.path.join(OUT_DIR, hit), "wb") as fh:
+                        fh.write(z.read(n))
+                    why = f"{n}: {why}"
+                    break
+                why = f"{n} rejected: {why}"
+        print(f"  {skey}: {out_name} ({how}, "
+              f"{os.path.getsize(os.path.join(OUT_DIR, out_name)) / 1e6:.2f} MB); hit sound {hit} ({why})",
+              flush=True)
+        for m, raw_off in zip(ms, offs):
+            m["audio"] = {"song": out_name, "hit": hit, "raw_offset_ms": round(raw_off, 1),
+                          "clip_start_ms": round(clip_ms, 1)}
+            m["audio_offset_ms"] = round(raw_off - clip_ms, 1)
+    data.pop("audio", None)
     with open(OUT, "w") as fh:
         json.dump(data, fh, separators=(",", ":"))
     print(f"updated {OUT}  {os.path.getsize(OUT) / 1e6:.2f} MB")
+    tot = sum(os.path.getsize(os.path.join(OUT_DIR, f)) for f in os.listdir(OUT_DIR)
+              if not f.endswith(".log"))
+    print(f"demo folder total {tot / 1e6:.2f} MB")
 
 
 if __name__ == "__main__":
