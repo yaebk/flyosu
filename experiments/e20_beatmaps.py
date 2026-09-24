@@ -97,8 +97,10 @@ FIT_BOTH_REL = dict(FIT_BOTH, release=tuple(round(0.05 * i, 2) for i in range(21
 FIT_BOTH8_ORC_REL = dict(FIT_BOTH_REL, n_charts=36, oracle=True,
                          specs=FIT_BOTH["specs"] + ((8, 400.0), (8, 300.0)))
 FIT_BOTH8_ORC_REL_GRID = dict(FIT_BOTH8_ORC_REL, grid=True)
+FIT_BOTH_ORC_REL = dict(FIT_BOTH_REL, oracle=True)          # round 12's both_a300_orc_rel
 _DIETS = {"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
-          "both8_orc_rel": FIT_BOTH8_ORC_REL, "both8_orc_rel_grid": FIT_BOTH8_ORC_REL_GRID}
+          "both8_orc_rel": FIT_BOTH8_ORC_REL, "both8_orc_rel_grid": FIT_BOTH8_ORC_REL_GRID,
+          "both_orc_rel": FIT_BOTH_ORC_REL}
 FIT = _DIETS[_DIET]
 TRAIN_SEED = 100
 N_NOTES_FIT = 24
