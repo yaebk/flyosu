@@ -326,6 +326,23 @@ ARMS = {
                                 n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
                                 smooth=20.0, lane_az=(-120.0, -40.0, 40.0, 120.0),
                                 release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 21: jacks.  On the held-out maps round 15's readout gets taps and
+    # chords to 0.922 but fast jacks (same lane within 150 ms) to only 0.156,
+    # and the diet has never held a single jack chart -- stage 6 was only ever
+    # in the battery.  Add jack charts at 200, 150 and 120 ms; then the same
+    # with the 75 ms refractory, which did nothing without jack training.
+    "fast_sm20_k48_jk": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                    (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                    (7, 400.0), (6, 200.0), (6, 150.0), (6, 120.0)),
+                             n_charts=48, k=48, approach=250.0, oracle=True, refr=100.0,
+                             smooth=20.0,
+                             release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k48_jk_r75": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                        (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                        (7, 400.0), (6, 200.0), (6, 150.0), (6, 120.0)),
+                                 n_charts=48, k=48, approach=250.0, oracle=True, refr=75.0,
+                                 smooth=20.0,
+                                 release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
