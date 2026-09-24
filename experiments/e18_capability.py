@@ -55,7 +55,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flyosu import learn as L, model as M, play as P, reservoir as R  # noqa: E402
+from flyosu import encoder as E, learn as L, model as M, play as P, reservoir as R  # noqa: E402
 from flyosu.controller import calibration_states  # noqa: E402
 
 RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
@@ -156,6 +156,12 @@ ARMS = {
                                  (7, 600.0), (7, 400.0), (8, 400.0), (8, 300.0)),
                           n_charts=36, k=32, approach=300.0,
                           release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # the same, with hold bodies drawn on a fixed screen grid plus an explicit
+    # tail (``Encoder.hold_grid``): a different picture of a hold, so its own arm
+    "both8_rel_grid": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                  (7, 600.0), (7, 400.0), (8, 400.0), (8, 300.0)),
+                           n_charts=36, k=32, approach=300.0, grid=True,
+                           release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -242,7 +248,8 @@ def run_arm(arm: str) -> dict:
     k = int(cfg.get("k", READOUT_K))
     t0 = time.time()
     fly = M.build(regime="play")
-    player = P.Player.untrained(fly, theta=THETA, noise=NOISE)
+    player = P.Player.untrained(fly, theta=THETA, noise=NOISE,
+                                encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid"))))
     if "refr" in cfg:
         player.controller.refractory_ms = float(cfg["refr"])
     states = calibration_states(fly, player.r0)
@@ -340,7 +347,8 @@ def validate():
         raise SystemExit(f"set ARM to one of: {', '.join(ARMS)}")
     cfg = ARMS[arm]
     fly = M.build(regime="play")
-    player = P.Player.untrained(fly, theta=THETA, noise=NOISE)
+    player = P.Player.untrained(fly, theta=THETA, noise=NOISE,
+                                encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid"))))
     if "refr" in cfg:
         player.controller.refractory_ms = float(cfg["refr"])
     states = calibration_states(fly, player.r0)

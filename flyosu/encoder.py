@@ -95,7 +95,7 @@ class Encoder:
                  gate_width_deg: float = 4.0, gate_gain: float = 1.0,
                  loom: float = 0.0, loom_exp: float = 1.0,
                  hold_intensity: float = 0.6, hold_step: float = 0.08,
-                 hold_points: int = 10):
+                 hold_points: int = 10, hold_grid: bool = False):
         self.ret = retina
         self.sigma = float(sigma_deg)
         self.intensity = float(intensity)
@@ -108,6 +108,16 @@ class Encoder:
         self.hold_intensity = float(hold_intensity)
         self.hold_step = float(hold_step)
         self.hold_points = int(hold_points)
+        # ``hold_grid`` draws the body differently: an explicit tail point, and
+        # body points fixed on the screen at multiples of ``hold_step`` rather
+        # than spread evenly between tail and head.  A real hold is an
+        # untextured bar, so any one spot on the screen is either covered or
+        # not; evenly spread points slide every frame and flicker where the bar
+        # would not, and they leave the tail implicit.  Fixed positions also
+        # recur, so the retina's blob cache covers them -- on a hold-heavy map
+        # the sliding points were ~14 full blob computations per frame.  Off by
+        # default so every earlier hold result is unchanged.
+        self.hold_grid = bool(hold_grid)
         self.adapt_tau = float(adapt if adapt is not None else adapt_tau_ms)
         self.adapt_gain = float(adapt_gain) if adapt is not None else 0.0
         self.adapt_base = float(adapt_base)
@@ -167,6 +177,16 @@ class Encoder:
                 out.append((az, float(elevation(prog)), self._intensity(prog)))
             lo, hi = float(tail), min(prog, 1.0)
             if hi <= lo:
+                continue
+            if self.hold_grid:
+                a = self.hold_intensity
+                if lo >= 0.0:                      # the tail, once it is on screen
+                    out.append((az, float(elevation(lo)), self._intensity(lo) * a))
+                j_hi = int(np.ceil(hi / self.hold_step)) - 1         # strictly below hi
+                j_lo = max(int(np.floor(lo / self.hold_step)) + 1, 0)  # strictly above lo, on screen
+                for j in range(j_hi, max(j_lo, j_hi - self.hold_points + 1) - 1, -1):
+                    p = j * self.hold_step
+                    out.append((az, float(elevation(p)), self._intensity(p) * a))
                 continue
             k = int(min(self.hold_points, max(1, round((hi - lo) / self.hold_step))))
             for j in range(1, k + 1):

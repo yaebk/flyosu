@@ -119,6 +119,7 @@ def test_mania():
     enc = E.Encoder.__new__(E.Encoder)
     enc.intensity, enc.loom, enc.loom_exp = 1.0, 0.0, 1.0
     enc.hold_intensity, enc.hold_step, enc.hold_points = 0.6, 0.08, 10
+    enc.hold_grid = False
     check("an ordinary note is still one point",
           enc.targets([(0, 0.5, 0, None)]) == [(-60.0, 5.0, 1.0)])
     body = enc.targets([(0, 0.5, 0, 0.1)])
@@ -130,6 +131,25 @@ def test_mania():
     check("a held note drops its head", len(held) > 0
           and all(p[2] < 1.0 for p in held), f"{len(held)} points")
     check("a finished hold renders nothing", enc.targets([(0, 2.5, 0, 1.2)]) == [])
+    # the grid rendering: an explicit tail, body points fixed on the screen
+    enc.hold_grid = True
+    check("grid: an ordinary note is unchanged",
+          enc.targets([(0, 0.5, 0, None)]) == [(-60.0, 5.0, 1.0)])
+    g = enc.targets([(0, 0.7, 0, 0.2)])
+    els = [p[1] for p in g]
+    check("grid: the tail is drawn", float(E.elevation(0.2)) in els)
+    grid_el = {float(E.elevation(j * 0.08)) for j in range(20)}
+    inner = [e for e in els[2:]]
+    check("grid: body points sit on the fixed grid, between tail and head",
+          len(inner) > 0 and all(e in grid_el for e in inner)
+          and all(float(E.elevation(0.7)) < e < float(E.elevation(0.2)) for e in inner))
+    g2 = enc.targets([(0, 0.703, 0, 0.203)])
+    check("grid: body points do not slide from frame to frame",
+          set(p[1] for p in g2[2:]) == set(inner))
+    top = enc.targets([(0, 0.3, 0, -0.9)])
+    check("grid: nothing is drawn above the top of the screen",
+          all(e <= float(E.elevation(0.0)) for _, e, _ in top))
+    enc.hold_grid = False
     # and the environment keeps a held note on screen
     env = mania.ManiaEnv(_hold_chart(), dt_ms=5.0)
     while env.t < 2000.0 - env.dt:
