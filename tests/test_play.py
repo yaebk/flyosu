@@ -348,6 +348,11 @@ def test_with_network():
               for i, (st, iv) in enumerate([(4, 400.0), (7, 500.0), (6, 300.0)])]
     alone = [noisy.play(c, seed=i) for i, c in enumerate(charts)]
     together = noisy.play_many(charts, seeds=[0, 1, 2])
+    from flyosu import reservoir as R
+    plain = [mania.stage_chart(4, n_notes=6, interval_ms=400.0, seed=40)]
+    a = R.record_many(noisy, plain, [5])[0].X
+    b = R.record_many(noisy, plain, [5], hold_oracle=True)[0].X
+    check("the hold oracle leaves a chart without holds bit-identical", np.array_equal(a, b))
     check("play_many is bit-identical to playing each chart alone",
           all(a.judgments == b.judgments
               and [repr(p) for p in a.presses] == [repr(p) for p in b.presses]
@@ -533,6 +538,22 @@ def test_release_logic():
         off_p, off_d = R.replay_keys(u, t, 150.0, rel)
         check(f"offline replay matches the live controller (level {lvl})",
               live_p == off_p and np.array_equal(live_d, off_d))
+    # the recording-time hold oracle, run through the judge the way play_many does
+    c7 = mania.stage_chart(8, n_notes=30, interval_ms=300.0, seed=4)
+    env, orc = mania.ManiaEnv(c7, dt_ms=2.0), R.HoldOracle(c7)
+    while not env.done:
+        for k in orc.step(None, env.t, env.dt):
+            env.press(k)
+        dn = orc.down()
+        for k in range(N_KEYS):
+            if env.hold[k] and not dn[k]:
+                env.release(k)
+        env.step()
+    res = env.result()
+    hj = [j for n, j in zip(c7.notes, res.judgments) if n.is_hold]
+    tj = [j for n, j in zip(c7.notes, res.judgments) if not n.is_hold]
+    check("the hold oracle plays every hold at MAX", len(hj) > 3 and set(hj) == {"MAX"}, str(set(hj)))
+    check("and leaves every other note alone", set(tj) == {"MISS"} and res.n_stray == 0)
     base_p = R.replay_presses(u, t, 150.0)
     lvl0_p, lvl0_d = R.replay_keys(u, t, 150.0, np.zeros(N_KEYS))
     check("level 0 is the original controller",

@@ -150,18 +150,29 @@ ARMS = {
     "both_a300_rel": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=300.0,
                           release=tuple(round(0.05 * i, 2) for i in range(21))),
-    # round 12: the same with stage 8 in the diet, so the fit sees the
-    # lift-and-press-again pattern it is now able to perform.
-    "both8_rel":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+    # Round 11 made holds worse (0.779 -> 0.728, 0.750 with levels), and the
+    # reason was the recordings, not the judge: the silent recorder misses every
+    # hold, and a missed hold leaves the screen 164 ms after its head, so the
+    # fit never saw the body it has to release on.  Round 12 records holds as a
+    # perfect player sees them (``reservoir.HoldOracle``): `_orc` alone, then
+    # with the levels, then with stage 8 (holds followed closely in their own
+    # lane) in the diet, then with the fixed-grid hold rendering as well.
+    "both_a300_orc": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=300.0,
+                          oracle=True),
+    "both_a300_orc_rel": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                     (4, 200.0), (7, 600.0), (7, 400.0)),
+                              n_charts=28, k=32, approach=300.0, oracle=True,
+                              release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "both8_orc_rel": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0), (8, 400.0), (8, 300.0)),
-                          n_charts=36, k=32, approach=300.0,
+                          n_charts=36, k=32, approach=300.0, oracle=True,
                           release=tuple(round(0.05 * i, 2) for i in range(21))),
-    # the same, with hold bodies drawn on a fixed screen grid plus an explicit
-    # tail (``Encoder.hold_grid``): a different picture of a hold, so its own arm
-    "both8_rel_grid": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
-                                  (7, 600.0), (7, 400.0), (8, 400.0), (8, 300.0)),
-                           n_charts=36, k=32, approach=300.0, grid=True,
-                           release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "both8_orc_rel_grid": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                      (4, 200.0), (7, 600.0), (7, 400.0), (8, 400.0),
+                                      (8, 300.0)),
+                               n_charts=36, k=32, approach=300.0, oracle=True, grid=True,
+                               release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -255,7 +266,8 @@ def run_arm(arm: str) -> dict:
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=n_charts, n_notes=N_NOTES,
                         seed=TRAIN_SEED, chart_specs=specs,
-                        release_levels=tuple(cfg.get("release", ())))
+                        release_levels=tuple(cfg.get("release", ())),
+                        hold_oracle=bool(cfg.get("oracle")))
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=k, states=states)
     print(f"[{arm}] recording {n_charts} charts (pca{k}): "
           + ", ".join(f"s{s[0]}@{s[1]:.0f}"
@@ -354,7 +366,8 @@ def validate():
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=int(cfg.get("n_charts", N_CHARTS)),
                         n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=_specs(cfg),
-                        release_levels=tuple(cfg.get("release", ())))
+                        release_levels=tuple(cfg.get("release", ())),
+                        hold_oracle=bool(cfg.get("oracle")))
     rr.features = R.PopulationProjection.fit(fly, player.r0,
                                              k=int(cfg.get("k", READOUT_K)), states=states)
     print(f"[{arm}] validating on seed {DEEP_KW['seed']}, "

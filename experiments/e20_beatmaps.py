@@ -90,13 +90,15 @@ FIT_BOTH = dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0
 # (``Controller.release``): the first run of FIT_BOTH lost the fast maps because
 # over half their holds are followed in the same lane within 100 ms.
 FIT_BOTH_REL = dict(FIT_BOTH, release=tuple(round(0.05 * i, 2) for i in range(21)))
-# ...and with stage 8 (holds followed closely in their own lane) in the diet,
-# optionally with hold bodies drawn on a fixed grid (``Encoder.hold_grid``).
-FIT_BOTH8_REL = dict(FIT_BOTH_REL, n_charts=36,
-                     specs=FIT_BOTH["specs"] + ((8, 400.0), (8, 300.0)))
-FIT_BOTH8_REL_GRID = dict(FIT_BOTH8_REL, grid=True)
+# ...recorded with the hold oracle (``reservoir.HoldOracle``; without it the fit
+# never sees a hold's body after the head), with stage 8 (holds followed
+# closely in their own lane) in the diet, optionally with hold bodies drawn on a
+# fixed grid (``Encoder.hold_grid``).
+FIT_BOTH8_ORC_REL = dict(FIT_BOTH_REL, n_charts=36, oracle=True,
+                         specs=FIT_BOTH["specs"] + ((8, 400.0), (8, 300.0)))
+FIT_BOTH8_ORC_REL_GRID = dict(FIT_BOTH8_ORC_REL, grid=True)
 _DIETS = {"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
-          "both8_rel": FIT_BOTH8_REL, "both8_rel_grid": FIT_BOTH8_REL_GRID}
+          "both8_orc_rel": FIT_BOTH8_ORC_REL, "both8_orc_rel_grid": FIT_BOTH8_ORC_REL_GRID}
 FIT = _DIETS[_DIET]
 TRAIN_SEED = 100
 N_NOTES_FIT = 24
@@ -166,7 +168,8 @@ def fitted_player():
     specs = tuple((s[0], s[1], APPROACH_MS) for s in FIT["specs"])
     rr = R.RidgeReadout(player, n_charts=FIT["n_charts"], n_notes=N_NOTES_FIT,
                         seed=TRAIN_SEED, chart_specs=specs,
-                        release_levels=tuple(FIT.get("release", ())))
+                        release_levels=tuple(FIT.get("release", ())),
+                        hold_oracle=bool(FIT.get("oracle")))
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=FIT["k"], states=states)
     rr.record()
     rr.solve()

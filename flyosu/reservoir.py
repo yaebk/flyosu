@@ -167,16 +167,57 @@ class Recording:
     dt: float
 
 
+class HoldOracle:
+    """Recording stand-in that plays the hold notes, and only those, perfectly:
+    each hold's key goes down on the first frame at or after its head and comes
+    up on the first frame at or after its tail.  Every other note is left alone,
+    exactly as the silent controller leaves it.
+
+    Why: the silent controller never presses, so every hold is missed, and a
+    missed hold leaves the screen 164 ms after its head -- for a 480 ms hold,
+    316 ms before its tail.  The fit then learns when to release from recordings
+    in which the body it should be watching has already vanished.  With this the
+    fly is shown what a good player sees: the body shrinking down to the line.
+    A chart with no holds is untouched, so its recording is bit-identical."""
+
+    def __init__(self, chart: Chart):
+        self.holds = sorted((n.hit_ms, n.end_ms, n.lane) for n in chart.notes if n.is_hold)
+        self.reset()
+
+    def reset(self) -> None:
+        self.i = 0
+        self.t = -np.inf
+        self.until = np.full(N_KEYS, -np.inf)
+
+    def step(self, z, t_ms: float, dt_ms: float) -> list[int]:
+        self.t = t_ms
+        keys = []
+        while self.i < len(self.holds) and self.holds[self.i][0] <= t_ms:
+            _, end, lane = self.holds[self.i]
+            self.i += 1
+            keys.append(int(lane))
+            self.until[lane] = end
+        return keys
+
+    def down(self) -> np.ndarray:
+        return self.t < self.until
+
+    def drive(self) -> np.ndarray:
+        return np.zeros(N_KEYS)
+
+
 def record(player: Player, chart: Chart, seed: int | None = None) -> Recording:
     """Play ``chart`` with a silent controller and record the readout population."""
     return record_many(player, [chart], [seed])[0]
 
 
 def record_many(player: Player, charts: list[Chart],
-                seeds: list[int | None]) -> list[Recording]:
+                seeds: list[int | None], hold_oracle: bool = False) -> list[Recording]:
     """``record`` for several charts in one batched play (``Player.play_many``).
     The controller is silent, so the network never feeds back into the chart
-    and every recording is exactly what ``record`` would make alone."""
+    and every recording is exactly what ``record`` would make alone.  With
+    ``hold_oracle`` the holds are played perfectly instead (``HoldOracle``);
+    that is still fixed in advance, so it does not feed back either."""
     idx = player.fly.readout.dn_local
     ts = [[] for _ in charts]
     xs = [[] for _ in charts]
@@ -192,7 +233,9 @@ def record_many(player: Player, charts: list[Chart],
     saved = player.features
     player.features = None
     try:
-        player.play_many(charts, controllers=[silent] * len(charts), seeds=seeds,
+        ctrls = ([HoldOracle(c) for c in charts] if hold_oracle
+                 else [silent] * len(charts))
+        player.play_many(charts, controllers=ctrls, seeds=seeds,
                          taps=[tapper(j) for j in range(len(charts))])
     finally:
         player.features = saved
@@ -388,6 +431,8 @@ class RidgeReadout:
     tail_lead_ms: float = 130.0
     # Candidate hold-release levels (see ``Controller.release``); empty = off.
     release_levels: tuple = ()
+    # Record holds as a perfect player would see them (``HoldOracle``).
+    hold_oracle: bool = False
     offsets: np.ndarray = field(default_factory=lambda: np.linspace(-2.0, 2.0, 41))
     recordings: list[Recording] = field(default_factory=list)
 
@@ -409,7 +454,8 @@ class RidgeReadout:
         """Record the training charts (the only expensive step; ~10 s per chart)."""
         charts = self.charts()
         self.recordings = record_many(self.player, charts,
-                                      [self.seed + i for i in range(len(charts))])
+                                      [self.seed + i for i in range(len(charts))],
+                                      hold_oracle=self.hold_oracle)
 
     def solve(self) -> dict:
         """Fit W, b and the per-lane (lead, offset) on the recordings; install
