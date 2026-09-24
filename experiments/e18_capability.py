@@ -173,6 +173,23 @@ ARMS = {
                                       (8, 300.0)),
                                n_charts=36, k=32, approach=300.0, oracle=True, grid=True,
                                release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 13: density past five events a second.  Real maps run to 10.2 and
+    # the diet stopped at 200 ms, so add 150 and 125 ms chord charts; then a
+    # shorter approach, since the approach window was the last density wall;
+    # then a shorter refractory for jacks, which bind at 150 ms.
+    "fast_orc_a300": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)),
+                          n_charts=36, k=32, approach=300.0, oracle=True,
+                          release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_orc_a250": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)),
+                          n_charts=36, k=32, approach=250.0, oracle=True,
+                          release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_orc_a250_r100": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                      (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                      (7, 400.0)),
+                               n_charts=36, k=32, approach=250.0, oracle=True, refr=100.0,
+                               release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -225,6 +242,11 @@ DEEP = {
     # were added simply lack the two rows.
     "s8_400": dict(stage=8, interval_ms=400.0),      # 2.5 notes/s
     "s8_300": dict(stage=8, interval_ms=300.0),      # 3.3 notes/s
+    # Past five events a second, where half the real maps live (5.5 to 10.2)
+    # and where nothing was ever trained or measured.
+    "s4_150": dict(stage=4, interval_ms=150.0),      # 6.7 events/s with chords
+    "s4_125": dict(stage=4, interval_ms=125.0),      # 8.0
+    "s4_100": dict(stage=4, interval_ms=100.0),      # 10.0, the fastest real map
 }
 DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 
