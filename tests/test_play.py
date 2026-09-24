@@ -120,6 +120,7 @@ def test_mania():
     enc.intensity, enc.loom, enc.loom_exp = 1.0, 0.0, 1.0
     enc.hold_intensity, enc.hold_step, enc.hold_points = 0.6, 0.08, 10
     enc.hold_grid = False
+    enc.lane_az = E.LANE_AZ
     check("an ordinary note is still one point",
           enc.targets([(0, 0.5, 0, None)]) == [(-60.0, 5.0, 1.0)])
     body = enc.targets([(0, 0.5, 0, 0.1)])

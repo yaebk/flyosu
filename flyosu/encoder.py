@@ -95,7 +95,8 @@ class Encoder:
                  gate_width_deg: float = 4.0, gate_gain: float = 1.0,
                  loom: float = 0.0, loom_exp: float = 1.0,
                  hold_intensity: float = 0.6, hold_step: float = 0.08,
-                 hold_points: int = 10, hold_grid: bool = False):
+                 hold_points: int = 10, hold_grid: bool = False,
+                 lane_az=None):
         self.ret = retina
         self.sigma = float(sigma_deg)
         self.intensity = float(intensity)
@@ -118,6 +119,11 @@ class Encoder:
         # the sliding points were ~14 full blob computations per frame.  Off by
         # default so every earlier hold result is unchanged.
         self.hold_grid = bool(hold_grid)
+        # Where each lane falls in the visual field, degrees of azimuth.  The
+        # default +-20/+-60 is a choice, not a fact about the game: lanes that
+        # land further apart on the retina reach more separate neurons, so they
+        # may interfere less when several are on screen at once.
+        self.lane_az = np.asarray(LANE_AZ if lane_az is None else lane_az, dtype=float)
         self.adapt_tau = float(adapt if adapt is not None else adapt_tau_ms)
         self.adapt_gain = float(adapt_gain) if adapt is not None else 0.0
         self.adapt_base = float(adapt_base)
@@ -168,7 +174,7 @@ class Encoder:
         for item in visible:
             lane, prog = item[0], float(item[1])
             tail = item[3] if len(item) > 3 else None
-            az = float(LANE_AZ[lane])
+            az = float(self.lane_az[lane])
             if tail is None:
                 out.append((az, float(elevation(prog)), self._intensity(prog)))
                 continue
@@ -210,7 +216,7 @@ class Encoder:
         return out.astype(np.float32)
 
     def describe(self) -> str:
-        base = (f"lanes at az {LANE_AZ.tolist()} deg, el {EL_SPAWN:+.0f} -> "
+        base = (f"lanes at az {self.lane_az.tolist()} deg, el {EL_SPAWN:+.0f} -> "
                 f"{EL_JUDGE:+.0f} deg, sigma {self.sigma:.0f} deg")
         if self.loom > 0:
             base += f", loom x{1.0 + self.loom:g} by arrival (exp {self.loom_exp:g})"

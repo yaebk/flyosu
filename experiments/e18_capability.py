@@ -310,6 +310,22 @@ ARMS = {
                                 n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
                                 smooth=20.0, max_bonus=0.10,
                                 release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 20: lane spacing on the retina (the user's question: the lanes are
+    # independent, so why do they interfere?).  Lanes at +-20/+-60 deg feed
+    # shared, saturating neurons; spread them to +-30/+-90 and +-40/+-120 so
+    # each lane reaches more of its own.  Otherwise round 15's readout exactly.
+    "fast_sm20_k48_az90": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                      (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                      (7, 400.0)),
+                               n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                               smooth=20.0, lane_az=(-90.0, -30.0, 30.0, 90.0),
+                               release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k48_az120": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                       (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                       (7, 400.0)),
+                                n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                                smooth=20.0, lane_az=(-120.0, -40.0, 40.0, 120.0),
+                                release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -408,7 +424,8 @@ def run_arm(arm: str) -> dict:
     t0 = time.time()
     fly = M.build(regime="play")
     player = P.Player.untrained(fly, theta=THETA, noise=NOISE,
-                                encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid"))))
+                                encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid")),
+                                                  lane_az=cfg.get("lane_az")))
     if "refr" in cfg:
         player.controller.refractory_ms = float(cfg["refr"])
     if "smooth" in cfg:
@@ -517,7 +534,8 @@ def validate():
     cfg = ARMS[arm]
     fly = M.build(regime="play")
     player = P.Player.untrained(fly, theta=THETA, noise=NOISE,
-                                encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid"))))
+                                encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid")),
+                                                  lane_az=cfg.get("lane_az")))
     if "refr" in cfg:
         player.controller.refractory_ms = float(cfg["refr"])
     if "smooth" in cfg:
