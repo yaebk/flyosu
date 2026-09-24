@@ -266,6 +266,17 @@ ARMS = {
                             n_charts=36, k=160, pca="train", approach=250.0, oracle=True,
                             refr=100.0, smooth=20.0,
                             release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 17: the Easy-map misses.  fast_sm20_k48 plus long-hold charts
+    # (1.0 and 1.5 s spacing, so 0.8 and 1.2 s holds) and chord-heavy charts
+    # (80 per cent chords), on a budget grown so the rest keeps its share.
+    "fast_sm20_k48_lh_ch": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                       (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                       (7, 400.0), (7, 1000.0), (7, 1500.0),
+                                       (4, 400.0, {"chord_p": 0.8}),
+                                       (4, 250.0, {"chord_p": 0.8})),
+                                n_charts=52, k=48, approach=250.0, oracle=True, refr=100.0,
+                                smooth=20.0,
+                                release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -323,6 +334,11 @@ DEEP = {
     "s4_150": dict(stage=4, interval_ms=150.0),      # 6.7 events/s with chords
     "s4_125": dict(stage=4, interval_ms=125.0),      # 8.0
     "s4_100": dict(stage=4, interval_ms=100.0),      # 10.0, the fastest real map
+    # From the misses on the replay's Easy map: holds released up to a second
+    # early (training holds never exceed 480 ms), and outer-lane chords (lanes
+    # 0 and 3 together) losing one side.
+    "s7_1500": dict(stage=7, interval_ms=1500.0),    # 1.2 s holds
+    "s4_400_ch": dict(stage=4, interval_ms=400.0, chord_p=0.8),   # mostly chords
 }
 DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 
@@ -340,7 +356,8 @@ def _specs(cfg) -> tuple:
     """Training specs with the arm's approach appended, if it declares one."""
     if "approach" not in cfg:
         return cfg["specs"]
-    return tuple((s[0], s[1], float(cfg["approach"])) for s in cfg["specs"])
+    # a spec may carry a third element, a dict of extra stage_chart arguments
+    return tuple((s[0], s[1], float(cfg["approach"])) + tuple(s[2:]) for s in cfg["specs"])
 
 
 def _load(path, default):
@@ -369,7 +386,10 @@ def run_arm(arm: str) -> dict:
                         release_levels=tuple(cfg.get("release", ())),
                         hold_oracle=bool(cfg.get("oracle")),
                         width_ms=float(cfg.get("width", 80.0)))
-    rr.features = R.PopulationProjection.fit(fly, player.r0, k=k, states=states)
+    # with pca="train" this projection is replaced after recording and only
+    # has to be legal (the calibration set has rank 60)
+    rr.features = R.PopulationProjection.fit(
+        fly, player.r0, k=k if cfg.get("pca") != "train" else min(k, 32), states=states)
     print(f"[{arm}] recording {n_charts} charts (pca{k}): "
           + ", ".join(f"s{s[0]}@{s[1]:.0f}"
                       + (f"/a{s[2]:.0f}" if len(s) > 2 else "") for s in specs), flush=True)
@@ -474,8 +494,11 @@ def validate():
                         release_levels=tuple(cfg.get("release", ())),
                         hold_oracle=bool(cfg.get("oracle")),
                         width_ms=float(cfg.get("width", 80.0)))
-    rr.features = R.PopulationProjection.fit(fly, player.r0,
-                                             k=int(cfg.get("k", READOUT_K)), states=states)
+    k = int(cfg.get("k", READOUT_K))
+    # with pca="train" this projection is replaced after recording and only
+    # has to be legal (the calibration set has rank 60)
+    rr.features = R.PopulationProjection.fit(
+        fly, player.r0, k=k if cfg.get("pca") != "train" else min(k, 32), states=states)
     print(f"[{arm}] validating on seed {DEEP_KW['seed']}, "
           f"{DEEP_KW['n_charts']} charts x {DEEP_KW['n_notes']} notes per condition", flush=True)
     rr.record()
@@ -484,7 +507,17 @@ def validate():
     fit = rr.solve()
     out = {"arm": arm, "deep_kw": DEEP_KW, "lanes": fit["lanes"],
            "n_params": fit["n_params"], "conditions": {}}
+    path = PATH[:-5] + f"_validate_{arm}.json"
+    # ONLY=a,b scores just those conditions and merges them into the arm's
+    # existing file -- for conditions added to the battery after it ran.  The
+    # refit is deterministic (fixed seeds), so this is the same readout.
+    only = [c for c in os.environ.get("ONLY", "").split(",") if c]
+    if only:
+        with open(path) as fh:
+            out = json.load(fh)
     for name, cond in DEEP.items():
+        if only and name not in only:
+            continue
         e = L.evaluate(player, **cond, **DEEP_KW, **_approach(cfg))
         n_c = int(np.array(e["confusion"]).sum())
         nps = 1000.0 / cond["interval_ms"]
@@ -497,7 +530,6 @@ def validate():
         print(f"  {name:<8s} {nps:>4.1f}/s  acc {b['accuracy']:.3f}  hit {b['hit_rate']:.2f}  "
               f"stray {b['stray_per_note']:.2f}"
               + (f"   (e5 {sel:.3f})" if sel else ""), flush=True)
-    path = PATH[:-5] + f"_validate_{arm}.json"
     with open(path, "w") as fh:
         json.dump(out, fh, indent=1)
     print(f"wrote {os.path.basename(path)}", flush=True)

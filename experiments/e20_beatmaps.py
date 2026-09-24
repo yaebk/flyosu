@@ -227,7 +227,7 @@ def fitted_player():
     if "refr" in FIT:
         player.controller.refractory_ms = float(FIT["refr"])
     states = calibration_states(fly, player.r0)
-    specs = tuple((s[0], s[1], APPROACH_MS) for s in FIT["specs"])
+    specs = tuple((s[0], s[1], APPROACH_MS) + tuple(s[2:]) for s in FIT["specs"])
     rr = R.RidgeReadout(player, n_charts=FIT["n_charts"], n_notes=N_NOTES_FIT,
                         seed=TRAIN_SEED, chart_specs=specs,
                         release_levels=tuple(FIT.get("release", ())),
