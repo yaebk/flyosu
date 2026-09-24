@@ -1,0 +1,6 @@
+controls -> e19_strays_powered_shard0of8.json (0 done, 5 planned)
+  rewired #1           stray/note 0.4725 (189/400)  acc 0.000  hit 0.000  presses 0 (GUARD FAIL)
+  rewired #9           stray/note 0.6125 (245/400)  acc 0.232  hit 0.232  presses 93
+  rewired #17          stray/note 0.8150 (326/400)  acc 0.392  hit 0.497  presses 417
+  rewired #25          stray/note 1.0125 (405/400)  acc 0.000  hit 0.000  presses 0 (GUARD FAIL)
+  rewired #33          stray/note 1.0050 (402/400)  acc 0.270  hit 0.277  presses 297
