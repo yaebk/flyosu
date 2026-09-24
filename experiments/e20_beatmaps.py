@@ -60,13 +60,15 @@ from flyosu.controller import calibration_states  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(ROOT, "results")
 MAPS = os.path.join(ROOT, "osumaps")
+APPROACH_MS = float(os.environ.get("APPROACH_MS", 400.0))   # experiment 18's optimum
 _DIET = os.environ.get("DIET", "hold")
-PATH = os.path.join(RESULTS, f"e20_beatmaps{'' if _DIET == 'nohold' else '_hold'}.json")
+PATH = os.path.join(RESULTS, f"e20_beatmaps{'' if _DIET == 'nohold' else '_' + _DIET}.json")
+if APPROACH_MS != 400.0:
+    PATH = PATH[:-5] + f"_a{APPROACH_MS:.0f}.json"
 SHARD = os.environ.get("SHARD")
 NSHARD = int(os.environ.get("NSHARD", 1))
 SHARD_PATH = PATH if SHARD is None else PATH[:-5] + f"_shard{int(SHARD)}of{NSHARD}.json"
 
-APPROACH_MS = float(os.environ.get("APPROACH_MS", 400.0))   # experiment 18's optimum
 THETA = 1.5
 NOISE = 0.03
 # Experiment 18's winning density diet, plus hold charts.  Real maps are 9 to
@@ -74,10 +76,18 @@ NOISE = 0.03
 # none at all -- which was fine as a measurement of the gap and is the wrong
 # thing to keep now that the fly can see a hold and the fit can sustain through
 # one.  FIT_NOHOLD is the original, kept so the two can be compared.
+#
+# FIT_BOTH is the generalist: experiment 18's full density ladder down to
+# 200 ms *plus* the two hold charts, on a bigger chart budget so that adding
+# holds does not cost density.  A real map is 9 to 67 per cent holds at 3 to 16
+# events a second, so a specialist in either skill is the wrong shape for it.
 FIT_NOHOLD = dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0)), n_charts=16, k=32)
 FIT_HOLD = dict(specs=((4, 600.0), (4, 350.0), (4, 250.0), (7, 600.0), (7, 400.0)),
                 n_charts=20, k=32)
-FIT = FIT_HOLD if os.environ.get("DIET", "hold") == "hold" else FIT_NOHOLD
+FIT_BOTH = dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                       (7, 600.0), (7, 400.0)), n_charts=28, k=32)
+_DIETS = {"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH}
+FIT = _DIETS[_DIET]
 TRAIN_SEED = 100
 N_NOTES_FIT = 24
 
