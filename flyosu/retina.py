@@ -57,6 +57,7 @@ AZ_CENTRE = {"left": -80.0, "right": 80.0}   # deg, eye-axis direction
 AZ_SPAN = 150.0                               # deg covered by one eye (p2..p98)
 EL_CENTRE = 5.0
 EL_SPAN = 130.0
+BLOB_CACHE_MAX = 4096        # ~140 MB of float32 blobs at 8,452 photoreceptors
 AZ_LIMIT = (-172.0, 172.0)
 EL_LIMIT = (-70.0, 82.0)
 
@@ -92,6 +93,7 @@ class Retina:
     direction: np.ndarray  # (P,3) float32 unit optical axes (head frame)
     fit: dict = field(default_factory=dict)
     _gain_cache: dict = field(default_factory=dict, repr=False, compare=False)
+    _blob_cache: dict = field(default_factory=dict, repr=False, compare=False)
 
     def __len__(self) -> int:
         return len(self.idx)
@@ -129,9 +131,22 @@ class Retina:
         for az, el, amp in targets:
             if amp == 0.0:
                 continue
-            cos = np.clip(self.direction @ unit_vector(az, el), -1.0, 1.0)
-            theta = np.arccos(cos)
-            out += np.float32(amp) * np.exp(-0.5 * (theta / s) ** 2).astype(np.float32)
+            # Each blob is cached by its exact position.  Notes move in whole
+            # frames, so the same (az, el) recurs constantly and the arccos and
+            # exp over every photoreceptor -- a third of a frame -- need only
+            # be done once per position; the arithmetic itself is untouched, so
+            # results are bit-identical.  Bounded, since a real map's hold
+            # bodies can produce many distinct positions.
+            key = (float(az), float(el), float(sigma_deg))
+            blob = self._blob_cache.get(key)
+            if blob is None:
+                cos = np.clip(self.direction @ unit_vector(az, el), -1.0, 1.0)
+                theta = np.arccos(cos)
+                blob = np.exp(-0.5 * (theta / s) ** 2).astype(np.float32)
+                if len(self._blob_cache) >= BLOB_CACHE_MAX:
+                    self._blob_cache.pop(next(iter(self._blob_cache)))
+                self._blob_cache[key] = blob
+            out += np.float32(amp) * blob
         return np.clip(out * g, 0.0, 1.0)
 
     def coverage(self) -> str:

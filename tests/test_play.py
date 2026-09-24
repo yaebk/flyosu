@@ -314,6 +314,18 @@ def test_with_network():
     check("its presses land in the right lane",
           all(p.lane == 1 for p in r1.presses if p.note is not None))
 
+    # batched play: every chart gets exactly what it would alone
+    noisy = P.Player.untrained(fly, theta=1.5, noise=0.03)
+    charts = [mania.stage_chart(st, n_notes=6, interval_ms=iv, seed=30 + i)
+              for i, (st, iv) in enumerate([(4, 400.0), (7, 500.0), (6, 300.0)])]
+    alone = [noisy.play(c, seed=i) for i, c in enumerate(charts)]
+    together = noisy.play_many(charts, seeds=[0, 1, 2])
+    check("play_many is bit-identical to playing each chart alone",
+          all(a.judgments == b.judgments
+              and [repr(p) for p in a.presses] == [repr(p) for p in b.presses]
+              and [repr(h) for h in a.holds] == [repr(h) for h in b.holds]
+              for a, b in zip(alone, together)))
+
     # the readout learner moves only the parameters it is allowed to
     lrn = L.ReadoutLearner(player, stage=1, n_notes=4, interval_ms=500.0,
                            mask=L.mask_for("thresholds"), seed=0)

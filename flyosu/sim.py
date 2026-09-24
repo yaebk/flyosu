@@ -312,7 +312,14 @@ class RateNetwork:
     # -- dynamics ----------------------------------------------------------
 
     def activation(self, x: np.ndarray) -> np.ndarray:
-        z = self.slope * (x - self.mu) / self.sigma + self.offset
+        # ``x`` is (n,) for one state or (n, B) for B states stepped together
+        # (``Player.play_many``); the per-neuron operating point then broadcasts
+        # along the batch.  Elementwise, so each column is bit-identical to
+        # stepping that state alone.
+        mu, sigma = self.mu, self.sigma
+        if x.ndim == 2 and np.ndim(mu) == 1:
+            mu, sigma = mu[:, None], (sigma[:, None] if np.ndim(sigma) == 1 else sigma)
+        z = self.slope * (x - mu) / sigma + self.offset
         return (1.0 / (1.0 + np.exp(-np.clip(z, -30, 30)))).astype(np.float32)
 
     def step(self, r: np.ndarray, ext: np.ndarray, dt: float) -> np.ndarray:

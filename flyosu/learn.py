@@ -141,9 +141,9 @@ def evaluate(player: Player, stage: int = 3, n_charts: int = 3, n_notes: int = 2
     recorded before this argument existed is unaffected.
     """
     accs, hits, rws, strays, errs, conf = [], [], [], [], [], np.zeros((4, 4), int)
-    for c in range(n_charts):
-        res = player.play(stage_chart(stage, n_notes=n_notes, interval_ms=interval_ms,
-                                      approach_ms=approach_ms, seed=seed + c), seed=seed + c)
+    charts = [stage_chart(stage, n_notes=n_notes, interval_ms=interval_ms,
+                          approach_ms=approach_ms, seed=seed + c) for c in range(n_charts)]
+    for res in player.play_many(charts, seeds=[seed + c for c in range(n_charts)]):
         accs.append(res.accuracy); hits.append(res.hit_rate); rws.append(reward(res))
         strays.append(res.n_stray); errs += res.errors_ms.tolist()
         conf += res.lane_confusion

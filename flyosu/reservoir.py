@@ -169,11 +169,22 @@ class Recording:
 
 def record(player: Player, chart: Chart, seed: int | None = None) -> Recording:
     """Play ``chart`` with a silent controller and record the readout population."""
-    idx = player.fly.readout.dn_local
-    ts, xs = [], []
+    return record_many(player, [chart], [seed])[0]
 
-    def tap(r, env):
-        ts.append(env.t); xs.append(r[idx].copy())
+
+def record_many(player: Player, charts: list[Chart],
+                seeds: list[int | None]) -> list[Recording]:
+    """``record`` for several charts in one batched play (``Player.play_many``).
+    The controller is silent, so the network never feeds back into the chart
+    and every recording is exactly what ``record`` would make alone."""
+    idx = player.fly.readout.dn_local
+    ts = [[] for _ in charts]
+    xs = [[] for _ in charts]
+
+    def tapper(j):
+        def tap(r, env):
+            ts[j].append(env.t); xs[j].append(r[idx].copy())
+        return tap
 
     silent = Controller(W=np.zeros((N_KEYS, N_KEYS)), b=np.full(N_KEYS, -1e9),
                         refractory_ms=player.controller.refractory_ms,
@@ -181,11 +192,12 @@ def record(player: Player, chart: Chart, seed: int | None = None) -> Recording:
     saved = player.features
     player.features = None
     try:
-        player.play(chart, controller=silent, seed=seed, tap=tap)
+        player.play_many(charts, controllers=[silent] * len(charts), seeds=seeds,
+                         taps=[tapper(j) for j in range(len(charts))])
     finally:
         player.features = saved
-    return Recording(chart=chart, t=np.asarray(ts), X=np.asarray(xs, dtype=np.float32),
-                     dt=player.dt)
+    return [Recording(chart=c, t=np.asarray(t), X=np.asarray(x, dtype=np.float32),
+                      dt=player.dt) for c, t, x in zip(charts, ts, xs)]
 
 
 def smooth(Z: np.ndarray, dt: float, smooth_ms: float) -> np.ndarray:
@@ -348,8 +360,9 @@ class RidgeReadout:
 
     def record(self) -> None:
         """Record the training charts (the only expensive step; ~10 s per chart)."""
-        self.recordings = [record(self.player, c, seed=self.seed + i)
-                           for i, c in enumerate(self.charts())]
+        charts = self.charts()
+        self.recordings = record_many(self.player, charts,
+                                      [self.seed + i for i in range(len(charts))])
 
     def solve(self) -> dict:
         """Fit W, b and the per-lane (lead, offset) on the recordings; install
