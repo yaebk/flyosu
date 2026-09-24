@@ -448,6 +448,9 @@ class RidgeReadout:
     # "fit on stage 4 and see" as the cheap follow-up.  ``None`` keeps the
     # single-condition behaviour every earlier experiment used, unchanged.
     chart_specs: tuple | None = None
+    # Ready-made charts (e.g. clips of real beatmaps) fitted alongside the
+    # generated ones; empty by default, so every earlier fit is unchanged.
+    extra_charts: tuple = ()
     # Drop a hold's target this early; see ``target``.  130 ms is the swept
     # optimum and matches the 126 ms median overhold that motivated it, so it
     # is a measured correction rather than a tuned one.  It does nothing on a
@@ -465,7 +468,8 @@ class RidgeReadout:
     def charts(self) -> list[Chart]:
         if self.chart_specs is None:
             return [stage_chart(self.stage, n_notes=self.n_notes, interval_ms=self.interval_ms,
-                                seed=self.seed + c) for c in range(self.n_charts)]
+                                seed=self.seed + c)
+                    for c in range(self.n_charts)] + list(self.extra_charts)
         specs = list(self.chart_specs)
         out = []
         for c in range(self.n_charts):
@@ -477,7 +481,7 @@ class RidgeReadout:
                 kw.update(s[3])
             out.append(stage_chart(int(s[0]), n_notes=self.n_notes,
                                    interval_ms=float(s[1]), seed=self.seed + c, **kw))
-        return out
+        return out + list(self.extra_charts)
 
     def record(self) -> None:
         """Record the training charts (the only expensive step; ~10 s per chart)."""

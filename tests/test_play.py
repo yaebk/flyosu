@@ -570,6 +570,13 @@ def test_projection():
     check("a projection within the rank fits", ok.k == 48 and np.isfinite(ok.sd).all())
     check("asking past the rank is refused, not silently padded with noise",
           _raises(lambda: R.PopulationProjection.from_activity(np.arange(200), X, 64)))
+    specs = ((4, 600.0), (7, 400.0))
+    plain = R.RidgeReadout(None, n_charts=3, chart_specs=specs).charts()
+    clip = mania.Chart([mania.Note(0, 1000.0), mania.Note(2, 1200.0, end_ms=1600.0)])
+    mixed = R.RidgeReadout(None, n_charts=3, chart_specs=specs, extra_charts=(clip,)).charts()
+    check("extra charts are appended after the generated diet, which is unchanged",
+          len(mixed) == 4 and mixed[-1] is clip
+          and all(a.notes == b.notes for a, b in zip(plain, mixed)))
 
 
 def main():
