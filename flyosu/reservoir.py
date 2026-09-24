@@ -399,14 +399,21 @@ def replay(rec: Recording, presses: list[list[int]],
 STRAY_PENALTY_FIT = 0.4
 
 
-def lane_rewards(res: PlayResult, stray_penalty: float = STRAY_PENALTY_FIT) -> np.ndarray:
-    """Per-lane accuracy minus stray penalty; lanes are independent in the judge."""
+def lane_rewards(res: PlayResult, stray_penalty: float = STRAY_PENALTY_FIT,
+                 max_bonus: float = 0.0) -> np.ndarray:
+    """Per-lane accuracy minus stray penalty; lanes are independent in the judge.
+
+    ``max_bonus`` credits a MAX that much above a 300 (0.0167 is osu!lazer's
+    305/300).  Accuracy as scored here treats the two alike, so without it the
+    per-lane timing search has no reason to aim for the 16 ms MAX window --
+    and round 15's readout lands most hits just outside it."""
     out = np.zeros(N_KEYS)
     for lane in range(N_KEYS):
         idx = [i for i, n in enumerate(res.chart.notes) if n.lane == lane]
         if not idx:
             continue
-        acc = sum(ACC_WEIGHT[res.judgments[i]] for i in idx) / (300.0 * len(idx))
+        acc = sum(ACC_WEIGHT[res.judgments[i]] * (1.0 + max_bonus * (res.judgments[i] == "MAX"))
+                  for i in idx) / (300.0 * len(idx))
         stray = sum(1 for p in res.presses if p.note is None and p.lane == lane)
         out[lane] = acc - stray_penalty * stray / len(idx)
     return out
@@ -450,6 +457,8 @@ class RidgeReadout:
     release_levels: tuple = ()
     # Record holds as a perfect player would see them (``HoldOracle``).
     hold_oracle: bool = False
+    # Extra credit for a MAX over a 300 in the timing search (``lane_rewards``).
+    max_bonus: float = 0.0
     offsets: np.ndarray = field(default_factory=lambda: np.linspace(-2.0, 2.0, 41))
     recordings: list[Recording] = field(default_factory=list)
 
@@ -514,7 +523,7 @@ class RidgeReadout:
                     u = z @ W.T + b + d
                     table[i, j] += lane_rewards(replay(rec, replay_presses(u, rec.t, refr),
                                                        replay_down(u)),
-                                                self.stray_penalty)
+                                                self.stray_penalty, self.max_bonus)
         table /= len(self.recordings)
         W = np.zeros((N_KEYS, k)); b = np.zeros(N_KEYS)
         chosen = []
@@ -536,7 +545,8 @@ class RidgeReadout:
                 for rec, z in zip(self.recordings, Zs):
                     u = z @ W.T + b
                     pr, dn = replay_keys(u, rec.t, refr, np.full(N_KEYS, float(lvl)))
-                    rel_table[m] += lane_rewards(replay(rec, pr, dn), self.stray_penalty)
+                    rel_table[m] += lane_rewards(replay(rec, pr, dn), self.stray_penalty,
+                                                 self.max_bonus)
             best = np.asarray(self.release_levels, float)[rel_table.argmax(0)]
             for lane in range(N_KEYS):
                 chosen[lane]["release"] = float(best[lane])

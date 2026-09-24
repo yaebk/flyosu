@@ -294,6 +294,22 @@ ARMS = {
                              n_charts=44, k=56, approach=250.0, oracle=True, refr=100.0,
                              smooth=20.0,
                              release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 19: MAX timing.  Round 15's readout lands most hits just outside the
+    # 16 ms MAX window (Easy: 16 MAX to 290 x 300) because the timing search
+    # scores a MAX like a 300.  Credit a MAX extra in the search only: at
+    # osu!lazer's 305/300, and at a stronger 10 per cent.
+    "fast_sm20_k48_max2": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                      (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                      (7, 400.0)),
+                               n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                               smooth=20.0, max_bonus=0.0167,
+                               release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k48_max10": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                       (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                       (7, 400.0)),
+                                n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                                smooth=20.0, max_bonus=0.10,
+                                release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -402,7 +418,8 @@ def run_arm(arm: str) -> dict:
                         seed=TRAIN_SEED, chart_specs=specs,
                         release_levels=tuple(cfg.get("release", ())),
                         hold_oracle=bool(cfg.get("oracle")),
-                        width_ms=float(cfg.get("width", 80.0)))
+                        width_ms=float(cfg.get("width", 80.0)),
+                        max_bonus=float(cfg.get("max_bonus", 0.0)))
     # with pca="train" this projection is replaced after recording and only
     # has to be legal (the calibration set has rank 60)
     rr.features = R.PopulationProjection.fit(
@@ -510,7 +527,8 @@ def validate():
                         n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=_specs(cfg),
                         release_levels=tuple(cfg.get("release", ())),
                         hold_oracle=bool(cfg.get("oracle")),
-                        width_ms=float(cfg.get("width", 80.0)))
+                        width_ms=float(cfg.get("width", 80.0)),
+                        max_bonus=float(cfg.get("max_bonus", 0.0)))
     k = int(cfg.get("k", READOUT_K))
     # with pca="train" this projection is replaced after recording and only
     # has to be legal (the calibration set has rank 60)
@@ -540,7 +558,7 @@ def validate():
         nps = 1000.0 / cond["interval_ms"]
         out["conditions"][name] = {
             "notes_per_s": round(nps, 2), **{k: float(e[k]) for k in
-            ("accuracy", "hit_rate", "stray_per_note")},
+            ("accuracy", "hit_rate", "stray_per_note", "max_frac")},
             "lane_correct": (float(e["lane_correct"]) if n_c >= 20 else None)}
         b = out["conditions"][name]
         sel = E5_REFERENCE.get(name)

@@ -142,15 +142,18 @@ def evaluate(player: Player, stage: int = 3, n_charts: int = 3, n_notes: int = 2
     anything else through to ``stage_chart`` (``chord_p``, ``hold_frac``, ...).
     """
     accs, hits, rws, strays, errs, conf = [], [], [], [], [], np.zeros((4, 4), int)
+    maxes = []
     charts = [stage_chart(stage, n_notes=n_notes, interval_ms=interval_ms,
                           approach_ms=approach_ms, seed=seed + c, **chart_kw)
               for c in range(n_charts)]
     for res in player.play_many(charts, seeds=[seed + c for c in range(n_charts)]):
         accs.append(res.accuracy); hits.append(res.hit_rate); rws.append(reward(res))
         strays.append(res.n_stray); errs += res.errors_ms.tolist()
+        maxes.append(res.counts["MAX"] / max(len(res.judgments), 1))
         conf += res.lane_confusion
     errs = np.array(errs)
     return {"accuracy": float(np.mean(accs)), "hit_rate": float(np.mean(hits)),
+            "max_frac": float(np.mean(maxes)),
             "reward": float(np.mean(rws)), "stray_per_note": float(np.sum(strays) / (n_charts * n_notes)),
             "lane_correct": float(np.trace(conf) / max(conf.sum(), 1)),
             "confusion": conf.tolist(),
