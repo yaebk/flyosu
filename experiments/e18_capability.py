@@ -343,6 +343,23 @@ ARMS = {
                                  n_charts=48, k=48, approach=250.0, oracle=True, refr=75.0,
                                  smooth=20.0,
                                  release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 22: early hold releases.  On real maps round 15's readout releases
+    # 17-60 per cent of holds more than 60 ms before the tail and almost none
+    # late.  The 130 ms tail lead was swept when releases ran 80-90 ms *late*,
+    # before the recording oracle and release levels; with those in, it likely
+    # overshoots.  Try 80 and 40 ms.
+    "fast_sm20_k48_tl80": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                      (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                      (7, 400.0)),
+                               n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                               smooth=20.0, tail_lead=80.0,
+                               release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k48_tl40": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                      (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                      (7, 400.0)),
+                               n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                               smooth=20.0, tail_lead=40.0,
+                               release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -453,7 +470,8 @@ def run_arm(arm: str) -> dict:
                         release_levels=tuple(cfg.get("release", ())),
                         hold_oracle=bool(cfg.get("oracle")),
                         width_ms=float(cfg.get("width", 80.0)),
-                        max_bonus=float(cfg.get("max_bonus", 0.0)))
+                        max_bonus=float(cfg.get("max_bonus", 0.0)),
+                        tail_lead_ms=float(cfg.get("tail_lead", 130.0)))
     # with pca="train" this projection is replaced after recording and only
     # has to be legal (the calibration set has rank 60)
     rr.features = R.PopulationProjection.fit(
@@ -563,7 +581,8 @@ def validate():
                         release_levels=tuple(cfg.get("release", ())),
                         hold_oracle=bool(cfg.get("oracle")),
                         width_ms=float(cfg.get("width", 80.0)),
-                        max_bonus=float(cfg.get("max_bonus", 0.0)))
+                        max_bonus=float(cfg.get("max_bonus", 0.0)),
+                        tail_lead_ms=float(cfg.get("tail_lead", 130.0)))
     k = int(cfg.get("k", READOUT_K))
     # with pca="train" this projection is replaced after recording and only
     # has to be legal (the calibration set has rank 60)
