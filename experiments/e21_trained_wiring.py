@@ -57,7 +57,7 @@ def _p(n_ge, n):
 _MAPS = {}
 
 
-def maps():
+def load_maps():
     """(training clips, held-out rows), loaded once per process.  The map set
     is chosen explicitly each time: ``B.charts`` reads a module global, and a
     shard measures several networks in one process."""
@@ -91,7 +91,7 @@ def measure(label: str, kw: dict) -> dict:
         S = np.linalg.svd(X - X.mean(0), compute_uv=False)
         rank = int((S > S[0] * 1e-9).sum())
         feats = R.PopulationProjection.fit(fly, player.r0, k=rank, states=states)
-    extra, rows = maps()
+    extra, rows = load_maps()
     specs = tuple((s[0], s[1], RECIPE["approach_ms"]) + tuple(s[2:]) for s in B.FIT["specs"])
     rr = R.RidgeReadout(player, n_charts=RECIPE["n_syn"], n_notes=B.N_NOTES_FIT,
                         seed=B.TRAIN_SEED, chart_specs=specs, extra_charts=extra,

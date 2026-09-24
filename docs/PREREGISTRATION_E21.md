@@ -92,3 +92,12 @@ No exclusions, outlier rules or alternative tests.
 
 Any change after the freeze is recorded here with its date and reason before
 the real network is run.
+
+- **2026-09-24, code fix, before any network was measured.** All six control
+  shards crashed at their first network with an `UnboundLocalError`: a local
+  list named `maps` inside `measure` shadowed the helper `maps()`. The helper is
+  renamed `load_maps`. Nothing else changed: recipe, maps, endpoint and
+  analysis are as frozen. The fix was smoke-tested end to end on an
+  unregistered network (`shuffle_seed` 999, two training clips, one map), whose
+  numbers are not recorded. The controls were relaunched as ten shards instead
+  of six, which changes only which process measures which control.
