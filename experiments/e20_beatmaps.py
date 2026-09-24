@@ -60,7 +60,8 @@ from flyosu.controller import calibration_states  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(ROOT, "results")
 MAPS = os.path.join(ROOT, "osumaps")
-PATH = os.path.join(RESULTS, "e20_beatmaps.json")
+_DIET = os.environ.get("DIET", "hold")
+PATH = os.path.join(RESULTS, f"e20_beatmaps{'' if _DIET == 'nohold' else '_hold'}.json")
 SHARD = os.environ.get("SHARD")
 NSHARD = int(os.environ.get("NSHARD", 1))
 SHARD_PATH = PATH if SHARD is None else PATH[:-5] + f"_shard{int(SHARD)}of{NSHARD}.json"
@@ -68,8 +69,15 @@ SHARD_PATH = PATH if SHARD is None else PATH[:-5] + f"_shard{int(SHARD)}of{NSHAR
 APPROACH_MS = float(os.environ.get("APPROACH_MS", 400.0))   # experiment 18's optimum
 THETA = 1.5
 NOISE = 0.03
-# The winning recipe from experiment 18, verbatim.
-FIT = dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0)), n_charts=16, k=32)
+# Experiment 18's winning density diet, plus hold charts.  Real maps are 9 to
+# 67 per cent hold notes, and the first run of this experiment used a diet with
+# none at all -- which was fine as a measurement of the gap and is the wrong
+# thing to keep now that the fly can see a hold and the fit can sustain through
+# one.  FIT_NOHOLD is the original, kept so the two can be compared.
+FIT_NOHOLD = dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0)), n_charts=16, k=32)
+FIT_HOLD = dict(specs=((4, 600.0), (4, 350.0), (4, 250.0), (7, 600.0), (7, 400.0)),
+                n_charts=20, k=32)
+FIT = FIT_HOLD if os.environ.get("DIET", "hold") == "hold" else FIT_NOHOLD
 TRAIN_SEED = 100
 N_NOTES_FIT = 24
 
