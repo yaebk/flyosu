@@ -21,3 +21,8 @@ data/malecns/*.parquet
 # per-shard checkpoints from parallel runs; `merge` folds them into the
 # canonical results file, so they are intermediate rather than data
 results/*_shard*of*.json
+
+# the replay page's sound, extracted from the map archive in osumaps/ by
+# `python experiments/demo_replay.py audio`; no need for a second copy
+demo/audio.ogg
+demo/soft-hitnormal.wav

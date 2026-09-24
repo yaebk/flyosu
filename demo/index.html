@@ -97,6 +97,12 @@ h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 5vw, 
 .seg button[aria-pressed="true"] { background: var(--btn-on); color: var(--btn-on-ink); }
 .scrub { flex: 1 1 240px; display: flex; gap: 10px; align-items: center; min-width: 0; }
 .scrub input { flex: 1; min-width: 0; accent-color: var(--accent); }
+.sound { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 13px; color: var(--muted); }
+.sound label { display: inline-flex; align-items: center; gap: 6px; }
+.sound input { width: 84px; accent-color: var(--accent); }
+.mute { font: 500 13px var(--mono); cursor: pointer; border: 0; border-radius: 6px; background: var(--btn); color: var(--ink); padding: 6px 10px; }
+.mute[aria-pressed="true"] { background: var(--btn-on); color: var(--btn-on-ink); }
+.sound-note { font-size: 13px; color: var(--muted); }
 .time { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
@@ -150,7 +156,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       <input type="range" id="scrub" min="0" max="1000" step="1" value="0" aria-label="Replay position">
       <span class="time" id="time">0:00 / 0:00</span>
     </div>
+    <div class="sound" role="group" aria-label="Sound">
+      <button type="button" class="mute" id="mute" aria-pressed="false">Mute</button>
+      <label for="vol-music">Music <input type="range" id="vol-music" min="0" max="1" step="0.05" value="0.6"></label>
+      <label for="vol-hits">Hits <input type="range" id="vol-hits" min="0" max="1" step="0.05" value="0.5"></label>
+    </div>
   </div>
+  <div class="sound-note" id="sound-note" hidden></div>
   <div class="status" id="status" hidden></div>
 
   <div class="panel">
@@ -168,6 +180,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
       <p>The fly's view of the game is rendered onto its 8,452 photoreceptors. Notes become visible to it only in the lower half of the note area, 250 ms before they should be hit, which is its scroll speed. The dimmed upper half previews upcoming notes for you, not for the fly.</p>
       <p>The network runs in 2 ms steps with its synaptic weights fixed. A small trained linear readout turns the activity of the descending neurons into four drive signals, one per key. A key is pressed when its drive rises through zero, held while it stays up, and released when it falls. Timing is judged with osu!mania-style windows (MAX, 300, 200, 100, 50, MISS), and hold notes are judged on both head and release.</p>
       <p><b>The legs are an illustration.</b> In the simulation the fly's output is those four key drives, read from descending neurons by the fitted readout. The real leg motor system is not modelled. Each drawn leg simply lands on its key for exactly the time that key was down in the replay.</p>
+      <p>The soundtrack is the map's own song, synced to the replay. The hit sounds mark the fly's key presses: a soft click for a press that hits a note, a short tick for a stray press, and a dull thud when a note is missed.</p>
       <p>The brain panel shows simulated activity, as change from each neuron's resting rate, for <span id="n-sampled">about 2,000</span> of the 19,367 connectome neurons, drawn at their real FlyWire positions. Each neuron is scaled to its own typical range, so the colours show when a neuron is unusually active, not how active it is compared with its neighbours.</p>
       <p>This is a simulation of the fly's wiring diagram, not a living fly, and the readout was trained. It shows what a fixed connectome plus a small fitted readout can play. It says nothing on its own about whether the real wiring beats a randomly rewired one.</p>
     </div>
@@ -235,7 +248,7 @@ function prepare(m) {
   for (const p of m.presses) if (p[2] !== null && headPress[p[2]] === null) headPress[p[2]] = p;
   const holdOf = new Array(n).fill(null);
   for (const h of m.holds) holdOf[h.note] = h;
-  const resolve = [], pops = [], gone = new Array(n).fill(Infinity), clipFrom = new Array(n).fill(null);
+  const resolve = [], pops = [], sounds = [], gone = new Array(n).fill(Infinity), clipFrom = new Array(n).fill(null);
   for (let i = 0; i < n; i++) {
     const [lane, hit, end] = m.notes[i];
     const isHold = end !== null && end > hit;
@@ -251,6 +264,8 @@ function prepare(m) {
       rt = p ? p[0] : hit + miss;
     }
     resolve.push({ t: rt, i, j: m.judgments[i], lane });
+    // miss thud when the miss window closes (for a hold whose head was hit, when the tail fails)
+    if (m.judgments[i] === "MISS") sounds.push({ t: isHold && h && h.head !== "MISS" ? rt : hit + miss, kind: "miss" });
   }
   resolve.sort((a, b) => a.t - b.t);
   for (const r of resolve) pops.push({ t: r.t, lane: r.lane, j: r.j, small: false });
@@ -272,6 +287,12 @@ function prepare(m) {
   const ylo = Math.min(-0.1, flat[Math.floor(flat.length * 0.01)]), yhi = Math.max(0.3 * Math.abs(ylo), flat[Math.floor(flat.length * 0.997)]);
   const out = { ...m, pops, rtimes, acc, combo, cnt, strayT, gone, clipFrom, tStart, tEnd, ylo, yhi, noteHitT: m.notes.map((x) => x[1]) };
   out.popT = pops.map((p) => p.t);
+  for (const p of m.presses) {
+    if (p[2] === null) sounds.push({ t: p[0], kind: "stray" });
+    else if (p[3] !== "MISS") sounds.push({ t: p[0], kind: "hit" });
+  }
+  sounds.sort((a, b) => a.t - b.t);
+  out.sounds = sounds; out.soundT = sounds.map((e) => e.t);
   return out;
 }
 
@@ -702,11 +723,119 @@ function updateStats() {
 
 function draw(now) { drawField(now ?? performance.now()); drawBrain(); drawDrive(); updateStats(); }
 
+// ---- sound: the song is the master clock while it plays; hit sounds are
+// scheduled ahead on the Web Audio clock and cancelled on scrub or pause ----
+const AU = {
+  el: null, failed: false, active: false, waiting: false,
+  ctx: null, hitBuf: null, hitGain: null, hitFailed: false,
+  muted: false, music: 0.6, hits: 0.5,
+  scheduled: new Set(), sIdx: 0,
+};
+const LOOKAHEAD = 120;   // ms of real time scheduled ahead
+function offset() { return MAP && MAP.audio_offset_ms != null ? MAP.audio_offset_ms : null; }
+function soundNote(msg) { const s = $("sound-note"); s.hidden = !msg; s.textContent = msg || ""; }
+function setRate(el) {
+  el.playbackRate = speed;
+  el.preservesPitch = true; el.mozPreservesPitch = true; el.webkitPreservesPitch = true;
+}
+function initSongElement() {
+  if (AU.el || !DATA || !DATA.audio) return;
+  const el = new Audio();
+  el.preload = "auto"; el.src = DATA.audio.song;
+  el.volume = AU.music; el.muted = AU.muted; setRate(el);
+  el.addEventListener("error", () => { AU.failed = true; AU.active = false; soundNote("The song could not be loaded, so the replay runs without music."); });
+  el.addEventListener("waiting", () => { AU.waiting = true; });
+  el.addEventListener("playing", () => { AU.waiting = false; });
+  el.addEventListener("seeked", () => { AU.waiting = false; });
+  el.addEventListener("ended", () => { AU.active = false; });
+  AU.el = el;
+}
+async function initAudioContext() {
+  if (AU.ctx) { if (AU.ctx.state === "suspended") AU.ctx.resume().catch(() => {}); return; }
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) { AU.hitFailed = true; return; }
+  AU.ctx = new Ctx();
+  AU.hitGain = AU.ctx.createGain(); AU.hitGain.gain.value = AU.muted ? 0 : AU.hits; AU.hitGain.connect(AU.ctx.destination);
+  try {
+    const r = await fetch(DATA.audio.hit);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const raw = await r.arrayBuffer();
+    AU.hitBuf = await new Promise((res, rej) => { const p = AU.ctx.decodeAudioData(raw, res, rej); if (p && p.then) p.then(res, rej); });
+  } catch (e) { AU.hitFailed = true; if (!AU.failed) soundNote("The hit sound could not be loaded, so hits on notes are silent."); }
+}
+function songWanted() {
+  const off = offset();
+  if (AU.failed || AU.blocked || !AU.el || off == null) return false;
+  const st = (t + off) / 1000, dur = AU.el.duration;
+  return st >= 0 && (!isFinite(dur) || st < dur - 0.05);
+}
+function startSong() {
+  const el = AU.el; setRate(el);
+  el.currentTime = Math.max(0, (t + offset()) / 1000);
+  AU.active = true; AU.waiting = true;
+  const p = el.play();
+  if (p && p.catch) p.catch((err) => { if (err && err.name === "AbortError") return; AU.blocked = true; AU.active = false; AU.waiting = false; soundNote("The browser did not allow the song to play, so the replay runs without music."); });
+}
+function stopSong() { if (AU.el && !AU.el.paused) AU.el.pause(); AU.active = false; AU.waiting = false; }
+function cancelSounds() {
+  for (const n of AU.scheduled) { try { n.stop(0); } catch (e) { /* already stopped */ } }
+  AU.scheduled.clear();
+  if (MAP) AU.sIdx = ub(MAP.soundT, t);
+}
+function resync() {             // after scrub, speed change, map change
+  cancelSounds();
+  if (!playing) return;
+  if (songWanted()) startSong(); else stopSong();
+}
+function voice(kind, when) {
+  const c = AU.ctx; let node;
+  if (kind === "hit") {
+    if (!AU.hitBuf) return;
+    node = c.createBufferSource(); node.buffer = AU.hitBuf; node.connect(AU.hitGain); node.start(when);
+  } else if (kind === "stray") {
+    node = c.createOscillator(); const g = c.createGain();
+    node.type = "triangle";
+    node.frequency.setValueAtTime(1900, when); node.frequency.exponentialRampToValueAtTime(1300, when + 0.03);
+    g.gain.setValueAtTime(0.0001, when); g.gain.exponentialRampToValueAtTime(0.10, when + 0.003); g.gain.exponentialRampToValueAtTime(0.0001, when + 0.045);
+    node.connect(g).connect(AU.hitGain); node.start(when); node.stop(when + 0.06);
+  } else {                                  // miss: soft, dull thud
+    node = c.createOscillator(); const g = c.createGain(), lp = c.createBiquadFilter();
+    node.type = "sine"; lp.type = "lowpass"; lp.frequency.value = 380;
+    node.frequency.setValueAtTime(120, when); node.frequency.exponentialRampToValueAtTime(52, when + 0.12);
+    g.gain.setValueAtTime(0.0001, when); g.gain.exponentialRampToValueAtTime(0.32, when + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, when + 0.18);
+    node.connect(lp).connect(g).connect(AU.hitGain); node.start(when); node.stop(when + 0.2);
+  }
+  AU.scheduled.add(node);
+  node.onended = () => AU.scheduled.delete(node);
+}
+function scheduleSounds() {
+  if (!AU.ctx || AU.ctx.state !== "running" || !MAP || (AU.active && AU.waiting)) return;
+  const ev = MAP.sounds, horizon = t + LOOKAHEAD * speed, now = AU.ctx.currentTime;
+  while (AU.sIdx < ev.length && ev[AU.sIdx].t <= horizon) {
+    const e = ev[AU.sIdx++];
+    if (e.t < t - 8) continue;              // already past: skip rather than play late
+    voice(e.kind, now + Math.max(0, (e.t - t) / speed / 1000));
+  }
+}
+
 function loop(now) {
   if (playing) {
     const dt = Math.min(100, now - lastFrame);
-    t += dt * speed;
+    let tn = t + dt * speed;
+    if (AU.active && AU.el) {
+      if (AU.waiting || AU.el.seeking) tn = t;          // hold while the song buffers or seeks
+      else {
+        const at = AU.el.currentTime * 1000 - offset();  // the song is the master clock
+        const err = at - tn;
+        tn = Math.abs(err) > 60 ? at : tn + 0.2 * err;   // follow it smoothly, snap on big jumps
+      }
+    }
+    t = tn;
+    const want = songWanted();
+    if (want && !AU.active) { cancelSounds(); startSong(); }
+    else if (!want && AU.active) stopSong();
     if (t >= MAP.tEnd) { t = MAP.tEnd; setPlaying(false); }
+    else scheduleSounds();
     draw(now);
   } else if (!reduced) {
     drawField(now);                       // idle breathing only; data-driven parts unchanged
@@ -715,7 +844,10 @@ function loop(now) {
   requestAnimationFrame(loop);
 }
 function setPlaying(on) {
+  const was = playing;
   playing = on; $("play").textContent = on ? "Pause" : (t >= MAP.tEnd ? "Replay" : "Play");
+  if (was && !on) { stopSong(); cancelSounds(); }
+  if (!was && on) resync();
 }
 
 function selectMap(i) {
@@ -723,6 +855,7 @@ function selectMap(i) {
   t = Math.min(MAP.tEnd, MAP.notes[0][1] + 2500);   // open on a moment with notes in play
   document.querySelectorAll(".map-btn").forEach((b, q) => b.setAttribute("aria-pressed", String(q === i)));
   setPlaying(playing);
+  resync();
   loadBrain(MAP.brain);
   draw();
 }
@@ -759,11 +892,39 @@ function init(data) {
   selectMap(0);
 }
 
-$("play").addEventListener("click", () => { if (!MAP) return; if (t >= MAP.tEnd) t = MAP.tStart; setPlaying(!playing); });
+$("play").addEventListener("click", () => {
+  if (!MAP) return;
+  if (!playing) {                          // audio may start only from this gesture
+    AU.blocked = false;
+    initSongElement();
+    initAudioContext();
+  }
+  if (t >= MAP.tEnd) t = MAP.tStart;
+  setPlaying(!playing);
+});
 document.querySelectorAll("#speed button").forEach((b) => b.addEventListener("click", () => {
   speed = +b.dataset.s; document.querySelectorAll("#speed button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  if (AU.el) setRate(AU.el);
+  cancelSounds();                          // rescheduled at the new rate on the next frame
 }));
-$("scrub").addEventListener("input", (e) => { if (!MAP) return; t = MAP.tStart + (+e.target.value / 1000) * (MAP.tEnd - MAP.tStart); if (t < MAP.tEnd && $("play").textContent === "Replay") setPlaying(false); draw(); });
+$("scrub").addEventListener("input", (e) => {
+  if (!MAP) return;
+  t = MAP.tStart + (+e.target.value / 1000) * (MAP.tEnd - MAP.tStart);
+  if (t < MAP.tEnd && $("play").textContent === "Replay") setPlaying(false);
+  if (playing && AU.active && songWanted()) { cancelSounds(); AU.el.currentTime = (t + offset()) / 1000; }
+  else resync();
+  draw();
+});
+function applyVolumes() {
+  if (AU.el) { AU.el.volume = AU.music; AU.el.muted = AU.muted; }
+  if (AU.hitGain) AU.hitGain.gain.value = AU.muted ? 0 : AU.hits;
+}
+$("vol-music").addEventListener("input", (e) => { AU.music = +e.target.value; applyVolumes(); });
+$("vol-hits").addEventListener("input", (e) => { AU.hits = +e.target.value; applyVolumes(); });
+$("mute").addEventListener("click", (e) => {
+  AU.muted = !AU.muted; e.currentTarget.setAttribute("aria-pressed", String(AU.muted));
+  e.currentTarget.textContent = AU.muted ? "Unmute" : "Mute"; applyVolumes();
+});
 document.addEventListener("keydown", (e) => { if (e.code === "Space" && e.target === document.body) { e.preventDefault(); $("play").click(); } });
 for (const cv of [field, dcv, bcv]) new ResizeObserver(() => { if (DATA) draw(); }).observe(cv);
 

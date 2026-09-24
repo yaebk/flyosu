@@ -21,8 +21,10 @@ os.environ["APPROACH_MS"] = "250"           # must precede the e20 import
 
 import numpy as np
 
-from flyosu import model as M, play as P, reservoir as R, mania
-from flyosu.controller import calibration_states
+from flyosu import mania        # light: the model is imported only by the fit
+
+SONG_OSZ = os.path.join(ROOT, "osumaps",
+                        "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz")
 
 A = 250.0
 SPECS = ((4, 600.), (4, 450.), (4, 350.), (4, 250.), (4, 200.), (4, 150.), (4, 125.),
@@ -45,6 +47,8 @@ BRAIN_EVERY = 8             # frames (2 ms each) -> 16 ms
 
 
 def build_player():
+    from flyosu import model as M, play as P, reservoir as R
+    from flyosu.controller import calibration_states
     t0 = time.time()
     fly = M.build(regime="play")
     sample_neurons(fly)                  # fail fast before the long fit
@@ -228,7 +232,64 @@ def main():
     print(f"demo data total {tot / 1e6:.2f} MB", flush=True)
     for m in maps:
         print(f"  {m['difficulty']}: accuracy {m['accuracy']:.4f}", flush=True)
+    audio()                                  # re-add the song offsets to the fresh JSON
+
+
+def _raw_hitobjects(txt):
+    """(time_ms, lane) of every [HitObjects] entry in a 4K .osu, plus [General]."""
+    general, objs, sec = {}, [], None
+    for line in txt.splitlines():
+        line = line.strip()
+        if line.startswith("["):
+            sec = line
+            continue
+        if sec == "[General]" and ":" in line:
+            k, v = line.split(":", 1)
+            general[k.strip()] = v.strip()
+        elif sec == "[HitObjects]" and line:
+            f = line.split(",")
+            objs.append((float(f[2]), min(3, max(0, int(float(f[0])) * 4 // 512))))
+    return general, sorted(objs, key=lambda o: (o[0], o[1]))
+
+
+def audio():
+    """Light entry point (no model, no fit): extract the song and hit sound from
+    the .osz and add a per-map ``audio_offset_ms`` to replay_data.json, so that
+    song time = replay time + offset.  The offset is found by matching the
+    replay's notes against the raw hit objects in order, and must be constant."""
+    import zipfile
+    z = zipfile.ZipFile(SONG_OSZ)
+    for name in ("audio.ogg", "soft-hitnormal.wav"):
+        with open(os.path.join(OUT_DIR, name), "wb") as fh:
+            fh.write(z.read(name))
+        print(f"extracted {name}  {os.path.getsize(os.path.join(OUT_DIR, name)) / 1e6:.2f} MB")
+    with open(OUT) as fh:
+        data = json.load(fh)
+    osus = {n: z.read(n).decode("utf-8-sig", errors="replace")
+            for n in z.namelist() if n.lower().endswith(".osu")}
+    for m in data["maps"]:
+        txt = next(v for n, v in osus.items() if n.endswith(f"[{m['difficulty']}].osu"))
+        general, raw = _raw_hitobjects(txt)
+        if general.get("AudioFilename") != "audio.ogg":
+            raise SystemExit(f"{m['difficulty']}: AudioFilename is {general.get('AudioFilename')!r}")
+        notes = sorted(((n[1], n[0]) for n in m["notes"]), key=lambda o: (o[0], o[1]))
+        if len(notes) != len(raw):
+            raise SystemExit(f"{m['difficulty']}: {len(notes)} replay notes vs {len(raw)} hit objects")
+        lanes_ok = all(a[1] == b[1] for a, b in zip(notes, raw))
+        off = np.array([b[0] - a[0] for a, b in zip(notes, raw)])
+        dev = float(np.abs(off - np.median(off)).max())
+        if dev > 1.0 or not lanes_ok:
+            raise SystemExit(f"{m['difficulty']}: offset not constant (max dev {dev:.2f} ms, "
+                             f"lanes match {lanes_ok})")
+        m["audio_offset_ms"] = round(float(np.median(off)), 1)
+        print(f"{m['difficulty']}: offset {m['audio_offset_ms']} ms over {len(off)} notes, "
+              f"max dev {dev:.2f} ms, lanes match {lanes_ok}, "
+              f"AudioLeadIn={general.get('AudioLeadIn', '(absent)')}")
+    data["audio"] = {"song": "audio.ogg", "hit": "soft-hitnormal.wav"}
+    with open(OUT, "w") as fh:
+        json.dump(data, fh, separators=(",", ":"))
+    print(f"updated {OUT}  {os.path.getsize(OUT) / 1e6:.2f} MB")
 
 
 if __name__ == "__main__":
-    main()
+    audio() if sys.argv[1:] == ["audio"] else main()
