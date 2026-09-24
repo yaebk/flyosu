@@ -182,6 +182,9 @@ class Recording:
     t: np.ndarray               # (T,) frame times, ms
     X: np.ndarray               # (T, n) readout-population activity per frame
     dt: float
+    # True when X already holds features (``record_many(project=...)``), not
+    # raw activity: (T, k) float64 instead of (T, n) float32.
+    projected: bool = False
 
 
 class HoldOracle:
@@ -229,19 +232,39 @@ def record(player: Player, chart: Chart, seed: int | None = None) -> Recording:
 
 
 def record_many(player: Player, charts: list[Chart],
-                seeds: list[int | None], hold_oracle: bool = False) -> list[Recording]:
+                seeds: list[int | None], hold_oracle: bool = False,
+                project=None, chunk: int = 512) -> list[Recording]:
     """``record`` for several charts in one batched play (``Player.play_many``).
     The controller is silent, so the network never feeds back into the chart
     and every recording is exactly what ``record`` would make alone.  With
     ``hold_oracle`` the holds are played perfectly instead (``HoldOracle``);
-    that is still fixed in advance, so it does not feed back either."""
+    that is still fixed in advance, so it does not feed back either.
+
+    ``project`` (e.g. a ``PopulationProjection.batch``) is applied to every
+    ``chunk`` frames as they are recorded, so only the features are kept:
+    48 float64 components instead of 1,303 float32 neurons is ~14x less memory.  BLAS sums a
+    chunk in a different order from the whole recording, so the features
+    differ from projecting afterwards at the 1e-13 level; opt-in for that
+    reason, so every earlier result reproduces bit for bit."""
     idx = player.fly.readout.dn_local
     ts = [[] for _ in charts]
     xs = [[] for _ in charts]
+    buf = [[] for _ in charts]
+
+    def flush(j):
+        if buf[j]:
+            xs[j].append(project(np.asarray(buf[j], dtype=np.float32)))
+            buf[j].clear()
 
     def tapper(j):
         def tap(r, env):
-            ts[j].append(env.t); xs[j].append(r[idx].copy())
+            ts[j].append(env.t)
+            if project is None:
+                xs[j].append(r[idx].copy())
+            else:
+                buf[j].append(r[idx].copy())
+                if len(buf[j]) >= chunk:
+                    flush(j)
         return tap
 
     silent = Controller(W=np.zeros((N_KEYS, N_KEYS)), b=np.full(N_KEYS, -1e9),
@@ -256,6 +279,11 @@ def record_many(player: Player, charts: list[Chart],
                          taps=[tapper(j) for j in range(len(charts))])
     finally:
         player.features = saved
+    if project is not None:
+        for j in range(len(charts)):
+            flush(j)
+        return [Recording(chart=c, t=np.asarray(t), X=np.vstack(x), dt=player.dt, projected=True)
+                for c, t, x in zip(charts, ts, xs)]
     return [Recording(chart=c, t=np.asarray(t), X=np.asarray(x, dtype=np.float32),
                       dt=player.dt) for c, t, x in zip(charts, ts, xs)]
 
@@ -451,6 +479,9 @@ class RidgeReadout:
     # Ready-made charts (e.g. clips of real beatmaps) fitted alongside the
     # generated ones; empty by default, so every earlier fit is unchanged.
     extra_charts: tuple = ()
+    # Project the activity onto ``features`` while recording (see
+    # ``record_many``); needs a PopulationProjection set before ``record``.
+    project_on_record: bool = False
     # Drop a hold's target this early; see ``target``.  130 ms is the swept
     # optimum and matches the 126 ms median overhold that motivated it, so it
     # is a measured correction rather than a tuned one.  It does nothing on a
@@ -486,14 +517,21 @@ class RidgeReadout:
     def record(self) -> None:
         """Record the training charts (the only expensive step; ~10 s per chart)."""
         charts = self.charts()
+        project = None
+        if self.project_on_record:
+            if not isinstance(self.features, PopulationProjection):
+                raise ValueError("project_on_record needs a PopulationProjection first")
+            project = self.features.batch
         self.recordings = record_many(self.player, charts,
                                       [self.seed + i for i in range(len(charts))],
-                                      hold_oracle=self.hold_oracle)
+                                      hold_oracle=self.hold_oracle, project=project)
 
     def features_from_recordings(self, k: int, stride: int = 10) -> PopulationProjection:
         """Refit the population projection on the activity recorded on the
         training charts (every ``stride``-th frame) instead of the calibration
         ensemble, and install it.  Call between ``record`` and ``solve``."""
+        if any(r.projected for r in self.recordings):
+            raise ValueError("the recordings hold features, not activity")
         idx = (self.features.idx if isinstance(self.features, PopulationProjection)
                else self.player.fly.readout.dn_local)
         X = np.vstack([r.X[::stride] for r in self.recordings])
@@ -507,7 +545,8 @@ class RidgeReadout:
         p = self.player
         feats = self.features or ChannelFeatures(p)
         sm = p.controller.smooth_ms; refr = p.controller.refractory_ms
-        Zs = [smooth(feats.batch(r.X), r.dt, sm) for r in self.recordings]
+        Zs = [smooth(r.X if r.projected else feats.batch(r.X), r.dt, sm)
+              for r in self.recordings]
         Zall = np.vstack(Zs)
         k = Zall.shape[1]
         # one ridge fit per lead; per lane, replay every (lead, offset) through the judge

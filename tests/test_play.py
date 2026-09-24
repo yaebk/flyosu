@@ -354,6 +354,11 @@ def test_with_network():
     a = R.record_many(noisy, plain, [5])[0].X
     b = R.record_many(noisy, plain, [5], hold_oracle=True)[0].X
     check("the hold oracle leaves a chart without holds bit-identical", np.array_equal(a, b))
+    pp = R.PopulationProjection.from_activity(fly.readout.dn_local, a[::5], 8)
+    rp = R.record_many(noisy, plain, [5], project=pp.batch, chunk=64)[0]
+    check("projecting while recording matches projecting afterwards (to rounding)",
+          rp.projected and rp.X.shape == (len(a), 8) and np.allclose(rp.X, pp.batch(a),
+                                                                     rtol=0, atol=1e-9))
     check("play_many is bit-identical to playing each chart alone",
           all(a.judgments == b.judgments
               and [repr(p) for p in a.presses] == [repr(p) for p in b.presses]
