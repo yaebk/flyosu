@@ -1,0 +1,8 @@
+fitting the experiment 18 readout (32 PCs, 28 synthetic charts, 300 ms approach)
+playing 6 difficulties
+  Easy                      2.5 evt/s  acc 0.952  hit 0.991  stray/note 0.01  (135s)
+  mirac1e's EXPERT          4.9 evt/s  acc 0.783  hit 0.863  stray/note 0.02  (308s)
+  Advanced                  5.4 evt/s  acc 0.881  hit 0.910  stray/note 0.01  (143s)
+  Hard                      6.5 evt/s  acc 0.593  hit 0.660  stray/note 0.00  (173s)
+  Gsun's Insane             9.0 evt/s  acc 0.371  hit 0.449  stray/note 0.00  (226s)
+  Sweetie                   9.7 evt/s  acc 0.213  hit 0.266  stray/note 0.00  (264s)
