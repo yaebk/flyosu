@@ -1,0 +1,28 @@
+[fast_sm20_k48_tl40] validating on seed 4242, 10 charts x 20 notes per condition
+  s3_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.917)
+  s3_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s3_350    2.9/s  acc 1.000  hit 1.00  stray 0.00
+  s4_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.506)
+  s4_400    2.5/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.286)
+  s4_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s5_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.608)
+  s3_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s3_250    4.0/s  acc 1.000  hit 1.00  stray 0.00
+  s4_250    4.0/s  acc 1.000  hit 1.00  stray 0.00
+  s4_200    5.0/s  acc 1.000  hit 1.00  stray 0.00
+  s6_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s6_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s6_250    4.0/s  acc 1.000  hit 1.00  stray 0.00
+  s6_150    6.7/s  acc 0.978  hit 0.98  stray 0.00
+  s6_120    8.3/s  acc 0.698  hit 0.70  stray 0.00
+  s7_600    1.7/s  acc 0.967  hit 0.97  stray 0.00
+  s7_400    2.5/s  acc 0.950  hit 0.97  stray 0.00
+  s7_300    3.3/s  acc 0.850  hit 0.91  stray 0.01
+  s8_400    2.5/s  acc 0.890  hit 0.92  stray 0.00
+  s8_300    3.3/s  acc 0.807  hit 0.85  stray 0.00
+  s4_150    6.7/s  acc 0.987  hit 0.99  stray 0.00
+  s4_125    8.0/s  acc 0.833  hit 0.85  stray 0.00
+  s4_100   10.0/s  acc 0.730  hit 0.73  stray 0.00
+  s7_1500   0.7/s  acc 0.745  hit 0.74  stray 0.00
+  s4_400_ch  2.5/s  acc 1.000  hit 1.00  stray 0.00
+wrote e18_capability_validate_fast_sm20_k48_tl40.json

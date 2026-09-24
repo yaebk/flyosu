@@ -125,7 +125,10 @@ FIT_FAST_SM20_K48_JK_R75 = dict(FIT_FAST_SM20_K48, n_charts=48, refr=75.0,
                                 specs=FIT_FAST_SM20_K48["specs"]
                                 + ((6, 200.0), (6, 150.0), (6, 120.0)))
 _DIETS = {"fast_sm20_k48": FIT_FAST_SM20_K48, "fast_sm20_k48_lh": FIT_FAST_SM20_K48_LH,
-          "fast_sm20_k48_jk_r75": FIT_FAST_SM20_K48_JK_R75,"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
+          "fast_sm20_k48_jk_r75": FIT_FAST_SM20_K48_JK_R75,
+          # round 22: the early hold releases are a real-map problem the
+          # synthetic battery cannot show, so the tail lead is judged here
+          "fast_sm20_k48_tl80": dict(FIT_FAST_SM20_K48, tail_lead=80.0),"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
           "both8_orc_rel": FIT_BOTH8_ORC_REL, "both8_orc_rel_grid": FIT_BOTH8_ORC_REL_GRID,
           "both_orc_rel": FIT_BOTH_ORC_REL, "fast_orc_r100": FIT_FAST_ORC_R100}
 FIT = _DIETS[_DIET]
@@ -244,7 +247,8 @@ def fitted_player():
     rr = R.RidgeReadout(player, n_charts=FIT["n_charts"], n_notes=N_NOTES_FIT,
                         seed=TRAIN_SEED, chart_specs=specs,
                         release_levels=tuple(FIT.get("release", ())),
-                        hold_oracle=bool(FIT.get("oracle")))
+                        hold_oracle=bool(FIT.get("oracle")),
+                        tail_lead_ms=float(FIT.get("tail_lead", 130.0)))
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=FIT["k"], states=states)
     rr.record()
     rr.solve()
