@@ -227,11 +227,24 @@ class Press:
 
 
 @dataclass
+class HoldRelease:
+    """How one hold note ended: the head it earned, the release error against
+    its tail, and the combined judgment.  ``released`` is False when the key was
+    still down as the tail window closed."""
+    note: int
+    head: str
+    tail_error_ms: float
+    judgment: str
+    released: bool
+
+
+@dataclass
 class PlayResult:
     chart: Chart
     judgments: list[str]        # one per note, in chart order
     presses: list[Press]
     finished: bool = True
+    holds: list = field(default_factory=list)   # HoldRelease, one per held note
 
     @property
     def counts(self) -> dict[str, int]:
@@ -308,6 +321,7 @@ class ManiaEnv:
         # mean over notes and every existing metric keeps its meaning.
         self.holding: list[int | None] = [None] * N_LANES
         self._head: dict[int, str] = {}
+        self.hold_log: list[HoldRelease] = []
 
     @property
     def done(self) -> bool:
@@ -392,7 +406,7 @@ class ManiaEnv:
         self.holding[lane] = None
         return self._finish_hold(i, self.t - self.chart.notes[i].end_ms)
 
-    def _finish_hold(self, i: int, err_ms: float) -> str:
+    def _finish_hold(self, i: int, err_ms: float, released: bool = True) -> str:
         """Combine a hold note's head and tail into its one judgment.
 
         The tail is judged on the release error against a window scaled by
@@ -404,8 +418,10 @@ class ManiaEnv:
         scaled = {k: v * HOLD_TAIL_LENIENCY for k, v in windows(od).items()}
         e = abs(err_ms)
         tail = next((name for name, half in scaled.items() if e <= half), "MISS")
-        j = worse(self._head.get(i, "MISS"), tail)
+        head = self._head.get(i, "MISS")
+        j = worse(head, tail)
         self.judged[i] = j
+        self.hold_log.append(HoldRelease(i, head, float(err_ms), j, released))
         return j
 
     def step(self) -> None:
@@ -420,7 +436,7 @@ class ManiaEnv:
         for lane, i in enumerate(self.holding):
             if i is not None and self.t - self.chart.notes[i].end_ms > late:
                 self.holding[lane] = None
-                self._finish_hold(i, self.t - self.chart.notes[i].end_ms)
+                self._finish_hold(i, self.t - self.chart.notes[i].end_ms, released=False)
         while self._cursor < len(self.chart):
             i = self._cursor
             n = self.chart.notes[i]
@@ -433,7 +449,8 @@ class ManiaEnv:
 
     def result(self) -> PlayResult:
         j = [x if x is not None else "MISS" for x in self.judged]
-        return PlayResult(self.chart, j, list(self.presses), finished=self.done)
+        return PlayResult(self.chart, j, list(self.presses), finished=self.done,
+                          holds=list(self.hold_log))
 
 
 if __name__ == "__main__":

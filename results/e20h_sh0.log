@@ -1,0 +1,7 @@
+fitting the experiment 18 readout (32 PCs, 20 synthetic charts, 400 ms approach)
+playing 5 difficulties
+  Easy                      2.5 evt/s  acc 0.894  hit 0.962  stray/note 0.02  (107s)
+  Normal                    5.1 evt/s  acc 0.656  hit 0.747  stray/note 0.01  (163s)
+  Spark the Flame of Hop    6.5 evt/s  acc 0.229  hit 0.357  stray/note 0.04  (525s)
+  Gsun's Insane             9.0 evt/s  acc 0.302  hit 0.406  stray/note 0.01  (241s)
+  Lavender                 10.2 evt/s  acc 0.194  hit 0.278  stray/note 0.00  (267s)
