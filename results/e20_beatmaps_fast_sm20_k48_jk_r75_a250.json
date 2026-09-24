@@ -1,0 +1,912 @@
+{
+ "approach_ms": 250.0,
+ "fit": "{'specs': ((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0), (6, 200.0), (6, 150.0), (6, 120.0)), 'n_charts': 48, 'k': 48, 'release': (0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0), 'oracle': True, 'refr': 75.0, 'smooth': 20.0}",
+ "runs": [
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Easy",
+   "notes": 319,
+   "seconds": 86.6,
+   "notes_per_s": 3.68,
+   "events_per_s": 2.47,
+   "chord_frac": 0.491,
+   "hold_frac": 0.147,
+   "jack_frac": 0.038,
+   "min_same_lane_gap_ms": 319.0,
+   "od": 6.0,
+   "accuracy": 0.9393939393939394,
+   "hit_rate": 0.9623824451410659,
+   "n_stray": 6,
+   "stray_per_note": 0.018808777429467086,
+   "counts": {
+    "MAX": 92,
+    "300": 197,
+    "200": 14,
+    "100": 4,
+    "50": 0,
+    "MISS": 12
+   },
+   "loss": {
+    "hold": {
+     "n": 47,
+     "acc": 0.695,
+     "loss_share": 0.741
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 171,
+     "acc": 0.971,
+     "loss_share": 0.259
+    },
+    "tap": {
+     "n": 101,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Amasugi's BASIC",
+   "notes": 463,
+   "seconds": 151.2,
+   "notes_per_s": 3.06,
+   "events_per_s": 2.66,
+   "chord_frac": 0.149,
+   "hold_frac": 0.272,
+   "jack_frac": 0.013,
+   "min_same_lane_gap_ms": 308.0,
+   "od": 6.0,
+   "accuracy": 0.827933765298776,
+   "hit_rate": 0.8704103671706264,
+   "n_stray": 3,
+   "stray_per_note": 0.0064794816414686825,
+   "counts": {
+    "MAX": 105,
+    "300": 250,
+    "200": 37,
+    "100": 11,
+    "50": 0,
+    "MISS": 60
+   },
+   "loss": {
+    "hold": {
+     "n": 126,
+     "acc": 0.638,
+     "loss_share": 0.573
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 86,
+     "acc": 0.942,
+     "loss_share": 0.063
+    },
+    "tap": {
+     "n": 251,
+     "acc": 0.884,
+     "loss_share": 0.364
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LINQAQ's ADVANCED",
+   "notes": 878,
+   "seconds": 152.1,
+   "notes_per_s": 5.77,
+   "events_per_s": 4.31,
+   "chord_frac": 0.34,
+   "hold_frac": 0.267,
+   "jack_frac": 0.014,
+   "min_same_lane_gap_ms": 205.0,
+   "od": 6.5,
+   "accuracy": 0.8906605922551253,
+   "hit_rate": 0.9430523917995444,
+   "n_stray": 14,
+   "stray_per_note": 0.015945330296127564,
+   "counts": {
+    "MAX": 261,
+    "300": 470,
+    "200": 59,
+    "100": 32,
+    "50": 6,
+    "MISS": 50
+   },
+   "loss": {
+    "hold": {
+     "n": 234,
+     "acc": 0.746,
+     "loss_share": 0.618
+    },
+    "after_hold": {
+     "n": 15,
+     "acc": 0.8,
+     "loss_share": 0.031
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 322,
+     "acc": 0.971,
+     "loss_share": 0.097
+    },
+    "tap": {
+     "n": 307,
+     "acc": 0.921,
+     "loss_share": 0.253
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "mirac1e's EXPERT",
+   "notes": 1102,
+   "seconds": 152.1,
+   "notes_per_s": 7.25,
+   "events_per_s": 4.87,
+   "chord_frac": 0.414,
+   "hold_frac": 0.3,
+   "jack_frac": 0.015,
+   "min_same_lane_gap_ms": 205.0,
+   "od": 7.0,
+   "accuracy": 0.8070175438596491,
+   "hit_rate": 0.8820326678765881,
+   "n_stray": 16,
+   "stray_per_note": 0.014519056261343012,
+   "counts": {
+    "MAX": 285,
+    "300": 512,
+    "200": 111,
+    "100": 46,
+    "50": 18,
+    "MISS": 130
+   },
+   "loss": {
+    "hold": {
+     "n": 331,
+     "acc": 0.609,
+     "loss_share": 0.608
+    },
+    "after_hold": {
+     "n": 19,
+     "acc": 0.491,
+     "loss_share": 0.045
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 458,
+     "acc": 0.918,
+     "loss_share": 0.176
+    },
+    "tap": {
+     "n": 294,
+     "acc": 0.876,
+     "loss_share": 0.171
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Normal",
+   "notes": 679,
+   "seconds": 86.6,
+   "notes_per_s": 7.84,
+   "events_per_s": 5.12,
+   "chord_frac": 0.529,
+   "hold_frac": 0.243,
+   "jack_frac": 0.035,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 6.2,
+   "accuracy": 0.9054982817869416,
+   "hit_rate": 0.9499263622974963,
+   "n_stray": 6,
+   "stray_per_note": 0.008836524300441826,
+   "counts": {
+    "MAX": 201,
+    "300": 378,
+    "200": 42,
+    "100": 23,
+    "50": 1,
+    "MISS": 34
+   },
+   "loss": {
+    "hold": {
+     "n": 165,
+     "acc": 0.791,
+     "loss_share": 0.538
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 341,
+     "acc": 0.953,
+     "loss_share": 0.249
+    },
+    "tap": {
+     "n": 173,
+     "acc": 0.921,
+     "loss_share": 0.213
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "MASTER",
+   "notes": 1159,
+   "seconds": 152.1,
+   "notes_per_s": 7.62,
+   "events_per_s": 5.35,
+   "chord_frac": 0.368,
+   "hold_frac": 0.391,
+   "jack_frac": 0.038,
+   "min_same_lane_gap_ms": 205.0,
+   "od": 7.2,
+   "accuracy": 0.721599079666379,
+   "hit_rate": 0.8274374460742019,
+   "n_stray": 24,
+   "stray_per_note": 0.02070750647109577,
+   "counts": {
+    "MAX": 273,
+    "300": 445,
+    "200": 130,
+    "100": 79,
+    "50": 32,
+    "MISS": 200
+   },
+   "loss": {
+    "hold": {
+     "n": 453,
+     "acc": 0.533,
+     "loss_share": 0.656
+    },
+    "after_hold": {
+     "n": 58,
+     "acc": 0.724,
+     "loss_share": 0.05
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 349,
+     "acc": 0.866,
+     "loss_share": 0.145
+    },
+    "tap": {
+     "n": 299,
+     "acc": 0.838,
+     "loss_share": 0.15
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Advanced",
+   "notes": 700,
+   "seconds": 97.0,
+   "notes_per_s": 7.22,
+   "events_per_s": 5.43,
+   "chord_frac": 0.328,
+   "hold_frac": 0.109,
+   "jack_frac": 0.021,
+   "min_same_lane_gap_ms": 152.0,
+   "od": 7.0,
+   "accuracy": 0.9514285714285714,
+   "hit_rate": 0.97,
+   "n_stray": 2,
+   "stray_per_note": 0.002857142857142857,
+   "counts": {
+    "MAX": 175,
+    "300": 478,
+    "200": 14,
+    "100": 10,
+    "50": 2,
+    "MISS": 21
+   },
+   "loss": {
+    "hold": {
+     "n": 76,
+     "acc": 0.741,
+     "loss_share": 0.578
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 309,
+     "acc": 0.971,
+     "loss_share": 0.265
+    },
+    "tap": {
+     "n": 315,
+     "acc": 0.983,
+     "loss_share": 0.157
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "LUNATIC",
+   "notes": 1316,
+   "seconds": 152.1,
+   "notes_per_s": 8.65,
+   "events_per_s": 5.98,
+   "chord_frac": 0.363,
+   "hold_frac": 0.568,
+   "jack_frac": 0.027,
+   "min_same_lane_gap_ms": 103.0,
+   "od": 7.4,
+   "accuracy": 0.6325987841945289,
+   "hit_rate": 0.7583586626139818,
+   "n_stray": 16,
+   "stray_per_note": 0.0121580547112462,
+   "counts": {
+    "MAX": 231,
+    "300": 445,
+    "200": 169,
+    "100": 110,
+    "50": 43,
+    "MISS": 318
+   },
+   "loss": {
+    "hold": {
+     "n": 747,
+     "acc": 0.539,
+     "loss_share": 0.712
+    },
+    "after_hold": {
+     "n": 141,
+     "acc": 0.544,
+     "loss_share": 0.133
+    },
+    "fast_jack": {
+     "n": 9,
+     "acc": 0.556,
+     "loss_share": 0.008
+    },
+    "chord": {
+     "n": 252,
+     "acc": 0.844,
+     "loss_share": 0.081
+    },
+    "tap": {
+     "n": 167,
+     "acc": 0.81,
+     "loss_share": 0.065
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2543258 ONGEKI SHOOTERS - No Limit RED Force (Game Ver.) [no video].osz",
+   "version": "Spark the Flame of Hope from Illusion",
+   "notes": 1472,
+   "seconds": 152.1,
+   "notes_per_s": 9.68,
+   "events_per_s": 6.52,
+   "chord_frac": 0.36,
+   "hold_frac": 0.644,
+   "jack_frac": 0.041,
+   "min_same_lane_gap_ms": 102.0,
+   "od": 7.6,
+   "accuracy": 0.5274003623188406,
+   "hit_rate": 0.6521739130434783,
+   "n_stray": 23,
+   "stray_per_note": 0.015625,
+   "counts": {
+    "MAX": 204,
+    "300": 384,
+    "200": 226,
+    "100": 80,
+    "50": 66,
+    "MISS": 512
+   },
+   "loss": {
+    "hold": {
+     "n": 948,
+     "acc": 0.432,
+     "loss_share": 0.775
+    },
+    "after_hold": {
+     "n": 167,
+     "acc": 0.561,
+     "loss_share": 0.105
+    },
+    "fast_jack": {
+     "n": 47,
+     "acc": 0.309,
+     "loss_share": 0.047
+    },
+    "chord": {
+     "n": 174,
+     "acc": 0.851,
+     "loss_share": 0.037
+    },
+    "tap": {
+     "n": 136,
+     "acc": 0.816,
+     "loss_share": 0.036
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Hard",
+   "notes": 913,
+   "seconds": 86.6,
+   "notes_per_s": 10.54,
+   "events_per_s": 6.52,
+   "chord_frac": 0.529,
+   "hold_frac": 0.233,
+   "jack_frac": 0.046,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 6.4,
+   "accuracy": 0.8680175246440307,
+   "hit_rate": 0.9211391018619934,
+   "n_stray": 3,
+   "stray_per_note": 0.0032858707557502738,
+   "counts": {
+    "MAX": 297,
+    "300": 449,
+    "200": 49,
+    "100": 37,
+    "50": 9,
+    "MISS": 72
+   },
+   "loss": {
+    "hold": {
+     "n": 213,
+     "acc": 0.667,
+     "loss_share": 0.588
+    },
+    "after_hold": {
+     "n": 9,
+     "acc": 0.667,
+     "loss_share": 0.025
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 467,
+     "acc": 0.936,
+     "loss_share": 0.249
+    },
+    "tap": {
+     "n": 224,
+     "acc": 0.926,
+     "loss_share": 0.138
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Muses' Hyper",
+   "notes": 990,
+   "seconds": 86.8,
+   "notes_per_s": 11.4,
+   "events_per_s": 7.51,
+   "chord_frac": 0.41,
+   "hold_frac": 0.464,
+   "jack_frac": 0.049,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 6.6,
+   "accuracy": 0.6951178451178451,
+   "hit_rate": 0.7787878787878788,
+   "n_stray": 6,
+   "stray_per_note": 0.006060606060606061,
+   "counts": {
+    "MAX": 242,
+    "300": 371,
+    "200": 82,
+    "100": 47,
+    "50": 29,
+    "MISS": 219
+   },
+   "loss": {
+    "hold": {
+     "n": 459,
+     "acc": 0.614,
+     "loss_share": 0.586
+    },
+    "after_hold": {
+     "n": 59,
+     "acc": 0.404,
+     "loss_share": 0.117
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 269,
+     "acc": 0.813,
+     "loss_share": 0.167
+    },
+    "tap": {
+     "n": 203,
+     "acc": 0.806,
+     "loss_share": 0.13
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Hyper",
+   "notes": 1098,
+   "seconds": 97.0,
+   "notes_per_s": 11.32,
+   "events_per_s": 8.54,
+   "chord_frac": 0.314,
+   "hold_frac": 0.095,
+   "jack_frac": 0.037,
+   "min_same_lane_gap_ms": 151.0,
+   "od": 7.5,
+   "accuracy": 0.9072556162720097,
+   "hit_rate": 0.9316939890710383,
+   "n_stray": 2,
+   "stray_per_note": 0.0018214936247723133,
+   "counts": {
+    "MAX": 361,
+    "300": 592,
+    "200": 61,
+    "100": 6,
+    "50": 3,
+    "MISS": 75
+   },
+   "loss": {
+    "hold": {
+     "n": 104,
+     "acc": 0.742,
+     "loss_share": 0.264
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.01
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 443,
+     "acc": 0.947,
+     "loss_share": 0.231
+    },
+    "tap": {
+     "n": 550,
+     "acc": 0.908,
+     "loss_share": 0.496
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Gsun's Insane",
+   "notes": 1131,
+   "seconds": 86.6,
+   "notes_per_s": 13.05,
+   "events_per_s": 9.01,
+   "chord_frac": 0.375,
+   "hold_frac": 0.513,
+   "jack_frac": 0.01,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 6.8,
+   "accuracy": 0.6622458001768347,
+   "hit_rate": 0.7409372236958444,
+   "n_stray": 2,
+   "stray_per_note": 0.0017683465959328027,
+   "counts": {
+    "MAX": 244,
+    "300": 419,
+    "200": 100,
+    "100": 41,
+    "50": 34,
+    "MISS": 293
+   },
+   "loss": {
+    "hold": {
+     "n": 580,
+     "acc": 0.564,
+     "loss_share": 0.661
+    },
+    "after_hold": {
+     "n": 23,
+     "acc": 0.333,
+     "loss_share": 0.04
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 346,
+     "acc": 0.775,
+     "loss_share": 0.204
+    },
+    "tap": {
+     "n": 182,
+     "acc": 0.801,
+     "loss_share": 0.095
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "winter's Expert",
+   "notes": 1140,
+   "seconds": 86.6,
+   "notes_per_s": 13.16,
+   "events_per_s": 9.04,
+   "chord_frac": 0.415,
+   "hold_frac": 0.578,
+   "jack_frac": 0.017,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 7.0,
+   "accuracy": 0.501608187134503,
+   "hit_rate": 0.5771929824561404,
+   "n_stray": 2,
+   "stray_per_note": 0.0017543859649122807,
+   "counts": {
+    "MAX": 190,
+    "300": 314,
+    "200": 69,
+    "100": 46,
+    "50": 39,
+    "MISS": 482
+   },
+   "loss": {
+    "hold": {
+     "n": 659,
+     "acc": 0.335,
+     "loss_share": 0.771
+    },
+    "after_hold": {
+     "n": 81,
+     "acc": 0.267,
+     "loss_share": 0.104
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 226,
+     "acc": 0.841,
+     "loss_share": 0.063
+    },
+    "tap": {
+     "n": 174,
+     "acc": 0.801,
+     "loss_share": 0.061
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Insane",
+   "notes": 1391,
+   "seconds": 97.0,
+   "notes_per_s": 14.34,
+   "events_per_s": 9.7,
+   "chord_frac": 0.402,
+   "hold_frac": 0.147,
+   "jack_frac": 0.013,
+   "min_same_lane_gap_ms": 114.0,
+   "od": 8.0,
+   "accuracy": 0.8058950395398994,
+   "hit_rate": 0.8547807332854062,
+   "n_stray": 1,
+   "stray_per_note": 0.0007189072609633358,
+   "counts": {
+    "MAX": 398,
+    "300": 651,
+    "200": 86,
+    "100": 34,
+    "50": 20,
+    "MISS": 202
+   },
+   "loss": {
+    "hold": {
+     "n": 204,
+     "acc": 0.581,
+     "loss_share": 0.317
+    },
+    "after_hold": {
+     "n": 61,
+     "acc": 0.333,
+     "loss_share": 0.151
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.004
+    },
+    "chord": {
+     "n": 640,
+     "acc": 0.891,
+     "loss_share": 0.257
+    },
+    "tap": {
+     "n": 485,
+     "acc": 0.849,
+     "loss_share": 0.272
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz",
+   "version": "Sweetie",
+   "notes": 1283,
+   "seconds": 86.8,
+   "notes_per_s": 14.78,
+   "events_per_s": 9.72,
+   "chord_frac": 0.436,
+   "hold_frac": 0.674,
+   "jack_frac": 0.011,
+   "min_same_lane_gap_ms": 80.0,
+   "od": 7.2,
+   "accuracy": 0.393868537282411,
+   "hit_rate": 0.455962587685113,
+   "n_stray": 3,
+   "stray_per_note": 0.002338269680436477,
+   "counts": {
+    "MAX": 148,
+    "300": 289,
+    "200": 75,
+    "100": 37,
+    "50": 36,
+    "MISS": 698
+   },
+   "loss": {
+    "hold": {
+     "n": 865,
+     "acc": 0.253,
+     "loss_share": 0.831
+    },
+    "after_hold": {
+     "n": 96,
+     "acc": 0.28,
+     "loss_share": 0.089
+    },
+    "fast_jack": {
+     "n": 2,
+     "acc": 0.0,
+     "loss_share": 0.003
+    },
+    "chord": {
+     "n": 196,
+     "acc": 0.804,
+     "loss_share": 0.049
+    },
+    "tap": {
+     "n": 124,
+     "acc": 0.824,
+     "loss_share": 0.028
+    }
+   },
+   "wall_s": 135.1
+  },
+  {
+   "song": "2298007 AAAA - Lobelia (Short Ver.).osz",
+   "version": "Lavender",
+   "notes": 1578,
+   "seconds": 97.0,
+   "notes_per_s": 16.27,
+   "events_per_s": 10.18,
+   "chord_frac": 0.475,
+   "hold_frac": 0.405,
+   "jack_frac": 0.01,
+   "min_same_lane_gap_ms": 76.0,
+   "od": 8.0,
+   "accuracy": 0.5673848753696662,
+   "hit_rate": 0.6337135614702155,
+   "n_stray": 3,
+   "stray_per_note": 0.0019011406844106464,
+   "counts": {
+    "MAX": 245,
+    "300": 569,
+    "200": 81,
+    "100": 59,
+    "50": 46,
+    "MISS": 578
+   },
+   "loss": {
+    "hold": {
+     "n": 639,
+     "acc": 0.3,
+     "loss_share": 0.655
+    },
+    "after_hold": {
+     "n": 117,
+     "acc": 0.234,
+     "loss_share": 0.131
+    },
+    "fast_jack": {
+     "n": 10,
+     "acc": 0.4,
+     "loss_share": 0.009
+    },
+    "chord": {
+     "n": 554,
+     "acc": 0.835,
+     "loss_share": 0.134
+    },
+    "tap": {
+     "n": 258,
+     "acc": 0.812,
+     "loss_share": 0.071
+    }
+   },
+   "wall_s": 135.1
+  }
+ ],
+ "summary": {
+  "n": 17,
+  "best": 0.9514285714285714,
+  "mean": 0.7414661379847031
+ }
+}

@@ -83,7 +83,7 @@ conditions; "mean" is over every condition the arm was scored on.
 | 18 | long-hold charts only; 56 PCs (`1055345`) | 26-condition 0.942 vs 0.938; 56 PCs 0.917 | a trade; lost on the tuning maps (0.759 vs 0.770), not adopted |
 | 19 | reward MAX over 300 in the timing search, at 305/300 and +10 % (`96f64a3`) | MAX share 29 % / 81 %; mean 0.932 / 0.920 vs 0.938 | a trade, not adopted; setting kept (`max_bonus`) |
 | 20 | lanes at ±30/±90° and ±40/±120° instead of ±20/±60° (`f3fc1df`) | 11-condition mean 0.898 / 0.889 vs 0.929 | worse; the lanes share only ~30 photoreceptors already |
-| 21 | jack charts at 200/150/120 ms in the diet, 100 and 75 ms refractory | with 75 ms: all 26 0.938 → 0.945; jacks @ 120 ms 0.627 → 0.702, chords @ 10/s 0.713 → 0.768; holds 0.891 → 0.874 | best on synthetic; unlike round 7 the jacks add to the diet rather than displace it, and the 75 ms refractory that did nothing in round 14 now helps. Real maps **in flight** |
+| 21 | jack charts at 200/150/120 ms in the diet, 100 and 75 ms refractory | with 75 ms: all 26 0.938 → 0.945; jacks @ 120 ms 0.627 → 0.702, chords @ 10/s 0.713 → 0.768; holds 0.891 → 0.874 | best on synthetic, **rejected on real maps**: tuning-map mean 0.770 → 0.741, worse on all 17, taps 0.900 → 0.874 and holds 0.518 → 0.483; the tuning maps hold only 69 fast jacks, so its one gain barely registers there |
 | 22 | tail lead 130 → 80 / 40 ms | **queued** | |
 
 ## Bugs found on the way
