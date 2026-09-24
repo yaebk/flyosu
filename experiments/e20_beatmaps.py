@@ -64,9 +64,18 @@ RESULTS = os.path.join(ROOT, "results")
 MAPS = os.path.join(ROOT, "osumaps")
 APPROACH_MS = float(os.environ.get("APPROACH_MS", 400.0))   # experiment 18's optimum
 _DIET = os.environ.get("DIET", "hold")
+# Which maps.  The three songs every earlier result was measured on are the
+# tuning set: readouts have been chosen by looking at them, so their scores are
+# selection-optimistic.  Every other archive in osumaps/ -- six songs added
+# after the choice was made, and anything added later -- is held out, scored
+# only at milestones and never used to choose between versions.
+TUNING_SONGS = ("2298007 ", "2543258 ", "2600298 ")
+MAP_SET = os.environ.get("MAP_SET", "tune")                  # tune | holdout
 PATH = os.path.join(RESULTS, f"e20_beatmaps{'' if _DIET == 'nohold' else '_' + _DIET}.json")
 if APPROACH_MS != 400.0:
     PATH = PATH[:-5] + f"_a{APPROACH_MS:.0f}.json"
+if MAP_SET != "tune":
+    PATH = PATH[:-5] + f"_{MAP_SET}.json"
 SHARD = os.environ.get("SHARD")
 NSHARD = int(os.environ.get("NSHARD", 1))
 SHARD_PATH = PATH if SHARD is None else PATH[:-5] + f"_shard{int(SHARD)}of{NSHARD}.json"
@@ -119,6 +128,9 @@ def charts() -> list[dict]:
     """Every 4K mania difficulty in ``osumaps/``, parsed and characterised."""
     out = []
     for f in sorted(glob.glob(os.path.join(MAPS, "*.osz"))):
+        tuning = os.path.basename(f).startswith(TUNING_SONGS)
+        if tuning != (MAP_SET == "tune"):
+            continue
         z = zipfile.ZipFile(f)
         for n in sorted(x for x in z.namelist() if x.lower().endswith(".osu")):
             txt = z.read(n).decode("utf-8-sig", errors="replace")
