@@ -1,0 +1,26 @@
+[fast_orc_a250_r100_w50] validating on seed 4242, 10 charts x 20 notes per condition
+  s3_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.917)
+  s3_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s3_350    2.9/s  acc 1.000  hit 1.00  stray 0.00
+  s4_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.506)
+  s4_400    2.5/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.286)
+  s4_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s5_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.608)
+  s3_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s3_250    4.0/s  acc 1.000  hit 1.00  stray 0.00
+  s4_250    4.0/s  acc 1.000  hit 1.00  stray 0.00
+  s4_200    5.0/s  acc 0.990  hit 1.00  stray 0.00
+  s6_450    2.2/s  acc 1.000  hit 1.00  stray 0.00
+  s6_300    3.3/s  acc 1.000  hit 1.00  stray 0.00
+  s6_250    4.0/s  acc 1.000  hit 1.00  stray 0.00
+  s6_150    6.7/s  acc 0.875  hit 0.88  stray 0.00
+  s6_120    8.3/s  acc 0.496  hit 0.51  stray 0.00
+  s7_600    1.7/s  acc 0.948  hit 0.97  stray 0.01
+  s7_400    2.5/s  acc 0.877  hit 0.93  stray 0.00
+  s7_300    3.3/s  acc 0.878  hit 0.92  stray 0.01
+  s8_400    2.5/s  acc 0.820  hit 0.87  stray 0.00
+  s8_300    3.3/s  acc 0.800  hit 0.83  stray 0.00
+  s4_150    6.7/s  acc 0.930  hit 0.93  stray 0.00
+  s4_125    8.0/s  acc 0.695  hit 0.71  stray 0.00
+  s4_100   10.0/s  acc 0.658  hit 0.66  stray 0.00
+wrote e18_capability_validate_fast_orc_a250_r100_w50.json

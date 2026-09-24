@@ -227,6 +227,21 @@ ARMS = {
                                    n_charts=36, k=32, approach=250.0, oracle=True,
                                    refr=100.0, width=50.0,
                                    release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 15: round 14's two winners -- 20 ms smoothing (0.929 over 24) and
+    # 48 components (0.925) -- act on different things, so combine them, and
+    # push each one step further.
+    "fast_sm20_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)),
+                          n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                          smooth=20.0, release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm10_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)),
+                          n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                          smooth=10.0, release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k64": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)),
+                          n_charts=36, k=64, approach=250.0, oracle=True, refr=100.0,
+                          smooth=20.0, release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
