@@ -9,11 +9,18 @@ synaptic connections from the FlyWire whole-brain reconstruction; the fly's
 descending neurons — its actual output to the legs — are grouped into four
 channels and read as D / F / J / K.
 
-**Current state: all 12 steps built; eighteen experiments run.** The fly plays,
-and plays very well: the best readout scores **1.000 up to 2.9 notes per second
-and 0.900 at 4 notes per second with chords**, on fresh charts, with zero stray
-presses, 132 parameters and the connectome frozen. That is roughly 4-star
-osu!mania, up from about 1.5-2 stars before experiment 18. Whether the *real* wiring plays better
+**Current state: all 12 steps built; twenty experiments run; the fly plays real
+beatmaps.** On seventeen 4K mania difficulties from three downloaded maps, with
+a readout fitted on synthetic charts and nothing refitted, it scores **0.894 on
+the easiest and 0.576 on average, with zero stray presses across all seventeen
+maps and 17,600 notes**. On synthetic charts it is saturated: **1.000 up to
+about 3 chord-events per second** and 0.948 at five, with 132 parameters and the
+connectome frozen.
+
+What limits it on real maps is density and **hold notes**, independently. It
+presses 15 of 17 hold heads at MAX or 300 and then loses every one of them on
+the tail, releasing a median 126 ms late; that is a consistent bias and work on
+it is in progress. Whether the *real* wiring plays better
 than matched random wiring is a separate question, and the answer got more
 negative every time the controls were treated better — through experiment 15 no
 behavioural comparison favoured the real connectome.
@@ -484,6 +491,8 @@ experiments/
   e16_heldout.py      the same frozen policies on charts nobody tuned against
   e17_strays.py       pre-registered: stray presses, declared threshold
   e18_capability.py   capability: training diet, readout size, scroll speed
+  e19_strays_powered.py pre-registered: strays again, with the ties broken
+  e20_beatmaps.py     real .osz beatmaps from osumaps/
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  32 checks on the network side
@@ -535,8 +544,8 @@ python -m tests.test_reservoir       # 20 checks
  7  fly controller               done   20-parameter threshold policy; per-key delays optional
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
-10  training experiments         run 18 times      e1-e18, two connectomes; best play 1.000 @ 2.9 notes/s (ridge, 132 params)
-11  beatmap parser               done   .osu v14 mania, both directions
+10  training experiments         run 20 times      e1-e20, two connectomes; best play 1.000 synthetic, 0.894 real
+11  beatmap parser               done   .osu v14 mania, both directions; 17 real difficulties played
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
 

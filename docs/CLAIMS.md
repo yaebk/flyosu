@@ -269,6 +269,29 @@ really there does not soften when the controls double.**
 
 ## Absolute performance, separately from any comparison
 
+**The headline, as of experiment 20: the fly plays real osu!mania beatmaps.**
+Seventeen 4K mania difficulties from three downloaded maps, with the readout
+fitted on synthetic charts and nothing refitted: **0.894 on the easiest, 0.576
+mean**, and **zero stray presses across all seventeen maps and 17,600 notes**.
+Two things cost it accuracy and they are independent — density (partial
+r = −0.78) and hold notes (partial r = −0.77) — and a regression on those two
+alone explains 83% of the variance. `docs/RESULTS_E20.md`.
+
+Three caveats that belong next to that number. Real maps run 2.5–10.2
+chord-events per second while the synthetic curriculum saturates at about 3, so
+only the easiest difficulties are inside the fly's range. Accuracy is not
+comparable between maps, since these carry OD 6.0 to 8.0. And **holds are the
+weakest thing the fly does**: it presses 15 of 17 heads at MAX or 300 and then
+loses *every one of them* on the tail, releasing a median 126 ms late. That is a
+consistent bias rather than noise, and work on it is in progress.
+
+**A negative result worth keeping:** putting hold charts in the training diet
+makes real beatmaps *worse* overall, 0.576 → 0.487. It helps the three easiest
+and hurts the fourteen denser ones because the hold charts displace density
+training. That is the fourth time in this project that adding something to the
+training diet cost more than it bought.
+
+
 **Superseded by experiment 18 — see below.** The best readout reaches **0.92
 accuracy** on held-out stage-3 charts with 68 parameters, fitted in closed form,
 connectome frozen (`docs/RESULTS_E5.md`). Across the curriculum it presses the
