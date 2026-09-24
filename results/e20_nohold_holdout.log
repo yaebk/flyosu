@@ -1,0 +1,71 @@
+fitting the experiment 18 readout (32 PCs, 16 synthetic charts, 400 ms approach)
+playing 30 difficulties together
+  4K Easy                   1.7 evt/s  acc 0.946  hit 0.952  stray/note 0.02  (193s)
+  EZ                        1.8 evt/s  acc 0.707  hit 0.786  stray/note 0.10  (193s)
+  Jepetski's EZ             1.9 evt/s  acc 0.961  hit 0.982  stray/note 0.02  (193s)
+  Abrax's Innocuous [Lv.    2.6 evt/s  acc 0.720  hit 0.819  stray/note 0.08  (193s)
+  Standard                  2.9 evt/s  acc 0.722  hit 0.830  stray/note 0.07  (193s)
+  4K Normal                 3.5 evt/s  acc 0.893  hit 0.916  stray/note 0.01  (193s)
+  NM                        3.6 evt/s  acc 0.678  hit 0.759  stray/note 0.05  (193s)
+  NM                        3.6 evt/s  acc 0.674  hit 0.826  stray/note 0.06  (193s)
+  Unpleasant [Lv.6]         4.3 evt/s  acc 0.607  hit 0.747  stray/note 0.07  (193s)
+  Zan's Hard                4.6 evt/s  acc 0.706  hit 0.778  stray/note 0.02  (193s)
+  4K Hard                   5.2 evt/s  acc 0.746  hit 0.800  stray/note 0.01  (193s)
+  Harsh [Lv.9]              5.7 evt/s  acc 0.544  hit 0.695  stray/note 0.04  (193s)
+  ajee's HD                 5.8 evt/s  acc 0.615  hit 0.694  stray/note 0.02  (193s)
+  4K Insane                 5.8 evt/s  acc 0.598  hit 0.682  stray/note 0.01  (193s)
+  Fullerene's 4K Catastr    6.2 evt/s  acc 0.585  hit 0.671  stray/note 0.01  (193s)
+  Cruel [Lv.12]             6.2 evt/s  acc 0.471  hit 0.590  stray/note 0.03  (193s)
+  Crying's HD               6.4 evt/s  acc 0.609  hit 0.686  stray/note 0.01  (193s)
+  HD                        6.8 evt/s  acc 0.656  hit 0.725  stray/note 0.02  (193s)
+  Brutal [Lv.15]            6.8 evt/s  acc 0.345  hit 0.449  stray/note 0.02  (193s)
+  World's End               6.9 evt/s  acc 0.616  hit 0.691  stray/note 0.00  (193s)
+  Grotesque [Lv.18]         7.1 evt/s  acc 0.291  hit 0.386  stray/note 0.02  (193s)
+  MX                        7.4 evt/s  acc 0.559  hit 0.644  stray/note 0.01  (193s)
+  Insane                    7.6 evt/s  acc 0.538  hit 0.634  stray/note 0.01  (193s)
+  SC                        8.1 evt/s  acc 0.423  hit 0.521  stray/note 0.01  (193s)
+  MX                        8.2 evt/s  acc 0.445  hit 0.563  stray/note 0.02  (193s)
+  SHD                       8.7 evt/s  acc 0.313  hit 0.412  stray/note 0.01  (193s)
+  Master                    9.9 evt/s  acc 0.379  hit 0.484  stray/note 0.01  (193s)
+  Zenx's SHD               12.7 evt/s  acc 0.295  hit 0.378  stray/note 0.00  (193s)
+  Jepetski's Empress       12.9 evt/s  acc 0.206  hit 0.278  stray/note 0.01  (193s)
+  SC                       13.7 evt/s  acc 0.441  hit 0.537  stray/note 0.01  (193s)
+
+=== experiment 20: real beatmaps, 400 ms approach ===
+  readout fitted on synthetic stage-4 charts; nothing refitted here
+
+  difficulty                evt/s  hold   OD     acc    hit  stray/note
+  4K Easy                    1.67  0.04  7.0   0.946  0.952        0.02
+  EZ                         1.81  0.29  6.5   0.707  0.786        0.10
+  Jepetski's EZ              1.86  0.06  7.0   0.961  0.982        0.02
+  Abrax's Innocuous [Lv.3    2.62  0.27  7.0   0.720  0.819        0.08
+  Standard                   2.86  0.21  7.0   0.722  0.830        0.07
+  4K Normal                  3.48  0.04  7.2   0.893  0.916        0.01
+  NM                         3.62  0.19  7.0   0.678  0.759        0.05
+  NM                         3.63  0.25  7.5   0.674  0.826        0.06
+  Unpleasant [Lv.6]          4.31  0.30  7.2   0.607  0.747        0.07
+  Zan's Hard                 4.57  0.10  7.5   0.706  0.778        0.02
+  4K Hard                    5.23  0.07  7.5   0.746  0.800        0.01
+  Harsh [Lv.9]               5.68  0.27  7.5   0.544  0.695        0.04
+  ajee's HD                  5.77  0.11  7.5   0.615  0.694        0.02
+  4K Insane                  5.84  0.07  8.0   0.598  0.682        0.01
+  Fullerene's 4K Catastro    6.15  0.02  9.0   0.585  0.671        0.01
+  Cruel [Lv.12]              6.24  0.28  7.8   0.471  0.590        0.03
+  Crying's HD                6.42  0.09  8.0   0.609  0.686        0.01
+  HD                         6.81  0.10  8.0   0.656  0.725        0.02
+  Brutal [Lv.15]             6.81  0.26  8.0   0.345  0.449        0.02
+  World's End                6.87  0.03  8.0   0.616  0.691        0.00
+  Grotesque [Lv.18]          7.06  0.24  8.4   0.291  0.386        0.02
+  MX                         7.40  0.09  8.0   0.559  0.644        0.01
+  Insane                     7.60  0.07  8.0   0.538  0.634        0.01
+  SC                         8.14  0.13  8.0   0.423  0.521        0.01
+  MX                         8.25  0.12  8.0   0.445  0.563        0.02
+  SHD                        8.69  0.21  8.0   0.313  0.412        0.01
+  Master                     9.93  0.06  8.5   0.379  0.484        0.01
+  Zenx's SHD                12.73  0.01  8.5   0.295  0.378        0.00
+  Jepetski's Empress        12.92  0.03  9.0   0.206  0.278        0.01
+  SC                        13.69  0.03  8.0   0.441  0.537        0.01
+
+  best 0.961 (Jepetski's EZ)
+  mean 0.576 over 30 difficulties
+  accuracy vs events/s: r = -0.83
