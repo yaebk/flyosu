@@ -109,9 +109,14 @@ FIT_BOTH8_ORC_REL = dict(FIT_BOTH_REL, n_charts=36, oracle=True,
                          specs=FIT_BOTH["specs"] + ((8, 400.0), (8, 300.0)))
 FIT_BOTH8_ORC_REL_GRID = dict(FIT_BOTH8_ORC_REL, grid=True)
 FIT_BOTH_ORC_REL = dict(FIT_BOTH_REL, oracle=True)          # round 12's both_a300_orc_rel
+# round 13's fast_orc_a250_r100: 150 and 125 ms chord charts, 100 ms refractory
+# (run with APPROACH_MS=250)
+FIT_FAST_ORC_R100 = dict(FIT_BOTH_ORC_REL, n_charts=36, refr=100.0,
+                         specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)))
 _DIETS = {"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
           "both8_orc_rel": FIT_BOTH8_ORC_REL, "both8_orc_rel_grid": FIT_BOTH8_ORC_REL_GRID,
-          "both_orc_rel": FIT_BOTH_ORC_REL}
+          "both_orc_rel": FIT_BOTH_ORC_REL, "fast_orc_r100": FIT_FAST_ORC_R100}
 FIT = _DIETS[_DIET]
 TRAIN_SEED = 100
 N_NOTES_FIT = 24
@@ -219,6 +224,8 @@ def fitted_player():
     fly = M.build(regime="play")
     player = P.Player.untrained(fly, theta=THETA, noise=NOISE,
                                 encoder=E.Encoder(fly.ret, hold_grid=bool(FIT.get("grid"))))
+    if "refr" in FIT:
+        player.controller.refractory_ms = float(FIT["refr"])
     states = calibration_states(fly, player.r0)
     specs = tuple((s[0], s[1], APPROACH_MS) for s in FIT["specs"])
     rr = R.RidgeReadout(player, n_charts=FIT["n_charts"], n_notes=N_NOTES_FIT,

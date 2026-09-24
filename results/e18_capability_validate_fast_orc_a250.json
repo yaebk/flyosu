@@ -1,0 +1,213 @@
+{
+ "arm": "fast_orc_a250",
+ "deep_kw": {
+  "n_charts": 10,
+  "n_notes": 20,
+  "seed": 4242
+ },
+ "lanes": [
+  {
+   "lead_ms": 0.0,
+   "offset": -0.5,
+   "train_reward": 0.9212191358024692,
+   "train_corr": 0.7487730310555462,
+   "release": 0.0,
+   "train_reward_release": 0.9212191358024692
+  },
+  {
+   "lead_ms": -20.0,
+   "offset": -0.5999999999999999,
+   "train_reward": 0.9490740740740742,
+   "train_corr": 0.7912396941005858,
+   "release": 0.0,
+   "train_reward_release": 0.9490740740740742
+  },
+  {
+   "lead_ms": -20.0,
+   "offset": -0.3999999999999999,
+   "train_reward": 0.8936067019400353,
+   "train_corr": 0.6928072036340901,
+   "release": 1.0,
+   "train_reward_release": 0.9099206349206348
+  },
+  {
+   "lead_ms": 20.0,
+   "offset": -0.5,
+   "train_reward": 0.9424382716049382,
+   "train_corr": 0.7746696278194735,
+   "release": 0.0,
+   "train_reward_release": 0.9424382716049382
+  }
+ ],
+ "n_params": 136,
+ "conditions": {
+  "s3_600": {
+   "notes_per_s": 1.67,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_450": {
+   "notes_per_s": 2.22,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_350": {
+   "notes_per_s": 2.86,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_600": {
+   "notes_per_s": 1.67,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_400": {
+   "notes_per_s": 2.5,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_300": {
+   "notes_per_s": 3.33,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s5_600": {
+   "notes_per_s": 1.67,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_300": {
+   "notes_per_s": 3.33,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s3_250": {
+   "notes_per_s": 4.0,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_250": {
+   "notes_per_s": 4.0,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_200": {
+   "notes_per_s": 5.0,
+   "accuracy": 0.9599999999999997,
+   "hit_rate": 0.9599999999999997,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s6_450": {
+   "notes_per_s": 2.22,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s6_300": {
+   "notes_per_s": 3.33,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s6_250": {
+   "notes_per_s": 4.0,
+   "accuracy": 1.0,
+   "hit_rate": 1.0,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s6_150": {
+   "notes_per_s": 6.67,
+   "accuracy": 0.5041666666666667,
+   "hit_rate": 0.51,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s6_120": {
+   "notes_per_s": 8.33,
+   "accuracy": 0.4866666666666667,
+   "hit_rate": 0.49000000000000005,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s7_600": {
+   "notes_per_s": 1.67,
+   "accuracy": 0.9549999999999998,
+   "hit_rate": 0.9800000000000001,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s7_400": {
+   "notes_per_s": 2.5,
+   "accuracy": 0.9149999999999998,
+   "hit_rate": 0.96,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s7_300": {
+   "notes_per_s": 3.33,
+   "accuracy": 0.9049999999999999,
+   "hit_rate": 0.95,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s8_400": {
+   "notes_per_s": 2.5,
+   "accuracy": 0.845,
+   "hit_rate": 0.9,
+   "stray_per_note": 0.005,
+   "lane_correct": 1.0
+  },
+  "s8_300": {
+   "notes_per_s": 3.33,
+   "accuracy": 0.8016666666666665,
+   "hit_rate": 0.86,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_150": {
+   "notes_per_s": 6.67,
+   "accuracy": 0.7283333333333333,
+   "hit_rate": 0.73,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_125": {
+   "notes_per_s": 8.0,
+   "accuracy": 0.6916666666666667,
+   "hit_rate": 0.695,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  },
+  "s4_100": {
+   "notes_per_s": 10.0,
+   "accuracy": 0.6766666666666666,
+   "hit_rate": 0.6849999999999999,
+   "stray_per_note": 0.0,
+   "lane_correct": 1.0
+  }
+ }
+}

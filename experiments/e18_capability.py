@@ -190,6 +190,25 @@ ARMS = {
                                       (7, 400.0)),
                                n_charts=36, k=32, approach=250.0, oracle=True, refr=100.0,
                                release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 14: round 13's winner pushed further on each of its levers, since
+    # chords at 6.7-10 events a second (0.83 falling to 0.67) are now the wall:
+    # a 200 ms approach, a 75 ms refractory, and more readout capacity now that
+    # the diet is broader.
+    "fast_orc_a200_r100": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                      (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                      (7, 400.0)),
+                               n_charts=36, k=32, approach=200.0, oracle=True, refr=100.0,
+                               release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_orc_a250_r75": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                     (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                     (7, 400.0)),
+                              n_charts=36, k=32, approach=250.0, oracle=True, refr=75.0,
+                              release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_orc_a250_r100_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                          (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                          (7, 400.0)),
+                                   n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
+                                   release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
