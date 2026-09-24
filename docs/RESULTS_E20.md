@@ -87,7 +87,9 @@ jacks.
 - **Holds** (0.599) and the note after one (0.589). On the replay maps 17–60 %
   of holds in each length band are released more than 60 ms before the tail,
   almost none late. The 130 ms tail lead was tuned when releases ran late.
-  **Round 22** retunes it to 80 and 40 ms (queued).
+  Round 22 retuned it to 80 ms: holds rose slightly (0.518 → 0.533 on the
+  tuning maps) but taps and chords fell, 0.770 → 0.751 overall, so it was
+  rejected. Round 21's jack charts were rejected the same way (0.741).
 - **Maps above 8.5 events/s** (0.677). Synthetic chords at 8 and 10 events/s
   are 0.81 and 0.71.
 - **Unexplained misses on the Easy tuning map** (read note by note from the

@@ -1,0 +1,45 @@
+fitting the experiment 18 readout (48 PCs, 36 synthetic charts, 250 ms approach)
+playing 17 difficulties together
+  Easy                      2.5 evt/s  acc 0.961  hit 0.969  stray/note 0.01  (126s)
+  Amasugi's BASIC           2.7 evt/s  acc 0.860  hit 0.879  stray/note 0.01  (126s)
+  LINQAQ's ADVANCED         4.3 evt/s  acc 0.895  hit 0.929  stray/note 0.02  (126s)
+  mirac1e's EXPERT          4.9 evt/s  acc 0.830  hit 0.887  stray/note 0.01  (126s)
+  Normal                    5.1 evt/s  acc 0.907  hit 0.940  stray/note 0.00  (126s)
+  MASTER                    5.3 evt/s  acc 0.744  hit 0.828  stray/note 0.01  (126s)
+  Advanced                  5.4 evt/s  acc 0.952  hit 0.966  stray/note 0.00  (126s)
+  LUNATIC                   6.0 evt/s  acc 0.662  hit 0.767  stray/note 0.01  (126s)
+  Spark the Flame of Hop    6.5 evt/s  acc 0.577  hit 0.679  stray/note 0.01  (126s)
+  Hard                      6.5 evt/s  acc 0.843  hit 0.892  stray/note 0.00  (126s)
+  Muses' Hyper              7.5 evt/s  acc 0.693  hit 0.767  stray/note 0.01  (126s)
+  Hyper                     8.5 evt/s  acc 0.901  hit 0.917  stray/note 0.00  (126s)
+  Gsun's Insane             9.0 evt/s  acc 0.689  hit 0.760  stray/note 0.00  (126s)
+  winter's Expert           9.0 evt/s  acc 0.501  hit 0.590  stray/note 0.01  (126s)
+  Insane                    9.7 evt/s  acc 0.797  hit 0.837  stray/note 0.00  (126s)
+  Sweetie                   9.7 evt/s  acc 0.392  hit 0.472  stray/note 0.00  (126s)
+  Lavender                 10.2 evt/s  acc 0.556  hit 0.629  stray/note 0.00  (126s)
+
+=== experiment 20: real beatmaps, 250 ms approach ===
+  readout fitted on synthetic stage-4 charts; nothing refitted here
+
+  difficulty                evt/s  hold   OD     acc    hit  stray/note
+  Easy                       2.47  0.15  6.0   0.961  0.969        0.01
+  Amasugi's BASIC            2.66  0.27  6.0   0.860  0.879        0.01
+  LINQAQ's ADVANCED          4.31  0.27  6.5   0.895  0.929        0.02
+  mirac1e's EXPERT           4.87  0.30  7.0   0.830  0.887        0.01
+  Normal                     5.12  0.24  6.2   0.907  0.940        0.00
+  MASTER                     5.35  0.39  7.2   0.744  0.828        0.01
+  Advanced                   5.43  0.11  7.0   0.952  0.966        0.00
+  LUNATIC                    5.98  0.57  7.4   0.662  0.767        0.01
+  Spark the Flame of Hope    6.52  0.64  7.6   0.577  0.679        0.01
+  Hard                       6.52  0.23  6.4   0.843  0.892        0.00
+  Muses' Hyper               7.51  0.46  6.6   0.693  0.767        0.01
+  Hyper                      8.54  0.10  7.5   0.901  0.917        0.00
+  Gsun's Insane              9.01  0.51  6.8   0.689  0.760        0.00
+  winter's Expert            9.04  0.58  7.0   0.501  0.590        0.01
+  Insane                     9.70  0.15  8.0   0.797  0.837        0.00
+  Sweetie                    9.72  0.67  7.2   0.392  0.472        0.00
+  Lavender                  10.18  0.41  8.0   0.556  0.629        0.00
+
+  best 0.961 (Easy)
+  mean 0.751 over 17 difficulties
+  accuracy vs events/s: r = -0.66

@@ -63,9 +63,9 @@ Finding the regime in which the network could play at all turned out to be the
 main event of the first session — see
 [What changed](#what-changed-when-the-fly-started-playing).
 
-**Next:** finish round 21 (jack charts in the training diet) and round 22 (hold
-release timing); then the remaining capability gaps (holds, fast jacks, maps
-above 8.5 events/s); then the pre-registered question of whether the current
+**Next:** the remaining capability gaps (holds, fast jacks, maps above 8.5
+events/s) -- rounds 21 and 22 targeted jacks and hold release and were both
+rejected on the tuning maps, because each cost taps and chords; then the pre-registered question of whether the current
 fly's play depends on the wiring, real against rewired controls on the held-out
 maps, and an audit of experiments 7, 11, 12, 13 and 15 under a declared
 threshold.
