@@ -201,23 +201,33 @@ def smooth(Z: np.ndarray, dt: float, smooth_ms: float) -> np.ndarray:
     return out
 
 
-def target(rec: Recording, lead_ms: float = 20.0, width_ms: float = 80.0) -> np.ndarray:
+def target(rec: Recording, lead_ms: float = 20.0, width_ms: float = 80.0,
+           tail_lead_ms: float = 0.0) -> np.ndarray:
     """(T, 4) in {-1, +1}: +1 for ``width_ms`` from ``lead_ms`` before each
     note's hit time, in its lane.
 
-    A **hold note** stays +1 through its body, to ``lead_ms`` before the tail.
-    The controller keeps a key down while its drive is above threshold, so a
-    fixed-width pulse can only ever produce a fixed-length hold however long the
-    note is -- which is why experiment 20 found holds scoring near zero even
-    after the encoder was taught to draw them. An ordinary note has no tail and
-    is unchanged, so a chart without holds fits exactly as before.
+    A **hold note** stays +1 through its body, to ``lead_ms + tail_lead_ms``
+    before the tail.  The controller keeps a key down while its drive is above
+    threshold, so a fixed-width pulse can only ever produce a fixed-length hold
+    however long the note is -- which is why experiment 20 found holds scoring
+    near zero even after the encoder was taught to draw them.
+
+    ``tail_lead_ms`` exists because the drive does not fall the instant the
+    target does: smoothing and the network's own dynamics carry it, and the
+    measured result was that the fly released a median 126 ms *late* on every
+    hold it took, losing all of them on the tail while its heads were nearly
+    perfect.  Dropping the target early by that much pulls the release back
+    onto the tail.  It is one declared number, swept like any other.
+
+    An ordinary note has no tail and is unchanged, so a chart without holds
+    fits exactly as before whatever ``tail_lead_ms`` is set to.
     """
     Y = -np.ones((len(rec.t), N_KEYS))
     for n in rec.chart.notes:
         start = n.hit_ms - lead_ms
         end = start + width_ms
         if n.is_hold:
-            end = max(end, n.end_ms - lead_ms)
+            end = max(end, n.end_ms - lead_ms - tail_lead_ms)
         m = (rec.t >= start) & (rec.t <= end)
         Y[m, n.lane] = 1.0
     return Y
@@ -314,6 +324,7 @@ class RidgeReadout:
     # "fit on stage 4 and see" as the cheap follow-up.  ``None`` keeps the
     # single-condition behaviour every earlier experiment used, unchanged.
     chart_specs: tuple | None = None
+    tail_lead_ms: float = 0.0      # drop a hold's target this early; see `target`
     offsets: np.ndarray = field(default_factory=lambda: np.linspace(-2.0, 2.0, 41))
     recordings: list[Recording] = field(default_factory=list)
 
@@ -351,7 +362,8 @@ class RidgeReadout:
         fits = []
         corr = np.zeros((len(self.leads), N_KEYS))
         for i, lead in enumerate(self.leads):
-            Y = [target(r, lead, self.width_ms) for r in self.recordings]
+            Y = [target(r, lead, self.width_ms, self.tail_lead_ms)
+                 for r in self.recordings]
             W, b = fit_ridge(Zall, np.vstack(Y), self.lam)
             fits.append((W, b))
             U = Zall @ W.T + b
