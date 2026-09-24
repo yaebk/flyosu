@@ -1,0 +1,13 @@
+[fast_sm20_k48_az120] validating on seed 4242, 10 charts x 20 notes per condition
+  s3_600    1.7/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.917)
+  s4_400    2.5/s  acc 1.000  hit 1.00  stray 0.00   (e5 0.286)
+  s4_200    5.0/s  acc 0.967  hit 0.97  stray 0.00
+  s6_250    4.0/s  acc 1.000  hit 1.00  stray 0.00
+  s6_150    6.7/s  acc 0.758  hit 0.76  stray 0.00
+  s7_400    2.5/s  acc 0.883  hit 0.92  stray 0.03
+  s8_300    3.3/s  acc 0.752  hit 0.81  stray 0.01
+  s4_150    6.7/s  acc 0.905  hit 0.90  stray 0.00
+  s4_125    8.0/s  acc 0.807  hit 0.82  stray 0.00
+  s4_100   10.0/s  acc 0.708  hit 0.72  stray 0.00
+  s4_400_ch  2.5/s  acc 1.000  hit 1.00  stray 0.00
+wrote e18_capability_validate_fast_sm20_k48_az120.json
