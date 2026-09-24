@@ -1,0 +1,1601 @@
+{
+ "approach_ms": 250.0,
+ "fit": "{'specs': ((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)), 'n_charts': 36, 'k': 48, 'release': (0.0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1.0), 'oracle': True, 'refr': 100.0, 'smooth': 20.0}",
+ "runs": [
+  {
+   "song": "171880 xi - Happy End of the World.osz",
+   "version": "4K Easy",
+   "notes": 778,
+   "seconds": 376.9,
+   "notes_per_s": 2.06,
+   "events_per_s": 1.67,
+   "chord_frac": 0.237,
+   "hold_frac": 0.045,
+   "jack_frac": 0.013,
+   "min_same_lane_gap_ms": 473.0,
+   "od": 7.0,
+   "accuracy": 0.9768637532133676,
+   "hit_rate": 0.9794344473007712,
+   "n_stray": 1,
+   "stray_per_note": 0.0012853470437017994,
+   "counts": {
+    "MAX": 41,
+    "300": 716,
+    "200": 4,
+    "100": 1,
+    "50": 0,
+    "MISS": 16
+   },
+   "loss": {
+    "hold": {
+     "n": 35,
+     "acc": 0.543,
+     "loss_share": 0.889
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 284,
+     "acc": 0.993,
+     "loss_share": 0.111
+    },
+    "tap": {
+     "n": 459,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "254581 Nightmare - Boulafacet.osz",
+   "version": "EZ",
+   "notes": 224,
+   "seconds": 117.9,
+   "notes_per_s": 1.9,
+   "events_per_s": 1.81,
+   "chord_frac": 0.052,
+   "hold_frac": 0.286,
+   "jack_frac": 0.13,
+   "min_same_lane_gap_ms": 177.0,
+   "od": 6.5,
+   "accuracy": 0.8444940476190477,
+   "hit_rate": 0.875,
+   "n_stray": 2,
+   "stray_per_note": 0.008928571428571428,
+   "counts": {
+    "MAX": 18,
+    "300": 164,
+    "200": 8,
+    "100": 5,
+    "50": 1,
+    "MISS": 28
+   },
+   "loss": {
+    "hold": {
+     "n": 64,
+     "acc": 0.591,
+     "loss_share": 0.751
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 15,
+     "acc": 0.8,
+     "loss_share": 0.086
+    },
+    "tap": {
+     "n": 145,
+     "acc": 0.961,
+     "loss_share": 0.163
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "315435 UNDEAD CORPORATION - The Empress scream off ver.osz",
+   "version": "Jepetski's EZ",
+   "notes": 329,
+   "seconds": 132.4,
+   "notes_per_s": 2.48,
+   "events_per_s": 1.86,
+   "chord_frac": 0.337,
+   "hold_frac": 0.055,
+   "jack_frac": 0.027,
+   "min_same_lane_gap_ms": 444.0,
+   "od": 7.0,
+   "accuracy": 0.983789260385005,
+   "hit_rate": 0.9878419452887538,
+   "n_stray": 1,
+   "stray_per_note": 0.00303951367781155,
+   "counts": {
+    "MAX": 5,
+    "300": 316,
+    "200": 4,
+    "100": 0,
+    "50": 0,
+    "MISS": 4
+   },
+   "loss": {
+    "hold": {
+     "n": 18,
+     "acc": 0.759,
+     "loss_share": 0.812
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 165,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 146,
+     "acc": 0.993,
+     "loss_share": 0.188
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "347453 Igorrr & Ruby My Dear - Figue Folle.osz",
+   "version": "Abrax's Innocuous [Lv.3]",
+   "notes": 568,
+   "seconds": 214.3,
+   "notes_per_s": 2.65,
+   "events_per_s": 2.62,
+   "chord_frac": 0.011,
+   "hold_frac": 0.268,
+   "jack_frac": 0.034,
+   "min_same_lane_gap_ms": 212.0,
+   "od": 7.0,
+   "accuracy": 0.9178403755868545,
+   "hit_rate": 0.9507042253521126,
+   "n_stray": 7,
+   "stray_per_note": 0.01232394366197183,
+   "counts": {
+    "MAX": 54,
+    "300": 448,
+    "200": 21,
+    "100": 15,
+    "50": 2,
+    "MISS": 28
+   },
+   "loss": {
+    "hold": {
+     "n": 152,
+     "acc": 0.717,
+     "loss_share": 0.921
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 6,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "tap": {
+     "n": 410,
+     "acc": 0.991,
+     "loss_share": 0.079
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "309328 xi - Hesperides.osz",
+   "version": "Standard",
+   "notes": 453,
+   "seconds": 111.3,
+   "notes_per_s": 4.07,
+   "events_per_s": 2.86,
+   "chord_frac": 0.425,
+   "hold_frac": 0.208,
+   "jack_frac": 0.024,
+   "min_same_lane_gap_ms": 150.0,
+   "od": 7.0,
+   "accuracy": 0.9356144223693893,
+   "hit_rate": 0.9668874172185431,
+   "n_stray": 1,
+   "stray_per_note": 0.002207505518763797,
+   "counts": {
+    "MAX": 42,
+    "300": 366,
+    "200": 18,
+    "100": 11,
+    "50": 1,
+    "MISS": 15
+   },
+   "loss": {
+    "hold": {
+     "n": 94,
+     "acc": 0.771,
+     "loss_share": 0.737
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 226,
+     "acc": 0.966,
+     "loss_share": 0.263
+    },
+    "tap": {
+     "n": 133,
+     "acc": 1.0,
+     "loss_share": 0.0
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "171880 xi - Happy End of the World.osz",
+   "version": "4K Normal",
+   "notes": 1621,
+   "seconds": 376.9,
+   "notes_per_s": 4.3,
+   "events_per_s": 3.48,
+   "chord_frac": 0.231,
+   "hold_frac": 0.045,
+   "jack_frac": 0.024,
+   "min_same_lane_gap_ms": 157.0,
+   "od": 7.2,
+   "accuracy": 0.9823154431420934,
+   "hit_rate": 0.9895126465144972,
+   "n_stray": 5,
+   "stray_per_note": 0.0030845157310302285,
+   "counts": {
+    "MAX": 101,
+    "300": 1479,
+    "200": 14,
+    "100": 8,
+    "50": 2,
+    "MISS": 17
+   },
+   "loss": {
+    "hold": {
+     "n": 73,
+     "acc": 0.699,
+     "loss_share": 0.767
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 574,
+     "acc": 0.991,
+     "loss_share": 0.174
+    },
+    "tap": {
+     "n": 974,
+     "acc": 0.998,
+     "loss_share": 0.058
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "254581 Nightmare - Boulafacet.osz",
+   "version": "NM",
+   "notes": 523,
+   "seconds": 117.9,
+   "notes_per_s": 4.44,
+   "events_per_s": 3.62,
+   "chord_frac": 0.225,
+   "hold_frac": 0.187,
+   "jack_frac": 0.044,
+   "min_same_lane_gap_ms": 176.0,
+   "od": 7.0,
+   "accuracy": 0.9139579349904398,
+   "hit_rate": 0.9464627151051626,
+   "n_stray": 6,
+   "stray_per_note": 0.011472275334608031,
+   "counts": {
+    "MAX": 67,
+    "300": 391,
+    "200": 23,
+    "100": 14,
+    "50": 0,
+    "MISS": 28
+   },
+   "loss": {
+    "hold": {
+     "n": 98,
+     "acc": 0.605,
+     "loss_share": 0.859
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 150,
+     "acc": 0.973,
+     "loss_share": 0.089
+    },
+    "tap": {
+     "n": 275,
+     "acc": 0.992,
+     "loss_share": 0.052
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "315435 UNDEAD CORPORATION - The Empress scream off ver.osz",
+   "version": "NM",
+   "notes": 599,
+   "seconds": 133.0,
+   "notes_per_s": 4.5,
+   "events_per_s": 3.63,
+   "chord_frac": 0.238,
+   "hold_frac": 0.247,
+   "jack_frac": 0.028,
+   "min_same_lane_gap_ms": 222.0,
+   "od": 7.5,
+   "accuracy": 0.9232053422370617,
+   "hit_rate": 0.9632721202003339,
+   "n_stray": 7,
+   "stray_per_note": 0.011686143572621035,
+   "counts": {
+    "MAX": 64,
+    "300": 462,
+    "200": 30,
+    "100": 21,
+    "50": 0,
+    "MISS": 22
+   },
+   "loss": {
+    "hold": {
+     "n": 148,
+     "acc": 0.75,
+     "loss_share": 0.804
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 180,
+     "acc": 0.97,
+     "loss_share": 0.116
+    },
+    "tap": {
+     "n": 271,
+     "acc": 0.986,
+     "loss_share": 0.08
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "347453 Igorrr & Ruby My Dear - Figue Folle.osz",
+   "version": "Unpleasant [Lv.6]",
+   "notes": 974,
+   "seconds": 214.3,
+   "notes_per_s": 4.54,
+   "events_per_s": 4.31,
+   "chord_frac": 0.055,
+   "hold_frac": 0.303,
+   "jack_frac": 0.032,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 7.2,
+   "accuracy": 0.8933949349760438,
+   "hit_rate": 0.9425051334702259,
+   "n_stray": 14,
+   "stray_per_note": 0.014373716632443531,
+   "counts": {
+    "MAX": 144,
+    "300": 662,
+    "200": 82,
+    "100": 27,
+    "50": 3,
+    "MISS": 56
+   },
+   "loss": {
+    "hold": {
+     "n": 295,
+     "acc": 0.742,
+     "loss_share": 0.734
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 78,
+     "acc": 0.944,
+     "loss_share": 0.042
+    },
+    "tap": {
+     "n": 601,
+     "acc": 0.961,
+     "loss_share": 0.225
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "309328 xi - Hesperides.osz",
+   "version": "Zan's Hard",
+   "notes": 854,
+   "seconds": 111.3,
+   "notes_per_s": 7.67,
+   "events_per_s": 4.57,
+   "chord_frac": 0.601,
+   "hold_frac": 0.1,
+   "jack_frac": 0.021,
+   "min_same_lane_gap_ms": 150.0,
+   "od": 7.5,
+   "accuracy": 0.944184231069477,
+   "hit_rate": 0.9648711943793911,
+   "n_stray": 2,
+   "stray_per_note": 0.00234192037470726,
+   "counts": {
+    "MAX": 95,
+    "300": 689,
+    "200": 28,
+    "100": 10,
+    "50": 2,
+    "MISS": 30
+   },
+   "loss": {
+    "hold": {
+     "n": 85,
+     "acc": 0.627,
+     "loss_share": 0.664
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 619,
+     "acc": 0.979,
+     "loss_share": 0.273
+    },
+    "tap": {
+     "n": 150,
+     "acc": 0.98,
+     "loss_share": 0.063
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "171880 xi - Happy End of the World.osz",
+   "version": "4K Hard",
+   "notes": 2552,
+   "seconds": 376.9,
+   "notes_per_s": 6.77,
+   "events_per_s": 5.23,
+   "chord_frac": 0.269,
+   "hold_frac": 0.065,
+   "jack_frac": 0.015,
+   "min_same_lane_gap_ms": 157.0,
+   "od": 7.5,
+   "accuracy": 0.9668887147335423,
+   "hit_rate": 0.9831504702194357,
+   "n_stray": 5,
+   "stray_per_note": 0.001959247648902821,
+   "counts": {
+    "MAX": 349,
+    "300": 2062,
+    "200": 74,
+    "100": 19,
+    "50": 5,
+    "MISS": 43
+   },
+   "loss": {
+    "hold": {
+     "n": 166,
+     "acc": 0.734,
+     "loss_share": 0.523
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 1028,
+     "acc": 0.977,
+     "loss_share": 0.284
+    },
+    "tap": {
+     "n": 1358,
+     "acc": 0.988,
+     "loss_share": 0.193
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "347453 Igorrr & Ruby My Dear - Figue Folle.osz",
+   "version": "Harsh [Lv.9]",
+   "notes": 1339,
+   "seconds": 214.3,
+   "notes_per_s": 6.25,
+   "events_per_s": 5.68,
+   "chord_frac": 0.099,
+   "hold_frac": 0.266,
+   "jack_frac": 0.019,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 7.5,
+   "accuracy": 0.8979337814289271,
+   "hit_rate": 0.9395070948469006,
+   "n_stray": 7,
+   "stray_per_note": 0.005227781926811053,
+   "counts": {
+    "MAX": 230,
+    "300": 889,
+    "200": 113,
+    "100": 22,
+    "50": 4,
+    "MISS": 81
+   },
+   "loss": {
+    "hold": {
+     "n": 356,
+     "acc": 0.75,
+     "loss_share": 0.651
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 166,
+     "acc": 0.936,
+     "loss_share": 0.078
+    },
+    "tap": {
+     "n": 816,
+     "acc": 0.955,
+     "loss_share": 0.271
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "254581 Nightmare - Boulafacet.osz",
+   "version": "ajee's HD",
+   "notes": 814,
+   "seconds": 117.9,
+   "notes_per_s": 6.91,
+   "events_per_s": 5.77,
+   "chord_frac": 0.197,
+   "hold_frac": 0.108,
+   "jack_frac": 0.062,
+   "min_same_lane_gap_ms": 117.0,
+   "od": 7.5,
+   "accuracy": 0.9277231777231777,
+   "hit_rate": 0.9496314496314496,
+   "n_stray": 4,
+   "stray_per_note": 0.004914004914004914,
+   "counts": {
+    "MAX": 155,
+    "300": 570,
+    "200": 43,
+    "100": 4,
+    "50": 1,
+    "MISS": 41
+   },
+   "loss": {
+    "hold": {
+     "n": 88,
+     "acc": 0.68,
+     "loss_share": 0.479
+    },
+    "after_hold": {
+     "n": 7,
+     "acc": 0.857,
+     "loss_share": 0.017
+    },
+    "fast_jack": {
+     "n": 3,
+     "acc": 0.333,
+     "loss_share": 0.034
+    },
+    "chord": {
+     "n": 225,
+     "acc": 0.957,
+     "loss_share": 0.164
+    },
+    "tap": {
+     "n": 491,
+     "acc": 0.963,
+     "loss_share": 0.306
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "171880 xi - Happy End of the World.osz",
+   "version": "4K Insane",
+   "notes": 3487,
+   "seconds": 376.9,
+   "notes_per_s": 9.25,
+   "events_per_s": 5.84,
+   "chord_frac": 0.464,
+   "hold_frac": 0.066,
+   "jack_frac": 0.012,
+   "min_same_lane_gap_ms": 105.0,
+   "od": 8.0,
+   "accuracy": 0.9375776694388682,
+   "hit_rate": 0.9621451104100947,
+   "n_stray": 9,
+   "stray_per_note": 0.0025810151993117293,
+   "counts": {
+    "MAX": 530,
+    "300": 2619,
+    "200": 162,
+    "100": 30,
+    "50": 14,
+    "MISS": 132
+   },
+   "loss": {
+    "hold": {
+     "n": 231,
+     "acc": 0.606,
+     "loss_share": 0.418
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.6,
+     "loss_share": 0.018
+    },
+    "fast_jack": {
+     "n": 5,
+     "acc": 0.4,
+     "loss_share": 0.014
+    },
+    "chord": {
+     "n": 2095,
+     "acc": 0.96,
+     "loss_share": 0.387
+    },
+    "tap": {
+     "n": 1146,
+     "acc": 0.969,
+     "loss_share": 0.162
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "171880 xi - Happy End of the World.osz",
+   "version": "Fullerene's 4K Catastrophic Shift",
+   "notes": 3692,
+   "seconds": 376.9,
+   "notes_per_s": 9.8,
+   "events_per_s": 6.15,
+   "chord_frac": 0.463,
+   "hold_frac": 0.024,
+   "jack_frac": 0.024,
+   "min_same_lane_gap_ms": 79.0,
+   "od": 9.0,
+   "accuracy": 0.943075117370892,
+   "hit_rate": 0.9734561213434453,
+   "n_stray": 2,
+   "stray_per_note": 0.0005417118093174431,
+   "counts": {
+    "MAX": 481,
+    "300": 2783,
+    "200": 324,
+    "100": 5,
+    "50": 1,
+    "MISS": 98
+   },
+   "loss": {
+    "hold": {
+     "n": 88,
+     "acc": 0.765,
+     "loss_share": 0.098
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 34,
+     "acc": 0.225,
+     "loss_share": 0.125
+    },
+    "chord": {
+     "n": 2355,
+     "acc": 0.957,
+     "loss_share": 0.481
+    },
+    "tap": {
+     "n": 1214,
+     "acc": 0.949,
+     "loss_share": 0.295
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "347453 Igorrr & Ruby My Dear - Figue Folle.osz",
+   "version": "Cruel [Lv.12]",
+   "notes": 1824,
+   "seconds": 214.3,
+   "notes_per_s": 8.51,
+   "events_per_s": 6.24,
+   "chord_frac": 0.353,
+   "hold_frac": 0.283,
+   "jack_frac": 0.011,
+   "min_same_lane_gap_ms": 159.0,
+   "od": 7.8,
+   "accuracy": 0.8208150584795322,
+   "hit_rate": 0.8865131578947368,
+   "n_stray": 21,
+   "stray_per_note": 0.011513157894736841,
+   "counts": {
+    "MAX": 293,
+    "300": 1041,
+    "200": 215,
+    "100": 51,
+    "50": 17,
+    "MISS": 207
+   },
+   "loss": {
+    "hold": {
+     "n": 516,
+     "acc": 0.573,
+     "loss_share": 0.675
+    },
+    "after_hold": {
+     "n": 7,
+     "acc": 0.81,
+     "loss_share": 0.004
+    },
+    "fast_jack": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "chord": {
+     "n": 549,
+     "acc": 0.911,
+     "loss_share": 0.149
+    },
+    "tap": {
+     "n": 752,
+     "acc": 0.925,
+     "loss_share": 0.172
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "254581 Nightmare - Boulafacet.osz",
+   "version": "Crying's HD",
+   "notes": 949,
+   "seconds": 117.9,
+   "notes_per_s": 8.05,
+   "events_per_s": 6.42,
+   "chord_frac": 0.239,
+   "hold_frac": 0.092,
+   "jack_frac": 0.035,
+   "min_same_lane_gap_ms": 118.0,
+   "od": 8.0,
+   "accuracy": 0.9183350895679663,
+   "hit_rate": 0.9399367755532139,
+   "n_stray": 1,
+   "stray_per_note": 0.001053740779768177,
+   "counts": {
+    "MAX": 177,
+    "300": 662,
+    "200": 45,
+    "100": 7,
+    "50": 1,
+    "MISS": 57
+   },
+   "loss": {
+    "hold": {
+     "n": 87,
+     "acc": 0.68,
+     "loss_share": 0.359
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.013
+    },
+    "chord": {
+     "n": 339,
+     "acc": 0.917,
+     "loss_share": 0.361
+    },
+    "tap": {
+     "n": 522,
+     "acc": 0.96,
+     "loss_share": 0.267
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "315435 UNDEAD CORPORATION - The Empress scream off ver.osz",
+   "version": "HD",
+   "notes": 1071,
+   "seconds": 133.0,
+   "notes_per_s": 8.05,
+   "events_per_s": 6.81,
+   "chord_frac": 0.166,
+   "hold_frac": 0.097,
+   "jack_frac": 0.026,
+   "min_same_lane_gap_ms": 111.0,
+   "od": 8.0,
+   "accuracy": 0.9397759103641457,
+   "hit_rate": 0.9673202614379085,
+   "n_stray": 2,
+   "stray_per_note": 0.0018674136321195146,
+   "counts": {
+    "MAX": 109,
+    "300": 852,
+    "200": 62,
+    "100": 12,
+    "50": 1,
+    "MISS": 35
+   },
+   "loss": {
+    "hold": {
+     "n": 104,
+     "acc": 0.659,
+     "loss_share": 0.55
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 1.0,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.016
+    },
+    "chord": {
+     "n": 292,
+     "acc": 0.982,
+     "loss_share": 0.083
+    },
+    "tap": {
+     "n": 673,
+     "acc": 0.966,
+     "loss_share": 0.351
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "347453 Igorrr & Ruby My Dear - Figue Folle.osz",
+   "version": "Brutal [Lv.15]",
+   "notes": 2408,
+   "seconds": 214.3,
+   "notes_per_s": 11.24,
+   "events_per_s": 6.81,
+   "chord_frac": 0.502,
+   "hold_frac": 0.261,
+   "jack_frac": 0.017,
+   "min_same_lane_gap_ms": 79.0,
+   "od": 8.0,
+   "accuracy": 0.7351882613510521,
+   "hit_rate": 0.8044019933554817,
+   "n_stray": 13,
+   "stray_per_note": 0.005398671096345515,
+   "counts": {
+    "MAX": 394,
+    "300": 1175,
+    "200": 258,
+    "100": 66,
+    "50": 44,
+    "MISS": 471
+   },
+   "loss": {
+    "hold": {
+     "n": 629,
+     "acc": 0.478,
+     "loss_share": 0.515
+    },
+    "after_hold": {
+     "n": 70,
+     "acc": 0.545,
+     "loss_share": 0.05
+    },
+    "fast_jack": {
+     "n": 75,
+     "acc": 0.082,
+     "loss_share": 0.108
+    },
+    "chord": {
+     "n": 1018,
+     "acc": 0.861,
+     "loss_share": 0.222
+    },
+    "tap": {
+     "n": 616,
+     "acc": 0.891,
+     "loss_share": 0.105
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "251365 Halozy - Kanshou no Matenrou.osz",
+   "version": "World's End",
+   "notes": 3580,
+   "seconds": 328.2,
+   "notes_per_s": 10.91,
+   "events_per_s": 6.87,
+   "chord_frac": 0.42,
+   "hold_frac": 0.034,
+   "jack_frac": 0.02,
+   "min_same_lane_gap_ms": 82.0,
+   "od": 8.0,
+   "accuracy": 0.9542830540037244,
+   "hit_rate": 0.9731843575418995,
+   "n_stray": 5,
+   "stray_per_note": 0.0013966480446927375,
+   "counts": {
+    "MAX": 452,
+    "300": 2854,
+    "200": 154,
+    "100": 22,
+    "50": 2,
+    "MISS": 96
+   },
+   "loss": {
+    "hold": {
+     "n": 120,
+     "acc": 0.675,
+     "loss_share": 0.238
+    },
+    "after_hold": {
+     "n": 4,
+     "acc": 0.75,
+     "loss_share": 0.006
+    },
+    "fast_jack": {
+     "n": 18,
+     "acc": 0.333,
+     "loss_share": 0.073
+    },
+    "chord": {
+     "n": 2181,
+     "acc": 0.984,
+     "loss_share": 0.218
+    },
+    "tap": {
+     "n": 1257,
+     "acc": 0.94,
+     "loss_share": 0.464
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "347453 Igorrr & Ruby My Dear - Figue Folle.osz",
+   "version": "Grotesque [Lv.18]",
+   "notes": 2715,
+   "seconds": 214.3,
+   "notes_per_s": 12.67,
+   "events_per_s": 7.06,
+   "chord_frac": 0.579,
+   "hold_frac": 0.236,
+   "jack_frac": 0.022,
+   "min_same_lane_gap_ms": 79.0,
+   "od": 8.4,
+   "accuracy": 0.6649478207489257,
+   "hit_rate": 0.7443830570902394,
+   "n_stray": 20,
+   "stray_per_note": 0.007366482504604052,
+   "counts": {
+    "MAX": 411,
+    "300": 1106,
+    "200": 383,
+    "100": 77,
+    "50": 44,
+    "MISS": 694
+   },
+   "loss": {
+    "hold": {
+     "n": 641,
+     "acc": 0.434,
+     "loss_share": 0.398
+    },
+    "after_hold": {
+     "n": 97,
+     "acc": 0.548,
+     "loss_share": 0.048
+    },
+    "fast_jack": {
+     "n": 194,
+     "acc": 0.097,
+     "loss_share": 0.193
+    },
+    "chord": {
+     "n": 1275,
+     "acc": 0.798,
+     "loss_share": 0.283
+    },
+    "tap": {
+     "n": 508,
+     "acc": 0.86,
+     "loss_share": 0.078
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "254581 Nightmare - Boulafacet.osz",
+   "version": "MX",
+   "notes": 1110,
+   "seconds": 117.9,
+   "notes_per_s": 9.42,
+   "events_per_s": 7.4,
+   "chord_frac": 0.256,
+   "hold_frac": 0.085,
+   "jack_frac": 0.038,
+   "min_same_lane_gap_ms": 117.0,
+   "od": 8.0,
+   "accuracy": 0.9160660660660661,
+   "hit_rate": 0.9423423423423424,
+   "n_stray": 5,
+   "stray_per_note": 0.0045045045045045045,
+   "counts": {
+    "MAX": 209,
+    "300": 763,
+    "200": 62,
+    "100": 9,
+    "50": 3,
+    "MISS": 64
+   },
+   "loss": {
+    "hold": {
+     "n": 94,
+     "acc": 0.686,
+     "loss_share": 0.317
+    },
+    "after_hold": {
+     "n": 6,
+     "acc": 0.5,
+     "loss_share": 0.032
+    },
+    "fast_jack": {
+     "n": 24,
+     "acc": 0.5,
+     "loss_share": 0.129
+    },
+    "chord": {
+     "n": 409,
+     "acc": 0.946,
+     "loss_share": 0.236
+    },
+    "tap": {
+     "n": 577,
+     "acc": 0.954,
+     "loss_share": 0.286
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "309328 xi - Hesperides.osz",
+   "version": "Insane",
+   "notes": 1310,
+   "seconds": 111.3,
+   "notes_per_s": 11.77,
+   "events_per_s": 7.6,
+   "chord_frac": 0.442,
+   "hold_frac": 0.069,
+   "jack_frac": 0.013,
+   "min_same_lane_gap_ms": 100.0,
+   "od": 8.0,
+   "accuracy": 0.9267175572519084,
+   "hit_rate": 0.9534351145038168,
+   "n_stray": 2,
+   "stray_per_note": 0.0015267175572519084,
+   "counts": {
+    "MAX": 245,
+    "300": 918,
+    "200": 69,
+    "100": 13,
+    "50": 4,
+    "MISS": 61
+   },
+   "loss": {
+    "hold": {
+     "n": 90,
+     "acc": 0.676,
+     "loss_share": 0.304
+    },
+    "after_hold": {
+     "n": 1,
+     "acc": 0.0,
+     "loss_share": 0.01
+    },
+    "fast_jack": {
+     "n": 2,
+     "acc": 0.0,
+     "loss_share": 0.021
+    },
+    "chord": {
+     "n": 754,
+     "acc": 0.958,
+     "loss_share": 0.332
+    },
+    "tap": {
+     "n": 463,
+     "acc": 0.931,
+     "loss_share": 0.333
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "254581 Nightmare - Boulafacet.osz",
+   "version": "SC",
+   "notes": 1339,
+   "seconds": 117.9,
+   "notes_per_s": 11.36,
+   "events_per_s": 8.14,
+   "chord_frac": 0.368,
+   "hold_frac": 0.133,
+   "jack_frac": 0.043,
+   "min_same_lane_gap_ms": 88.0,
+   "od": 8.0,
+   "accuracy": 0.7892705999502116,
+   "hit_rate": 0.842419716206124,
+   "n_stray": 3,
+   "stray_per_note": 0.0022404779686333084,
+   "counts": {
+    "MAX": 218,
+    "300": 740,
+    "200": 133,
+    "100": 24,
+    "50": 13,
+    "MISS": 211
+   },
+   "loss": {
+    "hold": {
+     "n": 178,
+     "acc": 0.568,
+     "loss_share": 0.272
+    },
+    "after_hold": {
+     "n": 11,
+     "acc": 0.818,
+     "loss_share": 0.007
+    },
+    "fast_jack": {
+     "n": 126,
+     "acc": 0.286,
+     "loss_share": 0.319
+    },
+    "chord": {
+     "n": 500,
+     "acc": 0.875,
+     "loss_share": 0.222
+    },
+    "tap": {
+     "n": 524,
+     "acc": 0.903,
+     "loss_share": 0.18
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "315435 UNDEAD CORPORATION - The Empress scream off ver.osz",
+   "version": "MX",
+   "notes": 1428,
+   "seconds": 133.0,
+   "notes_per_s": 10.74,
+   "events_per_s": 8.25,
+   "chord_frac": 0.275,
+   "hold_frac": 0.125,
+   "jack_frac": 0.063,
+   "min_same_lane_gap_ms": 111.0,
+   "od": 8.0,
+   "accuracy": 0.8214285714285714,
+   "hit_rate": 0.865546218487395,
+   "n_stray": 10,
+   "stray_per_note": 0.0070028011204481795,
+   "counts": {
+    "MAX": 227,
+    "300": 859,
+    "200": 114,
+    "100": 30,
+    "50": 6,
+    "MISS": 192
+   },
+   "loss": {
+    "hold": {
+     "n": 179,
+     "acc": 0.612,
+     "loss_share": 0.273
+    },
+    "after_hold": {
+     "n": 10,
+     "acc": 0.767,
+     "loss_share": 0.009
+    },
+    "fast_jack": {
+     "n": 135,
+     "acc": 0.126,
+     "loss_share": 0.463
+    },
+    "chord": {
+     "n": 457,
+     "acc": 0.955,
+     "loss_share": 0.081
+    },
+    "tap": {
+     "n": 647,
+     "acc": 0.931,
+     "loss_share": 0.175
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "254581 Nightmare - Boulafacet.osz",
+   "version": "SHD",
+   "notes": 1712,
+   "seconds": 117.9,
+   "notes_per_s": 14.52,
+   "events_per_s": 8.69,
+   "chord_frac": 0.518,
+   "hold_frac": 0.207,
+   "jack_frac": 0.03,
+   "min_same_lane_gap_ms": 88.0,
+   "od": 8.0,
+   "accuracy": 0.6680295950155763,
+   "hit_rate": 0.7324766355140186,
+   "n_stray": 3,
+   "stray_per_note": 0.0017523364485981308,
+   "counts": {
+    "MAX": 223,
+    "300": 780,
+    "200": 183,
+    "100": 44,
+    "50": 24,
+    "MISS": 458
+   },
+   "loss": {
+    "hold": {
+     "n": 354,
+     "acc": 0.455,
+     "loss_share": 0.34
+    },
+    "after_hold": {
+     "n": 33,
+     "acc": 0.53,
+     "loss_share": 0.027
+    },
+    "fast_jack": {
+     "n": 262,
+     "acc": 0.227,
+     "loss_share": 0.356
+    },
+    "chord": {
+     "n": 796,
+     "acc": 0.843,
+     "loss_share": 0.22
+    },
+    "tap": {
+     "n": 267,
+     "acc": 0.879,
+     "loss_share": 0.057
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "309328 xi - Hesperides.osz",
+   "version": "Master",
+   "notes": 1711,
+   "seconds": 111.3,
+   "notes_per_s": 15.37,
+   "events_per_s": 9.93,
+   "chord_frac": 0.43,
+   "hold_frac": 0.056,
+   "jack_frac": 0.011,
+   "min_same_lane_gap_ms": 75.0,
+   "od": 8.5,
+   "accuracy": 0.869666861484512,
+   "hit_rate": 0.9164231443600234,
+   "n_stray": 1,
+   "stray_per_note": 0.0005844535359438924,
+   "counts": {
+    "MAX": 296,
+    "300": 1065,
+    "200": 181,
+    "100": 12,
+    "50": 14,
+    "MISS": 143
+   },
+   "loss": {
+    "hold": {
+     "n": 96,
+     "acc": 0.634,
+     "loss_share": 0.158
+    },
+    "after_hold": {
+     "n": 11,
+     "acc": 0.561,
+     "loss_share": 0.022
+    },
+    "fast_jack": {
+     "n": 14,
+     "acc": 0.167,
+     "loss_share": 0.052
+    },
+    "chord": {
+     "n": 973,
+     "acc": 0.908,
+     "loss_share": 0.401
+    },
+    "tap": {
+     "n": 617,
+     "acc": 0.867,
+     "loss_share": 0.368
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "315435 UNDEAD CORPORATION - The Empress scream off ver.osz",
+   "version": "Zenx's SHD",
+   "notes": 2294,
+   "seconds": 132.6,
+   "notes_per_s": 17.3,
+   "events_per_s": 12.73,
+   "chord_frac": 0.29,
+   "hold_frac": 0.006,
+   "jack_frac": 0.026,
+   "min_same_lane_gap_ms": 111.0,
+   "od": 8.5,
+   "accuracy": 0.6365882011043301,
+   "hit_rate": 0.7109851787271142,
+   "n_stray": 0,
+   "stray_per_note": 0.0,
+   "counts": {
+    "MAX": 243,
+    "300": 999,
+    "200": 296,
+    "100": 33,
+    "50": 60,
+    "MISS": 663
+   },
+   "loss": {
+    "hold": {
+     "n": 13,
+     "acc": 0.436,
+     "loss_share": 0.009
+    },
+    "after_hold": {
+     "n": 9,
+     "acc": 0.63,
+     "loss_share": 0.004
+    },
+    "fast_jack": {
+     "n": 478,
+     "acc": 0.18,
+     "loss_share": 0.47
+    },
+    "chord": {
+     "n": 761,
+     "acc": 0.826,
+     "loss_share": 0.159
+    },
+    "tap": {
+     "n": 1033,
+     "acc": 0.711,
+     "loss_share": 0.358
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "315435 UNDEAD CORPORATION - The Empress scream off ver.osz",
+   "version": "Jepetski's Empress",
+   "notes": 2505,
+   "seconds": 133.0,
+   "notes_per_s": 18.84,
+   "events_per_s": 12.92,
+   "chord_frac": 0.418,
+   "hold_frac": 0.031,
+   "jack_frac": 0.007,
+   "min_same_lane_gap_ms": 111.0,
+   "od": 9.0,
+   "accuracy": 0.49221556886227547,
+   "hit_rate": 0.5664670658682635,
+   "n_stray": 3,
+   "stray_per_note": 0.0011976047904191617,
+   "counts": {
+    "MAX": 268,
+    "300": 793,
+    "200": 209,
+    "100": 47,
+    "50": 102,
+    "MISS": 1086
+   },
+   "loss": {
+    "hold": {
+     "n": 78,
+     "acc": 0.588,
+     "loss_share": 0.025
+    },
+    "after_hold": {
+     "n": 3,
+     "acc": 0.667,
+     "loss_share": 0.001
+    },
+    "fast_jack": {
+     "n": 785,
+     "acc": 0.096,
+     "loss_share": 0.558
+    },
+    "chord": {
+     "n": 866,
+     "acc": 0.714,
+     "loss_share": 0.195
+    },
+    "tap": {
+     "n": 773,
+     "acc": 0.636,
+     "loss_share": 0.221
+    }
+   },
+   "wall_s": 153.2
+  },
+  {
+   "song": "315435 UNDEAD CORPORATION - The Empress scream off ver.osz",
+   "version": "SC",
+   "notes": 1886,
+   "seconds": 133.0,
+   "notes_per_s": 14.18,
+   "events_per_s": 13.69,
+   "chord_frac": 0.036,
+   "hold_frac": 0.029,
+   "jack_frac": 0.021,
+   "min_same_lane_gap_ms": 111.0,
+   "od": 8.0,
+   "accuracy": 0.7199540473665607,
+   "hit_rate": 0.7354188759278897,
+   "n_stray": 3,
+   "stray_per_note": 0.0015906680805938495,
+   "counts": {
+    "MAX": 298,
+    "300": 1022,
+    "200": 50,
+    "100": 10,
+    "50": 7,
+    "MISS": 499
+   },
+   "loss": {
+    "hold": {
+     "n": 55,
+     "acc": 0.688,
+     "loss_share": 0.033
+    },
+    "after_hold": {
+     "n": 0,
+     "acc": null,
+     "loss_share": 0.0
+    },
+    "fast_jack": {
+     "n": 486,
+     "acc": 0.168,
+     "loss_share": 0.765
+    },
+    "chord": {
+     "n": 97,
+     "acc": 0.983,
+     "loss_share": 0.003
+    },
+    "tap": {
+     "n": 1248,
+     "acc": 0.916,
+     "loss_share": 0.199
+    }
+   },
+   "wall_s": 153.2
+  }
+ ],
+ "summary": {
+  "n": 30,
+  "best": 0.983789260385005,
+  "mean": 0.8620713489776514
+ }
+}
