@@ -1,9 +1,11 @@
-"""Export a replay of the current best fly playing two real beatmaps.
+"""Export a replay of the current best fly playing six real beatmap clips.
 
-Builds the round-14 player (250 ms approach, 100 ms refractory, 20 ms
-smoothing, k=32 population projection, hold oracle, release levels), plays the
-"Easy" and "Hard" tuning difficulties with the trace recorded, and writes
-``demo/replay_data.json`` for the browser replay in ``demo/index.html``.
+Builds round 15's player (250 ms approach, 100 ms refractory, 20 ms smoothing,
+k=48 population projection, hold oracle, release levels; 196 parameters),
+plays the six maps in ``SELECT`` with the trace and a sample of neuron activity
+recorded, and writes ``demo/replay_data.json`` and the per-map brain files for
+the browser replay in ``demo/index.html``; ``audio`` extracts and aligns the
+songs without running the model.
 
 Nothing here is a registered comparison: it is a demonstration of what the fly
 plays, fitted on synthetic charts only, as in experiment 20.
@@ -43,7 +45,7 @@ SELECT = (("easy", "tune", "2600298", "Easy"),
           ("empress_sc", "holdout", "315435", "SC"))
 SONG_KEYS = {"2600298": "mirairo", "2543258": "ongeki", "171880": "happyend",
              "254581": "boulafacet", "315435": "empress"}
-K = 48                      # population-projection components (round 14's best)
+K = 48                      # population-projection components (round 15's best)
 # brain view: neurons per class (small classes are kept whole)
 SAMPLE = {"photoreceptor": 350, "sensory": 50, "optic": 450, "visual_projection": 250,
           "visual_centrifugal": 200, "central": 300, "descending": 450, "ascending": 200}

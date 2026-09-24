@@ -280,63 +280,35 @@ really there does not soften when the controls double.**
 
 ## Absolute performance, separately from any comparison
 
-**The headline, as of experiment 20: the fly plays real osu!mania beatmaps.**
-Seventeen 4K mania difficulties from three downloaded maps, with the readout
-fitted on synthetic charts and nothing refitted: **0.894 on the easiest, 0.576
-mean**, and **zero stray presses across all seventeen maps and 17,600 notes**.
-Two things cost it accuracy and they are independent — density (partial
-r = −0.78) and hold notes (partial r = −0.77) — and a regression on those two
-alone explains 83% of the variance. `docs/RESULTS_E20.md`.
+**None of this bears on the connectome-versus-rewired question.** The
+capability work runs on the real connectome only, with no controls, and the
+same recipe would very likely work on a rewired network. A claim that the
+current fly's play depends on the wiring would need its own pre-registered test.
 
-Three caveats that belong next to that number. Real maps run 2.5–10.2
-chord-events per second while the synthetic curriculum saturates at about 3, so
-only the easiest difficulties are inside the fly's range. Accuracy is not
-comparable between maps, since these carry OD 6.0 to 8.0. And **holds are the
-weakest thing the fly does**: it presses 15 of 17 heads at MAX or 300 and then
-loses *every one of them* on the tail, releasing a median 126 ms late. That is a
-consistent bias rather than noise, and work on it is in progress.
+**Real maps (experiment 20): 0.862 mean accuracy on 30 held-out 4K
+difficulties from six songs** that no readout choice ever looked at: 0.935 up
+to 5.5 events/s, 0.871 from 5.5 to 8.5, 0.677 above. The best readout when real
+maps were first played scores 0.576 on the same maps, and round 12's 0.721;
+round 15 beats round 12 on all thirty. Taps and chords are at 0.922; holds
+(0.599), the note after a hold (0.589) and fast jacks (0.156) are what is left.
+The readout is fitted on synthetic charts only. Quote the held-out numbers: the
+17 tuning difficulties from three other songs (mean 0.770) were used to choose
+between versions and are selection-optimistic. `docs/RESULTS_E20.md`.
 
-**A negative result worth keeping:** putting hold charts in the training diet
-makes real beatmaps *worse* overall, 0.576 → 0.487. It helps the three easiest
-and hurts the fourteen denser ones because the hold charts displace density
-training. That is the fourth time in this project that adding something to the
-training diet cost more than it bought.
+**Synthetic charts (experiment 18): 1.000 on single notes and chords up to 5
+events/s, 0.973 / 0.810 / 0.713 on chords at 6.7 / 8 / 10**, holds 0.886–0.982,
+on fresh charts, with 196 fitted parameters and the connectome frozen. Every
+wall found so far was a protocol choice, not the network: chords were the
+training set (the readout had only been fitted on single notes); density was
+first the scroll speed (800 ms approach, now 250 ms), then the refractory and
+the drive smoothing; holds were first invisible to the encoder, then missing
+from the recordings the readout is fitted on. `docs/RESULTS_E18.md` has the
+round-by-round table, including what did not help.
 
-
-**Superseded by experiment 18 — see below.** The best readout reaches **0.92
-accuracy** on held-out stage-3 charts with 68 parameters, fitted in closed form,
-connectome frozen (`docs/RESULTS_E5.md`). Across the curriculum it presses the
-right key essentially always (lane-correct ≥ 0.95) and hardly ever presses an
-empty lane. What limits it is timing, and experiment 8 established that ceiling
-is structural: the spread of the four channels' peak times is the network's own
-latency structure, and no sensory front end removes it. `docs/RESULTS_E8.md`.
-
-**Experiment 18: the best fly now scores 1.000 up to 2.9 notes/s and 0.900 at
-4 notes/s with chords**, on fresh charts, with **zero stray presses on every
-condition**. Mean across eleven conditions 0.950 against 0.430 for experiment
-5's recipe. Both of the old walls were protocol choices rather than limits of
-the network:
-
-- **Chords were a training-set artefact.** The readout had only ever been fitted
-  on single-note charts, so the whole curriculum table in experiment 5 was
-  transfer. Fitting on stage 4 at three densities fixes it. Mixing *stages* does
-  not help — stage 4 already contains single notes and is a superset of stage 3.
-- **Density was the approach window**, the fly's scroll speed, fixed at 800 ms
-  since experiment 1 and never varied. Past three notes a second a lane holds
-  two or three notes at once and the encoder shows their superposition. At
-  400 ms, chords at 150 BPM go 0.852 → **1.000** and 4 notes/s with chords
-  0.529 → **0.900**. 300 ms is worse than 400, so it is an optimum, set by the
-  channels' own 200–600 ms latency needing room inside the approach.
-- **Not the refractory.** 150 → 50 ms changes nothing, bit-identical, because
-  uniform-interval charts never put two notes in one lane closer than the
-  interval. It would still bind on a real beatmap with jacks.
-
-**Quote 1.000 at 2.5 notes/s with chords and 0.900 at 4 notes/s as the project's
-best play, and report the approach window with any density figure.** In
-osu!mania terms this is roughly 1.5–2★ → about 4★. `docs/RESULTS_E18.md`.
-
-None of this bears on the connectome-versus-rewired question: experiment 18 ran
-no controls, and the same recipe would very likely work on a rewired network.
+Two earlier statements here are superseded. Experiment 5's 0.92 on single notes
+with 68 parameters (`docs/RESULTS_E5.md`) is no longer the best play, and "the
+refractory never binds" was true only of uniform charts: dense random chords put
+two notes in a lane inside 150 ms, and cutting it to 100 ms helped in round 13.
 
 Per-key delays in the controller were the prescription, and they work —
 untrained accuracy nearly triples, from 0.186 to 0.539, giving the project its

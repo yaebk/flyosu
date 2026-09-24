@@ -6,21 +6,40 @@ wired up to a four-key rhythm game.
 Notes falling toward a judgment line are projected onto the fly's simulated
 compound eyes; activity propagates through 19,367 real neurons and 729,558 real
 synaptic connections from the FlyWire whole-brain reconstruction; the fly's
-descending neurons — its actual output to the legs — are grouped into four
-channels and read as D / F / J / K.
+descending neurons — its actual output to the legs — are read as D / F / J / K,
+originally as four anatomical channels (the diagram below) and now by a small
+trained linear readout over the whole descending population.
 
-**Current state: all 12 steps built; twenty experiments run; the fly plays real
-beatmaps.** On seventeen 4K mania difficulties from three downloaded maps, with
-a readout fitted on synthetic charts and nothing refitted, it scores **0.894 on
-the easiest and 0.576 on average, with zero stray presses across all seventeen
-maps and 17,600 notes**. On synthetic charts it is saturated: **1.000 up to
-about 3 chord-events per second** and 0.948 at five, with 132 parameters and the
-connectome frozen.
+## Current status
 
-What limits it on real maps is density and **hold notes**, independently. It
-presses 15 of 17 hold heads at MAX or 300 and then loses every one of them on
-the tail, releasing a median 126 ms late; that is a consistent bias and work on
-it is in progress. Whether the *real* wiring plays better
+**The fly plays real osu!mania beatmaps: 0.862 mean accuracy on 30 held-out 4K
+difficulties** from six songs that no readout choice ever looked at. The
+connectome is frozen; the only fitted part is a 196-parameter readout, fitted
+on synthetic charts only. The best readout when real maps were first played
+scores 0.576 on the same maps.
+
+| held-out maps | difficulties | accuracy |
+|---|---|---|
+| up to 5.5 chord-events/s | 11 | 0.935 |
+| 5.5 – 8.5 | 14 | 0.871 |
+| above 8.5 (up to 13.7) | 5 | 0.677 |
+
+It plays taps and chords well: 0.922 on the held-out maps, and 1.000 on
+synthetic charts up to 5 events per second. It is still weak on fast jacks (a
+note in the same lane within 150 ms of the last, 0.156), on holds (0.599) and
+the note right after one (0.589), and on maps above 8.5 events per second.
+
+This is the **capability** thread: real connectome only, no controls, and it
+says nothing about whether the wiring matters, since the same recipe would very
+likely work on a rewired network. Details:
+[`docs/RESULTS_E20.md`](docs/RESULTS_E20.md) (real maps, tuning vs held-out),
+[`docs/RESULTS_E18.md`](docs/RESULTS_E18.md) (the synthetic recipe, round by
+round, including what did not help), [`docs/CLAIMS.md`](docs/CLAIMS.md)
+(everything else). A browser replay of the fly playing six map clips is in
+`demo/`, built by `experiments/demo_replay.py`; serve the folder locally
+(`python -m http.server -d demo`) and open `index.html`.
+
+**The science thread.** Whether the *real* wiring plays better
 than matched random wiring is a separate question, and the answer got more
 negative every time the controls were treated better — through experiment 15 no
 behavioural comparison favoured the real connectome.
@@ -32,14 +51,24 @@ was the bottom of the sweep for the real network and 19 of 20 controls. Declare
 the threshold instead, on fresh charts with 40 controls, and the real connectome
 is **level on accuracy** (14/40), hits more notes than 34 of 40, and makes a
 third the stray presses. **None of that is significant** — the pre-registered
-stray endpoint came to p = 0.073 against a declared floor of 0.049 — and it is
-behind on lane-correctness. The honest position is that the project's central
+stray endpoint came to p = 0.073 against a declared floor of 0.049, and
+experiment 19, with four times the notes to break its ties, failed again at
+p = 0.132, which by its declared stopping rule closes that endpoint
+([`docs/RESULTS_E19.md`](docs/RESULTS_E19.md)) — and it is behind on
+lane-correctness. The honest position is that the project's central
 negative result rests on a selection rule now known to be biased and has to be
 redone. Two structural
 measurements do survive, at p = 0.024 and replicated on a second connectome.
 Finding the regime in which the network could play at all turned out to be the
 main event of the first session — see
 [What changed](#what-changed-when-the-fly-started-playing).
+
+**Next:** finish round 21 (jack charts in the training diet) and round 22 (hold
+release timing); then the remaining capability gaps (holds, fast jacks, maps
+above 8.5 events/s); then the pre-registered question of whether the current
+fly's play depends on the wiring, real against rewired controls on the held-out
+maps, and an audit of experiments 7, 11, 12, 13 and 15 under a declared
+threshold.
 
 ```
                  osu!mania lanes  D    F    J    K
@@ -492,7 +521,8 @@ experiments/
   e17_strays.py       pre-registered: stray presses, declared threshold
   e18_capability.py   capability: training diet, readout size, scroll speed
   e19_strays_powered.py pre-registered: strays again, with the ties broken
-  e20_beatmaps.py     real .osz beatmaps from osumaps/
+  e20_beatmaps.py     real .osz beatmaps from osumaps/; MAP_SET=tune|holdout
+  demo_replay.py      export the browser replay in demo/ (and `audio` to rebuild its sound)
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  32 checks on the network side
@@ -517,6 +547,9 @@ docs/RESULTS_E11.md     experiment 11
 docs/RESULTS_E12.md     experiment 12
 docs/RESULTS_E13.md     experiment 13
 docs/RESULTS_E14.md     experiment 14
+docs/RESULTS_E18.md     capability on synthetic charts, round by round
+docs/RESULTS_E20.md     capability on real beatmaps, tuning and held-out
+demo/                   browser replay of the fly playing six map clips
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -544,8 +577,8 @@ python -m tests.test_reservoir       # 20 checks
  7  fly controller               done   20-parameter threshold policy; per-key delays optional
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
-10  training experiments         run 20 times      e1-e20, two connectomes; best play 1.000 synthetic, 0.894 real
-11  beatmap parser               done   .osu v14 mania, both directions; 17 real difficulties played
+10  training experiments         run 20 times      e1-e20, two connectomes; best play 0.862 on 30 held-out real maps
+11  beatmap parser               done   .osu v14 mania, both directions; 47 real difficulties played
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```
 
@@ -601,19 +634,13 @@ but the last two tie it at exactly 0.220, giving p = 0.073 against a declared
 Bonferroni floor of 0.049. Ties count against the hypothesis here as everywhere
 else, and the convention was not adjusted after seeing which way it cut.
 
-**Experiment 18 then went after capability rather than the comparison**, and
-found that both of the fly's apparent limits were protocol choices nobody had
-registered as choices. Chord difficulty was a training-set artefact -- the
-readout had only ever been fitted on single-note charts, so experiment 5's whole
-curriculum table was transfer. The density ceiling was the 800 ms approach
-window, the fly's scroll speed, fixed since experiment 1 and never varied; past
-three notes a second a lane holds two or three notes at once and the encoder
-shows their superposition. Fit on chords at varied density and shorten the
-approach to 400 ms, and chords at 150 BPM go from 0.286 to **1.000** and four
-notes a second with chords to **0.900**, with no stray presses anywhere. The
-150 ms refractory, the obvious suspect, turned out to change nothing at all.
-It ran no controls and says nothing about the connectome.
-[`docs/RESULTS_E18.md`](docs/RESULTS_E18.md).
+**Experiments 18 and 20 went after capability rather than the comparison**
+(see [Current status](#current-status)). Every apparent limit so far has been a
+protocol choice nobody had registered as one: the training set for chords, the
+scroll speed, refractory and drive smoothing for density, and the rendering and
+then the fit's recordings for holds. They ran no controls and say nothing about
+the connectome. [`docs/RESULTS_E18.md`](docs/RESULTS_E18.md),
+[`docs/RESULTS_E20.md`](docs/RESULTS_E20.md).
 
 The unpredicted finding is the larger one: with the threshold declared, the
 accuracy deficit is gone (0.357 vs 0.299, level at 14/40) and the real network
