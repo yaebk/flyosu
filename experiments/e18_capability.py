@@ -564,8 +564,9 @@ def validate():
     # ONLY=a,b scores just those conditions and merges them into the arm's
     # existing file -- for conditions added to the battery after it ran.  The
     # refit is deterministic (fixed seeds), so this is the same readout.
+    # For a new arm it simply scores a subset: a short run.
     only = [c for c in os.environ.get("ONLY", "").split(",") if c]
-    if only:
+    if only and os.path.exists(path):
         with open(path) as fh:
             out = json.load(fh)
     for name, cond in DEEP.items():
