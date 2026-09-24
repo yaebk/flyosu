@@ -8,6 +8,8 @@ smoothing, k=32 population projection, hold oracle, release levels), plays the
 Nothing here is a registered comparison: it is a demonstration of what the fly
 plays, fitted on synthetic charts only, as in experiment 20.
 """
+import base64
+import gzip
 import json
 import os
 import sys
@@ -31,11 +33,21 @@ MAX_PLAY_S = 120.0
 WINDOW_S = 80.0
 LEAD_MS = 1000.0
 PICK = ("Easy", "Hard")
+K = 48                      # population-projection components (round 14's best)
+# brain view: neurons per class (small classes are kept whole)
+SAMPLE = {"photoreceptor": 350, "sensory": 50, "optic": 450, "visual_projection": 250,
+          "visual_centrifugal": 200, "central": 300, "descending": 450, "ascending": 200}
+SAMPLE_SEED = 7
+FLOOR = 0.02                # min per-neuron scale (firing-rate units)
+QMAX = 15                   # 31 levels is plenty for dot brightness, and compresses well
+DEADZONE = 0.08             # |change| under this fraction of a neuron's range is stored as 0
+BRAIN_EVERY = 8             # frames (2 ms each) -> 16 ms
 
 
 def build_player():
     t0 = time.time()
     fly = M.build(regime="play")
+    sample_neurons(fly)                  # fail fast before the long fit
     player = P.Player.untrained(fly, theta=1.5, noise=0.03)
     player.controller.refractory_ms = 100.0
     player.controller.smooth_ms = 20.0
@@ -43,12 +55,65 @@ def build_player():
                         chart_specs=tuple((s, i, A) for s, i in SPECS),
                         release_levels=tuple(round(0.05 * i, 2) for i in range(21)),
                         hold_oracle=True)
-    rr.features = R.PopulationProjection.fit(fly, player.r0, k=32,
+    rr.features = R.PopulationProjection.fit(fly, player.r0, k=K,
                                              states=calibration_states(fly, player.r0))
     rr.record()
     fit = rr.solve()
     print(f"fit done in {time.time() - t0:.0f} s  n_params={fit['n_params']}", flush=True)
-    return player, fit, time.time() - t0
+    return fly, player, fit, time.time() - t0
+
+
+def sample_neurons(fly):
+    """A fixed, class-stratified subset of ~2,200 neurons for the brain view.
+    Photoreceptors are taken from the input population; every other class from
+    ``super_class``.  Small classes are kept whole."""
+    ann = fly.cx.ann.iloc[fly.node_ids]
+    cls = ann["super_class"].astype(str).to_numpy()
+    ph = np.zeros(len(cls), bool)
+    ph[np.asarray(fly.ph_local)] = True
+    cls = np.where(ph, "photoreceptor", cls)
+    readout = np.zeros(len(cls), bool)
+    readout[np.asarray(fly.readout.dn_local)] = True
+    rng = np.random.default_rng(SAMPLE_SEED)
+    pick = []
+    for c, n in SAMPLE.items():
+        idx = np.flatnonzero(cls == c)
+        pick.append(np.sort(rng.choice(idx, size=min(n, len(idx)), replace=False)))
+    pick = np.concatenate(pick)
+    x = ann["pos_x"].to_numpy(float)[pick]
+    y = ann["pos_y"].to_numpy(float)[pick]
+    classes = list(SAMPLE)
+    neurons = {"classes": classes,
+               "x": np.round(x / 1000.0, 1).tolist(),        # FlyWire pos / 1000; only shape matters
+               "y": np.round(y / 1000.0, 1).tolist(),
+               "cls": [classes.index(c) for c in cls[pick]],
+               "readout": readout[pick].astype(int).tolist()}
+    print("sampled", {c: int((cls[pick] == c).sum()) for c in classes},
+          "readout", int(readout[pick].sum()), flush=True)
+    return pick, neurons
+
+
+def encode_brain(frames, r0, pick, path):
+    """Change from rest, scaled per neuron by its own 99th-percentile |change|
+    (floored so near-silent neurons stay dark), clipped to [-1, 1], with a small
+    dead zone, quantized to int8 in [-QMAX, QMAX].  Stored neuron-major (each
+    neuron's time series contiguous) and gzip-compressed: that layout is about
+    half the size of frames x neurons for the same data."""
+    d = np.asarray(frames, np.float32) - r0[pick][None, :].astype(np.float32)
+    p99 = np.percentile(np.abs(d), 99, axis=0)
+    scale = np.maximum(p99, FLOOR)
+    u = np.clip(d / scale, -1.0, 1.0)
+    q = np.where(np.abs(u) < DEADZONE, 0, np.round(u * QMAX)).astype(np.int8)
+    # gzip, then base64 text: artifact pages serve .txt but not raw .bin files
+    blob = gzip.compress(np.ascontiguousarray(q.T).tobytes(), compresslevel=9, mtime=0)
+    with open(path, "w", encoding="ascii") as fh:
+        fh.write(base64.b64encode(blob).decode("ascii"))
+    print(f"  brain {q.shape}  p99|d| quantiles 10/50/90%: "
+          f"{np.round(np.percentile(p99, [10, 50, 90]), 4).tolist()}  "
+          f"floored {int((p99 < FLOOR).sum())}  -> {os.path.getsize(path) / 1e6:.2f} MB", flush=True)
+    return {"file": os.path.basename(path), "frames": int(q.shape[0]),
+            "neurons": int(q.shape[1]), "qmax": QMAX, "gzip": True, "base64": True,
+            "layout": "neuron-major"}
 
 
 def trim(chart):
@@ -127,18 +192,31 @@ def main():
     from experiments import e20_beatmaps as E20
     cs = {c["version"]: c for c in E20.charts()}
     print("difficulties:", {k: v["events_per_s"] for k, v in cs.items()}, flush=True)
-    player, fit, fit_s = build_player()
+    fly, player, fit, fit_s = build_player()
+    pick, neurons = sample_neurons(fly)
+    os.makedirs(OUT_DIR, exist_ok=True)
     maps = []
     for name in PICK:
         c = cs[name]
         chart = trim(c["chart"])
         meta = dict(c, trimmed=len(chart) != len(c["chart"]))
-        res = player.play(chart, record=True, seed=4242)
+        frames, count = [], [0]
+
+        def tap(r, env):
+            if count[0] % BRAIN_EVERY == 0:
+                frames.append(r[pick].astype(np.float32))
+            count[0] += 1
+
+        res = player.play(chart, record=True, seed=4242, tap=tap)
         print(f"{name}: {len(chart)} notes  acc={res.accuracy:.4f}  {res.counts}", flush=True)
-        maps.append(export(res, meta))
-        del res
-    os.makedirs(OUT_DIR, exist_ok=True)
-    data = {"about": {"n_params": int(fit["n_params"]), "neurons": 19367,
+        m = export(res, meta)
+        m["brain"] = encode_brain(frames, np.asarray(player.r0), pick,
+                                  os.path.join(OUT_DIR, f"brain_{name.lower()}.b64.txt"))
+        m["brain"].update(t0=m["trace"]["t0"], dt=round(2.0 * BRAIN_EVERY, 3))
+        maps.append(m)
+        del res, frames
+    data = {"neurons_view": neurons,
+            "about": {"n_params": int(fit["n_params"]), "neurons": 19367, "k": K,
                       "synapses": 729558, "photoreceptors": 8452,
                       "fit_seconds": round(fit_s), "refractory_ms": 100.0,
                       "smooth_ms": 20.0, "dt_ms": 2.0},
@@ -146,6 +224,8 @@ def main():
     with open(OUT, "w") as fh:
         json.dump(data, fh, separators=(",", ":"))
     print(f"wrote {OUT}  {os.path.getsize(OUT) / 1e6:.2f} MB", flush=True)
+    tot = sum(os.path.getsize(os.path.join(OUT_DIR, f)) for f in os.listdir(OUT_DIR) if f.endswith((".json", ".txt")))
+    print(f"demo data total {tot / 1e6:.2f} MB", flush=True)
     for m in maps:
         print(f"  {m['difficulty']}: accuracy {m['accuracy']:.4f}", flush=True)
 

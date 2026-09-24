@@ -16,6 +16,7 @@
   --btn: #e3e9e5;
   --btn-on: #17201c;
   --btn-on-ink: #ffffff;
+  --screen: #0c0f14;
   --lane0: #3d7fc4;
   --lane1: #c98a17;
   --lane2: #2a987a;
@@ -45,11 +46,11 @@ body {
   background: var(--ground); color: var(--ink); font-family: var(--body);
   font-size: 15px; line-height: 1.55; padding-inline: 16px; padding-block: 20px 40px;
 }
-.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 20px; }
+.wrap { max-width: 1080px; margin: 0 auto; display: grid; gap: 18px; }
 header { display: grid; gap: 6px; }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 5vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
-.lede { max-width: 68ch; margin: 0; color: var(--muted); }
+.lede { max-width: 72ch; margin: 0; color: var(--muted); }
 .lede b { color: var(--ink); font-weight: 600; }
 
 .maps { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -63,25 +64,31 @@ h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 5vw, 
 .map-btn[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 
 .stage { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 20px; align-items: start; }
-@media (max-width: 760px) { .stage { grid-template-columns: minmax(0, 1fr); } }
-.field-box { position: relative; width: 100%; max-width: 360px; justify-self: center; }
-#field { display: block; width: 100%; height: 540px; border-radius: 8px; background: #0c0f14; }
-@media (max-width: 760px) { #field { height: 460px; } }
+@media (max-width: 800px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+.field-box { width: 100%; max-width: 360px; justify-self: center; }
+#field { display: block; width: 100%; height: 640px; border-radius: 8px; background: var(--screen); }
+@media (max-width: 800px) { #field { height: 600px; } }
 
-.side { display: grid; gap: 16px; min-width: 0; }
+.side { display: grid; gap: 14px; min-width: 0; }
 .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
-.stat { background: var(--panel); padding: 10px 12px; display: grid; gap: 2px; }
+.stat { background: var(--panel); padding: 10px 12px; display: grid; gap: 2px; min-width: 0; }
 .stat .k { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-.stat .v { font-family: var(--display); font-weight: 600; font-size: 26px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.stat .v { font-family: var(--display); font-weight: 600; font-size: clamp(20px, 3.4vw, 26px); font-variant-numeric: tabular-nums; line-height: 1.1; }
 .counts { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; }
 .counts span b { font-weight: 500; }
 .chip { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: 0; }
 
-.drive-box { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 12px; display: grid; gap: 8px; }
-.drive-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: baseline; }
-.drive-head h2 { font-family: var(--display); font-weight: 600; font-size: 17px; margin: 0; }
-.drive-head .note { font-size: 12.5px; color: var(--muted); }
-#drive { display: block; width: 100%; height: 260px; }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 12px; display: grid; gap: 8px; min-width: 0; }
+.panel-head { display: flex; justify-content: space-between; gap: 4px 12px; flex-wrap: wrap; align-items: baseline; }
+.panel-head h2 { font-family: var(--display); font-weight: 600; font-size: 17px; margin: 0; }
+.panel-head .note { font-size: 12.5px; color: var(--muted); }
+#brain { display: block; width: 100%; aspect-ratio: 2 / 1; max-width: 100%; border-radius: 6px; background: var(--screen); }
+.brain-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--muted); align-items: center; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; }
+.ring { display: inline-block; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--muted); margin-right: 5px; vertical-align: -1px; }
+.scale { display: inline-flex; align-items: center; gap: 6px; }
+.scale i { display: inline-block; width: 90px; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #cfe6ff, #3d8bff 30%, #2a3240 50%, #ff8a3d 70%, #fff1c4); }
+#drive { display: block; width: 100%; height: 220px; }
 
 .controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; }
 .play { font: 600 14px var(--body); cursor: pointer; border: 0; border-radius: 6px; background: var(--btn-on); color: var(--btn-on-ink); padding: 8px 16px; min-width: 84px; }
@@ -107,13 +114,13 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   <header>
     <div class="eyebrow">FlyWire connectome · osu!mania-style 4-key replay</div>
     <h1>A fly's wiring diagram plays a rhythm game</h1>
-    <p class="lede">A simulation of the adult fruit fly brain, built from the real FlyWire wiring and never trained, watches notes fall through its simulated eyes. <b>Only a small linear readout</b> on top was fitted, on synthetic practice charts. Each lane's key goes down when that readout's drive crosses zero. Below is a deterministic replay of two real community beatmaps it had never played during fitting.</p>
+    <p class="lede">A simulation of the adult fruit fly brain, built from the real FlyWire wiring and never trained, watches notes fall through its simulated eyes. <b>Only a small linear readout</b> on top was fitted, on synthetic practice charts. Each key goes down when that readout's drive crosses zero. Below is a deterministic replay of two real community beatmaps it never saw during fitting, with the simulated brain's activity alongside.</p>
   </header>
 
   <div class="maps" id="maps" role="group" aria-label="Choose a beatmap"></div>
 
   <div class="stage">
-    <div class="field-box"><canvas id="field" aria-label="Playfield: four lanes with notes falling to a judgment line"></canvas></div>
+    <div class="field-box"><canvas id="field" aria-label="Playfield: four lanes with notes falling to a judgment line, and an illustrated fly pressing four keys"></canvas></div>
     <div class="side">
       <div class="stats">
         <div class="stat"><span class="k">Accuracy</span><span class="v" id="acc">100.00%</span></div>
@@ -121,14 +128,14 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
         <div class="stat"><span class="k">Notes judged</span><span class="v" id="done">0</span></div>
       </div>
       <div class="counts" id="counts"></div>
-      <div class="drive-box">
-        <div class="drive-head">
-          <h2>Key drive, last 1 second</h2>
-          <span class="note">Readout of neural activity per key. Above the line = key held.</span>
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Inside the simulated brain</h2>
+          <span class="note" id="brain-note">Front view, real positions, change from rest</span>
         </div>
-        <canvas id="drive" aria-label="Four scrolling traces of per-key drive against the zero threshold"></canvas>
+        <canvas id="brain" aria-label="Sampled neurons drawn at their real positions in a front view of the fly brain, coloured by activity change from rest"></canvas>
+        <div class="brain-legend" id="brain-legend"></div>
       </div>
-      <div class="legend" id="legend"></div>
     </div>
   </div>
 
@@ -146,12 +153,23 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); out
   </div>
   <div class="status" id="status" hidden></div>
 
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Key drive, last 1 second</h2>
+      <span class="note">Readout of the descending neurons, one signal per key. Above the line means the key is held.</span>
+    </div>
+    <canvas id="drive" aria-label="Four scrolling traces of per-key drive against the zero threshold"></canvas>
+    <div class="legend" id="legend"></div>
+  </div>
+
   <section class="about">
     <div>
       <h2>What you are watching</h2>
-      <p>The fly's view of the game is rendered onto its 8,452 photoreceptors. Notes become visible to it only in the lower half of the playfield, 250 ms before they should be hit, which is its scroll speed. The dimmed upper half shows upcoming notes for you, not for the fly.</p>
-      <p>The network runs in 2 ms steps with its synaptic weights fixed. The readout turns the activity of the simulated neurons into four drive signals, one per key. A key is pressed when its drive rises through zero, held while it stays up, and released when it falls. Timing is judged with osu!mania-style windows (MAX, 300, 200, 100, 50, MISS), and hold notes are judged on both head and release.</p>
-      <p>This is a simulation of the fly's wiring diagram, not a living fly, and the readout was trained. It shows what a fixed connectome plus a small fitted readout can play; it says nothing on its own about whether the real wiring beats a randomly rewired one.</p>
+      <p>The fly's view of the game is rendered onto its 8,452 photoreceptors. Notes become visible to it only in the lower half of the note area, 250 ms before they should be hit, which is its scroll speed. The dimmed upper half previews upcoming notes for you, not for the fly.</p>
+      <p>The network runs in 2 ms steps with its synaptic weights fixed. A small trained linear readout turns the activity of the descending neurons into four drive signals, one per key. A key is pressed when its drive rises through zero, held while it stays up, and released when it falls. Timing is judged with osu!mania-style windows (MAX, 300, 200, 100, 50, MISS), and hold notes are judged on both head and release.</p>
+      <p><b>The legs are an illustration.</b> In the simulation the fly's output is those four key drives, read from descending neurons by the fitted readout. The real leg motor system is not modelled. Each drawn leg simply lands on its key for exactly the time that key was down in the replay.</p>
+      <p>The brain panel shows simulated activity, as change from each neuron's resting rate, for <span id="n-sampled">about 2,000</span> of the 19,367 connectome neurons, drawn at their real FlyWire positions. Each neuron is scaled to its own typical range, so the colours show when a neuron is unusually active, not how active it is compared with its neighbours.</p>
+      <p>This is a simulation of the fly's wiring diagram, not a living fly, and the readout was trained. It shows what a fixed connectome plus a small fitted readout can play. It says nothing on its own about whether the real wiring beats a randomly rewired one.</p>
     </div>
     <div>
       <h2>The model</h2>
@@ -167,13 +185,25 @@ const J = ["MAX", "300", "200", "100", "50", "MISS"];
 const W = { MAX: 300, "300": 300, "200": 200, "100": 100, "50": 50, MISS: 0 };
 const JCOL = { MAX: "#dff4ff", "300": "#ffd35a", "200": "#6fdc8c", "100": "#6cb4ff", "50": "#a3a9b3", MISS: "#ff5a52" };
 const STRAY = "#e46cff";
+const SCREEN = "#0c0f14";
+const CLASS_INFO = {
+  photoreceptor: ["photoreceptors (input)", "#b0473f"],
+  sensory: ["other sensory", "#8c6f9e"],
+  optic: ["optic lobe", "#3f8a86"],
+  visual_projection: ["visual projection", "#6c73b8"],
+  visual_centrifugal: ["visual centrifugal", "#4f7fa6"],
+  central: ["central brain", "#8a8d4a"],
+  descending: ["descending (readout)", "#c7ccd4"],
+  ascending: ["ascending", "#a07a4f"],
+};
 const $ = (id) => document.getElementById(id);
 const fmtT = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
 const ub = (arr, x) => { let lo = 0, hi = arr.length; while (lo < hi) { const m = (lo + hi) >> 1; if (arr[m] <= x) lo = m + 1; else hi = m; } return lo; };
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-let DATA = null, MAP = null, idx = 0;
+let DATA = null, MAP = null, idx = 0, NV = null;
 let t = 0, playing = false, speed = 0.5, lastFrame = 0;
+const BRAIN = new Map();   // file -> Int8Array | "loading" | Error
 
 function laneColors() {
   const cs = getComputedStyle(document.documentElement);
@@ -191,6 +221,12 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", refreshThe
 new MutationObserver(refreshTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
 function songName(s) { return s.replace(/\.osz$/i, "").replace(/^\d+\s+/, ""); }
+function hexA(hex, a) {
+  const h = hex.replace("#", "");
+  const n = parseInt(h.length === 3 ? h.split("").map((x) => x + x).join("") : h, 16);
+  return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
+}
+function roundRect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
 
 // ---- prepare one map: events, prefix sums, per-note visual state ----
 function prepare(m) {
@@ -220,7 +256,6 @@ function prepare(m) {
   for (const r of resolve) pops.push({ t: r.t, lane: r.lane, j: r.j, small: false });
   for (const p of m.presses) if (p[2] === null) pops.push({ t: p[0], lane: p[1], j: "stray", small: true });
   pops.sort((a, b) => a.t - b.t);
-  // prefix state after k resolutions
   const rtimes = resolve.map((r) => r.t), acc = [1], combo = [0], cnt = [J.map(() => 0)];
   let w = 0, c = 0; const cc = J.map(() => 0);
   resolve.forEach((r, k) => {
@@ -235,60 +270,225 @@ function prepare(m) {
   const flat = []; for (const row of m.trace.drive) for (const v of row) flat.push(v);
   flat.sort((a, b) => a - b);
   const ylo = Math.min(-0.1, flat[Math.floor(flat.length * 0.01)]), yhi = Math.max(0.3 * Math.abs(ylo), flat[Math.floor(flat.length * 0.997)]);
-  return { ...m, pops, rtimes, acc, combo, cnt, strayT, gone, clipFrom, tStart, tEnd, ylo, yhi, noteHitT: m.notes.map((x) => x[1]) };
+  const out = { ...m, pops, rtimes, acc, combo, cnt, strayT, gone, clipFrom, tStart, tEnd, ylo, yhi, noteHitT: m.notes.map((x) => x[1]) };
+  out.popT = pops.map((p) => p.t);
+  return out;
 }
 
 // ---- canvases ----
-const field = $("field"), dcv = $("drive");
-const fctx = field.getContext("2d"), dctx = dcv.getContext("2d");
+const field = $("field"), dcv = $("drive"), bcv = $("brain");
+const fctx = field.getContext("2d"), dctx = dcv.getContext("2d"), bctx = bcv.getContext("2d");
 function fit(cv) {
   const r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
   const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
   if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
   return { w: r.width, h: r.height, dpr };
 }
-
 function inInterval(list, x) {
   let lo = 0, hi = list.length;
   while (lo < hi) { const m = (lo + hi) >> 1; if (list[m][0] <= x) lo = m + 1; else hi = m; }
   return lo > 0 && x < list[lo - 1][1];
 }
+// Leg reach 0..1: 1 exactly while the key is down; the leg starts lowering
+// LEAD ms before the press (known from the replay) and lifts over LIFT ms after.
+const LEAD = 45, LIFT = 70;
+function reach(list, x) {
+  let lo = 0, hi = list.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (list[m][0] <= x) lo = m + 1; else hi = m; }
+  let a = 0;
+  if (lo > 0) {
+    const iv = list[lo - 1];
+    if (x < iv[1]) return 1;
+    a = Math.max(0, 1 - (x - iv[1]) / LIFT);
+  }
+  if (lo < list.length) a = Math.max(a, 1 - (list[lo][0] - x) / LEAD);
+  const v = Math.max(0, Math.min(1, a));
+  return v * v * (3 - 2 * v);
+}
 
-function drawField() {
+// ---- the fly (dorsal view, head toward the keys) ----
+function ik(bx, by, tx, ty, L1, L2, outward) {
+  const dx = tx - bx, dy = ty - by;
+  let d = Math.hypot(dx, dy);
+  const dmax = L1 + L2 - 0.5;
+  const ux = dx / (d || 1), uy = dy / (d || 1);
+  if (d > dmax) { d = dmax; tx = bx + ux * d; ty = by + uy * d; }
+  const ca = Math.max(-1, Math.min(1, (L1 * L1 + d * d - L2 * L2) / (2 * L1 * d || 1)));
+  const a = Math.acos(ca), base = Math.atan2(uy, ux);
+  const k1 = [bx + L1 * Math.cos(base + a), by + L1 * Math.sin(base + a)];
+  const k2 = [bx + L1 * Math.cos(base - a), by + L1 * Math.sin(base - a)];
+  const knee = (outward(k1) > outward(k2)) ? k1 : k2;
+  return { knee, foot: [tx, ty] };
+}
+function drawLeg(c, s, pts, lift, planted) {
+  // pts: [coxaBase, coxaEnd, knee, ankle, tip]
+  const seg = (a, b, w, col) => { c.strokeStyle = col; c.lineWidth = w; c.beginPath(); c.moveTo(a[0], a[1]); c.lineTo(b[0], b[1]); c.stroke(); };
+  c.lineCap = "round"; c.lineJoin = "round";
+  // shadow on the key surface: offset grows as the leg lifts
+  const off = 2 + 6 * lift;
+  c.save(); c.translate(off * s * 0.6, off * s);
+  c.globalAlpha = 0.28 * (0.4 + 0.6 * lift);
+  for (let i = 1; i < pts.length - 1; i++) seg(pts[i], pts[i + 1], (i < 3 ? 4.6 : 2.4) * s, "#000");
+  c.restore(); c.globalAlpha = 1;
+  const dark = "#3b2a1c", mid = "#8a6440", light = "#b9905e";
+  seg(pts[0], pts[1], 6.2 * s, dark); seg(pts[0], pts[1], 4.4 * s, light);           // coxa
+  seg(pts[1], pts[2], 5.2 * s, dark); seg(pts[1], pts[2], 3.4 * s, mid);             // femur
+  seg(pts[2], pts[3], 4.4 * s, dark); seg(pts[2], pts[3], 2.6 * s, mid);             // tibia
+  seg(pts[3], pts[4], 2.6 * s, dark); seg(pts[3], pts[4], 1.3 * s, light);           // tarsus
+  // tibial bristles
+  c.strokeStyle = dark; c.lineWidth = 0.8 * s;
+  const [ax, ay] = pts[2], [bx, by] = pts[3], L = Math.hypot(bx - ax, by - ay) || 1;
+  const nx = -(by - ay) / L, ny = (bx - ax) / L;
+  for (let q = 1; q <= 4; q++) {
+    const f = q / 5, px = ax + (bx - ax) * f, py = ay + (by - ay) * f;
+    c.beginPath(); c.moveTo(px, py); c.lineTo(px + nx * 3.4 * s + (bx - ax) / L * 2.2 * s, py + ny * 3.4 * s + (by - ay) / L * 2.2 * s); c.stroke();
+  }
+  // tarsomere joints and claws
+  const [tx0, ty0] = pts[3], [tx1, ty1] = pts[4], TL = Math.hypot(tx1 - tx0, ty1 - ty0) || 1;
+  const ux = (tx1 - tx0) / TL, uy = (ty1 - ty0) / TL;
+  c.fillStyle = dark;
+  for (let q = 1; q <= 4; q++) { const f = q / 5; c.beginPath(); c.arc(tx0 + (tx1 - tx0) * f, ty0 + (ty1 - ty0) * f, 1.1 * s, 0, 7); c.fill(); }
+  c.strokeStyle = dark; c.lineWidth = 1 * s;
+  for (const sgn of [-1, 1]) {
+    c.beginPath(); c.moveTo(tx1, ty1);
+    c.quadraticCurveTo(tx1 + ux * 2.5 * s - uy * sgn * 2 * s, ty1 + uy * 2.5 * s + ux * sgn * 2 * s, tx1 + ux * 1 * s - uy * sgn * 3.4 * s, ty1 + uy * 1 * s + ux * sgn * 3.4 * s);
+    c.stroke();
+  }
+  // joints
+  c.fillStyle = dark;
+  for (const p of [pts[1], pts[2], pts[3]]) { c.beginPath(); c.arc(p[0], p[1], 1.9 * s, 0, 7); c.fill(); }
+  if (planted > 0.98) { c.fillStyle = "rgba(255,255,255,.55)"; c.beginPath(); c.arc(tx1, ty1, 1.6 * s, 0, 7); c.fill(); }
+}
+function drawFly(c, cx, ty, s, keyCenters, keyY, reaches, clock) {
+  // legs first (under the body); order: L-mid, L-front, R-front, R-mid -> K1..K4
+  const legs = [
+    { base: [-20, -3], dir: [-1, -0.25], L1: 58, L2: 56, tar: 24, key: 0 },
+    { base: [-13, -20], dir: [-0.8, -0.9], L1: 40, L2: 38, tar: 20, key: 1 },
+    { base: [13, -20], dir: [0.8, -0.9], L1: 40, L2: 38, tar: 20, key: 2 },
+    { base: [20, -3], dir: [1, -0.25], L1: 58, L2: 56, tar: 24, key: 3 },
+  ];
+  const outwardFrom = (sx) => (p) => (p[0] - cx) * sx;
+  for (const L of legs) {
+    const bx = cx + L.base[0] * s, by = ty + L.base[1] * s;
+    const cex = bx + L.dir[0] * 7 * s, cey = by + L.dir[1] * 7 * s;
+    const kx = keyCenters[L.key], ky = keyY;
+    const r = reaches[L.key];
+    // hover target: pulled back toward the body along the leg's line
+    const vx = kx - cex, vy = ky - cey, vd = Math.hypot(vx, vy);
+    const pull = (1 - r) * 20 * s;
+    const tipX = kx - vx / vd * pull + (1 - r) * Math.sign(L.base[0]) * 4 * s, tipY = ky - vy / vd * pull + (1 - r) * 6 * s;
+    const tdx = tipX - cex, tdy = tipY - cey, tdd = Math.hypot(tdx, tdy);
+    const ax = tipX - tdx / tdd * L.tar * s, ay = tipY - tdy / tdd * L.tar * s;
+    const sol = ik(cex, cey, ax, ay, L.L1 * s, L.L2 * s, outwardFrom(Math.sign(L.base[0])));
+    drawLeg(c, s, [[bx, by], [cex, cey], sol.knee, sol.foot, [tipX, tipY]], 1 - r, r);
+  }
+  // hind legs, resting, angled back
+  for (const sx of [-1, 1]) {
+    const bx = cx + sx * 16 * s, by = ty + 12 * s;
+    const cex = bx + sx * 6 * s, cey = by + 4 * s;
+    const tip = [cx + sx * 74 * s, ty + 92 * s];
+    const tdx = tip[0] - cex, tdy = tip[1] - cey, tdd = Math.hypot(tdx, tdy);
+    const ank = [tip[0] - tdx / tdd * 24 * s, tip[1] - tdy / tdd * 24 * s];
+    const sol = ik(cex, cey, ank[0], ank[1], 44 * s, 42 * s, outwardFrom(sx));
+    drawLeg(c, s, [[bx, by], [cex, cey], sol.knee, sol.foot, tip], 0, 1);
+  }
+  // abdomen with tergite bands
+  const breathe = reduced ? 1 : 1 + 0.012 * Math.sin(clock / 700);
+  c.save();
+  c.beginPath(); c.ellipse(cx, ty + 56 * s, 22 * s * breathe, 36 * s, 0, 0, 7); c.closePath();
+  const ga = c.createRadialGradient(cx - 6 * s, ty + 45 * s, 4 * s, cx, ty + 56 * s, 38 * s);
+  ga.addColorStop(0, "#d9b98a"); ga.addColorStop(1, "#9c7648");
+  c.fillStyle = ga; c.fill(); c.clip();
+  c.fillStyle = "#3a2618";
+  for (let q = 0; q < 5; q++) {
+    const y0 = ty + (30 + q * 11.5) * s;
+    c.globalAlpha = q < 3 ? 0.82 : 0.95;
+    c.beginPath(); c.ellipse(cx, y0 + 6 * s, 30 * s, 4.2 * s, 0, 0, 7); c.fill();
+  }
+  c.globalAlpha = 1; c.restore();
+  // wings, folded over the abdomen
+  for (const sx of [-1, 1]) {
+    c.save(); c.translate(cx + sx * 6 * s, ty + 14 * s); c.rotate(-sx * 0.1);
+    c.beginPath(); c.ellipse(sx * 4 * s, 44 * s, 15 * s, 48 * s, sx * 0.06, 0, 7);
+    c.fillStyle = "rgba(214,226,238,0.30)"; c.fill();
+    c.strokeStyle = "rgba(235,242,250,0.55)"; c.lineWidth = 0.9 * s; c.stroke();
+    c.strokeStyle = "rgba(90,70,50,0.55)"; c.lineWidth = 0.8 * s;
+    for (const vx of [-7, -2, 4, 9]) {
+      c.beginPath(); c.moveTo(sx * vx * 0.3 * s, 2 * s); c.quadraticCurveTo(sx * (vx + 2) * s, 44 * s, sx * vx * 0.9 * s, 88 * s); c.stroke();
+    }
+    c.beginPath(); c.moveTo(sx * -3 * s, 40 * s); c.lineTo(sx * 5 * s, 46 * s); c.stroke();
+    c.restore();
+  }
+  // thorax
+  c.beginPath(); c.ellipse(cx, ty - 6 * s, 21 * s, 26 * s, 0, 0, 7);
+  const gt = c.createRadialGradient(cx - 7 * s, ty - 16 * s, 3 * s, cx, ty - 6 * s, 28 * s);
+  gt.addColorStop(0, "#e2c28f"); gt.addColorStop(0.7, "#b78d58"); gt.addColorStop(1, "#8a6337");
+  c.fillStyle = gt; c.fill();
+  c.strokeStyle = "rgba(90,60,30,.35)"; c.lineWidth = 1.2 * s;       // faint dorsal stripes
+  for (const sx of [-6, 6]) { c.beginPath(); c.moveTo(cx + sx * s, ty - 28 * s); c.lineTo(cx + sx * 1.1 * s, ty + 12 * s); c.stroke(); }
+  // scutellum
+  c.beginPath(); c.ellipse(cx, ty + 19 * s, 10 * s, 6.5 * s, 0, 0, 7); c.fillStyle = "#a57c4a"; c.fill();
+  // bristles (macrochaetae point backward)
+  c.strokeStyle = "#1e140c"; c.lineCap = "round"; c.lineWidth = 1.1 * s;
+  const br = [[-9, -22, -1, 9], [9, -22, 1, 9], [-15, -8, -3, 9], [15, -8, 3, 9], [-7, 2, -1, 10], [7, 2, 1, 10], [-17, 6, -4, 8], [17, 6, 4, 8], [-4, 20, -2, 14], [4, 20, 2, 14]];
+  for (const [x, y, dx, dy] of br) { c.beginPath(); c.moveTo(cx + x * s, ty + y * s); c.lineTo(cx + (x + dx) * s, ty + (y + dy) * s); c.stroke(); }
+  // head
+  c.beginPath(); c.ellipse(cx, ty - 40 * s, 17 * s, 11 * s, 0, 0, 7); c.fillStyle = "#b08354"; c.fill();
+  c.beginPath(); c.ellipse(cx, ty - 44 * s, 5 * s, 5 * s, 0, 0, 7); c.fillStyle = "#8f6538"; c.fill();   // ocellar triangle
+  // compound eyes
+  for (const sx of [-1, 1]) {
+    c.save(); c.translate(cx + sx * 13 * s, ty - 40 * s); c.rotate(sx * 0.25);
+    c.beginPath(); c.ellipse(0, 0, 8.5 * s, 11 * s, 0, 0, 7);
+    const ge = c.createRadialGradient(-sx * 2 * s, -4 * s, 1 * s, 0, 0, 12 * s);
+    ge.addColorStop(0, "#f06a5a"); ge.addColorStop(0.55, "#b8201d"); ge.addColorStop(1, "#6d0f10");
+    c.fillStyle = ge; c.fill();
+    c.clip(); c.fillStyle = "rgba(0,0,0,.18)";                        // facet texture
+    for (let fy = -11; fy <= 11; fy += 2.4) for (let fx = -9; fx <= 9; fx += 2.4) { c.beginPath(); c.arc((fx + (Math.round(fy / 2.4) % 2) * 1.2) * s, fy * s, 0.55 * s, 0, 7); c.fill(); }
+    c.restore();
+  }
+  // antennae with aristae
+  c.strokeStyle = "#5a3d22"; c.lineWidth = 1.6 * s;
+  for (const sx of [-1, 1]) {
+    c.beginPath(); c.moveTo(cx + sx * 3 * s, ty - 49 * s); c.lineTo(cx + sx * 5 * s, ty - 55 * s); c.stroke();
+    c.lineWidth = 0.7 * s; c.beginPath(); c.moveTo(cx + sx * 5 * s, ty - 55 * s); c.quadraticCurveTo(cx + sx * 11 * s, ty - 60 * s, cx + sx * 14 * s, ty - 66 * s); c.stroke();
+    for (let q = 1; q <= 3; q++) { const px = cx + sx * (6 + q * 2.5) * s, py = ty - (56 + q * 3) * s; c.beginPath(); c.moveTo(px, py); c.lineTo(px + sx * 2 * s, py + 1.5 * s); c.stroke(); }
+    c.lineWidth = 1.6 * s;
+  }
+}
+
+function drawField(now) {
   const { w, h, dpr } = fit(field), c = fctx, m = MAP;
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
-  c.fillStyle = "#0c0f14"; c.fillRect(0, 0, w, h);
+  c.fillStyle = SCREEN; c.fillRect(0, 0, w, h);
   if (!m) return;
-  const A = m.approach_ms, pad = 10, laneW = (w - 2 * pad) / 4;
-  const keyH = 46, judgeY = h - keyH - 10;
-  const pxPerMs = judgeY / (2 * A);             // canvas shows 2x the fly's window
+  const A = m.approach_ms, pad = 10, laneW = (w - 2 * pad) / 4, s = laneW / 80;
+  const keyH = 34, flyH = 182 * s;
+  const judgeY = h - flyH - keyH - 8;
+  const keyTop = judgeY + 6, keyMid = keyTop + keyH / 2;
+  const pxPerMs = judgeY / (2 * A);             // note area shows 2x the fly's window
   const viewY = judgeY - A * pxPerMs;           // where notes appear to the fly
   const yOf = (ms) => judgeY - (ms - t) * pxPerMs;
-  // unseen region
   c.fillStyle = "#151a22"; c.fillRect(pad, 0, w - 2 * pad, viewY);
-  // lane backgrounds
   for (let k = 0; k < 4; k++) {
     const x = pad + k * laneW;
-    c.fillStyle = k % 2 ? "#10141b" : "#0e1218"; c.fillRect(x, viewY, laneW, judgeY - viewY + keyH);
-    c.strokeStyle = "#232a35"; c.lineWidth = 1; c.beginPath(); c.moveTo(x + .5, 0); c.lineTo(x + .5, h); c.stroke();
+    c.fillStyle = k % 2 ? "#10141b" : "#0e1218"; c.fillRect(x, viewY, laneW, judgeY - viewY);
+    c.strokeStyle = "#232a35"; c.lineWidth = 1; c.beginPath(); c.moveTo(x + .5, 0); c.lineTo(x + .5, judgeY); c.stroke();
   }
-  c.beginPath(); c.moveTo(w - pad - .5, 0); c.lineTo(w - pad - .5, h); c.stroke();
-  // fly field-of-view boundary
+  c.beginPath(); c.moveTo(w - pad - .5, 0); c.lineTo(w - pad - .5, judgeY); c.stroke();
   c.setLineDash([4, 4]); c.strokeStyle = "#5b6678"; c.beginPath(); c.moveTo(pad, viewY + .5); c.lineTo(w - pad, viewY + .5); c.stroke(); c.setLineDash([]);
   c.font = "500 10.5px 'IBM Plex Mono', monospace"; c.fillStyle = "#8490a3"; c.textAlign = "left";
   c.fillText("fly sees notes from here (" + A + " ms)", pad + 6, viewY - 6);
   c.fillText("not yet visible to the fly", pad + 6, 16);
-  // key presses glow
+  const down = [0, 1, 2, 3].map((k) => inInterval(m.keys[k], t));
   for (let k = 0; k < 4; k++) {
-    if (inInterval(m.keys[k], t)) {
-      const x = pad + k * laneW, g = c.createLinearGradient(0, judgeY - 140, 0, judgeY);
-      g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(1, hexA(LC[k], 0.28));
-      c.fillStyle = g; c.fillRect(x + 1, judgeY - 140, laneW - 1, 140);
-    }
+    if (!down[k]) continue;
+    const x = pad + k * laneW, g = c.createLinearGradient(0, judgeY - 140, 0, judgeY);
+    g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(1, hexA(LC[k], 0.28));
+    c.fillStyle = g; c.fillRect(x + 1, judgeY - 140, laneW - 1, 140);
   }
-  // notes
-  const lo = t - 400, hi = t + 2 * A + 50;
-  const nh = 14;
+  // notes (clipped to the note area)
+  c.save(); c.beginPath(); c.rect(0, 0, w, judgeY + 1); c.clip();
+  const lo = t - 400, hi = t + 2 * A + 50, nh = 13;
   for (let i = 0; i < m.notes.length; i++) {
     const [lane, hit, end] = m.notes[i];
     const tail = end ?? hit;
@@ -297,8 +497,7 @@ function drawField() {
     const x = pad + lane * laneW + 3, nw = laneW - 6;
     const unseen = hit - t > A;
     const missed = m.judgments[i] === "MISS" && t > hit + m.windows.MISS * 0.5;
-    const alpha = missed ? 0.35 : 1;
-    const col = LC[lane];
+    const alpha = missed ? 0.35 : 1, col = LC[lane];
     if (end !== null && end > hit) {
       let yHead = yOf(hit);
       if (m.clipFrom[i] !== null && t >= m.clipFrom[i]) yHead = Math.min(yHead, judgeY);
@@ -315,20 +514,26 @@ function drawField() {
     }
     c.globalAlpha = 1;
   }
-  // judgment line
+  c.restore();
   c.fillStyle = "#e9eef5"; c.fillRect(pad, judgeY - 1, w - 2 * pad, 2);
-  // keys
+  // keys: a 3D keycap that sinks while held
+  const keyCenters = [];
   for (let k = 0; k < 4; k++) {
-    const x = pad + k * laneW + 3, on = inInterval(m.keys[k], t);
-    c.fillStyle = on ? LC[k] : "#1c222c"; roundRect(c, x, judgeY + 8, laneW - 6, keyH - 10, 5); c.fill();
-    c.strokeStyle = on ? "#ffffff" : hexA(LC[k], 0.6); c.lineWidth = on ? 2 : 1.5; c.stroke();
-    c.fillStyle = on ? "#0c0f14" : "#8490a3"; c.font = "600 12px 'IBM Plex Mono', monospace"; c.textAlign = "center";
-    c.fillText("K" + (k + 1), x + (laneW - 6) / 2, judgeY + 8 + (keyH - 10) / 2 + 4);
+    const x = pad + k * laneW + 4, kw = laneW - 8, on = down[k], depth = on ? 1 : 5;
+    keyCenters.push(x + kw / 2);
+    c.fillStyle = "#07090c"; roundRect(c, x, keyTop + 1, kw, keyH, 5); c.fill();                  // well
+    c.fillStyle = on ? hexA(LC[k], 0.55) : "#262d38"; roundRect(c, x, keyTop + 5 - depth + 4, kw, keyH - 4, 5); c.fill();   // side
+    c.fillStyle = on ? LC[k] : "#1b212b"; roundRect(c, x, keyTop + (5 - depth), kw, keyH - 5, 5); c.fill();                 // top
+    c.strokeStyle = on ? "#ffffff" : hexA(LC[k], 0.7); c.lineWidth = on ? 1.6 : 1.2; c.stroke();
+    c.fillStyle = on ? "#0c0f14" : "#8490a3"; c.font = "600 11px 'IBM Plex Mono', monospace"; c.textAlign = "center";
+    c.fillText("K" + (k + 1), x + kw / 2, keyTop + (5 - depth) + (keyH - 5) / 2 + 4);
   }
+  // the fly
+  const reaches = [0, 1, 2, 3].map((k) => reach(m.keys[k], t));
+  drawFly(c, w / 2, keyTop + keyH + 72 * s, s, keyCenters, keyMid + 3, reaches, now || 0);
   // pop-ups
   const DUR = 380;
-  const p0 = ub(m.popT, t - DUR);
-  for (let q = p0; q < m.pops.length; q++) {
+  for (let q = ub(m.popT, t - DUR); q < m.pops.length; q++) {
     const p = m.pops[q]; if (p.t > t) break;
     const age = (t - p.t) / DUR; if (age < 0 || age > 1) continue;
     const cx = pad + (p.lane + 0.5) * laneW;
@@ -348,6 +553,100 @@ function drawField() {
   }
 }
 
+// ---- the brain ----
+let brainGeom = null;   // {w,h,dpr,px,py,base canvas}
+function brainLayout() {
+  const { w, h, dpr } = fit(bcv);
+  if (brainGeom && brainGeom.w === w && brainGeom.h === h && brainGeom.dpr === dpr) return brainGeom;
+  const n = NV.x.length, pad = 12;
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (let i = 0; i < n; i++) { x0 = Math.min(x0, NV.x[i]); x1 = Math.max(x1, NV.x[i]); y0 = Math.min(y0, NV.y[i]); y1 = Math.max(y1, NV.y[i]); }
+  const sc = Math.min((w - 2 * pad) / (x1 - x0), (h - 2 * pad) / (y1 - y0));
+  const ox = (w - sc * (x1 - x0)) / 2, oy = (h - sc * (y1 - y0)) / 2;
+  const px = new Float32Array(n), py = new Float32Array(n);
+  for (let i = 0; i < n; i++) { px[i] = ox + (NV.x[i] - x0) * sc; py[i] = oy + (NV.y[i] - y0) * sc; }
+  // static base layer: every sampled neuron as a dim class-tinted dot
+  const base = document.createElement("canvas"); base.width = Math.round(w * dpr); base.height = Math.round(h * dpr);
+  const b = base.getContext("2d"); b.setTransform(dpr, 0, 0, dpr, 0, 0);
+  b.fillStyle = SCREEN; b.fillRect(0, 0, w, h);
+  const r = Math.max(1.1, Math.min(2.2, w / 420));
+  NV.classes.forEach((cl, ci) => {
+    b.fillStyle = hexA((CLASS_INFO[cl] || [cl, "#888"])[1], 0.42);
+    b.beginPath();
+    for (let i = 0; i < n; i++) if (NV.cls[i] === ci && !NV.readout[i]) { b.moveTo(px[i] + r, py[i]); b.arc(px[i], py[i], r, 0, 7); }
+    b.fill();
+  });
+  b.strokeStyle = "rgba(210,216,226,0.45)"; b.lineWidth = 0.8; b.beginPath();
+  for (let i = 0; i < n; i++) if (NV.readout[i]) { b.moveTo(px[i] + r + 0.8, py[i]); b.arc(px[i], py[i], r + 0.8, 0, 7); }
+  b.stroke();
+  brainGeom = { w, h, dpr, px, py, base, r };
+  return brainGeom;
+}
+const LEVELS = 10;
+const WARM = [], COOL = [];
+for (let q = 1; q <= LEVELS; q++) {
+  const f = q / LEVELS;
+  WARM.push(`rgba(255,${Math.round(120 + 120 * f * f)},${Math.round(50 + 150 * f * f)},${(0.25 + 0.75 * f).toFixed(3)})`);
+  COOL.push(`rgba(${Math.round(60 + 150 * f * f)},${Math.round(140 + 90 * f * f)},255,${(0.25 + 0.75 * f).toFixed(3)})`);
+}
+function drawBrain() {
+  if (!NV || !MAP) return;
+  const g = brainLayout(), c = bctx;
+  c.setTransform(1, 0, 0, 1, 0, 0);
+  c.drawImage(g.base, 0, 0);
+  c.setTransform(g.dpr, 0, 0, g.dpr, 0, 0);
+  const B = MAP.brain, data = BRAIN.get(B.file);
+  if (!(data instanceof Int8Array)) {
+    c.fillStyle = "#8490a3"; c.font = "500 12px 'IBM Plex Mono', monospace"; c.textAlign = "left";
+    c.fillText(data instanceof Error ? "Activity could not be loaded: " + data.message : "Loading activity…", 12, 20);
+    return;
+  }
+  const n = B.neurons, k = Math.max(0, Math.min(B.frames - 1, Math.round((t - B.t0) / B.dt)));
+  const qmax = B.qmax, thr = B.qmax >= 100 ? 0.08 * qmax : 0, nm = B.layout === "neuron-major", F = B.frames, off = k * n;
+  const warm = Array.from({ length: LEVELS }, () => []), cool = Array.from({ length: LEVELS }, () => []);
+  for (let i = 0; i < n; i++) {
+    const v = nm ? data[i * F + k] : data[off + i];
+    if (v > thr) warm[Math.min(LEVELS - 1, Math.floor(v / qmax * LEVELS))].push(i);
+    else if (v < -thr) cool[Math.min(LEVELS - 1, Math.floor(-v / qmax * LEVELS))].push(i);
+  }
+  c.globalCompositeOperation = "lighter";
+  for (const [groups, cols] of [[cool, COOL], [warm, WARM]]) {
+    for (let q = 0; q < LEVELS; q++) {
+      if (!groups[q].length) continue;
+      const r = g.r * (1 + 0.9 * (q + 1) / LEVELS);
+      c.fillStyle = cols[q]; c.beginPath();
+      for (const i of groups[q]) { c.moveTo(g.px[i] + r, g.py[i]); c.arc(g.px[i], g.py[i], r, 0, 7); }
+      c.fill();
+    }
+  }
+  c.globalCompositeOperation = "source-over";
+  c.fillStyle = "#8490a3"; c.font = "500 10.5px 'IBM Plex Mono', monospace"; c.textAlign = "left";
+  c.fillText("left", 10, g.h - 10); c.textAlign = "right"; c.fillText("right  ·  front view", g.w - 10, g.h - 10);
+}
+async function loadBrain(B) {
+  if (BRAIN.has(B.file)) return;
+  BRAIN.set(B.file, "loading");
+  try {
+    const r = await fetch(B.file);
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    let buf;
+    if (B.gzip) {
+      if (typeof DecompressionStream === "undefined") throw new Error("this browser cannot unpack gzip data");
+      let body = r.body;
+      if (B.base64) {                     // gzip bytes shipped as base64 text
+        const s = atob((await r.text()).trim()), u = new Uint8Array(s.length);
+        for (let q = 0; q < s.length; q++) u[q] = s.charCodeAt(q);
+        body = new Blob([u]).stream();
+      }
+      buf = await new Response(body.pipeThrough(new DecompressionStream("gzip"))).arrayBuffer();
+    } else buf = await r.arrayBuffer();
+    const a = new Int8Array(buf);
+    if (a.length !== B.frames * B.neurons) throw new Error("unexpected size");
+    BRAIN.set(B.file, a);
+  } catch (e) { BRAIN.set(B.file, e instanceof Error ? e : new Error(String(e))); }
+  draw();
+}
+
 function drawDrive() {
   const { w, h, dpr } = fit(dcv), c = dctx, m = MAP;
   c.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -361,27 +660,22 @@ function drawDrive() {
     const top = k * (sh + gap);
     const yOf = (v) => top + 3 + (m.yhi - Math.max(m.ylo, Math.min(m.yhi, v))) / (m.yhi - m.ylo) * (sh - 6), mid = yOf(0);
     c.fillStyle = TK.strip; c.fillRect(x0, top, x1 - x0, sh);
-    // key-down shading
     for (const iv of m.keys[k]) {
       if (iv[1] < t - WIN || iv[0] > t) continue;
       c.fillStyle = hexA(LC[k], 0.14);
       const a = xOf(Math.max(iv[0], t - WIN)), b = xOf(Math.min(iv[1], t));
       c.fillRect(a, top, b - a, sh);
     }
-    // note hit markers
     c.strokeStyle = hexA(TK.muted, 0.6); c.lineWidth = 1;
     for (let i = ub(m.noteHitT, t - WIN); i < m.notes.length && m.notes[i][1] <= t; i++) {
       if (m.notes[i][0] !== k) continue;
       const x = xOf(m.notes[i][1]); c.setLineDash([2, 3]); c.beginPath(); c.moveTo(x, top); c.lineTo(x, top + sh); c.stroke(); c.setLineDash([]);
     }
-    // zero threshold
     c.strokeStyle = TK.zero; c.globalAlpha = 0.55; c.lineWidth = 1; c.beginPath(); c.moveTo(x0, mid + .5); c.lineTo(x1, mid + .5); c.stroke(); c.globalAlpha = 1;
-    // trace
     if (kHi > kLo) {
       c.beginPath();
       for (let j = kLo; j <= kHi; j++) { const x = xOf(tr.t0 + j * tr.dt), y = yOf(tr.drive[j][k]); j === kLo ? c.moveTo(x, y) : c.lineTo(x, y); }
       c.strokeStyle = LC[k]; c.lineWidth = 1.8; c.lineJoin = "round"; c.stroke();
-      // endpoint
       const v = tr.drive[kHi][k]; c.fillStyle = LC[k]; c.beginPath(); c.arc(xOf(tr.t0 + kHi * tr.dt), yOf(v), 3.2, 0, 7); c.fill();
     }
     c.fillStyle = TK.muted; c.font = "500 11px 'IBM Plex Mono', monospace"; c.textAlign = "left";
@@ -392,13 +686,6 @@ function drawDrive() {
   c.textAlign = "right"; c.fillText("now", x1, h - 3);
   c.textAlign = "center"; c.fillText("line = zero threshold · shaded = key down · dashes = notes due", (x0 + x1) / 2, h - 3);
 }
-
-function hexA(hex, a) {
-  const h = hex.replace("#", "");
-  const n = parseInt(h.length === 3 ? h.split("").map((x) => x + x).join("") : h, 16);
-  return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
-}
-function roundRect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
 
 function updateStats() {
   const m = MAP; if (!m) return;
@@ -413,14 +700,16 @@ function updateStats() {
   $("scrub").value = Math.round(1000 * (t - m.tStart) / (m.tEnd - m.tStart));
 }
 
-function draw() { drawField(); drawDrive(); updateStats(); }
+function draw(now) { drawField(now ?? performance.now()); drawBrain(); drawDrive(); updateStats(); }
 
 function loop(now) {
   if (playing) {
     const dt = Math.min(100, now - lastFrame);
     t += dt * speed;
     if (t >= MAP.tEnd) { t = MAP.tEnd; setPlaying(false); }
-    draw();
+    draw(now);
+  } else if (!reduced) {
+    drawField(now);                       // idle breathing only; data-driven parts unchanged
   }
   lastFrame = now;
   requestAnimationFrame(loop);
@@ -434,40 +723,51 @@ function selectMap(i) {
   t = Math.min(MAP.tEnd, MAP.notes[0][1] + 2500);   // open on a moment with notes in play
   document.querySelectorAll(".map-btn").forEach((b, q) => b.setAttribute("aria-pressed", String(q === i)));
   setPlaying(playing);
+  loadBrain(MAP.brain);
   draw();
 }
 
 function init(data) {
-  DATA = data;
+  DATA = data; NV = data.neurons_view;
   DATA.maps = data.maps.map(prepare);
-  DATA.maps.forEach((m) => { m.popT = m.pops.map((p) => p.t); });
   $("maps").innerHTML = `<span class="song">Song: ${songName(DATA.maps[0].song)} · two difficulties</span>` + DATA.maps.map((m, i) =>
     `<button type="button" class="map-btn" data-i="${i}" aria-pressed="false"><span class="n">${m.difficulty}</span>` +
     `<span class="m">${m.events_per_s} events/s · ${m.notes.length} notes · accuracy ${(100 * m.accuracy).toFixed(1)}%</span></button>`).join("");
   document.querySelectorAll(".map-btn").forEach((b) => b.addEventListener("click", () => selectMap(+b.dataset.i)));
   $("legend").innerHTML = J.map((j) => `<span><i class="chip" style="background:${JCOL[j]}"></i>${j}</span>`).join("")
     + `<span><i class="chip" style="background:${STRAY}"></i>stray press (no note)</span>`;
+  const nS = NV.x.length;
+  const perClass = NV.classes.map((cl, ci) => [cl, NV.cls.filter((c) => c === ci).length]);
+  $("brain-legend").innerHTML = perClass.filter(([, n]) => n > 0).map(([cl, n]) =>
+    `<span><i class="dot" style="background:${(CLASS_INFO[cl] || [cl, "#888"])[1]}"></i>${(CLASS_INFO[cl] || [cl])[0]} ${n}</span>`).join("")
+    + `<span><i class="ring"></i>readout neuron</span>`
+    + `<span class="scale">below rest <i></i> above rest</span>`;
+  $("brain-note").textContent = `${nS.toLocaleString("en-US")} of 19,367 neurons · front view · real positions`;
+  $("n-sampled").textContent = nS.toLocaleString("en-US");
+  // match the brain canvas to the data's own aspect ratio
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (let i = 0; i < nS; i++) { x0 = Math.min(x0, NV.x[i]); x1 = Math.max(x1, NV.x[i]); y0 = Math.min(y0, NV.y[i]); y1 = Math.max(y1, NV.y[i]); }
+  bcv.style.aspectRatio = `${(x1 - x0 + 30).toFixed(0)} / ${(y1 - y0 + 30).toFixed(0)}`;
   const a = data.about;
   const rows = [["Neurons", a.neurons.toLocaleString("en-US")], ["Synapses", a.synapses.toLocaleString("en-US")],
     ["Photoreceptors", a.photoreceptors.toLocaleString("en-US")], ["Fitted parameters", a.n_params.toLocaleString("en-US") + " (linear readout only)"],
+    ["Readout input", "descending neurons, " + a.k + " components"],
     ["Simulation step", a.dt_ms + " ms"], ["Scroll (approach)", DATA.maps[0].approach_ms + " ms"],
-    ["Key refractory", a.refractory_ms + " ms"]];
+    ["Key refractory", a.refractory_ms + " ms"], ["Brain view", nS.toLocaleString("en-US") + " sampled neurons, 16 ms frames"]];
   for (const m of DATA.maps) rows.push([m.difficulty + " accuracy", (100 * m.accuracy).toFixed(2) + "% · " + m.notes.length + " notes, OD " + m.od + (m.trimmed ? " (excerpt)" : "")]);
   $("facts").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
   selectMap(0);
 }
 
-// controls
 $("play").addEventListener("click", () => { if (!MAP) return; if (t >= MAP.tEnd) t = MAP.tStart; setPlaying(!playing); });
 document.querySelectorAll("#speed button").forEach((b) => b.addEventListener("click", () => {
   speed = +b.dataset.s; document.querySelectorAll("#speed button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
 }));
 $("scrub").addEventListener("input", (e) => { if (!MAP) return; t = MAP.tStart + (+e.target.value / 1000) * (MAP.tEnd - MAP.tStart); if (t < MAP.tEnd && $("play").textContent === "Replay") setPlaying(false); draw(); });
 document.addEventListener("keydown", (e) => { if (e.code === "Space" && e.target === document.body) { e.preventDefault(); $("play").click(); } });
-new ResizeObserver(() => draw()).observe(field);
-new ResizeObserver(() => draw()).observe(dcv);
+for (const cv of [field, dcv, bcv]) new ResizeObserver(() => { if (DATA) draw(); }).observe(cv);
 
-fetch("replay_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+fetch("replay_data.json").then((r) => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
   .then((d) => { init(d); requestAnimationFrame((n) => { lastFrame = n; loop(n); }); })
   .catch((err) => { const s = $("status"); s.hidden = false; s.textContent = "Could not load replay_data.json (" + err.message + "). Reload the page to try again."; });
 })();
