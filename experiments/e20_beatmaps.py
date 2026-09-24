@@ -120,7 +120,12 @@ FIT_FAST_SM20_K48 = dict(FIT_FAST_ORC_R100, k=48, smooth=20.0)
 # round 18's fast_sm20_k48_lh: the same plus 0.8 and 1.2 s hold charts
 FIT_FAST_SM20_K48_LH = dict(FIT_FAST_SM20_K48, n_charts=44,
                             specs=FIT_FAST_SM20_K48["specs"] + ((7, 1000.0), (7, 1500.0)))
-_DIETS = {"fast_sm20_k48": FIT_FAST_SM20_K48, "fast_sm20_k48_lh": FIT_FAST_SM20_K48_LH,"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
+# round 21's fast_sm20_k48_jk_r75: jack charts at 200/150/120 ms and a 75 ms refractory
+FIT_FAST_SM20_K48_JK_R75 = dict(FIT_FAST_SM20_K48, n_charts=48, refr=75.0,
+                                specs=FIT_FAST_SM20_K48["specs"]
+                                + ((6, 200.0), (6, 150.0), (6, 120.0)))
+_DIETS = {"fast_sm20_k48": FIT_FAST_SM20_K48, "fast_sm20_k48_lh": FIT_FAST_SM20_K48_LH,
+          "fast_sm20_k48_jk_r75": FIT_FAST_SM20_K48_JK_R75,"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
           "both8_orc_rel": FIT_BOTH8_ORC_REL, "both8_orc_rel_grid": FIT_BOTH8_ORC_REL_GRID,
           "both_orc_rel": FIT_BOTH_ORC_REL, "fast_orc_r100": FIT_FAST_ORC_R100}
 FIT = _DIETS[_DIET]
