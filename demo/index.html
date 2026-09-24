@@ -1,0 +1,474 @@
+<title>Connectome at the Keys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --ground: #eef1ee;
+  --panel: #ffffff;
+  --ink: #17201c;
+  --muted: #5b6862;
+  --rule: #d3dbd6;
+  --accent: #9b2f24;        /* compound-eye red */
+  --focus: #2f6fb3;
+  --strip-bg: #f6f8f6;
+  --zero: #17201c;
+  --btn: #e3e9e5;
+  --btn-on: #17201c;
+  --btn-on-ink: #ffffff;
+  --lane0: #3d7fc4;
+  --lane1: #c98a17;
+  --lane2: #2a987a;
+  --lane3: #b8466e;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #111714; --panel: #18201c; --ink: #e4ebe7; --muted: #95a39c;
+    --rule: #2b3632; --accent: #e0705f; --focus: #7fb3ea; --strip-bg: #141b18;
+    --zero: #e4ebe7; --btn: #232d29; --btn-on: #e4ebe7; --btn-on-ink: #111714;
+    --lane0: #6aa7e6; --lane1: #e2a83c; --lane2: #4cc49f; --lane3: #e07399;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #111714; --panel: #18201c; --ink: #e4ebe7; --muted: #95a39c;
+  --rule: #2b3632; --accent: #e0705f; --focus: #7fb3ea; --strip-bg: #141b18;
+  --zero: #e4ebe7; --btn: #232d29; --btn-on: #e4ebe7; --btn-on-ink: #111714;
+  --lane0: #6aa7e6; --lane1: #e2a83c; --lane2: #4cc49f; --lane3: #e07399;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ground); color: var(--ink); font-family: var(--body);
+  font-size: 15px; line-height: 1.55; padding-inline: 16px; padding-block: 20px 40px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 20px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 5vw, 44px); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+.lede { max-width: 68ch; margin: 0; color: var(--muted); }
+.lede b { color: var(--ink); font-weight: 600; }
+
+.maps { display: flex; gap: 8px; flex-wrap: wrap; }
+.maps .song { flex-basis: 100%; font-size: 13px; color: var(--muted); }
+.map-btn {
+  font: inherit; cursor: pointer; border: 1px solid var(--rule); background: var(--panel); color: var(--ink);
+  border-radius: 6px; padding: 8px 14px; text-align: left; display: grid; gap: 0; min-width: 0;
+}
+.map-btn .n { font-family: var(--display); font-weight: 600; font-size: 17px; }
+.map-btn .m { font-family: var(--mono); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.map-btn[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+
+.stage { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 760px) { .stage { grid-template-columns: minmax(0, 1fr); } }
+.field-box { position: relative; width: 100%; max-width: 360px; justify-self: center; }
+#field { display: block; width: 100%; height: 540px; border-radius: 8px; background: #0c0f14; }
+@media (max-width: 760px) { #field { height: 460px; } }
+
+.side { display: grid; gap: 16px; min-width: 0; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+.stat { background: var(--panel); padding: 10px 12px; display: grid; gap: 2px; }
+.stat .k { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.stat .v { font-family: var(--display); font-weight: 600; font-size: 26px; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.counts { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; }
+.counts span b { font-weight: 500; }
+.chip { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: 0; }
+
+.drive-box { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 12px; display: grid; gap: 8px; }
+.drive-head { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.drive-head h2 { font-family: var(--display); font-weight: 600; font-size: 17px; margin: 0; }
+.drive-head .note { font-size: 12.5px; color: var(--muted); }
+#drive { display: block; width: 100%; height: 260px; }
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; }
+.play { font: 600 14px var(--body); cursor: pointer; border: 0; border-radius: 6px; background: var(--btn-on); color: var(--btn-on-ink); padding: 8px 16px; min-width: 84px; }
+.seg { display: inline-flex; border-radius: 6px; background: var(--btn); padding: 2px; }
+.seg button { font: 500 13px var(--mono); cursor: pointer; border: 0; background: transparent; color: var(--ink); padding: 6px 10px; border-radius: 4px; }
+.seg button[aria-pressed="true"] { background: var(--btn-on); color: var(--btn-on-ink); }
+.scrub { flex: 1 1 240px; display: flex; gap: 10px; align-items: center; min-width: 0; }
+.scrub input { flex: 1; min-width: 0; accent-color: var(--accent); }
+.time { font-family: var(--mono); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+.about { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 20px; border-top: 1px solid var(--rule); padding-top: 18px; }
+.about h2 { font-family: var(--display); font-weight: 600; font-size: 18px; margin: 0 0 6px; }
+.about p { margin: 0 0 10px; max-width: 65ch; }
+.about dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; font-size: 14px; }
+.about dt { color: var(--muted); }
+.about dd { margin: 0; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.status { font-family: var(--mono); font-size: 13px; color: var(--accent); }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">FlyWire connectome · osu!mania-style 4-key replay</div>
+    <h1>A fly's wiring diagram plays a rhythm game</h1>
+    <p class="lede">A simulation of the adult fruit fly brain, built from the real FlyWire wiring and never trained, watches notes fall through its simulated eyes. <b>Only a small linear readout</b> on top was fitted, on synthetic practice charts. Each lane's key goes down when that readout's drive crosses zero. Below is a deterministic replay of two real community beatmaps it had never played during fitting.</p>
+  </header>
+
+  <div class="maps" id="maps" role="group" aria-label="Choose a beatmap"></div>
+
+  <div class="stage">
+    <div class="field-box"><canvas id="field" aria-label="Playfield: four lanes with notes falling to a judgment line"></canvas></div>
+    <div class="side">
+      <div class="stats">
+        <div class="stat"><span class="k">Accuracy</span><span class="v" id="acc">100.00%</span></div>
+        <div class="stat"><span class="k">Combo</span><span class="v" id="combo">0</span></div>
+        <div class="stat"><span class="k">Notes judged</span><span class="v" id="done">0</span></div>
+      </div>
+      <div class="counts" id="counts"></div>
+      <div class="drive-box">
+        <div class="drive-head">
+          <h2>Key drive, last 1 second</h2>
+          <span class="note">Readout of neural activity per key. Above the line = key held.</span>
+        </div>
+        <canvas id="drive" aria-label="Four scrolling traces of per-key drive against the zero threshold"></canvas>
+      </div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="play" id="play" type="button">Play</button>
+    <div class="seg" id="speed" role="group" aria-label="Playback speed">
+      <button type="button" data-s="0.25">0.25×</button>
+      <button type="button" data-s="0.5" aria-pressed="true">0.5×</button>
+      <button type="button" data-s="1">1×</button>
+    </div>
+    <div class="scrub">
+      <input type="range" id="scrub" min="0" max="1000" step="1" value="0" aria-label="Replay position">
+      <span class="time" id="time">0:00 / 0:00</span>
+    </div>
+  </div>
+  <div class="status" id="status" hidden></div>
+
+  <section class="about">
+    <div>
+      <h2>What you are watching</h2>
+      <p>The fly's view of the game is rendered onto its 8,452 photoreceptors. Notes become visible to it only in the lower half of the playfield, 250 ms before they should be hit, which is its scroll speed. The dimmed upper half shows upcoming notes for you, not for the fly.</p>
+      <p>The network runs in 2 ms steps with its synaptic weights fixed. The readout turns the activity of the simulated neurons into four drive signals, one per key. A key is pressed when its drive rises through zero, held while it stays up, and released when it falls. Timing is judged with osu!mania-style windows (MAX, 300, 200, 100, 50, MISS), and hold notes are judged on both head and release.</p>
+      <p>This is a simulation of the fly's wiring diagram, not a living fly, and the readout was trained. It shows what a fixed connectome plus a small fitted readout can play; it says nothing on its own about whether the real wiring beats a randomly rewired one.</p>
+    </div>
+    <div>
+      <h2>The model</h2>
+      <dl id="facts"></dl>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+"use strict";
+const J = ["MAX", "300", "200", "100", "50", "MISS"];
+const W = { MAX: 300, "300": 300, "200": 200, "100": 100, "50": 50, MISS: 0 };
+const JCOL = { MAX: "#dff4ff", "300": "#ffd35a", "200": "#6fdc8c", "100": "#6cb4ff", "50": "#a3a9b3", MISS: "#ff5a52" };
+const STRAY = "#e46cff";
+const $ = (id) => document.getElementById(id);
+const fmtT = (ms) => { const s = Math.max(0, Math.floor(ms / 1000)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+const ub = (arr, x) => { let lo = 0, hi = arr.length; while (lo < hi) { const m = (lo + hi) >> 1; if (arr[m] <= x) lo = m + 1; else hi = m; } return lo; };
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+let DATA = null, MAP = null, idx = 0;
+let t = 0, playing = false, speed = 0.5, lastFrame = 0;
+
+function laneColors() {
+  const cs = getComputedStyle(document.documentElement);
+  return [0, 1, 2, 3].map((k) => cs.getPropertyValue("--lane" + k).trim());
+}
+let LC = laneColors();
+function tokens() {
+  const cs = getComputedStyle(document.documentElement);
+  const g = (n) => cs.getPropertyValue(n).trim();
+  return { ink: g("--ink"), muted: g("--muted"), rule: g("--rule"), strip: g("--strip-bg"), zero: g("--zero") };
+}
+let TK = tokens();
+const refreshTheme = () => { LC = laneColors(); TK = tokens(); draw(); };
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", refreshTheme);
+new MutationObserver(refreshTheme).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+function songName(s) { return s.replace(/\.osz$/i, "").replace(/^\d+\s+/, ""); }
+
+// ---- prepare one map: events, prefix sums, per-note visual state ----
+function prepare(m) {
+  const n = m.notes.length, miss = m.windows.MISS;
+  const headPress = new Array(n).fill(null);
+  for (const p of m.presses) if (p[2] !== null && headPress[p[2]] === null) headPress[p[2]] = p;
+  const holdOf = new Array(n).fill(null);
+  for (const h of m.holds) holdOf[h.note] = h;
+  const resolve = [], pops = [], gone = new Array(n).fill(Infinity), clipFrom = new Array(n).fill(null);
+  for (let i = 0; i < n; i++) {
+    const [lane, hit, end] = m.notes[i];
+    const isHold = end !== null && end > hit;
+    const p = headPress[i], h = holdOf[i];
+    let rt;
+    if (isHold && h) {
+      rt = h.released ? h.release : end + 1.5 * miss;
+      pops.push({ t: p ? p[0] : hit, lane, j: h.head, small: true });
+      gone[i] = rt; clipFrom[i] = h.head === "MISS" ? null : (p ? p[0] : hit);
+    } else if (p && p[3] !== "MISS") {
+      rt = p[0]; gone[i] = rt;
+    } else {
+      rt = p ? p[0] : hit + miss;
+    }
+    resolve.push({ t: rt, i, j: m.judgments[i], lane });
+  }
+  resolve.sort((a, b) => a.t - b.t);
+  for (const r of resolve) pops.push({ t: r.t, lane: r.lane, j: r.j, small: false });
+  for (const p of m.presses) if (p[2] === null) pops.push({ t: p[0], lane: p[1], j: "stray", small: true });
+  pops.sort((a, b) => a.t - b.t);
+  // prefix state after k resolutions
+  const rtimes = resolve.map((r) => r.t), acc = [1], combo = [0], cnt = [J.map(() => 0)];
+  let w = 0, c = 0; const cc = J.map(() => 0);
+  resolve.forEach((r, k) => {
+    w += W[r.j]; c = r.j === "MISS" ? 0 : c + 1; cc[J.indexOf(r.j)]++;
+    acc.push(w / (300 * (k + 1))); combo.push(c); cnt.push(cc.slice());
+  });
+  const strayT = m.presses.filter((p) => p[2] === null).map((p) => p[0]).sort((a, b) => a - b);
+  const first = m.notes[0][1], last = Math.max(...m.notes.map((x) => x[2] ?? x[1]));
+  const tStart = Math.max(m.trace.t0, first - m.approach_ms * 2 - 300);
+  const tEnd = Math.min(m.trace.t0 + m.trace.dt * (m.trace.drive.length - 1), last + 1200);
+  // drive y-scale: 1st to 99.7th percentile of the drive, always spanning zero
+  const flat = []; for (const row of m.trace.drive) for (const v of row) flat.push(v);
+  flat.sort((a, b) => a - b);
+  const ylo = Math.min(-0.1, flat[Math.floor(flat.length * 0.01)]), yhi = Math.max(0.3 * Math.abs(ylo), flat[Math.floor(flat.length * 0.997)]);
+  return { ...m, pops, rtimes, acc, combo, cnt, strayT, gone, clipFrom, tStart, tEnd, ylo, yhi, noteHitT: m.notes.map((x) => x[1]) };
+}
+
+// ---- canvases ----
+const field = $("field"), dcv = $("drive");
+const fctx = field.getContext("2d"), dctx = dcv.getContext("2d");
+function fit(cv) {
+  const r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const w = Math.round(r.width * dpr), h = Math.round(r.height * dpr);
+  if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+  return { w: r.width, h: r.height, dpr };
+}
+
+function inInterval(list, x) {
+  let lo = 0, hi = list.length;
+  while (lo < hi) { const m = (lo + hi) >> 1; if (list[m][0] <= x) lo = m + 1; else hi = m; }
+  return lo > 0 && x < list[lo - 1][1];
+}
+
+function drawField() {
+  const { w, h, dpr } = fit(field), c = fctx, m = MAP;
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.fillStyle = "#0c0f14"; c.fillRect(0, 0, w, h);
+  if (!m) return;
+  const A = m.approach_ms, pad = 10, laneW = (w - 2 * pad) / 4;
+  const keyH = 46, judgeY = h - keyH - 10;
+  const pxPerMs = judgeY / (2 * A);             // canvas shows 2x the fly's window
+  const viewY = judgeY - A * pxPerMs;           // where notes appear to the fly
+  const yOf = (ms) => judgeY - (ms - t) * pxPerMs;
+  // unseen region
+  c.fillStyle = "#151a22"; c.fillRect(pad, 0, w - 2 * pad, viewY);
+  // lane backgrounds
+  for (let k = 0; k < 4; k++) {
+    const x = pad + k * laneW;
+    c.fillStyle = k % 2 ? "#10141b" : "#0e1218"; c.fillRect(x, viewY, laneW, judgeY - viewY + keyH);
+    c.strokeStyle = "#232a35"; c.lineWidth = 1; c.beginPath(); c.moveTo(x + .5, 0); c.lineTo(x + .5, h); c.stroke();
+  }
+  c.beginPath(); c.moveTo(w - pad - .5, 0); c.lineTo(w - pad - .5, h); c.stroke();
+  // fly field-of-view boundary
+  c.setLineDash([4, 4]); c.strokeStyle = "#5b6678"; c.beginPath(); c.moveTo(pad, viewY + .5); c.lineTo(w - pad, viewY + .5); c.stroke(); c.setLineDash([]);
+  c.font = "500 10.5px 'IBM Plex Mono', monospace"; c.fillStyle = "#8490a3"; c.textAlign = "left";
+  c.fillText("fly sees notes from here (" + A + " ms)", pad + 6, viewY - 6);
+  c.fillText("not yet visible to the fly", pad + 6, 16);
+  // key presses glow
+  for (let k = 0; k < 4; k++) {
+    if (inInterval(m.keys[k], t)) {
+      const x = pad + k * laneW, g = c.createLinearGradient(0, judgeY - 140, 0, judgeY);
+      g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(1, hexA(LC[k], 0.28));
+      c.fillStyle = g; c.fillRect(x + 1, judgeY - 140, laneW - 1, 140);
+    }
+  }
+  // notes
+  const lo = t - 400, hi = t + 2 * A + 50;
+  const nh = 14;
+  for (let i = 0; i < m.notes.length; i++) {
+    const [lane, hit, end] = m.notes[i];
+    const tail = end ?? hit;
+    if (tail < lo || hit > hi) continue;
+    if (t >= m.gone[i]) continue;
+    const x = pad + lane * laneW + 3, nw = laneW - 6;
+    const unseen = hit - t > A;
+    const missed = m.judgments[i] === "MISS" && t > hit + m.windows.MISS * 0.5;
+    const alpha = missed ? 0.35 : 1;
+    const col = LC[lane];
+    if (end !== null && end > hit) {
+      let yHead = yOf(hit);
+      if (m.clipFrom[i] !== null && t >= m.clipFrom[i]) yHead = Math.min(yHead, judgeY);
+      const yTail = yOf(end);
+      c.globalAlpha = alpha * (unseen ? 0.45 : 1);
+      c.fillStyle = hexA(col, 0.45);
+      c.fillRect(x + nw * 0.18, yTail, nw * 0.64, Math.max(0, yHead - yTail));
+      c.fillStyle = col; c.fillRect(x, yTail - 3, nw, 6);
+      c.fillRect(x, yHead - nh / 2, nw, nh);
+    } else {
+      const y = yOf(hit);
+      c.globalAlpha = alpha * (unseen && y < viewY ? 0.45 : 1);
+      c.fillStyle = col; roundRect(c, x, y - nh / 2, nw, nh, 3); c.fill();
+    }
+    c.globalAlpha = 1;
+  }
+  // judgment line
+  c.fillStyle = "#e9eef5"; c.fillRect(pad, judgeY - 1, w - 2 * pad, 2);
+  // keys
+  for (let k = 0; k < 4; k++) {
+    const x = pad + k * laneW + 3, on = inInterval(m.keys[k], t);
+    c.fillStyle = on ? LC[k] : "#1c222c"; roundRect(c, x, judgeY + 8, laneW - 6, keyH - 10, 5); c.fill();
+    c.strokeStyle = on ? "#ffffff" : hexA(LC[k], 0.6); c.lineWidth = on ? 2 : 1.5; c.stroke();
+    c.fillStyle = on ? "#0c0f14" : "#8490a3"; c.font = "600 12px 'IBM Plex Mono', monospace"; c.textAlign = "center";
+    c.fillText("K" + (k + 1), x + (laneW - 6) / 2, judgeY + 8 + (keyH - 10) / 2 + 4);
+  }
+  // pop-ups
+  const DUR = 380;
+  const p0 = ub(m.popT, t - DUR);
+  for (let q = p0; q < m.pops.length; q++) {
+    const p = m.pops[q]; if (p.t > t) break;
+    const age = (t - p.t) / DUR; if (age < 0 || age > 1) continue;
+    const cx = pad + (p.lane + 0.5) * laneW;
+    c.globalAlpha = 1 - age * age;
+    if (p.j === "stray") {
+      const y = judgeY - 22 - (reduced ? 0 : age * 10);
+      c.strokeStyle = STRAY; c.lineWidth = 2.5; const r = 7;
+      c.beginPath(); c.moveTo(cx - r, y - r); c.lineTo(cx + r, y + r); c.moveTo(cx + r, y - r); c.lineTo(cx - r, y + r); c.stroke();
+      c.fillStyle = STRAY; c.font = "500 10px 'IBM Plex Mono', monospace"; c.textAlign = "center"; c.fillText("stray", cx, y + 20);
+    } else {
+      const y = judgeY - (p.small ? 30 : 58) - (reduced ? 0 : age * 14);
+      c.fillStyle = JCOL[p.j] || "#fff"; c.textAlign = "center";
+      c.font = (p.small ? "600 12px " : "800 20px ") + "'Bricolage Grotesque', sans-serif";
+      c.fillText(p.small ? p.j + " head" : p.j, cx, y);
+    }
+    c.globalAlpha = 1;
+  }
+}
+
+function drawDrive() {
+  const { w, h, dpr } = fit(dcv), c = dctx, m = MAP;
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.clearRect(0, 0, w, h);
+  if (!m) return;
+  const WIN = 1000, labelW = 30, gap = 6, sh = (h - 18 - 3 * gap) / 4;
+  const tr = m.trace, x0 = labelW, x1 = w - 4;
+  const xOf = (ms) => x0 + (ms - (t - WIN)) / WIN * (x1 - x0);
+  const kLo = Math.max(0, Math.floor((t - WIN - tr.t0) / tr.dt)), kHi = Math.min(tr.drive.length - 1, Math.ceil((t - tr.t0) / tr.dt));
+  for (let k = 0; k < 4; k++) {
+    const top = k * (sh + gap);
+    const yOf = (v) => top + 3 + (m.yhi - Math.max(m.ylo, Math.min(m.yhi, v))) / (m.yhi - m.ylo) * (sh - 6), mid = yOf(0);
+    c.fillStyle = TK.strip; c.fillRect(x0, top, x1 - x0, sh);
+    // key-down shading
+    for (const iv of m.keys[k]) {
+      if (iv[1] < t - WIN || iv[0] > t) continue;
+      c.fillStyle = hexA(LC[k], 0.14);
+      const a = xOf(Math.max(iv[0], t - WIN)), b = xOf(Math.min(iv[1], t));
+      c.fillRect(a, top, b - a, sh);
+    }
+    // note hit markers
+    c.strokeStyle = hexA(TK.muted, 0.6); c.lineWidth = 1;
+    for (let i = ub(m.noteHitT, t - WIN); i < m.notes.length && m.notes[i][1] <= t; i++) {
+      if (m.notes[i][0] !== k) continue;
+      const x = xOf(m.notes[i][1]); c.setLineDash([2, 3]); c.beginPath(); c.moveTo(x, top); c.lineTo(x, top + sh); c.stroke(); c.setLineDash([]);
+    }
+    // zero threshold
+    c.strokeStyle = TK.zero; c.globalAlpha = 0.55; c.lineWidth = 1; c.beginPath(); c.moveTo(x0, mid + .5); c.lineTo(x1, mid + .5); c.stroke(); c.globalAlpha = 1;
+    // trace
+    if (kHi > kLo) {
+      c.beginPath();
+      for (let j = kLo; j <= kHi; j++) { const x = xOf(tr.t0 + j * tr.dt), y = yOf(tr.drive[j][k]); j === kLo ? c.moveTo(x, y) : c.lineTo(x, y); }
+      c.strokeStyle = LC[k]; c.lineWidth = 1.8; c.lineJoin = "round"; c.stroke();
+      // endpoint
+      const v = tr.drive[kHi][k]; c.fillStyle = LC[k]; c.beginPath(); c.arc(xOf(tr.t0 + kHi * tr.dt), yOf(v), 3.2, 0, 7); c.fill();
+    }
+    c.fillStyle = TK.muted; c.font = "500 11px 'IBM Plex Mono', monospace"; c.textAlign = "left";
+    c.fillText("K" + (k + 1), 2, mid + 4);
+  }
+  c.fillStyle = TK.muted; c.font = "11px 'IBM Plex Mono', monospace";
+  c.textAlign = "left"; c.fillText("−1.0 s", x0, h - 3);
+  c.textAlign = "right"; c.fillText("now", x1, h - 3);
+  c.textAlign = "center"; c.fillText("line = zero threshold · shaded = key down · dashes = notes due", (x0 + x1) / 2, h - 3);
+}
+
+function hexA(hex, a) {
+  const h = hex.replace("#", "");
+  const n = parseInt(h.length === 3 ? h.split("").map((x) => x + x).join("") : h, 16);
+  return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
+}
+function roundRect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+
+function updateStats() {
+  const m = MAP; if (!m) return;
+  const k = ub(m.rtimes, t);
+  $("acc").textContent = (100 * m.acc[k]).toFixed(2) + "%";
+  $("combo").textContent = m.combo[k];
+  $("done").textContent = k + " / " + m.notes.length;
+  const s = ub(m.strayT, t);
+  $("counts").innerHTML = J.map((j, q) => `<span><i class="chip" style="background:${JCOL[j]}"></i>${j} <b>${m.cnt[k][q]}</b></span>`).join("")
+    + `<span><i class="chip" style="background:${STRAY}"></i>stray <b>${s}</b></span>`;
+  $("time").textContent = fmtT(t - m.tStart) + " / " + fmtT(m.tEnd - m.tStart);
+  $("scrub").value = Math.round(1000 * (t - m.tStart) / (m.tEnd - m.tStart));
+}
+
+function draw() { drawField(); drawDrive(); updateStats(); }
+
+function loop(now) {
+  if (playing) {
+    const dt = Math.min(100, now - lastFrame);
+    t += dt * speed;
+    if (t >= MAP.tEnd) { t = MAP.tEnd; setPlaying(false); }
+    draw();
+  }
+  lastFrame = now;
+  requestAnimationFrame(loop);
+}
+function setPlaying(on) {
+  playing = on; $("play").textContent = on ? "Pause" : (t >= MAP.tEnd ? "Replay" : "Play");
+}
+
+function selectMap(i) {
+  idx = i; MAP = DATA.maps[i];
+  t = Math.min(MAP.tEnd, MAP.notes[0][1] + 2500);   // open on a moment with notes in play
+  document.querySelectorAll(".map-btn").forEach((b, q) => b.setAttribute("aria-pressed", String(q === i)));
+  setPlaying(playing);
+  draw();
+}
+
+function init(data) {
+  DATA = data;
+  DATA.maps = data.maps.map(prepare);
+  DATA.maps.forEach((m) => { m.popT = m.pops.map((p) => p.t); });
+  $("maps").innerHTML = `<span class="song">Song: ${songName(DATA.maps[0].song)} · two difficulties</span>` + DATA.maps.map((m, i) =>
+    `<button type="button" class="map-btn" data-i="${i}" aria-pressed="false"><span class="n">${m.difficulty}</span>` +
+    `<span class="m">${m.events_per_s} events/s · ${m.notes.length} notes · accuracy ${(100 * m.accuracy).toFixed(1)}%</span></button>`).join("");
+  document.querySelectorAll(".map-btn").forEach((b) => b.addEventListener("click", () => selectMap(+b.dataset.i)));
+  $("legend").innerHTML = J.map((j) => `<span><i class="chip" style="background:${JCOL[j]}"></i>${j}</span>`).join("")
+    + `<span><i class="chip" style="background:${STRAY}"></i>stray press (no note)</span>`;
+  const a = data.about;
+  const rows = [["Neurons", a.neurons.toLocaleString("en-US")], ["Synapses", a.synapses.toLocaleString("en-US")],
+    ["Photoreceptors", a.photoreceptors.toLocaleString("en-US")], ["Fitted parameters", a.n_params.toLocaleString("en-US") + " (linear readout only)"],
+    ["Simulation step", a.dt_ms + " ms"], ["Scroll (approach)", DATA.maps[0].approach_ms + " ms"],
+    ["Key refractory", a.refractory_ms + " ms"]];
+  for (const m of DATA.maps) rows.push([m.difficulty + " accuracy", (100 * m.accuracy).toFixed(2) + "% · " + m.notes.length + " notes, OD " + m.od + (m.trimmed ? " (excerpt)" : "")]);
+  $("facts").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+  selectMap(0);
+}
+
+// controls
+$("play").addEventListener("click", () => { if (!MAP) return; if (t >= MAP.tEnd) t = MAP.tStart; setPlaying(!playing); });
+document.querySelectorAll("#speed button").forEach((b) => b.addEventListener("click", () => {
+  speed = +b.dataset.s; document.querySelectorAll("#speed button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+}));
+$("scrub").addEventListener("input", (e) => { if (!MAP) return; t = MAP.tStart + (+e.target.value / 1000) * (MAP.tEnd - MAP.tStart); if (t < MAP.tEnd && $("play").textContent === "Replay") setPlaying(false); draw(); });
+document.addEventListener("keydown", (e) => { if (e.code === "Space" && e.target === document.body) { e.preventDefault(); $("play").click(); } });
+new ResizeObserver(() => draw()).observe(field);
+new ResizeObserver(() => draw()).observe(dcv);
+
+fetch("replay_data.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then((d) => { init(d); requestAnimationFrame((n) => { lastFrame = n; loop(n); }); })
+  .catch((err) => { const s = $("status"); s.hidden = false; s.textContent = "Could not load replay_data.json (" + err.message + "). Reload the page to try again."; });
+})();
+</script>
