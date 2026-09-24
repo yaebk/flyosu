@@ -209,6 +209,24 @@ ARMS = {
                                           (7, 400.0)),
                                    n_charts=36, k=48, approach=250.0, oracle=True, refr=100.0,
                                    release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # The 200 ms approach helped only at 6.7 events/s and cost the stage-8
+    # holds, so the approach is no longer the wall.  At 8-10 events/s accuracy
+    # equals hit rate with no strays: the fly is not mistiming notes, it is not
+    # pressing them, which is two same-lane pulses merging.  Two knobs set how
+    # sharp a pulse can be: the controller's 40 ms smoothing and the fit
+    # target's 80 ms width.
+    "fast_orc_a250_r100_sm20": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                           (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                           (7, 400.0)),
+                                    n_charts=36, k=32, approach=250.0, oracle=True,
+                                    refr=100.0, smooth=20.0,
+                                    release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_orc_a250_r100_w50": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                          (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                          (7, 400.0)),
+                                   n_charts=36, k=32, approach=250.0, oracle=True,
+                                   refr=100.0, width=50.0,
+                                   release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -304,11 +322,14 @@ def run_arm(arm: str) -> dict:
                                 encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid"))))
     if "refr" in cfg:
         player.controller.refractory_ms = float(cfg["refr"])
+    if "smooth" in cfg:
+        player.controller.smooth_ms = float(cfg["smooth"])
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=n_charts, n_notes=N_NOTES,
                         seed=TRAIN_SEED, chart_specs=specs,
                         release_levels=tuple(cfg.get("release", ())),
-                        hold_oracle=bool(cfg.get("oracle")))
+                        hold_oracle=bool(cfg.get("oracle")),
+                        width_ms=float(cfg.get("width", 80.0)))
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=k, states=states)
     print(f"[{arm}] recording {n_charts} charts (pca{k}): "
           + ", ".join(f"s{s[0]}@{s[1]:.0f}"
@@ -404,11 +425,14 @@ def validate():
                                 encoder=E.Encoder(fly.ret, hold_grid=bool(cfg.get("grid"))))
     if "refr" in cfg:
         player.controller.refractory_ms = float(cfg["refr"])
+    if "smooth" in cfg:
+        player.controller.smooth_ms = float(cfg["smooth"])
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=int(cfg.get("n_charts", N_CHARTS)),
                         n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=_specs(cfg),
                         release_levels=tuple(cfg.get("release", ())),
-                        hold_oracle=bool(cfg.get("oracle")))
+                        hold_oracle=bool(cfg.get("oracle")),
+                        width_ms=float(cfg.get("width", 80.0)))
     rr.features = R.PopulationProjection.fit(fly, player.r0,
                                              k=int(cfg.get("k", READOUT_K)), states=states)
     print(f"[{arm}] validating on seed {DEEP_KW['seed']}, "
