@@ -324,7 +324,11 @@ class RidgeReadout:
     # "fit on stage 4 and see" as the cheap follow-up.  ``None`` keeps the
     # single-condition behaviour every earlier experiment used, unchanged.
     chart_specs: tuple | None = None
-    tail_lead_ms: float = 0.0      # drop a hold's target this early; see `target`
+    # Drop a hold's target this early; see ``target``.  130 ms is the swept
+    # optimum and matches the 126 ms median overhold that motivated it, so it
+    # is a measured correction rather than a tuned one.  It does nothing on a
+    # chart with no hold notes, which is every chart used before experiment 20.
+    tail_lead_ms: float = 130.0
     offsets: np.ndarray = field(default_factory=lambda: np.linspace(-2.0, 2.0, 41))
     recordings: list[Recording] = field(default_factory=list)
 
