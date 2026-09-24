@@ -1,10 +1,11 @@
 # What this project actually shows
 
 One page, kept current, superseding anything older that contradicts it.
-Seventeen experiments, two connectomes, and thirteen occasions on which a result
-got weaker once the comparison was pushed harder — one of them a retraction of a
-number this document itself carried, and the last two results that had been
-running *against* the real connectome. Written for someone deciding what to
+Twenty-one experiments, two connectomes, and fifteen occasions on which a result
+got weaker once the comparison was pushed harder. One was a retraction of a
+number this document itself carried, two were results that had been running
+*against* the real connectome, and the latest two come from auditing earlier
+experiments at a declared threshold. Written for someone deciding what to
 believe, not what was believed at the time.
 
 **Read the threshold and stray warnings in claim 6 before quoting any accuracy
@@ -12,7 +13,8 @@ figure from this project.** Accuracy here cannot see presses that land on
 nothing; the two populations differ on those more than on anything else
 measured; and every threshold chosen by sweeping accuracy was therefore chosen
 for mashing. Under a *declared* threshold the untrained accuracy deficit is not
-present at all.
+present in experiments 17 and 19; the audit of earlier experiments at that
+threshold finds it survives only where the controller may wait (experiment 11).
 
 Each claim below carries the control family it holds *against*. That
 qualification is load-bearing: the project has three control families and they
@@ -156,6 +158,15 @@ has not been run. `docs/RESULTS_E17.md`. Experiment 19 repeated the observation
 on another fresh chart set, again as an uninferred secondary: 0.325 against
 0.308 ± 0.197, 16/40 reaching it. Level again. `docs/RESULTS_E19.md`.
 
+*The audit.* Reading the stored sweeps of experiments 7, 11 and 12 at the
+declared θ = 1.5 (`docs/AUDIT_DECLARED_THRESHOLD.md`, plan written before the
+numbers): experiment 7's no-delay comparison stays level and leans toward the
+real network (4/20, p = 0.24, was 8/20); **experiment 11's deficit holds**
+(17/20, gap 0.297 → 0.229), so the delay result is not a threshold artefact;
+but experiment 12's gap at 1000 and 1400 ms shrinks from about 0.27 to about
+0.07 (12/20, p = 0.62). At 450 ms the real network makes 13 counted presses,
+below the guard of 20, so that arm is a fallback, not a measurement.
+
 **7. Untrained lane-correctness.** Real 0.655 vs rewired 0.652 ± 0.178,
 **11/20, p = 0.571**, under the same protocol. This was the last behavioural
 claim standing — it held at 1/20, p = 0.095 with a controller that had to press
@@ -187,6 +198,13 @@ significant — 10 controls give a floor of 0.091 and four arms a Bonferroni flo
 of 0.364 — and the arms declare different amounts of lane knowledge (14.7 bits
 against 4.6), so they are not a ranking of readouts. `docs/RESULTS_E13.md`,
 `docs/RESULTS_E7.md`.
+
+At the declared θ = 1.5 the eight-component arm's scored-chart lead is gone
+(5/10) and **its stray result reverses**: the real network makes 1.225 strays
+per note against the controls' 0.220 ± 0.194, worse than all ten. The other
+three arms, and the male CNS arm of experiment 7, cannot be read at 1.5 because
+the real network presses fewer than 20 times or not at all.
+`docs/AUDIT_DECLARED_THRESHOLD.md`.
 
 ## Retracted
 
@@ -278,22 +296,34 @@ weaker than it looks. The two structural claims are the exception — they are a
 2.283 vs 0.733 ± 0.090 on forty freshly built networks. **A claim that is
 really there does not soften when the controls double.**
 
+## The trained fly against rewired controls (experiment 21)
+
+*Pending.* Pre-registered in `docs/PREREGISTRATION_E21.md`: round 23's recipe
+fitted separately to the real connectome and 20 rewired controls, scored on the
+30 held-out maps, support only at 0/20. The recipe was developed on the real
+network, which favours it. The controls are running, and the real network is
+measured only after they are committed.
+
 ## Absolute performance, separately from any comparison
 
-**None of this bears on the connectome-versus-rewired question.** The
-capability work runs on the real connectome only, with no controls, and the
-same recipe would very likely work on a rewired network. A claim that the
-current fly's play depends on the wiring would need its own pre-registered test.
+**Nothing in this section bears on the connectome-versus-rewired question.**
+The capability work runs on the real connectome only, with no controls; the
+comparison for the fly that actually plays is experiment 21, above.
 
-**Real maps (experiment 20): 0.862 mean accuracy on 30 held-out 4K
-difficulties from six songs** that no readout choice ever looked at: 0.935 up
-to 5.5 events/s, 0.871 from 5.5 to 8.5, 0.677 above. The best readout when real
-maps were first played scores 0.576 on the same maps, and round 12's 0.721;
-round 15 beats round 12 on all thirty. Taps and chords are at 0.922; holds
-(0.599), the note after a hold (0.589) and fast jacks (0.156) are what is left.
-The readout is fitted on synthetic charts only. Quote the held-out numbers: the
-17 tuning difficulties from three other songs (mean 0.770) were used to choose
-between versions and are selection-optimistic. `docs/RESULTS_E20.md`.
+**Real maps (experiment 20): 0.876 mean accuracy on 30 held-out 4K
+difficulties from six songs** that no readout choice ever looked at: 0.933 /
+0.891 / 0.707 up to 5.5 events/s, 5.5 to 8.5, and above. The readout
+(round 23) is fitted on synthetic charts plus 6-second clips from the three
+tuning songs, 102 clips taken only from even-numbered segments. The best
+readout fitted on synthetic charts alone (round 15) scores 0.862 on the same
+maps (0.935 / 0.871 / 0.677), and the one first played on real maps 0.576.
+Round 23 is better on 22 of 30. Taps 0.940, chords 0.938, the note after a hold
+0.704 and holds 0.619 against round 15's 0.922, 0.922, 0.589 and 0.599. Fast
+jacks are unchanged at 0.153, and they and holds are two thirds of what is
+lost. 200 fitted parameters. Quote the held-out numbers: the 17
+tuning difficulties from three other songs were used to choose between
+versions. Round 23 was chosen on their odd-numbered segments, which no fit
+saw (0.815 against round 15's 0.772). `docs/RESULTS_E20.md`.
 
 **Synthetic charts (experiment 18): 1.000 on single notes and chords up to 5
 events/s, 0.973 / 0.810 / 0.713 on chords at 6.7 / 8 / 10**, holds 0.886–0.982,
@@ -325,7 +355,8 @@ from delays once the chart leaves room, so "cannot use them" was wrong in the
 other direction. The delay-versus-gain correlation quoted there as
 counter-evidence (+0.39, p = 0.088) comes back +0.30, p = 0.200 at n = 20 and is
 flat elsewhere; it was noise and should not be quoted either way.
-`docs/RESULTS_E12.md`.
+`docs/RESULTS_E12.md`. "The gap never closes" is a swept-threshold result: at
+the declared θ = 1.5 it is about 0.07 at 1000 and 1400 ms (12/20), see claim 6.
 
 **A correction, recorded because it is the third instance of the same
 mistake.** This section previously said that at wide intervals the real

@@ -12,26 +12,31 @@ trained linear readout over the whole descending population.
 
 ## Current status
 
-**The fly plays real osu!mania beatmaps: 0.862 mean accuracy on 30 held-out 4K
+**The fly plays real osu!mania beatmaps: 0.876 mean accuracy on 30 held-out 4K
 difficulties** from six songs that no readout choice ever looked at. The
-connectome is frozen; the only fitted part is a 196-parameter readout, fitted
-on synthetic charts only. The best readout when real maps were first played
-scores 0.576 on the same maps.
+connectome is frozen; the only fitted part is a 200-parameter linear readout,
+fitted on synthetic charts plus 6-second clips from the three tuning songs
+(round 23). The best readout when real maps were first played scores 0.576 on
+the same maps; the best fitted on synthetic charts alone, 0.862.
 
-| held-out maps | difficulties | accuracy |
-|---|---|---|
-| up to 5.5 chord-events/s | 11 | 0.935 |
-| 5.5 – 8.5 | 14 | 0.871 |
-| above 8.5 (up to 13.7) | 5 | 0.677 |
+| held-out maps | difficulties | synthetic only (round 15) | + real clips (round 23) |
+|---|---|---|---|
+| up to 5.5 chord-events/s | 11 | 0.935 | 0.933 |
+| 5.5 – 8.5 | 14 | 0.871 | **0.891** |
+| above 8.5 (up to 13.7) | 5 | 0.677 | **0.707** |
 
-It plays taps and chords well: 0.922 on the held-out maps, and 1.000 on
-synthetic charts up to 5 events per second. It is still weak on fast jacks (a
-note in the same lane within 150 ms of the last, 0.156), on holds (0.599) and
-the note right after one (0.589), and on maps above 8.5 events per second.
+Round 23 is better on 22 of the 30, and its losses are all on easy maps, by at
+most 0.015. Taps are at 0.940 and chords at 0.938. The note right after a hold
+jumped from 0.589 to 0.704. Holds (0.619) and fast jacks (a note in the same
+lane within 150 ms of the last, 0.153) are what is left, and between them they
+account for two thirds of what it loses.
 
-This is the **capability** thread: real connectome only, no controls, and it
-says nothing about whether the wiring matters, since the same recipe would very
-likely work on a rewired network. Details:
+Fitting on real clips was the first change in eight rounds to beat round 15 on
+real maps: on tuning-map sections no fit saw, 0.772 → 0.815, with every kind of
+note better. Three earlier changes to the synthetic diet had each won on
+synthetic charts and lost on real maps.
+
+This is the **capability** thread: real connectome only, no controls. Details:
 [`docs/RESULTS_E20.md`](docs/RESULTS_E20.md) (real maps, tuning vs held-out),
 [`docs/RESULTS_E18.md`](docs/RESULTS_E18.md) (the synthetic recipe, round by
 round, including what did not help), [`docs/CLAIMS.md`](docs/CLAIMS.md)
@@ -57,18 +62,22 @@ p = 0.132, which by its declared stopping rule closes that endpoint
 ([`docs/RESULTS_E19.md`](docs/RESULTS_E19.md)) — and it is behind on
 lane-correctness. The honest position is that the project's central
 negative result rests on a selection rule now known to be biased and has to be
-redone. Two structural
+redone. An audit of experiments 7, 11, 12, 13 and 15 at the declared threshold
+([`docs/AUDIT_DECLARED_THRESHOLD.md`](docs/AUDIT_DECLARED_THRESHOLD.md)) finds 7
+and 11 unchanged, 12's slow-tempo gap mostly gone (about 0.27 → 0.07), 13's
+accuracy lead gone and its stray result reversed, and the rest unmeasurable
+because the real network barely presses at that threshold. Two structural
 measurements do survive, at p = 0.024 and replicated on a second connectome.
 Finding the regime in which the network could play at all turned out to be the
 main event of the first session — see
 [What changed](#what-changed-when-the-fly-started-playing).
 
-**Next:** the remaining capability gaps (holds, fast jacks, maps above 8.5
-events/s) -- rounds 21 and 22 targeted jacks and hold release and were both
-rejected on the tuning maps, because each cost taps and chords; then the pre-registered question of whether the current
-fly's play depends on the wiring, real against rewired controls on the held-out
-maps, and an audit of experiments 7, 11, 12, 13 and 15 under a declared
-threshold.
+**Experiment 21** (pre-registered,
+[`docs/PREREGISTRATION_E21.md`](docs/PREREGISTRATION_E21.md)) asks the question
+for the fly that actually plays: round 23's recipe fitted separately to the real
+connectome and to 20 rewired controls, all scored on the 30 held-out maps.
+*Result pending: the controls are running; the real network is measured after
+they are committed.*
 
 ```
                  osu!mania lanes  D    F    J    K
@@ -577,7 +586,7 @@ python -m tests.test_reservoir       # 20 checks
  7  fly controller               done   20-parameter threshold policy; per-key delays optional
  8  scoring                      done   MAX/300/200/100/50/MISS, accuracy, timing error
  9  plasticity                   done   reward-modulated perturbation; ridge fit as a ceiling
-10  training experiments         run 20 times      e1-e20, two connectomes; best play 0.862 on 30 held-out real maps
+10  training experiments         run 21 times      e1-e21, two connectomes; best play 0.876 on 30 held-out real maps
 11  beatmap parser               done   .osu v14 mania, both directions; 47 real difficulties played
 12  osu! integration             built  simulate-then-replay driver; not verified live
 ```

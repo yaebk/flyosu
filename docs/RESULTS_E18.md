@@ -85,6 +85,7 @@ conditions; "mean" is over every condition the arm was scored on.
 | 20 | lanes at ±30/±90° and ±40/±120° instead of ±20/±60° (`f3fc1df`) | 11-condition mean 0.898 / 0.889 vs 0.929 | worse; the lanes share only ~30 photoreceptors already |
 | 21 | jack charts at 200/150/120 ms in the diet, 100 and 75 ms refractory | with 75 ms: all 26 0.938 → 0.945; jacks @ 120 ms 0.627 → 0.702, chords @ 10/s 0.713 → 0.768; holds 0.891 → 0.874 | best on synthetic, **rejected on real maps**: tuning-map mean 0.770 → 0.741, worse on all 17, taps 0.900 → 0.874 and holds 0.518 → 0.483; the tuning maps hold only 69 fast jacks, so its one gain barely registers there |
 | 22 | tail lead 130 → 80 / 40 ms | synthetic holds unchanged (0.891, 0.887, 0.878); tuning maps 0.770 → 0.751 at 80 ms, holds 0.518 → 0.533 but taps 0.900 → 0.857, better on 1 of 17 | **rejected**: fixes a little of what it aimed at and costs taps and chords, like round 21 |
+| 23 | fit on real tuning-map clips as well (`experiments/e20_realfit.py`) | not scored on this battery; decided on unseen tuning-map segments: 0.772 → 0.815 | **kept**, see `RESULTS_E20.md`. Held-out 0.876 vs 0.862, better on 22 of 30 |
 
 ## Bugs found on the way
 

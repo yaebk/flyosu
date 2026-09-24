@@ -4,10 +4,12 @@
 here bears on whether the real wiring beats rewired wiring; the recipe would
 very likely work on a rewired control too.
 
-**Current best: 0.862 mean accuracy on 30 held-out 4K difficulties** that no
-readout choice ever looked at, up from 0.576 for the best readout when real
-maps were first played. The readout is fitted on synthetic charts only
-([`RESULTS_E18.md`](RESULTS_E18.md), round 15); nothing is fitted on maps.
+**Current best: 0.876 mean accuracy on 30 held-out 4K
+difficulties** that no readout choice ever looked at, up from 0.576 for the
+best readout when real maps were first played and 0.862 for the best fitted on
+synthetic charts alone ([`RESULTS_E18.md`](RESULTS_E18.md), round 15). Round 23
+adds clips of the tuning maps to the training charts; the held-out songs are
+never fitted on.
 
 ## Maps, and the tuning / held-out split
 
@@ -37,7 +39,15 @@ are `e20_beatmaps.json` and `e20_beatmaps_holdout.json`.
 |---|---|---|---|---|---|
 | density specialist (no holds in diet, 400 ms approach) | 0.576 | 0.760 | 0.521 | 0.327 | |
 | round 12 (hold recording fix, release levels, 300 ms) | 0.721 | 0.866 | 0.694 | 0.477 | 29 of 30 |
-| **round 15** (+ dense charts, 250 ms, 100 ms refractory, 20 ms smoothing, 48 PCs) | **0.862** | **0.935** | **0.871** | **0.677** | **30 of 30** |
+| round 15 (+ dense charts, 250 ms, 100 ms refractory, 20 ms smoothing, 48 PCs) | 0.862 | 0.935 | 0.871 | 0.677 | 30 of 30 |
+| **round 23** (+ 102 tuning-map clips in the fit) | **0.876** | 0.933 | **0.891** | **0.707** | **22 of 30** |
+
+Round 23's gains are in the middle and top bands: Ruby My Dear Cruel
+0.821 → 0.872, Grotesque 0.665 → 0.723, Boulafacet SHD 0.668 → 0.734. Its eight
+losses are all easy maps, by at most 0.015 (Hesperides Standard 0.936 → 0.921).
+Worst map is still Jepetski's Empress (12.9 events/s), 0.492 → 0.512. Stray
+presses per note fall from 0.0035 to 0.0024. Results:
+`results/e20_realfit_mix_holdout.json`. The round-15 figures that follow:
 
 Best 0.984 (The Empress, EZ, 1.9 events/s); worst 0.492 (Jepetski's Empress,
 12.9 events/s). The largest gains were on the hardest maps: Hesperides Master
@@ -48,13 +58,13 @@ By kind of note (each note gets one kind, first match wins: hold; note within
 150 ms of a hold's tail in its lane; note within 150 ms of the previous note in
 its lane, a "fast jack"; chord note; tap):
 
-| kind | notes | specialist | round 12 | round 15 | share of round 15's loss |
-|---|---|---|---|---|---|
-| tap | 19,066 | 0.611 | 0.733 | **0.922** | 20 % |
-| chord | 19,433 | 0.585 | 0.761 | **0.922** | 21 % |
-| hold | 5,225 | 0.241 | 0.474 | 0.599 | 28 % |
-| after a hold | 282 | 0.256 | 0.367 | 0.589 | 2 % |
-| fast jack | 2,643 | 0.024 | 0.022 | 0.156 | 30 % |
+| kind | notes | specialist | round 12 | round 15 | round 23 | share of round 23's loss |
+|---|---|---|---|---|---|---|
+| tap | 19,066 | 0.611 | 0.733 | 0.922 | **0.940** | 17 % |
+| chord | 19,433 | 0.585 | 0.761 | 0.922 | **0.938** | 18 % |
+| hold | 5,225 | 0.241 | 0.474 | 0.599 | **0.619** | 30 % |
+| after a hold | 282 | 0.256 | 0.367 | 0.589 | **0.704** | 1 % |
+| fast jack | 2,643 | 0.024 | 0.022 | 0.156 | 0.153 | 34 % |
 
 ## Tuning-set results, and what they decided
 
@@ -74,26 +84,56 @@ The long-hold charts fix 1.2 s holds on synthetic charts but barely move
 real-map holds (0.518 → 0.521), because real holds are mostly short, and they
 cost density everywhere above 5.5 events/s.
 
+### Round 23: fitting on the tuning maps themselves
+
+Rounds 17, 21 and 22 each changed the synthetic diet, won or tied on synthetic
+charts, and lost here. So round 23 fits on the real maps too. To keep the
+tuning maps able to decide, each tuning difficulty is cut into 6-second
+segments by note head. Even-numbered segments form the training pool (170
+clips), odd-numbered ones the decision set (153 clips, 8,658 notes) that no
+fit sees. Every arm, round 15 included, is scored on the same decision clips,
+each played alone from a 1 s lead-in (`experiments/e20_realfit.py`).
+
+| arm | training charts | decision mean | better than round 15 |
+|---|---|---|---|
+| round 15 | 36 synthetic | 0.772 | |
+| 3 clips per map | + 51 real | 0.809 | 12 of 17 |
+| **6 clips per map** | **+ 102 real** | **0.815** | **11 of 17** |
+| 10 clips per map | + 152 real | 0.809 | 12 of 17 |
+| the whole pool | + 170 real | 0.798 | 11 of 17 |
+| real clips only | 102 real, no synthetic | 0.803 | 9 of 17 |
+
+Six per map was frozen. It improves every kind of note on the decision
+clips: holds 0.529 → 0.613, the note after a hold 0.474 → 0.598, taps
+0.902 → 0.938, chords 0.921 → 0.935. The gains are on the hard, hold-heavy
+maps (+0.06 to +0.14); the six difficulties it loses are easy ones already
+above 0.88, by at most 0.018. More real data plateaus and then slightly hurts.
+Dropping the synthetic charts costs 0.012, so they still earn their place.
+
 On the tuning maps holds are 70 % of what round 15 loses; on the held-out maps,
 which are lighter on holds and full of fast jacks, it is 28 % against 30 % for
 jacks.
 
 ## What is still weak
 
-- **Fast jacks** (0.156). Most notes 100–150 ms apart in one lane are still
-  missed, though the 100 ms refractory now allows them, and the training diet
-  has never contained a jack chart. **Round 21**, jack charts in the diet, is
-  in flight.
-- **Holds** (0.599) and the note after one (0.589). On the replay maps 17–60 %
-  of holds in each length band are released more than 60 ms before the tail,
-  almost none late. The 130 ms tail lead was tuned when releases ran late.
+Held-out figures are round 23's.
+
+- **Fast jacks** (0.153, 34 % of the loss). Most notes 100–150 ms apart in one
+  lane are still missed, though the 100 ms refractory now allows them. Real
+  clips did not move them either. Jack charts in the synthetic diet (round 21)
+  lost on the tuning maps, and the tuning maps hold only 69 fast jacks, so no
+  fix for them can be chosen there.
+- **Holds** (0.619, 30 %). The note after a hold is largely fixed by real clips
+  (0.589 → 0.704). With round 15, on the replay maps, 17–60 % of holds in each
+  length band were released more than 60 ms before the tail, almost none late.
+  The 130 ms tail lead was tuned when releases ran late.
   Round 22 retuned it to 80 ms: holds rose slightly (0.518 → 0.533 on the
   tuning maps) but taps and chords fell, 0.770 → 0.751 overall, so it was
   rejected. Round 21's jack charts were rejected the same way (0.741).
-- **Maps above 8.5 events/s** (0.677). Synthetic chords at 8 and 10 events/s
+- **Maps above 8.5 events/s** (0.707). Synthetic chords at 8 and 10 events/s
   are 0.81 and 0.71.
-- **Unexplained misses on the Easy tuning map** (read note by note from the
-  replay, `02a2ba1`): chords on the two outer lanes 0 and 3 where one key fires
+- **Unexplained misses on the Easy tuning map** (read note by note from round
+  15's replay, `02a2ba1`; not re-read with round 23): chords on the two outer lanes 0 and 3 where one key fires
   and the other's drive peaks just under threshold; lane-0 hold heads pressed
   about 170 ms late; hold chords pressed about 55 ms early. The long early
   releases on the same map were a diet gap (training holds stopped at 480 ms).
@@ -103,6 +143,12 @@ jacks.
 - **Held-out split**: `MAP_SET=tune | holdout` (`aaa5b3a`).
 - **Per-note loss breakdown**: each run records count, accuracy and loss share
   per kind of note (`b41a0af`).
+- **Real clips in the fit**: `RidgeReadout(extra_charts=...)` fits ready-made
+  charts next to the generated diet (`b91d2b7`).
+- **Projecting while recording**: `RidgeReadout(project_on_record=True)` keeps
+  only the 48 features, about 14× less memory per fit. It is not bit-identical
+  (features move by about 1e-13), so it is opt-in. In a side-by-side fit it
+  changed no press (`af4bed2`).
 - **Batched play**: `Player.play_many` steps several charts through one sparse
   product and the retina caches blobs by position, 1.6× faster (a fit's
   recording 40.4 → 23.5 s). Checked bit-identical to the previous code side by
