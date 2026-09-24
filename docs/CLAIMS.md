@@ -83,6 +83,15 @@ against the hypothesis here as everywhere else in this project. This is the
 best-supported behavioural direction in the project and it is still not
 significant. `docs/RESULTS_E17.md`.
 
+**Experiment 19 re-ran it with four times the notes to break the ties, and it
+failed again**: real 0.2575 vs 0.749 ± 0.370, **4/37, p = 0.132** against a
+floor of 0.024 (all 40: 4/40, p = 0.122). Only one tie this time; three
+controls beat it outright. Across both runs the real connectome makes about a
+third of the controls' strays and sits at roughly the 90th percentile of their
+distribution — consistent, and short of the 95th that significance needs. By
+the stopping rule declared in advance, **the stray endpoint is closed**: a
+direction with a measured effect size, not a result. `docs/RESULTS_E19.md`.
+
 Those three are the only behavioural comparisons pointing the real connectome's
 way. None is significant; only 4c was pre-registered, and it failed its declared
 floor. Against them, on the same run as 4c, the real network is *behind* the
@@ -143,7 +152,9 @@ comparison* — other charts, other threshold, twice the controls — so it does
 overturn the 19/20 above, and it was a descriptive secondary with no inference
 claimed. What it does is make the question live. **The honest state of claim 6
 is that nobody currently knows**, and the registered test that would settle it
-has not been run. `docs/RESULTS_E17.md`.
+has not been run. `docs/RESULTS_E17.md`. Experiment 19 repeated the observation
+on another fresh chart set, again as an uninferred secondary: 0.325 against
+0.308 ± 0.197, 16/40 reaching it. Level again. `docs/RESULTS_E19.md`.
 
 **7. Untrained lane-correctness.** Real 0.655 vs rewired 0.652 ± 0.178,
 **11/20, p = 0.571**, under the same protocol. This was the last behavioural
