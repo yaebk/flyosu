@@ -43,6 +43,7 @@ the maps being scored would be the threshold-sweep mistake all over again.
 
 from __future__ import annotations
 
+import collections
 import glob
 import json
 import os
@@ -56,6 +57,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from flyosu import beatmap, encoder as E, learn as L, model as M, play as P, reservoir as R  # noqa: E402
 from flyosu.controller import calibration_states  # noqa: E402
+from flyosu.mania import ACC_WEIGHT  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RESULTS = os.path.join(ROOT, "results")
@@ -147,6 +149,45 @@ def describe(c) -> dict:
             "od": c.od}
 
 
+LOSS_KINDS = ("hold", "after_hold", "fast_jack", "chord", "tap")
+
+
+def loss_breakdown(c, pr) -> dict:
+    """Where a map's accuracy went.  Each note gets one kind, first match
+    wins: a hold; a tap within 150 ms of a hold's tail in its own lane; a tap
+    within 150 ms of the previous note in its own lane (inside the refractory);
+    a tap in a chord; any other tap.  Per kind: how many notes, their accuracy,
+    and their share of everything the map lost."""
+    times = [n.hit_ms for n in c.notes]
+    at = collections.Counter(times)
+    prev = {}
+    kinds = []
+    for i in sorted(range(len(c.notes)), key=lambda i: times[i]):
+        n = c.notes[i]
+        p = prev.get(n.lane)
+        if n.is_hold:
+            k = "hold"
+        elif p is not None and p.is_hold and n.hit_ms - p.end_ms < 150.0:
+            k = "after_hold"
+        elif p is not None and n.hit_ms - p.hit_ms < 150.0:
+            k = "fast_jack"
+        elif at[n.hit_ms] > 1:
+            k = "chord"
+        else:
+            k = "tap"
+        kinds.append((i, k))
+        prev[n.lane] = n
+    lost = {k: 0.0 for k in LOSS_KINDS}
+    got = {k: [] for k in LOSS_KINDS}
+    for i, k in kinds:
+        a = ACC_WEIGHT[pr.judgments[i]] / 300.0
+        got[k].append(a)
+        lost[k] += 1.0 - a
+    total = max(sum(lost.values()), 1e-9)
+    return {k: {"n": len(got[k]), "acc": round(float(np.mean(got[k])), 3) if got[k] else None,
+                "loss_share": round(lost[k] / total, 3)} for k in LOSS_KINDS}
+
+
 def survey():
     rows = sorted(charts(), key=lambda r: r["events_per_s"])
     print(f"{'song':<16s}{'difficulty':<24s}{'notes':>6s}{'sec':>5s}"
@@ -201,6 +242,7 @@ def play():
                     "n_stray": int(pr.n_stray),
                     "stray_per_note": float(pr.n_stray / max(len(r["chart"]), 1)),
                     "counts": pr.counts,
+                    "loss": loss_breakdown(r["chart"], pr),
                     "wall_s": round(wall / len(todo), 1)})
         res["runs"].append(row)
         with open(SHARD_PATH, "w") as fh:
