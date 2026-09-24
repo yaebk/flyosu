@@ -131,6 +131,17 @@ ARMS = {
     # jack result says to expect the control to do well and the trained arm to
     # pay for whatever the stage-7 charts displaced.
     "hold_a400":    dict(specs=((4, 600.0), (4, 350.0), (7, 600.0), (7, 400.0)), n_charts=16, k=32, approach=400.0),
+    # round 10: density and holds each work alone and neither survives being
+    # mixed at a fixed chart budget -- the density diet is perfect on density
+    # and poor on holds, the hold diet the reverse.  Is that a budget limit or
+    # a capacity limit?  Give both a diet big enough to cover everything, and
+    # try more readout capacity as well.
+    "both_a400":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=400.0),
+    "both_a300":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=300.0),
+    "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
 
 # Held-out battery: the conditions experiment 5 measured, plus a denser
