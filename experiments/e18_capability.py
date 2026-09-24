@@ -242,6 +242,30 @@ ARMS = {
                                  (4, 150.0), (4, 125.0), (7, 600.0), (7, 400.0)),
                           n_charts=36, k=64, approach=250.0, oracle=True, refr=100.0,
                           smooth=20.0, release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 16: 48 components tied at 0.943 with either 20 or 10 ms smoothing,
+    # and 64 collapsed -- not because 64 is too many but because the 61
+    # calibration states the projection is fitted on have rank 60.  Fitting
+    # the projection on the activity recorded on the training charts instead
+    # (still label-free) lifts that ceiling: 48 from recordings, to compare
+    # like with like, then 96 and 160.
+    "fast_sm20_k48t":  dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                   (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                   (7, 400.0)),
+                            n_charts=36, k=48, pca="train", approach=250.0, oracle=True,
+                            refr=100.0, smooth=20.0,
+                            release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k96t":  dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                   (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                   (7, 400.0)),
+                            n_charts=36, k=96, pca="train", approach=250.0, oracle=True,
+                            refr=100.0, smooth=20.0,
+                            release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k160t": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                   (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                   (7, 400.0)),
+                            n_charts=36, k=160, pca="train", approach=250.0, oracle=True,
+                            refr=100.0, smooth=20.0,
+                            release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -350,6 +374,8 @@ def run_arm(arm: str) -> dict:
           + ", ".join(f"s{s[0]}@{s[1]:.0f}"
                       + (f"/a{s[2]:.0f}" if len(s) > 2 else "") for s in specs), flush=True)
     rr.record()
+    if cfg.get("pca") == "train":
+        rr.features_from_recordings(k)
     d = rr.solve()
     out = {"arm": arm, "specs": [list(s) for s in specs],
            "n_charts": n_charts, "k": k, "n_params": d["n_params"],
@@ -453,6 +479,8 @@ def validate():
     print(f"[{arm}] validating on seed {DEEP_KW['seed']}, "
           f"{DEEP_KW['n_charts']} charts x {DEEP_KW['n_notes']} notes per condition", flush=True)
     rr.record()
+    if cfg.get("pca") == "train":
+        rr.features_from_recordings(int(cfg.get("k", READOUT_K)))
     fit = rr.solve()
     out = {"arm": arm, "deep_kw": DEEP_KW, "lanes": fit["lanes"],
            "n_params": fit["n_params"], "conditions": {}}

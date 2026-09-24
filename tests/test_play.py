@@ -560,8 +560,20 @@ def test_release_logic():
           base_p == lvl0_p and np.array_equal(lvl0_d, R.replay_down(u)))
 
 
+def test_projection():
+    from flyosu import reservoir as R
+    print("population projection")
+    rng = np.random.default_rng(1)
+    X = rng.normal(size=(61, 200))          # like the 61 calibration states: rank 60
+    ok = R.PopulationProjection.from_activity(np.arange(200), X, 48)
+    check("a projection within the rank fits", ok.k == 48 and np.isfinite(ok.sd).all())
+    check("asking past the rank is refused, not silently padded with noise",
+          _raises(lambda: R.PopulationProjection.from_activity(np.arange(200), X, 64)))
+
+
 def main():
     test_mania()
+    test_projection()
     test_beatmap()
     test_encoder_geometry()
     test_controller_logic()

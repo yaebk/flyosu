@@ -142,9 +142,26 @@ class PopulationProjection:
         idx = fly.readout.dn_local if idx is None else np.asarray(idx)
         states = calibration_states(fly, r0, dt) if states is None else states
         X = np.array([s[idx] for s in states], dtype=np.float64)
+        return cls.from_activity(idx, X, k)
+
+    @classmethod
+    def from_activity(cls, idx: np.ndarray, X: np.ndarray, k: int) -> "PopulationProjection":
+        """The projection fitted on any (samples, len(idx)) activity matrix.
+        ``fit`` uses the 61 calibration states; a caller can instead pass the
+        activity recorded on the training charts, which is still label-free
+        (no target is used) but spans far more than the calibration set's 60
+        dimensions."""
+        X = np.asarray(X, dtype=np.float64)
         mean = X.mean(0)
         U, S, Vt = np.linalg.svd(X - mean, full_matrices=False)
-        k = min(k, len(S))
+        # Components past the rank have singular values at rounding level; the
+        # z-scoring below would divide by that and turn them into huge noise,
+        # which is how a 64-component readout on the 61 calibration states
+        # (rank 60) collapsed to 0.02.  Refuse rather than silently cap.
+        rank = int((S > S[0] * 1e-9).sum()) if len(S) else 0
+        if k > rank:
+            raise ValueError(f"asked for {k} components but the activity has rank {rank} "
+                             f"({len(X)} samples)")
         comp = Vt[:k]
         P = (X - mean) @ comp.T
         sd = P.std(0)
@@ -456,6 +473,16 @@ class RidgeReadout:
         self.recordings = record_many(self.player, charts,
                                       [self.seed + i for i in range(len(charts))],
                                       hold_oracle=self.hold_oracle)
+
+    def features_from_recordings(self, k: int, stride: int = 10) -> PopulationProjection:
+        """Refit the population projection on the activity recorded on the
+        training charts (every ``stride``-th frame) instead of the calibration
+        ensemble, and install it.  Call between ``record`` and ``solve``."""
+        idx = (self.features.idx if isinstance(self.features, PopulationProjection)
+               else self.player.fly.readout.dn_local)
+        X = np.vstack([r.X[::stride] for r in self.recordings])
+        self.features = PopulationProjection.from_activity(idx, X, k)
+        return self.features
 
     def solve(self) -> dict:
         """Fit W, b and the per-lane (lead, offset) on the recordings; install
