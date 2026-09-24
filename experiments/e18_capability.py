@@ -140,6 +140,16 @@ ARMS = {
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=400.0),
     "both_a300":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=300.0),
+    # round 11: releases.  both_a300 releases a steady 80-90 ms late on every
+    # hold, and the fit never saw it -- its judge replay didn't release keys at
+    # all, so every hold was scored as never let go.  `_v2` is both_a300 with
+    # only that corrected; `_rel` also fits a per-lane release level on the
+    # training charts.  The pair separates the two changes.
+    "both_a300_v2":  dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=300.0),
+    "both_a300_rel": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=300.0,
+                          release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -226,7 +236,8 @@ def run_arm(arm: str) -> dict:
         player.controller.refractory_ms = float(cfg["refr"])
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=n_charts, n_notes=N_NOTES,
-                        seed=TRAIN_SEED, chart_specs=specs)
+                        seed=TRAIN_SEED, chart_specs=specs,
+                        release_levels=tuple(cfg.get("release", ())))
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=k, states=states)
     print(f"[{arm}] recording {n_charts} charts (pca{k}): "
           + ", ".join(f"s{s[0]}@{s[1]:.0f}"
@@ -323,14 +334,16 @@ def validate():
         player.controller.refractory_ms = float(cfg["refr"])
     states = calibration_states(fly, player.r0)
     rr = R.RidgeReadout(player, n_charts=int(cfg.get("n_charts", N_CHARTS)),
-                        n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=_specs(cfg))
+                        n_notes=N_NOTES, seed=TRAIN_SEED, chart_specs=_specs(cfg),
+                        release_levels=tuple(cfg.get("release", ())))
     rr.features = R.PopulationProjection.fit(fly, player.r0,
                                              k=int(cfg.get("k", READOUT_K)), states=states)
     print(f"[{arm}] validating on seed {DEEP_KW['seed']}, "
           f"{DEEP_KW['n_charts']} charts x {DEEP_KW['n_notes']} notes per condition", flush=True)
     rr.record()
-    rr.solve()
-    out = {"arm": arm, "deep_kw": DEEP_KW, "conditions": {}}
+    fit = rr.solve()
+    out = {"arm": arm, "deep_kw": DEEP_KW, "lanes": fit["lanes"],
+           "n_params": fit["n_params"], "conditions": {}}
     for name, cond in DEEP.items():
         e = L.evaluate(player, **cond, **DEEP_KW, **_approach(cfg))
         n_c = int(np.array(e["confusion"]).sum())

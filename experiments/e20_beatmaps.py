@@ -86,7 +86,11 @@ FIT_HOLD = dict(specs=((4, 600.0), (4, 350.0), (4, 250.0), (7, 600.0), (7, 400.0
                 n_charts=20, k=32)
 FIT_BOTH = dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                        (7, 600.0), (7, 400.0)), n_charts=28, k=32)
-_DIETS = {"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH}
+# FIT_BOTH_REL adds the per-lane hold-release levels and the re-press rule
+# (``Controller.release``): the first run of FIT_BOTH lost the fast maps because
+# over half their holds are followed in the same lane within 100 ms.
+FIT_BOTH_REL = dict(FIT_BOTH, release=tuple(round(0.05 * i, 2) for i in range(21)))
+_DIETS = {"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL}
 FIT = _DIETS[_DIET]
 TRAIN_SEED = 100
 N_NOTES_FIT = 24
@@ -154,7 +158,8 @@ def fitted_player():
     states = calibration_states(fly, player.r0)
     specs = tuple((s[0], s[1], APPROACH_MS) for s in FIT["specs"])
     rr = R.RidgeReadout(player, n_charts=FIT["n_charts"], n_notes=N_NOTES_FIT,
-                        seed=TRAIN_SEED, chart_specs=specs)
+                        seed=TRAIN_SEED, chart_specs=specs,
+                        release_levels=tuple(FIT.get("release", ())))
     rr.features = R.PopulationProjection.fit(fly, player.r0, k=FIT["k"], states=states)
     rr.record()
     rr.solve()
@@ -170,18 +175,21 @@ def play():
     print(f"fitting the experiment 18 readout ({FIT['k']} PCs, "
           f"{FIT['n_charts']} synthetic charts, {APPROACH_MS:.0f} ms approach)", flush=True)
     player = fitted_player()
-    print(f"playing {len(rows)} difficulties", flush=True)
-    for r in rows:
-        if (r["song"], r["version"]) in done:
-            continue
-        t0 = time.time()
-        pr = player.play(r["chart"], seed=4242)
+    todo = [r for r in rows if (r["song"], r["version"]) not in done]
+    print(f"playing {len(todo)} difficulties together", flush=True)
+    # All of a shard's maps in one batched play (bit-identical to one at a
+    # time, and cheaper per map); the price is that a shard checkpoints once,
+    # at the end, instead of after every map.
+    t0 = time.time()
+    results = player.play_many([r["chart"] for r in todo], seeds=[4242] * len(todo))
+    wall = time.time() - t0
+    for r, pr in zip(todo, results):
         row = {k: v for k, v in r.items() if k != "chart"}
         row.update({"accuracy": float(pr.accuracy), "hit_rate": float(pr.hit_rate),
                     "n_stray": int(pr.n_stray),
                     "stray_per_note": float(pr.n_stray / max(len(r["chart"]), 1)),
                     "counts": pr.counts,
-                    "wall_s": round(time.time() - t0, 1)})
+                    "wall_s": round(wall / len(todo), 1)})
         res["runs"].append(row)
         with open(SHARD_PATH, "w") as fh:
             json.dump(res, fh, indent=1)

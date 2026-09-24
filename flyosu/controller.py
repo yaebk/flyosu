@@ -107,11 +107,20 @@ class Controller:
     # parameter* -- they reuse the same W and the same threshold, where delays
     # need four more numbers off a probe.
     trigger: str = "cross"              # "cross" | "peak" | "fall"
+    # Per-key release level for hold notes, or None.  None is the original
+    # behaviour: a key lifts when its drive falls back through zero.  Hold
+    # releases measured that way land a steady 80-90 ms late, because the
+    # drive decays slowly off its plateau, so with a level set the key instead
+    # lifts as the drive falls back through ``release[k]`` -- which it must
+    # first have exceeded since the press.  Presses are untouched.
+    release: np.ndarray | None = None
     z_s: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS))
     u_prev: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
     du_prev: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS))
     last_press: np.ndarray = field(default_factory=lambda: np.full(N_KEYS, -np.inf))
     pending: list = field(default_factory=list)   # [(press time, key), ...]
+    armed: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS, bool))
+    relifted: np.ndarray = field(default_factory=lambda: np.zeros(N_KEYS, bool))
 
     # -- parameters --------------------------------------------------------
 
@@ -132,13 +141,14 @@ class Controller:
 
     @property
     def n_params(self) -> int:
-        return self.W.size + N_KEYS
+        return self.W.size + N_KEYS + (0 if self.release is None else N_KEYS)
 
     def copy(self) -> "Controller":
         return Controller(self.W.copy(), self.b.copy(), self.refractory_ms,
                           self.smooth_ms,
                           None if self.delay_ms is None else self.delay_ms.copy(),
-                          self.trigger)
+                          self.trigger,
+                          None if self.release is None else self.release.copy())
 
     # -- dynamics ----------------------------------------------------------
 
@@ -148,6 +158,8 @@ class Controller:
         self.du_prev = np.zeros(N_KEYS)
         self.last_press = np.full(N_KEYS, -np.inf)
         self.pending = []
+        self.armed = np.zeros(N_KEYS, bool)
+        self.relifted = np.zeros(N_KEYS, bool)
 
     def step(self, z: np.ndarray, t_ms: float, dt_ms: float) -> list[int]:
         """Feed one frame of z-scored channel activity; return keys pressed."""
@@ -159,6 +171,15 @@ class Controller:
         ready = t_ms - self.last_press >= self.refractory_ms
         if self.trigger == "cross":
             fire = (u > 0) & (self.u_prev <= 0) & ready
+            if self.release is not None:
+                # A key lifted at its release level presses again when the
+                # drive rises back through that level, without first falling
+                # to zero.  On the harder real maps over half of all holds
+                # have the next same-lane note within 100 ms of the tail, far
+                # too soon for the drive to empty, so without this the
+                # follower is never pressed at all.
+                fire |= (self.relifted & (u > self.release)
+                         & (self.u_prev <= self.release) & ready)
         elif self.trigger == "peak":
             # the drive has just turned over while still above threshold: this
             # is the channel's own peak, which arrives later than its crossing
@@ -170,6 +191,10 @@ class Controller:
             fire = (u <= 0) & (self.u_prev > 0) & ready
         else:
             raise ValueError(f"unknown trigger {self.trigger!r}")
+        if self.release is not None:
+            self.armed = (u > 0) & (self.armed | (u > self.release))
+            lifted = self.armed & (u < self.release)
+            self.relifted = (u > 0) & (self.relifted | lifted) & ~fire
         self.u_prev = u
         crossed = np.flatnonzero(fire).tolist()
         for k in crossed:
@@ -200,8 +225,14 @@ class Controller:
         follows the crossing, not the scheduled press, so it is not meaningful
         together with ``delay_ms`` -- the untrained delay policy and hold notes
         have never been used on the same chart.
+
+        With ``release`` set, a key that has risen above its release level
+        lifts as soon as it falls back below it, rather than waiting for zero.
         """
-        return np.asarray(self.u_prev > 0)
+        up = np.asarray(self.u_prev > 0)
+        if self.release is None:
+            return up
+        return up & ~(self.armed & (self.u_prev < self.release))
 
     # -- construction ------------------------------------------------------
 

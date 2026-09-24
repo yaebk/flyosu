@@ -461,12 +461,63 @@ def _raises(fn):
     return False
 
 
+def _drive_controller(u, release, refractory_ms=150.0, dt=2.0):
+    """Run a Controller whose drive is exactly ``u`` (identity W, no bias, no
+    smoothing): per-frame presses and ``down``."""
+    c = Controller(W=np.eye(N_KEYS), b=np.zeros(N_KEYS), refractory_ms=refractory_ms,
+                   smooth_ms=0.0, release=release)
+    c.reset()
+    presses, down = [], []
+    for i, ui in enumerate(u):
+        presses.append(c.step(ui, i * dt, dt))
+        down.append(c.down().copy())
+    return presses, np.array(down)
+
+
+def test_release_logic():
+    from flyosu import reservoir as R
+    print("hold release levels")
+    # one hold: rise to 1, plateau, decay through 0.5 and on to zero
+    ramp = np.concatenate([np.linspace(-0.5, 1.0, 20), np.ones(40), np.linspace(1.0, -0.5, 60)])
+    u = np.zeros((len(ramp), N_KEYS)) - 1.0
+    u[:, 0] = ramp
+    p0, d0 = _drive_controller(u, None)
+    p5, d5 = _drive_controller(u, np.full(N_KEYS, 0.5))
+    lift0 = int(np.flatnonzero(d0[:, 0])[-1]); lift5 = int(np.flatnonzero(d5[:, 0])[-1])
+    check("a release level lifts the key earlier", lift5 < lift0, f"frame {lift5} vs {lift0}")
+    check("it does not change the press", [i for i, k in enumerate(p0) if k] ==
+          [i for i, k in enumerate(p5) if k])
+    # a follower: the drive dips to 0.3 (never to zero) and rises again
+    dip = np.concatenate([np.linspace(-0.5, 1.0, 20), np.ones(80), np.linspace(1.0, 0.3, 15),
+                          np.linspace(0.3, 1.0, 15), np.ones(20), np.linspace(1.0, -0.5, 20)])
+    u = np.zeros((len(dip), N_KEYS)) - 1.0
+    u[:, 0] = dip
+    n0 = sum(1 for k in _drive_controller(u, None)[0] if k)
+    n5 = sum(1 for k in _drive_controller(u, np.full(N_KEYS, 0.5))[0] if k)
+    check("without a level, a dip that never reaches zero is one press", n0 == 1, str(n0))
+    check("with one, the rise after the dip presses again", n5 == 2, str(n5))
+    rng = np.random.default_rng(3)
+    u = np.cumsum(rng.normal(0, 0.08, (3000, N_KEYS)), 0) % 2.0 - 0.6   # busy, crossing often
+    t = np.arange(len(u)) * 2.0
+    for lvl in (0.0, 0.3):
+        rel = np.full(N_KEYS, lvl)
+        live_p, live_d = _drive_controller(u, rel)
+        off_p, off_d = R.replay_keys(u, t, 150.0, rel)
+        check(f"offline replay matches the live controller (level {lvl})",
+              live_p == off_p and np.array_equal(live_d, off_d))
+    base_p = R.replay_presses(u, t, 150.0)
+    lvl0_p, lvl0_d = R.replay_keys(u, t, 150.0, np.zeros(N_KEYS))
+    check("level 0 is the original controller",
+          base_p == lvl0_p and np.array_equal(lvl0_d, R.replay_down(u)))
+
+
 def main():
     test_mania()
     test_beatmap()
     test_encoder_geometry()
     test_controller_logic()
     test_triggers()
+    test_release_logic()
     test_probes()
     if "--fast" not in sys.argv:
         test_with_network()

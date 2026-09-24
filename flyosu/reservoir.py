@@ -281,12 +281,57 @@ def replay_presses(u: np.ndarray, t: np.ndarray, refractory_ms: float) -> list[l
     return out
 
 
-def replay(rec: Recording, presses: list[list[int]]) -> PlayResult:
-    """Run recorded press times through the judge (open-loop visuals)."""
+def replay_down(u: np.ndarray) -> np.ndarray:
+    """The controller's ``down`` run offline on a drive trace, for a
+    controller without release levels: (T, 4) bool, which keys are held."""
+    return u > 0
+
+
+def replay_keys(u: np.ndarray, t: np.ndarray, refractory_ms: float,
+                release: np.ndarray) -> tuple[list[list[int]], np.ndarray]:
+    """``replay_presses`` and ``replay_down`` together for a controller with
+    release levels: ``Controller.step`` and ``down`` for the "cross" trigger,
+    frame by frame.  The re-press rule makes each lane depend on its own
+    history, so the vectorised crossing search above no longer applies."""
+    T, K = u.shape
+    presses: list[list[int]] = [[] for _ in range(T)]
+    down = np.empty((T, K), bool)
+    u_prev = np.full(K, -np.inf)
+    last = np.full(K, -np.inf)
+    armed = np.zeros(K, bool)
+    relifted = np.zeros(K, bool)
+    for i in range(T):
+        ui = u[i]
+        ready = t[i] - last >= refractory_ms
+        fire = ((ui > 0) & (u_prev <= 0) & ready) | (
+            relifted & (ui > release) & (u_prev <= release) & ready)
+        armed = (ui > 0) & (armed | (ui > release))
+        relifted = (ui > 0) & (relifted | (armed & (ui < release))) & ~fire
+        u_prev = ui
+        for k in np.flatnonzero(fire):
+            presses[i].append(int(k))
+            last[k] = t[i]
+        down[i] = (ui > 0) & ~(armed & (ui < release))
+    return presses, down
+
+
+def replay(rec: Recording, presses: list[list[int]],
+           down: np.ndarray | None = None) -> PlayResult:
+    """Run recorded press times through the judge (open-loop visuals).
+
+    ``down`` (from ``replay_down``) releases held keys exactly as live play
+    does.  Without it a hold is judged as never let go -- which is how every
+    fit judged holds until the release level was added, so the fit could not
+    see release timing at all.  A chart with no holds never holds a key, so
+    for those the two are identical."""
     env = ManiaEnv(rec.chart, dt_ms=rec.dt)
     for i in range(len(rec.t)):
         for lane in presses[i]:
             env.press(lane)
+        if down is not None:
+            for k in range(N_KEYS):
+                if env.hold[k] and not down[i, k]:
+                    env.release(k)
         env.step()
     return env.result()
 
@@ -341,6 +386,8 @@ class RidgeReadout:
     # is a measured correction rather than a tuned one.  It does nothing on a
     # chart with no hold notes, which is every chart used before experiment 20.
     tail_lead_ms: float = 130.0
+    # Candidate hold-release levels (see ``Controller.release``); empty = off.
+    release_levels: tuple = ()
     offsets: np.ndarray = field(default_factory=lambda: np.linspace(-2.0, 2.0, 41))
     recordings: list[Recording] = field(default_factory=list)
 
@@ -389,7 +436,8 @@ class RidgeReadout:
             for j, d in enumerate(self.offsets):
                 for rec, z in zip(self.recordings, Zs):
                     u = z @ W.T + b + d
-                    table[i, j] += lane_rewards(replay(rec, replay_presses(u, rec.t, refr)),
+                    table[i, j] += lane_rewards(replay(rec, replay_presses(u, rec.t, refr),
+                                                       replay_down(u)),
                                                 self.stray_penalty)
         table /= len(self.recordings)
         W = np.zeros((N_KEYS, k)); b = np.zeros(N_KEYS)
@@ -401,7 +449,26 @@ class RidgeReadout:
             chosen.append({"lead_ms": float(self.leads[i]), "offset": float(self.offsets[j]),
                            "train_reward": float(table[i, j, lane]),
                            "train_corr": float(corr[i, lane])})
-        ctrl = Controller(W=W, b=b, refractory_ms=refr, smooth_ms=sm)
+        # Release levels, per lane, chosen the same way as the offsets: replay
+        # the training charts through the judge with W and b now fixed.  Level
+        # 0 is the original release and wins every tie, so a diet with no
+        # holds -- where releases are never judged -- keeps release None.
+        release = None
+        if len(self.release_levels):
+            rel_table = np.zeros((len(self.release_levels), N_KEYS))
+            for m, lvl in enumerate(self.release_levels):
+                for rec, z in zip(self.recordings, Zs):
+                    u = z @ W.T + b
+                    pr, dn = replay_keys(u, rec.t, refr, np.full(N_KEYS, float(lvl)))
+                    rel_table[m] += lane_rewards(replay(rec, pr, dn), self.stray_penalty)
+            best = np.asarray(self.release_levels, float)[rel_table.argmax(0)]
+            for lane in range(N_KEYS):
+                chosen[lane]["release"] = float(best[lane])
+                chosen[lane]["train_reward_release"] = float(rel_table[:, lane].max()
+                                                             / len(self.recordings))
+            if np.any(best > 0):
+                release = best
+        ctrl = Controller(W=W, b=b, refractory_ms=refr, smooth_ms=sm, release=release)
         p.controller = ctrl
         p.features = None if self.features is None else feats
         return {"n_params": int(ctrl.n_params), "n_features": int(ctrl.n_features),
