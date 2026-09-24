@@ -277,6 +277,23 @@ ARMS = {
                                 n_charts=52, k=48, approach=250.0, oracle=True, refr=100.0,
                                 smooth=20.0,
                                 release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 18: round 17's long holds fixed the early releases (1.2 s holds
+    # 0.745 -> 1.000) but the chord-heavy charts showed nothing (the baseline
+    # already scores 1.000 there) and the two together cost density.  Keep only
+    # the long holds; then give the broader diet more capacity, 56 components,
+    # just under the calibration set's rank of 60.
+    "fast_sm20_k48_lh": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                    (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                    (7, 400.0), (7, 1000.0), (7, 1500.0)),
+                             n_charts=44, k=48, approach=250.0, oracle=True, refr=100.0,
+                             smooth=20.0,
+                             release=tuple(round(0.05 * i, 2) for i in range(21))),
+    "fast_sm20_k56_lh": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0),
+                                    (4, 200.0), (4, 150.0), (4, 125.0), (7, 600.0),
+                                    (7, 400.0), (7, 1000.0), (7, 1500.0)),
+                             n_charts=44, k=56, approach=250.0, oracle=True, refr=100.0,
+                             smooth=20.0,
+                             release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
