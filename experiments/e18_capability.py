@@ -150,6 +150,12 @@ ARMS = {
     "both_a300_rel": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=32, approach=300.0,
                           release=tuple(round(0.05 * i, 2) for i in range(21))),
+    # round 12: the same with stage 8 in the diet, so the fit sees the
+    # lift-and-press-again pattern it is now able to perform.
+    "both8_rel":     dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
+                                 (7, 600.0), (7, 400.0), (8, 400.0), (8, 300.0)),
+                          n_charts=36, k=32, approach=300.0,
+                          release=tuple(round(0.05 * i, 2) for i in range(21))),
     "both_a300_k48": dict(specs=((4, 600.0), (4, 450.0), (4, 350.0), (4, 250.0), (4, 200.0),
                                  (7, 600.0), (7, 400.0)), n_charts=28, k=48, approach=300.0),
 }
@@ -197,6 +203,11 @@ DEEP = {
     "s7_600": dict(stage=7, interval_ms=600.0),      # 1.7 notes/s, holds
     "s7_400": dict(stage=7, interval_ms=400.0),      # 2.5 notes/s, holds
     "s7_300": dict(stage=7, interval_ms=300.0),      # 3.3 notes/s, holds
+    # Holds followed in their own lane 80 / 60 ms after the tail (stage 8),
+    # the pattern that sinks the fast real maps.  Arms validated before these
+    # were added simply lack the two rows.
+    "s8_400": dict(stage=8, interval_ms=400.0),      # 2.5 notes/s
+    "s8_300": dict(stage=8, interval_ms=300.0),      # 3.3 notes/s
 }
 DEEP_KW = dict(n_charts=10, n_notes=20, seed=4242)
 

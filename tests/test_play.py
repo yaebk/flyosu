@@ -59,7 +59,15 @@ def test_mania():
     t3, l3 = c3.times(), c3.lanes()
     g3 = [np.diff(np.sort(t3[l3 == k])).min() for k in range(4) if (l3 == k).sum() > 1]
     check("stage 3 never does", min(g3) >= 300.0)
-    check("an unknown stage is rejected", _raises(lambda: mania.stage_chart(8)))
+    check("an unknown stage is rejected", _raises(lambda: mania.stage_chart(9)))
+    c8 = mania.stage_chart(8, n_notes=60, interval_ms=400.0, seed=2)
+    follow = [b.hit_ms - a.end_ms for ln in range(4)
+              for a, b in zip(*(lambda ns: (ns, ns[1:]))(
+                  sorted((n for n in c8.notes if n.lane == ln), key=lambda n: n.hit_ms)))
+              if a.is_hold]
+    check("stage 8 follows holds closely in their own lane",
+          sum(g <= 80.0 for g in follow) >= 5, f"{sum(g <= 80.0 for g in follow)} within 80 ms")
+    check("and never overlaps them", min(follow) > 0)
     c7 = mania.stage_chart(7, n_notes=40, interval_ms=600.0, seed=1)
     holds = [n for n in c7.notes if n.is_hold]
     check("stage 7 makes hold notes", 5 < len(holds) < 40, f"{len(holds)} of 40")

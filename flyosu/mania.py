@@ -145,6 +145,7 @@ STAGES = {
     5: "random lanes, varied intervals",
     6: "random lanes with jacks",
     7: "random lanes with hold notes",
+    8: "hold notes with same-lane followers",
 }
 
 
@@ -207,6 +208,17 @@ def stage_chart(stage: int, n_notes: int = 24, interval_ms: float = 600.0,
             ln = int(rng.integers(N_LANES))
             end = t + hold_frac * interval_ms if rng.random() < hold_p else None
             notes.append(Note(ln, t, end_ms=end)); t += interval_ms
+    elif stage == 8:
+        # Stage 7's holds with stage 6's jacks, so a hold is often followed in
+        # its own lane only (1 - hold_frac) of an interval after its tail --
+        # 80 ms at 400 ms.  Stage 7 alone almost never does this, and on the
+        # hardest real maps over half of all holds are followed that way: the
+        # key has to come up and go straight back down.
+        prev = int(rng.integers(N_LANES))
+        for i in range(n_notes):
+            ln = prev if i and rng.random() < jack_p else int(rng.integers(N_LANES))
+            end = t + hold_frac * interval_ms if rng.random() < hold_p else None
+            notes.append(Note(ln, t, end_ms=end)); prev = ln; t += interval_ms
     else:
         raise ValueError(f"unknown stage {stage}; known: {sorted(STAGES)}")
     return Chart(notes, approach_ms=approach_ms, od=od,
