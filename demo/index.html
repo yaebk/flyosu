@@ -251,7 +251,8 @@ function grade(acc) {        // osu!mania (stable) grade thresholds
 const songTitle = (s) => s.replace(/\.osz$/i, "").replace(/^\d+\s+/, "").replace(/\s*\[no video\]\s*/i, "");
 const splitSong = (s) => { const x = songTitle(s), i = x.indexOf(" - "); return i < 0 ? ["", x] : [x.slice(0, i), x.slice(i + 3)]; };
 
-let INDEX = null, NV = null, MAP = null, CUR = -1, filter = "all";
+let INDEX = null, NV = null, MAP = null, CUR = -1, SHOWN = -1, filter = "all";
+let HUDF = "sans-serif", MONO = "monospace";   // font stacks from the CSS, read once in init
 let t = 0, playing = false, speed = 1, lastFrame = 0, preview = false;
 const CACHE = new Map();      // key -> prepared map | "loading" | Error
 const BRAIN = new Map();      // file -> Int8Array | "loading" | Error
@@ -274,7 +275,7 @@ function prepare(idx, m) {
     if (isHold && h) { rt = h.released ? h.release : end + 1.5 * miss; gone[i] = rt; clipFrom[i] = h.head === "MISS" ? null : (p ? p[0] : hit); }
     else if (p && p[3] !== "MISS") { rt = p[0]; gone[i] = rt; }
     else rt = p ? p[0] : hit + miss;
-    resolve.push({ t: rt, j: m.judgments[i], lane, err: p && p[4] !== null && p[3] !== "MISS" ? p[4] : null });
+    resolve.push({ t: rt, j: m.judgments[i], lane });
     if (m.judgments[i] === "MISS") sounds.push({ t: isHold && h && h.head !== "MISS" ? rt : hit + miss, kind: "miss" });
   }
   resolve.sort((a, b) => a.t - b.t);
@@ -481,7 +482,7 @@ function drawField(now) {
     keyCenters.push(x + kw / 2);
     c.fillStyle = on ? hexA(LANE[k], 0.9) : "#171a21"; roundRect(c, x, recY + 3, kw, recH - 8, 4); c.fill();
     c.strokeStyle = on ? "#ffffff" : hexA(LANE[k], 0.55); c.lineWidth = on ? 2 : 1.4; c.stroke();
-    c.fillStyle = on ? "#0b0d11" : "#6c7585"; c.font = `700 ${Math.round(Math.max(12, colW * 0.2))}px ${getComputedStyle(document.documentElement).getPropertyValue("--hud")}`;
+    c.fillStyle = on ? "#0b0d11" : "#6c7585"; c.font = `700 ${Math.round(Math.max(12, colW * 0.2))}px ${HUDF}`;
     c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(KEYS[k], x + kw / 2, recY + 3 + (recH - 8) / 2 + 1);
   }
   c.textBaseline = "alphabetic";
@@ -492,7 +493,7 @@ function drawField(now) {
     c.globalAlpha = 1 - age; c.strokeStyle = STRAY; c.lineWidth = 2; c.beginPath(); c.moveTo(cx - 5, y - 5); c.lineTo(cx + 5, y + 5); c.moveTo(cx + 5, y - 5); c.lineTo(cx - 5, y + 5); c.stroke(); c.globalAlpha = 1;
   }
   // combo and the latest judgment, centred on the stage
-  const k = ub(m.rtimes, t), HUDF = getComputedStyle(document.documentElement).getPropertyValue("--hud");
+  const k = ub(m.rtimes, t);
   if (m.combo[k] > 1) {
     c.fillStyle = "#f2f4f7"; c.textAlign = "center"; c.font = `700 ${Math.round(colW * 0.62)}px ${HUDF}`;
     c.fillText(String(m.combo[k]), sx + stW / 2, judgeY * 0.34);
@@ -569,7 +570,7 @@ function drawBrain() {
   c.setTransform(1, 0, 0, 1, 0, 0); c.drawImage(g.base, 0, 0); c.setTransform(g.dpr, 0, 0, g.dpr, 0, 0);
   const B = MAP.brain, data = BRAIN.get(B.file);
   if (!(data instanceof Int8Array)) {
-    c.fillStyle = "#8a93a3"; c.font = "500 12px " + getComputedStyle(document.documentElement).getPropertyValue("--mono"); c.textAlign = "left";
+    c.fillStyle = "#8a93a3"; c.font = "500 12px " + MONO; c.textAlign = "left";
     c.fillText(data instanceof Error ? "Activity could not be loaded: " + data.message : "Loading activity…", 8, 18); return;
   }
   const n = B.neurons, F = B.frames, k = Math.max(0, Math.min(F - 1, Math.round((t - B.t0) / B.dt))), qmax = B.qmax;
@@ -611,7 +612,6 @@ function drawDrive() {
   c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, w, h);
   if (!m) return;
   const WIN = 1000, labelW = 18, gap = 6, sh = (h - 16 - 3 * gap) / 4, tr = m.trace, x0 = labelW, x1 = w - 2;
-  const MONO = getComputedStyle(document.documentElement).getPropertyValue("--mono");
   const xOf = (ms) => x0 + (ms - (t - WIN)) / WIN * (x1 - x0);
   const kLo = Math.max(0, Math.floor((t - WIN - tr.t0) / tr.dt)), kHi = Math.min(tr.drive.length - 1, Math.ceil((t - tr.t0) / tr.dt));
   for (let k = 0; k < 4; k++) {
@@ -787,22 +787,33 @@ async function selectMap(i) {
   CUR = i; setPlaying(false); showResults(false);
   document.querySelectorAll(".diff").forEach((b) => b.setAttribute("aria-current", String(+b.dataset.i === i)));
   const idx = INDEX.maps[i], [artist, title] = splitSong(idx.song);
+  const hud = () => {                      // only once this replay is the one on screen
   $("hud-title").textContent = title;
   $("hud-diff").innerHTML = `<span class="star" style="background:${starColor(idx.stars)};color:${starInk(idx.stars)};padding:3px 7px">★ ${idx.stars.toFixed(2)}</span>${esc(idx.difficulty)} · OD ${idx.od} · ${esc(artist)}`;
   const warn = $("warn");
   warn.hidden = idx.set !== "tuning";
   warn.textContent = "Tuning map. The fly was fitted on half of this map's 6-second sections, so this replay overstates it. Held-out maps are the fair test.";
+  };
+  const status = $("status");
   try {
     const m = await loadReplay(i);
     if (CUR !== i) return;
-    MAP = m; t = Math.min(MAP.tEnd, MAP.notes[0][1] + 2500); preview = true;   // a still with notes in play
+    MAP = m; SHOWN = i; t = Math.min(MAP.tEnd, MAP.notes[0][1] + 2500); preview = true;   // a still with notes in play
+    hud(); status.hidden = true;
     if (AU.el) ensureSong();
     if (AU.ctx) loadHit(hitFile());
     loadBrain(MAP.brain); draw();
-  } catch (e) { const s = $("status"); s.hidden = false; s.textContent = "Could not load this replay (" + e.message + "). Pick it again to retry."; }
+  } catch (e) {
+    if (CUR !== i) return;
+    CUR = SHOWN;                             // keep the list and header on the replay still showing
+    document.querySelectorAll(".diff").forEach((b) => b.setAttribute("aria-current", String(+b.dataset.i === SHOWN)));
+    status.hidden = false; status.textContent = "Could not load this replay (" + e.message + "). Pick it again to retry.";
+  }
 }
 function init(data) {
   INDEX = data; NV = data.neurons_view;
+  const css = getComputedStyle(document.documentElement);
+  HUDF = css.getPropertyValue("--hud").trim() || HUDF; MONO = css.getPropertyValue("--mono").trim() || MONO;
   $("jlegend").innerHTML = J.map((j) => `<span><i style="background:${JCOL[j]}"></i>${j}</span>`).join("") + `<span><i style="background:${STRAY}"></i>stray</span>`;
   const perClass = NV.classes.map((cl, ci) => [cl, NV.cls.filter((c) => c === ci).length]).filter(([, n]) => n > 0);
   $("blegend").innerHTML = perClass.map(([cl, n]) => `<span><i style="background:${(CLASS_INFO[cl] || [cl, "#888888"])[1]}"></i>${(CLASS_INFO[cl] || [cl])[0]}</span>`).join("") + `<span><i class="ring"></i>readout</span>`;

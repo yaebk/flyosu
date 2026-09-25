@@ -112,15 +112,23 @@ def test_e21_maps():
     import e21_trained_wiring as X
     print("experiment 21: training clips and held-out maps")
     X._MAPS.clear()
+    before = B.MAP_SET
     train, held = X.load_maps()
-    B.MAP_SET = "tune"
     t2, _ = RF.pools()
     ref = [c for _, ev in t2 for c in RF.pick(ev, X.RECIPE["per_map"])]
     check("the training clips are round 23's 102", len(train) == 102
           and [c.notes for c in train] == [c.notes for c in ref])
     check("the held-out set is the 30 difficulties with no tuning song", len(held) == 30
           and not any(r["song"].startswith(B.TUNING_SONGS) for r in held))
-    check("the map set is left on tune afterwards", B.MAP_SET == "tune")
+    check("loading the maps leaves the run's map set alone", B.MAP_SET == before)
+    B.MAP_SET = "holdout"             # a run started on the held-out maps ...
+    try:
+        t4, _ = RF.pools()
+    finally:
+        B.MAP_SET = before
+    check("... still draws its training clips from tuning songs only",
+          len(t4) == 17 and all(r["song"].startswith(B.TUNING_SONGS) for r, _ in t4))
+    check("an unknown map set is refused", _raises(lambda: B.charts("tuning"), ValueError))
     t3, h3 = X.load_maps()
     check("a second network in the same shard reuses the same maps", t3 is train and h3 is held)
 

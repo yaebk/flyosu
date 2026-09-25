@@ -83,7 +83,7 @@ def segments(c: Chart) -> list[Chart]:
 def pools():
     """(train clips, decision rows) over every tuning difficulty."""
     train, decide = [], []
-    for r in B.charts():
+    for r in B.charts("tune"):
         segs = segments(r["chart"])
         ev = [s for s in segs[0::2] if s is not None]
         od = [s for s in segs[1::2] if s is not None]
@@ -153,8 +153,7 @@ def holdout():
     cfg = ARMS[ARM]
     train, _ = pools()
     player, diag = fitted_player(cfg, train)
-    B.MAP_SET = "holdout"
-    rows = sorted(B.charts(), key=lambda r: r["events_per_s"])
+    rows = sorted(B.charts("holdout"), key=lambda r: r["events_per_s"])
     t0 = time.time()
     results = player.play_many([r["chart"] for r in rows], seeds=[4242] * len(rows))
     runs = []

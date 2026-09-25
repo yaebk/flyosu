@@ -220,8 +220,7 @@ def select_charts():
         stars = json.load(fh)
     out = []
     for ms in ("tune", "holdout"):
-        E20.MAP_SET = ms                   # charts() reads this at call time
-        for c in E20.charts():
+        for c in E20.charts(ms):
             sid = c["song"].split(" ")[0]
             key = f"{SONG_KEYS[sid]}_{_slug(c['version'])}"
             out.append({"key": key, "set": "tuning" if ms == "tune" else "held-out",
@@ -378,7 +377,7 @@ def _good_hit_sample(blob):
     import wave
     try:
         with wave.open(io.BytesIO(blob)) as w:
-            n, sr, ch, sw = w.getnframes(), w.getframerate(), w.getnchannels(), w.getsampwidth()
+            n, sr, sw = w.getnframes(), w.getframerate(), w.getsampwidth()
             x = np.frombuffer(w.readframes(n), {1: np.uint8, 2: np.int16}[sw]).astype(np.float32)
     except Exception as e:                   # noqa: BLE001 - any unreadable file falls back
         return False, f"unreadable ({e})"

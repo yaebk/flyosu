@@ -58,16 +58,13 @@ _MAPS = {}
 
 
 def load_maps():
-    """(training clips, held-out rows), loaded once per process.  The map set
-    is chosen explicitly each time: ``B.charts`` reads a module global, and a
-    shard measures several networks in one process."""
+    """(training clips, held-out rows), loaded once per process, since a shard
+    measures several networks in one process.  Both map sets are named
+    explicitly (``RF.pools`` reads the tuning maps)."""
     if not _MAPS:
-        B.MAP_SET = "tune"
         train, _ = RF.pools()
         _MAPS["train"] = tuple(c for _, ev in train for c in RF.pick(ev, RECIPE["per_map"]))
-        B.MAP_SET = "holdout"
-        _MAPS["held"] = sorted(B.charts(), key=lambda r: r["events_per_s"])
-        B.MAP_SET = "tune"
+        _MAPS["held"] = sorted(B.charts("holdout"), key=lambda r: r["events_per_s"])
         if any(r["song"].startswith(B.TUNING_SONGS) for r in _MAPS["held"]):
             raise SystemExit("a tuning song is in the held-out set")
     return _MAPS["train"], _MAPS["held"]

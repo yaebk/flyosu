@@ -230,7 +230,7 @@ tests/
   test_pipeline.py    32 checks on the network side
   test_play.py        115 checks on the game side, incl. probes, firing edges, jacks, holds and strays
   test_reservoir.py   20 checks on the closed-form readout
-  test_experiments.py 21 checks on the replay export and experiment 21's maps and freeze guard
+  test_experiments.py 23 checks on the replay export, the map-set handling and experiment 21's freeze guard
   test_malecns.py     the male CNS loader, pinning the numbers docs/MALECNS.md quotes
 docs/
   CLAIMS.md           what is and is not supported, current
@@ -255,7 +255,7 @@ python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 32 checks
 python -m tests.test_play            # 115 checks
 python -m tests.test_reservoir       # 20 checks
-python -m tests.test_experiments     # 21 checks, no network build
+python -m tests.test_experiments     # 23 checks, no network build
 ```
 
 ## Gotchas

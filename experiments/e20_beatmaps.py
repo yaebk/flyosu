@@ -55,7 +55,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flyosu import beatmap, encoder as E, learn as L, model as M, play as P, reservoir as R  # noqa: E402
+from flyosu import beatmap, encoder as E, model as M, play as P, reservoir as R  # noqa: E402
 from flyosu.controller import calibration_states  # noqa: E402
 from flyosu.mania import ACC_WEIGHT  # noqa: E402
 
@@ -128,7 +128,8 @@ _DIETS = {"fast_sm20_k48": FIT_FAST_SM20_K48, "fast_sm20_k48_lh": FIT_FAST_SM20_
           "fast_sm20_k48_jk_r75": FIT_FAST_SM20_K48_JK_R75,
           # round 22: the early hold releases are a real-map problem the
           # synthetic battery cannot show, so the tail lead is judged here
-          "fast_sm20_k48_tl80": dict(FIT_FAST_SM20_K48, tail_lead=80.0),"nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
+          "fast_sm20_k48_tl80": dict(FIT_FAST_SM20_K48, tail_lead=80.0),
+          "nohold": FIT_NOHOLD, "hold": FIT_HOLD, "both": FIT_BOTH, "both_rel": FIT_BOTH_REL,
           "both8_orc_rel": FIT_BOTH8_ORC_REL, "both8_orc_rel_grid": FIT_BOTH8_ORC_REL_GRID,
           "both_orc_rel": FIT_BOTH_ORC_REL, "fast_orc_r100": FIT_FAST_ORC_R100}
 FIT = _DIETS[_DIET]
@@ -143,12 +144,19 @@ def _load(path, default):
     return default
 
 
-def charts() -> list[dict]:
-    """Every 4K mania difficulty in ``osumaps/``, parsed and characterised."""
+def charts(map_set: str | None = None) -> list[dict]:
+    """Every 4K mania difficulty in ``osumaps/`` of one map set ("tune" or
+    "holdout"; default the ``MAP_SET`` this run was started with), parsed and
+    characterised.  Callers that need a particular set pass it rather than
+    changing ``MAP_SET``, so a set chosen for one purpose cannot leak into
+    another (a fit on tuning clips must never read held-out maps)."""
+    map_set = MAP_SET if map_set is None else map_set
+    if map_set not in ("tune", "holdout"):
+        raise ValueError(f"map_set must be 'tune' or 'holdout', not {map_set!r}")
     out = []
     for f in sorted(glob.glob(os.path.join(MAPS, "*.osz"))):
         tuning = os.path.basename(f).startswith(TUNING_SONGS)
-        if tuning != (MAP_SET == "tune"):
+        if tuning != (map_set == "tune"):
             continue
         z = zipfile.ZipFile(f)
         for n in sorted(x for x in z.namelist() if x.lower().endswith(".osu")):
