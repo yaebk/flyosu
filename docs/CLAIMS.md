@@ -298,11 +298,22 @@ really there does not soften when the controls double.**
 
 ## The trained fly against rewired controls (experiment 21)
 
-*Pending.* Pre-registered in `docs/PREREGISTRATION_E21.md`: round 23's recipe
-fitted separately to the real connectome and 20 rewired controls, scored on the
-30 held-out maps, support only at 0/20. The recipe was developed on the real
-network, which favours it. The controls are running, and the real network is
-measured only after they are committed.
+**Not supported, and reversed in direction.** Round 23's recipe was fitted
+separately to the real connectome and to 20 degree-, weight- and
+sign-preserving rewired controls, and all were scored once on the 30 held-out
+maps. The real network scores **0.876 against 0.911 ± 0.016, and 19 of 20
+controls beat it**: p = 0.952, −2.2 control SD, pre-registered with the
+controls committed first (`docs/PREREGISTRATION_E21.md`). The recipe was
+developed entirely on the real network, which favoured it, so the reversal is
+the stronger for it. The gap is widest on fast jacks (0.153 against
+0.378 ± 0.087, all twenty controls ahead) and holds (0.619 against 0.737, all
+twenty ahead). The real network makes fewer stray presses than every control
+(0.0024 against 0.0049), which is descriptive only.
+
+A plausible mechanism, untested: the real connectome's much higher recurrent
+gain (spectral radius 2.283 against 0.736 ± 0.117, the structural finding
+above) keeps activity ringing, so quick repeats in one lane merge and hold
+releases arrive late. `docs/RESULTS_E21.md`.
 
 ## Absolute performance, separately from any comparison
 

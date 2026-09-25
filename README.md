@@ -76,8 +76,12 @@ main event of the first session — see
 [`docs/PREREGISTRATION_E21.md`](docs/PREREGISTRATION_E21.md)) asks the question
 for the fly that actually plays: round 23's recipe fitted separately to the real
 connectome and to 20 rewired controls, all scored on the 30 held-out maps.
-*Result pending: the controls are running; the real network is measured after
-they are committed.*
+**It does not, and the rewired networks play better.** The real network
+scores 0.876 against 0.911 ± 0.016, and 19 of 20 controls beat it (p = 0.952),
+even though the recipe was tuned on the real network alone. The gap is widest
+on fast jacks and holds, the notes that need activity to die away quickly,
+which fits the real connectome's much higher recurrent gain
+([`docs/RESULTS_E21.md`](docs/RESULTS_E21.md)).
 
 ```
                  osu!mania lanes  D    F    J    K

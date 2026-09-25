@@ -2,9 +2,10 @@
 
 **This is the capability thread: real connectome only, no controls, no
 p-values.** A number here says nothing about whether the real wiring beats
-rewired wiring; the same recipe has never been tried on a rewired control and,
-on this project's record, would very likely work there too. The comparison
-thread is `docs/CLAIMS.md` and the pre-registered experiments.
+rewired wiring. Experiment 21 applied the round-23 recipe to 20 rewired
+controls, and 19 of them played better than the real connectome
+(`RESULTS_E21.md`). The comparison thread is `docs/CLAIMS.md` and the
+pre-registered experiments.
 
 Real-map results, which are what the synthetic work is for, are in
 [`RESULTS_E20.md`](RESULTS_E20.md).

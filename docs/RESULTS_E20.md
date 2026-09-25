@@ -1,8 +1,9 @@
 # Experiment 20 — the fly plays real beatmaps
 
 **Capability thread: real connectome only, no controls, no p-values.** Nothing
-here bears on whether the real wiring beats rewired wiring; the recipe would
-very likely work on a rewired control too.
+here bears on whether the real wiring beats rewired wiring. Experiment 21
+tested that with the round-23 recipe: 19 of 20 rewired controls play these
+held-out maps better (0.911 ± 0.016 against 0.876, `RESULTS_E21.md`).
 
 **Current best: 0.876 mean accuracy on 30 held-out 4K
 difficulties** that no readout choice ever looked at, up from 0.576 for the
