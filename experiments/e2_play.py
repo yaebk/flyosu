@@ -39,7 +39,7 @@ from sklearn.model_selection import StratifiedKFold, cross_val_score
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from flyosu import learn as L, mania, model as M, play as P  # noqa: E402
+from flyosu import learn as L, model as M, play as P  # noqa: E402
 from flyosu.controller import best_assignment  # noqa: E402
 from flyosu.encoder import EL_JUDGE, LANE_AZ  # noqa: E402
 
@@ -191,7 +191,6 @@ def main():
 
 def report(results):
     runs = results["runs"]
-    fams = ["real"] + [f for f, _ in CONTROLS]
 
     def rows(fam):
         return [r for r in runs if r["family"] == fam]

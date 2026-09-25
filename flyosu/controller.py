@@ -47,7 +47,7 @@ from itertools import permutations
 
 import numpy as np
 
-from .encoder import EL_JUDGE, EL_SPAWN, LANE_AZ, SIGMA_DEG, Encoder
+from .encoder import EL_JUDGE, LANE_AZ, SIGMA_DEG, Encoder
 from .model import CAL_AZ, CAL_EL, DT_PLAY, Fly
 
 N_KEYS = 4

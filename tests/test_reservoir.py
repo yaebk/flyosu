@@ -70,7 +70,6 @@ def test_offline_matches_online():
           f"{len(online.presses)} presses")
     check("same judgments", online.judgments == offline.judgments)
     check("some notes were hit", online.hit_rate > 0.5, online.summary())
-    lr = R.lane_rewards(offline)
     check("lane rewards average to the reward",
           abs(R.lane_rewards(offline, 0.05).mean() - (offline.accuracy - 0.05 * offline.n_stray / len(chart))) < 1e-9)
     # mashing every lane at every note must lose to playing one's own lane

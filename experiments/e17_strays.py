@@ -229,7 +229,7 @@ def report(res):
     real = runs.get("real connectome")
     ctl = [r for lbl, r in runs.items() if lbl.startswith("rewired")]
     n = len(ctl)
-    print(f"\n=== experiment 17: strays, pre-registered ===")
+    print("\n=== experiment 17: strays, pre-registered ===")
     print(f"  theta {THETA} declared; {CHARTS['n_charts']} charts x {CHARTS['n_notes']} "
           f"notes at {CHARTS['interval_ms']:.0f} ms, seed {CHARTS['seed']}")
     print(f"  {n} rewired controls; one-sided p floor {_p(0, n):.3f}, "

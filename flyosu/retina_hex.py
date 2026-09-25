@@ -53,7 +53,6 @@ for this dataset would replace all of it.
 from __future__ import annotations
 
 import numpy as np
-import pandas as pd
 
 from .connectome import Connectome
 from .retina import (AZ_CENTRE, AZ_LIMIT, AZ_SPAN, EL_CENTRE, EL_LIMIT, EL_SPAN,

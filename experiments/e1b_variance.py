@@ -35,7 +35,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from experiments.e1_sensorimotor import (  # noqa: E402
-    LANES, EL_JUDGE, RESULTS, SIGMA, _best_assignment, decode, trial)
+    LANES, EL_JUDGE, RESULTS, _best_assignment, decode, trial)
 from flyosu import model as M  # noqa: E402
 
 POOL = 200          # trials per lane simulated once

@@ -133,7 +133,6 @@ def build_motor(cx: Connectome, node_ids: np.ndarray, Wt: sp.csr_matrix | None =
     """
     lut = np.full(cx.n_neurons, -1, dtype=np.int32)
     lut[node_ids] = np.arange(len(node_ids), dtype=np.int32)
-    ann = cx.ann
     names, groups = [], []
     for s, tag in (("left", "L"), ("right", "R")):
         for nm in neuromeres:

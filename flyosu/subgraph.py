@@ -47,7 +47,7 @@ class Pathway:
         lines.append("  super_class:")
         for k, v in a.super_class.value_counts(dropna=False).items():
             lines.append(f"    {str(k):<20s} {v:>6,}")
-        lines.append(f"  top cell types:")
+        lines.append("  top cell types:")
         for k, v in a.cell_type.value_counts(dropna=False).head(top).items():
             lines.append(f"    {str(k):<20s} {v:>6,}")
         return "\n".join(lines)

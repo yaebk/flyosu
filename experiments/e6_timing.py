@@ -268,7 +268,7 @@ def report(results):
         pk_ctrl = np.array([pk[r["label"]]["lane_correct_mean"] for r in ctrl if r["label"] in pk])
         pk_real = pk["real connectome"]["lane_correct_mean"] if "real connectome" in pk else np.nan
         n_ge = int((pk_ctrl >= pk_real).sum())
-        print(f"\n=== phase 2: four per-key thresholds instead of one shared ===")
+        print("\n=== phase 2: four per-key thresholds instead of one shared ===")
         print(f"  real     lane-correct {shared_real:.2f} -> {pk_real:.2f}  "
               f"({pk_real - shared_real:+.2f})")
         print(f"  rewired  lane-correct {shared_ctrl.mean():.2f} +- {shared_ctrl.std():.2f} -> "

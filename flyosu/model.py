@@ -137,7 +137,7 @@ class Fly:
         lines = [f"network   {self.net.n:,} neurons  {self.net.n_edges:,} edges",
                  f"input     {len(self.ret):,} cells ("
                  + "/".join(sorted(set(self.ret.ptype.tolist()))) + ")",
-                 f"channels  " + "  ".join(
+                 "channels  " + "  ".join(
                      f"{n}={len(g)}" for n, g in
                      zip(self.readout.names, self.readout.groups))]
         lines.append("composition:")

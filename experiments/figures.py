@@ -229,7 +229,7 @@ def fig_confusion(res, path):
         order = [run["channels"].index(c) for c in ap["channel_for_lane"]]
         conf = conf[:, order]
         conf = conf / conf.sum(1, keepdims=True)
-        im = ax.imshow(conf, cmap="Blues", vmin=0, vmax=1)
+        ax.imshow(conf, cmap="Blues", vmin=0, vmax=1)
         for i in range(4):
             for j in range(4):
                 ax.text(j, i, f"{conf[i, j]:.2f}", ha="center", va="center",

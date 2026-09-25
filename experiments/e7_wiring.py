@@ -160,7 +160,7 @@ def report_selectivity(results):
     if real is None or len(ctrl) < 3:
         print("not enough networks yet")
         return
-    print(f"\n=== does the selectivity result survive the new wiring rule? ===")
+    print("\n=== does the selectivity result survive the new wiring rule? ===")
     summary = {}
     for key, label, better_high in (("selectivity", "selectivity (argmax fraction)", True),
                                     ("band", "shared-threshold band", True),
@@ -227,7 +227,7 @@ def report(results):
         print("  !! no threshold reaches " + str(MIN_COUNTED) + " counted presses for: " + msg)
         print("     their lane-correct is a fallback, not a score; read accuracy instead")
     n_diff = sum(1 for r in runs.values() if not r["same"])
-    print(f"\n=== experiment 7: wiring chosen on the shared-threshold band ===")
+    print("\n=== experiment 7: wiring chosen on the shared-threshold band ===")
     print(f"  the two rules disagree on {n_diff}/{len(runs)} networks "
           f"(real: {'different' if not real['same'] else 'same'})")
     widen = np.array([r["band_band"] - r["margin_band"] for r in runs.values()])

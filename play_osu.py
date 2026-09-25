@@ -28,7 +28,6 @@ Keys: D F J K, mania's default 4K binding.
 from __future__ import annotations
 
 import argparse
-import sys
 import threading
 import time
 

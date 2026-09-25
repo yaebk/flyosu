@@ -17,7 +17,6 @@ from __future__ import annotations
 
 import argparse
 
-import numpy as np
 
 from flyosu import learn as L, mania, model as M, play as P
 from flyosu.mania import KEYS

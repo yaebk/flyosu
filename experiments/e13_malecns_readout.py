@@ -123,7 +123,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from flyosu import learn as L, model as M, play as P, probes as PR, reservoir as RS  # noqa: E402
-from flyosu.controller import ChannelNormaliser, Controller, calibration_states  # noqa: E402
+from flyosu.controller import Controller, calibration_states  # noqa: E402
 from flyosu.encoder import Encoder, LANE_AZ  # noqa: E402
 
 RESULTS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results")
@@ -380,7 +380,7 @@ def report_heldout(results):
         print("not enough networks yet")
         return
     n = len(ctrl)
-    print(f"\n=== experiment 13, held-out charts (nothing re-chosen) ===")
+    print("\n=== experiment 13, held-out charts (nothing re-chosen) ===")
     print(f"  {n} rewired controls, floor {1.0 / (n + 1):.3f}, "
           f"Bonferroni floor over {len(ARMS)} arms {len(ARMS) / (n + 1):.3f}")
     summary = {}
