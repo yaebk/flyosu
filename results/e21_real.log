@@ -1,0 +1,4 @@
+  real connectome    held-out accuracy 0.876  stray/note 0.0024  k 48  (6305s)
+controls (20): mean 0.911 +- 0.016, min 0.868, max 0.934
+  sorted: 0.868 0.883 0.899 0.900 0.901 0.904 0.906 0.908 0.909 0.911 0.912 0.915 0.918 0.921 0.922 0.925 0.925 0.925 0.929 0.934
+real 0.876: n_ge 19/20, p = 0.952, effect -2.19 control SD

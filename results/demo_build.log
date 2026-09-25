@@ -1,0 +1,164 @@
+lobelia: window 28.2-88.2 s, 4 difficulties, notes kept [407, 644, 830, 919]
+ongeki: window 34.1-94.1 s, 6 difficulties, notes kept [218, 395, 605, 527, 680, 499]
+mirairo: window 28.0-88.0 s, 7 difficulties, notes kept [235, 849, 683, 743, 512, 992, 869]
+happyend: window 264.7-324.7 s, 5 difficulties, notes kept [206, 654, 933, 393, 948]
+matenrou: window 265.8-325.8 s, 1 difficulties, notes kept [836]
+boulafacet: window 50.2-110.2 s, 7 difficulties, notes kept [501, 116, 573, 269, 746, 909, 423]
+hesperides: window 44.2-104.2 s, 4 difficulties, notes kept [792, 976, 263, 474]
+empress: window 56.6-116.6 s, 7 difficulties, notes kept [571, 185, 1351, 760, 316, 1043, 1284]
+figue: window 54.2-114.2 s, 6 difficulties, notes kept [164, 678, 513, 752, 375, 267]
+fit done in 1636 s  n_params=200
+sampled {'photoreceptor': 160, 'sensory': 2, 'optic': 200, 'visual_projection': 120, 'visual_centrifugal': 100, 'central': 150, 'descending': 250, 'ascending': 100} readout 250
+played 47 replays in 6350 s
+  brain (1920, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0072, 0.3994]  floored 719  -> 0.49 MB
+  lobelia_advanced                 2.39*  acc 0.9709
+  brain (1929, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.0081, 0.5377]  floored 697  -> 0.55 MB
+  lobelia_hyper                    3.38*  acc 0.9081
+  brain (1922, 1082)  p99|d| quantiles 10/50/90%: [0.0012, 0.0091, 0.5651]  floored 686  -> 0.61 MB
+  lobelia_insane                   4.47*  acc 0.8163
+  brain (1929, 1082)  p99|d| quantiles 10/50/90%: [0.0014, 0.0098, 0.6118]  floored 673  -> 0.66 MB
+  lobelia_lavender                 5.31*  acc 0.6371
+  brain (1931, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0074, 0.4745]  floored 699  -> 0.43 MB
+  ongeki_amasugi_s_basic           1.46*  acc 0.9136
+  brain (1931, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.0079, 0.4423]  floored 709  -> 0.56 MB
+  ongeki_linqaq_s_advanced         2.20*  acc 0.9219
+  brain (1921, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0103, 0.5441]  floored 688  -> 0.70 MB
+  ongeki_lunatic                   3.73*  acc 0.7584
+  brain (1928, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0097, 0.5708]  floored 683  -> 0.66 MB
+  ongeki_master                    3.03*  acc 0.8169
+  brain (1921, 1082)  p99|d| quantiles 10/50/90%: [0.0015, 0.0104, 0.5829]  floored 677  -> 0.71 MB
+  ongeki_spark_the_flame_of_hope_from_illusion 4.68*  acc 0.6868
+  brain (1931, 1082)  p99|d| quantiles 10/50/90%: [0.0012, 0.009, 0.4754]  floored 696  -> 0.62 MB
+  ongeki_mirac1e_s_expert          2.70*  acc 0.8661
+  brain (1915, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0074, 0.4312]  floored 716  -> 0.40 MB
+  mirairo_easy                     1.51*  acc 0.9546
+  brain (1922, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0097, 0.5426]  floored 694  -> 0.71 MB
+  mirairo_gsun_s_insane            4.12*  acc 0.7631
+  brain (1922, 1082)  p99|d| quantiles 10/50/90%: [0.0012, 0.0092, 0.4687]  floored 702  -> 0.62 MB
+  mirairo_hard                     3.33*  acc 0.8912
+  brain (1925, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0093, 0.5706]  floored 687  -> 0.67 MB
+  mirairo_muses_hyper              3.65*  acc 0.7856
+  brain (1920, 1082)  p99|d| quantiles 10/50/90%: [0.0012, 0.0087, 0.4656]  floored 706  -> 0.57 MB
+  mirairo_normal                   2.44*  acc 0.9124
+  brain (1924, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0098, 0.5748]  floored 689  -> 0.70 MB
+  mirairo_sweetie                  6.23*  acc 0.5168
+  brain (1927, 1082)  p99|d| quantiles 10/50/90%: [0.0014, 0.0098, 0.5701]  floored 689  -> 0.71 MB
+  mirairo_winter_s_expert          5.24*  acc 0.5890
+  brain (1924, 1082)  p99|d| quantiles 10/50/90%: [0.0008, 0.006, 0.3211]  floored 727  -> 0.33 MB
+  happyend_4k_easy                 1.32*  acc 0.9862
+  brain (1919, 1082)  p99|d| quantiles 10/50/90%: [0.0006, 0.004, 0.1563]  floored 769  -> 0.57 MB
+  happyend_4k_hard                 3.25*  acc 1.0000
+  brain (1919, 1082)  p99|d| quantiles 10/50/90%: [0.0007, 0.0047, 0.1759]  floored 756  -> 0.63 MB
+  happyend_4k_insane               4.40*  acc 0.9723
+  brain (1920, 1082)  p99|d| quantiles 10/50/90%: [0.0006, 0.0039, 0.1511]  floored 772  -> 0.48 MB
+  happyend_4k_normal               2.17*  acc 0.9932
+  brain (1922, 1082)  p99|d| quantiles 10/50/90%: [0.0007, 0.005, 0.194]  floored 755  -> 0.64 MB
+  happyend_fullerene_s_4k_catastrophic_shift 4.70*  acc 0.9258
+  brain (1919, 1082)  p99|d| quantiles 10/50/90%: [0.0007, 0.0048, 0.1759]  floored 757  -> 0.59 MB
+  matenrou_world_s_end             4.53*  acc 0.9709
+  brain (1916, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0074, 0.4275]  floored 705  -> 0.50 MB
+  boulafacet_crying_s_hd           3.02*  acc 0.9441
+  brain (1925, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0073, 0.5313]  floored 687  -> 0.31 MB
+  boulafacet_ez                    1.43*  acc 0.8707
+  brain (1916, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.0081, 0.4833]  floored 687  -> 0.51 MB
+  boulafacet_mx                    3.45*  acc 0.9101
+  brain (1936, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.0082, 0.4831]  floored 687  -> 0.45 MB
+  boulafacet_nm                    1.96*  acc 0.9176
+  brain (1935, 1082)  p99|d| quantiles 10/50/90%: [0.0012, 0.0091, 0.5454]  floored 675  -> 0.52 MB
+  boulafacet_sc                    4.48*  acc 0.7985
+  brain (1935, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0093, 0.589]  floored 689  -> 0.62 MB
+  boulafacet_shd                   5.31*  acc 0.7182
+  brain (2178, 1082)  p99|d| quantiles 10/50/90%: [0.0009, 0.007, 0.4282]  floored 700  -> 0.46 MB
+  boulafacet_ajee_s_hd             2.77*  acc 0.9626
+  brain (1920, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.0082, 0.4297]  floored 699  -> 0.57 MB
+  hesperides_insane                3.84*  acc 0.9348
+  brain (1922, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.0076, 0.4733]  floored 715  -> 0.60 MB
+  hesperides_master                4.86*  acc 0.8890
+  brain (1924, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.008, 0.4827]  floored 692  -> 0.43 MB
+  hesperides_standard              1.77*  acc 0.9309
+  brain (1922, 1082)  p99|d| quantiles 10/50/90%: [0.0011, 0.0079, 0.4831]  floored 693  -> 0.47 MB
+  hesperides_zan_s_hard            3.03*  acc 0.9571
+  brain (1921, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.007, 0.3893]  floored 724  -> 0.52 MB
+  empress_hd                       2.90*  acc 0.9790
+  brain (1911, 1082)  p99|d| quantiles 10/50/90%: [0.0006, 0.0047, 0.1977]  floored 755  -> 0.35 MB
+  empress_jepetski_s_ez            1.39*  acc 0.9955
+  brain (1923, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.007, 0.3425]  floored 728  -> 0.69 MB
+  empress_jepetski_s_empress       5.86*  acc 0.4959
+  brain (1928, 1082)  p99|d| quantiles 10/50/90%: [0.0012, 0.0084, 0.5454]  floored 682  -> 0.56 MB
+  empress_mx                       3.88*  acc 0.8450
+  brain (1924, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0078, 0.4548]  floored 703  -> 0.46 MB
+  empress_nm                       1.90*  acc 0.9388
+  brain (1923, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0066, 0.3293]  floored 733  -> 0.62 MB
+  empress_sc                       4.18*  acc 0.7325
+  brain (1923, 1082)  p99|d| quantiles 10/50/90%: [0.0009, 0.0065, 0.2584]  floored 736  -> 0.67 MB
+  empress_zenx_s_shd               5.55*  acc 0.5892
+  brain (1944, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0074, 0.497]  floored 692  -> 0.33 MB
+  figue_abrax_s_innocuous_lv_3     1.52*  acc 0.9360
+  brain (1919, 1082)  p99|d| quantiles 10/50/90%: [0.0014, 0.0095, 0.6343]  floored 664  -> 0.54 MB
+  figue_brutal_lv_15               4.63*  acc 0.7942
+  brain (1919, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0091, 0.5807]  floored 665  -> 0.52 MB
+  figue_cruel_lv_12                3.59*  acc 0.8821
+  brain (1919, 1082)  p99|d| quantiles 10/50/90%: [0.0013, 0.0095, 0.6818]  floored 662  -> 0.56 MB
+  figue_grotesque_lv_18            4.97*  acc 0.7343
+  brain (1918, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0076, 0.5201]  floored 701  -> 0.48 MB
+  figue_harsh_lv_9                 2.88*  acc 0.9271
+  brain (1918, 1082)  p99|d| quantiles 10/50/90%: [0.001, 0.0075, 0.5132]  floored 688  -> 0.40 MB
+  figue_unpleasant_lv_6            1.97*  acc 0.9276
+wrote demo\replay_build.json  7.62 MB
+lobelia_advanced: raw offset 27302.0 ms over 407 notes (max dev 0.00 ms), window 28302-88151 ms of 97.0 s, AudioLeadIn=0
+lobelia_hyper: raw offset 27302.0 ms over 644 notes (max dev 0.00 ms), window 28302-88454 ms of 97.0 s, AudioLeadIn=0
+lobelia_insane: raw offset 27302.0 ms over 830 notes (max dev 0.00 ms), window 28302-88226 ms of 97.0 s, AudioLeadIn=0
+lobelia_lavender: raw offset 27302.0 ms over 919 notes (max dev 0.00 ms), window 28302-88454 ms of 97.0 s, AudioLeadIn=0
+  lobelia: song_lobelia.ogg (trimmed 26.30-90.45 s of 111.1 s, clip lag +0.00 ms, 1.32 MB); hit sound hit_lobelia.wav (soft-hitnormal.wav: 0.30 s, peak 1.000)
+ongeki_amasugi_s_basic: raw offset 33335.0 ms over 218 notes (max dev 0.00 ms), window 34335-94541 ms of 151.2 s, AudioLeadIn=0
+ongeki_linqaq_s_advanced: raw offset 33335.0 ms over 395 notes (max dev 0.00 ms), window 34335-94541 ms of 152.1 s, AudioLeadIn=0
+ongeki_lunatic: raw offset 33335.0 ms over 605 notes (max dev 0.00 ms), window 34335-94232 ms of 152.1 s, AudioLeadIn=0
+ongeki_master: raw offset 33335.0 ms over 527 notes (max dev 0.00 ms), window 34335-94438 ms of 152.1 s, AudioLeadIn=0
+ongeki_spark_the_flame_of_hope_from_illusion: raw offset 33335.0 ms over 680 notes (max dev 0.00 ms), window 34335-94232 ms of 152.1 s, AudioLeadIn=0
+ongeki_mirac1e_s_expert: raw offset 33335.0 ms over 499 notes (max dev 0.00 ms), window 34335-94541 ms of 152.1 s, AudioLeadIn=0
+  ongeki: song_ongeki.ogg (trimmed 32.34-96.54 s of 158.3 s, clip lag +0.00 ms, 1.32 MB); hit sound hit_ongeki.wav (soft-hitnormal.wav: 0.31 s, peak 0.774)
+mirairo_easy: raw offset 27061.0 ms over 235 notes (max dev 0.00 ms), window 28061-87742 ms of 86.6 s, AudioLeadIn=0
+mirairo_gsun_s_insane: raw offset 27061.0 ms over 849 notes (max dev 0.00 ms), window 28061-87982 ms of 86.6 s, AudioLeadIn=0
+mirairo_hard: raw offset 27061.0 ms over 683 notes (max dev 0.00 ms), window 28061-87982 ms of 86.6 s, AudioLeadIn=0
+mirairo_muses_hyper: raw offset 27061.0 ms over 743 notes (max dev 0.00 ms), window 28061-88061 ms of 86.8 s, AudioLeadIn=0
+mirairo_normal: raw offset 27061.0 ms over 512 notes (max dev 0.00 ms), window 28061-87902 ms of 86.6 s, AudioLeadIn=0
+mirairo_sweetie: raw offset 27061.0 ms over 992 notes (max dev 0.00 ms), window 28061-88061 ms of 86.8 s, AudioLeadIn=0
+mirairo_winter_s_expert: raw offset 27061.0 ms over 869 notes (max dev 0.00 ms), window 28061-88141 ms of 86.6 s, AudioLeadIn=0
+  mirairo: song_mirairo.ogg (trimmed 26.06-90.14 s of 94.5 s, clip lag +0.00 ms, 1.27 MB); hit sound soft-hitnormal.wav (this archive's soft-hitnormal.wav)
+happyend_4k_easy: raw offset 263847.0 ms over 206 notes (max dev 0.00 ms), window 264847-324847 ms of 376.9 s, AudioLeadIn=1825
+happyend_4k_hard: raw offset 263847.0 ms over 654 notes (max dev 0.00 ms), window 264847-324689 ms of 376.9 s, AudioLeadIn=1825
+happyend_4k_insane: raw offset 263847.0 ms over 933 notes (max dev 0.00 ms), window 264847-324689 ms of 376.9 s, AudioLeadIn=1825
+happyend_4k_normal: raw offset 263847.0 ms over 393 notes (max dev 0.00 ms), window 264847-324689 ms of 376.9 s, AudioLeadIn=1825
+happyend_fullerene_s_4k_catastrophic_shift: raw offset 263768.0 ms over 948 notes (max dev 0.00 ms), window 264768-324689 ms of 376.9 s, AudioLeadIn=1825
+  happyend: song_happyend.ogg (trimmed 262.77-326.85 s of 387.1 s, clip lag +0.00 ms, 1.27 MB); hit sound soft-hitnormal.wav (soft-hitnormal.wav rejected: 0.83 s, peak 0.074)
+matenrou_world_s_end: raw offset 264899.0 ms over 836 notes (max dev 0.00 ms), window 265899-325735 ms of 328.2 s, AudioLeadIn=0
+  matenrou: song_matenrou.ogg (trimmed 263.90-327.74 s of 344.2 s, clip lag +0.00 ms, 1.24 MB); hit sound hit_matenrou.wav (drum-hitnormal.wav: 0.45 s, peak 1.000)
+boulafacet_crying_s_hd: raw offset 49476.0 ms over 501 notes (max dev 0.00 ms), window 50476-110211 ms of 117.9 s, AudioLeadIn=0
+boulafacet_ez: raw offset 49829.0 ms over 116 notes (max dev 0.00 ms), window 50829-110829 ms of 117.9 s, AudioLeadIn=0
+boulafacet_mx: raw offset 49476.0 ms over 573 notes (max dev 0.00 ms), window 50476-110211 ms of 117.9 s, AudioLeadIn=0
+boulafacet_nm: raw offset 49476.0 ms over 269 notes (max dev 0.00 ms), window 50476-110829 ms of 117.9 s, AudioLeadIn=0
+boulafacet_sc: raw offset 49476.0 ms over 746 notes (max dev 0.00 ms), window 50476-110829 ms of 117.9 s, AudioLeadIn=0
+boulafacet_shd: raw offset 49476.0 ms over 909 notes (max dev 0.00 ms), window 50476-110829 ms of 117.9 s, AudioLeadIn=0
+boulafacet_ajee_s_hd: raw offset 49476.0 ms over 423 notes (max dev 0.00 ms), window 50476-118594 ms of 117.9 s, AudioLeadIn=0
+  boulafacet: song_boulafacet.ogg (trimmed 48.48-119.69 s of 119.7 s, clip lag +0.00 ms, 1.49 MB); hit sound hit_boulafacet.wav (soft-hitnormal.wav: 0.19 s, peak 0.523)
+hesperides_insane: raw offset 43270.0 ms over 792 notes (max dev 0.00 ms), window 44270-104120 ms of 111.3 s, AudioLeadIn=0
+hesperides_master: raw offset 43195.0 ms over 976 notes (max dev 0.00 ms), window 44195-104120 ms of 111.3 s, AudioLeadIn=0
+hesperides_standard: raw offset 43270.0 ms over 263 notes (max dev 0.00 ms), window 44270-104270 ms of 111.3 s, AudioLeadIn=0
+hesperides_zan_s_hard: raw offset 43195.0 ms over 474 notes (max dev 0.00 ms), window 44195-104120 ms of 111.3 s, AudioLeadIn=0
+  hesperides: song_hesperides.ogg (trimmed 42.20-106.27 s of 115.0 s, clip lag +0.00 ms, 1.26 MB); hit sound soft-hitnormal.wav (none in archive)
+empress_hd: raw offset 55647.0 ms over 571 notes (max dev 0.00 ms), window 56647-116536 ms of 133.0 s, AudioLeadIn=1500
+empress_jepetski_s_ez: raw offset 55758.0 ms over 185 notes (max dev 0.00 ms), window 56758-116314 ms of 132.4 s, AudioLeadIn=1500
+empress_jepetski_s_empress: raw offset 55647.0 ms over 1351 notes (max dev 0.00 ms), window 56647-116592 ms of 133.0 s, AudioLeadIn=1500
+empress_mx: raw offset 55647.0 ms over 760 notes (max dev 0.00 ms), window 56647-116758 ms of 133.0 s, AudioLeadIn=1500
+empress_nm: raw offset 55758.0 ms over 316 notes (max dev 0.00 ms), window 56758-116758 ms of 133.0 s, AudioLeadIn=1500
+empress_sc: raw offset 55647.0 ms over 1043 notes (max dev 0.00 ms), window 56647-116592 ms of 133.0 s, AudioLeadIn=1500
+empress_zenx_s_shd: raw offset 55647.0 ms over 1284 notes (max dev 0.00 ms), window 56647-116592 ms of 132.6 s, AudioLeadIn=1500
+  empress: song_empress.ogg (trimmed 54.65-118.76 s of 134.1 s, clip lag +0.00 ms, 1.36 MB); hit sound soft-hitnormal.wav (none in archive)
+figue_abrax_s_innocuous_lv_3: raw offset 53316.0 ms over 164 notes (max dev 0.00 ms), window 54316-114954 ms of 214.3 s, AudioLeadIn=0
+figue_brutal_lv_15: raw offset 53316.0 ms over 678 notes (max dev 0.00 ms), window 54316-114156 ms of 214.3 s, AudioLeadIn=0
+figue_cruel_lv_12: raw offset 53316.0 ms over 513 notes (max dev 0.00 ms), window 54316-114156 ms of 214.3 s, AudioLeadIn=0
+figue_grotesque_lv_18: raw offset 53316.0 ms over 752 notes (max dev 0.00 ms), window 54316-114156 ms of 214.3 s, AudioLeadIn=0
+figue_harsh_lv_9: raw offset 53316.0 ms over 375 notes (max dev 0.00 ms), window 54316-114103 ms of 214.3 s, AudioLeadIn=0
+figue_unpleasant_lv_6: raw offset 53316.0 ms over 267 notes (max dev 0.00 ms), window 54316-114103 ms of 214.3 s, AudioLeadIn=0
+  figue: song_figue.ogg (trimmed 52.32-116.95 s of 222.1 s, clip lag +0.00 ms, 1.24 MB); hit sound hit_figue.wav (drum-hitnormal.wav: 0.11 s, peak 0.925)
+wrote demo\replays.json and 47 replay files; demo folder 60.4 MB

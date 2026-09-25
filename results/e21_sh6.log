@@ -1,0 +1,3 @@
+controls -> e21_trained_wiring_shard6of10.json (0 done, 2 planned)
+  rewired #7         held-out accuracy 0.899  stray/note 0.0030  k 48  (6940s)
+  rewired #17        held-out accuracy 0.868  stray/note 0.0042  k 48  (8061s)

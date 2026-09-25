@@ -155,13 +155,19 @@ Held-out figures are round 23's.
   recording 40.4 → 23.5 s). Checked bit-identical to the previous code side by
   side on judgments, press and release times, recorded activity, fitted weights
   and experiment 19's measurement path; a test pins it (`07f000a`).
-- **Replay page**: `demo/index.html` replays the round-15 fly on six map clips
-  from five songs, each marked tuning or held-out, with the song, hit sounds,
-  per-key drive traces and a view of 2,138 neurons at their FlyWire positions.
-  `python experiments/demo_replay.py` fits the readout and writes
-  `demo/replay_data.json` and the brain files; `python experiments/demo_replay.py audio`
-  rebuilds the gitignored audio from the archives. Clip scores are single
-  90-second runs; quote the full-map numbers above instead.
+- **Replay page**: `demo/index.html` replays the round-23 fly on all 47 4K
+  difficulties from the nine songs, one 60-second window per song shared by
+  its difficulties (`d44848f`). Each difficulty is listed with its official
+  osu! star rating (`results/star_ratings.json`, from the osu! website), the
+  fly's accuracy and its grade, and is marked tuning or held-out. The replay
+  is an osu!mania-style stage with the song, hit sounds, combo, classic-formula
+  score and a hit-error meter, plus per-key drive traces and about 1,100
+  neurons at their FlyWire positions. `python experiments/demo_replay.py` fits
+  the readout and writes `demo/replays.json`, `demo/replays/` and `demo/brain/`;
+  `python experiments/demo_replay.py audio` rebuilds the gitignored audio from
+  the archives. Replay scores are single 60-second runs, and tuning-song
+  replays include sections the fly was fitted on; quote the full-map numbers
+  above instead.
 
 ## History
 

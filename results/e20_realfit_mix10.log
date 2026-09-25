@@ -1,0 +1,4 @@
+arm mix10: {'n_syn': 36, 'per_map': 10}; 170 train clips in the pool, 153 decision clips
+fitted on 152 real clips (8037 notes) + 36 synthetic; record 1864.0 s
+mix10    decision mean over 17 difficulties 0.809
+   hold 0.603 (n=3567)  after_hold 0.575 (n=385)  fast_jack 0.238 (n=21)  chord 0.936 (n=2704)  tap 0.932 (n=1981)

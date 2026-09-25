@@ -40,8 +40,9 @@ This is the **capability** thread: real connectome only, no controls. Details:
 [`docs/RESULTS_E20.md`](docs/RESULTS_E20.md) (real maps, tuning vs held-out),
 [`docs/RESULTS_E18.md`](docs/RESULTS_E18.md) (the synthetic recipe, round by
 round, including what did not help), [`docs/CLAIMS.md`](docs/CLAIMS.md)
-(everything else). A browser replay of the fly playing six map clips is in
-`demo/`, built by `experiments/demo_replay.py`; serve the folder locally
+(everything else). A browser replay of the fly playing all 47 4K difficulties,
+on an osu!mania-style stage with star ratings, score and the brain's activity,
+is in `demo/`, built by `experiments/demo_replay.py`; serve the folder locally
 (`python -m http.server -d demo`) and open `index.html`.
 
 **The science thread.** Whether the *real* wiring plays better
@@ -535,12 +536,16 @@ experiments/
   e18_capability.py   capability: training diet, readout size, scroll speed
   e19_strays_powered.py pre-registered: strays again, with the ties broken
   e20_beatmaps.py     real .osz beatmaps from osumaps/; MAP_SET=tune|holdout
+  e20_realfit.py      round 23: fit on real tuning-map clips, decide on unseen sections
+  e21_trained_wiring.py pre-registered: the round-23 fly, real vs 20 rewired controls
+  audit_declared.py   experiments 7/11/12/13/15 re-read at the declared threshold
   demo_replay.py      export the browser replay in demo/ (and `audio` to rebuild its sound)
   figures.py / figures_e2.py / ... / figures_e6.py / figures_e7.py
   refresh_c.py, restats.py
 tests/test_pipeline.py  32 checks on the network side
-tests/test_play.py      86 checks on the game side, incl. probes, firing edges, jacks, holds and strays
+tests/test_play.py      115 checks on the game side, incl. probes, firing edges, jacks, holds and strays
 tests/test_reservoir.py 20 checks on the closed-form readout
+tests/test_experiments.py 21 checks on the replay export and experiment 21's maps and freeze guard
 tests/test_malecns.py   the male CNS loader, pinning the numbers docs/MALECNS.md quotes
 docs/CALIBRATION.md     every modelling decision the data did not make, incl. the regime
 docs/MALECNS.md         the second connectome: loader, decisions, what transfers
@@ -562,7 +567,7 @@ docs/RESULTS_E13.md     experiment 13
 docs/RESULTS_E14.md     experiment 14
 docs/RESULTS_E18.md     capability on synthetic charts, round by round
 docs/RESULTS_E20.md     capability on real beatmaps, tuning and held-out
-demo/                   browser replay of the fly playing six map clips
+demo/                   browser replay of the fly on all 47 4K difficulties
 data/SOURCES.md         where the data comes from, with citations
 ```
 
@@ -574,8 +579,9 @@ python run_fly.py --fall D           # watch a note descend
 python run_fly.py --sweep            # azimuth tuning, as text
 python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 32 checks
-python -m tests.test_play            # 86 checks
+python -m tests.test_play            # 115 checks
 python -m tests.test_reservoir       # 20 checks
+python -m tests.test_experiments     # 21 checks, no network build
 ```
 
 ## Where this is

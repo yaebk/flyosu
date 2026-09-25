@@ -1,0 +1,4 @@
+arm real: {'n_syn': 0, 'per_map': 6, 'proj': True}; 170 train clips in the pool, 153 decision clips
+fitted on 102 real clips (5360 notes) + 0 synthetic; record 969.4 s
+real     decision mean over 17 difficulties 0.803
+   hold 0.608 (n=3567)  after_hold 0.617 (n=385)  fast_jack 0.238 (n=21)  chord 0.921 (n=2704)  tap 0.925 (n=1981)
