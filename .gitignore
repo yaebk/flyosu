@@ -27,3 +27,4 @@ results/*_shard*of*.json
 demo/audio.ogg
 demo/song_*.ogg
 demo/*.wav
+demo/replay_build.json

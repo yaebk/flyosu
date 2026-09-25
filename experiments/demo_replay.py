@@ -1,14 +1,17 @@
-"""Export a replay of the current best fly playing six real beatmap clips.
+"""Export replays of the current best fly on every 4K difficulty in osumaps/.
 
-Builds round 15's player (250 ms approach, 100 ms refractory, 20 ms smoothing,
-k=48 population projection, hold oracle, release levels; 196 parameters),
-plays the six maps in ``SELECT`` with the trace and a sample of neuron activity
-recorded, and writes ``demo/replay_data.json`` and the per-map brain files for
-the browser replay in ``demo/index.html``; ``audio`` extracts and aligns the
-songs without running the model.
+Builds round 23's player (``e20_realfit`` arm ``mix``: round 15's synthetic
+diet plus 102 tuning-map clips, 250 ms approach, 100 ms refractory, 20 ms
+smoothing, k=48, hold oracle, release levels; 200 parameters).  Each song gets
+one PLAY_S window shared by all its difficulties, so they share one audio
+clip.  Every difficulty is played in that window with the trace and a sample
+of neuron activity recorded, in one batched play.  Writes ``demo/replays.json``
+(the list the page shows), ``demo/replays/<key>.json`` and
+``demo/brain/<key>.b64.txt``; ``audio`` extracts and aligns the songs.
 
-Nothing here is a registered comparison: it is a demonstration of what the fly
-plays, fitted on synthetic charts only, as in experiment 20.
+Tuning-song replays are not a fair test: round 23 was fitted on the
+even-numbered 6 s segments of those very difficulties.  The page says so.
+Nothing here is a registered comparison.
 """
 import base64
 import gzip
@@ -29,52 +32,35 @@ SONG_OSZ = os.path.join(ROOT, "osumaps",
                         "2600298 Metal Scar Radio - Mirairo Rider (Japanese Ver.) (Game Ver.).osz")
 
 A = 250.0
-SPECS = ((4, 600.), (4, 450.), (4, 350.), (4, 250.), (4, 200.), (4, 150.), (4, 125.),
-         (7, 600.), (7, 400.))
 OUT_DIR = os.path.join(ROOT, "demo")
-OUT = os.path.join(OUT_DIR, "replay_data.json")
+OUT = os.path.join(OUT_DIR, "replay_build.json")   # everything, for the audio pass (gitignored)
+INDEX = os.path.join(OUT_DIR, "replays.json")       # what the page lists
 LEAD_MS = 1000.0
-PLAY_S = 90.0              # at most this much play per map
+PLAY_S = 60.0              # one window per song, shared by its difficulties
 AUDIO_PAD_S = 2.0          # audio kept either side of the window when a song is trimmed
-# (page key, map set, song id, difficulty); map set "tune" = the tuning songs
-SELECT = (("easy", "tune", "2600298", "Easy"),
-          ("hard", "tune", "2600298", "Hard"),
-          ("ongeki_adv", "tune", "2543258", "LINQAQ's ADVANCED"),
-          ("happyend_normal", "holdout", "171880", "4K Normal"),
-          ("boulafacet_mx", "holdout", "254581", "MX"),
-          ("empress_sc", "holdout", "315435", "SC"))
+STARS = os.path.join(ROOT, "results", "star_ratings.json")   # osu! website, "<set id>|<version>"
 SONG_KEYS = {"2600298": "mirairo", "2543258": "ongeki", "171880": "happyend",
-             "254581": "boulafacet", "315435": "empress"}
-K = 48                      # population-projection components (round 15's best)
-# brain view: neurons per class (small classes are kept whole)
-SAMPLE = {"photoreceptor": 350, "sensory": 50, "optic": 450, "visual_projection": 250,
-          "visual_centrifugal": 200, "central": 300, "descending": 450, "ascending": 200}
+             "254581": "boulafacet", "315435": "empress", "2298007": "lobelia",
+             "251365": "matenrou", "309328": "hesperides", "347453": "figue"}
+K = 48
+# brain view: neurons per class (small classes are kept whole); about 1,100
+SAMPLE = {"photoreceptor": 160, "sensory": 25, "optic": 200, "visual_projection": 120,
+          "visual_centrifugal": 100, "central": 150, "descending": 250, "ascending": 100}
 SAMPLE_SEED = 7
 FLOOR = 0.02                # min per-neuron scale (firing-rate units)
 QMAX = 15                   # 31 levels is plenty for dot brightness, and compresses well
 DEADZONE = 0.08             # |change| under this fraction of a neuron's range is stored as 0
-BRAIN_EVERY = 8             # frames (2 ms each) -> 16 ms
+BRAIN_EVERY = 16            # frames (2 ms each) -> 32 ms
 
 
 def build_player():
-    from flyosu import model as M, play as P, reservoir as R
-    from flyosu.controller import calibration_states
+    """Round 23's readout, exactly as ``e20_realfit`` fits arm ``mix``."""
+    from experiments import e20_realfit as RF
     t0 = time.time()
-    fly = M.build(regime="play")
-    sample_neurons(fly)                  # fail fast before the long fit
-    player = P.Player.untrained(fly, theta=1.5, noise=0.03)
-    player.controller.refractory_ms = 100.0
-    player.controller.smooth_ms = 20.0
-    rr = R.RidgeReadout(player, n_charts=36, n_notes=24, seed=100,
-                        chart_specs=tuple((s, i, A) for s, i in SPECS),
-                        release_levels=tuple(round(0.05 * i, 2) for i in range(21)),
-                        hold_oracle=True)
-    rr.features = R.PopulationProjection.fit(fly, player.r0, k=K,
-                                             states=calibration_states(fly, player.r0))
-    rr.record()
-    fit = rr.solve()
+    train, _ = RF.pools()
+    player, fit = RF.fitted_player(RF.ARMS["mix"], train)
     print(f"fit done in {time.time() - t0:.0f} s  n_params={fit['n_params']}", flush=True)
-    return fly, player, fit, time.time() - t0
+    return player.fly, player, fit, time.time() - t0
 
 
 def sample_neurons(fly):
@@ -130,36 +116,37 @@ def encode_brain(frames, r0, pick, path):
             "layout": "neuron-major"}
 
 
-def trim(chart):
-    """Keep at most PLAY_S of play: a contiguous window that starts on a note.
-    It is the opening of the chart unless the opening is sparse, in which case
-    it is the first window holding at least 90% of the chart's average number
-    of events per window.  Every note whose head falls in the window is kept,
-    holds whole.  Times are shifted so the first kept note lands LEAD_MS in.
-    Returns the new chart and a record of the window in the map's own time."""
-    notes = chart.notes
-    t = np.array([n.hit_ms for n in notes])
-    span = (chart.end_ms - chart.start_ms) / 1000.0
+def song_window(charts):
+    """One PLAY_S window start (map time, ms) for all of a song's difficulties:
+    on a 500 ms grid, the start that maximises the smallest share of any
+    difficulty's notes inside the window, so no difficulty gets an empty or
+    thin replay.  Ties go to the earliest start."""
     W = PLAY_S * 1000.0
-    if span <= PLAY_S:
-        keep = list(notes)
-    else:
-        ev = np.unique(t)
-        target = 0.9 * len(ev) * W / (ev[-1] - ev[0])
-        s = ev[0]
-        for x in ev:
-            if x + W > ev[-1]:
-                break
-            if np.searchsorted(ev, x + W) - np.searchsorted(ev, x) >= target:
-                s = x
-                break
-        keep = [n for n in notes if s <= n.hit_ms < s + W]
+    ts = [np.array([n.hit_ms for n in c.notes]) for c in charts]
+    lo = min(t.min() for t in ts)
+    hi = max(t.max() for t in ts)
+    best, best_s = -1.0, lo
+    for s in np.arange(lo, max(lo, hi - W) + 1.0, 500.0):
+        share = min(((t >= s) & (t < s + W)).sum() / len(t) for t in ts)
+        if share > best + 1e-9:
+            best, best_s = share, s
+    return float(best_s)
+
+
+def trim(chart, s):
+    """The notes whose head falls in [s, s + PLAY_S), holds whole, shifted so
+    the first kept note lands LEAD_MS in.  Returns the new chart and a record
+    of the window in the map's own time."""
+    notes = chart.notes
+    span = (chart.end_ms - chart.start_ms) / 1000.0
+    keep = [n for n in notes if s <= n.hit_ms < s + PLAY_S * 1000.0]
     first = keep[0].hit_ms
     shift = LEAD_MS - first
     new = [mania.Note(n.lane, n.hit_ms + shift, None if n.end_ms is None else n.end_ms + shift)
            for n in keep]
     last = max((n.end_ms if n.is_hold else n.hit_ms) for n in keep)
-    window = {"raw_first_ms": round(first, 1), "raw_last_ms": round(last, 1),
+    window = {"raw_start_ms": round(s, 1), "raw_first_ms": round(first, 1),
+              "raw_last_ms": round(last, 1),
               "n_notes": len(keep), "of_notes": len(notes),
               "full_span_s": round(span, 1), "clipped": len(keep) != len(notes)}
     return mania.Chart(new, approach_ms=chart.approach_ms, od=chart.od, name=chart.name), window
@@ -221,66 +208,100 @@ def export(res, meta):
     }
 
 
+def _slug(s):
+    import re
+    return re.sub(r"[^a-z0-9]+", "_", s.lower()).strip("_")
+
+
 def select_charts():
-    """The six demo maps, by (map set, song id prefix, difficulty name)."""
+    """Every 4K difficulty in osumaps/, grouped by song, with its star rating."""
     from experiments import e20_beatmaps as E20
-    pool = {}
+    with open(STARS) as fh:
+        stars = json.load(fh)
+    out = []
     for ms in ("tune", "holdout"):
         E20.MAP_SET = ms                   # charts() reads this at call time
         for c in E20.charts():
-            pool[(ms, c["song"].split(" ")[0], c["version"])] = c
-    out = []
-    for key, ms, sid, ver in SELECT:
-        c = pool.get((ms, sid, ver))
-        if c is None:
-            names = sorted(v for (m2, s2, v) in pool if m2 == ms and s2 == sid)
-            raise SystemExit(f"{key}: no difficulty {ver!r} for song {sid} in {ms}; have {names}")
-        print(f"{key}: {c['song']} [{c['version']}]  {c['events_per_s']} ev/s  "
-              f"{c['seconds']} s  {c['notes']} notes", flush=True)
-        out.append((key, "tuning" if ms == "tune" else "held-out", c))
+            sid = c["song"].split(" ")[0]
+            key = f"{SONG_KEYS[sid]}_{_slug(c['version'])}"
+            out.append({"key": key, "set": "tuning" if ms == "tune" else "held-out",
+                        "sid": sid, "stars": stars[f"{sid}|{c['version']}"], "c": c})
+    if len({o["key"] for o in out}) != len(out):
+        raise SystemExit("duplicate replay keys")
     return out
 
 
 def main():
     chosen = select_charts()
+    by_song = {}
+    for o in chosen:
+        by_song.setdefault(o["sid"], []).append(o)
+    for sid, os_ in by_song.items():
+        s = song_window([o["c"]["chart"] for o in os_])
+        for o in os_:
+            o["chart"], o["window"] = trim(o["c"]["chart"], s)
+        print(f"{SONG_KEYS[sid]}: window {s / 1000:.1f}-{s / 1000 + PLAY_S:.1f} s, "
+              f"{len(os_)} difficulties, notes kept "
+              f"{[o['window']['n_notes'] for o in os_]}", flush=True)
     fly, player, fit, fit_s = build_player()
     pick, neurons = sample_neurons(fly)
-    os.makedirs(OUT_DIR, exist_ok=True)
-    maps = []
-    for key, map_set, c in chosen:
-        name = f"{key} ({c['version']})"
-        chart, window = trim(c["chart"])
-        meta = dict(c, trimmed=window["clipped"])
-        frames, count = [], [0]
+    os.makedirs(os.path.join(OUT_DIR, "brain"), exist_ok=True)
+    frames = [[] for _ in chosen]
+    count = [0] * len(chosen)
 
+    def tapper(j):
         def tap(r, env):
-            if count[0] % BRAIN_EVERY == 0:
-                frames.append(r[pick].astype(np.float32))
-            count[0] += 1
+            if count[j] % BRAIN_EVERY == 0:
+                frames[j].append(r[pick].astype(np.float32))
+            count[j] += 1
+        return tap
 
-        res = player.play(chart, record=True, seed=4242, tap=tap)
-        print(f"{name}: {len(chart)} notes  acc={res.accuracy:.4f}  {res.counts}", flush=True)
+    t0 = time.time()
+    results = player.play_many([o["chart"] for o in chosen], record=True,
+                               seeds=[4242] * len(chosen),
+                               taps=[tapper(j) for j in range(len(chosen))])
+    print(f"played {len(chosen)} replays in {time.time() - t0:.0f} s", flush=True)
+    maps = []
+    for j, (o, res) in enumerate(zip(chosen, results)):
+        meta = dict(o["c"], trimmed=o["window"]["clipped"])
         m = export(res, meta)
-        m.update(key=key, set=map_set, window=window)
-        m["brain"] = encode_brain(frames, np.asarray(player.r0), pick,
-                                  os.path.join(OUT_DIR, f"brain_{key}.b64.txt"))
+        m.update(key=o["key"], set=o["set"], stars=o["stars"], window=o["window"])
+        m["brain"] = encode_brain(frames[j], np.asarray(player.r0), pick,
+                                  os.path.join(OUT_DIR, "brain", f"{o['key']}.b64.txt"))
         m["brain"].update(t0=m["trace"]["t0"], dt=round(2.0 * BRAIN_EVERY, 3))
+        frames[j] = None
+        print(f"  {o['key']:<32s} {o['stars']:.2f}*  acc {res.accuracy:.4f}", flush=True)
         maps.append(m)
-        del res, frames
     data = {"neurons_view": neurons,
             "about": {"n_params": int(fit["n_params"]), "neurons": 19367, "k": K,
-                      "synapses": 729558, "photoreceptors": 8452,
+                      "synapses": 729558, "photoreceptors": 8452, "round": 23,
                       "fit_seconds": round(fit_s), "refractory_ms": 100.0,
-                      "smooth_ms": 20.0, "dt_ms": 2.0},
+                      "smooth_ms": 20.0, "dt_ms": 2.0, "play_s": PLAY_S},
             "maps": maps}
     with open(OUT, "w") as fh:
         json.dump(data, fh, separators=(",", ":"))
     print(f"wrote {OUT}  {os.path.getsize(OUT) / 1e6:.2f} MB", flush=True)
-    tot = sum(os.path.getsize(os.path.join(OUT_DIR, f)) for f in os.listdir(OUT_DIR) if f.endswith((".json", ".txt")))
-    print(f"demo data total {tot / 1e6:.2f} MB", flush=True)
-    for m in maps:
-        print(f"  {m['difficulty']}: accuracy {m['accuracy']:.4f}", flush=True)
-    audio()                                  # re-add the song offsets to the fresh JSON
+    audio()                                  # adds the song offsets, then splits
+
+
+def split(data):
+    """replays.json (index: everything but the per-frame data) plus one
+    replays/<key>.json per replay, so the page lists instantly and loads one
+    replay at a time."""
+    heavy = ("notes", "judgments", "presses", "holds", "keys", "trace")
+    os.makedirs(os.path.join(OUT_DIR, "replays"), exist_ok=True)
+    index = {"neurons_view": data["neurons_view"], "about": data["about"], "maps": []}
+    for m in data["maps"]:
+        with open(os.path.join(OUT_DIR, "replays", f"{m['key']}.json"), "w") as fh:
+            json.dump({k: m[k] for k in heavy}, fh, separators=(",", ":"))
+        index["maps"].append({k: v for k, v in m.items() if k not in heavy})
+    with open(INDEX, "w") as fh:
+        json.dump(index, fh, separators=(",", ":"))
+    tot = 0
+    for dp, _, fs in os.walk(OUT_DIR):
+        tot += sum(os.path.getsize(os.path.join(dp, f)) for f in fs
+                   if not f.endswith(".log") and f != os.path.basename(OUT))
+    print(f"wrote {INDEX} and {len(data['maps'])} replay files; demo folder {tot / 1e6:.1f} MB")
 
 
 def _raw_hitobjects(txt):
@@ -313,7 +334,7 @@ def _match_window(m, raw):
     if not w["clipped"] and (i0 != 0 or len(raw) != len(notes)):
         raise SystemExit(f"{tag}: unclipped map does not cover every hit object")
     if w["clipped"] and i0 + len(notes) < len(raw) \
-            and raw[i0 + len(notes)][0] < w["raw_first_ms"] + PLAY_S * 1000.0:
+            and raw[i0 + len(notes)][0] < w["raw_start_ms"] + PLAY_S * 1000.0:
         raise SystemExit(f"{tag}: window is not contiguous in the raw map")
     lanes_ok = all(a[1] == b[1] for a, b in zip(notes, seg))
     off = np.array([b[0] - a[0] for a, b in zip(notes, seg)])
@@ -451,10 +472,7 @@ def audio():
     data.pop("audio", None)
     with open(OUT, "w") as fh:
         json.dump(data, fh, separators=(",", ":"))
-    print(f"updated {OUT}  {os.path.getsize(OUT) / 1e6:.2f} MB")
-    tot = sum(os.path.getsize(os.path.join(OUT_DIR, f)) for f in os.listdir(OUT_DIR)
-              if not f.endswith(".log"))
-    print(f"demo folder total {tot / 1e6:.2f} MB")
+    split(data)
 
 
 if __name__ == "__main__":
