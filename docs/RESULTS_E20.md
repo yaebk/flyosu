@@ -15,7 +15,8 @@ never fitted on.
 ## Maps, and the tuning / held-out split
 
 `osumaps/` holds nine songs; their 4K mania difficulties are played (5K–9K
-are skipped). Rates are chord-events per second, a chord counting once, which
+are skipped). The archives are not committed, because they contain the songs;
+[`osumaps/README.md`](../osumaps/README.md) lists the sets to download. Rates are chord-events per second, a chord counting once, which
 is the quantity comparable to the synthetic charts.
 
 | set | songs | difficulties | events/s | hold share | role |

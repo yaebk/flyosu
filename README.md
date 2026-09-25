@@ -142,6 +142,9 @@ python -m experiments.e10_chords       # experiment 10 (~55 min at N_CTRL=12)
 python -m experiments.e11_delays       # experiment 11 (~32 min at N_SEEDS=20)
 ```
 
+Experiments 20 and 21 and the replay page also need the beatmaps: download the
+nine sets listed in [`osumaps/README.md`](osumaps/README.md) into `osumaps/`.
+
 `make experiment2 … experiment9` wrap these with the seed counts the published
 numbers used; the male CNS variants are `DATASET=malecns`. Later experiments
 give their run command at the top of their script and write-up.
@@ -238,7 +241,7 @@ docs/
   PREREGISTRATION*.md frozen protocols for experiments 14 and 21
   AUDIT_DECLARED_THRESHOLD.md  experiments 7/11/12/13/15 at a declared threshold
 demo/                 browser replay of the fly on all 47 4K difficulties
-osumaps/              the beatmaps (.osz); 4K difficulties only are played
+osumaps/README.md     the nine beatmap sets to download (the .osz files are not committed)
 data/SOURCES.md       where the data comes from, with citations
 ```
 

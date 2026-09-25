@@ -28,3 +28,6 @@ demo/audio.ogg
 demo/song_*.ogg
 demo/*.wav
 demo/replay_build.json
+
+# beatmap archives contain the songs; download them as listed in osumaps/README.md
+osumaps/*.osz

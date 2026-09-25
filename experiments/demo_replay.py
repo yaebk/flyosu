@@ -280,7 +280,7 @@ def main():
             "maps": maps}
     with open(OUT, "w") as fh:
         json.dump(data, fh, separators=(",", ":"))
-    print(f"wrote {OUT}  {os.path.getsize(OUT) / 1e6:.2f} MB", flush=True)
+    print(f"wrote {os.path.relpath(OUT, ROOT)}  {os.path.getsize(OUT) / 1e6:.2f} MB", flush=True)
     audio()                                  # adds the song offsets, then splits
 
 
@@ -301,7 +301,7 @@ def split(data):
     for dp, _, fs in os.walk(OUT_DIR):
         tot += sum(os.path.getsize(os.path.join(dp, f)) for f in fs
                    if not f.endswith(".log") and f != os.path.basename(OUT))
-    print(f"wrote {INDEX} and {len(data['maps'])} replay files; demo folder {tot / 1e6:.1f} MB")
+    print(f"wrote {os.path.relpath(INDEX, ROOT)} and {len(data['maps'])} replay files; demo folder {tot / 1e6:.1f} MB")
 
 
 def _raw_hitobjects(txt):
