@@ -153,8 +153,14 @@ def charts(map_set: str | None = None) -> list[dict]:
     map_set = MAP_SET if map_set is None else map_set
     if map_set not in ("tune", "holdout"):
         raise ValueError(f"map_set must be 'tune' or 'holdout', not {map_set!r}")
+    archives = sorted(glob.glob(os.path.join(MAPS, "*.osz")))
+    if not archives:
+        # The archives are not committed (they contain the songs).  Without
+        # this, every map experiment would quietly run on zero maps.
+        raise SystemExit(f"no beatmap archives in {MAPS}; download the sets listed in "
+                         "osumaps/README.md into that folder")
     out = []
-    for f in sorted(glob.glob(os.path.join(MAPS, "*.osz"))):
+    for f in archives:
         tuning = os.path.basename(f).startswith(TUNING_SONGS)
         if tuning != (map_set == "tune"):
             continue

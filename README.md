@@ -144,6 +144,8 @@ python -m experiments.e11_delays       # experiment 11 (~32 min at N_SEEDS=20)
 
 Experiments 20 and 21 and the replay page also need the beatmaps: download the
 nine sets listed in [`osumaps/README.md`](osumaps/README.md) into `osumaps/`.
+Rebuilding the replay page's audio (`python experiments/demo_replay.py audio`)
+also needs `ffmpeg` and `ffprobe` on the path.
 
 `make experiment2 … experiment9` wrap these with the seed counts the published
 numbers used; the male CNS variants are `DATASET=malecns`. Later experiments
@@ -230,7 +232,7 @@ tests/
   test_pipeline.py    32 checks on the network side
   test_play.py        115 checks on the game side, incl. probes, firing edges, jacks, holds and strays
   test_reservoir.py   20 checks on the closed-form readout
-  test_experiments.py 23 checks on the replay export, the map-set handling and experiment 21's freeze guard
+  test_experiments.py 24 checks on the replay export, the map loader and experiment 21's freeze guard
   test_malecns.py     the male CNS loader, pinning the numbers docs/MALECNS.md quotes
 docs/
   CLAIMS.md           what is and is not supported, current
@@ -255,7 +257,7 @@ python run_fly.py --control rewired  # the same, on a randomised network
 python -m tests.test_pipeline        # 32 checks
 python -m tests.test_play            # 115 checks
 python -m tests.test_reservoir       # 20 checks
-python -m tests.test_experiments     # 23 checks, no network build
+python -m tests.test_experiments     # 24 checks, no network build; map checks skip without osumaps/
 ```
 
 ## Gotchas

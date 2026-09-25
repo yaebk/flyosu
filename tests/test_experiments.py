@@ -128,7 +128,6 @@ def test_e21_maps():
         B.MAP_SET = before
     check("... still draws its training clips from tuning songs only",
           len(t4) == 17 and all(r["song"].startswith(B.TUNING_SONGS) for r, _ in t4))
-    check("an unknown map set is refused", _raises(lambda: B.charts("tuning"), ValueError))
     t3, h3 = X.load_maps()
     check("a second network in the same shard reuses the same maps", t3 is train and h3 is held)
 
@@ -153,12 +152,41 @@ def test_e21_freeze():
             X.PATH = old
 
 
+def test_map_loader_guards():
+    import e20_beatmaps as B
+    print("map loader: guards that need no maps")
+    check("an unknown map set is refused", _raises(lambda: B.charts("tuning"), ValueError))
+    old = B.MAPS
+    with tempfile.TemporaryDirectory() as tmp:
+        B.MAPS = tmp
+        try:
+            B.charts("tune")
+            msg = ""
+        except SystemExit as e:
+            msg = str(e)
+        finally:
+            B.MAPS = old
+    check("with no archives it stops and points to the download list, rather than "
+          "running on zero maps", "osumaps/README.md" in msg)
+
+
+def have_maps():
+    import glob
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return bool(glob.glob(os.path.join(root, "osumaps", "*.osz")))
+
+
 def main():
     test_song_window()
     test_trim()
     test_split()
-    test_replay_selection()
-    test_e21_maps()
+    test_map_loader_guards()
+    if have_maps():
+        test_replay_selection()
+        test_e21_maps()
+    else:
+        print("maps: SKIPPED the checks that need the beatmaps; download the sets "
+              "listed in osumaps/README.md to run them")
     test_e21_freeze()
     print()
     if FAILED:
