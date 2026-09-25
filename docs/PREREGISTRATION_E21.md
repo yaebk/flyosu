@@ -102,7 +102,7 @@ the real network is run.
   numbers are not recorded. The controls were relaunched as ten shards instead
   of six, which changes only which process measures which control.
 - **2026-09-24, two aborted launches of the real network, neither producing a
-  value.** After the controls were committed (`a69a373`), the first `real`
+  value.** After the controls were committed (`433901c`), the first `real`
   launch failed at import because the shell passed an empty `SHARD`. The
   second was running when the machine was restarted. `run_real` writes only
   on completion, so neither left a measurement, and no real-network number

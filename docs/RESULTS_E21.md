@@ -18,7 +18,7 @@ connectome and 20 degree-, weight- and sign-preserving rewired controls
 48-component projection, ridge readout, timing offsets and release levels.
 All were fitted on the same 36 synthetic charts and 102 tuning-map clips. Each
 network then played the 30 held-out 4K difficulties once (46,649 notes). The
-controls were committed (`a69a373`) before the real network was measured, once.
+controls were committed (`433901c`) before the real network was measured, once.
 Script: `experiments/e21_trained_wiring.py`; results:
 `results/e21_trained_wiring.json`.
 

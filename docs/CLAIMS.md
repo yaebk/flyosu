@@ -77,7 +77,7 @@ pre-registered, and at 3/20 it is not significant.
 seeds, **2/40, p = 0.073** against a declared Bonferroni floor of 0.049, under a
 protocol frozen and committed before the controls ran and with the full control
 distribution committed before the real network was built
-(`experiments/e17_strays.py`, commit `bac88d3`). A third as many strays, 1.45 SD
+(`experiments/e17_strays.py`, commit `31770be`). A third as many strays, 1.45 SD
 below the control mean, beating 38 of 40 outright. **It fails.** The two
 remaining controls tie it at exactly 0.220 — three of 41 networks on precisely
 22 strays per 100 notes, which looks like a floor in the policy — and ties count

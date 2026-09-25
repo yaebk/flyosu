@@ -22,7 +22,7 @@ Raw numbers: `results/e19_strays_powered.json`, `results/e19_real.log`,
 `results/e19_controls_s*.log`. Protocol frozen in
 `experiments/e19_strays_powered.py` and committed before any control ran;
 the forty controls committed before the real network was measured
-(`e006743`).
+(`fcad2c2`).
 
 ## The prediction, and how it did
 
@@ -89,7 +89,7 @@ be run.
 
 ## A disclosure
 
-While verifying that the batched play code (commit `07f000a`) is bit-identical
+While verifying that the batched play code (commit `12f51f8`) is bit-identical
 to the previous code on this experiment's measurement path, I ran the real
 connectome through that path on 24 notes of this stage and interval, before
 the controls were finished. That check should have used two controls. It

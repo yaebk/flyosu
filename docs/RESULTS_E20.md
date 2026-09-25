@@ -135,30 +135,30 @@ Held-out figures are round 23's.
 - **Maps above 8.5 events/s** (0.707). Synthetic chords at 8 and 10 events/s
   are 0.81 and 0.71.
 - **Unexplained misses on the Easy tuning map** (read note by note from round
-  15's replay, `02a2ba1`; not re-read with round 23): chords on the two outer lanes 0 and 3 where one key fires
+  15's replay, `47d7acf`; not re-read with round 23): chords on the two outer lanes 0 and 3 where one key fires
   and the other's drive peaks just under threshold; lane-0 hold heads pressed
   about 170 ms late; hold chords pressed about 55 ms early. The long early
   releases on the same map were a diet gap (training holds stopped at 480 ms).
 
 ## Tooling
 
-- **Held-out split**: `MAP_SET=tune | holdout` (`aaa5b3a`).
+- **Held-out split**: `MAP_SET=tune | holdout` (`d872e7c`).
 - **Per-note loss breakdown**: each run records count, accuracy and loss share
-  per kind of note (`b41a0af`).
+  per kind of note (`8a21e14`).
 - **Real clips in the fit**: `RidgeReadout(extra_charts=...)` fits ready-made
-  charts next to the generated diet (`b91d2b7`).
+  charts next to the generated diet (`996808e`).
 - **Projecting while recording**: `RidgeReadout(project_on_record=True)` keeps
   only the 48 features, about 14× less memory per fit. It is not bit-identical
   (features move by about 1e-13), so it is opt-in. In a side-by-side fit it
-  changed no press (`af4bed2`).
+  changed no press (`38ddd06`).
 - **Batched play**: `Player.play_many` steps several charts through one sparse
   product and the retina caches blobs by position, 1.6× faster (a fit's
   recording 40.4 → 23.5 s). Checked bit-identical to the previous code side by
   side on judgments, press and release times, recorded activity, fitted weights
-  and experiment 19's measurement path; a test pins it (`07f000a`).
+  and experiment 19's measurement path; a test pins it (`12f51f8`).
 - **Replay page**: `demo/index.html` replays the round-23 fly on all 47 4K
   difficulties from the nine songs, one 60-second window per song shared by
-  its difficulties (`d44848f`). Each difficulty is listed with its official
+  its difficulties (`aec1cc0`). Each difficulty is listed with its official
   osu! star rating (`results/star_ratings.json`, from the osu! website), the
   fly's accuracy and its grade, and is marked tuning or held-out. The replay
   is an osu!mania-style stage with the song, hit sounds, combo, classic-formula
@@ -172,10 +172,10 @@ Held-out figures are round 23's.
 
 ## History
 
-The first run (`79f56dc`) played the tuning maps with experiment 18's density
+The first run (`870f39d`) played the tuning maps with experiment 18's density
 specialist: best 0.853, mean 0.576, zero stray presses. A regression put the
 losses on density and hold fraction independently (R² = 0.83 over 17 maps).
 Holds were drawn as their head only, so the fly could not see them at all.
 Drawing hold bodies, and then recording hold charts as a perfect player would
-see them (`04b7c33`), is what made a single generalist beat the specialist in
-every band (`0b8364a`).
+see them (`bddd1c9`), is what made a single generalist beat the specialist in
+every band (`c7b9ed9`).

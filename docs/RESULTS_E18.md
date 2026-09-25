@@ -72,18 +72,18 @@ conditions; "mean" is over every condition the arm was scored on.
 | 7 | jack charts in the diet | chords @ 5/s 0.718 → 0.552 | worse: they displaced density charts |
 | 8 | 200 ms chord chart in the diet, 300 ms approach | chords @ 5/s 0.718 → 0.948; 11-condition mean 0.995 | kept |
 | 9 | hold charts, holds drawn as a head only | holds 0.630 either way | holds were invisible |
-| 9b | draw hold bodies (`5592ebd`), sustain through the body, 130 ms tail lead (`c13292f`) | holds @ 600 ms 0.630 → 0.821; chords @ 5/s fall to 0.328 | holds learnable, but they displace density |
-| 10 | one 28-chart diet: full density ladder + holds (`033ec66`) | density 0.994, holds 0.779, 19-condition mean 0.904 | kept: the chart budget was the limit; 48 PCs no gain (0.900) |
+| 9b | draw hold bodies (`9b6b39e`), sustain through the body, 130 ms tail lead (`c4442cf`) | holds @ 600 ms 0.630 → 0.821; chords @ 5/s fall to 0.328 | holds learnable, but they displace density |
+| 10 | one 28-chart diet: full density ladder + holds (`491ce15`) | density 0.994, holds 0.779, 19-condition mean 0.904 | kept: the chart budget was the limit; 48 PCs no gain (0.900) |
 | 11 | fit's judge releases keys (bug fix) + release levels | holds 0.779 → 0.727 / 0.750 | exposed the recording bug below |
-| 12 | record holds with `HoldOracle` (`04b7c33`) | holds 0.841; with release levels 0.858, 19-condition mean 0.922 | kept. Stage-8 charts in the diet: no clear gain. Grid hold rendering: worse (holds 0.836) |
-| 13 | 150/125 ms chord charts; approach 300 → 250 ms; refractory 150 → 100 ms (`7e036ec`) | dense 0.683 → 0.699 → 0.736; holds 0.862 → 0.925; jacks @ 150 ms 0.504 → 0.785; 24-condition 0.913 | all kept. Dense random chords do put notes in one lane inside 150 ms |
-| 14 | approach 200 ms; refractory 75 ms; smoothing 40 → 20 ms; 48 PCs; target width 80 → 50 ms (`58e3edf`) | 0.912; 0.914; **0.929**; **0.925**; 0.915 | smoothing and 48 PCs kept; the rest tie or trade |
-| 15 | 20 ms smoothing + 48 PCs (`7ada5f9`) | **0.943**; jacks @ 150 ms 0.988; chords @ 6.7/s 0.973 | **current base**. 10 ms + 48 PCs also 0.943; 64 PCs was a bug |
+| 12 | record holds with `HoldOracle` (`bddd1c9`) | holds 0.841; with release levels 0.858, 19-condition mean 0.922 | kept. Stage-8 charts in the diet: no clear gain. Grid hold rendering: worse (holds 0.836) |
+| 13 | 150/125 ms chord charts; approach 300 → 250 ms; refractory 150 → 100 ms (`da4cd91`) | dense 0.683 → 0.699 → 0.736; holds 0.862 → 0.925; jacks @ 150 ms 0.504 → 0.785; 24-condition 0.913 | all kept. Dense random chords do put notes in one lane inside 150 ms |
+| 14 | approach 200 ms; refractory 75 ms; smoothing 40 → 20 ms; 48 PCs; target width 80 → 50 ms (`307ab8a`) | 0.912; 0.914; **0.929**; **0.925**; 0.915 | smoothing and 48 PCs kept; the rest tie or trade |
+| 15 | 20 ms smoothing + 48 PCs (`d686223`) | **0.943**; jacks @ 150 ms 0.988; chords @ 6.7/s 0.973 | **current base**. 10 ms + 48 PCs also 0.943; 64 PCs was a bug |
 | 16 | PCA fitted on recorded training activity instead of calibration | dense 0.832 → 0.859, holds 0.939 → 0.763; 0.920 | worse |
-| 17 | long-hold (0.8, 1.2 s) and chord-heavy charts (`47a2e9c`) | 1.2 s holds 0.745 → 1.000; dense 0.832 → 0.798 | chord-heavy charts do nothing (baseline already 1.000) |
-| 18 | long-hold charts only; 56 PCs (`1055345`) | 26-condition 0.942 vs 0.938; 56 PCs 0.917 | a trade; lost on the tuning maps (0.759 vs 0.770), not adopted |
-| 19 | reward MAX over 300 in the timing search, at 305/300 and +10 % (`96f64a3`) | MAX share 29 % / 81 %; mean 0.932 / 0.920 vs 0.938 | a trade, not adopted; setting kept (`max_bonus`) |
-| 20 | lanes at ±30/±90° and ±40/±120° instead of ±20/±60° (`f3fc1df`) | 11-condition mean 0.898 / 0.889 vs 0.929 | worse; the lanes share only ~30 photoreceptors already |
+| 17 | long-hold (0.8, 1.2 s) and chord-heavy charts (`3686448`) | 1.2 s holds 0.745 → 1.000; dense 0.832 → 0.798 | chord-heavy charts do nothing (baseline already 1.000) |
+| 18 | long-hold charts only; 56 PCs (`05b5d6a`) | 26-condition 0.942 vs 0.938; 56 PCs 0.917 | a trade; lost on the tuning maps (0.759 vs 0.770), not adopted |
+| 19 | reward MAX over 300 in the timing search, at 305/300 and +10 % (`a9ee5d5`) | MAX share 29 % / 81 %; mean 0.932 / 0.920 vs 0.938 | a trade, not adopted; setting kept (`max_bonus`) |
+| 20 | lanes at ±30/±90° and ±40/±120° instead of ±20/±60° (`6f3c32e`) | 11-condition mean 0.898 / 0.889 vs 0.929 | worse; the lanes share only ~30 photoreceptors already |
 | 21 | jack charts at 200/150/120 ms in the diet, 100 and 75 ms refractory | with 75 ms: all 26 0.938 → 0.945; jacks @ 120 ms 0.627 → 0.702, chords @ 10/s 0.713 → 0.768; holds 0.891 → 0.874 | best on synthetic, **rejected on real maps**: tuning-map mean 0.770 → 0.741, worse on all 17, taps 0.900 → 0.874 and holds 0.518 → 0.483; the tuning maps hold only 69 fast jacks, so its one gain barely registers there |
 | 22 | tail lead 130 → 80 / 40 ms | synthetic holds unchanged (0.891, 0.887, 0.878); tuning maps 0.770 → 0.751 at 80 ms, holds 0.518 → 0.533 but taps 0.900 → 0.857, better on 1 of 17 | **rejected**: fixes a little of what it aimed at and costs taps and chords, like round 21 |
 | 23 | fit on real tuning-map clips as well (`experiments/e20_realfit.py`) | not scored on this battery; decided on unseen tuning-map segments: 0.772 → 0.815 | **kept**, see `RESULTS_E20.md`. Held-out 0.876 vs 0.862, better on 22 of 30 |
@@ -97,16 +97,16 @@ conditions; "mean" is over every condition the arm was scored on.
   presses and lifts each hold exactly on time while recording and touches
   nothing else, so recordings still do not depend on the policy being fitted.
   Charts without holds record bit-identically. Opt-in, so old results
-  reproduce. (`04b7c33`)
+  reproduce. (`bddd1c9`)
 - **The fit's offline judge never released keys**, so every training hold was
   scored as never let go and the timing search could not see releases. It now
   releases as live play does. No chart without holds changes, including every
-  registered experiment. (`45484ef`)
+  registered experiment. (`c83253d`)
 - **`PopulationProjection` capped k at the number of singular values, not the
   rank.** The 61 calibration states have rank 60 after centering, so k = 64
   kept a component at rounding level, z-scoring blew it up, and the arm scored
   0.023. It now refuses k above the rank, with a test. No earlier result used
-  k above 48. (`7ada5f9`)
+  k above 48. (`d686223`)
 
 ## What carries over
 

@@ -18,7 +18,7 @@ claimed for it, and it needs its own registered test.
 
 Raw numbers: `results/e17_strays.json`, `results/e17_sh*.log`. Protocol frozen
 in `experiments/e17_strays.py` and committed before the controls ran; controls
-committed before the real network was built (`bac88d3`).
+committed before the real network was built (`31770be`).
 
 ## Why this experiment exists
 
@@ -36,7 +36,7 @@ first.
 |---|---|---|
 | threshold | **1.5, not swept** — `Player.untrained`'s default, never fitted | applied |
 | charts | stage 3, 5 × 20 notes, 1400 ms, **seed 20260923** (never used before) | applied |
-| controls | 40 rewired, run and committed before the real network | 40, committed at `bac88d3` |
+| controls | 40 rewired, run and committed before the real network | 40, committed at `31770be` |
 | co-primary 1 | `reward` = acc − 0.05 × strays, real higher | p = 0.366 — **fails** |
 | co-primary 2 | strays per note, real lower, guarded | p = 0.079 — **fails** |
 | sensitivity | same, guard dropped | p = 0.073 |

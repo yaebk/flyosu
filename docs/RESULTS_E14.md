@@ -20,7 +20,7 @@ Protocol frozen and tagged at `e14-prereg` before any network ran:
 ## The design, and why its ordering mattered
 
 The forty controls were run, reported and **committed to git before the real
-network was measured once** (commit `1a3d163`). The script refuses to run the
+network was measured once** (commit `75f989b`). The script refuses to run the
 real network until that file exists. From the moment the null was committed
 there was no way to adjust the endpoint, the wiring rule or the threshold to
 suit the real network's value, because that value had not been computed.
