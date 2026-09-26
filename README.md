@@ -10,6 +10,10 @@ descending neurons — its actual output to the legs — are read as D / F / J /
 originally as four anatomical channels (the diagram below) and now by a small
 trained linear readout over the whole descending population.
 
+[![Video: a fruit fly connectome plays osu!mania](https://img.youtube.com/vi/kp_HwA6wk5M/hqdefault.jpg)](https://www.youtube.com/watch?v=kp_HwA6wk5M)
+
+**[Watch the video on YouTube](https://www.youtube.com/watch?v=kp_HwA6wk5M)**
+
 ```
                  osu!mania lanes  D    F    J    K
                                   │    │    │    │
